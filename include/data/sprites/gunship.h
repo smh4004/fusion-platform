@@ -13,4 +13,7 @@ extern const struct FrameData sGunshipPartOam_Idle[2];
 
 extern const u16 sGunshipFlashingPal[7 * 16];
 
+extern const s16 sGunshipEndEnteringYMovement[65];
+extern const u8 sBlob_39ab62_39f4b0[];
+
 #endif /* GUNSHIP_DATA_H */
