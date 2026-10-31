@@ -1,7 +1,7 @@
 #include "data/sprites/toxic_gas.h"
 
-const u32 sToxicGasGfx[2 * 512] = INCBIN_U32("data/sprites/toxic_gas.gfx");
-const u16 sToxicGasPal[2 * 16] = INCBIN_U16("data/sprites/toxic_gas.pal");
+const u32 sToxicGasGfx[] = INCBIN_U32("data/sprites/toxic_gas.gfx");
+const u16 sToxicGasPal[] = INCBIN_U16("data/sprites/toxic_gas.pal");
 
 static const u16 sToxicGasOam_3364a8[OAM_DATA_SIZE(1)] = {
     1,

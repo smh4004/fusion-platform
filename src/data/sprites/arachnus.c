@@ -19,8 +19,8 @@ const s16 sArachnusBonkingSpeed[36] = {
     0, 0, 0, SHORT_MAX
 };
 
-const u32 sArachnusGfx[512 * 8] = INCBIN_U32("data/sprites/arachnus.gfx");
-const u16 sArachnusPal[16 * 8] = INCBIN_U16("data/sprites/arachnus.pal");
+const u32 sArachnusGfx[] = INCBIN_U32("data/sprites/arachnus.gfx");
+const u16 sArachnusPal[] = INCBIN_U16("data/sprites/arachnus.pal");
 
 static const u16 sArachnusOam_Walking_Frame0[OAM_DATA_SIZE(6)] = {
     6,

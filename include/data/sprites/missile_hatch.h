@@ -6,8 +6,8 @@
 
 extern const s16 sMissileHatchDebrisFallingXMovement[16];
 
-extern const u32 sMissileHatchGfx[512];
-extern const u16 sMissileHatchPal[1 * 16];
+extern const u32 sMissileHatchGfx[];
+extern const u16 sMissileHatchPal[];
 
 extern const struct FrameData sMissileHatchOam_Idle[2];
 extern const struct FrameData sMissileHatchDebrisOam_Falling0[5];

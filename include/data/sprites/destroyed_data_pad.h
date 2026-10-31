@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sDestroyedDataPadGfx[512];
-extern const u16 sDestroyedDataPadPal[16 * 1];
+extern const u32 sDestroyedDataPadGfx[];
+extern const u16 sDestroyedDataPadPal[];
 
 extern const struct FrameData sDestroyedDataPadOam_Destroyed[2];
 

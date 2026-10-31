@@ -1,8 +1,8 @@
 #include "data/sprites/geruboss.h"
 #include "macros.h"
 
-const u32 sGerubossGfx[512 * 1] = INCBIN_U32("data/sprites/geruboss.gfx");
-const u16 sGerubossPal[16 * 1] = INCBIN_U16("data/sprites/geruboss.pal");
+const u32 sGerubossGfx[] = INCBIN_U32("data/sprites/geruboss.gfx");
+const u16 sGerubossPal[] = INCBIN_U16("data/sprites/geruboss.pal");
 
 static const u16 sGerubossOam_Idle_Frame0[OAM_DATA_SIZE(10)] = {
     10,

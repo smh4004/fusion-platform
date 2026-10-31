@@ -17,8 +17,8 @@ const s16 sFrozenRidleyXFlyingAwayYMovement[51] = {
     14, 16, SHORT_MAX
 };
 
-const u32 sFrozenRidleyGfx[2 * 512] = INCBIN_U32("data/sprites/frozen_ridley.gfx");
-const u16 sFrozenRidleyPal[2 * 16] = INCBIN_U16("data/sprites/frozen_ridley.pal");
+const u32 sFrozenRidleyGfx[] = INCBIN_U32("data/sprites/frozen_ridley.gfx");
+const u16 sFrozenRidleyPal[] = INCBIN_U16("data/sprites/frozen_ridley.pal");
 
 static const u16 sFrozenRidleyOam_Idle_Frame0[OAM_DATA_SIZE(25)] = {
     25,

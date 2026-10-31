@@ -1,8 +1,8 @@
 #include "data/sprites/ripper.h"
 #include "macros.h"
 
-const u32 sRipperGfx[512] = INCBIN_U32("data/sprites/ripper.gfx");
-const u16 sRipperPal[1 * 16] = INCBIN_U16("data/sprites/ripper.pal");
+const u32 sRipperGfx[] = INCBIN_U32("data/sprites/ripper.gfx");
+const u16 sRipperPal[] = INCBIN_U16("data/sprites/ripper.pal");
 
 static const u16 sRipperOam_Idle_Frame0[OAM_DATA_SIZE(2)] = {
     2,

@@ -13,8 +13,8 @@ extern const s16 sMetroidFloatingXSpeeds[40];
 extern const s16 sMetroidSwayingYSpeeds[64];
 extern const s16 sMetroidSwayingXSpeeds[80];
 
-extern const u32 sMetroidGfx[512 * 1];
-extern const u16 sMetroidPal[PAL_ROW * 1];
+extern const u32 sMetroidGfx[];
+extern const u16 sMetroidPal[];
 
 extern const struct FrameData sMetroidOam_Unused_385294[5];
 extern const struct FrameData sMetroidOam_Idle[5];

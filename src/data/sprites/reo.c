@@ -43,8 +43,8 @@ const s16 sReoGoingUpDeceleratingYSpeed[16] = {
     -2, -2, -1, SHORT_MAX
 };
 
-const u32 sReoGfx[1 * 512] = INCBIN_U32("data/sprites/reo.gfx");
-const u16 sReoPal[1 * 16] = INCBIN_U16("data/sprites/reo.pal");
+const u32 sReoGfx[] = INCBIN_U32("data/sprites/reo.gfx");
+const u16 sReoPal[] = INCBIN_U16("data/sprites/reo.pal");
 
 static const u16 sReoOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     4,

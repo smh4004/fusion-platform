@@ -156,14 +156,14 @@ const u8 sTest123_3_Spriteset0[ENEMY_ROOM_DATA_ARRAY_SIZE(1)] = {
 
 static const u8 sPadding_3f21a1[3] = { 0, 0, 0 };
 
-const u8 sDoorTransitionTilemap[172] = INCBIN_U8("data/rooms/door_transition.tm.rle");
+const u8 sDoorTransitionTilemap[] = INCBIN_U8("data/rooms/door_transition.tm.rle");
 
 const u32 sBg3_Empty[64] = {
     BGCNT_SIZE_256x256,
     _INCBIN_U32("data/rooms/bg3_empty.tm.lz")
 };
 
-const u8 sBg0_TestWater[504] = INCBIN_U8("data/rooms/test/test_water_bg0.tm.lz");
+const u8 sBg0_TestWater[] = INCBIN_U8("data/rooms/test/test_water_bg0.tm.lz");
 
 const u32 sBg3_TestRoom[224] = {
     BGCNT_SIZE_256x256,

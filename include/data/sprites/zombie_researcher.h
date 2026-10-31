@@ -6,8 +6,8 @@
 
 extern const s16 sZombieLungingVelocity[4];
 
-extern const u32 sZombieGfx[512 * 3];
-extern const u16 sZombiePal[16 * 3];
+extern const u32 sZombieGfx[];
+extern const u16 sZombiePal[];
 
 extern const struct FrameData sZombieOam_FormingFromBlob[21];
 extern const struct FrameData sZombieOam_Idle[5];

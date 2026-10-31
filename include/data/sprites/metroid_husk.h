@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sMetroidHuskGfx[512 * 1];
-extern const u16 sMetroidHuskPal[16 * 1];
+extern const u32 sMetroidHuskGfx[];
+extern const u16 sMetroidHuskPal[];
 
 extern const struct FrameData sMetroidHuskOam[2];
 

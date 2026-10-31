@@ -5,8 +5,8 @@
 #include "oam.h"
 #include "gba/memory.h"
 
-extern const u32 sZebesianAquaGfx[512 * 2];
-extern const u16 sZebesianAquaPal[PAL_ROW * 2];
+extern const u32 sZebesianAquaGfx[];
+extern const u16 sZebesianAquaPal[];
 
 extern const struct FrameData sZebesianAquaOam_Unused_38172c[7];
 extern const struct FrameData sZebesianAquaOam_Idle[7];

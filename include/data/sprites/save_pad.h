@@ -6,8 +6,8 @@
 
 extern const s16 sSavePlatformFloatingYMovement[49];
 
-extern const u32 sSavePadGfx[3 * 512];
-extern const u16 sSavePadPal[3 * 16];
+extern const u32 sSavePadGfx[];
+extern const u16 sSavePadPal[];
 
 extern const struct FrameData sSavePlatformOam_Floating[7];
 extern const struct FrameData sSavePadOam_Idle[2];

@@ -22,8 +22,8 @@ const s16 sHornoadJumpVelocityLow[10] = {
     16,  16
 };
 
-const u32 sHornoadGfx[512 * 3] = INCBIN_U32("data/sprites/hornoad.gfx");
-const u16 sHornoadPal[16 * 3] = INCBIN_U16("data/sprites/hornoad.pal");
+const u32 sHornoadGfx[] = INCBIN_U32("data/sprites/hornoad.gfx");
+const u16 sHornoadPal[] = INCBIN_U16("data/sprites/hornoad.pal");
 
 static const u16 sHornoadOam_TiltingHeadHidden_Frame3[OAM_DATA_SIZE(4)] = {
     4,

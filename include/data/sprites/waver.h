@@ -7,8 +7,8 @@
 extern const s16 sWaverDebrisFallingSpeed[30];
 extern const s16 sWaverFlyingYMovement[12];
 
-extern const u32 sWaverGfx[2 * 512];
-extern const u16 sWaverPal[2 * 16];
+extern const u32 sWaverGfx[];
+extern const u16 sWaverPal[];
 
 extern const struct FrameData sWaverOam_FlyingUp[2];
 extern const struct FrameData sWaverOam_FlyingDown[6];

@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sChozoStatueGfx[1 * 512];
-extern const u16 sChozoStatuePal[1 * 16];
+extern const u32 sChozoStatueGfx[];
+extern const u16 sChozoStatuePal[];
 
 extern const struct FrameData sChozoStatueOam[2];
 extern const struct FrameData sFakeChozoBallOam_Idle[2];

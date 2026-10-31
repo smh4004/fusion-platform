@@ -7,8 +7,8 @@
 extern const s16 sZebesianGroundJumpingSpeedHigh[10];
 extern const s16 sZebesianGroundJumpingSpeedLow[10];
 
-extern const u32 sZebesianGroundGfx[512 * 3];
-extern const u16 sZebesianGroundPal[16 * 3];
+extern const u32 sZebesianGroundGfx[];
+extern const u16 sZebesianGroundPal[];
 
 extern const struct FrameData sZebesianGroundOam_Walking[9];
 extern const struct FrameData sZebesianGroundOam_Standing[5];
@@ -24,7 +24,7 @@ extern const struct FrameData sZebesianGroundBeamOam_Extended[6];
 extern const struct FrameData sZebesianGroundBeamOam_Spawning[5];
 extern const struct FrameData sZebesianGroundBeamOam_Extending[6];
 
-extern const u32 sGoldZebesianGfx[512 * 3];
-extern const u16 sGoldZebesianPal[16 * 3];
+extern const u32 sGoldZebesianGfx[];
+extern const u16 sGoldZebesianPal[];
 
 #endif /* ZEBESIAN_GROUND_DATA_H */

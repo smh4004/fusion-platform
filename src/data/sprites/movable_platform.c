@@ -1,8 +1,8 @@
 #include "data/sprites/movable_platform.h"
 #include "macros.h"
 
-const u32 sMovablePlatformGfx[512] = INCBIN_U32("data/sprites/movable_platform.gfx");
-const u16 sMovablePlatformPal[16 * 1] = INCBIN_U16("data/sprites/movable_platform.pal");
+const u32 sMovablePlatformGfx[] = INCBIN_U32("data/sprites/movable_platform.gfx");
+const u16 sMovablePlatformPal[] = INCBIN_U16("data/sprites/movable_platform.pal");
 
 static const u16 sMovablePlatformOam_Idle_Frame0[OAM_DATA_SIZE(1)] = {
     1,

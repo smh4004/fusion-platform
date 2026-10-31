@@ -1,8 +1,8 @@
 #include "data/sprites/gadora.h"
 #include "macros.h"
 
-const u32 sGadoraGfx[1024] = INCBIN_U32("data/sprites/gadora.gfx");
-const u16 sGadoraPal[2 * 16] = INCBIN_U16("data/sprites/gadora.pal");
+const u32 sGadoraGfx[] = INCBIN_U32("data/sprites/gadora.gfx");
+const u16 sGadoraPal[] = INCBIN_U16("data/sprites/gadora.pal");
 
 static const u16 sGadoraOam_EyeClosed_Frame0[OAM_DATA_SIZE(5)] = {
     5,

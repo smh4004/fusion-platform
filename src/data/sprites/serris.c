@@ -76,8 +76,8 @@ const s16 sSerrisPartFallingVelocity[12] = {
     SHORT_MAX
 };
 
-const u32 sSerrisGfx[4096] = INCBIN_U32("data/sprites/serris.gfx");
-const u16 sSerrisPal[16 * 8] = INCBIN_U16("data/sprites/serris.pal");
+const u32 sSerrisGfx[] = INCBIN_U32("data/sprites/serris.gfx");
+const u16 sSerrisPal[] = INCBIN_U16("data/sprites/serris.pal");
 
 static const u16 sSerrisOam_Left_Frame0[OAM_DATA_SIZE(5)] = {
     5,
@@ -1588,5 +1588,5 @@ const struct FrameData sSerrisBlockOam_Falling0[2] = {
 };
 
 
-const u16 sSerrisSecondPhasePal[16 * 2] = INCBIN_U16("data/sprites/serris_phase_two.pal");
-const u16 sSerrisThirdPhasePal[16 * 2] = INCBIN_U16("data/sprites/serris_phase_three.pal");
+const u16 sSerrisSecondPhasePal[] = INCBIN_U16("data/sprites/serris_phase_two.pal");
+const u16 sSerrisThirdPhasePal[] = INCBIN_U16("data/sprites/serris_phase_three.pal");

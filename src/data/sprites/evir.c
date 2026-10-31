@@ -1,8 +1,8 @@
 #include "data/sprites/evir.h"
 #include "macros.h"
 
-const u32 sEvirGfx[512 * 2] = INCBIN_U32("data/sprites/evir.gfx");
-const u16 sEvirPal[16 * 2] = INCBIN_U16("data/sprites/evir.pal");
+const u32 sEvirGfx[] = INCBIN_U32("data/sprites/evir.gfx");
+const u16 sEvirPal[] = INCBIN_U16("data/sprites/evir.pal");
 
 static const u16 sEvirOam_Idle_Frame0[OAM_DATA_SIZE(11)] = {
     11,

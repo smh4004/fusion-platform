@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sEvirGfx[512 * 2];
-extern const u16 sEvirPal[16 * 2];
+extern const u32 sEvirGfx[];
+extern const u16 sEvirPal[];
 
 extern const struct FrameData sEvirOam_Idle[9];
 extern const struct FrameData sEvirOam_Shooting[8];

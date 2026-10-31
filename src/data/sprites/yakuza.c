@@ -683,8 +683,8 @@ const struct MultiSpriteData sYakuzaMultiSpriteData_3b11c0[2] = {
     [1] = MULTI_SPRITE_DATA_TERMINATOR
 };
 
-const u32 sYakuzaGfx[512 * 8] = INCBIN_U32("data/sprites/yakuza.gfx");
-const u16 sYakuzaPal[16 * 8] = INCBIN_U16("data/sprites/yakuza.pal");
+const u32 sYakuzaGfx[] = INCBIN_U32("data/sprites/yakuza.gfx");
+const u16 sYakuzaPal[] = INCBIN_U16("data/sprites/yakuza.pal");
 
 const u16 sYakuzaMouthGlowingPal[8][16] = INCBIN_U16("data/sprites/yakuza_mouth_glowing.pal");
 

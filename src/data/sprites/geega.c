@@ -21,8 +21,8 @@ const s16 sGeega_3791d4[65] = {
     SHORT_MAX
 };
 
-const u32 sGeegaGfx[512 * 1] = INCBIN_U32("data/sprites/geega.gfx");
-const u16 sGeegaPal[16 * 1] = INCBIN_U16("data/sprites/geega.pal");
+const u32 sGeegaGfx[] = INCBIN_U32("data/sprites/geega.gfx");
+const u16 sGeegaPal[] = INCBIN_U16("data/sprites/geega.pal");
 
 static const u16 sGeegaOam_GoingUp_Frame0[OAM_DATA_SIZE(1)] = {
     1,

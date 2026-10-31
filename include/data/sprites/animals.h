@@ -7,8 +7,8 @@
 
 extern const s16 sAnimalsLeavingEnclosureYSpeeds[13];
 
-extern const u32 sAnimalsGfx[512 * 4];
-extern const u16 sAnimalsPal[PAL_ROW * 4];
+extern const u32 sAnimalsGfx[];
+extern const u16 sAnimalsPal[];
 
 extern const struct FrameData sEtecoonOam_Standing_Foreground_Still[2];
 extern const struct FrameData sEtecoonOam_Standing_Foreground[5];

@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sSkulteraGfx[2 * 512];
-extern const u16 sSkulteraPal[2 * 16];
+extern const u32 sSkulteraGfx[];
+extern const u16 sSkulteraPal[];
 
 extern const struct FrameData sSkulteraOam_IdleSmall[4];
 extern const struct FrameData sSkulteraOam_TurningAroundSmall[9];

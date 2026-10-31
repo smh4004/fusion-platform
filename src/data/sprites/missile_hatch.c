@@ -9,8 +9,8 @@ const s16 sMissileHatchDebrisFallingXMovement[16] = {
     SHORT_MAX
 };
 
-const u32 sMissileHatchGfx[512] = INCBIN_U32("data/sprites/missile_hatch.gfx");
-const u16 sMissileHatchPal[1 * 16] = INCBIN_U16("data/sprites/missile_hatch.pal");
+const u32 sMissileHatchGfx[] = INCBIN_U32("data/sprites/missile_hatch.gfx");
+const u16 sMissileHatchPal[] = INCBIN_U16("data/sprites/missile_hatch.pal");
 
 static const u16 sMissileHatchOam_Idle_Frame0[OAM_DATA_SIZE(3)] = {
     3,

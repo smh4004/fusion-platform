@@ -7,8 +7,8 @@
 extern const s16 sSidehopperBigHopVelocity[10];
 extern const s16 sSidehopperLittleHopVelocity[10];
 
-extern const u32 sSidehopperGfx[512 * 1];
-extern const u16 sSidehopperPal[16 * 1];
+extern const u32 sSidehopperGfx[];
+extern const u16 sSidehopperPal[];
 
 extern const struct FrameData sSidehopperOam_Idle[5];
 extern const struct FrameData sSidehopperOam_ShakingHead[9];

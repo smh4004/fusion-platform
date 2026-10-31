@@ -20,8 +20,8 @@ const s16 sHalzynLungingVelocity[28] = {
     22, 20, 18, 16, 14, 12, 8, 7, 6, 5, 4, 3, 2, 1, 0, SHORT_MAX
 };
 
-const u32 sHalzynGfx[1024] = INCBIN_U32("data/sprites/halzyn.gfx");
-const u16 sHalzynPal[16 * 2] = INCBIN_U16("data/sprites/halzyn.pal");
+const u32 sHalzynGfx[] = INCBIN_U32("data/sprites/halzyn.gfx");
+const u16 sHalzynPal[] = INCBIN_U16("data/sprites/halzyn.pal");
 
 static const u16 sOam_2ec964[OAM_DATA_SIZE(3)] = {
     3,

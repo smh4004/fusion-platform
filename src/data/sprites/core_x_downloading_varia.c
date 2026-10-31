@@ -1,8 +1,8 @@
 #include "data/sprites/core_x_downloading_varia.h"
 #include "macros.h"
 
-const u32 sCoreXDownloadingVariaGfx[512 * 4] = INCBIN_U32("data/sprites/core_x_downloading_varia.gfx");
-const u16 sCoreXDownloadingVariaPal[16 * 4] = INCBIN_U16("data/sprites/core_x_downloading_varia.pal");
+const u32 sCoreXDownloadingVariaGfx[] = INCBIN_U32("data/sprites/core_x_downloading_varia.gfx");
+const u16 sCoreXDownloadingVariaPal[] = INCBIN_U16("data/sprites/core_x_downloading_varia.pal");
 
 static const u16 sCoreXShellBeforeVariaCoreOam_Downloading_Frame0[OAM_DATA_SIZE(6)] = {
     6,
@@ -448,4 +448,4 @@ const struct FrameData sCoreXStaticBeforeVariaCoreOam_2[5] = {
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sVariaXAfterDownloadingGfx[512 * 2] = INCBIN_U32("data/sprites/varia_x_after_downloading.gfx");
+const u32 sVariaXAfterDownloadingGfx[] = INCBIN_U32("data/sprites/varia_x_after_downloading.gfx");

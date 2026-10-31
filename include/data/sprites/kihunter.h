@@ -15,8 +15,8 @@ extern const s16 sKihunterFlyingSwoopingAcrossYSpeed[8];
 extern const s16 sKihunterFlyingAfterSwoopingAcceleratingYSpeed[12];
 extern const s16 sKihunterFlyingAfterSwoopingDeceleratingYSpeed[12];
 
-extern const u32 sKihunterGfx[3 * 512];
-extern const u16 sKihunterPal[3 * 16];
+extern const u32 sKihunterGfx[];
+extern const u16 sKihunterPal[];
 
 extern const struct FrameData sKihunterFlyingOam_Idle[4];
 extern const struct FrameData sKihunterWingsOam_Flapping[4];

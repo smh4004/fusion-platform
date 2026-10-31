@@ -9,8 +9,8 @@ extern const s16 sNettoriEaterSporeFloatingSmallXVelocity[64];
 extern const s16 sNettoriEaterSporeFloatingLargeXVelocity[64];
 extern const s16 sNettoriEaterSporeMovingYVelocity[32];
 
-extern const u32 sNettoriGfx[4096];
-extern const u16 sNettoriPal[8 * 16];
+extern const u32 sNettoriGfx[];
+extern const u16 sNettoriPal[];
 
 extern const struct FrameData sNettoriOam_Idle[5];
 extern const struct FrameData sNettoriOam_ChargingBeam[5];
@@ -35,10 +35,10 @@ extern const struct FrameData sNettoriPlasmaBeamOam_Moving[3];
 extern const struct FrameData sNettoriPlasmaBeamOam_Emerging[23];
 extern const struct FrameData sNettoriPlasmaBeamOam_Charging[3];
 
-extern const u16 sNettoriPal_Purple[1 * 16];
-extern const u16 sNettoriPal_Red[1 * 16];
-extern const u16 sNettoriGlowingPal_1[1 * 16];
-extern const u16 sNettoriGlowingPal_2[1 * 16];
-extern const u16 sNettoriGlowingPal_3[1 * 16];
+extern const u16 sNettoriPal_Purple[];
+extern const u16 sNettoriPal_Red[];
+extern const u16 sNettoriGlowingPal_1[];
+extern const u16 sNettoriGlowingPal_2[];
+extern const u16 sNettoriGlowingPal_3[];
 
 #endif /* NETTORI_DATA_H */

@@ -115,8 +115,8 @@ extern const struct MultiSpriteData sSaXMonsterMultiOam_ScreamingAirborne_Right[
 extern const struct MultiSpriteData sSaXMonsterMultiOam_Still_Left[2];
 extern const struct MultiSpriteData sSaXMonsterMultiOam_Still_Right[2];
 
-extern const u32 sSaXMonsterGfx[512 * 8];
-extern const u16 sSaXMonsterPal[PAL_ROW * 8];
+extern const u32 sSaXMonsterGfx[];
+extern const u16 sSaXMonsterPal[];
 
 extern const struct FrameData sSaXMonsterPartOam_Tongue_Whipping_Left[13];
 extern const struct FrameData sSaXMonsterPartOam_Tongue_Swaying_Left[25];

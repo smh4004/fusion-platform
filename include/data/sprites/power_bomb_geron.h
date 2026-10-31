@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sPowerBombGeronGfx[1024];
-extern const u16 sPowerBombGeronPal[2 * 16];
+extern const u32 sPowerBombGeronGfx[];
+extern const u16 sPowerBombGeronPal[];
 
 extern const struct FrameData sPowerBombGeronStemOam_Idle[41];
 extern const struct FrameData sPowerBombGeronStemOam_Destroyed[6];

@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sCoreXDownloadingVariaGfx[512 * 4];
-extern const u16 sCoreXDownloadingVariaPal[16 * 4];
+extern const u32 sCoreXDownloadingVariaGfx[];
+extern const u16 sCoreXDownloadingVariaPal[];
 
 extern const struct FrameData sCoreXShellBeforeVariaCoreOam_Idle[2];
 extern const struct FrameData sCoreXShellBeforeVariaCoreOam_Downloading[3];
@@ -17,6 +17,6 @@ extern const struct FrameData sCoreXStaticBeforeVariaCoreOam_0[5];
 extern const struct FrameData sCoreXStaticBeforeVariaCoreOam_1[5];
 extern const struct FrameData sCoreXStaticBeforeVariaCoreOam_2[5];
 
-extern const u32 sVariaXAfterDownloadingGfx[512 * 2];
+extern const u32 sVariaXAfterDownloadingGfx[];
 
 #endif /* CORE_X_DOWNLOADING_VARIA_DATA_H */

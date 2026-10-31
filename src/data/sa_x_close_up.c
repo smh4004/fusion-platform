@@ -2,10 +2,10 @@
 #include "macros.h"
 
 const u16 sSaXCloseUpPal[16 * 16] = INCBIN_U16("data/sa_x_close_up/palette.pal");
-const u16 sSaXCloseUpPalGrayscale[16 * 16] = INCBIN_U16("data/sa_x_close_up/palette_grayscale.pal");
-const u32 sSaXCloseUpGfx[4472] = INCBIN_U32("data/sa_x_close_up/graphics.gfx.lz");
-const u32 sSaXCloseUpTileTable1[294] = INCBIN_U32("data/sa_x_close_up/first.tt.lz");
-const u32 sSaXCloseUpTileTable2[305] = INCBIN_U32("data/sa_x_close_up/second.tt.lz");
+const u16 sSaXCloseUpPalGrayscale[] = INCBIN_U16("data/sa_x_close_up/palette_grayscale.pal");
+const u32 sSaXCloseUpGfx[] = INCBIN_U32("data/sa_x_close_up/graphics.gfx.lz");
+const u32 sSaXCloseUpTileTable1[] = INCBIN_U32("data/sa_x_close_up/first.tt.lz");
+const u32 sSaXCloseUpTileTable2[] = INCBIN_U32("data/sa_x_close_up/second.tt.lz");
 
 const u8 sSaXCloseUpDurations[2] = { 25, 60 };
 

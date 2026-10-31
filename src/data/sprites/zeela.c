@@ -12,8 +12,8 @@ const s16 sZeelaProjectileMovement[32] = {
     10, 11, 12, SHORT_MAX
 };
 
-const u32 sZeelaGfx[2 * 512] = INCBIN_U32("data/sprites/zeela.gfx");
-const u16 sZeelaPal[2 * 16] = INCBIN_U16("data/sprites/zeela.pal");
+const u32 sZeelaGfx[] = INCBIN_U32("data/sprites/zeela.gfx");
+const u16 sZeelaPal[] = INCBIN_U16("data/sprites/zeela.pal");
 
 static const u16 sZeelaOam_CrawlingHorizontal_Frame0[OAM_DATA_SIZE(6)] = {
     6,
@@ -461,5 +461,5 @@ const struct FrameData sZeelaProjectileOam_Exploding2[5] = {
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sRedZeelaGfx[2 * 512] = INCBIN_U32("data/sprites/red_zeela.gfx");
-const u16 sRedZeelaPal[2 * 16] = INCBIN_U16("data/sprites/red_zeela.pal");
+const u32 sRedZeelaGfx[] = INCBIN_U32("data/sprites/red_zeela.gfx");
+const u16 sRedZeelaPal[] = INCBIN_U16("data/sprites/red_zeela.pal");

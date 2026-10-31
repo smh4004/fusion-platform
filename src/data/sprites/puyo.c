@@ -19,8 +19,8 @@ const s16 sPuyoJumpingDownSpeed[16] = {
     6, 7, 8, SHORT_MAX
 };
 
-const u32 sPuyoGfx[1 * 512] = INCBIN_U32("data/sprites/puyo.gfx");
-const u16 sPuyoPal[1 * 16] = INCBIN_U16("data/sprites/puyo.pal");
+const u32 sPuyoGfx[] = INCBIN_U32("data/sprites/puyo.gfx");
+const u16 sPuyoPal[] = INCBIN_U16("data/sprites/puyo.pal");
 
 static const u16 sPuyoOam_37ce44_Frame0[OAM_DATA_SIZE(1)] = {
     1,

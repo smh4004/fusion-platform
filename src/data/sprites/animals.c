@@ -8,8 +8,8 @@ const s16 sAnimalsLeavingEnclosureYSpeeds[13] = {
     SHORT_MAX
 };
 
-const u32 sAnimalsGfx[512 * 4] = INCBIN_U32("data/sprites/animals.gfx");
-const u16 sAnimalsPal[PAL_ROW * 4] = INCBIN_U16("data/sprites/animals.pal");
+const u32 sAnimalsGfx[] = INCBIN_U32("data/sprites/animals.gfx");
+const u16 sAnimalsPal[] = INCBIN_U16("data/sprites/animals.pal");
 
 static const u16 sEtecoonOam_Standing_Foreground_Still_Frame0[OAM_DATA_SIZE(6)] = {
     6,

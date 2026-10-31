@@ -1,8 +1,8 @@
 #include "data/sprites/skultera.h"
 #include "macros.h"
 
-const u32 sSkulteraGfx[2 * 512] = INCBIN_U32("data/sprites/skultera.gfx");
-const u16 sSkulteraPal[2 * 16] = INCBIN_U16("data/sprites/skultera.pal");
+const u32 sSkulteraGfx[] = INCBIN_U32("data/sprites/skultera.gfx");
+const u16 sSkulteraPal[] = INCBIN_U16("data/sprites/skultera.pal");
 
 static const u16 sSkulteraOam_IdleSmall_Frame0[OAM_DATA_SIZE(5)] = {
     5,

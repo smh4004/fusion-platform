@@ -21,8 +21,8 @@ const s16 sMimicFlyingYMovement[65] = {
     SHORT_MAX
 };
 
-const u32 sMimicEnergyTankGfx[1 * 512] = INCBIN_U32("data/sprites/mimic_energy_tank.gfx");
-const u16 sMimicEnergyTankPal[1 * 16] = INCBIN_U16("data/sprites/mimic_energy_tank.pal");
+const u32 sMimicEnergyTankGfx[] = INCBIN_U32("data/sprites/mimic_energy_tank.gfx");
+const u16 sMimicEnergyTankPal[] = INCBIN_U16("data/sprites/mimic_energy_tank.pal");
 
 static const u16 sMimicEnergyTankOam_Idle_Frame0[OAM_DATA_SIZE(1)] = {
     1,
@@ -159,8 +159,8 @@ const struct FrameData sMimicEnergyTankOam_Flying[5] = {
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sMimicMissileTankGfx[1 * 512] = INCBIN_U32("data/sprites/mimic_missile_tank.gfx");
-const u16 sMimicMissileTankPal[1 * 16] = INCBIN_U16("data/sprites/mimic_missile_tank.pal");
+const u32 sMimicMissileTankGfx[] = INCBIN_U32("data/sprites/mimic_missile_tank.gfx");
+const u16 sMimicMissileTankPal[] = INCBIN_U16("data/sprites/mimic_missile_tank.pal");
 
 static const u16 sMimicMissileTankOam_Idle_Frame0[OAM_DATA_SIZE(1)] = {
     1,

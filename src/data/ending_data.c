@@ -9,20 +9,20 @@
 
 #include "gba/memory.h"
 
-const u16 sPal_7478A0[PAL_ROW * 3] = INCBIN_U16("data/ending/7478a0.pal");
+const u16 sPal_7478A0[] = INCBIN_U16("data/ending/7478a0.pal");
 
-const u32 sCreditsCharacterGfx[1280] = INCBIN_U32("data/ending/credits_character.gfx");
-const u32 sCreditsCopyrightText1_Gfx[112] = INCBIN_U32("data/ending/copyright_text_1.gfx");
-const u32 sCreditsCopyrightText2_Gfx[144] = INCBIN_U32("data/ending/copyright_text_2.gfx");
-const u32 sCreditsCopyrightText3_Gfx[176] = INCBIN_U32("data/ending/copyright_text_3.gfx");
-const u32 sCreditsCopyrightText4_Gfx[144] = INCBIN_U32("data/ending/copyright_text_4.gfx");
+const u32 sCreditsCharacterGfx[] = INCBIN_U32("data/ending/credits_character.gfx");
+const u32 sCreditsCopyrightText1_Gfx[] = INCBIN_U32("data/ending/copyright_text_1.gfx");
+const u32 sCreditsCopyrightText2_Gfx[] = INCBIN_U32("data/ending/copyright_text_2.gfx");
+const u32 sCreditsCopyrightText3_Gfx[] = INCBIN_U32("data/ending/copyright_text_3.gfx");
+const u32 sCreditsCopyrightText4_Gfx[] = INCBIN_U32("data/ending/copyright_text_4.gfx");
 
-const u16 sPal_749600[PAL_ROW * 6] = INCBIN_U16("data/ending/749600.pal");
-const u16 sPal_7496c0[PAL_ROW * 10] = INCBIN_U16("data/ending/7496c0.pal");
+const u16 sPal_749600[] = INCBIN_U16("data/ending/749600.pal");
+const u16 sPal_7496c0[] = INCBIN_U16("data/ending/7496c0.pal");
 
-const u16 sPreResultsSamusWithoutHelmetBgPal[PAL_ROW * 10] = INCBIN_U16("data/ending/samus_without_helmet_bg.pal");
-const u16 sPreResultsSamusSuitlessBgPal[PAL_ROW * 10] = INCBIN_U16("data/ending/samus_suitless_bg.pal");
-const u16 sPreResultsSamusObjPal[PAL_ROW * 16] = INCBIN_U16("data/ending/samus_obj.pal");
+const u16 sPreResultsSamusWithoutHelmetBgPal[] = INCBIN_U16("data/ending/samus_without_helmet_bg.pal");
+const u16 sPreResultsSamusSuitlessBgPal[] = INCBIN_U16("data/ending/samus_suitless_bg.pal");
+const u16 sPreResultsSamusObjPal[] = INCBIN_U16("data/ending/samus_obj.pal");
 
 const u16 sOamFrame_749c80[OAM_DATA_SIZE(25)] = {
     25,
@@ -71,12 +71,12 @@ const u16 sOamFrame_749d3e[OAM_DATA_SIZE(4)] = {
     OAM_ENTRY(34, 52, OAM_DIMS_16x32, OAM_NO_FLIP, 0x2d2, 1, 0),
 };
 
-const u16 sEnding_0_Pal[PAL_ROW * 16] = INCBIN_U16("data/ending/ending_0.pal");
-const u16 sEnding_1_Pal[PAL_ROW * 16] = INCBIN_U16("data/ending/ending_1.pal");
-const u16 sEnding_2_Pal[PAL_ROW * 16] = INCBIN_U16("data/ending/ending_2.pal");
-const u16 sEnding_3_Pal[PAL_ROW * 16] = INCBIN_U16("data/ending/ending_3.pal");
-const u16 sEnding_4_Pal[PAL_ROW * 16] = INCBIN_U16("data/ending/ending_4.pal");
-const u16 sResultsTextPal[PAL_ROW * 4] = INCBIN_U16("data/ending/results_text.pal");
+const u16 sEnding_0_Pal[] = INCBIN_U16("data/ending/ending_0.pal");
+const u16 sEnding_1_Pal[] = INCBIN_U16("data/ending/ending_1.pal");
+const u16 sEnding_2_Pal[] = INCBIN_U16("data/ending/ending_2.pal");
+const u16 sEnding_3_Pal[] = INCBIN_U16("data/ending/ending_3.pal");
+const u16 sEnding_4_Pal[] = INCBIN_U16("data/ending/ending_4.pal");
+const u16 sResultsTextPal[] = INCBIN_U16("data/ending/results_text.pal");
 
 static const u8 sBlob_74a7d8_74b0b0[] = INCBIN_U8("data/Blob_74a7d8_74b0b0.bin");
 
@@ -1348,63 +1348,63 @@ const u8* const sPreResultsSamusBgTilemapPointers[4] = {
 
 static const u8 sBlob_74e650_74eb50[] = INCBIN_U8("data/Blob_74e650_74eb50.bin");
 
-const u32 sPreResultsSpaceBgGfx[4772] = INCBIN_U32("data/ending/space_bg.gfx.lz");
+const u32 sPreResultsSpaceBgGfx[] = INCBIN_U32("data/ending/space_bg.gfx.lz");
 
-const u8 sTilemap_7535e0[2208] = INCBIN_U8("data/ending/7535e0.tm.lz");
-const u8 sTilemap_753E80[376] = INCBIN_U8("data/ending/753e80.tm.lz");
+const u8 sTilemap_7535e0[] = INCBIN_U8("data/ending/7535e0.tm.lz");
+const u8 sTilemap_753E80[] = INCBIN_U8("data/ending/753e80.tm.lz");
 
-const u32 sPreResultsSamusSuitedGfx1[853] = INCBIN_U32("data/ending/samus_suited_1.gfx.lz");
-const u32 sPreResultsSamusSuitedGfx2[629] = INCBIN_U32("data/ending/samus_suited_2.gfx.lz");
-const u32 sPreResultsSamusSuitedGfx3[852] = INCBIN_U32("data/ending/samus_suited_3.gfx.lz");
-const u32 sPreResultsSamusSuitedGfx4[852] = INCBIN_U32("data/ending/samus_suited_4.gfx.lz");
-const u32 sPreResultsSamusSuitedGfx5[848] = INCBIN_U32("data/ending/samus_suited_5.gfx.lz");
-const u32 sPreResultsSamusSuitedGfx6[941] = INCBIN_U32("data/ending/samus_suited_6.gfx.lz");
-const u32 sPreResultsSamusSuitedGfx7[915] = INCBIN_U32("data/ending/samus_suited_7.gfx.lz");
-const u32 sPreResultsSamusSuitedGfx8[778] = INCBIN_U32("data/ending/samus_suited_8.gfx.lz");
-const u32 sPreResultsSamusSuitedGfx9[923] = INCBIN_U32("data/ending/samus_suited_9.gfx.lz");
-const u32 sPreResultsSamusSuitedGfx10[496] = INCBIN_U32("data/ending/samus_suited_10.gfx.lz");
+const u32 sPreResultsSamusSuitedGfx1[] = INCBIN_U32("data/ending/samus_suited_1.gfx.lz");
+const u32 sPreResultsSamusSuitedGfx2[] = INCBIN_U32("data/ending/samus_suited_2.gfx.lz");
+const u32 sPreResultsSamusSuitedGfx3[] = INCBIN_U32("data/ending/samus_suited_3.gfx.lz");
+const u32 sPreResultsSamusSuitedGfx4[] = INCBIN_U32("data/ending/samus_suited_4.gfx.lz");
+const u32 sPreResultsSamusSuitedGfx5[] = INCBIN_U32("data/ending/samus_suited_5.gfx.lz");
+const u32 sPreResultsSamusSuitedGfx6[] = INCBIN_U32("data/ending/samus_suited_6.gfx.lz");
+const u32 sPreResultsSamusSuitedGfx7[] = INCBIN_U32("data/ending/samus_suited_7.gfx.lz");
+const u32 sPreResultsSamusSuitedGfx8[] = INCBIN_U32("data/ending/samus_suited_8.gfx.lz");
+const u32 sPreResultsSamusSuitedGfx9[] = INCBIN_U32("data/ending/samus_suited_9.gfx.lz");
+const u32 sPreResultsSamusSuitedGfx10[] = INCBIN_U32("data/ending/samus_suited_10.gfx.lz");
 
-const u32 sPreResultsSamusWithoutHelmetBgGfx1[897] = INCBIN_U32("data/ending/samus_without_helmet_bg_1.gfx.lz");
-const u32 sPreResultsSamusWithoutHelmetBgGfx2[124] = INCBIN_U32("data/ending/samus_without_helmet_bg_2.gfx.lz");
-const u32 sPreResultsSamusSuitlessBgGfx1[710] = INCBIN_U32("data/ending/samus_suitless_bg_1.gfx.lz");
-const u32 sPreResultsSamusSuitlessBgGfx2[124] = INCBIN_U32("data/ending/samus_suitless_bg_2.gfx.lz");
+const u32 sPreResultsSamusWithoutHelmetBgGfx1[] = INCBIN_U32("data/ending/samus_without_helmet_bg_1.gfx.lz");
+const u32 sPreResultsSamusWithoutHelmetBgGfx2[] = INCBIN_U32("data/ending/samus_without_helmet_bg_2.gfx.lz");
+const u32 sPreResultsSamusSuitlessBgGfx1[] = INCBIN_U32("data/ending/samus_suitless_bg_1.gfx.lz");
+const u32 sPreResultsSamusSuitlessBgGfx2[] = INCBIN_U32("data/ending/samus_suitless_bg_2.gfx.lz");
 
-const u8 sTilemap_75db50[692] = INCBIN_U8("data/ending/75db50.tm.lz");
-const u8 sTilemap_75de04[764] = INCBIN_U8("data/ending/75de04.tm.lz");
-const u8 sTilemap_75e100[788] = INCBIN_U8("data/ending/75e100.tm.lz");
-const u8 sTilemap_75e414[744] = INCBIN_U8("data/ending/75e414.tm.lz");
-const u8 sTilemap_75e6fc[660] = INCBIN_U8("data/ending/75e6fc.tm.lz");
-const u8 sTilemap_75E990[516] = INCBIN_U8("data/ending/75e990.tm.lz");
-const u8 sTilemap_75EB94[472] = INCBIN_U8("data/ending/75eb94.tm.lz");
+const u8 sTilemap_75db50[] = INCBIN_U8("data/ending/75db50.tm.lz");
+const u8 sTilemap_75de04[] = INCBIN_U8("data/ending/75de04.tm.lz");
+const u8 sTilemap_75e100[] = INCBIN_U8("data/ending/75e100.tm.lz");
+const u8 sTilemap_75e414[] = INCBIN_U8("data/ending/75e414.tm.lz");
+const u8 sTilemap_75e6fc[] = INCBIN_U8("data/ending/75e6fc.tm.lz");
+const u8 sTilemap_75E990[] = INCBIN_U8("data/ending/75e990.tm.lz");
+const u8 sTilemap_75EB94[] = INCBIN_U8("data/ending/75eb94.tm.lz");
 
-const u32 sPreResultsSamusObjGfx[2887] = INCBIN_U32("data/ending/samus_obj.gfx.lz");
+const u32 sPreResultsSamusObjGfx[] = INCBIN_U32("data/ending/samus_obj.gfx.lz");
 
-const u32 sEnding_0_GfxTop[5628] = INCBIN_U32("data/ending/ending_0_top.gfx.lz");
-const u32 sEnding_0_GfxBottom[3191] = INCBIN_U32("data/ending/ending_0_bottom.gfx.lz");
-const u32 sEnding_1_GfxTop[5900] = INCBIN_U32("data/ending/ending_1_top.gfx.lz");
-const u32 sEnding_1_GfxBottom[2986] = INCBIN_U32("data/ending/ending_1_bottom.gfx.lz");
-const u32 sEnding_2_GfxTop[5731] = INCBIN_U32("data/ending/ending_2_top.gfx.lz");
-const u32 sEnding_2_GfxBottom[3293] = INCBIN_U32("data/ending/ending_2_bottom.gfx.lz");
-const u32 sEnding_3_GfxTop[6364] = INCBIN_U32("data/ending/ending_3_top.gfx.lz");
-const u32 sEnding_3_GfxBottom[3818] = INCBIN_U32("data/ending/ending_3_bottom.gfx.lz");
-const u32 sEnding_4_GfxTop[6851] = INCBIN_U32("data/ending/ending_4_top.gfx.lz");
-const u32 sEnding_4_GfxBottom[3504] = INCBIN_U32("data/ending/ending_4_bottom.gfx.lz");
+const u32 sEnding_0_GfxTop[] = INCBIN_U32("data/ending/ending_0_top.gfx.lz");
+const u32 sEnding_0_GfxBottom[] = INCBIN_U32("data/ending/ending_0_bottom.gfx.lz");
+const u32 sEnding_1_GfxTop[] = INCBIN_U32("data/ending/ending_1_top.gfx.lz");
+const u32 sEnding_1_GfxBottom[] = INCBIN_U32("data/ending/ending_1_bottom.gfx.lz");
+const u32 sEnding_2_GfxTop[] = INCBIN_U32("data/ending/ending_2_top.gfx.lz");
+const u32 sEnding_2_GfxBottom[] = INCBIN_U32("data/ending/ending_2_bottom.gfx.lz");
+const u32 sEnding_3_GfxTop[] = INCBIN_U32("data/ending/ending_3_top.gfx.lz");
+const u32 sEnding_3_GfxBottom[] = INCBIN_U32("data/ending/ending_3_bottom.gfx.lz");
+const u32 sEnding_4_GfxTop[] = INCBIN_U32("data/ending/ending_4_top.gfx.lz");
+const u32 sEnding_4_GfxBottom[] = INCBIN_U32("data/ending/ending_4_bottom.gfx.lz");
 
-const u8 sEnding_0_TilemapTop[2204] = INCBIN_U8("data/ending/ending_0_top.tm.lz");
-const u8 sEnding_0_TilemapBottom[1472] = INCBIN_U8("data/ending/ending_0_bottom.tm.lz");
-const u8 sEnding_1_TilemapTop[2204] = INCBIN_U8("data/ending/ending_1_top.tm.lz");
-const u8 sEnding_1_TilemapBottom[1472] = INCBIN_U8("data/ending/ending_1_bottom.tm.lz");
-const u8 sEnding_2_TilemapTop[2204] = INCBIN_U8("data/ending/ending_2_top.tm.lz");
-const u8 sEnding_2_TilemapBottom[1472] = INCBIN_U8("data/ending/ending_2_bottom.tm.lz");
-const u8 sEnding_3_TilemapTop[2204] = INCBIN_U8("data/ending/ending_3_top.tm.lz");
-const u8 sEnding_3_TilemapBottom[1476] = INCBIN_U8("data/ending/ending_3_bottom.tm.lz");
-const u8 sEnding_4_TilemapTop[2204] = INCBIN_U8("data/ending/ending_4_top.tm.lz");
-const u8 sEnding_4_TilemapBottom[1476] = INCBIN_U8("data/ending/ending_4_bottom.tm.lz");
+const u8 sEnding_0_TilemapTop[] = INCBIN_U8("data/ending/ending_0_top.tm.lz");
+const u8 sEnding_0_TilemapBottom[] = INCBIN_U8("data/ending/ending_0_bottom.tm.lz");
+const u8 sEnding_1_TilemapTop[] = INCBIN_U8("data/ending/ending_1_top.tm.lz");
+const u8 sEnding_1_TilemapBottom[] = INCBIN_U8("data/ending/ending_1_bottom.tm.lz");
+const u8 sEnding_2_TilemapTop[] = INCBIN_U8("data/ending/ending_2_top.tm.lz");
+const u8 sEnding_2_TilemapBottom[] = INCBIN_U8("data/ending/ending_2_bottom.tm.lz");
+const u8 sEnding_3_TilemapTop[] = INCBIN_U8("data/ending/ending_3_top.tm.lz");
+const u8 sEnding_3_TilemapBottom[] = INCBIN_U8("data/ending/ending_3_bottom.tm.lz");
+const u8 sEnding_4_TilemapTop[] = INCBIN_U8("data/ending/ending_4_top.tm.lz");
+const u8 sEnding_4_TilemapBottom[] = INCBIN_U8("data/ending/ending_4_bottom.tm.lz");
 
-const u32 sResultsScreenEnglishTextGfx[1201] = INCBIN_U32("data/ending/results_english_text.gfx.lz");
-const u32 sResultsScreenFrenchTextGfx[1171] = INCBIN_U32("data/ending/results_french_text.gfx.lz");
-const u32 sResultsScreenItalianTextGfx[1221] = INCBIN_U32("data/ending/results_italian_text.gfx.lz");
-const u32 sResultsScreenSpanishTextGfx[1197] = INCBIN_U32("data/ending/results_spanish_text.gfx.lz");
-const u32 sResultsScreenGermanTextGfx[1144] = INCBIN_U32("data/ending/results_german_text.gfx.lz");
+const u32 sResultsScreenEnglishTextGfx[] = INCBIN_U32("data/ending/results_english_text.gfx.lz");
+const u32 sResultsScreenFrenchTextGfx[] = INCBIN_U32("data/ending/results_french_text.gfx.lz");
+const u32 sResultsScreenItalianTextGfx[] = INCBIN_U32("data/ending/results_italian_text.gfx.lz");
+const u32 sResultsScreenSpanishTextGfx[] = INCBIN_U32("data/ending/results_spanish_text.gfx.lz");
+const u32 sResultsScreenGermanTextGfx[] = INCBIN_U32("data/ending/results_german_text.gfx.lz");
 
 static const u8 sBlob_79a19c_79a29c[] = INCBIN_U8("data/Blob_79a19c_79a29c.bin");

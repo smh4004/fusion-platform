@@ -22,11 +22,11 @@ extern const struct FrameData sBeamCoreXEyeOam_Closing[7];
 
 extern const u32 sWideBeamCoreXGfx[5 * 512];
 extern const u16 sWideBeamCoreXPal[5 * 16];
-extern const u32 sPlasmaBeamCoreXGfx[5 * 512];
-extern const u16 sPlasmaBeamCoreXPal[5 * 16];
-extern const u32 sWaveBeamCoreXGfx[5 * 512];
-extern const u16 sWaveBeamCoreXPal[5 * 16];
-extern const u32 sIceBeamCoreXGfx[5 * 512];
-extern const u16 sIceBeamCoreXPal[5 * 16];
+extern const u32 sPlasmaBeamCoreXGfx[];
+extern const u16 sPlasmaBeamCoreXPal[];
+extern const u32 sWaveBeamCoreXGfx[];
+extern const u16 sWaveBeamCoreXPal[];
+extern const u32 sIceBeamCoreXGfx[];
+extern const u16 sIceBeamCoreXPal[];
 
 #endif /* BEAM_CORE_X_DATA_H */

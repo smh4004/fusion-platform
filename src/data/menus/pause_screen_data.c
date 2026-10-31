@@ -3,13 +3,13 @@
 #include "macros.h"
 #include "constants/menus/pause_screen.h"
 
-const u8 sMinimapTilesGfx[32 * 14 * TILE_SIZE] = INCBIN_U8("data/menus/pause_screen/minimap_tiles.gfx");
-const u16 sMinimapTilesPal[3 * PAL_ROW] = INCBIN_U16("data/menus/pause_screen/minimap_tiles.pal");
+const u8 sMinimapTilesGfx[] = INCBIN_U8("data/menus/pause_screen/minimap_tiles.gfx");
+const u16 sMinimapTilesPal[] = INCBIN_U16("data/menus/pause_screen/minimap_tiles.pal");
 
-const u16 sPauseScreenBgPal_565808[13 * PAL_ROW] = INCBIN_U16("data/menus/pause_screen/bg_565808.pal");
-const u16 sPauseScreenBgPal_5659a8[13 * PAL_ROW] = INCBIN_U16("data/menus/pause_screen/bg_5659a8.pal");
-const u16 sPauseScreenObjPal_565b48[16 * PAL_ROW] = INCBIN_U16("data/menus/pause_screen/obj_565b48.pal");
-const u16 sNavConversationSamusPal[3 * PAL_ROW] = INCBIN_U16("data/menus/pause_screen/nav_conversation_samus.pal");
+const u16 sPauseScreenBgPal_565808[] = INCBIN_U16("data/menus/pause_screen/bg_565808.pal");
+const u16 sPauseScreenBgPal_5659a8[] = INCBIN_U16("data/menus/pause_screen/bg_5659a8.pal");
+const u16 sPauseScreenObjPal_565b48[] = INCBIN_U16("data/menus/pause_screen/obj_565b48.pal");
+const u16 sNavConversationSamusPal[] = INCBIN_U16("data/menus/pause_screen/nav_conversation_samus.pal");
 
 static const u16 sPauseScreenOam_BlinkingSquare_Frame0[OAM_DATA_SIZE(1)] = {
     1,
@@ -5550,27 +5550,27 @@ const struct FrameData sPauseScreenOam_BslDiagram350Degrees[2] = {
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sPauseScreenBgGfx[2437] = INCBIN_U32("data/menus/pause_screen/bg.gfx.lz");
-const u32 sNavConversationRoomGfx[1414] = INCBIN_U32("data/menus/pause_screen/nav_convo_room.gfx.lz");
-const u32 sNavConversationShipGfx[1575] = INCBIN_U32("data/menus/pause_screen/nav_convo_ship.gfx.lz");
-const u32 sPauseScreenObjGfx[3404] = INCBIN_U32("data/menus/pause_screen/obj.gfx.lz");
+const u32 sPauseScreenBgGfx[] = INCBIN_U32("data/menus/pause_screen/bg.gfx.lz");
+const u32 sNavConversationRoomGfx[] = INCBIN_U32("data/menus/pause_screen/nav_convo_room.gfx.lz");
+const u32 sNavConversationShipGfx[] = INCBIN_U32("data/menus/pause_screen/nav_convo_ship.gfx.lz");
+const u32 sPauseScreenObjGfx[] = INCBIN_U32("data/menus/pause_screen/obj.gfx.lz");
 
-const u32 sBlankMinimap[63] = INCBIN_U32("data/menus/pause_screen/blank_minimap.tm.lz");
-const u32 sMainDeckMinimap[149] = INCBIN_U32("data/menus/pause_screen/main_deck_minimap.tm.lz");
-const u32 sSector1Minimap[120] = INCBIN_U32("data/menus/pause_screen/sector_1_minimap.tm.lz");
-const u32 sSector3Minimap[122] = INCBIN_U32("data/menus/pause_screen/sector_3_minimap.tm.lz");
-const u32 sSector6Minimap[117] = INCBIN_U32("data/menus/pause_screen/sector_6_minimap.tm.lz");
-const u32 sSector4Minimap[132] = INCBIN_U32("data/menus/pause_screen/sector_4_minimap.tm.lz");
-const u32 sSector2Minimap[133] = INCBIN_U32("data/menus/pause_screen/sector_2_minimap.tm.lz");
-const u32 sSector5Minimap[126] = INCBIN_U32("data/menus/pause_screen/sector_5_minimap.tm.lz");
-const u32 sMainDeckNoLabMinimap[148] = INCBIN_U32("data/menus/pause_screen/main_deck_no_lab_minimap.tm.lz");
+const u32 sBlankMinimap[] = INCBIN_U32("data/menus/pause_screen/blank_minimap.tm.lz");
+const u32 sMainDeckMinimap[] = INCBIN_U32("data/menus/pause_screen/main_deck_minimap.tm.lz");
+const u32 sSector1Minimap[] = INCBIN_U32("data/menus/pause_screen/sector_1_minimap.tm.lz");
+const u32 sSector3Minimap[] = INCBIN_U32("data/menus/pause_screen/sector_3_minimap.tm.lz");
+const u32 sSector6Minimap[] = INCBIN_U32("data/menus/pause_screen/sector_6_minimap.tm.lz");
+const u32 sSector4Minimap[] = INCBIN_U32("data/menus/pause_screen/sector_4_minimap.tm.lz");
+const u32 sSector2Minimap[] = INCBIN_U32("data/menus/pause_screen/sector_2_minimap.tm.lz");
+const u32 sSector5Minimap[] = INCBIN_U32("data/menus/pause_screen/sector_5_minimap.tm.lz");
+const u32 sMainDeckNoLabMinimap[] = INCBIN_U32("data/menus/pause_screen/main_deck_no_lab_minimap.tm.lz");
 
-const u32 sUnk_573da4[63] = INCBIN_U32("data/menus/pause_screen/573da4.tm.lz");
-const u32 sPauseDebugTilemap[151] = INCBIN_U32("data/menus/pause_screen/pause_debug.tm.lz");
-const u32 sMapScreenOutlineTilemap[123] = INCBIN_U32("data/menus/pause_screen/map_screen_outline.tm.lz");
-const u32 sNavConversationTextBoxesTilemap[176] = INCBIN_U32("data/menus/pause_screen/nav_conversation_text_boxes.tm.lz");
-const u32 sPauseScreenSleepTilemap[193] = INCBIN_U32("data/menus/pause_screen/sleep.tm.lz");
-const u32 sStatusScreenTilemap[295] = INCBIN_U32("data/menus/pause_screen/status_screen.tm.lz");
-const u32 sNavConversationRoomTilemap[359] = INCBIN_U32("data/menus/pause_screen/nav_conversation_room.tm.lz");
-const u32 sPauseScreen_5752e4[65] = INCBIN_U32("data/menus/pause_screen/5752e4.tm.lz");
-const u32 sNavConversationShipTilemap[414] = INCBIN_U32("data/menus/pause_screen/nav_conversation_ship.tm.lz");
+const u32 sUnk_573da4[] = INCBIN_U32("data/menus/pause_screen/573da4.tm.lz");
+const u32 sPauseDebugTilemap[] = INCBIN_U32("data/menus/pause_screen/pause_debug.tm.lz");
+const u32 sMapScreenOutlineTilemap[] = INCBIN_U32("data/menus/pause_screen/map_screen_outline.tm.lz");
+const u32 sNavConversationTextBoxesTilemap[] = INCBIN_U32("data/menus/pause_screen/nav_conversation_text_boxes.tm.lz");
+const u32 sPauseScreenSleepTilemap[] = INCBIN_U32("data/menus/pause_screen/sleep.tm.lz");
+const u32 sStatusScreenTilemap[] = INCBIN_U32("data/menus/pause_screen/status_screen.tm.lz");
+const u32 sNavConversationRoomTilemap[] = INCBIN_U32("data/menus/pause_screen/nav_conversation_room.tm.lz");
+const u32 sPauseScreen_5752e4[] = INCBIN_U32("data/menus/pause_screen/5752e4.tm.lz");
+const u32 sNavConversationShipTilemap[] = INCBIN_U32("data/menus/pause_screen/nav_conversation_ship.tm.lz");

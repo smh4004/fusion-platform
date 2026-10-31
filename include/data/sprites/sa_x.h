@@ -112,9 +112,9 @@ extern const struct SaXAnimationData* const sSaXOamDataPointers_Turning[DIAG_AIM
 
 extern const u8 sSaX_2b4154[20];
 
-extern const u16 sSaXPalette_Fading[16 * 16];
-extern const u16 sSaXPalette_MidAir[4 * 16];
-extern const u16 sSaXPalette_TransformingIntoMonster[1 * 16];
+extern const u16 sSaXPalette_Fading[];
+extern const u16 sSaXPalette_MidAir[];
+extern const u16 sSaXPalette_TransformingIntoMonster[];
 
 extern const SaXGfxFunc_T sSaXPoseGfxFunctionPointers[SA_X_POSE_END];
 
@@ -189,7 +189,7 @@ extern const struct FrameData sSaXMissileOam_Diagonal_XFlipped[3];
 extern const struct FrameData sSaXElevatorOam_2e8038[3];
 extern const struct FrameData sLabExplosionOam_Idle[49];
 
-extern const u32 sSaXLabExplosionsGfx[2 * 512];
-extern const u16 sSaXLabExplosionsPal[2 * 16];
+extern const u32 sSaXLabExplosionsGfx[];
+extern const u16 sSaXLabExplosionsPal[];
 
 #endif /* SA_X_DATA */

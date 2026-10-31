@@ -1,8 +1,8 @@
 #include "data/sprites/gunship.h"
 #include "macros.h"
 
-const u32 sGunshipGfx[6 * 512] = INCBIN_U32("data/sprites/gunship.gfx");
-const u16 sGunshipPal[6 * 16] = INCBIN_U16("data/sprites/gunship.pal");
+const u32 sGunshipGfx[] = INCBIN_U32("data/sprites/gunship.gfx");
+const u16 sGunshipPal[] = INCBIN_U16("data/sprites/gunship.pal");
 
 static const u16 sGunshipPartOam_Idle_Frame0[OAM_DATA_SIZE(14)] = {
     14,
@@ -84,4 +84,4 @@ const struct FrameData sGunshipPartOam_Idle[2] = {
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const u16 sGunshipFlashingPal[7 * 16] = INCBIN_U16("data/sprites/gunship_flashing.pal");
+const u16 sGunshipFlashingPal[] = INCBIN_U16("data/sprites/gunship_flashing.pal");

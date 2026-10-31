@@ -1,7 +1,7 @@
 #include "data/sprites/navigation_pad.h"
 
-const u32 sNavigationPadGfx[512 * 3] = INCBIN_U32("data/sprites/navigation_pad.gfx");
-const u16 sNavigationPadPal[16 * 3] = INCBIN_U16("data/sprites/navigation_pad.pal");
+const u32 sNavigationPadGfx[] = INCBIN_U32("data/sprites/navigation_pad.gfx");
+const u16 sNavigationPadPal[] = INCBIN_U16("data/sprites/navigation_pad.pal");
 
 static const u16 sNavigationPadOam_31e268_Frame0[OAM_DATA_SIZE(6)] = {
     6,

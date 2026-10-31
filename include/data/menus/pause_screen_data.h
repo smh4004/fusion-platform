@@ -5,13 +5,13 @@
 #include "gba/memory.h"
 #include "oam.h"
 
-extern const u8 sMinimapTilesGfx[32 * 14 * TILE_SIZE];
-extern const u16 sMinimapTilesPal[3 * PAL_ROW];
+extern const u8 sMinimapTilesGfx[];
+extern const u16 sMinimapTilesPal[];
 
-extern const u16 sPauseScreenBgPal_565808[13 * PAL_ROW];
-extern const u16 sPauseScreenBgPal_5659a8[13 * PAL_ROW];
-extern const u16 sPauseScreenObjPal_565b48[16 * PAL_ROW];
-extern const u16 sNavConversationSamusPal[3 * PAL_ROW];
+extern const u16 sPauseScreenBgPal_565808[];
+extern const u16 sPauseScreenBgPal_5659a8[];
+extern const u16 sPauseScreenObjPal_565b48[];
+extern const u16 sNavConversationSamusPal[];
 
 extern const struct FrameData sPauseScreenOam_BlinkingSquare[3];
 extern const struct FrameData sPauseScreenOam_YesNoCursor[5];
@@ -136,29 +136,29 @@ extern const struct FrameData sPauseScreenOam_BslDiagram330Degrees[2];
 extern const struct FrameData sPauseScreenOam_BslDiagram340Degrees[2];
 extern const struct FrameData sPauseScreenOam_BslDiagram350Degrees[2];
 
-extern const u32 sPauseScreenBgGfx[2437];
-extern const u32 sNavConversationRoomGfx[1414];
-extern const u32 sNavConversationShipGfx[1575];
-extern const u32 sPauseScreenObjGfx[3404];
+extern const u32 sPauseScreenBgGfx[];
+extern const u32 sNavConversationRoomGfx[];
+extern const u32 sNavConversationShipGfx[];
+extern const u32 sPauseScreenObjGfx[];
 
-extern const u32 sBlankMinimap[63];
-extern const u32 sMainDeckMinimap[149];
-extern const u32 sSector1Minimap[120];
-extern const u32 sSector3Minimap[122];
-extern const u32 sSector6Minimap[117];
-extern const u32 sSector4Minimap[132];
-extern const u32 sSector2Minimap[133];
-extern const u32 sSector5Minimap[126];
-extern const u32 sMainDeckNoLabMinimap[148];
+extern const u32 sBlankMinimap[];
+extern const u32 sMainDeckMinimap[];
+extern const u32 sSector1Minimap[];
+extern const u32 sSector3Minimap[];
+extern const u32 sSector6Minimap[];
+extern const u32 sSector4Minimap[];
+extern const u32 sSector2Minimap[];
+extern const u32 sSector5Minimap[];
+extern const u32 sMainDeckNoLabMinimap[];
 
-extern const u32 sUnk_573da4[63];
-extern const u32 sPauseDebugTilemap[151];
-extern const u32 sMapScreenOutlineTilemap[123];
-extern const u32 sNavConversationTextBoxesTilemap[176];
-extern const u32 sPauseScreenSleepTilemap[193];
-extern const u32 sStatusScreenTilemap[295];
-extern const u32 sNavConversationRoomTilemap[359];
-extern const u32 sPauseScreen_5752e4[65];
-extern const u32 sNavConversationShipTilemap[414];
+extern const u32 sUnk_573da4[];
+extern const u32 sPauseDebugTilemap[];
+extern const u32 sMapScreenOutlineTilemap[];
+extern const u32 sNavConversationTextBoxesTilemap[];
+extern const u32 sPauseScreenSleepTilemap[];
+extern const u32 sStatusScreenTilemap[];
+extern const u32 sNavConversationRoomTilemap[];
+extern const u32 sPauseScreen_5752e4[];
+extern const u32 sNavConversationShipTilemap[];
 
 #endif /* PAUSE_SCREEN_DATA_H */

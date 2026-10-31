@@ -1,8 +1,8 @@
 #include "data/sprites/security_pad.h"
 #include "macros.h"
 
-const u32 sSecurityPadGfx[3 * 512] = INCBIN_U32("data/sprites/security_pad.gfx");
-const u16 sSecurityPadPal[3 * 16] = INCBIN_U16("data/sprites/security_pad.pal");
+const u32 sSecurityPadGfx[] = INCBIN_U32("data/sprites/security_pad.gfx");
+const u16 sSecurityPadPal[] = INCBIN_U16("data/sprites/security_pad.pal");
 
 static const u16 sSecurityPadMonitorOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     4,
@@ -406,4 +406,4 @@ const struct FrameData sSecurityPadMonitorOam_2f78bc[2] = {
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const u16 sSecurityPad_2f78cc[16 * 16] = INCBIN_U16("data/sprites/security_pad_2f78cc.pal");
+const u16 sSecurityPad_2f78cc[] = INCBIN_U16("data/sprites/security_pad_2f78cc.pal");

@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sRechargePadGfx[3 * 512];
-extern const u16 sRechargePadPal[3 * 16];
+extern const u32 sRechargePadGfx[];
+extern const u16 sRechargePadPal[];
 
 extern const struct FrameData sRechargePadOam_325640[5];
 extern const struct FrameData sRechargePadOam_325668[5];

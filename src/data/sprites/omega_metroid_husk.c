@@ -1,8 +1,8 @@
 #include "data/sprites/omega_metroid_husk.h"
 #include "macros.h"
 
-const u32 sOmegaMetroidHuskGfx[512 * 2] = INCBIN_U32("data/sprites/omega_metroid_husk.gfx");
-const u16 sOmegaMetroidHuskPal[16 * 2] = INCBIN_U16("data/sprites/omega_metroid_husk.pal");
+const u32 sOmegaMetroidHuskGfx[] = INCBIN_U32("data/sprites/omega_metroid_husk.gfx");
+const u16 sOmegaMetroidHuskPal[] = INCBIN_U16("data/sprites/omega_metroid_husk.pal");
 
 static const u16 sOmegaMetroidHuskOam_Idle_Frame0[OAM_DATA_SIZE(23)] = {
     23,

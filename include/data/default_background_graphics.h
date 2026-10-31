@@ -3,8 +3,8 @@
 
 #include "types.h"
 
-extern const u32 sTileset_0_Gfx[762];
+extern const u32 sTileset_0_Gfx[];
 
-extern const u32 sTileset_0_Bg_Gfx[949];
+extern const u32 sTileset_0_Bg_Gfx[];
 
 #endif /* DEFAULT_BACKGROUND_GRAPHICS_H */

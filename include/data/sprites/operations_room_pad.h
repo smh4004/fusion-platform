@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sOperationsRoomPadGfx[2 * 512];
-extern const u16 sOperationsRoomPadPal[2 * 16];
+extern const u32 sOperationsRoomPadGfx[];
+extern const u16 sOperationsRoomPadPal[];
 
 extern const struct FrameData sOperationsRoomPadOam_34c244[2];
 extern const struct FrameData sOperationsRoomPadOam_34c254[5];

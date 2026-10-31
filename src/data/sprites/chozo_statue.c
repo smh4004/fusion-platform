@@ -1,7 +1,7 @@
 #include "data/sprites/chozo_statue.h"
 
-const u32 sChozoStatueGfx[1 * 512] = INCBIN_U32("data/sprites/chozo_statue.gfx");
-const u16 sChozoStatuePal[1 * 16] = INCBIN_U16("data/sprites/chozo_statue.pal");
+const u32 sChozoStatueGfx[] = INCBIN_U32("data/sprites/chozo_statue.gfx");
+const u16 sChozoStatuePal[] = INCBIN_U16("data/sprites/chozo_statue.pal");
 
 static const u16 sChozoStatueOam_Frame0[OAM_DATA_SIZE(5)] = {
     5,

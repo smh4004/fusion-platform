@@ -103,8 +103,8 @@ const s16 sKihunterFlyingAfterSwoopingDeceleratingYSpeed[12] = {
     -4, -3, -2, SHORT_MAX
 };
 
-const u32 sKihunterGfx[3 * 512] = INCBIN_U32("data/sprites/kihunter.gfx");
-const u16 sKihunterPal[3 * 16] = INCBIN_U16("data/sprites/kihunter.pal");
+const u32 sKihunterGfx[] = INCBIN_U32("data/sprites/kihunter.gfx");
+const u16 sKihunterPal[] = INCBIN_U16("data/sprites/kihunter.pal");
 
 static const u16 sKihunterFlyingOam_Idle_Frame0[OAM_DATA_SIZE(10)] = {
     10,

@@ -5345,9 +5345,9 @@ const u8 sSaX_2b4154[20] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0
 };
 
-const u16 sSaXPalette_Fading[16 * 16] = INCBIN_U16("data/sa_x/fading.pal");
-const u16 sSaXPalette_MidAir[4 * 16] = INCBIN_U16("data/sa_x/screw_attack.pal");
-const u16 sSaXPalette_TransformingIntoMonster[1 * 16] = INCBIN_U16("data/sa_x/transforming_into_monster.pal");
+const u16 sSaXPalette_Fading[] = INCBIN_U16("data/sa_x/fading.pal");
+const u16 sSaXPalette_MidAir[] = INCBIN_U16("data/sa_x/screw_attack.pal");
+const u16 sSaXPalette_TransformingIntoMonster[] = INCBIN_U16("data/sa_x/transforming_into_monster.pal");
 
 const SaXGfxFunc_T sSaXPoseGfxFunctionPointers[SA_X_POSE_END] = {
     [SA_X_POSE_RUNNING] = SaXRunningGfx,

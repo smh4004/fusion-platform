@@ -1,8 +1,8 @@
 #include "data/sprites/ridley_pre_spawn.h"
 #include "macros.h"
 
-const u32 sRidleyPreSpawnGfx[512 * 2] = INCBIN_U32("data/sprites/ridley_pre_spawn.gfx");
-const u16 sRidleyPreSpawnPal[16 * 2] = INCBIN_U16("data/sprites/ridley_pre_spawn.pal");
+const u32 sRidleyPreSpawnGfx[] = INCBIN_U32("data/sprites/ridley_pre_spawn.gfx");
+const u16 sRidleyPreSpawnPal[] = INCBIN_U16("data/sprites/ridley_pre_spawn.pal");
 
 static const u16 sRidleyPreSpawnOam_Idle_Frame0[OAM_DATA_SIZE(14)] = {
     14,

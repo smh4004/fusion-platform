@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sMissileGeronGfx[512 * 1];
-extern const u16 sMissileGeronPal[16 * 1];
+extern const u32 sMissileGeronGfx[];
+extern const u16 sMissileGeronPal[];
 
 extern const struct FrameData sMissileGeronStemOam_Idle[5];
 extern const struct FrameData sMissileGeronStemOam_Destroyed[5];

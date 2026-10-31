@@ -9,8 +9,8 @@ const s16 sZebesianGroundJumpingSpeedLow[10] = {
     -4, -8, -8, -8, -4, 0, 4, 8, 16, 16
 };
 
-const u32 sZebesianGroundGfx[512 * 3] = INCBIN_U32("data/sprites/zebesian_ground.gfx");
-const u16 sZebesianGroundPal[16 * 3] = INCBIN_U16("data/sprites/zebesian_ground.pal");
+const u32 sZebesianGroundGfx[] = INCBIN_U32("data/sprites/zebesian_ground.gfx");
+const u16 sZebesianGroundPal[] = INCBIN_U16("data/sprites/zebesian_ground.pal");
 
 static const u16 sZebesianGroundOam_Walking_Frame0[OAM_DATA_SIZE(12)] = {
     12,
@@ -1145,5 +1145,5 @@ const struct FrameData sZebesianGroundBeamOam_Extending[6] = {
     [5] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sGoldZebesianGfx[512 * 3] = INCBIN_U32("data/sprites/gold_zebesian.gfx");
-const u16 sGoldZebesianPal[16 * 3] = INCBIN_U16("data/sprites/gold_zebesian.pal");
+const u32 sGoldZebesianGfx[] = INCBIN_U32("data/sprites/gold_zebesian.gfx");
+const u16 sGoldZebesianPal[] = INCBIN_U16("data/sprites/gold_zebesian.pal");

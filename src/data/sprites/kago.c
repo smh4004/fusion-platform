@@ -15,8 +15,8 @@ const s16 sKagoInsectLowJumpVelocity[10] = {
     4, 8, 12, 16, 16
 };
 
-const u32 sKagoGfx[2 * 512] = INCBIN_U32("data/sprites/kago.gfx");
-const u16 sKagoPal[2 * 16] = INCBIN_U16("data/sprites/kago.pal");
+const u32 sKagoGfx[] = INCBIN_U32("data/sprites/kago.gfx");
+const u16 sKagoPal[] = INCBIN_U16("data/sprites/kago.pal");
 
 static const u16 sKagoOam_IdleTall_Frame0[OAM_DATA_SIZE(6)] = {
     6,

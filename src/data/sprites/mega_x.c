@@ -39,8 +39,8 @@ const s16 sVariaSuitAbilitySpawningXMovement[57] = {
     SHORT_MAX
 };
 
-const u32 sMegaXGfx[8 * 512] = INCBIN_U32("data/sprites/mega_x.gfx");
-const u16 sMegaXPal[8 * 16] = INCBIN_U16("data/sprites/mega_x.pal");
+const u32 sMegaXGfx[] = INCBIN_U32("data/sprites/mega_x.gfx");
+const u16 sMegaXPal[] = INCBIN_U16("data/sprites/mega_x.pal");
 
 static const u16 sMegaXOam_3a5e40_Frame0[OAM_DATA_SIZE(4)] = {
     4,

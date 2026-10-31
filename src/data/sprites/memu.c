@@ -45,8 +45,8 @@ const s16 sMemuIdleXSpeed[81] = {
     SHORT_MAX
 };
 
-const u32 sMemuGfx[512 * 1] = INCBIN_U32("data/sprites/memu.gfx");
-const u16 sMemuPal[16 * 1] = INCBIN_U16("data/sprites/memu.pal");
+const u32 sMemuGfx[] = INCBIN_U32("data/sprites/memu.gfx");
+const u16 sMemuPal[] = INCBIN_U16("data/sprites/memu.pal");
 
 static const u16 sMemuOam_Idle_Frame0[OAM_DATA_SIZE(1)] = {
     1,

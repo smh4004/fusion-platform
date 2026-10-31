@@ -6,8 +6,8 @@
 
 extern const s16 sSova_3516fc[16];
 
-extern const u32 sSovaGfx[3 * 512];
-extern const u16 sSovaPal[3 * 16];
+extern const u32 sSovaGfx[];
+extern const u16 sSovaPal[];
 
 extern const struct FrameData sSovaOam_CrawlingOnFlatGround[5];
 extern const struct FrameData sSovaOam_CrawlingOnWall[5];

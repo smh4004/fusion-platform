@@ -43,34 +43,34 @@ const s16 sTumblingMissileFallingVelocity[16] = {
     12, 16, 20, SHORT_MAX
 };
 
-const u16 sNormalBeamPal[1 * 16] = INCBIN_U16("data/projectiles/normal_beam.pal");
-const u16 sChargeBeamPal[1 * 16] = INCBIN_U16("data/projectiles/charge_beam.pal");
-const u16 sWideBeamPal[1 * 16] = INCBIN_U16("data/projectiles/wide_beam.pal");
-const u16 sPlasmaBeamPal[1 * 16] = INCBIN_U16("data/projectiles/plasma_beam.pal");
-const u16 sWaveBeamPal[1 * 16] = INCBIN_U16("data/projectiles/wave_beam.pal");
-const u16 sIceBeamPal[1 * 16] = INCBIN_U16("data/projectiles/ice_beam.pal");
+const u16 sNormalBeamPal[] = INCBIN_U16("data/projectiles/normal_beam.pal");
+const u16 sChargeBeamPal[] = INCBIN_U16("data/projectiles/charge_beam.pal");
+const u16 sWideBeamPal[] = INCBIN_U16("data/projectiles/wide_beam.pal");
+const u16 sPlasmaBeamPal[] = INCBIN_U16("data/projectiles/plasma_beam.pal");
+const u16 sWaveBeamPal[] = INCBIN_U16("data/projectiles/wave_beam.pal");
+const u16 sIceBeamPal[] = INCBIN_U16("data/projectiles/ice_beam.pal");
 
-const u8 sNormalBeamGfx_Top[20 * 32] = INCBIN_U8("data/projectiles/normal_beam_top.gfx");
-const u8 sNormalBeamGfx_Bottom[20 * 32] = INCBIN_U8("data/projectiles/normal_beam_bottom.gfx");
-const u8 sChargeBeamGfx_Top[20 * 32] = INCBIN_U8("data/projectiles/charge_beam_top.gfx");
-const u8 sChargeBeamGfx_Bottom[20 * 32] = INCBIN_U8("data/projectiles/charge_beam_bottom.gfx");
-const u8 sWideBeamGfx_Top[20 * 32] = INCBIN_U8("data/projectiles/wide_beam_top.gfx");
-const u8 sWideBeamGfx_Bottom[20 * 32] = INCBIN_U8("data/projectiles/wide_beam_bottom.gfx");
-const u8 sPlasmaBeamGfx_Top[20 * 32] = INCBIN_U8("data/projectiles/plasma_beam_top.gfx");
-const u8 sPlasmaBeamGfx_Bottom[20 * 32] = INCBIN_U8("data/projectiles/plasma_beam_bottom.gfx");
-const u8 sWaveBeamGfx_Top[20 * 32] = INCBIN_U8("data/projectiles/wave_beam_top.gfx");
-const u8 sWaveBeamGfx_Bottom[20 * 32] = INCBIN_U8("data/projectiles/wave_beam_bottom.gfx");
-const u8 sIceBeamGfx_Top[20 * 32] = INCBIN_U8("data/projectiles/ice_beam_top.gfx");
-const u8 sIceBeamGfx_Bottom[20 * 32] = INCBIN_U8("data/projectiles/ice_beam_bottom.gfx");
+const u8 sNormalBeamGfx_Top[] = INCBIN_U8("data/projectiles/normal_beam_top.gfx");
+const u8 sNormalBeamGfx_Bottom[] = INCBIN_U8("data/projectiles/normal_beam_bottom.gfx");
+const u8 sChargeBeamGfx_Top[] = INCBIN_U8("data/projectiles/charge_beam_top.gfx");
+const u8 sChargeBeamGfx_Bottom[] = INCBIN_U8("data/projectiles/charge_beam_bottom.gfx");
+const u8 sWideBeamGfx_Top[] = INCBIN_U8("data/projectiles/wide_beam_top.gfx");
+const u8 sWideBeamGfx_Bottom[] = INCBIN_U8("data/projectiles/wide_beam_bottom.gfx");
+const u8 sPlasmaBeamGfx_Top[] = INCBIN_U8("data/projectiles/plasma_beam_top.gfx");
+const u8 sPlasmaBeamGfx_Bottom[] = INCBIN_U8("data/projectiles/plasma_beam_bottom.gfx");
+const u8 sWaveBeamGfx_Top[] = INCBIN_U8("data/projectiles/wave_beam_top.gfx");
+const u8 sWaveBeamGfx_Bottom[] = INCBIN_U8("data/projectiles/wave_beam_bottom.gfx");
+const u8 sIceBeamGfx_Top[] = INCBIN_U8("data/projectiles/ice_beam_top.gfx");
+const u8 sIceBeamGfx_Bottom[] = INCBIN_U8("data/projectiles/ice_beam_bottom.gfx");
 
-const u8 sNormalMissileGfx_Top[4 * 32] = INCBIN_U8("data/projectiles/normal_missile_top.gfx");
-const u8 sNormalMissileGfx_Bottom[4 * 32] = INCBIN_U8("data/projectiles/normal_missile_bottom.gfx");
-const u8 sSuperMissileGfx_Top[4 * 32] = INCBIN_U8("data/projectiles/super_missile_top.gfx");
-const u8 sSuperMissileGfx_Bottom[4 * 32] = INCBIN_U8("data/projectiles/super_missile_bottom.gfx");
-const u8 sIceMissileGfx_Top[4 * 32] = INCBIN_U8("data/projectiles/ice_missile_top.gfx");
-const u8 sIceMissileGfx_Bottom[4 * 32] = INCBIN_U8("data/projectiles/ice_missile_bottom.gfx");
-const u8 sDiffusionMissileGfx_Top[4 * 32] = INCBIN_U8("data/projectiles/diffusion_missile_top.gfx");
-const u8 sDiffusionMissileGfx_Bottom[4 * 32] = INCBIN_U8("data/projectiles/diffusion_missile_bottom.gfx");
+const u8 sNormalMissileGfx_Top[] = INCBIN_U8("data/projectiles/normal_missile_top.gfx");
+const u8 sNormalMissileGfx_Bottom[] = INCBIN_U8("data/projectiles/normal_missile_bottom.gfx");
+const u8 sSuperMissileGfx_Top[] = INCBIN_U8("data/projectiles/super_missile_top.gfx");
+const u8 sSuperMissileGfx_Bottom[] = INCBIN_U8("data/projectiles/super_missile_bottom.gfx");
+const u8 sIceMissileGfx_Top[] = INCBIN_U8("data/projectiles/ice_missile_top.gfx");
+const u8 sIceMissileGfx_Bottom[] = INCBIN_U8("data/projectiles/ice_missile_bottom.gfx");
+const u8 sDiffusionMissileGfx_Top[] = INCBIN_U8("data/projectiles/diffusion_missile_top.gfx");
+const u8 sDiffusionMissileGfx_Bottom[] = INCBIN_U8("data/projectiles/diffusion_missile_bottom.gfx");
 
 static const u16 sNormalBeamOam_Horizontal_Frame0[OAM_DATA_SIZE(1)] = {
     1,
@@ -2515,12 +2515,12 @@ const struct FrameData sPowerBombOam_Fast[4] = {
     [3] = FRAME_DATA_TERMINATOR
 };
 
-const u8 sFlareHorizontalGfx_Top[40 * 32] = INCBIN_U8("data/projectiles/flare_horizontal_top.gfx");
-const u8 sFlareHorizontalGfx_Bottom[40 * 32] = INCBIN_U8("data/projectiles/flare_horizontal_bottom.gfx");
-const u8 sFlareDiagonalGfx_Top[40 * 32] = INCBIN_U8("data/projectiles/flare_diagonal_top.gfx");
-const u8 sFlareDiagonalGfx_Bottom[40 * 32] = INCBIN_U8("data/projectiles/flare_diagonal_bottom.gfx");
-const u8 sFlareVerticalGfx_Top[40 * 32] = INCBIN_U8("data/projectiles/flare_vertical_top.gfx");
-const u8 sFlareVerticalGfx_Bottom[40 * 32] = INCBIN_U8("data/projectiles/flare_vertical_bottom.gfx");
+const u8 sFlareHorizontalGfx_Top[] = INCBIN_U8("data/projectiles/flare_horizontal_top.gfx");
+const u8 sFlareHorizontalGfx_Bottom[] = INCBIN_U8("data/projectiles/flare_horizontal_bottom.gfx");
+const u8 sFlareDiagonalGfx_Top[] = INCBIN_U8("data/projectiles/flare_diagonal_top.gfx");
+const u8 sFlareDiagonalGfx_Bottom[] = INCBIN_U8("data/projectiles/flare_diagonal_bottom.gfx");
+const u8 sFlareVerticalGfx_Top[] = INCBIN_U8("data/projectiles/flare_vertical_top.gfx");
+const u8 sFlareVerticalGfx_Bottom[] = INCBIN_U8("data/projectiles/flare_vertical_bottom.gfx");
 
 static const u16 sFlareOam_Frame0[OAM_DATA_SIZE(2)] = {
     2,

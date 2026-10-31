@@ -114,8 +114,8 @@ extern const struct MultiSpriteData sBoxMultiSpriteData_LoweringToFireBomb[8];
 extern const struct MultiSpriteData sBoxMultiSpriteData_FiringBomb[4];
 extern const struct MultiSpriteData sBoxMultiSpriteData_DoneFiringBomb[9];
 
-extern const u32 sBoxGfx[512 * 8];
-extern const u16 sBoxPal[16 * 8];
+extern const u32 sBoxGfx[];
+extern const u16 sBoxPal[];
 
 extern const struct FrameData sBoxPartOam_FrontLeftLegCoverUndamaged[2];
 extern const struct FrameData sBoxPartOam_FrontLeftLegCoverShaking[7];

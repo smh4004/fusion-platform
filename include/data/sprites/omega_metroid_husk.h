@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sOmegaMetroidHuskGfx[512 * 2];
-extern const u16 sOmegaMetroidHuskPal[16 * 2];
+extern const u32 sOmegaMetroidHuskGfx[];
+extern const u16 sOmegaMetroidHuskPal[];
 
 extern const struct FrameData sOmegaMetroidHuskOam_Idle[2];
 extern const struct FrameData sOmegaMetroidHuskOam_GettingCrushed[6];

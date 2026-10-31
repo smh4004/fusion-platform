@@ -470,7 +470,7 @@ const u16 sClipdataTilemapBehaviorTypes[CLIPDATA_TILEMAP_COUNT] = {
     [CLIPDATA_TILEMAP_463] = CLIP_BEHAVIOR_NONE,
 };
 
-const u16 sCommonTilemap[1856] = INCBIN_U16("data/common/common_tilemap.tt");
+const u16 sCommonTilemap[] = INCBIN_U16("data/common/common_tilemap.tt");
 
 const u8 sClipdataTilemapCollisionTypes[CLIPDATA_TILEMAP_COUNT] = {
     [CLIPDATA_TILEMAP_AIR] = CLIPDATA_TYPE_AIR,

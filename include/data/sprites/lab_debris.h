@@ -5,8 +5,8 @@
 #include "oam.h"
 #include "gba/memory.h"
 
-extern const u32 sLabDebrisGfx[512 * 1];
-extern const u16 sLabDebrisPal[PAL_ROW * 1];
+extern const u32 sLabDebrisGfx[];
+extern const u16 sLabDebrisPal[];
 
 extern const struct FrameData sLabDebrisOam_Left[2];
 extern const struct FrameData sLabDebrisOam_Middle[2];

@@ -1,7 +1,7 @@
 #include "data/sprites/electric_water.h"
 
-const u32 sElectricWaterGfx[2 * 512] = INCBIN_U32("data/sprites/electric_water.gfx");
-const u16 sElectricWaterPal[2 * 16] = INCBIN_U16("data/sprites/electric_water.pal");
+const u32 sElectricWaterGfx[] = INCBIN_U32("data/sprites/electric_water.gfx");
+const u16 sElectricWaterPal[] = INCBIN_U16("data/sprites/electric_water.pal");
 
 static const u16 sElectricWaterDamageOam_Idle_Frame0[OAM_DATA_SIZE(2)] = {
     2,

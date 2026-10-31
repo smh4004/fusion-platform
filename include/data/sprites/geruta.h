@@ -6,8 +6,8 @@
 
 extern const s16 sGerutaIdleYMovement[65]; // 36
 
-extern const u32 sGerutaGfx[512 * 1];
-extern const u16 sGerutaPal[16 * 1];
+extern const u32 sGerutaGfx[];
+extern const u16 sGerutaPal[];
 
 extern const struct FrameData sGerutaOam_Idle[5];
 extern const struct FrameData sGerutaOam_AttackWarning[2];

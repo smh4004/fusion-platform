@@ -1,7 +1,7 @@
 #include "data/sprites/missile_geron.h"
 
-const u32 sMissileGeronGfx[512 * 1] = INCBIN_U32("data/sprites/missile_geron.gfx");
-const u16 sMissileGeronPal[16 * 1] = INCBIN_U16("data/sprites/missile_geron.pal");
+const u32 sMissileGeronGfx[] = INCBIN_U32("data/sprites/missile_geron.gfx");
+const u16 sMissileGeronPal[] = INCBIN_U16("data/sprites/missile_geron.pal");
 
 static const u16 sMissileGeronStemOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     4,

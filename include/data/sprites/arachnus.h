@@ -7,8 +7,8 @@
 extern const s16 sArachnusRollingSpeed[12];
 extern const s16 sArachnusBonkingSpeed[36];
 
-extern const u32 sArachnusGfx[512 * 8];
-extern const u16 sArachnusPal[16 * 8];
+extern const u32 sArachnusGfx[];
+extern const u16 sArachnusPal[];
 
 extern const struct FrameData sArachnusOam_Walking[6];
 extern const struct FrameData sArachnusShellOam_Walking[5];

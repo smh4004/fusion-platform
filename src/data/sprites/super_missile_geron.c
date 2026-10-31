@@ -1,8 +1,8 @@
 #include "data/sprites/super_missile_geron.h"
 #include "macros.h"
 
-const u32 sSuperMissileGeronGfx[512] = INCBIN_U32("data/sprites/super_missile_geron.gfx");
-const u16 sSuperMissileGeronPal[1 * 16] = INCBIN_U16("data/sprites/super_missile_geron.pal");
+const u32 sSuperMissileGeronGfx[] = INCBIN_U32("data/sprites/super_missile_geron.gfx");
+const u16 sSuperMissileGeronPal[] = INCBIN_U16("data/sprites/super_missile_geron.pal");
 
 static const u16 sSuperMissileGeronStemOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     4,

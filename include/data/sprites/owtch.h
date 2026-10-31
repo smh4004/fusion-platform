@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sOwtchGfx[512];
-extern const u16 sOwtchPal[16];
+extern const u32 sOwtchGfx[];
+extern const u16 sOwtchPal[];
 
 extern const struct FrameData sOwtchOam_3790d4[4];
 extern const struct FrameData sOwtchOam_3790f4[4];

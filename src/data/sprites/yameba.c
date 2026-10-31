@@ -89,8 +89,8 @@ static const s16 sYameba_2f49be[81] = {
     SHORT_MAX
 };
 
-const u32 sYamebaGfx[2 * 512] = INCBIN_U32("data/sprites/yameba.gfx");
-const u16 sYamebaPal[2 * 16] = INCBIN_U16("data/sprites/yameba.pal");
+const u32 sYamebaGfx[] = INCBIN_U32("data/sprites/yameba.gfx");
+const u16 sYamebaPal[] = INCBIN_U16("data/sprites/yameba.pal");
 
 
 static const u16 sYamebaOam_Small_Frame0[OAM_DATA_SIZE(1)] = {

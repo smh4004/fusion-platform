@@ -1,8 +1,8 @@
 #include "data/sprites/zebesian_aqua.h"
 #include "macros.h"
 
-const u32 sZebesianAquaGfx[512 * 2] = INCBIN_U32("data/sprites/zebesian_aqua.gfx");
-const u16 sZebesianAquaPal[PAL_ROW * 2] = INCBIN_U16("data/sprites/zebesian_aqua.pal");
+const u32 sZebesianAquaGfx[] = INCBIN_U32("data/sprites/zebesian_aqua.gfx");
+const u16 sZebesianAquaPal[] = INCBIN_U16("data/sprites/zebesian_aqua.pal");
 
 static const u16 sZebesianAquaOam_Unused_38172c_Frame0[OAM_DATA_SIZE(13)] = {
     13,

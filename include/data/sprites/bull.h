@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sBullGfx[512 * 1];
-extern const u16 sBullPal[16 * 1];
+extern const u32 sBullGfx[];
+extern const u16 sBullPal[];
 
 extern const struct FrameData sBullOam[5];
 extern const struct FrameData sBullSmokeOam[9];

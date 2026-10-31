@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sToxicGasGfx[2 * 512];
-extern const u16 sToxicGasPal[2 * 16];
+extern const u32 sToxicGasGfx[];
+extern const u16 sToxicGasPal[];
 
 extern const struct FrameData sToxicGasExplosionOam[11];
 extern const struct FrameData sToxicGasOam[5];

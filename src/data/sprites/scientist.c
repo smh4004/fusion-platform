@@ -1,7 +1,7 @@
 #include "data/sprites/scientist.h"
 
-const u32 sScientistGfx[2 * 512] = INCBIN_U32("data/sprites/scientist.gfx");
-const u16 sScientistPal[2 * 16] = INCBIN_U16("data/sprites/scientist.pal");
+const u32 sScientistGfx[] = INCBIN_U32("data/sprites/scientist.gfx");
+const u16 sScientistPal[] = INCBIN_U16("data/sprites/scientist.pal");
 
 static const u16 sScientistOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     4,

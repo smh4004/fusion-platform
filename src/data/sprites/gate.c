@@ -1,7 +1,7 @@
 #include "data/sprites/gate.h"
 
-const u32 sGateGfx[1 * 512] = INCBIN_U32("data/sprites/gate.gfx");
-const u16 sGatePal[1 * 16] = INCBIN_U16("data/sprites/gate.pal");
+const u32 sGateGfx[] = INCBIN_U32("data/sprites/gate.gfx");
+const u16 sGatePal[] = INCBIN_U16("data/sprites/gate.pal");
 
 static const u16 sGateOam_OpenedThin_Frame0[OAM_DATA_SIZE(1)] = {
     1,

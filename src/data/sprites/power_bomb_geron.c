@@ -1,8 +1,8 @@
 #include "data/sprites/power_bomb_geron.h"
 #include "macros.h"
 
-const u32 sPowerBombGeronGfx[1024] = INCBIN_U32("data/sprites/power_bomb_geron.gfx");
-const u16 sPowerBombGeronPal[2 * 16] = INCBIN_U16("data/sprites/power_bomb_geron.pal");
+const u32 sPowerBombGeronGfx[] = INCBIN_U32("data/sprites/power_bomb_geron.gfx");
+const u16 sPowerBombGeronPal[] = INCBIN_U16("data/sprites/power_bomb_geron.pal");
 
 static const u16 sPowerBombGeronStemOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     4,

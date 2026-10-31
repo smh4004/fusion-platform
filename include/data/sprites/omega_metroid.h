@@ -107,8 +107,8 @@ extern const struct MultiSpriteData sOmegaMetroidMultiOam_WalkingBackward[11];
 extern const struct MultiSpriteData sOmegaMetroidMultiOam_DoneWalkingBackward[2];
 extern const struct MultiSpriteData sOmegaMetroidMultiOam_Swiping[6];
 
-extern const u32 sOmegaMetroidGfx[512 * 5];
-extern const u16 sOmegaMetroidPal[PAL_ROW * 5];
+extern const u32 sOmegaMetroidGfx[];
+extern const u16 sOmegaMetroidPal[];
 
 extern const struct FrameData sOmegaMetroidPartOam_RightLeg_Idle[5];
 extern const struct FrameData sOmegaMetroidPartOam_LeftLeg_Idle[5];

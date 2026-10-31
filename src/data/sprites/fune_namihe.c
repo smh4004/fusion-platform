@@ -1,8 +1,8 @@
 #include "data/sprites/fune_namihe.h"
 #include "macros.h"
 
-const u32 sFuneNamiheGfx[2 * 512] = INCBIN_U32("data/sprites/fune_namihe.gfx");
-const u16 sFuneNamihePal[2 * 16] = INCBIN_U16("data/sprites/fune_namihe.pal");
+const u32 sFuneNamiheGfx[] = INCBIN_U32("data/sprites/fune_namihe.gfx");
+const u16 sFuneNamihePal[] = INCBIN_U16("data/sprites/fune_namihe.pal");
 
 static const u16 sFuneOam_Idle_Frame0[OAM_DATA_SIZE(7)] = {
     7,

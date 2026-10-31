@@ -1,8 +1,8 @@
 #include "data/sprites/powamp.h"
 #include "macros.h"
 
-const u32 sPowampGfx[512 * 1] = INCBIN_U32("data/sprites/powamp.gfx");
-const u16 sPowampPal[PAL_ROW * 1] = INCBIN_U16("data/sprites/powamp.pal");
+const u32 sPowampGfx[] = INCBIN_U32("data/sprites/powamp.gfx");
+const u16 sPowampPal[] = INCBIN_U16("data/sprites/powamp.pal");
 
 static const u16 sPowampOam_Extending_Frame0[OAM_DATA_SIZE(2)] = {
     2,

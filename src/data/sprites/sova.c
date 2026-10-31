@@ -8,8 +8,8 @@ const s16 sSova_3516fc[16] = {
     10, 11, 12, SHORT_MAX
 };
 
-const u32 sSovaGfx[3 * 512] = INCBIN_U32("data/sprites/sova.gfx");
-const u16 sSovaPal[3 * 16] = INCBIN_U16("data/sprites/sova.pal");
+const u32 sSovaGfx[] = INCBIN_U32("data/sprites/sova.gfx");
+const u16 sSovaPal[] = INCBIN_U16("data/sprites/sova.pal");
 
 static const u16 sSovaOam_CrawlingOnFlatGround_Frame0[OAM_DATA_SIZE(5)] = {
     5,

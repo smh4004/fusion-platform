@@ -89,8 +89,8 @@ const s16 sBlueXIdleXMovement[81] = {
      SHORT_MAX
 };
 
-const u32 sBlueXGfx[1024] = INCBIN_U32("data/sprites/blue_x.gfx");
-const u16 sBlueXPal[2 * 16] = INCBIN_U16("data/sprites/blue_x.pal");
+const u32 sBlueXGfx[] = INCBIN_U32("data/sprites/blue_x.gfx");
+const u16 sBlueXPal[] = INCBIN_U16("data/sprites/blue_x.pal");
 
 static const u16 sBlueXOam_Moving_Frame0[OAM_DATA_SIZE(1)] = {
     1,

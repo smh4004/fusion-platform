@@ -26,8 +26,8 @@ extern const struct FrameData sCoreXShellOam_Red[2];
 
 extern const u32 sHiJumpCoreXGfx[512 * 5];
 extern const u16 sHiJumpCoreXPal[16 * 5];
-extern const u32 sSpeedBoosterCoreXGfx[512 * 5];
-extern const u16 sSpeedBoosterCoreXPal[16 * 5];
+extern const u32 sSpeedBoosterCoreXGfx[];
+extern const u16 sSpeedBoosterCoreXPal[];
 extern const u32 sSpaceJumpCoreXGfx[512 * 5];
 extern const u16 sSpaceJumpCoreXPal[16 * 5];
 extern const u32 sGravityCoreXGfx[512 * 5];

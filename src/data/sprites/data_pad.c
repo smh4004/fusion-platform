@@ -1,7 +1,7 @@
 #include "data/sprites/data_pad.h"
 
-const u32 sDataPadGfx[512 * 3] = INCBIN_U32("data/sprites/data_pad.gfx");
-const u16 sDataPadPal[16 * 3] = INCBIN_U16("data/sprites/data_pad.pal");
+const u32 sDataPadGfx[] = INCBIN_U32("data/sprites/data_pad.gfx");
+const u16 sDataPadPal[] = INCBIN_U16("data/sprites/data_pad.pal");
 
 static const u16 sDataPadSidesOam_Idle_Frame0[OAM_DATA_SIZE(16)] = {
     16,

@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sControlPadGfx[2 * 512];
-extern const u16 sControlPadPal[2 * 16];
+extern const u32 sControlPadGfx[];
+extern const u16 sControlPadPal[];
 
 extern const struct FrameData sControlPadConsoleOam_Inactive[5];
 extern const struct FrameData sControlPadConsoleOam_Active[5];
@@ -14,8 +14,8 @@ extern const struct FrameData sControlPadOam_ReleasingSwitch[5];
 extern const struct FrameData sControlPadOam_SwitchUnpressed[2];
 extern const struct FrameData sControlPadOam_SwitchPressed[2];
 
-extern const u32 sHabitationPadGfx[1 * 512];
-extern const u16 sHabitationPadPal[1 * 16];
+extern const u32 sHabitationPadGfx[];
+extern const u16 sHabitationPadPal[];
 
 extern const struct FrameData sHabitationPadConsoleOam_Inactive[5];
 extern const struct FrameData sHabitationPadConsoleOam_Active[5];

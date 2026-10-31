@@ -55,8 +55,8 @@ const s16 sMetroidSwayingXSpeeds[80] = {
     -3, -3, -2, -2, -1, -1, 0, SHORT_MAX
 };
 
-const u32 sMetroidGfx[512 * 1] = INCBIN_U32("data/sprites/metroid.gfx");
-const u16 sMetroidPal[PAL_ROW * 1] = INCBIN_U16("data/sprites/metroid.pal");
+const u32 sMetroidGfx[] = INCBIN_U32("data/sprites/metroid.gfx");
+const u16 sMetroidPal[] = INCBIN_U16("data/sprites/metroid.pal");
 
 static const u16 sMetroidOam_Unused_385294_Frame0[OAM_DATA_SIZE(2)] = {
     2,

@@ -9,8 +9,8 @@ extern const s16 sSciserDancingSidewaysMovementRight[12];
 extern const s16 sSciserProjectileThrownDownVelocity[25];
 extern const s16 sSciserProjectileThrownUpVelocity[25];
 
-extern const u32 sSciserGfx[512 * 2];
-extern const u16 sSciserPal[16 * 2];
+extern const u32 sSciserGfx[];
+extern const u16 sSciserPal[];
 
 extern const struct FrameData sSciserOam_CrawlingHorizontal_Uninfected[5];
 extern const struct FrameData sSciserOam_IdleHorizontal_Uninfected[5];
@@ -32,7 +32,7 @@ extern const struct FrameData sSciserOam_DancingInBackgroundVertical[5];
 extern const struct FrameData sSciserProjectileOam_Exploding1[5];
 extern const struct FrameData sSciserProjectileOam_Exploding2[5];
 
-extern const u32 sGoldSciserGfx[512 * 2];
-extern const u16 sGoldSciserPal[16 * 2];
+extern const u32 sGoldSciserGfx[];
+extern const u16 sGoldSciserPal[];
 
 #endif /* SCISER_DATA_H */

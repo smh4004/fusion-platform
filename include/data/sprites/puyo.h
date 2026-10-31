@@ -7,8 +7,8 @@
 extern const s16 sPuyoJumpingUpSpeed[32];
 extern const s16 sPuyoJumpingDownSpeed[16];
 
-extern const u32 sPuyoGfx[1 * 512];
-extern const u16 sPuyoPal[1 * 16];
+extern const u32 sPuyoGfx[];
+extern const u16 sPuyoPal[];
 
 extern const struct FrameData sPuyoOam_37ce44[5];
 extern const struct FrameData sPuyoOam_37ce6c[7];

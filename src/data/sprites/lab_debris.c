@@ -1,8 +1,8 @@
 #include "data/sprites/lab_debris.h"
 #include "macros.h"
 
-const u32 sLabDebrisGfx[512 * 1] = INCBIN_U32("data/sprites/lab_debris.gfx");
-const u16 sLabDebrisPal[PAL_ROW * 1] = INCBIN_U16("data/sprites/lab_debris.pal");
+const u32 sLabDebrisGfx[] = INCBIN_U32("data/sprites/lab_debris.gfx");
+const u16 sLabDebrisPal[] = INCBIN_U16("data/sprites/lab_debris.pal");
 
 static const u16 sLabDebrisOam_Left_Frame0[OAM_DATA_SIZE(1)] = {
     1,

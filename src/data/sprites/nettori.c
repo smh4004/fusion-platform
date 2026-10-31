@@ -74,8 +74,8 @@ const s16 sNettoriEaterSporeMovingYVelocity[32] = {
 };
 
 
-const u32 sNettoriGfx[4096] = INCBIN_U32("data/sprites/nettori.gfx");
-const u16 sNettoriPal[8 * 16] = INCBIN_U16("data/sprites/nettori.pal");
+const u32 sNettoriGfx[] = INCBIN_U32("data/sprites/nettori.gfx");
+const u16 sNettoriPal[] = INCBIN_U16("data/sprites/nettori.pal");
 
 static const u16 sNettoriOam_Idle_Frame0[OAM_DATA_SIZE(9)] = {
     9,
@@ -978,8 +978,8 @@ const struct FrameData sNettoriPlasmaBeamOam_Charging[3] = {
 };
 
 
-const u16 sNettoriPal_Purple[1 * 16] = INCBIN_U16("data/sprites/nettori_purple.pal");
-const u16 sNettoriPal_Red[1 * 16] = INCBIN_U16("data/sprites/nettori_red.pal");
-const u16 sNettoriGlowingPal_1[1 * 16] = INCBIN_U16("data/sprites/nettori_glowing_1.pal");
-const u16 sNettoriGlowingPal_2[1 * 16] = INCBIN_U16("data/sprites/nettori_glowing_2.pal");
-const u16 sNettoriGlowingPal_3[1 * 16] = INCBIN_U16("data/sprites/nettori_glowing_3.pal");
+const u16 sNettoriPal_Purple[] = INCBIN_U16("data/sprites/nettori_purple.pal");
+const u16 sNettoriPal_Red[] = INCBIN_U16("data/sprites/nettori_red.pal");
+const u16 sNettoriGlowingPal_1[] = INCBIN_U16("data/sprites/nettori_glowing_1.pal");
+const u16 sNettoriGlowingPal_2[] = INCBIN_U16("data/sprites/nettori_glowing_2.pal");
+const u16 sNettoriGlowingPal_3[] = INCBIN_U16("data/sprites/nettori_glowing_3.pal");

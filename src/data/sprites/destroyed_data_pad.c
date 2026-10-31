@@ -1,8 +1,8 @@
 #include "data/sprites/destroyed_data_pad.h"
 #include "macros.h"
 
-const u32 sDestroyedDataPadGfx[512] = INCBIN_U32("data/sprites/destroyed_data_pad.gfx");
-const u16 sDestroyedDataPadPal[16 * 1] = INCBIN_U16("data/sprites/destroyed_data_pad.pal");
+const u32 sDestroyedDataPadGfx[] = INCBIN_U32("data/sprites/destroyed_data_pad.gfx");
+const u16 sDestroyedDataPadPal[] = INCBIN_U16("data/sprites/destroyed_data_pad.pal");
 
 static const u16 sDestroyedDataPadOam_Destroyed_Frame0[OAM_DATA_SIZE(23)] = {
     23,

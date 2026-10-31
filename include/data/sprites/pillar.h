@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sPillarGfx[512 * 1];
-extern const u16 sPillarPal[16 * 1];
+extern const u32 sPillarGfx[];
+extern const u16 sPillarPal[];
 
 extern const struct FrameData sPillarOam_37a7b4[26];
 extern const struct FrameData sPillarOam_37a884[25];

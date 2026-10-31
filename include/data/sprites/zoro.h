@@ -4,10 +4,10 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sZoroGfx[1 * 512];
-extern const u32 sBlueZoroGfx[1 * 512];
-extern const u16 sZoroPal[1 * 16];
-extern const u16 sBlueZoroPal[1 * 16];
+extern const u32 sZoroGfx[];
+extern const u32 sBlueZoroGfx[];
+extern const u16 sZoroPal[];
+extern const u16 sBlueZoroPal[];
 
 extern const struct FrameData sZoroOam_CrawlingHorizontal[7];
 extern const struct FrameData sZoroOam_TurningAroundHorizontal1[3];

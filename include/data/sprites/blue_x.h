@@ -9,8 +9,8 @@ extern const s16 sBlueXUnusedXMovement[81];
 extern const s16 sBlueXIdleYMovement[65];
 extern const s16 sBlueXIdleXMovement[81];
 
-extern const u32 sBlueXGfx[1024];
-extern const u16 sBlueXPal[2 * 16];
+extern const u32 sBlueXGfx[];
+extern const u16 sBlueXPal[];
 
 extern const struct FrameData sBlueXOam_Moving[7];
 extern const struct FrameData sBlueXOam_Idle[7];

@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sGateGfx[1 * 512];
-extern const u16 sGatePal[1 * 16];
+extern const u32 sGateGfx[];
+extern const u16 sGatePal[];
 
 extern const struct FrameData sGateOam_OpenedThin[2];
 extern const struct FrameData sGateOam_ClosingThin[15];

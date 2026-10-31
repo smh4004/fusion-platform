@@ -12,8 +12,8 @@ const s16 sDessgeegaLittleHopVelocity[10] = {
     16, 16
 };
 
-const u32 sDessgeegaGfx[512 * 1] = INCBIN_U32("data/sprites/dessgeega.gfx");
-const u16 sDessgeegaPal[16 * 1] = INCBIN_U16("data/sprites/dessgeega.pal");
+const u32 sDessgeegaGfx[] = INCBIN_U32("data/sprites/dessgeega.gfx");
+const u16 sDessgeegaPal[] = INCBIN_U16("data/sprites/dessgeega.pal");
 
 static const u16 sDessgeegaOam_Idle_Frame0[OAM_DATA_SIZE(10)] = {
     10,

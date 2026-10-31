@@ -992,8 +992,8 @@ const struct FrameData sCoreXShellOam_Red[2] = {
 
 const u32 sHiJumpCoreXGfx[512 * 5] = INCBIN_U32("data/sprites/hi_jump_core_x.gfx");
 const u16 sHiJumpCoreXPal[16 * 5] = INCBIN_U16("data/sprites/hi_jump_core_x.pal");
-const u32 sSpeedBoosterCoreXGfx[512 * 5] = INCBIN_U32("data/sprites/speed_booster_core_x.gfx");
-const u16 sSpeedBoosterCoreXPal[16 * 5] = INCBIN_U16("data/sprites/speed_booster_core_x.pal");
+const u32 sSpeedBoosterCoreXGfx[] = INCBIN_U32("data/sprites/speed_booster_core_x.gfx");
+const u16 sSpeedBoosterCoreXPal[] = INCBIN_U16("data/sprites/speed_booster_core_x.pal");
 const u32 sSpaceJumpCoreXGfx[512 * 5] = INCBIN_U32("data/sprites/space_jump_core_x.gfx");
 const u16 sSpaceJumpCoreXPal[16 * 5] = INCBIN_U16("data/sprites/space_jump_core_x.pal");
 const u32 sGravityCoreXGfx[512 * 5] = INCBIN_U32("data/sprites/gravity_core_x.gfx");

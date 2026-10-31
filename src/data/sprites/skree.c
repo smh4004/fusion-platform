@@ -18,8 +18,8 @@ const s16 sSkreeGoingDownYVelocity[] = {
     SHORT_MAX
 };
 
-const u32 sSkreeGfx[512] = INCBIN_U32("data/sprites/skree.gfx");
-const u16 sSkreePal[16 * 1] = INCBIN_U16("data/sprites/skree.pal");
+const u32 sSkreeGfx[] = INCBIN_U32("data/sprites/skree.gfx");
+const u16 sSkreePal[] = INCBIN_U16("data/sprites/skree.pal");
 
 static const u16 sSkreeOam_WaitingForX_Frame0[OAM_DATA_SIZE(4)] = {
     4,

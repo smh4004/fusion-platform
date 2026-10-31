@@ -1,9 +1,9 @@
 #include "data/sprites/zoro.h"
 
-const u32 sZoroGfx[1 * 512] = INCBIN_U32("data/sprites/zoro.gfx");
-const u32 sBlueZoroGfx[1 * 512] = INCBIN_U32("data/sprites/blue_zoro.gfx");
-const u16 sZoroPal[1 * 16] = INCBIN_U16("data/sprites/zoro.pal");
-const u16 sBlueZoroPal[1 * 16] = INCBIN_U16("data/sprites/blue_zoro.pal");
+const u32 sZoroGfx[] = INCBIN_U32("data/sprites/zoro.gfx");
+const u32 sBlueZoroGfx[] = INCBIN_U32("data/sprites/blue_zoro.gfx");
+const u16 sZoroPal[] = INCBIN_U16("data/sprites/zoro.pal");
+const u16 sBlueZoroPal[] = INCBIN_U16("data/sprites/blue_zoro.pal");
 
 static const u16 sZoroOam_CrawlingVertical_Frame0[OAM_DATA_SIZE(8)] = {
     8,

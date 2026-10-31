@@ -5,8 +5,8 @@ const s16 sZombieLungingVelocity[4] = {
     2,  4,  2,  1
 };
 
-const u32 sZombieGfx[512 * 3] = INCBIN_U32("data/sprites/zombie_researcher.gfx");
-const u16 sZombiePal[16 * 3] = INCBIN_U16("data/sprites/zombie_researcher.pal");
+const u32 sZombieGfx[] = INCBIN_U32("data/sprites/zombie_researcher.gfx");
+const u16 sZombiePal[] = INCBIN_U16("data/sprites/zombie_researcher.pal");
 
 static const u16 sZombieOam_Moving_Frame0[OAM_DATA_SIZE(7)] = {
     7,

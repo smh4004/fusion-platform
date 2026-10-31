@@ -46,7 +46,7 @@ const s16 sIceBeamAbilityOmegaFloatingBeforeSaXXMovement[81] = {
 };
 
 const u32 sIceBeamAbilityOmegaGfx[512 * 2] = INCBIN_U32("data/sprites/ice_beam_ability.gfx");
-const u16 sIceBeamAbilityOmegaPal[16 * 1] = INCBIN_U16("data/sprites/ice_beam_ability.pal");
+const u16 sIceBeamAbilityOmegaPal[] = INCBIN_U16("data/sprites/ice_beam_ability.pal");
 
 static const u16 sIceBeamAbilityOmegaOam_Idle_Frame0[OAM_DATA_SIZE(4)] = {
     4,

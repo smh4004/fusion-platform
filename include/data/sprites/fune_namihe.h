@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sFuneNamiheGfx[2 * 512];
-extern const u16 sFuneNamihePal[2 * 16];
+extern const u32 sFuneNamiheGfx[];
+extern const u16 sFuneNamihePal[];
 
 extern const struct FrameData sFuneOam_Idle[9];
 extern const struct FrameData sFuneOam_Spitting[9];

@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sZozoroGfx[2 * 512];
-extern const u16 sZozoroPal[1 * 16];
+extern const u32 sZozoroGfx[];
+extern const u16 sZozoroPal[];
 
 extern const struct FrameData sZozoroOam_CrawlingGround[6];
 extern const struct FrameData sZozoroOam_CrawlingGroundFast[7];

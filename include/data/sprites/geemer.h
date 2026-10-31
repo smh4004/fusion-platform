@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sGeemerGfx[512 * 2];
-extern const u16 sGeemerPal[16 * 2];
+extern const u32 sGeemerGfx[];
+extern const u16 sGeemerPal[];
 
 extern const struct FrameData sGeemerOam_2fcc58[5];
 extern const struct FrameData sGeemerOam_2fcc80[6];

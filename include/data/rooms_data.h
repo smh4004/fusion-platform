@@ -5,9 +5,9 @@
 #include "structs/room.h"
 #include "structs/sprite.h"
 
-extern const u16 sDestroyedDockingBayAnimatedPal[6 * 16];
+extern const u16 sDestroyedDockingBayAnimatedPal[];
 
-extern const u8 sBackground_Empty[52];
+extern const u8 sBackground_Empty[];
 
 extern const u8 sEnemyRoomData_Empty[3];
 

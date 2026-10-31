@@ -1170,9 +1170,9 @@ const struct MultiSpriteData sOmegaMetroidMultiOam_Swiping[6] = {
     [5] = MULTI_SPRITE_DATA_TERMINATOR
 };
 
-const u32 sOmegaMetroidGfx[512 * 5] = INCBIN_U32("data/sprites/omega_metroid.gfx");
+const u32 sOmegaMetroidGfx[] = INCBIN_U32("data/sprites/omega_metroid.gfx");
 
-const u16 sOmegaMetroidPal[PAL_ROW * 5] = INCBIN_U16("data/sprites/omega_metroid.pal");
+const u16 sOmegaMetroidPal[] = INCBIN_U16("data/sprites/omega_metroid.pal");
 
 static const u16 sOmegaMetroidPartOam_RightLeg_Idle_Frame0[OAM_DATA_SIZE(6)] = {
     6,

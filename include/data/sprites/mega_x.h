@@ -7,8 +7,8 @@
 extern const s16 sVariaSuitAbilitySpawningYMovement[65];
 extern const s16 sVariaSuitAbilitySpawningXMovement[57];
 
-extern const u32 sMegaXGfx[8 * 512];
-extern const u16 sMegaXPal[8 * 16];
+extern const u32 sMegaXGfx[];
+extern const u16 sMegaXPal[];
 
 extern const struct FrameData sMegaXOam_3a59b0[9];
 extern const struct FrameData sMegaXOam_3a59f8[9];

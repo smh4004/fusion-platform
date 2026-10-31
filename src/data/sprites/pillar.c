@@ -1,8 +1,8 @@
 #include "data/sprites/pillar.h"
 #include "macros.h"
 
-const u32 sPillarGfx[512 * 1] = INCBIN_U32("data/sprites/pillar.gfx");
-const u16 sPillarPal[16 * 1] = INCBIN_U16("data/sprites/pillar.pal");
+const u32 sPillarGfx[] = INCBIN_U32("data/sprites/pillar.gfx");
+const u16 sPillarPal[] = INCBIN_U16("data/sprites/pillar.pal");
 
 static const u16 sPillarOam_37a984_Frame0[OAM_DATA_SIZE(1)] = {
     1,

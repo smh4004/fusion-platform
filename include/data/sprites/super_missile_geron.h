@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sSuperMissileGeronGfx[512];
-extern const u16 sSuperMissileGeronPal[1 * 16];
+extern const u32 sSuperMissileGeronGfx[];
+extern const u16 sSuperMissileGeronPal[];
 
 extern const struct FrameData sSuperMissileGeronStemOam_Idle[5];
 extern const struct FrameData sSuperMissileGeronStemOam_Destroyed[5];

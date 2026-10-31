@@ -1,8 +1,8 @@
 #include "data/sprites/owtch.h"
 #include "macros.h"
 
-const u32 sOwtchGfx[512] = INCBIN_U32("data/sprites/owtch.gfx");
-const u16 sOwtchPal[16] = INCBIN_U16("data/sprites/owtch.pal");
+const u32 sOwtchGfx[] = INCBIN_U32("data/sprites/owtch.gfx");
+const u16 sOwtchPal[] = INCBIN_U16("data/sprites/owtch.pal");
 
 static const u16 sOwtchOam_3790d4_Frame0[OAM_DATA_SIZE(1)] = {
     1,

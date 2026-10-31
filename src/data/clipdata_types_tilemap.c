@@ -194,9 +194,9 @@ const u8 sClipdataCollisionTypes_Test[CLIPDATA_TEST_COUNT] = {
 	[CLIPDATA_TEST_RED_DOOR_SLOT_5] = CLIPDATA_TYPE_DOOR
 };
 
-const u8 sTileset_0_Tilemap[1604] = INCBIN_U8("data/tilesets/0.tm");
+const u8 sTileset_0_Tilemap[] = INCBIN_U8("data/tilesets/0.tm");
 
-const u16 sTileset_0_Pal[14 * 16] = INCBIN_U16("data/tilesets/0.pal");
+const u16 sTileset_0_Pal[] = INCBIN_U16("data/tilesets/0.pal");
 
 const ClipBehavior sClipdataBehaviorTypes[CLIPDATA_COUNT] = {
 	[CLIPDATA_AIR] = CLIP_BEHAVIOR_NONE,

@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sAtmosphericStabilizerGfx[3 * 512];
-extern const u16 sAtmosphericStabilizerPal[3 * 16];
+extern const u32 sAtmosphericStabilizerGfx[];
+extern const u16 sAtmosphericStabilizerPal[];
 
 extern const struct FrameData sAtmosphericStabilizerFanOam_OnlineHorizontal[4];
 extern const struct FrameData sAtmosphericStabilizerFanOam_CloggedHorizontal[16];

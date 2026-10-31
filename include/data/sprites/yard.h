@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sYardGfx[512 * 3];
-extern const u16 sYardPal[16 * 3];
+extern const u32 sYardGfx[];
+extern const u16 sYardPal[];
 
 extern const struct FrameData sYardOam_CrawlingHorizontal[4];
 extern const struct FrameData sYardOam_ChargingHorizontal[6];

@@ -6,15 +6,15 @@
 
 extern const s16 sMimicFlyingYMovement[65];
 
-extern const u32 sMimicEnergyTankGfx[1 * 512];
-extern const u16 sMimicEnergyTankPal[1 * 16];
+extern const u32 sMimicEnergyTankGfx[];
+extern const u16 sMimicEnergyTankPal[];
 
 extern const struct FrameData sMimicEnergyTankOam_Idle[5];
 extern const struct FrameData sMimicEnergyTankOam_WakingUp[7];
 extern const struct FrameData sMimicEnergyTankOam_Flying[5];
 
-extern const u32 sMimicMissileTankGfx[1 * 512];
-extern const u16 sMimicMissileTankPal[1 * 16];
+extern const u32 sMimicMissileTankGfx[];
+extern const u16 sMimicMissileTankPal[];
 
 extern const struct FrameData sMimicMissileTankOam_Idle[5];
 extern const struct FrameData sMimicMissileTankOam_WakingUp[8];

@@ -100,8 +100,8 @@ extern const struct MultiSpriteData sNightmareMultiSpriteData_3b8584[3];
 extern const struct MultiSpriteData sNightmareMultiSpriteData_3b859c[3];
 extern const struct MultiSpriteData sNightmareMultiSpriteData_3b85b4[3];
 
-extern const u32 sNightmareGfx[512 * 8];
-extern const u16 sNightmarePal[16 * 8];
+extern const u32 sNightmareGfx[];
+extern const u16 sNightmarePal[];
 
 extern const struct FrameData sNightmarePartBodyOam[2];
 extern const struct FrameData sNightmarePartOam_EyeSludge[6];

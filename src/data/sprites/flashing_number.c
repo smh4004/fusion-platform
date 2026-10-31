@@ -2,8 +2,8 @@
 
 #include "macros.h"
 
-const u32 sBigFlashingNumberGfx[512] = INCBIN_U32("data/sprites/big_flashing_number.gfx");
-const u16 sBigFlashingNumberPal[1 * 16] = INCBIN_U16("data/sprites/big_flashing_number.pal");
+const u32 sBigFlashingNumberGfx[] = INCBIN_U32("data/sprites/big_flashing_number.gfx");
+const u16 sBigFlashingNumberPal[] = INCBIN_U16("data/sprites/big_flashing_number.pal");
 
 static const u16 sBigFlashingNumberOam_Frame0[OAM_DATA_SIZE(1)] = {
     1,
@@ -450,8 +450,8 @@ const struct FrameData sBigFlashingNumberOam_Sector6[] = {
     [8] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sFlashingNumberGfx[512] = INCBIN_U32("data/sprites/flashing_number.gfx");
-const u16 sFlashingNumberPal[1 * 16] = INCBIN_U16("data/sprites/flashing_number.pal");
+const u32 sFlashingNumberGfx[] = INCBIN_U32("data/sprites/flashing_number.gfx");
+const u16 sFlashingNumberPal[] = INCBIN_U16("data/sprites/flashing_number.pal");
 
 static const u16 sFlashingNumberOam_Frame0[OAM_DATA_SIZE(1)] = {
     1,

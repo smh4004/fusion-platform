@@ -17,8 +17,8 @@ const s16 sSavePlatformFloatingYMovement[49] = {
      SHORT_MAX
 };
 
-const u32 sSavePadGfx[3 * 512] = INCBIN_U32("data/sprites/save_pad.gfx");
-const u16 sSavePadPal[3 * 16] = INCBIN_U16("data/sprites/save_pad.pal");
+const u32 sSavePadGfx[] = INCBIN_U32("data/sprites/save_pad.gfx");
+const u16 sSavePadPal[] = INCBIN_U16("data/sprites/save_pad.pal");
 
 static const u16 sSavePlatformOam_Floating_Frame0[OAM_DATA_SIZE(4)] = {
     4,

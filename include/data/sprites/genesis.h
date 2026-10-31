@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sGenesisGfx[512 * 2];
-extern const u16 sGenesisPal[16 * 2];
+extern const u32 sGenesisGfx[];
+extern const u16 sGenesisPal[];
 
 extern const struct FrameData sGenesisOam_Walking[7];
 extern const struct FrameData sGenesisOam_Running[7];

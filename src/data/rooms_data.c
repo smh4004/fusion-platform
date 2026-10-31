@@ -30,9 +30,9 @@
 
 #include "structs/connection.h"
 
-const u16 sDestroyedDockingBayAnimatedPal[6 * 16] = INCBIN_U16("data/rooms/destroyed_docking_bay_animated.pal");
+const u16 sDestroyedDockingBayAnimatedPal[] = INCBIN_U16("data/rooms/destroyed_docking_bay_animated.pal");
 
-const u8 sBackground_Empty[52] = INCBIN_U8("data/rooms/background_empty.bin");
+const u8 sBackground_Empty[] = INCBIN_U8("data/rooms/background_empty.bin");
 
 const u8 sEnemyRoomData_Empty[3] = {
 	ROOM_SPRITE_DATA_TERMINATOR

@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sElevatorPadGfx[512];
-extern const u16 sElevatorPadPal[16 * 1];
+extern const u32 sElevatorPadGfx[];
+extern const u16 sElevatorPadPal[];
 
 extern const struct FrameData sElevatorPadOam_Idle[7];
 

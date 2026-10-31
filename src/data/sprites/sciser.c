@@ -33,8 +33,8 @@ const s16 sSciserProjectileThrownUpVelocity[25] = {
     SHORT_MAX
 };
 
-const u32 sSciserGfx[512 * 2] = INCBIN_U32("data/sprites/sciser.gfx");
-const u16 sSciserPal[16 * 2] = INCBIN_U16("data/sprites/sciser.pal");
+const u32 sSciserGfx[] = INCBIN_U32("data/sprites/sciser.gfx");
+const u16 sSciserPal[] = INCBIN_U16("data/sprites/sciser.pal");
 
 static const u16 sSciserOam_CrawlingHorizontal_Uninfected_Frame0[OAM_DATA_SIZE(3)] = {
     3,
@@ -934,5 +934,5 @@ const struct FrameData sSciserProjectileOam_Exploding2[5] = {
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sGoldSciserGfx[512 * 2] = INCBIN_U32("data/sprites/gold_sciser.gfx");
-const u16 sGoldSciserPal[16 * 2] = INCBIN_U16("data/sprites/gold_sciser.pal");
+const u32 sGoldSciserGfx[] = INCBIN_U32("data/sprites/gold_sciser.gfx");
+const u16 sGoldSciserPal[] = INCBIN_U16("data/sprites/gold_sciser.pal");

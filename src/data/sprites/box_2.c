@@ -1087,9 +1087,9 @@ const struct MultiSpriteData sBox2MultiOam_DoneFiringMissiles[9] = {
     [8] = MULTI_SPRITE_DATA_TERMINATOR
 };
 
-const u32 sBox2Gfx[512 * 7] = INCBIN_U32("data/sprites/box_2.gfx");
+const u32 sBox2Gfx[] = INCBIN_U32("data/sprites/box_2.gfx");
 
-const u16 sBox2Pal[PAL_ROW * 7] = INCBIN_U16("data/sprites/box_2.pal");
+const u16 sBox2Pal[] = INCBIN_U16("data/sprites/box_2.pal");
 
 static const u16 sBox2PartOam_FrontLeftLegCover_Shaking_Frame1[OAM_DATA_SIZE(5)] = {
     5,

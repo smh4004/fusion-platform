@@ -1,8 +1,8 @@
 #include "data/sprites/genesis.h"
 #include "macros.h"
 
-const u32 sGenesisGfx[512 * 2] = INCBIN_U32("data/sprites/genesis.gfx");
-const u16 sGenesisPal[16 * 2] = INCBIN_U16("data/sprites/genesis.pal");
+const u32 sGenesisGfx[] = INCBIN_U32("data/sprites/genesis.gfx");
+const u16 sGenesisPal[] = INCBIN_U16("data/sprites/genesis.pal");
 
 static const u16 sGenesisOam_Walking_Frame0[OAM_DATA_SIZE(8)] = {
     8,

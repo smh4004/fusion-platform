@@ -82,8 +82,8 @@ extern const struct MultiSpriteData sYakuzaMultiSpriteData_3b1188[5];
 extern const struct MultiSpriteData sYakuzaMultiSpriteData_3b11b0[2];
 extern const struct MultiSpriteData sYakuzaMultiSpriteData_3b11c0[2];
 
-extern const u32 sYakuzaGfx[512 * 8];
-extern const u16 sYakuzaPal[16 * 8];
+extern const u32 sYakuzaGfx[];
+extern const u16 sYakuzaPal[];
 
 extern const u16 sYakuzaMouthGlowingPal[8][16];
 

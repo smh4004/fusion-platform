@@ -1,8 +1,8 @@
 #include "data/sprites/zoro_cocoon.h"
 #include "macros.h"
 
-const u32 sZoroCocoonGfx[1024] = INCBIN_U32("data/sprites/zoro_cocoon.gfx");
-const u16 sZoroCocoonPal[2 * 16] = INCBIN_U16("data/sprites/zoro_cocoon.pal");
+const u32 sZoroCocoonGfx[] = INCBIN_U32("data/sprites/zoro_cocoon.gfx");
+const u16 sZoroCocoonPal[] = INCBIN_U16("data/sprites/zoro_cocoon.pal");
 
 
 static const u16 sZoroCocoonOam_TransformedVertical_Frame0[OAM_DATA_SIZE(1)] = {
@@ -172,8 +172,8 @@ const struct FrameData sZoroCocoonOam_UntransformedHorizontal[2] = {
 };
 
 
-const u32 sZoroHuskGfx[512] = INCBIN_U32("data/sprites/zoro_husk.gfx");
-const u16 sZoroHuskPal[1 * 16] = INCBIN_U16("data/sprites/zoro_husk.pal");
+const u32 sZoroHuskGfx[] = INCBIN_U32("data/sprites/zoro_husk.gfx");
+const u16 sZoroHuskPal[] = INCBIN_U16("data/sprites/zoro_husk.pal");
 
 
 static const u16 sZoroHuskOam_Vertical_Frame0[OAM_DATA_SIZE(2)] = {

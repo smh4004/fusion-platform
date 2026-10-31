@@ -1,8 +1,8 @@
 #include "data/sprites/moto.h"
 #include "macros.h"
 
-const u32 sMotoGfx[1536] = INCBIN_U32("data/sprites/moto.gfx");
-const u16 sMotoPal[48] = INCBIN_U16("data/sprites/moto.pal");
+const u32 sMotoGfx[] = INCBIN_U32("data/sprites/moto.gfx");
+const u16 sMotoPal[] = INCBIN_U16("data/sprites/moto.pal");
 
 static const u16 sMotoOam_Charging_Frame4[OAM_DATA_SIZE(6)] = {
     6,

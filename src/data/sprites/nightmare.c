@@ -1165,8 +1165,8 @@ const struct MultiSpriteData sNightmareMultiSpriteData_3b85b4[3] = {
     [2] = MULTI_SPRITE_DATA_TERMINATOR
 };
 
-const u32 sNightmareGfx[512 * 8] = INCBIN_U32("data/sprites/nightmare.gfx");
-const u16 sNightmarePal[16 * 8] = INCBIN_U16("data/sprites/nightmare.pal");
+const u32 sNightmareGfx[] = INCBIN_U32("data/sprites/nightmare.gfx");
+const u16 sNightmarePal[] = INCBIN_U16("data/sprites/nightmare.pal");
 
 static const u16 sNightmarePartOam_EyeSludge_Frame0[OAM_DATA_SIZE(2)] = {
     2,

@@ -629,5 +629,5 @@ const struct FrameData sLabExplosionOam_Idle[49] = {
     [48] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sSaXLabExplosionsGfx[2 * 512] = INCBIN_U32("data/sa_x/lab_explosions.gfx");
-const u16 sSaXLabExplosionsPal[2 * 16] = INCBIN_U16("data/sa_x/lab_explosions.pal");
+const u32 sSaXLabExplosionsGfx[] = INCBIN_U32("data/sa_x/lab_explosions.gfx");
+const u16 sSaXLabExplosionsPal[] = INCBIN_U16("data/sa_x/lab_explosions.pal");

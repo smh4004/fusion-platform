@@ -4,9 +4,9 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sAreaBannerGfx[1 * 512];
-extern const u16 sAreaBannerPal[1 * 16];
-extern const u16 sAreaBannerLocationPal[1 * 16];
+extern const u32 sAreaBannerGfx[];
+extern const u16 sAreaBannerPal[];
+extern const u16 sAreaBannerLocationPal[];
 
 extern const struct FrameData sAreaBannerOam_StaticMiddle[2];
 extern const struct FrameData sAreaBannerOam_SpawningMiddle[9];

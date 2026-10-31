@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-extern const u8 sCharactersGfx[192 * 1024];
+extern const u8 sCharactersGfx[];
 
 
 

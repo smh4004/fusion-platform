@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sGerubossGfx[512 * 1];
-extern const u16 sGerubossPal[16 * 1];
+extern const u32 sGerubossGfx[];
+extern const u16 sGerubossPal[];
 
 extern const struct FrameData sGerubossOam_Stalling[4];
 extern const struct FrameData sGerubossOam_Idle[5];

@@ -7,8 +7,8 @@
 extern const s16 sZebesianWallJumpYVelocity[34];
 extern const s16 sZebesianWallJumpXVelocity[34];
 
-extern const u32 sZebesianWallGfx[2 * 512];
-extern const u16 sZebesianWallPal[2 * 16];
+extern const u32 sZebesianWallGfx[];
+extern const u16 sZebesianWallPal[];
 
 extern const struct FrameData sZebesianWallOam_Crawling[9];
 extern const struct FrameData sZebesianWallOam_Idle[13];

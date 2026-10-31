@@ -1,8 +1,8 @@
 #include "data/sprites/geemer.h"
 #include "macros.h"
 
-const u32 sGeemerGfx[512 * 2] = INCBIN_U32("data/sprites/geemer.gfx");
-const u16 sGeemerPal[16 * 2] = INCBIN_U16("data/sprites/geemer.pal");
+const u32 sGeemerGfx[] = INCBIN_U32("data/sprites/geemer.gfx");
+const u16 sGeemerPal[] = INCBIN_U16("data/sprites/geemer.pal");
 
 static const u16 sGeemerOam_2fcc80_Frame4[OAM_DATA_SIZE(4)] = {
     4,

@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sRipperGfx[512];
-extern const u16 sRipperPal[1 * 16];
+extern const u32 sRipperGfx[];
+extern const u16 sRipperPal[];
 
 extern const struct FrameData sRipperOam_Idle[5];
 extern const struct FrameData sRipperOam_TurningAround[2];

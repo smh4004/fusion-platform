@@ -862,8 +862,8 @@ const struct MultiSpriteData sSaXMonsterMultiOam_Still_Right[2] = {
     [1] = MULTI_SPRITE_DATA_TERMINATOR
 };
 
-const u32 sSaXMonsterGfx[512 * 8] = INCBIN_U32("data/sprites/sa_x_monster.gfx");
-const u16 sSaXMonsterPal[PAL_ROW * 8] = INCBIN_U16("data/sprites/sa_x_monster.pal");
+const u32 sSaXMonsterGfx[] = INCBIN_U32("data/sprites/sa_x_monster.gfx");
+const u16 sSaXMonsterPal[] = INCBIN_U16("data/sprites/sa_x_monster.pal");
 
 static const u16 sSaXMonsterPartOam_LowerBackTentacle_Idle_Left_Frame0[OAM_DATA_SIZE(3)] = {
     3,

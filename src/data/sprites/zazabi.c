@@ -4258,8 +4258,8 @@ const s16 sZazabiFallingSpeed[8] = {
     SHORT_MAX
 };
 
-const u32 sZazabiGfx[4096] = INCBIN_U32("data/sprites/zazabi.gfx");
-const u16 sZazabiPal[8 * 16] = INCBIN_U16("data/sprites/zazabi.pal");
+const u32 sZazabiGfx[] = INCBIN_U32("data/sprites/zazabi.gfx");
+const u16 sZazabiPal[] = INCBIN_U16("data/sprites/zazabi.pal");
 
 
 static const u16 sZazabiPartOam_MouthFrontIdle_Frame0[OAM_DATA_SIZE(5)] = {

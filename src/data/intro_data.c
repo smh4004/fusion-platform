@@ -784,23 +784,23 @@ const struct FrameData sOam_598088[5] = {
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const u16 sIntroSamusShipPal[5 * PAL_ROW] = INCBIN_U16("data/new_file_intro/samus_ship.pal");
-const u16 sPal_598150[2 * PAL_ROW] = INCBIN_U16("data/new_file_intro/598150.pal"); // Loaded to PALRAM but not used?
+const u16 sIntroSamusShipPal[] = INCBIN_U16("data/new_file_intro/samus_ship.pal");
+const u16 sPal_598150[] = INCBIN_U16("data/new_file_intro/598150.pal"); // Loaded to PALRAM but not used?
 
-const u32 sIntroSamusHelmetCloseupTilemap[418] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup.tm.lz");
+const u32 sIntroSamusHelmetCloseupTilemap[] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup.tm.lz");
 
-const u16 sIntroSamusHelmetCloseupPal[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/samus_helmet_closeup.pal");
+const u16 sIntroSamusHelmetCloseupPal[] = INCBIN_U16("data/new_file_intro/samus_helmet_closeup.pal");
 
-const u32 sIntroSamusShipFlyingTextTilemap[125] = INCBIN_U32("data/new_file_intro/samus_ship_flying_text.tm.lz");
+const u32 sIntroSamusShipFlyingTextTilemap[] = INCBIN_U32("data/new_file_intro/samus_ship_flying_text.tm.lz");
 
-const u16 sPal_598a8c[1 * PAL_ROW] = INCBIN_U16("data/new_file_intro/598a8c.pal");
-const u16 sIntroSamusCloseupGrayscalePal[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/samus_helmet_closeup_grayscale.pal");
+const u16 sPal_598a8c[] = INCBIN_U16("data/new_file_intro/598a8c.pal");
+const u16 sIntroSamusCloseupGrayscalePal[] = INCBIN_U16("data/new_file_intro/samus_helmet_closeup_grayscale.pal");
 
-const u16 sSr388SpaceAndSurfacePal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/sr388_space_and_surface.pal");
+const u16 sSr388SpaceAndSurfacePal[] = INCBIN_U16("data/new_file_intro/sr388_space_and_surface.pal");
 
-const u32 sIntroSr388SurfaceTilemap[551] = INCBIN_U32("data/new_file_intro/sr388_surface.tm.lz");
-const u32 sIntroSr388SpaceBgTilemap[265] = INCBIN_U32("data/new_file_intro/sr388_space_bg.tm.lz");
-const u32 sIntroSr388PlanetTilemap[199] = INCBIN_U32("data/new_file_intro/sr388_planet.tm.lz");
+const u32 sIntroSr388SurfaceTilemap[] = INCBIN_U32("data/new_file_intro/sr388_surface.tm.lz");
+const u32 sIntroSr388SpaceBgTilemap[] = INCBIN_U32("data/new_file_intro/sr388_space_bg.tm.lz");
+const u32 sIntroSr388PlanetTilemap[] = INCBIN_U32("data/new_file_intro/sr388_planet.tm.lz");
 
 static const u16 sOamFrame_599d08[OAM_DATA_SIZE(1)] = {
     1,
@@ -1172,13 +1172,13 @@ const struct FrameData sOam_59a178[8] = {
     [7] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sIntroSr388SpaceAndSurfaceObjGfx[3538] = INCBIN_U32("data/new_file_intro/sr388_space_and_surface_objects.gfx.lz");
-const u16 sIntroSr388SpaceAndSurfaceObjPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/sr388_space_and_surface_objects.pal");
+const u32 sIntroSr388SpaceAndSurfaceObjGfx[] = INCBIN_U32("data/new_file_intro/sr388_space_and_surface_objects.gfx.lz");
+const u16 sIntroSr388SpaceAndSurfaceObjPal[] = INCBIN_U16("data/new_file_intro/sr388_space_and_surface_objects.pal");
 
 const u8 sArray_59db00[8] = {20, 30, 40, 50, 40, 30, 0, 0};
 
-const u32 sIntroHornoadEncounterObjGfx[4252] = INCBIN_U32("data/new_file_intro/hornoad_encounter_obj.gfx.lz");
-const u16 sIntroHornoadEncounterObjPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/hornoad_encounter_obj.pal");
+const u32 sIntroHornoadEncounterObjGfx[] = INCBIN_U32("data/new_file_intro/hornoad_encounter_obj.gfx.lz");
+const u16 sIntroHornoadEncounterObjPal[] = INCBIN_U16("data/new_file_intro/hornoad_encounter_obj.pal");
 
 static const u16 sOamFrame_5a1f78[OAM_DATA_SIZE(5)] = {
 	5,
@@ -4228,17 +4228,17 @@ const struct FrameData sIntroInSr388SamusOam_WalkingRight[11] = {
     [10] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sIntroHornoadEncounterBgGfx[4027] = INCBIN_U32("data/new_file_intro/hornoad_encounter_bg.gfx.lz");
+const u32 sIntroHornoadEncounterBgGfx[] = INCBIN_U32("data/new_file_intro/hornoad_encounter_bg.gfx.lz");
 
-const u32 sTilemap_5a83b8[196] = INCBIN_U32("data/new_file_intro/5a83b8.tm.lz");
-const u32 sTilemap_5a86c8[479] = INCBIN_U32("data/new_file_intro/5a86c8.tm.lz");
+const u32 sTilemap_5a83b8[] = INCBIN_U32("data/new_file_intro/5a83b8.tm.lz");
+const u32 sTilemap_5a86c8[] = INCBIN_U32("data/new_file_intro/5a86c8.tm.lz");
 
-const u16 sPal_5a8e44[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5a8e44.pal");
+const u16 sPal_5a8e44[] = INCBIN_U16("data/new_file_intro/5a8e44.pal");
 
-const u32 sTilemap_5a9044[135] = INCBIN_U32("data/new_file_intro/5a9044.tm.lz");
+const u32 sTilemap_5a9044[] = INCBIN_U32("data/new_file_intro/5a9044.tm.lz");
 
-const u16 sPal_5a9260[15 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5a9260.pal");
-const u16 sPal_5a9440[15 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5a9440.pal");
+const u16 sPal_5a9260[] = INCBIN_U16("data/new_file_intro/5a9260.pal");
+const u16 sPal_5a9440[] = INCBIN_U16("data/new_file_intro/5a9440.pal");
 
 const u16 sArray_5a9620[30] = {
 	C_16_2_8(0, 36),
@@ -4273,7 +4273,7 @@ const u16 sArray_5a9620[30] = {
 	C_16_2_8(8, 36)
 };
 
-const u32 sIntroMetroidVaccineObjGfx[1485] = INCBIN_U32("data/new_file_intro/metroid_vaccine_obj.gfx.lz");
+const u32 sIntroMetroidVaccineObjGfx[] = INCBIN_U32("data/new_file_intro/metroid_vaccine_obj.gfx.lz");
 
 static const u16 sOamFrame_5aad90[OAM_DATA_SIZE(60)] = {
 	60,
@@ -9858,17 +9858,17 @@ const struct FrameData sIntroMetroidVaccineElectrocardiogramOam[146] = {
 	[145] = FRAME_DATA_TERMINATOR
 };
 
-const u16 sIntroMetroidVaccineObjPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/metroid_vaccine_obj.pal");
+const u16 sIntroMetroidVaccineObjPal[] = INCBIN_U16("data/new_file_intro/metroid_vaccine_obj.pal");
 
-const u32 sIntroMetroidVaccineBgGfx[2794] = INCBIN_U32("data/new_file_intro/metroid_vaccine_bg.gfx.lz");
+const u32 sIntroMetroidVaccineBgGfx[] = INCBIN_U32("data/new_file_intro/metroid_vaccine_bg.gfx.lz");
 
-const u16 sIntroMetroidVaccineBgPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/metroid_vaccine_bg.pal");
+const u16 sIntroMetroidVaccineBgPal[] = INCBIN_U16("data/new_file_intro/metroid_vaccine_bg.pal");
 
-const u32 sIntroMetroidVaccineBg1Tilemap[106] = INCBIN_U32("data/new_file_intro/metroid_vaccine_bg1.tm.lz");
-const u32 sIntroMetroidVaccineBg2Tilemap[109] = INCBIN_U32("data/new_file_intro/metroid_vaccine_bg2.tm.lz");
-const u32 sIntroMetroidVaccineBg3Tilemap[208] = INCBIN_U32("data/new_file_intro/metroid_vaccine_bg3.tm.lz");
+const u32 sIntroMetroidVaccineBg1Tilemap[] = INCBIN_U32("data/new_file_intro/metroid_vaccine_bg1.tm.lz");
+const u32 sIntroMetroidVaccineBg2Tilemap[] = INCBIN_U32("data/new_file_intro/metroid_vaccine_bg2.tm.lz");
+const u32 sIntroMetroidVaccineBg3Tilemap[] = INCBIN_U32("data/new_file_intro/metroid_vaccine_bg3.tm.lz");
 
-const u32 sIntroSamusNervousSystemObjGfx[2495] = INCBIN_U32("data/new_file_intro/samus_nervous_system_obj.gfx.lz");
+const u32 sIntroSamusNervousSystemObjGfx[] = INCBIN_U32("data/new_file_intro/samus_nervous_system_obj.gfx.lz");
 
 static const u16 sOamFrame_5b6c7c[OAM_DATA_SIZE(31)] = {
 	31,
@@ -15875,58 +15875,58 @@ const struct FrameData sIntroSamusNervousSystemXParasiteOam_6[17] = {
 	[16] = FRAME_DATA_TERMINATOR
 };
 
-const u16 sIntroSamusNervousSystemObjPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/samus_nervous_system_obj.pal");
+const u16 sIntroSamusNervousSystemObjPal[] = INCBIN_U16("data/new_file_intro/samus_nervous_system_obj.pal");
 
-const u32 sIntroSamusNervousSystemBgGfx[4869] = INCBIN_U32("data/new_file_intro/samus_nervous_system_bg.gfx.lz");
+const u32 sIntroSamusNervousSystemBgGfx[] = INCBIN_U32("data/new_file_intro/samus_nervous_system_bg.gfx.lz");
 
-const u16 sIntroSamusNervousSystemBgPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/samus_nervous_system_bg.pal");
+const u16 sIntroSamusNervousSystemBgPal[] = INCBIN_U16("data/new_file_intro/samus_nervous_system_bg.pal");
 
-const u32 sIntroSamusNervousSystemBg3Tilemap[369] = INCBIN_U32("data/new_file_intro/samus_nervous_system_bg3.tm.lz");
-const u32 sIntroSamusNervousSystemBg2Tilemap[63] = INCBIN_U32("data/new_file_intro/samus_nervous_system_bg2.tm.lz");
-const u32 sIntroSamusNervousSystemBg1Tilemap[68] = INCBIN_U32("data/new_file_intro/samus_nervous_system_bg1.tm.lz");
+const u32 sIntroSamusNervousSystemBg3Tilemap[] = INCBIN_U32("data/new_file_intro/samus_nervous_system_bg3.tm.lz");
+const u32 sIntroSamusNervousSystemBg2Tilemap[] = INCBIN_U32("data/new_file_intro/samus_nervous_system_bg2.tm.lz");
+const u32 sIntroSamusNervousSystemBg1Tilemap[] = INCBIN_U32("data/new_file_intro/samus_nervous_system_bg1.tm.lz");
 
-const u16 sPal_5bf838[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bf838.pal");
-const u16 sPal_5bf8b8[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bf8b8.pal");
-const u16 sPal_5bf938[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bf938.pal");
-const u16 sPal_5bf9b8[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bf9b8.pal");
-const u16 sPal_5bfa38[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bfa38.pal");
-const u16 sPal_5bfab8[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bfab8.pal");
-const u16 sPal_5bfb38[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bfb38.pal");
-const u16 sPal_5bfbb8[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bfbb8.pal");
-const u16 sPal_5bfc38[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bfc38.pal");
-const u16 sPal_5bfcb8[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bfcb8.pal");
-const u16 sPal_5bfd38[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bfd38.pal");
-const u16 sPal_5bfdb8[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5bfdb8.pal");
+const u16 sPal_5bf838[] = INCBIN_U16("data/new_file_intro/5bf838.pal");
+const u16 sPal_5bf8b8[] = INCBIN_U16("data/new_file_intro/5bf8b8.pal");
+const u16 sPal_5bf938[] = INCBIN_U16("data/new_file_intro/5bf938.pal");
+const u16 sPal_5bf9b8[] = INCBIN_U16("data/new_file_intro/5bf9b8.pal");
+const u16 sPal_5bfa38[] = INCBIN_U16("data/new_file_intro/5bfa38.pal");
+const u16 sPal_5bfab8[] = INCBIN_U16("data/new_file_intro/5bfab8.pal");
+const u16 sPal_5bfb38[] = INCBIN_U16("data/new_file_intro/5bfb38.pal");
+const u16 sPal_5bfbb8[] = INCBIN_U16("data/new_file_intro/5bfbb8.pal");
+const u16 sPal_5bfc38[] = INCBIN_U16("data/new_file_intro/5bfc38.pal");
+const u16 sPal_5bfcb8[] = INCBIN_U16("data/new_file_intro/5bfcb8.pal");
+const u16 sPal_5bfd38[] = INCBIN_U16("data/new_file_intro/5bfd38.pal");
+const u16 sPal_5bfdb8[] = INCBIN_U16("data/new_file_intro/5bfdb8.pal");
 
-const u32 sIntroVariaSuitCoveredInXParasitesGfx[4230] = INCBIN_U32("data/new_file_intro/suit_covered_in_parasites.gfx.lz");
-const u32 sIntroHazmatTeamGfx[4915] = INCBIN_U32("data/new_file_intro/hazmat_team.gfx.lz");
+const u32 sIntroVariaSuitCoveredInXParasitesGfx[] = INCBIN_U32("data/new_file_intro/suit_covered_in_parasites.gfx.lz");
+const u32 sIntroHazmatTeamGfx[] = INCBIN_U32("data/new_file_intro/hazmat_team.gfx.lz");
 
-const u16 sIntroSamusFoundPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/samus_found.pal");
+const u16 sIntroSamusFoundPal[] = INCBIN_U16("data/new_file_intro/samus_found.pal");
 
-const u32 sIntroVariaSuitCoveredInXParasitesTilemap[385] = INCBIN_U32("data/new_file_intro/suit_covered_in_parasites.tm.lz");
-const u32 sIntroHazmatTeamTilemap[395] = INCBIN_U32("data/new_file_intro/hazmat_team.tm.lz");
+const u32 sIntroVariaSuitCoveredInXParasitesTilemap[] = INCBIN_U32("data/new_file_intro/suit_covered_in_parasites.tm.lz");
+const u32 sIntroHazmatTeamTilemap[] = INCBIN_U32("data/new_file_intro/hazmat_team.tm.lz");
 
-const u32 sIntroSuitRemovalSurgeryGfx[7003] = INCBIN_U32("data/new_file_intro/suit_removal_surgery.gfx.lz");
-const u32 sIntroSuitRemovalSurgeryTilemap[551] = INCBIN_U32("data/new_file_intro/suit_removal_surgery.tm.lz");
+const u32 sIntroSuitRemovalSurgeryGfx[] = INCBIN_U32("data/new_file_intro/suit_removal_surgery.gfx.lz");
+const u32 sIntroSuitRemovalSurgeryTilemap[] = INCBIN_U32("data/new_file_intro/suit_removal_surgery.tm.lz");
 
-const u32 sIntroMetroidVaccineVialGfx[3525] = INCBIN_U32("data/new_file_intro/metroid_vaccine_vial.gfx.lz");
-const u32 sIntroMetroidVaccineVialTilemap[385] = INCBIN_U32("data/new_file_intro/metroid_vaccine_vial.tm.lz");
+const u32 sIntroMetroidVaccineVialGfx[] = INCBIN_U32("data/new_file_intro/metroid_vaccine_vial.gfx.lz");
+const u32 sIntroMetroidVaccineVialTilemap[] = INCBIN_U32("data/new_file_intro/metroid_vaccine_vial.tm.lz");
 
-const u32 sIntroSamusRebornBgTopGfx[6616] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_top.gfx.lz");
-const u32 sIntroSamusRebornBgBottomGfx[3537] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_bottom.gfx.lz");
-const u16 sIntroSamusRebornBgPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/samus_reborn_bg.pal");
-const u32 sIntroSamusRebornBgTopTilemap[551] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_top.tm.lz");
-const u32 sIntroSamusRebornBgBottomTilemap[368] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_bottom.tm.lz");
+const u32 sIntroSamusRebornBgTopGfx[] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_top.gfx.lz");
+const u32 sIntroSamusRebornBgBottomGfx[] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_bottom.gfx.lz");
+const u16 sIntroSamusRebornBgPal[] = INCBIN_U16("data/new_file_intro/samus_reborn_bg.pal");
+const u32 sIntroSamusRebornBgTopTilemap[] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_top.tm.lz");
+const u32 sIntroSamusRebornBgBottomTilemap[] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_bottom.tm.lz");
 
 static const u8 sBlob_5dfd6c_5e116c[] = INCBIN_U8("data/Blob_5dfd6c_5e116c.bin");
 
-const u32 sIntroApproachingBslObjGfx[3614] = INCBIN_U32("data/new_file_intro/approaching_bsl_obj.gfx.lz");
+const u32 sIntroApproachingBslObjGfx[] = INCBIN_U32("data/new_file_intro/approaching_bsl_obj.gfx.lz");
 
-const u32 sIntroFlyingToBslBgGfx[4107] = INCBIN_U32("data/new_file_intro/5e49e4.gfx.lz");
-const u32 sIntroArrivingAtBslSpaceMapBgGfx[2178] = INCBIN_U32("data/new_file_intro/space_map_bg");
-const u32 sIntroFlyingToBslObjGfx[3286] = INCBIN_U32("data/new_file_intro/5eac18.gfx.lz");
+const u32 sIntroFlyingToBslBgGfx[] = INCBIN_U32("data/new_file_intro/5e49e4.gfx.lz");
+const u32 sIntroArrivingAtBslSpaceMapBgGfx[] = INCBIN_U32("data/new_file_intro/space_map_bg");
+const u32 sIntroFlyingToBslObjGfx[] = INCBIN_U32("data/new_file_intro/5eac18.gfx.lz");
 
-const u32 sIntroSamusMonologueBgGfx[3282] = INCBIN_U32("data/new_file_intro/samus_monologue_bg.gfx.lz");
+const u32 sIntroSamusMonologueBgGfx[] = INCBIN_U32("data/new_file_intro/samus_monologue_bg.gfx.lz");
 
 static const u16 sOamFrame_5f12b8[OAM_DATA_SIZE(5)] = {
 	5,
@@ -21101,19 +21101,19 @@ const struct FrameData sIntroArrivingAtBslThrustersOam[4] = {
 
 static const u8 sBlob_5f4e54_5f4ed4[] = INCBIN_U8("data/Blob_5f4e54_5f4ed4.bin");
 
-const u16 sPal_5f4ed4[12 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5f4ed4.pal");
-const u16 sIntroArrivingAtBslSpaceMapPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/space_map.pal");
-const u16 sIntroApproachingBslObjPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/approaching_bsl_obj.pal");
+const u16 sPal_5f4ed4[] = INCBIN_U16("data/new_file_intro/5f4ed4.pal");
+const u16 sIntroArrivingAtBslSpaceMapPal[] = INCBIN_U16("data/new_file_intro/space_map.pal");
+const u16 sIntroApproachingBslObjPal[] = INCBIN_U16("data/new_file_intro/approaching_bsl_obj.pal");
 
-const u32 sIntroTilemap_5f5454[385] = INCBIN_U32("data/new_file_intro/5f5454.tm.lz");
-const u32 sIntroArrivingAtBslSpaceMapTilemap[368] = INCBIN_U32("data/new_file_intro/5f5a58.tm.lz");
-const u32 sIntroSamusMonologueBgTilemap[368] = INCBIN_U32("data/new_file_intro/samus_monologue_bg.tm.lz");
-const u32 sIntroTilemap_5f65d8[238] = INCBIN_U32("data/new_file_intro/5f65d8.tm.lz");
+const u32 sIntroTilemap_5f5454[] = INCBIN_U32("data/new_file_intro/5f5454.tm.lz");
+const u32 sIntroArrivingAtBslSpaceMapTilemap[] = INCBIN_U32("data/new_file_intro/5f5a58.tm.lz");
+const u32 sIntroSamusMonologueBgTilemap[] = INCBIN_U32("data/new_file_intro/samus_monologue_bg.tm.lz");
+const u32 sIntroTilemap_5f65d8[] = INCBIN_U32("data/new_file_intro/5f65d8.tm.lz");
 
 static const u8 sBlob_5f6990_5f7190[] = INCBIN_U8("data/Blob_5f6990_5f7190.bin");
 
-const u32 sIntroLandingOnBslBgGfx[3697] = INCBIN_U32("data/new_file_intro/landing_on_bsl_bg.gfx.lz");
-const u32 sIntroLandingOnBslObjGfx[3297] = INCBIN_U32("data/new_file_intro/landing_on_bsl_obj.gfx.lz");
+const u32 sIntroLandingOnBslBgGfx[] = INCBIN_U32("data/new_file_intro/landing_on_bsl_bg.gfx.lz");
+const u32 sIntroLandingOnBslObjGfx[] = INCBIN_U32("data/new_file_intro/landing_on_bsl_obj.gfx.lz");
 
 static const u16 sOamFrame_5fded8[OAM_DATA_SIZE(12)] = {
 	12,
@@ -22575,24 +22575,24 @@ const struct FrameData sIntroShipLandingOam_FarAway[2] = {
 	[1] = FRAME_DATA_TERMINATOR
 };
 
-const u16 sIntroLandingOnBslBgPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/landing_on_bsl_bg.pal");
-const u16 sIntroPal_5ff908[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5ff908.pal");
-const u16 sIntroPal_5ffb08[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/5ffb08.pal");
-const u16 sIntroLandingOnBslObjPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/landing_on_bsl_obj.pal");
+const u16 sIntroLandingOnBslBgPal[] = INCBIN_U16("data/new_file_intro/landing_on_bsl_bg.pal");
+const u16 sIntroPal_5ff908[] = INCBIN_U16("data/new_file_intro/5ff908.pal");
+const u16 sIntroPal_5ffb08[] = INCBIN_U16("data/new_file_intro/5ffb08.pal");
+const u16 sIntroLandingOnBslObjPal[] = INCBIN_U16("data/new_file_intro/landing_on_bsl_obj.pal");
 
-const u32 sIntroLandingOnBslSpaceTilemap[257] = INCBIN_U32("data/new_file_intro/landing_on_bsl_space.tm.lz");
-const u32 sIntroLandingOnBslHangarTilemap[396] = INCBIN_U32("data/new_file_intro/landing_on_bsl_hangar.tm.lz");
+const u32 sIntroLandingOnBslSpaceTilemap[] = INCBIN_U32("data/new_file_intro/landing_on_bsl_space.tm.lz");
+const u32 sIntroLandingOnBslHangarTilemap[] = INCBIN_U32("data/new_file_intro/landing_on_bsl_hangar.tm.lz");
 
-const u32 sIntroSamusSittingGfx[4818] = INCBIN_U32("data/new_file_intro/samus_sitting.gfx.lz");
-const u16 sIntroSamusSittingPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/samus_sitting.pal");
-const u32 sIntroSamusSittingTilemap[417] = INCBIN_U32("data/new_file_intro/samus_sitting.tm.lz");
+const u32 sIntroSamusSittingGfx[] = INCBIN_U32("data/new_file_intro/samus_sitting.gfx.lz");
+const u16 sIntroSamusSittingPal[] = INCBIN_U16("data/new_file_intro/samus_sitting.pal");
+const u32 sIntroSamusSittingTilemap[] = INCBIN_U32("data/new_file_intro/samus_sitting.tm.lz");
 
-const u32 sTitleScreenSpaceBackgroundGfx[3270] = INCBIN_U32("data/menus/title_screen/space_background.gfx.lz");
+const u32 sTitleScreenSpaceBackgroundGfx[] = INCBIN_U32("data/menus/title_screen/space_background.gfx.lz");
 
-const u16 sIntroSamusDriftingIntoAsteroidsBgPal[8 * PAL_ROW] = INCBIN_U16("data/new_file_intro/drifting_into_asteroids_bg.pal");
+const u16 sIntroSamusDriftingIntoAsteroidsBgPal[] = INCBIN_U16("data/new_file_intro/drifting_into_asteroids_bg.pal");
 const u16 sTitleScreenSpaceBackgroundPal[8 * PAL_ROW] = INCBIN_U16("data/menus/title_screen/space_background.pal");
 
-const u32 sTitleScreenSpaceBackgroundTilemap[418] = INCBIN_U32("data/menus/title_screen/space_background.tm.lz");
+const u32 sTitleScreenSpaceBackgroundTilemap[] = INCBIN_U32("data/menus/title_screen/space_background.tm.lz");
 
 static const u16 sOamFrame_6098a8[OAM_DATA_SIZE(1)] = {
 	1,
@@ -24518,17 +24518,17 @@ const struct FrameData sOam_60afe0[45] = {
 	[44] = FRAME_DATA_TERMINATOR
 };
 
-const u8 sIntroSpaceTilemap[1320] = INCBIN_U8("data/new_file_intro/space_bg.tm.lz");
-const u8 sIntroBslTilemap[1586] = INCBIN_U8("data/new_file_intro/bsl_bg.tm.lz");
+const u8 sIntroSpaceTilemap[] = INCBIN_U8("data/new_file_intro/space_bg.tm.lz");
+const u8 sIntroBslTilemap[] = INCBIN_U8("data/new_file_intro/bsl_bg.tm.lz");
 
 static const u8 padding[2] = {0, 0};
 
-const u32 sIntroBslSpaceBgGfx[4421] = INCBIN_U32("data/new_file_intro/bsl_space_bg.gfx.lz");
-const u32 sTitleIntroBslObjGfx[2852] = INCBIN_U32("data/title_intro/bsl_obj.gfx.lz");
-const u16 sIntroBslSpaceBgPal[8 * PAL_ROW] = INCBIN_U16("data/new_file_intro/bsl_space_bg.pal");
-const u16 sIntroSamusDriftingIntoAsteroidsObjPal[16 * PAL_ROW] = INCBIN_U16("data/new_file_intro/drifting_into_asteroids_obj.pal");
+const u32 sIntroBslSpaceBgGfx[] = INCBIN_U32("data/new_file_intro/bsl_space_bg.gfx.lz");
+const u32 sTitleIntroBslObjGfx[] = INCBIN_U32("data/title_intro/bsl_obj.gfx.lz");
+const u16 sIntroBslSpaceBgPal[] = INCBIN_U16("data/new_file_intro/bsl_space_bg.pal");
+const u16 sIntroSamusDriftingIntoAsteroidsObjPal[] = INCBIN_U16("data/new_file_intro/drifting_into_asteroids_obj.pal");
 
-const u32 sNextPageArrowGfx[8] = INCBIN_U32("data/new_file_intro/next_page_arrow.gfx");
+const u32 sNextPageArrowGfx[] = INCBIN_U32("data/new_file_intro/next_page_arrow.gfx");
 
 static const u16 sOamFrame_613168[OAM_DATA_SIZE(1)] = {
     1,
@@ -24565,7 +24565,7 @@ const struct FrameData sIntroNextPageArrowOam[5] = {
     [4] = FRAME_DATA_TERMINATOR
 };
 
-const u16 sNextPageArrowPal[1 * PAL_ROW] = INCBIN_U16("data/new_file_intro/next_page_arrow.pal");
+const u16 sNextPageArrowPal[] = INCBIN_U16("data/new_file_intro/next_page_arrow.pal");
 
 static const u8 sBlob_6131c8_63a19c[] = INCBIN_U8("data/Blob_6131c8_63a19c.bin");
 
@@ -24573,83 +24573,83 @@ const u16 sCutsceneTextNone[2] = {
     CHAR_TERMINATOR, CHAR_TERMINATOR
 };
 
-const u32 sIntroSr388SurfaceBgGfx0[686] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_0.gfx.lz");
-const u32 sIntroSr388SurfaceBgGfx1[767] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_1.gfx.lz");
-const u32 sIntroSr388SurfaceBgGfx2[848] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_2.gfx.lz");
-const u32 sIntroSr388SurfaceBgGfx3[641] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_3.gfx.lz");
-const u32 sIntroSr388SurfaceBgGfx4[577] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_4.gfx.lz");
-const u32 sIntroSr388SurfaceBgGfx5[655] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_5.gfx.lz");
-const u32 sIntroSr388SurfaceBgGfx6[513] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_6.gfx.lz");
-const u32 sIntroSr388SurfaceBgGfx7[177] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_7.gfx.lz");
+const u32 sIntroSr388SurfaceBgGfx0[] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_0.gfx.lz");
+const u32 sIntroSr388SurfaceBgGfx1[] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_1.gfx.lz");
+const u32 sIntroSr388SurfaceBgGfx2[] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_2.gfx.lz");
+const u32 sIntroSr388SurfaceBgGfx3[] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_3.gfx.lz");
+const u32 sIntroSr388SurfaceBgGfx4[] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_4.gfx.lz");
+const u32 sIntroSr388SurfaceBgGfx5[] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_5.gfx.lz");
+const u32 sIntroSr388SurfaceBgGfx6[] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_6.gfx.lz");
+const u32 sIntroSr388SurfaceBgGfx7[] = INCBIN_U32("data/new_file_intro/sr388_surface_bg_7.gfx.lz");
 
-const u32 sIntroSr388PlanetBgGfx0[719] = INCBIN_U32("data/new_file_intro/sr388_planet_bg_0.gfx.lz");
-const u32 sIntroSr388PlanetBgGfx1[809] = INCBIN_U32("data/new_file_intro/sr388_planet_bg_1.gfx.lz");
-const u32 sIntroSr388PlanetBgGfx2[794] = INCBIN_U32("data/new_file_intro/sr388_planet_bg_2.gfx.lz");
-const u32 sIntroSr388PlanetBgGfx3[782] = INCBIN_U32("data/new_file_intro/sr388_planet_bg_3.gfx.lz");
-const u32 sIntroSr388PlanetBgGfx4[772] = INCBIN_U32("data/new_file_intro/sr388_planet_bg_4.gfx.lz");
+const u32 sIntroSr388PlanetBgGfx0[] = INCBIN_U32("data/new_file_intro/sr388_planet_bg_0.gfx.lz");
+const u32 sIntroSr388PlanetBgGfx1[] = INCBIN_U32("data/new_file_intro/sr388_planet_bg_1.gfx.lz");
+const u32 sIntroSr388PlanetBgGfx2[] = INCBIN_U32("data/new_file_intro/sr388_planet_bg_2.gfx.lz");
+const u32 sIntroSr388PlanetBgGfx3[] = INCBIN_U32("data/new_file_intro/sr388_planet_bg_3.gfx.lz");
+const u32 sIntroSr388PlanetBgGfx4[] = INCBIN_U32("data/new_file_intro/sr388_planet_bg_4.gfx.lz");
 
-const u32 sIntroBslObjectGfx0[448] = INCBIN_U32("data/new_file_intro/bsl_object_0.gfx.lz");
-const u32 sIntroBslObjectGfx1[402] = INCBIN_U32("data/new_file_intro/bsl_object_1.gfx.lz");
-const u32 sIntroBslObjectGfx2[420] = INCBIN_U32("data/new_file_intro/bsl_object_2.gfx.lz");
-const u32 sIntroBslObjectGfx3[124] = INCBIN_U32("data/new_file_intro/bsl_object_3.gfx.lz");
-const u32 sIntroBslObjectGfx4[298] = INCBIN_U32("data/new_file_intro/bsl_object_4.gfx.lz");
-const u32 sIntroBslObjectGfx5[186] = INCBIN_U32("data/new_file_intro/bsl_object_5.gfx.lz");
-const u32 sIntroBslObjectGfx6[543] = INCBIN_U32("data/new_file_intro/bsl_object_6.gfx.lz");
-const u32 sIntroBslObjectGfx7[482] = INCBIN_U32("data/new_file_intro/bsl_object_7.gfx.lz");
+const u32 sIntroBslObjectGfx0[] = INCBIN_U32("data/new_file_intro/bsl_object_0.gfx.lz");
+const u32 sIntroBslObjectGfx1[] = INCBIN_U32("data/new_file_intro/bsl_object_1.gfx.lz");
+const u32 sIntroBslObjectGfx2[] = INCBIN_U32("data/new_file_intro/bsl_object_2.gfx.lz");
+const u32 sIntroBslObjectGfx3[] = INCBIN_U32("data/new_file_intro/bsl_object_3.gfx.lz");
+const u32 sIntroBslObjectGfx4[] = INCBIN_U32("data/new_file_intro/bsl_object_4.gfx.lz");
+const u32 sIntroBslObjectGfx5[] = INCBIN_U32("data/new_file_intro/bsl_object_5.gfx.lz");
+const u32 sIntroBslObjectGfx6[] = INCBIN_U32("data/new_file_intro/bsl_object_6.gfx.lz");
+const u32 sIntroBslObjectGfx7[] = INCBIN_U32("data/new_file_intro/bsl_object_7.gfx.lz");
 
-const u32 sIntroSamusSittingBgGfx0[920] = INCBIN_U32("data/new_file_intro/samus_sitting_bg_0.gfx.lz");
-const u32 sIntroSamusSittingBgGfx1[978] = INCBIN_U32("data/new_file_intro/samus_sitting_bg_1.gfx.lz");
-const u32 sIntroSamusSittingBgGfx2[962] = INCBIN_U32("data/new_file_intro/samus_sitting_bg_2.gfx.lz");
-const u32 sIntroSamusSittingBgGfx3[944] = INCBIN_U32("data/new_file_intro/samus_sitting_bg_3.gfx.lz");
-const u32 sIntroSamusSittingBgGfx4[800] = INCBIN_U32("data/new_file_intro/samus_sitting_bg_4.gfx.lz");
+const u32 sIntroSamusSittingBgGfx0[] = INCBIN_U32("data/new_file_intro/samus_sitting_bg_0.gfx.lz");
+const u32 sIntroSamusSittingBgGfx1[] = INCBIN_U32("data/new_file_intro/samus_sitting_bg_1.gfx.lz");
+const u32 sIntroSamusSittingBgGfx2[] = INCBIN_U32("data/new_file_intro/samus_sitting_bg_2.gfx.lz");
+const u32 sIntroSamusSittingBgGfx3[] = INCBIN_U32("data/new_file_intro/samus_sitting_bg_3.gfx.lz");
+const u32 sIntroSamusSittingBgGfx4[] = INCBIN_U32("data/new_file_intro/samus_sitting_bg_4.gfx.lz");
 
-const u32 sIntroSamusHelmetCloseupBgGfx0[598] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_0.gfx.lz");
-const u32 sIntroSamusHelmetCloseupBgGfx1[848] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_1.gfx.lz");
-const u32 sIntroSamusHelmetCloseupBgGfx2[908] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_2.gfx.lz");
-const u32 sIntroSamusHelmetCloseupBgGfx3[812] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_3.gfx.lz");
-const u32 sIntroSamusHelmetCloseupBgGfx4[844] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_4.gfx.lz");
-const u32 sIntroSamusHelmetCloseupBgGfx5[403] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_5.gfx.lz");
+const u32 sIntroSamusHelmetCloseupBgGfx0[] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_0.gfx.lz");
+const u32 sIntroSamusHelmetCloseupBgGfx1[] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_1.gfx.lz");
+const u32 sIntroSamusHelmetCloseupBgGfx2[] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_2.gfx.lz");
+const u32 sIntroSamusHelmetCloseupBgGfx3[] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_3.gfx.lz");
+const u32 sIntroSamusHelmetCloseupBgGfx4[] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_4.gfx.lz");
+const u32 sIntroSamusHelmetCloseupBgGfx5[] = INCBIN_U32("data/new_file_intro/samus_helmet_closeup_bg_5.gfx.lz");
 
-const u32 sTitleIntroCollisionWarningBgGfx0[462] = INCBIN_U32("data/title_intro/collision_warning_bg_0.gfx.lz");
-const u32 sTitleIntroCollisionWarningBgGfx1[569] = INCBIN_U32("data/title_intro/collision_warning_bg_1.gfx.lz");
-const u32 sTitleIntroCollisionWarningBgGfx2[729] = INCBIN_U32("data/title_intro/collision_warning_bg_2.gfx.lz");
-const u32 sTitleIntroCollisionWarningBgGfx3[545] = INCBIN_U32("data/title_intro/collision_warning_bg_3.gfx.lz");
-const u32 sTitleIntroCollisionWarningBgGfx4[546] = INCBIN_U32("data/title_intro/collision_warning_bg_4.gfx.lz");
-const u32 sTitleIntroCollisionWarningObjGfx0[433] = INCBIN_U32("data/title_intro/collision_warning_obj_0.gfx.lz");
-const u32 sTitleIntroCollisionWarningObjGfx1[459] = INCBIN_U32("data/title_intro/collision_warning_obj_1.gfx.lz");
-const u32 sTitleIntroCollisionWarningObjGfx2[199] = INCBIN_U32("data/title_intro/collision_warning_obj_2.gfx.lz");
-const u32 sTitleIntroCollisionWarningObjGfx3[227] = INCBIN_U32("data/title_intro/collision_warning_obj_3.gfx.lz");
-const u32 sTitleIntroCollisionWarningObjGfx4[256] = INCBIN_U32("data/title_intro/collision_warning_obj_4.gfx.lz");
-const u32 sTitleIntroCollisionWarningObjGfx5[144] = INCBIN_U32("data/title_intro/collision_warning_obj_5.gfx.lz");
-const u32 sTitleIntroGfx_652bd4[875] = INCBIN_U32("data/title_intro/gfx_652bd4.gfx.lz");
-const u32 sTitleIntroGfx_653980[861] = INCBIN_U32("data/title_intro/gfx_653980.gfx.lz");
-const u32 sTitleIntroGfx_6546f4[747] = INCBIN_U32("data/title_intro/gfx_6546f4.gfx.lz");
-const u32 sTitleIntroGfx_6552a0[807] = INCBIN_U32("data/title_intro/gfx_6552a0.gfx.lz");
-const u32 sTitleIntroGfx_655f3c[869] = INCBIN_U32("data/title_intro/gfx_655f3c.gfx.lz");
-const u32 sTitleIntroGfx_656cd0[462] = INCBIN_U32("data/title_intro/gfx_656cd0.gfx.lz");
-const u32 sTitleIntroGfx_657408[367] = INCBIN_U32("data/title_intro/gfx_657408.gfx.lz");
-const u32 sTitleIntroGfx_6579c4[218] = INCBIN_U32("data/title_intro/gfx_6579c4.gfx.lz");
-const u32 sTitleIntroGfx_657d2c[141] = INCBIN_U32("data/title_intro/gfx_657d2c.gfx.lz");
-const u32 sTitleIntroGfx_657f60[124] = INCBIN_U32("data/title_intro/gfx_657f60.gfx.lz");
-const u32 sTitleIntroGfx_658150[198] = INCBIN_U32("data/title_intro/gfx_658150.gfx.lz");
-const u32 sTitleIntroGfx_658468[248] = INCBIN_U32("data/title_intro/gfx_658468.gfx.lz");
-const u32 sTitleIntroGfx_658848[230] = INCBIN_U32("data/title_intro/gfx_658848.gfx.lz");
+const u32 sTitleIntroCollisionWarningBgGfx0[] = INCBIN_U32("data/title_intro/collision_warning_bg_0.gfx.lz");
+const u32 sTitleIntroCollisionWarningBgGfx1[] = INCBIN_U32("data/title_intro/collision_warning_bg_1.gfx.lz");
+const u32 sTitleIntroCollisionWarningBgGfx2[] = INCBIN_U32("data/title_intro/collision_warning_bg_2.gfx.lz");
+const u32 sTitleIntroCollisionWarningBgGfx3[] = INCBIN_U32("data/title_intro/collision_warning_bg_3.gfx.lz");
+const u32 sTitleIntroCollisionWarningBgGfx4[] = INCBIN_U32("data/title_intro/collision_warning_bg_4.gfx.lz");
+const u32 sTitleIntroCollisionWarningObjGfx0[] = INCBIN_U32("data/title_intro/collision_warning_obj_0.gfx.lz");
+const u32 sTitleIntroCollisionWarningObjGfx1[] = INCBIN_U32("data/title_intro/collision_warning_obj_1.gfx.lz");
+const u32 sTitleIntroCollisionWarningObjGfx2[] = INCBIN_U32("data/title_intro/collision_warning_obj_2.gfx.lz");
+const u32 sTitleIntroCollisionWarningObjGfx3[] = INCBIN_U32("data/title_intro/collision_warning_obj_3.gfx.lz");
+const u32 sTitleIntroCollisionWarningObjGfx4[] = INCBIN_U32("data/title_intro/collision_warning_obj_4.gfx.lz");
+const u32 sTitleIntroCollisionWarningObjGfx5[] = INCBIN_U32("data/title_intro/collision_warning_obj_5.gfx.lz");
+const u32 sTitleIntroGfx_652bd4[] = INCBIN_U32("data/title_intro/gfx_652bd4.gfx.lz");
+const u32 sTitleIntroGfx_653980[] = INCBIN_U32("data/title_intro/gfx_653980.gfx.lz");
+const u32 sTitleIntroGfx_6546f4[] = INCBIN_U32("data/title_intro/gfx_6546f4.gfx.lz");
+const u32 sTitleIntroGfx_6552a0[] = INCBIN_U32("data/title_intro/gfx_6552a0.gfx.lz");
+const u32 sTitleIntroGfx_655f3c[] = INCBIN_U32("data/title_intro/gfx_655f3c.gfx.lz");
+const u32 sTitleIntroGfx_656cd0[] = INCBIN_U32("data/title_intro/gfx_656cd0.gfx.lz");
+const u32 sTitleIntroGfx_657408[] = INCBIN_U32("data/title_intro/gfx_657408.gfx.lz");
+const u32 sTitleIntroGfx_6579c4[] = INCBIN_U32("data/title_intro/gfx_6579c4.gfx.lz");
+const u32 sTitleIntroGfx_657d2c[] = INCBIN_U32("data/title_intro/gfx_657d2c.gfx.lz");
+const u32 sTitleIntroGfx_657f60[] = INCBIN_U32("data/title_intro/gfx_657f60.gfx.lz");
+const u32 sTitleIntroGfx_658150[] = INCBIN_U32("data/title_intro/gfx_658150.gfx.lz");
+const u32 sTitleIntroGfx_658468[] = INCBIN_U32("data/title_intro/gfx_658468.gfx.lz");
+const u32 sTitleIntroGfx_658848[] = INCBIN_U32("data/title_intro/gfx_658848.gfx.lz");
 
-const u32 sTitleIntroSpaceBgTilemap_Unused[385] = INCBIN_U32("data/title_intro/space_bg_unused.tm.lz");
-const u16 sTitleIntroSamusSittingBgPal[16 * PAL_ROW] = INCBIN_U16("data/title_intro/samus_sitting_bg.pal");
-const u32 sTitleIntroCollisionWarningBgTilemap[368] = INCBIN_U32("data/title_intro/collision_warning_bg.tm.lz");
-const u16 sTitleIntroCollisionWarningBgPal[16 * PAL_ROW] = INCBIN_U16("data/title_intro/collision_warning_bg.pal");
+const u32 sTitleIntroSpaceBgTilemap_Unused[] = INCBIN_U32("data/title_intro/space_bg_unused.tm.lz");
+const u16 sTitleIntroSamusSittingBgPal[] = INCBIN_U16("data/title_intro/samus_sitting_bg.pal");
+const u32 sTitleIntroCollisionWarningBgTilemap[] = INCBIN_U32("data/title_intro/collision_warning_bg.tm.lz");
+const u16 sTitleIntroCollisionWarningBgPal[] = INCBIN_U16("data/title_intro/collision_warning_bg.pal");
 
 static const u8 sBlob_659ba4_65c268[] = INCBIN_U8("data/Blob_659ba4_65c268.bin");
 
-const u16 sTitleIntroCollisionWarningObjPal[16 * PAL_ROW] = INCBIN_U16("data/title_intro/collision_warning_obj.pal");
+const u16 sTitleIntroCollisionWarningObjPal[] = INCBIN_U16("data/title_intro/collision_warning_obj.pal");
 
 static const u8 sBlob_65c468_662804[] = INCBIN_U8("data/Blob_65c468_662804.bin");
 
-const u32 sIntroTilemap_662804[318] = INCBIN_U32("data/new_file_intro/662804.tm.lz");
+const u32 sIntroTilemap_662804[] = INCBIN_U32("data/new_file_intro/662804.tm.lz");
 
 static const u8 sBlob_662cfc_663820[] = INCBIN_U8("data/Blob_662cfc_663820.bin");
 
-const u16 sIntroPal_663820[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/663820.pal");
+const u16 sIntroPal_663820[] = INCBIN_U16("data/new_file_intro/663820.pal");
 
 static const u8 sBlob_6638a0_682fac[] = INCBIN_U8("data/Blob_6638a0_682fac.bin");

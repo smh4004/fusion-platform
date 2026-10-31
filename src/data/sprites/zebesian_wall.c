@@ -24,8 +24,8 @@ const s16 sZebesianWallJumpXVelocity[34] = {
     16, SHORT_MAX
 };
 
-const u32 sZebesianWallGfx[2 * 512] = INCBIN_U32("data/sprites/zebesian_wall.gfx");
-const u16 sZebesianWallPal[2 * 16] = INCBIN_U16("data/sprites/zebesian_wall.pal");
+const u32 sZebesianWallGfx[] = INCBIN_U32("data/sprites/zebesian_wall.gfx");
+const u16 sZebesianWallPal[] = INCBIN_U16("data/sprites/zebesian_wall.pal");
 
 static const u16 sZebesianWallOam_Crawling_Frame0[OAM_DATA_SIZE(13)] = {
     13,

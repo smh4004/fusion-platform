@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sDataPadGfx[512 * 3];
-extern const u16 sDataPadPal[16 * 3];
+extern const u32 sDataPadGfx[];
+extern const u16 sDataPadPal[];
 
 extern const struct FrameData sDataPadOam_Unpressed[2];
 extern const struct FrameData sDataPadOam_Pressed[2];

@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sMotoGfx[1536];
-extern const u16 sMotoPal[48];
+extern const u32 sMotoGfx[];
+extern const u16 sMotoPal[];
 
 extern const struct FrameData sMotoOam_Idle[5];
 extern const struct FrameData sMotoOam_Walking[7];

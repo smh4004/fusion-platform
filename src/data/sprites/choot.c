@@ -18,8 +18,8 @@ const s16 sChootJumpVelocity[53] = {
     SHORT_MAX
 };
 
-const u32 sChootGfx[512 * 1] = INCBIN_U32("data/sprites/choot.gfx");
-const u16 sChootPal[16 * 1] = INCBIN_U16("data/sprites/choot.pal");
+const u32 sChootGfx[] = INCBIN_U32("data/sprites/choot.gfx");
+const u16 sChootPal[] = INCBIN_U16("data/sprites/choot.pal");
 
 static const u16 sChootOam_Idle_Frame0[OAM_DATA_SIZE(2)] = {
     2,

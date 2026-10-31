@@ -4,8 +4,8 @@
 #include "types.h"
 #include "oam.h"
 
-extern const u32 sLavaPlumeGfx[1 * 512];
-extern const u16 sLavaPlumePal[1 * 16];
+extern const u32 sLavaPlumeGfx[];
+extern const u16 sLavaPlumePal[];
 
 extern const struct FrameData sLavaPlumeWarningOam_Idle1[5];
 extern const struct FrameData sLavaPlumeWarningOam_Idle2[6];

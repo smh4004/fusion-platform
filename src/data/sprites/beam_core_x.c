@@ -533,9 +533,9 @@ const struct FrameData sBeamCoreXEyeOam_Closing[7] = {
 
 const u32 sWideBeamCoreXGfx[5 * 512] = INCBIN_U32("data/sprites/wide_beam_core_x.gfx");
 const u16 sWideBeamCoreXPal[5 * 16] = INCBIN_U16("data/sprites/wide_beam_core_x.pal");
-const u32 sPlasmaBeamCoreXGfx[5 * 512] = INCBIN_U32("data/sprites/plasma_beam_core_x.gfx");
-const u16 sPlasmaBeamCoreXPal[5 * 16] = INCBIN_U16("data/sprites/plasma_beam_core_x.pal");
-const u32 sWaveBeamCoreXGfx[5 * 512] = INCBIN_U32("data/sprites/wave_beam_core_x.gfx");
-const u16 sWaveBeamCoreXPal[5 * 16] = INCBIN_U16("data/sprites/wave_beam_core_x.pal");
-const u32 sIceBeamCoreXGfx[5 * 512] = INCBIN_U32("data/sprites/ice_beam_core_x.gfx");
-const u16 sIceBeamCoreXPal[5 * 16] = INCBIN_U16("data/sprites/ice_beam_core_x.pal");
+const u32 sPlasmaBeamCoreXGfx[] = INCBIN_U32("data/sprites/plasma_beam_core_x.gfx");
+const u16 sPlasmaBeamCoreXPal[] = INCBIN_U16("data/sprites/plasma_beam_core_x.pal");
+const u32 sWaveBeamCoreXGfx[] = INCBIN_U32("data/sprites/wave_beam_core_x.gfx");
+const u16 sWaveBeamCoreXPal[] = INCBIN_U16("data/sprites/wave_beam_core_x.pal");
+const u32 sIceBeamCoreXGfx[] = INCBIN_U32("data/sprites/ice_beam_core_x.gfx");
+const u16 sIceBeamCoreXPal[] = INCBIN_U16("data/sprites/ice_beam_core_x.pal");

@@ -1,8 +1,8 @@
 #include "data/sprites/bull.h"
 #include "macros.h"
 
-const u32 sBullGfx[512 * 1] = INCBIN_U32("data/sprites/bull.gfx");
-const u16 sBullPal[16 * 1] = INCBIN_U16("data/sprites/bull.pal");
+const u32 sBullGfx[] = INCBIN_U32("data/sprites/bull.gfx");
+const u16 sBullPal[] = INCBIN_U16("data/sprites/bull.pal");
 
 static const u16 sBullOam_Frame0[OAM_DATA_SIZE(4)] = {
     4,

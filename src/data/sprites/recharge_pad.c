@@ -1,7 +1,7 @@
 #include "data/sprites/recharge_pad.h"
 
-const u32 sRechargePadGfx[3 * 512] = INCBIN_U32("data/sprites/recharge_pad.gfx");
-const u16 sRechargePadPal[3 * 16] = INCBIN_U16("data/sprites/recharge_pad.pal");
+const u32 sRechargePadGfx[] = INCBIN_U32("data/sprites/recharge_pad.gfx");
+const u16 sRechargePadPal[] = INCBIN_U16("data/sprites/recharge_pad.pal");
 
 static const u16 sRechargePadOam_325700_Frame0[OAM_DATA_SIZE(5)] = {
     5,

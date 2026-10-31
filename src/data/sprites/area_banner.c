@@ -1,9 +1,9 @@
 #include "data/sprites/area_banner.h"
 #include "macros.h"
 
-const u32 sAreaBannerGfx[1 * 512] = INCBIN_U32("data/sprites/area_banner.gfx");
-const u16 sAreaBannerPal[1 * 16] = INCBIN_U16("data/sprites/area_banner.pal");
-const u16 sAreaBannerLocationPal[1 * 16] = INCBIN_U16("data/sprites/area_banner_location.pal");
+const u32 sAreaBannerGfx[] = INCBIN_U32("data/sprites/area_banner.gfx");
+const u16 sAreaBannerPal[] = INCBIN_U16("data/sprites/area_banner.pal");
+const u16 sAreaBannerLocationPal[] = INCBIN_U16("data/sprites/area_banner_location.pal");
 
 static const u16 sAreaBannerOam_SpawningMiddle_Frame0[OAM_DATA_SIZE(2)] = {
     2,

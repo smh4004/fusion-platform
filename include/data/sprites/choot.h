@@ -6,8 +6,8 @@
 
 extern const s16 sChootJumpVelocity[53];
 
-extern const u32 sChootGfx[512 * 1];
-extern const u16 sChootPal[16 * 1];
+extern const u32 sChootGfx[];
+extern const u16 sChootPal[];
 
 extern const struct FrameData sChootOam_Idle[2];
 extern const struct FrameData sChootOam_Launching[3];

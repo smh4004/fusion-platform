@@ -21,8 +21,8 @@ const s16 sGerutaIdleYMovement[65] = {
     SHORT_MAX
 };
 
-const u32 sGerutaGfx[512 * 1] = INCBIN_U32("data/sprites/geruta.gfx");
-const u16 sGerutaPal[16 * 1] = INCBIN_U16("data/sprites/geruta.pal");
+const u32 sGerutaGfx[] = INCBIN_U32("data/sprites/geruta.gfx");
+const u16 sGerutaPal[] = INCBIN_U16("data/sprites/geruta.pal");
 
 static const u16 sGerutaOam_Idle_Frame0[OAM_DATA_SIZE(10)] = {
     10,

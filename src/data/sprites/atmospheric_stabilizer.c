@@ -1,7 +1,7 @@
 #include "data/sprites/atmospheric_stabilizer.h"
 
-const u32 sAtmosphericStabilizerGfx[3 * 512] = INCBIN_U32("data/sprites/atmospheric_stabilizer.gfx");
-const u16 sAtmosphericStabilizerPal[3 * 16] = INCBIN_U16("data/sprites/atmospheric_stabilizer.pal");
+const u32 sAtmosphericStabilizerGfx[] = INCBIN_U32("data/sprites/atmospheric_stabilizer.gfx");
+const u16 sAtmosphericStabilizerPal[] = INCBIN_U16("data/sprites/atmospheric_stabilizer.pal");
 
 static const u16 sAtmosphericStabilizerParasiteOam_Idle_Frame0[OAM_DATA_SIZE(5)] = {
     5,

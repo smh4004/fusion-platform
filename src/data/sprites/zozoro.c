@@ -1,8 +1,8 @@
 #include "data/sprites/zozoro.h"
 #include "macros.h"
 
-const u32 sZozoroGfx[2 * 512] = INCBIN_U32("data/sprites/zozoro.gfx");
-const u16 sZozoroPal[1 * 16] = INCBIN_U16("data/sprites/zozoro.pal");
+const u32 sZozoroGfx[] = INCBIN_U32("data/sprites/zozoro.gfx");
+const u16 sZozoroPal[] = INCBIN_U16("data/sprites/zozoro.pal");
 
 static const u16 sZozoroOam_CrawlingGround_Frame0[OAM_DATA_SIZE(4)] = {
     4,

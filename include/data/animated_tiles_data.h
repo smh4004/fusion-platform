@@ -3,8 +3,8 @@
 
 #include "types.h"
 
-extern const u8 sAnimatedTilesGfx[234 * 128];
-extern const u8 sAnimatedTankGfx[3 * 512];
-extern const u8 sAnimatedLiquidsGfx[8 * 512];
+extern const u8 sAnimatedTilesGfx[];
+extern const u8 sAnimatedTankGfx[];
+extern const u8 sAnimatedLiquidsGfx[];
 
 #endif /* ANIMATED_TILES_DATA_H */

@@ -147,8 +147,8 @@ extern const s16 sZazabiJumpingSpeed2[40];
 extern const s16 sZazabiJumpingSpeed3[40];
 extern const s16 sZazabiFallingSpeed[8];
 
-extern const u32 sZazabiGfx[4096];
-extern const u16 sZazabiPal[8 * 16];
+extern const u32 sZazabiGfx[];
+extern const u16 sZazabiPal[];
 
 extern const struct FrameData sZAZABI_OAM_LOWER_SHELL_IDLE[2];
 extern const struct FrameData sZazabiPartOam_LowerShellEatingSamus[5];

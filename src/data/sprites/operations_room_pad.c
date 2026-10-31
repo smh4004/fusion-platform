@@ -1,7 +1,7 @@
 #include "data/sprites/operations_room_pad.h"
 
-const u32 sOperationsRoomPadGfx[2 * 512] = INCBIN_U32("data/sprites/operations_room_pad.gfx");
-const u16 sOperationsRoomPadPal[2 * 16] = INCBIN_U16("data/sprites/operations_room_pad.pal");
+const u32 sOperationsRoomPadGfx[] = INCBIN_U32("data/sprites/operations_room_pad.gfx");
+const u16 sOperationsRoomPadPal[] = INCBIN_U16("data/sprites/operations_room_pad.pal");
 
 static const u16 sOperationsRoomPadOam_34c244_Frame0[OAM_DATA_SIZE(6)] = {
     6,

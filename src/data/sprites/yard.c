@@ -1,8 +1,8 @@
 #include "data/sprites/yard.h"
 #include "macros.h"
 
-const u32 sYardGfx[512 * 3] = INCBIN_U32("data/sprites/yard.gfx");
-const u16 sYardPal[16 * 3] = INCBIN_U16("data/sprites/yard.pal");
+const u32 sYardGfx[] = INCBIN_U32("data/sprites/yard.gfx");
+const u16 sYardPal[] = INCBIN_U16("data/sprites/yard.pal");
 
 static const u16 sYardOam_CrawlingHorizontal_Frame0[OAM_DATA_SIZE(6)] = {
     6,

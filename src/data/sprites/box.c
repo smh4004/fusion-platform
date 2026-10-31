@@ -1072,8 +1072,8 @@ const struct MultiSpriteData sBoxMultiSpriteData_DoneFiringBomb[9] = {
     [8] = MULTI_SPRITE_DATA_TERMINATOR
 };
 
-const u32 sBoxGfx[512 * 8] = INCBIN_U32("data/sprites/box.gfx");
-const u16 sBoxPal[16 * 8] = INCBIN_U16("data/sprites/box.pal");
+const u32 sBoxGfx[] = INCBIN_U32("data/sprites/box.gfx");
+const u16 sBoxPal[] = INCBIN_U16("data/sprites/box.pal");
 
 static const u16 sBoxPartOam_FrontLeftLegCoverUndamaged_Frame0[OAM_DATA_SIZE(5)] = {
     5,

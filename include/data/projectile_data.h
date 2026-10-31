@@ -14,34 +14,34 @@ extern const s16 sDiffusionMissileVelocity[7];
 
 extern const s16 sTumblingMissileFallingVelocity[16];
 
-extern const u16 sNormalBeamPal[1 * 16];
-extern const u16 sChargeBeamPal[1 * 16];
-extern const u16 sWideBeamPal[1 * 16];
-extern const u16 sPlasmaBeamPal[1 * 16];
-extern const u16 sWaveBeamPal[1 * 16];
-extern const u16 sIceBeamPal[1 * 16];
+extern const u16 sNormalBeamPal[];
+extern const u16 sChargeBeamPal[];
+extern const u16 sWideBeamPal[];
+extern const u16 sPlasmaBeamPal[];
+extern const u16 sWaveBeamPal[];
+extern const u16 sIceBeamPal[];
 
-extern const u8 sNormalBeamGfx_Top[20 * 32];
-extern const u8 sNormalBeamGfx_Bottom[20 * 32];
-extern const u8 sChargeBeamGfx_Top[20 * 32];
-extern const u8 sChargeBeamGfx_Bottom[20 * 32];
-extern const u8 sWideBeamGfx_Top[20 * 32];
-extern const u8 sWideBeamGfx_Bottom[20 * 32];
-extern const u8 sPlasmaBeamGfx_Top[20 * 32];
-extern const u8 sPlasmaBeamGfx_Bottom[20 * 32];
-extern const u8 sWaveBeamGfx_Top[20 * 32];
-extern const u8 sWaveBeamGfx_Bottom[20 * 32];
-extern const u8 sIceBeamGfx_Top[20 * 32];
-extern const u8 sIceBeamGfx_Bottom[20 * 32];
+extern const u8 sNormalBeamGfx_Top[];
+extern const u8 sNormalBeamGfx_Bottom[];
+extern const u8 sChargeBeamGfx_Top[];
+extern const u8 sChargeBeamGfx_Bottom[];
+extern const u8 sWideBeamGfx_Top[];
+extern const u8 sWideBeamGfx_Bottom[];
+extern const u8 sPlasmaBeamGfx_Top[];
+extern const u8 sPlasmaBeamGfx_Bottom[];
+extern const u8 sWaveBeamGfx_Top[];
+extern const u8 sWaveBeamGfx_Bottom[];
+extern const u8 sIceBeamGfx_Top[];
+extern const u8 sIceBeamGfx_Bottom[];
 
-extern const u8 sNormalMissileGfx_Top[4 * 32];
-extern const u8 sNormalMissileGfx_Bottom[4 * 32];
-extern const u8 sSuperMissileGfx_Top[4 * 32];
-extern const u8 sSuperMissileGfx_Bottom[4 * 32];
-extern const u8 sIceMissileGfx_Top[4 * 32];
-extern const u8 sIceMissileGfx_Bottom[4 * 32];
-extern const u8 sDiffusionMissileGfx_Top[4 * 32];
-extern const u8 sDiffusionMissileGfx_Bottom[4 * 32];
+extern const u8 sNormalMissileGfx_Top[];
+extern const u8 sNormalMissileGfx_Bottom[];
+extern const u8 sSuperMissileGfx_Top[];
+extern const u8 sSuperMissileGfx_Bottom[];
+extern const u8 sIceMissileGfx_Top[];
+extern const u8 sIceMissileGfx_Bottom[];
+extern const u8 sDiffusionMissileGfx_Top[];
+extern const u8 sDiffusionMissileGfx_Bottom[];
 
 extern const struct FrameData sNormalBeamOam_Horizontal[3];
 extern const struct FrameData sNormalBeamOam_Diagonal[3];
@@ -128,12 +128,12 @@ extern const struct FrameData sBombOam_Fast[5];
 extern const struct FrameData sPowerBombOam_Slow[4];
 extern const struct FrameData sPowerBombOam_Fast[4];
 
-extern const u8 sFlareHorizontalGfx_Top[40 * 32];
-extern const u8 sFlareHorizontalGfx_Bottom[40 * 32];
-extern const u8 sFlareDiagonalGfx_Top[40 * 32];
-extern const u8 sFlareDiagonalGfx_Bottom[40 * 32];
-extern const u8 sFlareVerticalGfx_Top[40 * 32];
-extern const u8 sFlareVerticalGfx_Bottom[40 * 32];
+extern const u8 sFlareHorizontalGfx_Top[];
+extern const u8 sFlareHorizontalGfx_Bottom[];
+extern const u8 sFlareDiagonalGfx_Top[];
+extern const u8 sFlareDiagonalGfx_Bottom[];
+extern const u8 sFlareVerticalGfx_Top[];
+extern const u8 sFlareVerticalGfx_Bottom[];
 
 extern const struct FrameData sFlareOam[2];
 

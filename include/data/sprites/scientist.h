@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sScientistGfx[2 * 512];
-extern const u16 sScientistPal[2 * 16];
+extern const u32 sScientistGfx[];
+extern const u16 sScientistPal[];
 
 extern const struct FrameData sScientistOam_Idle[13];
 extern const struct FrameData sScientistOam_34da54[4];

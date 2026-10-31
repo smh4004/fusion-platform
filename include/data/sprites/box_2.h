@@ -98,8 +98,8 @@ extern const struct MultiSpriteData sBox2MultiOam_LoweringToFireMissiles[8];
 extern const struct MultiSpriteData sBox2MultiOam_FiringMissiles[13];
 extern const struct MultiSpriteData sBox2MultiOam_DoneFiringMissiles[9];
 
-extern const u32 sBox2Gfx[512 * 7];
-extern const u16 sBox2Pal[PAL_ROW * 7];
+extern const u32 sBox2Gfx[];
+extern const u16 sBox2Pal[];
 
 extern const struct FrameData sBox2PartOam_FrontLeftLegCover_Undamaged[16];
 extern const struct FrameData sBox2PartOam_FrontLeftLegCover_Shaking[7];

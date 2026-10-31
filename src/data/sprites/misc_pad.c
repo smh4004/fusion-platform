@@ -1,7 +1,7 @@
 #include "data/sprites/misc_pad.h"
 
-const u32 sControlPadGfx[2 * 512] = INCBIN_U32("data/sprites/control_pad.gfx");
-const u16 sControlPadPal[2 * 16] = INCBIN_U16("data/sprites/control_pad.pal");
+const u32 sControlPadGfx[] = INCBIN_U32("data/sprites/control_pad.gfx");
+const u16 sControlPadPal[] = INCBIN_U16("data/sprites/control_pad.pal");
 
 static const u16 sControlPadConsoleOam_Inactive_Frame0[OAM_DATA_SIZE(12)] = {
     12,
@@ -294,8 +294,8 @@ const struct FrameData sControlPadOam_SwitchPressed[2] = {
     [1] = FRAME_DATA_TERMINATOR
 };
 
-const u32 sHabitationPadGfx[1 * 512] = INCBIN_U32("data/sprites/habitation_pad.gfx");
-const u16 sHabitationPadPal[1 * 16] = INCBIN_U16("data/sprites/habitation_pad.pal");
+const u32 sHabitationPadGfx[] = INCBIN_U32("data/sprites/habitation_pad.gfx");
+const u16 sHabitationPadPal[] = INCBIN_U16("data/sprites/habitation_pad.pal");
 
 static const u16 sHabitationPadConsoleOam_Inactive_Frame0[OAM_DATA_SIZE(14)] = {
     14,

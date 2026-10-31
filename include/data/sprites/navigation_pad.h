@@ -4,8 +4,8 @@
 #include "macros.h"
 #include "oam.h"
 
-extern const u32 sNavigationPadGfx[512 * 3];
-extern const u16 sNavigationPadPal[16 * 3];
+extern const u32 sNavigationPadGfx[];
+extern const u16 sNavigationPadPal[];
 
 extern const struct FrameData sNavigationPadOam_31e268[2];
 extern const struct FrameData sNavigationPadOam_31e278[5];

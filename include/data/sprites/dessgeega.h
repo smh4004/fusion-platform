@@ -7,8 +7,8 @@
 extern const s16 sDessgeegaBigHopVelocity[10];
 extern const s16 sDessgeegaLittleHopVelocity[10];
 
-extern const u32 sDessgeegaGfx[512 * 1];
-extern const u16 sDessgeegaPal[16 * 1];
+extern const u32 sDessgeegaGfx[];
+extern const u16 sDessgeegaPal[];
 
 extern const struct FrameData sDessgeegaOam_Idle[5];
 extern const struct FrameData sDessgeegaOam_ShakingHead[9];
