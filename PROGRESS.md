@@ -31,10 +31,14 @@ Each upstream-ready branch builds a matching ROM on its own. None has been offer
 - Emulator smoke test (`tools/smoketest`) passes on the platform build: boot, title, file select, full intro, first room, walking.
 - **Shiftability: everything after the ROM header can move.** With padding of 4 bytes, 0x100 or 64 KB inserted before crt0, agbmain (all code), generic_data (all data), rooms_data or sa_x_close_up, the new-game smoke test passes end to end. An edited graphic that grew from 0x738 to 0x1204 bytes also plays through. This covers boot, title, file select, the intro and the first room; other areas, saves and later events aren't exercised by the test yet.
 - Raw ROM addresses: on `platform` essentially none are left that the shift tests or `find_raw_pointers.py` can find. Pointers into the middle of other blobs are written as `symbol + offset`, which relocates correctly.
-- Platform-only: 958 INCBIN arrays size themselves; `tools/fusiontool` round-trips all 1644 graphics/palette files byte-for-byte.
+- Platform-only: 2189 INCBIN arrays size themselves (graphics, palettes, room layers); `tools/fusiontool` round-trips 2031 assets byte-for-byte: 1644 graphics/palettes and all 387 rooms.
+- **Rooms in Tiled**: `fusiontool extract` writes every room as a Tiled map with real tileset pictures (all 98 tilesets rendered from the built ROM) and a labelled collision layer. Editing and resizing rooms works and plays (tested on the first room).
 
 ## Findings worth knowing
 
+- **Room RLE**: runs of 3+ with 8-bit counts (mode byte 1) or 4+ with 16-bit counts (mode byte 2), shorter form per pass; reproduces all 1231 layers.
+- **Room tilesets**: BG character base is VRAM 0x4000 (tile 0x40 = first common tile, 0xC0 = first tileset tile).
+- **CRLF**: room sources use Windows line endings; tools that edit them must read and write with `newline=""`.
 - **LZ77**: the ROM's encoder is greedy, takes the nearest match on ties, and never uses matches closer than 4 bytes. `tools/fusiontool/fusiontool/lz77.py` reproduces all 376 compressed assets.
 - **Implicit declarations**: `gunship_end.c` must not include `sprite.h`. The original called `SpriteSpawnSecondary` without a prototype, so u16 arguments weren't narrowed. Expect this elsewhere when a call's arguments look un-truncated.
 - **agbcc silently accepts undeclared names in static initializers** and emits 0. A wrong label in a data table can still compile, so always run `make check`.
@@ -67,4 +71,4 @@ Each upstream-ready branch builds a matching ROM on its own. None has been offer
 2. Emulator smoke test (boot, title, new game, first room, save/load) so a shifted ROM can be checked automatically.
 3. Shift the RAM layout out of `linker.ld` (291 pinned symbols; Zero Mission is down to 30).
 4. Label the remaining 47 blobs, starting with the pointer-heavy ones (`Blob_79ce10`, `Blob_a5710`, `Blob_6131c8`).
-5. Tilemap and room (RLE) support in `fusiontool`, then a Tiled export.
+5. Rooms: doors, scroll boundaries and sprite placement as Tiled object layers; animated tiles in tileset previews.
