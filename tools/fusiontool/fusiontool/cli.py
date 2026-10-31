@@ -85,8 +85,12 @@ def cmd_build(args) -> int:
         key = str(tmx.relative_to(args.assets / "rooms"))[: -len(".tmx")]
         if key not in all_rooms:
             continue
+        sizes = rooms.layer_sizes(tmx)
         for layer, data in rooms.build_room(tmx).items():
-            path = all_rooms[key][layer][0]
+            path, cw, ch = all_rooms[key][layer]
+            if sizes[layer] != (cw, ch):
+                rooms.set_layer_size(path, *sizes[layer])
+                print(f"  resized {path} to {sizes[layer][0]}x{sizes[layer][1]}")
             if data != path.read_bytes():
                 path.write_bytes(data)
                 changed += 1

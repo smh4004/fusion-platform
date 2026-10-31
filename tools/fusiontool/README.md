@@ -39,7 +39,7 @@ Each room is one Tiled map with a layer per room layer: `clipdata` (collision), 
 
 `extract` renders every room tileset from the built ROM (`make` first) into `assets/tilesets/tileset_<n>.png` with a matching `.tsx`, exactly as the game composes its 16x16 metatiles. The clipdata layer uses `clipdata.tsx`, labelled squares showing each collision value in hex.
 
-Room width and height are set in `src/data/rooms/<area>/<room>.c` and can't be changed from the map yet. Keep each layer's `fusion_gid_base` property as it is; it's how values map back to the game's numbers.
+To resize a room, use Tiled's *Map > Resize Map*; `build` writes the new width and height into `src/data/rooms/<area>/<room>.c` (each side up to 255, at most 6144 tiles per layer). Doors, scroll boundaries and sprite positions aren't moved for you. Keep each layer's `fusion_gid_base` property as it is; it's how values map back to the game's numbers.
 
 ## How the matching recompression works
 
