@@ -144,23 +144,39 @@ static const u32* sIntroSamusHelmetCloseupBgGfxPointers[6] = {
 };
 
 const u32* sTitleIntroCollisionWarningBgGfxPointers[5] = {
-    (const u32*)0x0864e470,
-    (const u32*)0x0864eba8,
-    (const u32*)0x0864f48c,
-    (const u32*)0x0864fff0,
-    (const u32*)0x08650874
+    sTitleIntroCollisionWarningBgGfx0,
+    sTitleIntroCollisionWarningBgGfx1,
+    sTitleIntroCollisionWarningBgGfx2,
+    sTitleIntroCollisionWarningBgGfx3,
+    sTitleIntroCollisionWarningBgGfx4
 };
 
 const u32* sTitleIntroCollisionWarningObjGfxPointers[6] = {
-    (const u32*)0x086510fc,
-    (const u32*)0x086517c0,
-    (const u32*)0x08651eec,
-    (const u32*)0x08652208,
-    (const u32*)0x08652594,
-    (const u32*)0x08652994
+    sTitleIntroCollisionWarningObjGfx0,
+    sTitleIntroCollisionWarningObjGfx1,
+    sTitleIntroCollisionWarningObjGfx2,
+    sTitleIntroCollisionWarningObjGfx3,
+    sTitleIntroCollisionWarningObjGfx4,
+    sTitleIntroCollisionWarningObjGfx5
 };
 
-static u8 sBlob_79c474_79c5a4[] = INCBIN_U8("data/Blob_79c474_79c5a4.bin");
+static const u32* sTitleIntroGfxPointers_79c474[13] = {
+    sTitleIntroGfx_652bd4,
+    sTitleIntroGfx_653980,
+    sTitleIntroGfx_6546f4,
+    sTitleIntroGfx_6552a0,
+    sTitleIntroGfx_655f3c,
+    sTitleIntroGfx_656cd0,
+    sTitleIntroGfx_657408,
+    sTitleIntroGfx_6579c4,
+    sTitleIntroGfx_657d2c,
+    sTitleIntroGfx_657f60,
+    sTitleIntroGfx_658150,
+    sTitleIntroGfx_658468,
+    sTitleIntroGfx_658848
+};
+
+u8 sBlob_79c4a8_79c5a4[] = INCBIN_U8("data/Blob_79c4a8_79c5a4.bin");
 
 static u16** sMonologueTextPointers[LANGUAGE_COUNT] = {
     sMonologueTextPointersJapanese,

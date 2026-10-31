@@ -9,6 +9,7 @@
 extern const u32* sIntroSamusSittingBgGfxPointers[5];
 extern const u32* sTitleIntroCollisionWarningBgGfxPointers[5];
 extern const u32* sTitleIntroCollisionWarningObjGfxPointers[6];
+extern u8 sBlob_79c4a8_79c5a4[];
 extern const u16** sLocationTextPointers[LANGUAGE_COUNT];
 extern u16** sMessageTextPointers[LANGUAGE_COUNT];
 
