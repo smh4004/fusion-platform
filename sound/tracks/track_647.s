@@ -21,7 +21,7 @@ track_647:
 	.byte 0
 	.byte 170
 	.byte 0
-	.word 0x80a7d14
+	.word gVoiceGroup_a7d14
 	.word track_647_0
 
 .align 2

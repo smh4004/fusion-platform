@@ -71,7 +71,7 @@ track_107:
 	.byte 0
 	.byte 228
 	.byte 0
-	.word 0x80a682c
+	.word gVoiceGroup_a682c
 	.word track_107_0
 	.word track_107_1
 

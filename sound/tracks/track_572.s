@@ -175,7 +175,7 @@ track_572:
 	.byte 0
 	.byte 229
 	.byte 0
-	.word 0x80a7798
+	.word gVoiceGroup_a7798
 	.word track_572_0
 	.word track_572_1
 

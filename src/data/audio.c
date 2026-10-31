@@ -143,4 +143,4 @@ const MusicFunc_T sMusicCommandFunctionPointers[30] = {
     [EOT - FINE] = AudioCommand_EndOfTie
 };
 
-static const u8 sBlob_a5710_a8cdc[] = INCBIN_U8("data/Blob_a5710_a8cdc.bin");
+// The voice groups that followed here are in sound/voice_groups.s

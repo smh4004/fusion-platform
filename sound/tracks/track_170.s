@@ -101,7 +101,7 @@ track_170:
 	.byte 0
 	.byte 130
 	.byte 128
-	.word 0x80a64c0
+	.word gVoiceGroup_a64c0
 	.word track_170_0
 	.word track_170_1
 	.word track_170_2

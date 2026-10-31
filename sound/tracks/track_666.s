@@ -283,7 +283,7 @@ track_666:
 	.byte 0
 	.byte 178
 	.byte 0
-	.word 0x80a7f24
+	.word gVoiceGroup_a7f24
 	.word track_666_0
 	.word track_666_1
 

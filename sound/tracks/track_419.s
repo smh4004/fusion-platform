@@ -23,7 +23,7 @@ track_419:
 	.byte 0
 	.byte 151
 	.byte 0
-	.word 0x80a6d54
+	.word gVoiceGroup_a6d54
 	.word track_419_0
 
 .align 2

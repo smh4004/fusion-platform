@@ -373,7 +373,7 @@ track_23:
 	.byte 23
 	.byte 130
 	.byte 128
-	.word 0x80a61fc
+	.word gVoiceGroup_a61fc
 	.word track_23_0
 	.word track_23_1
 	.word track_23_2

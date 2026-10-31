@@ -30,7 +30,7 @@ track_715:
 	.byte 0
 	.byte 255
 	.byte 128
-	.word 0x80a8af4
+	.word gVoiceGroup_a8af4
 	.word track_715_0
 
 .align 2

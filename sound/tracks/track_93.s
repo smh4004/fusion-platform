@@ -629,7 +629,7 @@ track_93:
 	.byte 93
 	.byte 130
 	.byte 128
-	.word 0x80a64c0
+	.word gVoiceGroup_a64c0
 	.word track_93_0
 	.word track_93_1
 

@@ -1280,7 +1280,7 @@ track_584:
 	.byte 0
 	.byte 254
 	.byte 128
-	.word 0x80a8554
+	.word gVoiceGroup_a8554
 	.word track_584_0
 	.word track_584_1
 	.word track_584_2

@@ -22,7 +22,7 @@ track_455:
 	.byte 0
 	.byte 161
 	.byte 128
-	.word 0x80a8554
+	.word gVoiceGroup_a8554
 	.word track_455_0
 
 .align 2

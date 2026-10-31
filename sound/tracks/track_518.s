@@ -21,7 +21,7 @@ track_518:
 	.byte 0
 	.byte 251
 	.byte 128
-	.word 0x80a8554
+	.word gVoiceGroup_a8554
 	.word track_518_0
 
 .align 2

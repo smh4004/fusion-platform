@@ -113,7 +113,7 @@ track_650:
 	.byte 0
 	.byte 225
 	.byte 0
-	.word 0x80a7e10
+	.word gVoiceGroup_a7e10
 	.word track_650_0
 	.word track_650_1
 

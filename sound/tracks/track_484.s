@@ -60,7 +60,7 @@ track_484:
 	.byte 0
 	.byte 220
 	.byte 0
-	.word 0x80a81e8
+	.word gVoiceGroup_a81e8
 	.word track_484_0
 	.word track_484_1
 

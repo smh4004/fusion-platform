@@ -40,7 +40,7 @@ track_184:
 	.byte 0
 	.byte 130
 	.byte 0
-	.word 0x80a74c8
+	.word gVoiceGroup_a74c8
 	.word track_184_0
 
 .align 2

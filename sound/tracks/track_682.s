@@ -208,7 +208,7 @@ track_682:
 	.byte 0
 	.byte 228
 	.byte 0
-	.word 0x80a838c
+	.word gVoiceGroup_a838c
 	.word track_682_0
 	.word track_682_1
 

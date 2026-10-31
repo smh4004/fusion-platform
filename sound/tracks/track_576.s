@@ -21,7 +21,7 @@ track_576:
 	.byte 0
 	.byte 226
 	.byte 0
-	.word 0x80a7798
+	.word gVoiceGroup_a7798
 	.word track_576_0
 
 .align 2

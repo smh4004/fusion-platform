@@ -23,7 +23,7 @@ track_285:
 	.byte 0
 	.byte 251
 	.byte 0
-	.word 0x80a71ec
+	.word gVoiceGroup_a71ec
 	.word track_285_0
 
 .align 2

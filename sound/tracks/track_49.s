@@ -453,7 +453,7 @@ track_49:
 	.byte 49
 	.byte 130
 	.byte 128
-	.word 0x80a61fc
+	.word gVoiceGroup_a61fc
 	.word track_49_0
 	.word track_49_1
 	.word track_49_2

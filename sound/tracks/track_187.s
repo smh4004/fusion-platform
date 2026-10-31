@@ -57,7 +57,7 @@ track_187:
 	.byte 0
 	.byte 220
 	.byte 0
-	.word 0x80a74c8
+	.word gVoiceGroup_a74c8
 	.word track_187_0
 
 .align 2

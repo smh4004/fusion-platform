@@ -33,7 +33,7 @@ track_521:
 	.byte 0
 	.byte 251
 	.byte 128
-	.word 0x80a8554
+	.word gVoiceGroup_a8554
 	.word track_521_0
 	.word track_521_1
 

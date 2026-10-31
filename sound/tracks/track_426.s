@@ -30,7 +30,7 @@ track_426:
 	.byte 0
 	.byte 162
 	.byte 0
-	.word 0x80a6d54
+	.word gVoiceGroup_a6d54
 	.word track_426_0
 
 .align 2

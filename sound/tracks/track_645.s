@@ -135,7 +135,7 @@ track_645:
 	.byte 0
 	.byte 182
 	.byte 0
-	.word 0x80a7d14
+	.word gVoiceGroup_a7d14
 	.word track_645_0
 	.word track_645_1
 

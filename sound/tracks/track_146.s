@@ -124,7 +124,7 @@ track_146:
 	.byte 0
 	.byte 220
 	.byte 0
-	.word 0x80a682c
+	.word gVoiceGroup_a682c
 	.word track_146_0
 	.word track_146_1
 

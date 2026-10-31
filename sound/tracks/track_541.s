@@ -36,7 +36,7 @@ track_541:
 	.byte 0
 	.byte 180
 	.byte 0
-	.word 0x80a808c
+	.word gVoiceGroup_a808c
 	.word track_541_0
 	.word track_541_1
 

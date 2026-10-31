@@ -523,7 +523,7 @@ track_480:
 	.byte 0
 	.byte 254
 	.byte 0
-	.word 0x80a808c
+	.word gVoiceGroup_a808c
 	.word track_480_0
 	.word track_480_1
 	.word track_480_2

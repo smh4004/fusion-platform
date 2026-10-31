@@ -792,7 +792,7 @@ track_24:
 	.byte 24
 	.byte 130
 	.byte 128
-	.word 0x80a5fbc
+	.word gVoiceGroup_a5fbc
 	.word track_24_0
 	.word track_24_1
 	.word track_24_2

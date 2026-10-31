@@ -19,7 +19,7 @@ track_104:
 	.byte 0
 	.byte 162
 	.byte 0
-	.word 0x80a682c
+	.word gVoiceGroup_a682c
 	.word track_104_0
 
 .align 2

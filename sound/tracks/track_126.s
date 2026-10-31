@@ -22,7 +22,7 @@ track_126:
 	.byte 0
 	.byte 164
 	.byte 0
-	.word 0x80a682c
+	.word gVoiceGroup_a682c
 	.word track_126_0
 
 .align 2

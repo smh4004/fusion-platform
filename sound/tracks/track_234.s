@@ -33,7 +33,7 @@ track_234:
 	.byte 0
 	.byte 197
 	.byte 0
-	.word 0x80a6af0
+	.word gVoiceGroup_a6af0
 	.word track_234_0
 	.word track_234_1
 

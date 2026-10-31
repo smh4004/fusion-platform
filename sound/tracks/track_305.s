@@ -114,7 +114,7 @@ track_305:
 	.byte 0
 	.byte 220
 	.byte 0
-	.word 0x80a82f0
+	.word gVoiceGroup_a82f0
 	.word track_305_0
 	.word track_305_1
 

@@ -214,7 +214,7 @@ track_675:
 	.byte 0
 	.byte 200
 	.byte 0
-	.word 0x80a808c
+	.word gVoiceGroup_a808c
 	.word track_675_0
 	.word track_675_1
 

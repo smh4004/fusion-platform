@@ -3631,7 +3631,7 @@ track_91:
 	.byte 91
 	.byte 130
 	.byte 128
-	.word 0x80a62f8
+	.word gVoiceGroup_a62f8
 	.word track_91_0
 	.word track_91_1
 	.word track_91_2

@@ -99,7 +99,7 @@ track_636:
 	.byte 0
 	.byte 180
 	.byte 0
-	.word 0x80a7d14
+	.word gVoiceGroup_a7d14
 	.word track_636_0
 	.word track_636_1
 

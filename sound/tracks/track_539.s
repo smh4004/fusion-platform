@@ -122,7 +122,7 @@ track_539:
 	.byte 0
 	.byte 229
 	.byte 0
-	.word 0x80a826c
+	.word gVoiceGroup_a826c
 	.word track_539_0
 	.word track_539_1
 

@@ -61,7 +61,7 @@ track_659:
 	.byte 0
 	.byte 228
 	.byte 0
-	.word 0x80a7e10
+	.word gVoiceGroup_a7e10
 	.word track_659_0
 	.word track_659_1
 
