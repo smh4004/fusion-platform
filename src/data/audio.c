@@ -110,10 +110,14 @@ const u32 sDma1ControlValue = C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_DEST_FIXED,
 static const u16 sAudio_a5694 = DMA_ENABLE | DMA_START_SPECIAL | DMA_REPEAT | DMA_32BIT;
 static const u16 sAudio_a5696 = DMA_ENABLE | DMA_INTR_ENABLE | DMA_START_SPECIAL | DMA_REPEAT | DMA_32BIT;
 
+// In asm/audio_internal.s
+void unk_4a3c(struct TrackVariables* pVariables);
+void unk_4a7c(struct TrackVariables* pVariables);
+
 const MusicFunc_T sMusicCommandFunctionPointers[30] = {
     [FINE - FINE] = Music_EmptyCommand,
-    [GOTO - FINE] = (MusicFunc_T)0x8004a3d, // AudioCommand_Goto
-    [PATT - FINE] = (MusicFunc_T)0x8004a7d, // AudioCommand_PatternPlay
+    [GOTO - FINE] = unk_4a3c, // AudioCommand_Goto, still in asm/audio_internal.s
+    [PATT - FINE] = unk_4a7c, // AudioCommand_PatternPlay, still in asm/audio_internal.s
     [PEND - FINE] = AudioCommand_PatternEnd,
     [REPT - FINE] = AudioCommand_Repeat,
     [5] = Music_EmptyCommand,
