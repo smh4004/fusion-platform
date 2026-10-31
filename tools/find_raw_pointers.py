@@ -41,6 +41,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("point", nargs="?", default="src/data/generic_data.o(.rodata)")
     ap.add_argument("--pad", default="0x100")
+    ap.add_argument("--any", action="store_true", help="count pointers to any address past the cut, not only symbol starts (noisy for large regions)")
     args = ap.parse_args()
     pad = int(args.pad, 0)
 
@@ -96,7 +97,7 @@ def main() -> int:
             continue  # linker-relocated: fine
         # only count words that point exactly at a known symbol (Thumb bit
         # allowed); anything else that didn't move is most likely plain data
-        if w2 == w and ((w in starts) or ((w & ~1) in starts and w & 1)):
+        if w2 == w and (args.any or (w in starts) or ((w & ~1) in starts and w & 1)):
             hits.append((0x08000000 + off, w, owner(0x08000000 + off)))
 
     by_owner = collections.Counter(o for _, _, o in hits)

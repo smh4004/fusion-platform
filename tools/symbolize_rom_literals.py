@@ -7,9 +7,9 @@
 A literal is only rewritten when the built ELF (run `make` first) has a
 global symbol starting exactly at that address (the Thumb bit is ignored
 for code). Static symbols are skipped; make them global first if needed.
-The cast is dropped when the symbol already has a compatible type, i.e. for
-functions in a function-pointer table and for arrays; otherwise it is kept
-around the symbol. Blobs (sBlob_*) are never used as targets: those need
+For functions in a function-pointer table the cast is dropped; for data the
+literal becomes `(cast)&symbol`, which is the same address for arrays and
+the right one for plain objects. Blobs (sBlob_*) are never used as targets: those need
 real labels first. The ROM must still match afterwards.
 
 usage: symbolize_rom_literals.py <file.c> [...]  [--dry-run]
@@ -63,7 +63,10 @@ def main() -> int:
             if is_func and kind == "T":
                 return name
             if kind in "RD":
-                return f"({cast}){name}"
+                # take the address explicitly: for arrays &x == x, and for a
+                # plain object (e.g. a pointer variable) the address is what the
+                # literal meant
+                return f"({cast})&{name}"
             used.pop()
             return m.group(0)
 

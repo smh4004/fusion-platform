@@ -1,0 +1,8 @@
+# Quick check: boot, skip the title intro, reach file select.
+wait 600
+hold START 4
+wait 400
+hold START 4
+until8 {gMainGameMode} 7 600
+wait 30
+shot {out}/boot_file_select.ppm
