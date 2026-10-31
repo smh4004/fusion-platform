@@ -26514,19 +26514,11 @@
   },
   {
     "path": "new_file_intro/samus_helmet_closeup.tm.lz",
-    "count": "0xAC",
+    "count": "0x1A2",
     "addr": {
       "us": "0x598190"
     },
     "size": 4
-  },
-  {
-    "path": "Blob_598440_598818.bin",
-    "count": "0x3D8",
-    "addr": {
-      "us": "0x598440"
-    },
-    "size": 1
   },
   {
     "path": "new_file_intro/samus_helmet_closeup.pal",
@@ -27202,35 +27194,19 @@
   },
   {
     "path": "new_file_intro/samus_sitting.tm.lz",
-    "count": "0xAB",
+    "count": "0x1A1",
     "addr": {
       "us": "0x605684"
     },
     "size": 4
   },
   {
-    "path": "Blob_605930_605d08.bin",
-    "count": "0x3D8",
-    "addr": {
-      "us": "0x605930"
-    },
-    "size": 1
-  },
-  {
     "path": "menus/title_screen/space_background.gfx.lz",
-    "count": "0x33E",
+    "count": "0xCC6",
     "addr": {
       "us": "0x605D08"
     },
     "size": 4
-  },
-  {
-    "path": "Blob_606a00_609020.bin",
-    "count": "0x2620",
-    "addr": {
-      "us": "0x606A00"
-    },
-    "size": 1
   },
   {
     "path": "new_file_intro/drifting_into_asteroids_bg.pal",
@@ -27250,19 +27226,11 @@
   },
   {
     "path": "menus/title_screen/space_background.tm.lz",
-    "count": "0xAC",
+    "count": "0x1A2",
     "addr": {
       "us": "0x609220"
     },
     "size": 4
-  },
-  {
-    "path": "Blob_6094d0_6098a8.bin",
-    "count": "0x3D8",
-    "addr": {
-      "us": "0x6094D0"
-    },
-    "size": 1
   },
   {
     "path": "new_file_intro/space_bg.tm.lz",
