@@ -156,6 +156,17 @@ check: all
 	$(MSG) SHA1SUM $(SHA1FILE)
 	$Q$(SHA1SUM) -c $(SHA1FILE)
 
+.PHONY: smoke
+smoke: all
+	$(MSG) SMOKE $(TARGET)
+	$Q$(MAKE) -s -C tools/smoketest
+	$Q$(PYTHON) tools/smoketest/run.py --rom $(TARGET) --elf $(ELF)
+
+.PHONY: shift-test
+shift-test: all
+	$Q$(MAKE) -s -C tools/smoketest
+	$Qtools/smoketest/shift_test.sh 0x100 "src/agbmain.o(.text)" "src/data/rooms_data.o(.rodata)"
+
 .PHONY: dump
 dump: $(DUMPS)
 
@@ -207,6 +218,8 @@ help:
 	@echo 'Targets:'
 	@echo '  all: build the ROM'
 	@echo '  check: checksum the ROM'
+	@echo '  smoke: play a new game in headless mGBA (needs libmgba-dev)'
+	@echo '  shift-test: build with inserted padding and run the smoke test'
 	@echo '  dump: dump the ROMs'
 	@echo '  diff: compare the ROM with the original'
 	@echo '  clean: remove the ROM and intermediate files'

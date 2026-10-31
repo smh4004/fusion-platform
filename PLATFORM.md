@@ -10,6 +10,8 @@ The `platform` branch is the one to use. `main` mirrors upstream untouched. Othe
 - **Assets can change size.** Arrays filled from data files take their size from the file, so an edited graphic that compresses differently still builds.
 - **Rebuilds that notice edits.** Changing a header or anything in `data/` rebuilds exactly the files that use it.
 - **Symbols instead of addresses.** Every enemy's AI function and most sprite graphics/palettes are referenced by name, so tables can be extended like normal code.
+- **Shiftable ROM.** Hard-coded addresses have been replaced with symbols across code, data, music and graphics tables.
+- **Automated play test.** `make smoke` boots the game in headless mGBA, starts a new file, plays the intro and checks Samus is in the first room.
 - **More decompiled code**, starting with the gunship ending.
 
 ## Quick start
@@ -31,9 +33,9 @@ Edit files in `assets/`, run `PYTHONPATH=tools/fusiontool python3 -m fusiontool 
 - **Keep `make check` passing** on `main`-based branches. Platform changes that intentionally change the ROM must be behind an option and off by default.
 - **Clean room.** The upstream rule applies: don't consult Nintendo's code, leaked or otherwise. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Status of moving things around
+## Moving things around
 
-The ROM isn't fully shiftable yet: some code and data still use fixed addresses, so making an asset bigger can break things placed after it. Remaining work is tracked in PROGRESS.md.
+Everything after the ROM header can change size or move: code, data and assets. Inserting padding anywhere from the startup code onward, or growing an edited graphic, still plays from boot through the intro into the first room (`make shift-test`). The test doesn't yet cover saves, other sectors or late-game events, so report anything that breaks after a size change. See PROGRESS.md for details.
 
 ## Credits
 
