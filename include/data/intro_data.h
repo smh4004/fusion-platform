@@ -28,7 +28,7 @@ extern const struct FrameData sOam_598088[5];
 extern const u16 sIntroSamusShipPal[5 * PAL_ROW];
 extern const u16 sPal_598150[2 * PAL_ROW];
 
-extern const u32 sIntroSamusHelmetCloseupTilemap[172];
+extern const u32 sIntroSamusHelmetCloseupTilemap[418];
 
 extern const u16 sIntroSamusHelmetCloseupPal[4 * PAL_ROW];
 
@@ -332,14 +332,14 @@ extern const u32 sIntroLandingOnBslHangarTilemap[396];
 
 extern const u32 sIntroSamusSittingGfx[4818];
 extern const u16 sIntroSamusSittingPal[16 * PAL_ROW];
-extern const u32 sIntroSamusSittingTilemap[171];
+extern const u32 sIntroSamusSittingTilemap[417];
 
-extern const u32 sTitleScreenSpaceBackgroundGfx[830];
+extern const u32 sTitleScreenSpaceBackgroundGfx[3270];
 
 extern const u16 sIntroSamusDriftingIntoAsteroidsBgPal[8 * PAL_ROW];
 extern const u16 sTitleScreenSpaceBackgroundPal[8 * PAL_ROW];
 
-extern const u32 sTitleScreenSpaceBackgroundTilemap[172];
+extern const u32 sTitleScreenSpaceBackgroundTilemap[418];
 
 extern const struct FrameData sOam_60ac08[2];
 extern const struct FrameData sOam_60ac18[2];
