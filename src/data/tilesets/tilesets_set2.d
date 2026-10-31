@@ -1,0 +1,24 @@
+src/data/tilesets/tilesets_set2.s src/data/tilesets/tilesets_set2.d: data/tilesets/2.gfx.lz data/tilesets/56.gfx.lz data/tilesets/13.gfx.lz data/tilesets/28.gfx.lz data/tilesets/4.gfx.lz data/tilesets/51_bg.gfx.lz data/tilesets/8_bg.gfx.lz data/tilesets/2_bg.gfx.lz data/tilesets/2.tm data/tilesets/56.tm data/tilesets/13.tm data/tilesets/28.tm data/tilesets/4.tm data/tilesets/2.pal data/tilesets/69.pal data/tilesets/13.pal data/tilesets/animated_palettes/17.pal data/tilesets/38.pal data/tilesets/4.pal include/data/tilesets/tilesets_set2.h include/macros.h include/types.h include/config.h
+data/tilesets/2.gfx.lz:
+data/tilesets/56.gfx.lz:
+data/tilesets/13.gfx.lz:
+data/tilesets/28.gfx.lz:
+data/tilesets/4.gfx.lz:
+data/tilesets/51_bg.gfx.lz:
+data/tilesets/8_bg.gfx.lz:
+data/tilesets/2_bg.gfx.lz:
+data/tilesets/2.tm:
+data/tilesets/56.tm:
+data/tilesets/13.tm:
+data/tilesets/28.tm:
+data/tilesets/4.tm:
+data/tilesets/2.pal:
+data/tilesets/69.pal:
+data/tilesets/13.pal:
+data/tilesets/animated_palettes/17.pal:
+data/tilesets/38.pal:
+data/tilesets/4.pal:
+include/data/tilesets/tilesets_set2.h:
+include/macros.h:
+include/types.h:
+include/config.h:

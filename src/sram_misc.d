@@ -1,0 +1,19 @@
+src/sram_misc.s src/sram_misc.d: include/sram_misc.h include/gba.h include/sram/sram.h include/types.h include/data/generic_data.h include/data/sram_pointers.h include/structs/save_file.h include/gba/memory.h include/macros.h include/config.h include/io.h include/gba/audio.h include/gba/display.h include/gba/dma.h include/gba/interrupt.h include/gba/keys.h include/gba/waitstate.h include/gba/cable_link.h
+include/sram_misc.h:
+include/gba.h:
+include/sram/sram.h:
+include/types.h:
+include/data/generic_data.h:
+include/data/sram_pointers.h:
+include/structs/save_file.h:
+include/gba/memory.h:
+include/macros.h:
+include/config.h:
+include/io.h:
+include/gba/audio.h:
+include/gba/display.h:
+include/gba/dma.h:
+include/gba/interrupt.h:
+include/gba/keys.h:
+include/gba/waitstate.h:
+include/gba/cable_link.h:

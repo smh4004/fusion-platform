@@ -1,0 +1,19 @@
+src/data/menus/pause_screen_misc_data.s src/data/menus/pause_screen_misc_data.d: data/Blob_5760e8_576142.bin data/Blob_576217_576234.bin data/Blob_5766D4_5766e0.bin data/Blob_5766e4_5767f0.bin data/Blob_576802_581510.bin data/Blob_58217b_58225c.bin include/data/menus/pause_screen_misc_data.h include/macros.h include/constants/menus/pause_screen.h include/types.h include/config.h include/gba/memory.h include/constants/connection.h include/constants/event.h include/constants/menus/pause_debug.h include/constants/minimap.h include/constants/navigation.h include/constants/samus.h
+data/Blob_5760e8_576142.bin:
+data/Blob_576217_576234.bin:
+data/Blob_5766D4_5766e0.bin:
+data/Blob_5766e4_5767f0.bin:
+data/Blob_576802_581510.bin:
+data/Blob_58217b_58225c.bin:
+include/data/menus/pause_screen_misc_data.h:
+include/macros.h:
+include/constants/menus/pause_screen.h:
+include/types.h:
+include/config.h:
+include/gba/memory.h:
+include/constants/connection.h:
+include/constants/event.h:
+include/constants/menus/pause_debug.h:
+include/constants/minimap.h:
+include/constants/navigation.h:
+include/constants/samus.h:
