@@ -23,6 +23,7 @@
 #include "structs/menus/pause_screen.h"
 #include "structs/minimap.h"
 #include "structs/samus.h"
+extern const u8 sPointerTable_79ce10[];
 
 static const u32* sMinimapData[MINIMAP_COUNT] = {
     [MINIMAP_MAIN_DECK] = sMainDeckMinimap,
@@ -93,7 +94,7 @@ static u8 sPauseScreenTankCheckMarkOamInfo[TANK_NUM_COUNT][PAUSE_OAM_INFO_COUNT]
     }
 };
 
-static const u8* sPauseDebugItemFlagsPointers[5] = {
+const u8* sPauseDebugItemFlagsPointers[5] = {
     sPauseDebugBeamFlags,
     sPauseDebugMissileFlags,
     sPauseDebugBombFlags,
@@ -251,24 +252,24 @@ static const struct FrameData* sPauseScreenOamPointers[PAUSE_OAM_ID_COUNT] = {
     [PAUSE_OAM_ID_BSL_DIAGRAM_350_DEGREES] = sPauseScreenOam_BslDiagram350Degrees,
 };
 
-static u16** sNavConversationTextPointers[LANGUAGE_COUNT] = {
-    [LANGUAGE_JAPANESE] = (u16**)0x879CE10,
-    [LANGUAGE_HIRAGANA] = (u16**)0x879D194,
-    [LANGUAGE_ENGLISH] = (u16**)0x879D50C,
-    [LANGUAGE_GERMAN] = (u16**)0x879D890,
-    [LANGUAGE_FRENCH] = (u16**)0x879DC14,
-    [LANGUAGE_ITALIAN] = (u16**)0x879DF98,
-    [LANGUAGE_SPANISH] = (u16**)0x879E31C
+u16** sNavConversationTextPointers[LANGUAGE_COUNT] = {
+    [LANGUAGE_JAPANESE] = (u16**)(&sPointerTable_79ce10),
+    [LANGUAGE_HIRAGANA] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x384),
+    [LANGUAGE_ENGLISH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x6fc),
+    [LANGUAGE_GERMAN] = (u16**)((const u8*)&sPointerTable_79ce10 + 0xa80),
+    [LANGUAGE_FRENCH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0xe04),
+    [LANGUAGE_ITALIAN] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x1188),
+    [LANGUAGE_SPANISH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x150c)
 };
 
-static u16** sPauseScreenTextPointers[LANGUAGE_COUNT] = {
-    [LANGUAGE_JAPANESE] = (u16**)0x879CFD8,
-    [LANGUAGE_HIRAGANA] = (u16**)0x879D35C,
-    [LANGUAGE_ENGLISH] = (u16**)0x879D6D4,
-    [LANGUAGE_GERMAN] = (u16**)0x879DA58,
-    [LANGUAGE_FRENCH] = (u16**)0x879DDDC,
-    [LANGUAGE_ITALIAN] = (u16**)0x879E160,
-    [LANGUAGE_SPANISH] = (u16**)0x879E4E4
+u16** sPauseScreenTextPointers[LANGUAGE_COUNT] = {
+    [LANGUAGE_JAPANESE] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x1c8),
+    [LANGUAGE_HIRAGANA] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x54c),
+    [LANGUAGE_ENGLISH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x8c4),
+    [LANGUAGE_GERMAN] = (u16**)((const u8*)&sPointerTable_79ce10 + 0xc48),
+    [LANGUAGE_FRENCH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0xfcc),
+    [LANGUAGE_ITALIAN] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x1350),
+    [LANGUAGE_SPANISH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x16d4)
 };
 
 /**

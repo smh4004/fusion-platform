@@ -26,4 +26,4 @@ const void* const sUnk_582280[2] = {
     EWRAM_SRAM + 0x7080
 };
 
-static const u8 sBlob_582288_58b3cc[] = INCBIN_U8("data/Blob_582288_58b3cc.bin");
+const u8 sBlob_582288_58b3cc[] = INCBIN_U8("data/Blob_582288_58b3cc.bin");

@@ -5,7 +5,7 @@
 
 // TODO: The start of this file needs to be 4-byte aligned, but sPauseScreenAreaNameOamIds is not.
 // When this blob is removed, sPauseScreenAreaNameOamIds cannot be the first item
-static const u8 sBlob_5760e8_576142[] = INCBIN_U8("data/Blob_5760e8_576142.bin");
+const u8 sBlob_5760e8_576142[] = INCBIN_U8("data/Blob_5760e8_576142.bin");
 
 const u8 sPauseScreenAreaNameOamIds[AREA_NORMAL_COUNT][2] = {
     [AREA_MAIN_DECK] = { PAUSE_OAM_ID_MAIN_DECK_TEXT, PAUSE_OAM_ID_MAIN_DECK_TEXT_APPEARING },
@@ -147,7 +147,7 @@ const u8 sMaintainedInputDelays[7] = {
     15, 10, 6, 4, 4, 4, 2,
 };
 
-static const u8 sBlob_576217_576234[] = INCBIN_U8("data/Blob_576217_576234.bin");
+const u8 sBlob_576217_576234[] = INCBIN_U8("data/Blob_576217_576234.bin");
 
 const u8 sCharacterWidths[1184] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
@@ -226,14 +226,14 @@ const u8 sCharacterWidths[1184] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
 };
 
-static const u8 sBlob_5766D4_5766e0[] = INCBIN_U8("data/Blob_5766D4_5766e0.bin");
+const u8 sBlob_5766D4_5766e0[] = INCBIN_U8("data/Blob_5766D4_5766e0.bin");
 
 const u8 sNavConversationTextBoxCursorYPositions[NAV_TEXT_BOX_COUNT][2] = {
     [NAV_TEXT_BOX_BOTTOM] = { 128, 150 },
     [NAV_TEXT_BOX_TOP] = { 25, 47 }
 };
 
-static const u8 sBlob_5766e4_5767f0[] = INCBIN_U8("data/Blob_5766e4_5767f0.bin");
+const u8 sBlob_5766e4_5767f0[] = INCBIN_U8("data/Blob_5766e4_5767f0.bin");
 
 const u8 sNavConversationPortraitOamIds[6][3] = {
     [0] = {
@@ -268,7 +268,7 @@ const u8 sNavConversationPortraitOamIds[6][3] = {
     }
 };
 
-static const u8 sBlob_576802_581510[] = INCBIN_U8("data/Blob_576802_581510.bin");
+const u8 sBlob_576802_581510[] = INCBIN_U8("data/Blob_576802_581510.bin");
 
 const u8 sPauseDebugEventNames[EVENT_END][EVENT_NAME_SIZE] = {
     [EVENT_NONE] = SHIFT_JIS("TOHOKANKO   トクベツホカンコヘ ムカエ  "),
@@ -530,4 +530,4 @@ const u8 sDebugSectionInfo[PAUSE_DEBUG_SECTION_END][5] = {
     },
 };
 
-static const u8 sBlob_58217b_58225c[] = INCBIN_U8("data/Blob_58217b_58225c.bin");
+const u8 sBlob_58217b_58225c[] = INCBIN_U8("data/Blob_58217b_58225c.bin");

@@ -15918,7 +15918,7 @@ const u16 sIntroSamusRebornBgPal[] = INCBIN_U16("data/new_file_intro/samus_rebor
 const u32 sIntroSamusRebornBgTopTilemap[] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_top.tm.lz");
 const u32 sIntroSamusRebornBgBottomTilemap[] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_bottom.tm.lz");
 
-static const u8 sBlob_5dfd6c_5e116c[] = INCBIN_U8("data/Blob_5dfd6c_5e116c.bin");
+const u8 sBlob_5dfd6c_5e116c[] = INCBIN_U8("data/Blob_5dfd6c_5e116c.bin");
 
 const u32 sIntroApproachingBslObjGfx[] = INCBIN_U32("data/new_file_intro/approaching_bsl_obj.gfx.lz");
 
@@ -21110,7 +21110,7 @@ const u32 sIntroArrivingAtBslSpaceMapTilemap[] = INCBIN_U32("data/new_file_intro
 const u32 sIntroSamusMonologueBgTilemap[] = INCBIN_U32("data/new_file_intro/samus_monologue_bg.tm.lz");
 const u32 sIntroTilemap_5f65d8[] = INCBIN_U32("data/new_file_intro/5f65d8.tm.lz");
 
-static const u8 sBlob_5f6990_5f7190[] = INCBIN_U8("data/Blob_5f6990_5f7190.bin");
+const u8 sBlob_5f6990_5f7190[] = INCBIN_U8("data/Blob_5f6990_5f7190.bin");
 
 const u32 sIntroLandingOnBslBgGfx[] = INCBIN_U32("data/new_file_intro/landing_on_bsl_bg.gfx.lz");
 const u32 sIntroLandingOnBslObjGfx[] = INCBIN_U32("data/new_file_intro/landing_on_bsl_obj.gfx.lz");
@@ -24567,7 +24567,7 @@ const struct FrameData sIntroNextPageArrowOam[5] = {
 
 const u16 sNextPageArrowPal[] = INCBIN_U16("data/new_file_intro/next_page_arrow.pal");
 
-static const u8 sBlob_6131c8_63a19c[] = INCBIN_U8("data/Blob_6131c8_63a19c.bin");
+const u8 sBlob_6131c8_63a19c[] = INCBIN_U8("data/Blob_6131c8_63a19c.bin");
 
 const u16 sCutsceneTextNone[2] = {
     CHAR_TERMINATOR, CHAR_TERMINATOR
@@ -24640,7 +24640,7 @@ const u16 sTitleIntroSamusSittingBgPal[] = INCBIN_U16("data/title_intro/samus_si
 const u32 sTitleIntroCollisionWarningBgTilemap[] = INCBIN_U32("data/title_intro/collision_warning_bg.tm.lz");
 const u16 sTitleIntroCollisionWarningBgPal[] = INCBIN_U16("data/title_intro/collision_warning_bg.pal");
 
-static const u8 sBlob_659ba4_65c268[] = INCBIN_U8("data/Blob_659ba4_65c268.bin");
+const u8 sBlob_659ba4_65c268[] = INCBIN_U8("data/Blob_659ba4_65c268.bin");
 
 const u16 sTitleIntroCollisionWarningObjPal[] = INCBIN_U16("data/title_intro/collision_warning_obj.pal");
 

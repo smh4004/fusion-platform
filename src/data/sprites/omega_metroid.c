@@ -3313,7 +3313,7 @@ const u16 sGunshipEndTakingOffScaling[68] = {
     0x1EB, 0x1EB, 0x1EB, 0x1EB
 };
 
-static const u8 sBlob_39ad58_39e638[] = INCBIN_U8("data/Blob_39ad58_39e638.bin");
+const u8 sBlob_39ad58_39e638[] = INCBIN_U8("data/Blob_39ad58_39e638.bin");
 
 static const u16 sGunshipEndOam_39eb38_Frame0[OAM_DATA_SIZE(13)] = {
     13,
@@ -3781,4 +3781,4 @@ const struct FrameData sGunshipEndOam_39ec78[3] = {
     [2] = FRAME_DATA_TERMINATOR
 };
 
-static const u8 sBlob_39ec90_39f4b0[] = INCBIN_U8("data/Blob_39ec90_39f4b0.bin");
+const u8 sBlob_39ec90_39f4b0[] = INCBIN_U8("data/Blob_39ec90_39f4b0.bin");
