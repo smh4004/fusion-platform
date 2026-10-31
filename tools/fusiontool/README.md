@@ -35,7 +35,11 @@ make                                     # rebuilds just what uses those files
 
 ## Rooms
 
-Each room is one Tiled map with a CSV layer per room layer. Cell values are the game's 16-bit tile values plus one (Tiled uses 0 for "empty"). Metatile pictures aren't rendered yet, so Tiled shows the cells as numbers: copy and paste regions, or edit the CSV. Room width and height are set in `src/data/rooms/<area>/<room>.c` and can't be changed from the map yet.
+Each room is one Tiled map with a layer per room layer: `clipdata` (collision), `bg0`, `bg1` and `bg2`. Open `assets/rooms/<area>/<room>.tmx` in Tiled and paint with the room's tileset.
+
+`extract` renders every room tileset from the built ROM (`make` first) into `assets/tilesets/tileset_<n>.png` with a matching `.tsx`, exactly as the game composes its 16x16 metatiles. The clipdata layer uses `clipdata.tsx`, labelled squares showing each collision value in hex.
+
+Room width and height are set in `src/data/rooms/<area>/<room>.c` and can't be changed from the map yet. Keep each layer's `fusion_gid_base` property as it is; it's how values map back to the game's numbers.
 
 ## How the matching recompression works
 

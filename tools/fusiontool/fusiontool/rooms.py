@@ -5,10 +5,11 @@ Each room's layers (clipdata, BG0, BG1, BG2) live in data/rooms/<area>/
 the INCBIN in src/data/rooms/<area>/<room>.c. A room becomes one Tiled map
 (assets/rooms/<area>/<room>.tmx) with a CSV layer per room layer.
 
-Values in the map are the game's 16-bit tile values plus one (Tiled
-reserves 0 for "empty"). Metatile pictures aren't rendered yet, so for now
-a map shows numbers; edit with Tiled's "Select Same Tile" / stamp tools or
-any text editor. Room size is fixed by the C source for now.
+BG layers show the room's tileset (rendered by tilesets.py into
+assets/tilesets/tileset_<n>.png/.tsx) and the clipdata layer shows a
+labelled collision tileset. A cell holds the game's 16-bit value plus the
+layer's first tile ID (stored in the layer's fusion_gid_base property), so
+a round trip is exact. Room size is fixed by the C source for now.
 """
 from __future__ import annotations
 
@@ -33,22 +34,37 @@ def find_rooms(src_root: Path = Path("src/data/rooms")) -> dict:
     return rooms
 
 
-def export_room(key: str, layers: dict, out: Path) -> None:
+BG_TILES = 1024   # metatiles in a rendered room tileset
+CLIP_FIRST_GID = 1 + BG_TILES
+
+
+def export_room(key: str, layers: dict, out: Path, tileset: int | None = None) -> None:
     w, h = next(iter(layers.values()))[1:]
     m = ET.Element("map", version="1.10", orientation="orthogonal", renderorder="right-down",
                    width=str(w), height=str(h), tilewidth="16", tileheight="16", infinite="0",
                    nextlayerid=str(len(layers) + 1), nextobjectid="1")
     props = ET.SubElement(m, "properties")
     ET.SubElement(props, "property", name="fusion_room", value=key)
+    depth = len(Path(key).parts)  # rooms/<area>/<room>.tmx -> ../../tilesets
+    up = "../" * depth
+    if tileset is not None:
+        ET.SubElement(m, "tileset", firstgid="1", source=f"{up}tilesets/tileset_{tileset}.tsx")
+    ET.SubElement(m, "tileset", firstgid=str(CLIP_FIRST_GID), source=f"{up}tilesets/clipdata.tsx")
     for lid, layer in enumerate([l for l in LAYER_ORDER if l in layers], start=1):
         path, lw, lh = layers[layer]
         raw = path.read_bytes()
         tiles, used = rle.decode(raw, lw, lh)
         le = ET.SubElement(m, "layer", id=str(lid), name=layer, width=str(lw), height=str(lh))
+        base = CLIP_FIRST_GID if layer == "clipdata" else 1
         lp = ET.SubElement(le, "properties")
         ET.SubElement(lp, "property", name="fusion_tail", value=raw[used:].hex())
-        rows = [",".join(str(t + 1) for t in tiles[y * lw:(y + 1) * lw]) for y in range(lh)]
+        ET.SubElement(lp, "property", name="fusion_gid_base", type="int", value=str(base))
+        rows = [",".join(str(t + base) for t in tiles[y * lw:(y + 1) * lw]) for y in range(lh)]
         ET.SubElement(le, "data", encoding="csv").text = "\n" + ",\n".join(rows) + "\n"
+    # Tiled wants tilesets before layers
+    for ts in m.findall("tileset"):
+        m.remove(ts)
+        m.insert(1, ts)
     out.parent.mkdir(parents=True, exist_ok=True)
     ET.indent(m)
     ET.ElementTree(m).write(out, encoding="UTF-8", xml_declaration=True)
@@ -64,10 +80,12 @@ def build_room(tmx: Path) -> dict:
         vals = [int(v) for v in le.find("data").text.replace("\n", "").split(",") if v.strip()]
         if len(vals) != w * h:
             raise ValueError(f"{tmx} layer {name}: expected {w * h} tiles, found {len(vals)}")
-        tiles = [max(v, 1) - 1 for v in vals]
-        tail = ""
+        tail, base = "", 1
         for p in le.iter("property"):
             if p.get("name") == "fusion_tail":
                 tail = p.get("value")
+            if p.get("name") == "fusion_gid_base":
+                base = int(p.get("value"))
+        tiles = [max(v - base, 0) for v in vals]
         out[name] = rle.encode(tiles) + bytes.fromhex(tail)
     return out

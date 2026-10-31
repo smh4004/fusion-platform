@@ -43,11 +43,27 @@ def cmd_extract(args) -> int:
         palette = _guess_palette(p) if out.suffix == ".png" else None
         assets.export(p, out, palette, args.width)
         n += 1
+    try:
+        from . import tilesets
+        rom = tilesets.Rom()
+        print(f"rendered {tilesets.export_all(args.assets, rom)} tilesets")
+        by_addr = tilesets.room_tilesets(rom)
+    except (FileNotFoundError, OSError, KeyError) as ex:
+        print(f"  (tileset previews skipped: {ex}; run make first)")
+        by_addr = {}
+    db = {e["path"]: int(e["addr"]["us"], 16) for e in __import__("json").load(open("database.json")) if "us" in e["addr"]}
     for key, layers in rooms.find_rooms().items():
         out = args.assets / "rooms" / f"{key}.tmx"
         if out.exists() and not args.force:
             continue
-        rooms.export_room(key, layers, out)
+        tileset = None
+        for layer in ("bg1", "bg2", "bg0"):
+            if layer in layers:
+                addr = db.get(str(layers[layer][0])[len("data/"):])
+                if addr is not None and (addr - 2) in by_addr:
+                    tileset = by_addr[addr - 2]
+                    break
+        rooms.export_room(key, layers, out, tileset)
         n += 1
     print(f"extracted {n} assets into {args.assets}/")
     return 0
