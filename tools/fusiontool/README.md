@@ -7,6 +7,7 @@ Turns the decomp's raw ROM data into files you can edit with normal tools, and b
 | `*.gfx` (4bpp tiles) | `*.gfx.png` (indexed PNG) | Aseprite, GIMP, Usenti, any palette-aware editor |
 | `*.gfx.lz` (LZ77-compressed tiles) | `*.gfx.png` | same; recompressed on build |
 | `*.pal` (BGR555) | `*.pal` (JASC-PAL text) | most pixel-art tools, or a text editor |
+| `rooms/<area>/<room>_{clipdata,bg0,bg1,bg2}.rle` | `rooms/<area>/<room>.tmx` (one layer each) | [Tiled](https://www.mapeditor.org/) or a text editor |
 
 Both `data/` and `assets/` are git-ignored. They're generated from your own ROM and must never be committed.
 
@@ -32,9 +33,15 @@ make                                     # rebuilds just what uses those files
 - You can add or remove tiles; the build sizes the array from the file. A few assets (69, mostly palettes) are measured by the code with `sizeof` and keep a fixed size.
 - Changing an asset's size moves everything after it in the ROM. The decomp isn't fully shiftable yet, so check that a moved build still boots.
 
+## Rooms
+
+Each room is one Tiled map with a CSV layer per room layer. Cell values are the game's 16-bit tile values plus one (Tiled uses 0 for "empty"). Metatile pictures aren't rendered yet, so Tiled shows the cells as numbers: copy and paste regions, or edit the CSV. Room width and height are set in `src/data/rooms/<area>/<room>.c` and can't be changed from the map yet.
+
 ## How the matching recompression works
 
-The ROM's LZ77 data was produced by a greedy encoder that takes the longest match, prefers the nearest one on ties, and never uses matches closer than 4 bytes back. `lz77.compress` follows those rules, which reproduces all 376 compressed graphics and tilemaps in the US ROM exactly. Bytes that sat after a compressed stream in the ROM are stored in the PNG (`fusion_lz_tail`) and written back after it.
+The ROM's LZ77 data was produced by a greedy encoder that takes the longest match, prefers the nearest one on ties, and never uses matches closer than 4 bytes back. `lz77.compress` follows those rules, which reproduces all 376 compressed graphics and tilemaps in the US ROM exactly.
+
+Room layers use the game's own two-pass RLE (low bytes, then high bytes). The original encoder writes runs of 3 or more with 8-bit counts, or runs of 4 or more with 16-bit counts, and picks whichever form is shorter for each pass. `rle.encode` reproduces all 1231 room layers. Bytes that sat after a compressed stream in the ROM are stored in the PNG (`fusion_lz_tail`) and written back after it.
 
 ## Tests
 

@@ -1,6 +1,6 @@
 """fusiontool: turn the decomp's raw ROM data into editable assets and back.
 
-    python3 -m fusiontool extract   # data/  -> assets/   (PNG, JASC palettes)
+    python3 -m fusiontool extract   # data/  -> assets/   (PNG, JASC palettes, Tiled rooms)
     python3 -m fusiontool build     # assets/ -> data/    (only files that changed)
     python3 -m fusiontool check     # prove every asset round-trips byte-for-byte
 
@@ -13,7 +13,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from . import assets, pal
+from . import assets, pal, rooms
 
 
 def _data_files(data_root: Path):
@@ -43,6 +43,12 @@ def cmd_extract(args) -> int:
         palette = _guess_palette(p) if out.suffix == ".png" else None
         assets.export(p, out, palette, args.width)
         n += 1
+    for key, layers in rooms.find_rooms().items():
+        out = args.assets / "rooms" / f"{key}.tmx"
+        if out.exists() and not args.force:
+            continue
+        rooms.export_room(key, layers, out)
+        n += 1
     print(f"extracted {n} assets into {args.assets}/")
     return 0
 
@@ -58,6 +64,17 @@ def cmd_build(args) -> int:
             p.write_bytes(new)
             changed += 1
             print(f"  updated {p}")
+    all_rooms = rooms.find_rooms()
+    for tmx in sorted((args.assets / "rooms").rglob("*.tmx")) if (args.assets / "rooms").exists() else []:
+        key = str(tmx.relative_to(args.assets / "rooms"))[: -len(".tmx")]
+        if key not in all_rooms:
+            continue
+        for layer, data in rooms.build_room(tmx).items():
+            path = all_rooms[key][layer][0]
+            if data != path.read_bytes():
+                path.write_bytes(data)
+                changed += 1
+                print(f"  updated {path}")
     print(f"{changed} data file(s) updated from {args.assets}/")
     return 0
 
@@ -79,6 +96,20 @@ def cmd_check(args) -> int:
             else:
                 bad += 1
                 print(f"  MISMATCH {p}")
+        for key, layers in rooms.find_rooms().items():
+            t = tmp / "rooms" / f"{key}.tmx"
+            try:
+                rooms.export_room(key, layers, t)
+                built = rooms.build_room(t)
+                same = all(built[l] == p.read_bytes() for l, (p, _, _) in layers.items())
+            except Exception as ex:
+                same = False
+                print(f"  ERROR room {key}: {ex}")
+            if same:
+                ok += 1
+            else:
+                bad += 1
+                print(f"  MISMATCH room {key}")
     print(f"{ok} assets round-trip exactly, {bad} do not")
     return 1 if bad else 0
 

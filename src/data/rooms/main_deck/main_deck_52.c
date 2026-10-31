@@ -1,19 +1,19 @@
 #include "data/rooms/main_deck_rooms_data.h"
 #include "macros.h"
 
-const u8 sMainDeck_52_Clipdata[60] = {
+const u8 sMainDeck_52_Clipdata[] = {
     19, // Room width
     14, // Room height
     _INCBIN_U8("data/rooms/main_deck/main_deck_52_clipdata.rle")
 };
 
-const u8 sMainDeck_52_Bg2[178] = {
+const u8 sMainDeck_52_Bg2[] = {
     19, // Room width
     14, // Room height
     _INCBIN_U8("data/rooms/main_deck/main_deck_52_bg2.rle")
 };
 
-const u8 sMainDeck_52_Bg1[189] = {
+const u8 sMainDeck_52_Bg1[] = {
     19, // Room width
     14, // Room height
     _INCBIN_U8("data/rooms/main_deck/main_deck_52_bg1.rle")

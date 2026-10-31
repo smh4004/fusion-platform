@@ -1,19 +1,19 @@
 #include "data/rooms/sector_4_rooms_data.h"
 #include "macros.h"
 
-const u8 sSector4_9_Clipdata[109] = {
+const u8 sSector4_9_Clipdata[] = {
     49, // Room width
     14, // Room height
     _INCBIN_U8("data/rooms/sector_4/sector_4_9_clipdata.rle")
 };
 
-const u8 sSector4_9_Bg2[376] = {
+const u8 sSector4_9_Bg2[] = {
     49, // Room width
     14, // Room height
     _INCBIN_U8("data/rooms/sector_4/sector_4_9_bg2.rle")
 };
 
-const u8 sSector4_9_Bg1[460] = {
+const u8 sSector4_9_Bg1[] = {
     49, // Room width
     14, // Room height
     _INCBIN_U8("data/rooms/sector_4/sector_4_9_bg1.rle")

@@ -1,13 +1,13 @@
 #include "data/rooms/sector_1_rooms_data.h"
 #include "macros.h"
 
-const u8 sSector1_7_Clipdata[134] = {
+const u8 sSector1_7_Clipdata[] = {
     79, // Room width
     14, // Room height
     _INCBIN_U8("data/rooms/sector_1/sector_1_7_clipdata.rle")
 };
 
-const u8 sSector1_7_Bg2[221] = {
+const u8 sSector1_7_Bg2[] = {
     79, // Room width
     14, // Room height
     _INCBIN_U8("data/rooms/sector_1/sector_1_7_bg2.rle")
@@ -24,7 +24,7 @@ const u8 sSector1_7_Spriteset1[ENEMY_ROOM_DATA_ARRAY_SIZE(8)] = {
 	ROOM_SPRITE_DATA_TERMINATOR
 };
 
-const u8 sSector1_7_Bg1[692] = {
+const u8 sSector1_7_Bg1[] = {
     79, // Room width
     14, // Room height
     _INCBIN_U8("data/rooms/sector_1/sector_1_7_bg1.rle")

@@ -1,7 +1,7 @@
 #include "data/rooms/main_deck_rooms_data.h"
 #include "macros.h"
 
-const u8 sMainDeck_6_Clipdata[233] = {
+const u8 sMainDeck_6_Clipdata[] = {
     19, // Room width
     44, // Room height
     _INCBIN_U8("data/rooms/main_deck/main_deck_6_clipdata.rle")
@@ -12,7 +12,7 @@ const u8 sMainDeck_6_Spriteset2[ENEMY_ROOM_DATA_ARRAY_SIZE(2)] = {
 	ROOM_SPRITE_DATA_TERMINATOR
 };
 
-const u8 sMainDeck_6_Bg2[148] = {
+const u8 sMainDeck_6_Bg2[] = {
     19, // Room width
     44, // Room height
     _INCBIN_U8("data/rooms/main_deck/main_deck_6_bg2.rle")
@@ -24,7 +24,7 @@ const u8 sMainDeck_6_Spriteset1[ENEMY_ROOM_DATA_ARRAY_SIZE(3)] = {
 	ROOM_SPRITE_DATA_TERMINATOR
 };
 
-const u8 sMainDeck_6_Bg1[554] = {
+const u8 sMainDeck_6_Bg1[] = {
     19, // Room width
     44, // Room height
     _INCBIN_U8("data/rooms/main_deck/main_deck_6_bg1.rle")
@@ -34,7 +34,7 @@ const u8 sMainDeck_6_Spriteset0[ENEMY_ROOM_DATA_ARRAY_SIZE(1)] = {
 	ROOM_SPRITE_DATA_TERMINATOR
 };
 
-const u8 sMainDeck_6_Bg0[14] = {
+const u8 sMainDeck_6_Bg0[] = {
     19, // Room width
     44, // Room height
     _INCBIN_U8("data/rooms/main_deck/main_deck_6_bg0.rle")

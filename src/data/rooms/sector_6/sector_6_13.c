@@ -13,19 +13,19 @@ const u8 sSector6_13_Scrolls[SCROLL_DATA_SIZE(1)] = {
 	UCHAR_MAX, // Breakable block Y bound extension
 };
 
-const u8 sSector6_13_Clipdata[140] = {
+const u8 sSector6_13_Clipdata[] = {
     34, // Room width
     34, // Room height
     _INCBIN_U8("data/rooms/sector_6/sector_6_13_clipdata.rle")
 };
 
-const u8 sSector6_13_Bg2[14] = {
+const u8 sSector6_13_Bg2[] = {
     34, // Room width
     34, // Room height
     _INCBIN_U8("data/rooms/sector_6/sector_6_13_bg2.rle")
 };
 
-const u8 sSector6_13_Bg1[497] = {
+const u8 sSector6_13_Bg1[] = {
     34, // Room width
     34, // Room height
     _INCBIN_U8("data/rooms/sector_6/sector_6_13_bg1.rle")

@@ -1,19 +1,19 @@
 #include "data/rooms/sector_3_rooms_data.h"
 #include "macros.h"
 
-const u8 sSector3_15_Clipdata[291] = {
+const u8 sSector3_15_Clipdata[] = {
     34, // Room width
     34, // Room height
     _INCBIN_U8("data/rooms/sector_3/sector_3_15_clipdata.rle")
 };
 
-const u8 sSector3_15_Bg2[274] = {
+const u8 sSector3_15_Bg2[] = {
     34, // Room width
     34, // Room height
     _INCBIN_U8("data/rooms/sector_3/sector_3_15_bg2.rle")
 };
 
-const u8 sSector3_15_Bg1[1119] = {
+const u8 sSector3_15_Bg1[] = {
     34, // Room width
     34, // Room height
     _INCBIN_U8("data/rooms/sector_3/sector_3_15_bg1.rle")
@@ -35,7 +35,7 @@ const u8 sSector3_15_Spriteset0[ENEMY_ROOM_DATA_ARRAY_SIZE(13)] = {
 	ROOM_SPRITE_DATA_TERMINATOR
 };
 
-const u8 sSector3_15_Bg0[23] = {
+const u8 sSector3_15_Bg0[] = {
     34, // Room width
     34, // Room height
     _INCBIN_U8("data/rooms/sector_3/sector_3_15_bg0.rle")

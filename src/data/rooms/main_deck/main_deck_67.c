@@ -13,19 +13,19 @@ const u8 sMainDeck_67_Scrolls[SCROLL_DATA_SIZE(1)] = {
 	2, // Breakable block Y bound extension
 };
 
-const u8 sMainDeck_67_Clipdata[105] = {
+const u8 sMainDeck_67_Clipdata[] = {
     19, // Room width
     24, // Room height
     _INCBIN_U8("data/rooms/main_deck/main_deck_67_clipdata.rle")
 };
 
-const u8 sMainDeck_67_Bg2[293] = {
+const u8 sMainDeck_67_Bg2[] = {
     19, // Room width
     24, // Room height
     _INCBIN_U8("data/rooms/main_deck/main_deck_67_bg2.rle")
 };
 
-const u8 sMainDeck_67_Bg1[411] = {
+const u8 sMainDeck_67_Bg1[] = {
     19, // Room width
     24, // Room height
     _INCBIN_U8("data/rooms/main_deck/main_deck_67_bg1.rle")
