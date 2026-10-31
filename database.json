@@ -12697,10 +12697,18 @@
     "size": 1
   },
   {
-    "path": "Blob_39ab62_39f4b0.bin",
-    "count": "0x494E",
+    "path": "Blob_39ad58_39e638.bin",
+    "count": "0x38E0",
     "addr": {
-      "us": "0x39AB62"
+      "us": "0x39AD58"
+    },
+    "size": 1
+  },
+  {
+    "path": "Blob_39ec90_39f4b0.bin",
+    "count": "0x820",
+    "addr": {
+      "us": "0x39EC90"
     },
     "size": 1
   },
