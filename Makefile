@@ -100,7 +100,11 @@ PREPROCFLAGS = charmap.txt
 
 # Objects
 CSRC = $(wildcard src/**.c) $(wildcard src/**/**.c) $(wildcard src/**/**/**.c) $(wildcard src/**/**/**/**.c)
-.PRECIOUS: $(CSRC:.c=.s)
+# .SECONDARY keeps the intermediate .s files but, unlike .PRECIOUS, still lets
+# .DELETE_ON_ERROR remove a half-written one when the compiler fails
+.SECONDARY: $(CSRC:.c=.s)
+.DELETE_ON_ERROR:
+DEPS = $(CSRC:.c=.d)
 ASMSRC = $(CSRC:.c=.s) $(wildcard asm/*.s) $(wildcard sound/*.s) $(wildcard sound/**/*.s)
 OBJ = $(ASMSRC:.s=.o) 
 
@@ -185,6 +189,8 @@ tidy:
 	$(MSG) RM data/*.s
 	$(MSG) RM src/\*\*/\*.s
 	$Q$(RM) $(CSRC:.c=.s)
+	$(MSG) RM src/\*\*/\*.d
+	$Q$(RM) $(DEPS)
 	$(MSG) RM $(GBAFIX)
 	$Q$(RM) $(GBAFIX)
 ifeq ($(DATA),1)
@@ -233,6 +239,13 @@ $(LD_SCRIPT): linker.ld
 %.o: %.s
 	$(MSG) AS $@
 	$Q$(AS) $(ASFLAGS) $< -o $@
+
+%.d: %.c
+	$Q$(PYTHON) $(TOOLS_DIR)/scandeps.py $< $*.s $@ -Iinclude/
+
+ifeq ($(SETUP_PREREQS),1)
+-include $(DEPS)
+endif
 
 %.s: %.c
 	$(MSG) CC $@
