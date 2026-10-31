@@ -8,14 +8,6 @@
     "size": 1
   },
   {
-    "path": "Blob_a5710_a8cdc.bin",
-    "count": "0x35CC",
-    "addr": {
-      "us": "0xA5710"
-    },
-    "size": 1
-  },
-  {
     "path": "direct_sound_samples/080AA488.bin",
     "dir": "sound",
     "count": "0x3C1",

@@ -79,7 +79,7 @@ track_643:
 	.byte 0
 	.byte 190
 	.byte 0
-	.word 0x80a7d14
+	.word gVoiceGroup_a7d14
 	.word track_643_0
 	.word track_643_1
 

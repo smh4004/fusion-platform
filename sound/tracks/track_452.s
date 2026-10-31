@@ -19,7 +19,7 @@ track_452:
 	.byte 0
 	.byte 163
 	.byte 128
-	.word 0x80a8554
+	.word gVoiceGroup_a8554
 	.word track_452_0
 
 .align 2

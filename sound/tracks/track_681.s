@@ -255,7 +255,7 @@ track_681:
 	.byte 0
 	.byte 252
 	.byte 0
-	.word 0x80a808c
+	.word gVoiceGroup_a808c
 	.word track_681_0
 	.word track_681_1
 	.word track_681_2

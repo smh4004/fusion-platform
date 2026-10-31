@@ -524,6 +524,7 @@ SECTIONS {
     .rodata : ALIGN(2) {
         src/data/generic_data.o(.rodata);
         src/data/audio.o(.rodata);
+        sound/voice_groups.o(.rodata);
 
         src/data/music_track_data.o(.rodata);
         sound/sound_entries.o(.rodata);

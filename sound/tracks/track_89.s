@@ -70,7 +70,7 @@ track_89:
 	.byte 89
 	.byte 130
 	.byte 128
-	.word 0x80a62f8
+	.word gVoiceGroup_a62f8
 	.word track_89_0
 	.word track_89_1
 

@@ -20,7 +20,7 @@ track_139:
 	.byte 0
 	.byte 220
 	.byte 0
-	.word 0x80a682c
+	.word gVoiceGroup_a682c
 	.word track_139_0
 
 .align 2

@@ -40,7 +40,7 @@ track_245:
 	.byte 0
 	.byte 165
 	.byte 0
-	.word 0x80a6af0
+	.word gVoiceGroup_a6af0
 	.word track_245_0
 
 .align 2

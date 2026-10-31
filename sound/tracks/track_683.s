@@ -76,7 +76,7 @@ track_683:
 	.byte 0
 	.byte 182
 	.byte 0
-	.word 0x80a838c
+	.word gVoiceGroup_a838c
 	.word track_683_0
 
 .align 2

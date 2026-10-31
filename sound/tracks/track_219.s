@@ -84,7 +84,7 @@ track_219:
 	.byte 0
 	.byte 181
 	.byte 0
-	.word 0x80a6af0
+	.word gVoiceGroup_a6af0
 	.word track_219_0
 	.word track_219_1
 

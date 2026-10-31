@@ -76,7 +76,7 @@ track_246:
 	.byte 0
 	.byte 180
 	.byte 0
-	.word 0x80a6af0
+	.word gVoiceGroup_a6af0
 	.word track_246_0
 
 .align 2

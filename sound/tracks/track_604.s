@@ -20,7 +20,7 @@ track_604:
 	.byte 0
 	.byte 229
 	.byte 0
-	.word 0x80a7654
+	.word gVoiceGroup_a7654
 	.word track_604_0
 
 .align 2

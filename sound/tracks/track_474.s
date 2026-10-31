@@ -28,7 +28,7 @@ track_474:
 	.byte 0
 	.byte 132
 	.byte 0
-	.word 0x80a6d54
+	.word gVoiceGroup_a6d54
 	.word track_474_0
 
 .align 2

@@ -32,7 +32,7 @@ track_545:
 	.byte 0
 	.byte 228
 	.byte 0
-	.word 0x80a826c
+	.word gVoiceGroup_a826c
 	.word track_545_0
 
 .align 2

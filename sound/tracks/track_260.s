@@ -26,7 +26,7 @@ track_260:
 	.byte 0
 	.byte 220
 	.byte 0
-	.word 0x80a71ec
+	.word gVoiceGroup_a71ec
 	.word track_260_0
 
 .align 2

@@ -19,7 +19,7 @@ track_162:
 	.byte 0
 	.byte 1
 	.byte 0
-	.word 0x80a8008
+	.word gVoiceGroup_a8008
 	.word track_162_0
 
 .align 2

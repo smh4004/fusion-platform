@@ -25,7 +25,7 @@ track_466:
 	.byte 0
 	.byte 165
 	.byte 128
-	.word 0x80a8554
+	.word gVoiceGroup_a8554
 	.word track_466_0
 
 .align 2

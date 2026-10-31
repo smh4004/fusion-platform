@@ -137,7 +137,7 @@ track_667:
 	.byte 0
 	.byte 177
 	.byte 0
-	.word 0x80a7f24
+	.word gVoiceGroup_a7f24
 	.word track_667_0
 	.word track_667_1
 

@@ -41,7 +41,7 @@ track_670:
 	.byte 0
 	.byte 178
 	.byte 0
-	.word 0x80a808c
+	.word gVoiceGroup_a808c
 	.word track_670_0
 	.word track_670_1
 

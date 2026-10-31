@@ -3530,7 +3530,7 @@ track_95:
 	.byte 95
 	.byte 130
 	.byte 128
-	.word 0x80a64c0
+	.word gVoiceGroup_a64c0
 	.word track_95_0
 	.word track_95_1
 	.word track_95_2

@@ -116,7 +116,7 @@ track_42:
 	.byte 42
 	.byte 130
 	.byte 128
-	.word 0x80a62f8
+	.word gVoiceGroup_a62f8
 	.word track_42_0
 	.word track_42_1
 	.word track_42_2

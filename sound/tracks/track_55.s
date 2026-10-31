@@ -23,7 +23,7 @@ track_55:
 	.byte 55
 	.byte 130
 	.byte 128
-	.word 0x80a5ca4
+	.word gVoiceGroup_a5ca4
 	.word track_55_0
 
 .align 2

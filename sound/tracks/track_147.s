@@ -49,7 +49,7 @@ track_147:
 	.byte 0
 	.byte 150
 	.byte 0
-	.word 0x80a682c
+	.word gVoiceGroup_a682c
 	.word track_147_0
 
 .align 2

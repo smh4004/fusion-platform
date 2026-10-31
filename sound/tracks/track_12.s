@@ -22,7 +22,7 @@ track_12:
 	.byte 12
 	.byte 130
 	.byte 128
-	.word 0x80a5f68
+	.word gVoiceGroup_a5f68
 	.word track_12_0
 
 .align 2

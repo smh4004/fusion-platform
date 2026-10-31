@@ -148,7 +148,7 @@ track_478:
 	.byte 0
 	.byte 228
 	.byte 0
-	.word 0x80a81e8
+	.word gVoiceGroup_a81e8
 	.word track_478_0
 	.word track_478_1
 

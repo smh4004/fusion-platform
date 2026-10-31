@@ -262,7 +262,7 @@ track_672:
 	.byte 0
 	.byte 197
 	.byte 0
-	.word 0x80a808c
+	.word gVoiceGroup_a808c
 	.word track_672_0
 	.word track_672_1
 	.word track_672_2

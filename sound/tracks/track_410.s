@@ -62,7 +62,7 @@ track_410:
 	.byte 0
 	.byte 166
 	.byte 0
-	.word 0x80a6d54
+	.word gVoiceGroup_a6d54
 	.word track_410_0
 	.word track_410_1
 

@@ -53,7 +53,7 @@ track_668:
 	.byte 0
 	.byte 161
 	.byte 0
-	.word 0x80a7f24
+	.word gVoiceGroup_a7f24
 	.word track_668_0
 
 .align 2

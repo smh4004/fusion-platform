@@ -19,7 +19,7 @@ track_339:
 	.byte 0
 	.byte 136
 	.byte 0
-	.word 0x80a6d54
+	.word gVoiceGroup_a6d54
 	.word track_339_0
 
 .align 2

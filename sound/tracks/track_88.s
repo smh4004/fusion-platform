@@ -1274,7 +1274,7 @@ track_88:
 	.byte 88
 	.byte 130
 	.byte 128
-	.word 0x80a64c0
+	.word gVoiceGroup_a64c0
 	.word track_88_0
 	.word track_88_1
 	.word track_88_2

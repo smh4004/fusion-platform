@@ -21,7 +21,7 @@ track_422:
 	.byte 0
 	.byte 161
 	.byte 0
-	.word 0x80a6d54
+	.word gVoiceGroup_a6d54
 	.word track_422_0
 
 .align 2
