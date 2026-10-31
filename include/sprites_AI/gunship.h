@@ -24,4 +24,9 @@ void Gunship(void);
 void GunshipBeam(void);
 void GunshipPart(void);
 
+// Still in asm (asm/disasm_0x08056140.s)
+void GunshipEnd(void);
+void GunshipEndBeam(void);
+void GunshipEndBottom(void);
+
 #endif /* GUNSHIP_H */
