@@ -13522,7 +13522,7 @@ CutsceneElevatorMonologueInit: @ 0x08099C38
 	ldr r0, _08099DBC @ =0x84000008
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r1, _08099DC0 @ =sBlob_79c4a8_79c5a4 + 0x24
+	ldr r1, _08099DC0 @ =sPointerTable_79c4a8 + 0x24
 	ldrb r0, [r6]
 	subs r0, #1
 	lsls r0, r0, #2
@@ -13534,7 +13534,7 @@ CutsceneElevatorMonologueInit: @ 0x08099C38
 	ldr r0, _08099DC8 @ =0x84000030
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r1, _08099DCC @ =sBlob_79c4a8_79c5a4 + 0x48
+	ldr r1, _08099DCC @ =sPointerTable_79c4a8 + 0x48
 	ldrb r0, [r6]
 	subs r0, #1
 	lsls r0, r0, #2
@@ -13573,7 +13573,7 @@ CutsceneElevatorMonologueInit: @ 0x08099C38
 	ldr r0, _08099DF0 @ =0x84000080
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r1, _08099DF4 @ =sBlob_79c4a8_79c5a4
+	ldr r1, _08099DF4 @ =sPointerTable_79c4a8
 	ldrb r0, [r6]
 	subs r0, #1
 	lsls r0, r0, #2
@@ -13644,10 +13644,10 @@ _08099DB0: .4byte 0x040000D4
 _08099DB4: .4byte 0x086638A0
 _08099DB8: .4byte 0x050003E0
 _08099DBC: .4byte 0x84000008
-_08099DC0: .4byte sBlob_79c4a8_79c5a4 + 0x24
+_08099DC0: .4byte sPointerTable_79c4a8 + 0x24
 _08099DC4: .4byte 0x05000200
 _08099DC8: .4byte 0x84000030
-_08099DCC: .4byte sBlob_79c4a8_79c5a4 + 0x48
+_08099DCC: .4byte sPointerTable_79c4a8 + 0x48
 _08099DD0: .4byte 0x0879C538
 _08099DD4: .4byte 0x0600D000
 _08099DD8: .4byte 0x08662804
@@ -13657,7 +13657,7 @@ _08099DE4: .4byte 0x0600C800
 _08099DE8: .4byte 0x84000200
 _08099DEC: .4byte 0x086636A0
 _08099DF0: .4byte 0x84000080
-_08099DF4: .4byte sBlob_79c4a8_79c5a4
+_08099DF4: .4byte sPointerTable_79c4a8
 _08099DF8: .4byte 0x84000058
 _08099DFC: .4byte 0x04000012
 _08099E00: .4byte 0x00001908

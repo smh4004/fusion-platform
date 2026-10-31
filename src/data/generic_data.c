@@ -1,6 +1,8 @@
 #include "data/generic_data.h"
 #include "gba/memory.h"
 #include "structs/save_file.h"
+#include "callbacks.h"
+#include "music_wrappers.h"
 
 const s16 sSineTable[Q_8_8(1.f) + PI / 2] = {
     Q_8_8(0),           // sin(0*(π/128))
@@ -325,7 +327,21 @@ const s16 sSineTable[Q_8_8(1.f) + PI / 2] = {
     Q_8_8(0.99609375),  // sin(319*(π/128))
 };
 
-static const u8 sBlob_a5224_a5258[] = INCBIN_U8("data/Blob_a5224_a5258.bin");
+const u32 sPointerTable_a5224[13] = {
+    (u32)Dma2IntrCode,
+    (u32)CallbackCallVblank,
+    (u32)CallbackCallHBlank,
+    (u32)CallbackCallVCount,
+    (u32)Callback_Empty,
+    (u32)Callback_Empty,
+    (u32)Callback_Empty,
+    (u32)Callback_Empty,
+    (u32)Callback_Empty,
+    (u32)Callback_Empty,
+    (u32)Callback_Empty,
+    (u32)Callback_Empty,
+    (u32)Callback_Empty
+};
 
 const void* const sSaveDataSramPointers[3] = {
     SRAM_BASE + 0x200 + sizeof(struct SaveFile) * 0,

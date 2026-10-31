@@ -24644,12 +24644,12 @@ static const u8 sBlob_659ba4_65c268[] = INCBIN_U8("data/Blob_659ba4_65c268.bin")
 
 const u16 sTitleIntroCollisionWarningObjPal[] = INCBIN_U16("data/title_intro/collision_warning_obj.pal");
 
-static const u8 sBlob_65c468_662804[] = INCBIN_U8("data/Blob_65c468_662804.bin");
+const u8 sBlob_65c468_662804[] = INCBIN_U8("data/Blob_65c468_662804.bin");
 
 const u32 sIntroTilemap_662804[] = INCBIN_U32("data/new_file_intro/662804.tm.lz");
 
-static const u8 sBlob_662cfc_663820[] = INCBIN_U8("data/Blob_662cfc_663820.bin");
+const u8 sBlob_662cfc_663820[] = INCBIN_U8("data/Blob_662cfc_663820.bin");
 
 const u16 sIntroPal_663820[] = INCBIN_U16("data/new_file_intro/663820.pal");
 
-static const u8 sBlob_6638a0_682fac[] = INCBIN_U8("data/Blob_6638a0_682fac.bin");
+const u8 sBlob_6638a0_682fac[] = INCBIN_U8("data/Blob_6638a0_682fac.bin");
