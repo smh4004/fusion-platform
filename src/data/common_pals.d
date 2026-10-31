@@ -1,0 +1,20 @@
+src/data/common_pals.s src/data/common_pals.d: data/common/common_tiles.pal data/common/hatch_flashing.pal data/common/unlocked_hatch_flashing.pal data/tilesets/14.tm data/tilesets/51.tm data/tilesets/19.tm data/Blob_40a310_40afa8.bin data/tilesets/32.tm data/tilesets/12.tm data/tilesets/49.tm data/tilesets/9.tm data/tilesets/59.tm data/tilesets/11.tm data/tilesets/33.tm data/tilesets/10.tm include/data/common_pals.h include/macros.h include/types.h include/config.h
+data/common/common_tiles.pal:
+data/common/hatch_flashing.pal:
+data/common/unlocked_hatch_flashing.pal:
+data/tilesets/14.tm:
+data/tilesets/51.tm:
+data/tilesets/19.tm:
+data/Blob_40a310_40afa8.bin:
+data/tilesets/32.tm:
+data/tilesets/12.tm:
+data/tilesets/49.tm:
+data/tilesets/9.tm:
+data/tilesets/59.tm:
+data/tilesets/11.tm:
+data/tilesets/33.tm:
+data/tilesets/10.tm:
+include/data/common_pals.h:
+include/macros.h:
+include/types.h:
+include/config.h:

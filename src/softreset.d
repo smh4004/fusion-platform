@@ -1,0 +1,25 @@
+src/softreset.s src/softreset.d: include/softreset.h include/globals.h include/macros.h include/gba.h include/io.h include/gba/audio.h include/gba/display.h include/gba/dma.h include/gba/interrupt.h include/gba/keys.h include/gba/memory.h include/gba/waitstate.h include/gba/cable_link.h include/types.h include/config.h include/structs/menus/pause_screen.h include/structs/menus/title_screen.h include/structs/sa_x_close_up.h include/structs/ending.h include/structs/intro.h include/structs/cutscene.h include/constants/ending.h include/oam.h include/constants/menus/pause_screen.h
+include/softreset.h:
+include/globals.h:
+include/macros.h:
+include/gba.h:
+include/io.h:
+include/gba/audio.h:
+include/gba/display.h:
+include/gba/dma.h:
+include/gba/interrupt.h:
+include/gba/keys.h:
+include/gba/memory.h:
+include/gba/waitstate.h:
+include/gba/cable_link.h:
+include/types.h:
+include/config.h:
+include/structs/menus/pause_screen.h:
+include/structs/menus/title_screen.h:
+include/structs/sa_x_close_up.h:
+include/structs/ending.h:
+include/structs/intro.h:
+include/structs/cutscene.h:
+include/constants/ending.h:
+include/oam.h:
+include/constants/menus/pause_screen.h:

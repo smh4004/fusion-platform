@@ -1,5 +1,6 @@
 #include "sprites_AI/yameba.h"
 #include "globals.h"
+#include "data/particle_data.h"
 #include "macros.h"
 #include "gba.h"
 
@@ -71,13 +72,13 @@ void YamebaInit(void)
         gCurrentSprite.status |= SPRITE_STATUS_IGNORE_PROJECTILES;
         gCurrentSprite.drawOrder = 12;
         gCurrentSprite.samusCollision = SSC_NONE;
-        gCurrentSprite.pOam = (const struct FrameData*)0x82f5b18;
+        gCurrentSprite.pOam = (const struct FrameData*)sYamebaOam_Small;
     }
     else
     {
         gCurrentSprite.drawOrder = 4;
         gCurrentSprite.samusCollision = SSC_YAMEBA;
-        gCurrentSprite.pOam = (const struct FrameData*)0x82f5b60;
+        gCurrentSprite.pOam = (const struct FrameData*)sYamebaOam_Big;
     }
 
     gCurrentSprite.health = GET_PSPRITE_HEALTH(gCurrentSprite.spriteId);

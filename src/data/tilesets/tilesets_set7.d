@@ -1,0 +1,20 @@
+src/data/tilesets/tilesets_set7.s src/data/tilesets/tilesets_set7.d: data/tilesets/31.gfx.lz data/tilesets/47.gfx.lz data/tilesets/3.gfx.lz data/tilesets/23_bg.gfx.lz data/tilesets/1_bg.gfx.lz data/tilesets/41.pal data/tilesets/animated_palettes/18.pal data/tilesets/73.pal data/tilesets/3.pal data/tilesets/31.tm data/Blob_54d950_54e700.bin data/tilesets/47.tm data/Blob_54e9a4_54f704.bin data/tilesets/3.tm data/Blob_54f9a8_550708.bin include/data/tilesets/tilesets_set7.h include/macros.h include/types.h include/config.h
+data/tilesets/31.gfx.lz:
+data/tilesets/47.gfx.lz:
+data/tilesets/3.gfx.lz:
+data/tilesets/23_bg.gfx.lz:
+data/tilesets/1_bg.gfx.lz:
+data/tilesets/41.pal:
+data/tilesets/animated_palettes/18.pal:
+data/tilesets/73.pal:
+data/tilesets/3.pal:
+data/tilesets/31.tm:
+data/Blob_54d950_54e700.bin:
+data/tilesets/47.tm:
+data/Blob_54e9a4_54f704.bin:
+data/tilesets/3.tm:
+data/Blob_54f9a8_550708.bin:
+include/data/tilesets/tilesets_set7.h:
+include/macros.h:
+include/types.h:
+include/config.h:
