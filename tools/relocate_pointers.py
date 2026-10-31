@@ -15,7 +15,8 @@
         (animation frame tables, or every address-like word with --all).
 
     relocate_pointers.py literals <file.c|file.s> [...]
-        Rewrite raw ROM addresses in C casts `(T)0x8xxxxxx` and in asm
+        Rewrite raw ROM addresses in C casts `(T)0x8xxxxxx`, bare
+        addresses passed as arguments (e.g. DMA3_COPY_16(0x83e799c, ...)), and in asm
         `.4byte 0x08xxxxxx` as symbol (+ offset) expressions.
 
 Targets are found in the built ELF (run `make` first). A target symbol that
@@ -287,6 +288,7 @@ def cmd_incbin(args):
 
 
 CAST_LIT = re.compile(r"\((?P<cast>[^()]*?\*[^()]*?)\)\s*0x0?(?P<addr>8[0-9a-fA-F]{6})\b")
+BARE_LIT = re.compile(r"(?<=[(,]\s)0x0?(?P<addr>8[0-9a-fA-F]{6})\b|(?<=[(,])0x0?(?P<addr2>8[0-9a-fA-F]{6})\b")
 ASM_LIT = re.compile(r"(\.4byte\s+)0x0?(8[0-9A-Fa-f]{6})\b")
 
 
@@ -311,6 +313,19 @@ def cmd_literals(files):
                 return f"({m.group('cast')})({inner})"
             text = p.read_text()
             text = CAST_LIT.sub(sub, text)
+
+            def bare(m):
+                nonlocal n
+                addr = int(m.group("addr") or m.group("addr2"), 16) & 0xFFFFFF
+                t = target(addr, allow_code=False)
+                if not t:
+                    return m.group(0)
+                name, off, kind = t
+                if not ensure_global(name, kind):
+                    return m.group(0)
+                n += 1
+                return f"(u32)&{name}" + (f" + 0x{off:x}" if off else "")
+            text = BARE_LIT.sub(bare, text)
         else:
             def sub(m):
                 nonlocal n

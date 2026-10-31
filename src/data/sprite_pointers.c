@@ -184,6 +184,8 @@
 #include "sprites_AI/zoro.h"
 #include "sprites_AI/zoro_cocoon.h"
 #include "sprites_AI/zozoro.h"
+#include "sprites_AI/destroyed_data_pad.h"
+#include "sprites_AI/metroid_husk.h"
 extern const u8 sBlob_2e5cae_2e6160[];
 extern const u8 sBlob_2e6382_2e6ba4[];
 extern const u8 sBlob_39ad58_39e638[];
@@ -332,7 +334,7 @@ const Func_T sPrimarySpritesAiPointers[PSPRITE_END] = {
 	[PSPRITE_GOLD_SCISER] = Sciser,
 	[PSPRITE_SA_X_TRO_1] = SaXTro1,
 	[PSPRITE_SA_X_NOC] = SaXNoc,
-	[PSPRITE_PRE_DESTROYED_DATA_PAD] = (Func_T)0x804378d,
+	[PSPRITE_PRE_DESTROYED_DATA_PAD] = DestroyedDataPad,
 	[PSPRITE_GADORA_ARACHNUS] = Gadora,
 	[PSPRITE_GADORA_CHARGE_BEAM] = Gadora,
 	[PSPRITE_GADORA_ZAZABI] = Gadora,
@@ -368,7 +370,7 @@ const Func_T sPrimarySpritesAiPointers[PSPRITE_END] = {
 	[PSPRITE_CORE_X_ABILITY_BEFORE_VARIA_CORE] = CoreXAbilityBeforeVariaCore,
 	[PSPRITE_BIG_FLASHING_NUMBER] = BigFlashingNumber,
 	[PSPRITE_FLASHING_NUMBER] = FlashingNumber,
-	[PSPRITE_DESTROYED_DATA_PAD] = (Func_T)0x804378d,
+	[PSPRITE_DESTROYED_DATA_PAD] = DestroyedDataPad,
 	[PSPRITE_ZEBESIAN_AQUA] = ZebesianAqua,
 	[PSPRITE_ZEBESIAN_PRE_AQUA] = ZebesianGround,
 	[PSPRITE_SKULTERA_SMALL_2] = Skultera,
@@ -392,7 +394,7 @@ const Func_T sPrimarySpritesAiPointers[PSPRITE_END] = {
 	[PSPRITE_GOLD_SCISER_DOOR_LOCK] = GoldSciserDoorLock,
 	[PSPRITE_GOLD_ZEBESIAN_DOOR_LOCK] = GoldZebesianDoorLock,
 	[PSPRITE_SA_X_OMEGA_CUTSCENE] = SaXOmega,
-	[PSPRITE_METROID_HUSK] = (Func_T)0x8059055,
+	[PSPRITE_METROID_HUSK] = MetroidHusk,
 	[PSPRITE_RIDLEY] = Ridley,
 	[PSPRITE_PRE_SPAWN] = RidleyPreSpawn,
 	[PSPRITE_SA_X_TRO_2] = SaXTro2,

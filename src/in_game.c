@@ -14,6 +14,7 @@
 #include "structs/haze.h"
 #include "structs/samus.h"
 #include "structs/sa_x.h"
+#include "data/hud_data.h"
 
 /**
  * @brief dd24 | 234 | In game mode handler
@@ -436,7 +437,7 @@ void InitAndLoadGenerics(void)
 
     gDebugFlag = FALSE;
 
-    DMA3_COPY_16(0x83e40dc, PALRAM_OBJ + 0x40, 16 * 6);
+    DMA3_COPY_16((u32)&sCommonSpritesPal, PALRAM_OBJ + 0x40, 16 * 6);
 
     SamusInit();
 
