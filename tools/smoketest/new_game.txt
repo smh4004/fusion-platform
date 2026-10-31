@@ -1,0 +1,39 @@
+# Boot, start a new game on file A, play through the intro, and check that
+# Samus is standing in the first room. {symbol} is replaced with its address
+# from the ELF; @REPEAT n ... @END repeats a block.
+#
+# Game modes (include/globals.h): 0 title, 1 in game, 7 file select / intro.
+# Sub mode 2 is "playing".
+
+wait 600
+hold START 4
+wait 400
+hold START 4
+until8 {gMainGameMode} 7 600
+wait 60
+# file A -> "Start" -> confirm
+hold A 4
+wait 60
+hold A 4
+wait 60
+hold A 4
+wait 120
+shot {out}/01_intro.ppm
+
+# The intro's text boxes advance with A
+@REPEAT 900
+hold A 2
+wait 18
+@END
+
+until8 {gMainGameMode} 1 3000
+until8 {gSubGameMode1} 2 600
+wait 180
+shot {out}/02_first_room.ppm
+expect8 {gCurrentArea} 0
+expect8 {gCurrentRoom} 0
+
+# Walk right for a second to prove input and physics work
+hold RIGHT 60
+shot {out}/03_walked.ppm
+expect8 {gMainGameMode} 1

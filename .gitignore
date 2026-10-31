@@ -27,3 +27,6 @@ err.log
 /assets/
 /src/**/*.d
 __pycache__/
+/smoke_out/
+linker.ld.shift-backup
+/tools/smoketest/smoke
