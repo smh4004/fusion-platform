@@ -8,6 +8,7 @@
 #include "init_helpers.h"
 #include "oam.h"
 #include "audio_wrappers.h"
+#include "audio/track_internal.h"
 #include "music_wrappers.h"
 
 #include "constants/audio.h"
@@ -15,6 +16,7 @@
 
 #include "data/generic_data.h"
 #include "data/intro_data.h"
+#include "data/sprite_data.h"
 
 /**
  * @brief 97dd0 | d8 | Checks if the monologue ended, and handles waiting and page changes
@@ -2983,123 +2985,48 @@ _080997A0: .4byte 0xFFFFFC00\n\
     .syntax divided\n");
 }
 
-// 0x080997A4
-NAKED_FUNCTION
+/**
+ * @brief 997a4 | 108 | Setup for the new file intro
+ * 
+ */
 void NewFileIntroInit(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	sub sp, #4\n\
-	ldr r3, _08099864 @ =0x04000208\n\
-	movs r4, #0\n\
-	strh r4, [r3]\n\
-	ldr r2, _08099868 @ =0x04000004\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _0809986C @ =0x0000FFEF\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r2, _08099870 @ =0x04000200\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _08099874 @ =0x0000FFFD\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #1\n\
-	strh r0, [r3]\n\
-	ldr r0, _08099878 @ =unk_99940\n\
-	bl CallbackSetVBlank\n\
-	ldr r1, _0809987C @ =0x04000050\n\
-	movs r0, #0xff\n\
-	strh r0, [r1]\n\
-	ldr r0, _08099880 @ =gWrittenToBldy\n\
-	movs r1, #0x10\n\
-	strh r1, [r0]\n\
-	ldr r0, _08099884 @ =0x04000054\n\
-	strh r1, [r0]\n\
-	ldr r0, _08099888 @ =gNextOamSlot\n\
-	strb r4, [r0]\n\
-	bl ResetFreeOam\n\
-	movs r2, #0\n\
-	str r2, [sp]\n\
-	ldr r1, _0809988C @ =0x040000D4\n\
-	mov r0, sp\n\
-	str r0, [r1]\n\
-	ldr r0, _08099890 @ =gNonGameplayRam\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08099894 @ =0x85000150\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r0, _08099898 @ =0x00007FFF\n\
-	str r0, [sp]\n\
-	mov r0, sp\n\
-	str r0, [r1]\n\
-	movs r3, #0xa0\n\
-	lsls r3, r3, #0x13\n\
-	str r3, [r1, #4]\n\
-	ldr r0, _0809989C @ =0x85000080\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	strh r2, [r3]\n\
-	str r2, [sp]\n\
-	mov r0, sp\n\
-	str r0, [r1]\n\
-	movs r0, #0xc0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _080998A0 @ =0x85004000\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r0, _080998A4 @ =0x0400000E\n\
-	strh r2, [r0]\n\
-	subs r0, #2\n\
-	strh r2, [r0]\n\
-	subs r0, #2\n\
-	strh r2, [r0]\n\
-	subs r0, #2\n\
-	strh r2, [r0]\n\
-	adds r0, #8\n\
-	strh r2, [r0]\n\
-	adds r0, #2\n\
-	strh r2, [r0]\n\
-	adds r0, #2\n\
-	strh r2, [r0]\n\
-	adds r0, #2\n\
-	strh r2, [r0]\n\
-	adds r0, #2\n\
-	strh r2, [r0]\n\
-	adds r0, #2\n\
-	strh r2, [r0]\n\
-	adds r0, #2\n\
-	strh r2, [r0]\n\
-	adds r0, #2\n\
-	strh r2, [r0]\n\
-	subs r0, #0x1e\n\
-	strh r2, [r0]\n\
-	ldr r0, _080998A8 @ =NewFileIntroVblank\n\
-	bl CallbackSetVBlank\n\
-	add sp, #4\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08099864: .4byte 0x04000208\n\
-_08099868: .4byte 0x04000004\n\
-_0809986C: .4byte 0x0000FFEF\n\
-_08099870: .4byte 0x04000200\n\
-_08099874: .4byte 0x0000FFFD\n\
-_08099878: .4byte unk_99940\n\
-_0809987C: .4byte 0x04000050\n\
-_08099880: .4byte gWrittenToBldy\n\
-_08099884: .4byte 0x04000054\n\
-_08099888: .4byte gNextOamSlot\n\
-_0809988C: .4byte 0x040000D4\n\
-_08099890: .4byte gNonGameplayRam\n\
-_08099894: .4byte 0x85000150\n\
-_08099898: .4byte 0x00007FFF\n\
-_0809989C: .4byte 0x85000080\n\
-_080998A0: .4byte 0x85004000\n\
-_080998A4: .4byte 0x0400000E\n\
-_080998A8: .4byte NewFileIntroVblank\n\
-    .syntax divided\n");
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
+
+    CallbackSetVBlank(unk_99940);
+
+    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+    gWrittenToBldy = BLDY_MAX_VALUE;
+    WRITE_16(REG_BLDY, BLDY_MAX_VALUE);
+
+    gNextOamSlot = 0;
+    ResetFreeOam();
+
+    DMA3_FILL_32(0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+    DMA3_FILL_32(0x7FFF, PALRAM_BASE, PALRAM_SIZE / 2);
+    WRITE_16(PALRAM_BASE, 0);
+    DMA3_FILL_32(0, VRAM_BASE, 0x10000);
+
+    WRITE_16(REG_BG3CNT, 0);
+    WRITE_16(REG_BG2CNT, 0);
+    WRITE_16(REG_BG1CNT, 0);
+    WRITE_16(REG_BG0CNT, 0);
+
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, 0);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
+
+    WRITE_16(REG_DISPCNT, 0);
+
+    CallbackSetVBlank(NewFileIntroVblank);
 }
 
 // 0x080998AC
@@ -3142,54 +3069,23 @@ _080998F0: .4byte gFrameCounter16Bit\n\
     .syntax divided\n");
 }
 
-// 0x080998F4
-NAKED_FUNCTION
+/**
+ * @brief 998f4 | 4c | V-blank for the new file intro init
+ * 
+ */
 void NewFileIntroVblank(void)
 {
-    asm(" .syntax unified\n\
-	ldr r1, _08099920 @ =0x040000D4\n\
-	ldr r0, _08099924 @ =gOamData\n\
-	str r0, [r1]\n\
-	movs r0, #0xe0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08099928 @ =0x84000100\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r2, _0809992C @ =0x04000052\n\
-	ldr r0, _08099930 @ =gWrittenToBldalpha_Evb\n\
-	ldrh r0, [r0]\n\
-	lsls r0, r0, #8\n\
-	ldr r1, _08099934 @ =gWrittenToBldalpha_Eva\n\
-	ldrh r1, [r1]\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r1, _08099938 @ =0x04000054\n\
-	ldr r0, _0809993C @ =gWrittenToBldy\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	bx lr\n\
-	.align 2, 0\n\
-_08099920: .4byte 0x040000D4\n\
-_08099924: .4byte gOamData\n\
-_08099928: .4byte 0x84000100\n\
-_0809992C: .4byte 0x04000052\n\
-_08099930: .4byte gWrittenToBldalpha_Evb\n\
-_08099934: .4byte gWrittenToBldalpha_Eva\n\
-_08099938: .4byte 0x04000054\n\
-_0809993C: .4byte gWrittenToBldy\n\
-    .syntax divided\n");
+    DMA3_COPY_32(gOamData, OAM_BASE, OAM_SIZE / 4);
+
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_Evb, gWrittenToBldalpha_Eva));
+    WRITE_16(REG_BLDY, gWrittenToBldy);
 }
 
-// 0x08099940
-NAKED_FUNCTION
+/**
+ * @brief 99940 | c | V-blank that only updates the audio
+ * 
+ */
 void unk_99940(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	bl UpdateAudio\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    UpdateAudio();
 }

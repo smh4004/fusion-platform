@@ -5,6 +5,9 @@
 
 #include "structs/cutscene.h"
 
+// Random number state used by SpecialCutsceneGetRandomNumber
+extern u16 gUnk_3005404;
+
 boolu32 NewFileIntroCheckMonologueEnded(void);
 boolu32 EndingCheckMonologueEnded(void);
 void SpecialCutsceneProcessMonologue(void);

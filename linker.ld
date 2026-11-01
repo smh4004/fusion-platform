@@ -297,6 +297,7 @@ SECTIONS {
         . = 0x000053f9; gUnk_30053f9 = .;
         . = 0x000053fc; gHazeProcessCodePointer = .;
         . = 0x00005400; gMaintainedInput = .;
+        . = 0x00005404; gUnk_3005404 = .;
 
         . = 0x00005408; *libgcc.a:dp-bit.o(.bss);
         . = 0x00005420; *libgcc.a:fp-bit.o(.bss);
