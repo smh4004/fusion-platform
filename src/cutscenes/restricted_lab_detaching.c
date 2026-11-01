@@ -797,7 +797,7 @@ _0809B438: .4byte 0x000001FF\n\
 
 // 0x0809B43C
 NAKED_FUNCTION
-u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 descendingSearch)
+u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -1586,170 +1586,72 @@ _0809BA1C:\n\
     .syntax divided\n");
 }
 
-// 0x0809BA24
-NAKED_FUNCTION
+/**
+ * @brief 9ba24 | 2c | Processes the scrolling of the restricted lab detaching cutscene
+ * 
+ */
 void CutsceneRestrictedLabDetachingProcessScrolling(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r2, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #0x1e\n\
-	bne _0809BA40\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0x13]\n\
-	ldrh r0, [r2]\n\
-	subs r0, #1\n\
-	strh r0, [r2]\n\
-_0809BA40:\n\
-	ldr r1, _0809BA4C @ =0x0400001C\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r1]\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809BA4C: .4byte 0x0400001C\n\
-    .syntax divided\n");
+    pOam->timer++;
+    if (pOam->timer == 30)
+    {
+        pOam->timer = 0;
+        pOam->xPosition--;
+    }
+
+    WRITE_16(REG_BG3HOFS, pOam->xPosition);
 }
 
-// 0x0809BA50
-NAKED_FUNCTION
+/**
+ * @brief 9ba50 | 70 | Processes a debris
+ * 
+ */
 void unk_9ba50(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x14]\n\
-	cmp r0, #0\n\
-	bne _0809BA68\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r2, #6]\n\
-	ldrh r0, [r2, #2]\n\
-	strh r0, [r2, #8]\n\
-	movs r0, #1\n\
-	strb r0, [r2, #0x14]\n\
-	b _0809BA92\n\
-_0809BA68:\n\
-	cmp r0, #1\n\
-	bne _0809BA92\n\
-	ldrh r0, [r2, #0xe]\n\
-	adds r0, #1\n\
-	strh r0, [r2, #0xe]\n\
-	movs r0, #0xc\n\
-	ldrsh r1, [r2, r0]\n\
-	ldrh r0, [r2, #0xe]\n\
-	muls r0, r1, r0\n\
-	asrs r0, r0, #6\n\
-	ldrh r1, [r2, #6]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #0xa\n\
-	ldrsh r1, [r2, r0]\n\
-	ldrh r0, [r2, #0xe]\n\
-	muls r0, r1, r0\n\
-	asrs r0, r0, #6\n\
-	ldrh r1, [r2, #8]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r2, #2]\n\
-_0809BA92:\n\
-	ldrh r0, [r2]\n\
-	adds r0, #0x10\n\
-	lsls r0, r0, #0x10\n\
-	movs r1, #0x88\n\
-	lsls r1, r1, #0x11\n\
-	cmp r0, r1\n\
-	bhi _0809BAB0\n\
-	movs r0, #2\n\
-	ldrsh r1, [r2, r0]\n\
-	movs r0, #0x10\n\
-	rsbs r0, r0, #0\n\
-	cmp r1, r0\n\
-	blt _0809BAB0\n\
-	cmp r1, #0xb0\n\
-	ble _0809BABC\n\
-_0809BAB0:\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0x10]\n\
-	ldrb r1, [r2, #0x16]\n\
-	subs r0, #2\n\
-	ands r0, r1\n\
-	strb r0, [r2, #0x16]\n\
-_0809BABC:\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    if (pOam->stage == 0)
+    {
+        pOam->spawnX = pOam->xPosition;
+        pOam->spawnY = pOam->yPosition;
+        pOam->stage = 1;
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->unk_E++;
+        pOam->xPosition = ((pOam->unk_C * pOam->unk_E) >> 6) + pOam->spawnX;
+        pOam->yPosition = ((pOam->unk_A * pOam->unk_E) >> 6) + pOam->spawnY;
+    }
+
+    if ((u16)(pOam->xPosition + 16) > 272 || pOam->yPosition < -16 || pOam->yPosition > 176)
+    {
+        pOam->type = 0;
+        pOam->enabled = FALSE;
+    }
 }
 
-// 0x0809BAC0
-NAKED_FUNCTION
+/**
+ * @brief 9bac0 | 70 | Processes a debris
+ * 
+ */
 void unk_9bac0(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x14]\n\
-	cmp r0, #0\n\
-	bne _0809BAD8\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r2, #6]\n\
-	ldrh r0, [r2, #2]\n\
-	strh r0, [r2, #8]\n\
-	movs r0, #1\n\
-	strb r0, [r2, #0x14]\n\
-	b _0809BB02\n\
-_0809BAD8:\n\
-	cmp r0, #1\n\
-	bne _0809BB02\n\
-	ldrh r0, [r2, #0xe]\n\
-	adds r0, #1\n\
-	strh r0, [r2, #0xe]\n\
-	movs r0, #0xc\n\
-	ldrsh r1, [r2, r0]\n\
-	ldrh r0, [r2, #0xe]\n\
-	muls r0, r1, r0\n\
-	asrs r0, r0, #6\n\
-	ldrh r1, [r2, #6]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #0xa\n\
-	ldrsh r1, [r2, r0]\n\
-	ldrh r0, [r2, #0xe]\n\
-	muls r0, r1, r0\n\
-	asrs r0, r0, #6\n\
-	ldrh r1, [r2, #8]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r2, #2]\n\
-_0809BB02:\n\
-	ldrh r0, [r2]\n\
-	adds r0, #0x10\n\
-	lsls r0, r0, #0x10\n\
-	movs r1, #0x88\n\
-	lsls r1, r1, #0x11\n\
-	cmp r0, r1\n\
-	bhi _0809BB20\n\
-	movs r0, #2\n\
-	ldrsh r1, [r2, r0]\n\
-	movs r0, #0x10\n\
-	rsbs r0, r0, #0\n\
-	cmp r1, r0\n\
-	blt _0809BB20\n\
-	cmp r1, #0xb0\n\
-	ble _0809BB2C\n\
-_0809BB20:\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0x10]\n\
-	ldrb r1, [r2, #0x16]\n\
-	subs r0, #2\n\
-	ands r0, r1\n\
-	strb r0, [r2, #0x16]\n\
-_0809BB2C:\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    if (pOam->stage == 0)
+    {
+        pOam->spawnX = pOam->xPosition;
+        pOam->spawnY = pOam->yPosition;
+        pOam->stage = 1;
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->unk_E++;
+        pOam->xPosition = ((pOam->unk_C * pOam->unk_E) >> 6) + pOam->spawnX;
+        pOam->yPosition = ((pOam->unk_A * pOam->unk_E) >> 6) + pOam->spawnY;
+    }
+
+    if ((u16)(pOam->xPosition + 16) > 272 || pOam->yPosition < -16 || pOam->yPosition > 176)
+    {
+        pOam->type = 0;
+        pOam->enabled = FALSE;
+    }
 }
 
 // 0x0809BB30
@@ -1990,49 +1892,24 @@ _0809BCD8: .4byte 0x84000008\n\
     .syntax divided\n");
 }
 
-// 0x0809BCDC
-NAKED_FUNCTION
+/**
+ * @brief 9bcdc | 48 | Processes the scrolling of the restricted lab
+ * 
+ */
 void unk_9bcdc(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r3, r0, #0\n\
-	ldrb r0, [r3, #0x14]\n\
-	cmp r0, #0\n\
-	bne _0809BD00\n\
-	ldr r1, _0809BCFC @ =0x04000018\n\
-	ldrh r0, [r3]\n\
-	strh r0, [r1]\n\
-	ldrh r0, [r3]\n\
-	strh r0, [r3, #6]\n\
-	ldrh r0, [r3, #2]\n\
-	strh r0, [r3, #8]\n\
-	movs r0, #1\n\
-	strb r0, [r3, #0x14]\n\
-	b _0809BD1C\n\
-	.align 2, 0\n\
-_0809BCFC: .4byte 0x04000018\n\
-_0809BD00:\n\
-	cmp r0, #1\n\
-	bne _0809BD1C\n\
-	ldrh r0, [r3, #0xe]\n\
-	adds r0, #1\n\
-	strh r0, [r3, #0xe]\n\
-	ldr r2, _0809BD20 @ =0x04000018\n\
-	movs r0, #0xc\n\
-	ldrsh r1, [r3, r0]\n\
-	ldrh r0, [r3, #0xe]\n\
-	muls r0, r1, r0\n\
-	asrs r0, r0, #7\n\
-	ldrh r3, [r3]\n\
-	adds r0, r0, r3\n\
-	strh r0, [r2]\n\
-_0809BD1C:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809BD20: .4byte 0x04000018\n\
-    .syntax divided\n");
+    if (pOam->stage == 0)
+    {
+        WRITE_16(REG_BG2HOFS, pOam->xPosition);
+        pOam->spawnX = pOam->xPosition;
+        pOam->spawnY = pOam->yPosition;
+        pOam->stage = 1;
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->unk_E++;
+        WRITE_16(REG_BG2HOFS, ((pOam->unk_C * pOam->unk_E) >> 7) + pOam->xPosition);
+    }
 }
 
 // 0x0809BD24
@@ -2152,91 +2029,39 @@ _0809BDF4: .4byte 0x84000008\n\
     .syntax divided\n");
 }
 
-// 0x0809BDF8
-NAKED_FUNCTION
+/**
+ * @brief 9bdf8 | 94 | Processes a debris
+ * 
+ */
 void unk_9bdf8(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x14]\n\
-	cmp r0, #0\n\
-	bne _0809BE10\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r2, #6]\n\
-	ldrh r0, [r2, #2]\n\
-	strh r0, [r2, #8]\n\
-	movs r0, #1\n\
-	strb r0, [r2, #0x14]\n\
-	b _0809BE3A\n\
-_0809BE10:\n\
-	cmp r0, #1\n\
-	bne _0809BE3A\n\
-	ldrh r0, [r2, #0xe]\n\
-	adds r0, #1\n\
-	strh r0, [r2, #0xe]\n\
-	movs r0, #0xc\n\
-	ldrsh r1, [r2, r0]\n\
-	ldrh r0, [r2, #0xe]\n\
-	muls r0, r1, r0\n\
-	asrs r0, r0, #6\n\
-	ldrh r1, [r2, #6]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #0xa\n\
-	ldrsh r1, [r2, r0]\n\
-	ldrh r0, [r2, #0xe]\n\
-	muls r0, r1, r0\n\
-	asrs r0, r0, #6\n\
-	ldrh r1, [r2, #8]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r2, #2]\n\
-_0809BE3A:\n\
-	ldrb r0, [r2, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r2, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #5\n\
-	bne _0809BE5E\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0x13]\n\
-	ldrh r0, [r2, #4]\n\
-	subs r0, #4\n\
-	strh r0, [r2, #4]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #2\n\
-	bgt _0809BE5E\n\
-	movs r0, #2\n\
-	strh r0, [r2, #4]\n\
-_0809BE5E:\n\
-	ldrh r0, [r2]\n\
-	adds r0, #0x10\n\
-	lsls r0, r0, #0x10\n\
-	movs r1, #0x88\n\
-	lsls r1, r1, #0x11\n\
-	cmp r0, r1\n\
-	bhi _0809BE7C\n\
-	movs r0, #2\n\
-	ldrsh r1, [r2, r0]\n\
-	movs r0, #0x10\n\
-	rsbs r0, r0, #0\n\
-	cmp r1, r0\n\
-	blt _0809BE7C\n\
-	cmp r1, #0xb0\n\
-	ble _0809BE88\n\
-_0809BE7C:\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0x10]\n\
-	ldrb r1, [r2, #0x16]\n\
-	subs r0, #2\n\
-	ands r0, r1\n\
-	strb r0, [r2, #0x16]\n\
-_0809BE88:\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    if (pOam->stage == 0)
+    {
+        pOam->spawnX = pOam->xPosition;
+        pOam->spawnY = pOam->yPosition;
+        pOam->stage = 1;
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->unk_E++;
+        pOam->xPosition = ((pOam->unk_C * pOam->unk_E) >> 6) + pOam->spawnX;
+        pOam->yPosition = ((pOam->unk_A * pOam->unk_E) >> 6) + pOam->spawnY;
+    }
+
+    pOam->timer++;
+    if (pOam->timer == 5)
+    {
+        pOam->timer = 0;
+        pOam->scaling -= 4;
+        if (pOam->scaling <= 2)
+            pOam->scaling = 2;
+    }
+
+    if ((u16)(pOam->xPosition + 16) > 272 || pOam->yPosition < -16 || pOam->yPosition > 176)
+    {
+        pOam->type = 0;
+        pOam->enabled = FALSE;
+    }
 }
 
 // 0x0809BE8C
@@ -2342,371 +2167,152 @@ _0809BF50: .4byte gWrittenToBldalpha_Evb\n\
     .syntax divided\n");
 }
 
-// 0x0809BF54
-NAKED_FUNCTION
+/**
+ * @brief 9bf54 | 64 | Shakes the screen
+ * 
+ */
 void unk_9bf54(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r3, r0, #0\n\
-	ldrb r0, [r3, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r3, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #1\n\
-	bne _0809BF7E\n\
-	movs r0, #0\n\
-	strb r0, [r3, #0x13]\n\
-	ldr r1, _0809BFAC @ =gNonGameplayRam\n\
-	ldrh r0, [r1, #0xa]\n\
-	adds r0, #2\n\
-	strh r0, [r1, #0xa]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #0xa0\n\
-	ble _0809BF7E\n\
-	movs r0, #0xa0\n\
-	strh r0, [r1, #0xa]\n\
-_0809BF7E:\n\
-	ldrb r0, [r3, #0x12]\n\
-	adds r0, #1\n\
-	strb r0, [r3, #0x12]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #0x20\n\
-	bne _0809BF90\n\
-	movs r0, #0\n\
-	strb r0, [r3, #0x12]\n\
-_0809BF90:\n\
-	ldr r1, _0809BFB0 @ =0x04000014\n\
-	ldr r2, _0809BFB4 @ =sRandomNumberTable\n\
-	ldrb r0, [r3, #0x12]\n\
-	adds r0, r0, r2\n\
-	ldrb r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldrb r0, [r3, #0x12]\n\
-	adds r0, r0, r2\n\
-	ldrb r0, [r0]\n\
-	strh r0, [r1]\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809BFAC: .4byte gNonGameplayRam\n\
-_0809BFB0: .4byte 0x04000014\n\
-_0809BFB4: .4byte sRandomNumberTable\n\
-    .syntax divided\n");
+    pOam->timer++;
+    if (pOam->timer == 1)
+    {
+        pOam->timer = 0;
+        CUTSCENE_OAM_DATA.unk_A += 2;
+        if (CUTSCENE_OAM_DATA.unk_A > 160)
+            CUTSCENE_OAM_DATA.unk_A = 160;
+    }
+
+    pOam->animationDurationCounter++;
+    if (pOam->animationDurationCounter == 32)
+        pOam->animationDurationCounter = 0;
+
+    WRITE_16(REG_BG1HOFS, sRandomNumberTable[pOam->animationDurationCounter]);
+    WRITE_16(REG_BG1VOFS, sRandomNumberTable[pOam->animationDurationCounter]);
 }
 
-// 0x0809BFB8
-NAKED_FUNCTION
+/**
+ * @brief 9bfb8 | 94 | Processes a debris
+ * 
+ */
 void unk_9bfb8(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x14]\n\
-	cmp r0, #0\n\
-	bne _0809BFD0\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r2, #6]\n\
-	ldrh r0, [r2, #2]\n\
-	strh r0, [r2, #8]\n\
-	movs r0, #1\n\
-	strb r0, [r2, #0x14]\n\
-	b _0809BFFA\n\
-_0809BFD0:\n\
-	cmp r0, #1\n\
-	bne _0809BFFA\n\
-	ldrh r0, [r2, #0xe]\n\
-	adds r0, #1\n\
-	strh r0, [r2, #0xe]\n\
-	movs r0, #0xc\n\
-	ldrsh r1, [r2, r0]\n\
-	ldrh r0, [r2, #0xe]\n\
-	muls r0, r1, r0\n\
-	asrs r0, r0, #6\n\
-	ldrh r1, [r2, #6]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r2]\n\
-	movs r3, #0xa\n\
-	ldrsh r1, [r2, r3]\n\
-	ldrh r0, [r2, #0xe]\n\
-	muls r0, r1, r0\n\
-	asrs r0, r0, #6\n\
-	ldrh r1, [r2, #8]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r2, #2]\n\
-_0809BFFA:\n\
-	ldrh r0, [r2]\n\
-	adds r0, #0x10\n\
-	lsls r0, r0, #0x10\n\
-	movs r1, #0x88\n\
-	lsls r1, r1, #0x11\n\
-	cmp r0, r1\n\
-	bhi _0809C018\n\
-	movs r3, #2\n\
-	ldrsh r1, [r2, r3]\n\
-	movs r0, #0x10\n\
-	rsbs r0, r0, #0\n\
-	cmp r1, r0\n\
-	blt _0809C018\n\
-	cmp r1, #0xb0\n\
-	ble _0809C024\n\
-_0809C018:\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0x10]\n\
-	ldrb r1, [r2, #0x16]\n\
-	subs r0, #2\n\
-	ands r0, r1\n\
-	strb r0, [r2, #0x16]\n\
-_0809C024:\n\
-	ldrb r0, [r2, #0x11]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r2, #0x1c]\n\
-	adds r1, r1, r0\n\
-	ldrb r0, [r1, #4]\n\
-	ldrb r3, [r2, #0x12]\n\
-	cmp r0, r3\n\
-	bne _0809C046\n\
-	ldrb r1, [r1, #0xc]\n\
-	cmp r1, #0\n\
-	bne _0809C046\n\
-	strb r1, [r2, #0x10]\n\
-	ldrb r1, [r2, #0x16]\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	strb r0, [r2, #0x16]\n\
-_0809C046:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    const struct FrameData* pFrame;
+
+    if (pOam->stage == 0)
+    {
+        pOam->spawnX = pOam->xPosition;
+        pOam->spawnY = pOam->yPosition;
+        pOam->stage = 1;
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->unk_E++;
+        pOam->xPosition = ((pOam->unk_C * pOam->unk_E) >> 6) + pOam->spawnX;
+        pOam->yPosition = ((pOam->unk_A * pOam->unk_E) >> 6) + pOam->spawnY;
+    }
+
+    if ((u16)(pOam->xPosition + 16) > 272 || pOam->yPosition < -16 || pOam->yPosition > 176)
+    {
+        pOam->type = 0;
+        pOam->enabled = FALSE;
+    }
+
+    pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+    if (pFrame[0].timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+    {
+        pOam->type = 0;
+        pOam->enabled = FALSE;
+    }
 }
 
-// 0x0809C04C
-NAKED_FUNCTION
+/**
+ * @brief 9c04c | 34 | To document
+ * 
+ */
 void unk_9c04c(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r2, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #0x28\n\
-	bne _0809C070\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0x13]\n\
-	ldrh r1, [r2]\n\
-	movs r3, #0\n\
-	ldrsh r0, [r2, r3]\n\
-	cmp r0, #0\n\
-	ble _0809C070\n\
-	subs r0, r1, #1\n\
-	strh r0, [r2]\n\
-_0809C070:\n\
-	ldr r1, _0809C07C @ =0x04000018\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r1]\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809C07C: .4byte 0x04000018\n\
-    .syntax divided\n");
+    pOam->timer++;
+    if (pOam->timer == 40)
+    {
+        pOam->timer = 0;
+        if (pOam->xPosition > 0)
+            pOam->xPosition--;
+    }
+
+    WRITE_16(REG_BG2HOFS, pOam->xPosition);
 }
 
-// 0x0809C080
-NAKED_FUNCTION
-void unk_9c080(u8 type, s16 xPosition, s16 yPosition, u16 param_4)
+/**
+ * @brief 9c080 | 34 | Sets up a restricted lab detaching OAM with a parameter
+ * 
+ */
+u8 unk_9c080(u8 type, s16 xPosition, s16 yPosition, u16 param_4)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	adds r4, r3, #0\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	lsls r4, r4, #0x10\n\
-	lsrs r4, r4, #0x10\n\
-	lsls r1, r1, #0x10\n\
-	asrs r1, r1, #0x10\n\
-	lsls r2, r2, #0x10\n\
-	asrs r2, r2, #0x10\n\
-	bl CutsceneRestrictedLabDetachingSetupOam\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	ldr r2, _0809C0B0 @ =gNonGameplayRam\n\
-	lsls r1, r0, #3\n\
-	adds r1, r1, r0\n\
-	lsls r1, r1, #2\n\
-	adds r1, r1, r2\n\
-	strh r4, [r1, #0x24]\n\
-	pop {r4}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_0809C0B0: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    u8 slot;
+
+    slot = CutsceneRestrictedLabDetachingSetupOam(type, xPosition, yPosition);
+    CUTSCENE_OAM_DATA.oam[slot].unk_C = param_4;
+    return slot;
 }
 
-// 0x0809C0B4
-NAKED_FUNCTION
-void unk_9c0b4(u8 type, s16 xPosition, s16 yPosition, u16 param_4, u16 param_5)
+/**
+ * @brief 9c0b4 | 3c | Sets up a restricted lab detaching OAM with two parameters
+ * 
+ */
+u8 unk_9c0b4(u8 type, s16 xPosition, s16 yPosition, u16 param_4, u16 param_5)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	adds r5, r3, #0\n\
-	ldr r4, [sp, #0xc]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	lsls r5, r5, #0x10\n\
-	lsrs r5, r5, #0x10\n\
-	lsls r4, r4, #0x10\n\
-	lsrs r4, r4, #0x10\n\
-	lsls r1, r1, #0x10\n\
-	asrs r1, r1, #0x10\n\
-	lsls r2, r2, #0x10\n\
-	asrs r2, r2, #0x10\n\
-	bl CutsceneRestrictedLabDetachingSetupOam\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	ldr r2, _0809C0EC @ =gNonGameplayRam\n\
-	lsls r1, r0, #3\n\
-	adds r1, r1, r0\n\
-	lsls r1, r1, #2\n\
-	adds r1, r1, r2\n\
-	strh r4, [r1, #0x22]\n\
-	strh r5, [r1, #0x24]\n\
-	pop {r4, r5}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_0809C0EC: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    u8 slot;
+
+    slot = CutsceneRestrictedLabDetachingSetupOam(type, xPosition, yPosition);
+    CUTSCENE_OAM_DATA.oam[slot].unk_A = param_5;
+    CUTSCENE_OAM_DATA.oam[slot].unk_C = param_4;
+    return slot;
 }
 
-// 0x0809C0F0
-NAKED_FUNCTION
+/**
+ * @brief 9c0f0 | 48 | Gets the position of a restricted lab detaching OAM by type
+ * 
+ */
 void CutsceneRestrictedLabDetachingGetPositionOfOamByType(u8 type, s16* pXPosition, s16* pYPosition)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	adds r4, r1, #0\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r5, r0, #0x18\n\
-	movs r1, #0\n\
-	ldr r6, _0809C118 @ =gNonGameplayRam\n\
-_0809C0FC:\n\
-	lsls r0, r1, #3\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r3, r0, r6\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x28\n\
-	ldrb r0, [r0]\n\
-	cmp r0, r5\n\
-	bne _0809C11C\n\
-	ldrh r0, [r3, #0x18]\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r3, #0x1a]\n\
-	b _0809C130\n\
-	.align 2, 0\n\
-_0809C118: .4byte gNonGameplayRam\n\
-_0809C11C:\n\
-	adds r0, r1, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r1, r0, #0x18\n\
-	cmp r1, #0xf\n\
-	bls _0809C0FC\n\
-	movs r1, #0x96\n\
-	lsls r1, r1, #1\n\
-	adds r0, r1, #0\n\
-	strh r0, [r4]\n\
-	movs r0, #0xc8\n\
-_0809C130:\n\
-	strh r0, [r2]\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    u8 slot;
+
+    for (slot = 0; slot < ARRAY_SIZE(CUTSCENE_OAM_DATA.oam); slot++)
+    {
+        if (CUTSCENE_OAM_DATA.oam[slot].type == type)
+        {
+            *pXPosition = CUTSCENE_OAM_DATA.oam[slot].xPosition;
+            *pYPosition = CUTSCENE_OAM_DATA.oam[slot].yPosition;
+            return;
+        }
+    }
+
+    *pXPosition = 300;
+    *pYPosition = 200;
 }
 
-// 0x0809C138
-NAKED_FUNCTION
+/**
+ * @brief 9c138 | 84 | V-blank for the restricted lab detaching cutscene
+ * 
+ */
 void CutsceneRestrictedLabDetachingVblank(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	ldr r3, _0809C18C @ =0x040000D4\n\
-	ldr r0, _0809C190 @ =gOamData\n\
-	str r0, [r3]\n\
-	movs r0, #0xe0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r3, #4]\n\
-	ldr r0, _0809C194 @ =0x84000100\n\
-	str r0, [r3, #8]\n\
-	ldr r0, [r3, #8]\n\
-	ldr r2, _0809C198 @ =0x04000052\n\
-	ldr r0, _0809C19C @ =gWrittenToBldalpha_Evb\n\
-	ldrh r0, [r0]\n\
-	lsls r0, r0, #8\n\
-	ldr r1, _0809C1A0 @ =gWrittenToBldalpha_Eva\n\
-	ldrh r1, [r1]\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r1, _0809C1A4 @ =0x04000054\n\
-	ldr r0, _0809C1A8 @ =gWrittenToBldy\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0809C1AC @ =gNonGameplayRam\n\
-	movs r2, #0xa\n\
-	ldrsh r0, [r1, r2]\n\
-	cmp r0, #1\n\
-	bne _0809C188\n\
-	movs r0, #0\n\
-	strh r0, [r1, #0xa]\n\
-	movs r2, #0xc\n\
-	ldrsh r0, [r1, r2]\n\
-	lsls r0, r0, #5\n\
-	ldr r1, _0809C1B0 @ =0x0868101C\n\
-	adds r0, r0, r1\n\
-	str r0, [r3]\n\
-	ldr r0, _0809C1B4 @ =0x05000120\n\
-	str r0, [r3, #4]\n\
-	ldr r0, _0809C1B8 @ =0x84000008\n\
-	str r0, [r3, #8]\n\
-	ldr r0, [r3, #8]\n\
-_0809C188:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809C18C: .4byte 0x040000D4\n\
-_0809C190: .4byte gOamData\n\
-_0809C194: .4byte 0x84000100\n\
-_0809C198: .4byte 0x04000052\n\
-_0809C19C: .4byte gWrittenToBldalpha_Evb\n\
-_0809C1A0: .4byte gWrittenToBldalpha_Eva\n\
-_0809C1A4: .4byte 0x04000054\n\
-_0809C1A8: .4byte gWrittenToBldy\n\
-_0809C1AC: .4byte gNonGameplayRam\n\
-_0809C1B0: .4byte 0x0868101C\n\
-_0809C1B4: .4byte 0x05000120\n\
-_0809C1B8: .4byte 0x84000008\n\
-    .syntax divided\n");
+    DMA3_COPY_32(gOamData, OAM_BASE, OAM_SIZE / 4);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_Evb, gWrittenToBldalpha_Eva));
+    WRITE_16(REG_BLDY, gWrittenToBldy);
+
+    if (CUTSCENE_OAM_DATA.unk_A == 1)
+    {
+        CUTSCENE_OAM_DATA.unk_A = 0;
+        DMA3_COPY_32(&((const u16*)0x868101c)[CUTSCENE_OAM_DATA.unk_C * 16], PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
+    }
 }
 
-// 0x0809C1BC
-NAKED_FUNCTION
+/**
+ * @brief 9c1bc | c | V-blank that only updates the audio
+ * 
+ */
 void unk_9c1bc(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	bl UpdateAudio\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    UpdateAudio();
 }
