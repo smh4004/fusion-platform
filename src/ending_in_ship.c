@@ -1278,7 +1278,7 @@ _08096920:\n\
 
 // 0x08096928
 NAKED_FUNCTION
-void EndingInShip(void)
+boolu32 EndingInShip(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, lr}\n\
