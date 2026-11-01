@@ -4925,193 +4925,62 @@ void unk_7c3b4(void)
 }
 
 // 0x0807C440
-NAKED_FUNCTION
+#define PALRAM_BG ((u16*)PALRAM_BASE)
+#define PALRAM_BASE_U16 ((vu16*)0x5000000)
 void unk_7c440(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	ldr r2, _0807C518 @ =gNonGameplayRam\n\
-	ldr r0, _0807C51C @ =0x00000225\n\
-	adds r5, r2, r0\n\
-	ldrb r0, [r5]\n\
-	adds r0, #1\n\
-	movs r7, #0\n\
-	strb r0, [r5]\n\
-	ldr r3, _0807C520 @ =0x0857BEB4\n\
-	movs r1, #0x89\n\
-	lsls r1, r1, #2\n\
-	adds r4, r2, r1\n\
-	ldrb r1, [r4]\n\
-	adds r1, r1, r3\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	adds r6, r2, #0\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	blo _0807C4B0\n\
-	strb r7, [r5]\n\
-	ldrb r0, [r4]\n\
-	adds r0, #1\n\
-	strb r0, [r4]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #3\n\
-	bls _0807C47A\n\
-	strb r7, [r4]\n\
-_0807C47A:\n\
-	movs r3, #0xa0\n\
-	lsls r3, r3, #0x13\n\
-	ldr r1, _0807C524 @ =0x0857BCD4\n\
-	ldrb r0, [r4]\n\
-	lsls r0, r0, #1\n\
-	adds r0, r0, r1\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r3, #0x24]\n\
-	ldrb r0, [r4]\n\
-	lsls r0, r0, #1\n\
-	adds r0, r0, r1\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r3, #0x26]\n\
-	adds r1, r3, #0\n\
-	adds r1, #0x44\n\
-	ldr r2, _0807C528 @ =0x0857BCF4\n\
-	ldrb r0, [r4]\n\
-	lsls r0, r0, #1\n\
-	adds r0, r0, r2\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldrb r0, [r4]\n\
-	lsls r0, r0, #1\n\
-	adds r0, r0, r2\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-_0807C4B0:\n\
-	adds r1, r6, #0\n\
-	ldrb r0, [r1]\n\
-	cmp r0, #0\n\
-	beq _0807C59C\n\
-	cmp r0, #1\n\
-	bne _0807C53C\n\
-	ldr r6, _0807C52C @ =0x0000022D\n\
-	adds r3, r1, r6\n\
-	ldrb r0, [r3]\n\
-	adds r0, #1\n\
-	movs r5, #0\n\
-	strb r0, [r3]\n\
-	ldr r2, _0807C530 @ =0x0857BEB8\n\
-	subs r6, #1\n\
-	adds r4, r1, r6\n\
-	ldrb r1, [r4]\n\
-	adds r1, r1, r2\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	blo _0807C59C\n\
-	strb r5, [r3]\n\
-	ldrb r0, [r4]\n\
-	adds r0, #1\n\
-	strb r0, [r4]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #3\n\
-	bls _0807C4EE\n\
-	strb r5, [r4]\n\
-_0807C4EE:\n\
-	ldr r3, _0807C534 @ =0x05000138\n\
-	ldrb r0, [r4]\n\
-	lsls r0, r0, #4\n\
-	adds r0, #0xc\n\
-	adds r2, r0, #0\n\
-	movs r1, #0\n\
-	ldr r4, _0807C538 @ =0x0857BD34\n\
-_0807C4FC:\n\
-	lsls r0, r2, #1\n\
-	adds r0, r0, r4\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r3]\n\
-	adds r0, r1, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r1, r0, #0x10\n\
-	adds r0, r2, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r2, r0, #0x10\n\
-	adds r3, #2\n\
-	cmp r1, #3\n\
-	bls _0807C4FC\n\
-	b _0807C59C\n\
-	.align 2, 0\n\
-_0807C518: .4byte gNonGameplayRam\n\
-_0807C51C: .4byte 0x00000225\n\
-_0807C520: .4byte 0x0857BEB4\n\
-_0807C524: .4byte 0x0857BCD4\n\
-_0807C528: .4byte 0x0857BCF4\n\
-_0807C52C: .4byte 0x0000022D\n\
-_0807C530: .4byte 0x0857BEB8\n\
-_0807C534: .4byte 0x05000138\n\
-_0807C538: .4byte 0x0857BD34\n\
-_0807C53C:\n\
-	cmp r0, #2\n\
-	bne _0807C59C\n\
-	ldr r0, _0807C5A4 @ =0x0000022D\n\
-	adds r3, r6, r0\n\
-	ldrb r0, [r3]\n\
-	adds r0, #1\n\
-	movs r5, #0\n\
-	strb r0, [r3]\n\
-	ldr r2, _0807C5A8 @ =0x0857BEBC\n\
-	movs r1, #0x8b\n\
-	lsls r1, r1, #2\n\
-	adds r4, r6, r1\n\
-	ldrb r1, [r4]\n\
-	adds r1, r1, r2\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	blo _0807C59C\n\
-	strb r5, [r3]\n\
-	ldrb r0, [r4]\n\
-	adds r0, #1\n\
-	strb r0, [r4]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bls _0807C574\n\
-	strb r5, [r4]\n\
-_0807C574:\n\
-	ldr r3, _0807C5AC @ =0x05000194\n\
-	ldrb r0, [r4]\n\
-	lsls r0, r0, #4\n\
-	adds r0, #0xa\n\
-	adds r2, r0, #0\n\
-	movs r1, #0\n\
-	ldr r4, _0807C5B0 @ =0x0857BDB4\n\
-_0807C582:\n\
-	lsls r0, r2, #1\n\
-	adds r0, r0, r4\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r3]\n\
-	adds r0, r1, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r1, r0, #0x10\n\
-	adds r0, r2, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r2, r0, #0x10\n\
-	adds r3, #2\n\
-	cmp r1, #5\n\
-	bls _0807C582\n\
-_0807C59C:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807C5A4: .4byte 0x0000022D\n\
-_0807C5A8: .4byte 0x0857BEBC\n\
-_0807C5AC: .4byte 0x05000194\n\
-_0807C5B0: .4byte 0x0857BDB4\n\
-    .syntax divided\n");
+    u16* dst;
+    u16 i;
+    u16 j;
+
+    PAUSE_SCREEN_DATA.unk_225++;
+    if (PAUSE_SCREEN_DATA.unk_225 >= sNavConversationPalTimers_57beb4[PAUSE_SCREEN_DATA.unk_224])
+    {
+        PAUSE_SCREEN_DATA.unk_225 = 0;
+        PAUSE_SCREEN_DATA.unk_224++;
+        if (PAUSE_SCREEN_DATA.unk_224 > 3)
+            PAUSE_SCREEN_DATA.unk_224 = 0;
+
+        dst = PALRAM_BASE;
+        dst[0x12] = sNavConversationPal_57bcd4[PAUSE_SCREEN_DATA.unk_224];
+        dst[0x13] = sNavConversationPal_57bcd4[PAUSE_SCREEN_DATA.unk_224];
+        dst[0x22] = sNavConversationPal_57bcf4[0][PAUSE_SCREEN_DATA.unk_224];
+        dst[0x23] = sNavConversationPal_57bcf4[0][PAUSE_SCREEN_DATA.unk_224];
+    }
+
+    if (PAUSE_SCREEN_DATA.unk_0 == 0)
+        return;
+
+    if (PAUSE_SCREEN_DATA.unk_0 == 1)
+    {
+        PAUSE_SCREEN_DATA.unk_22D++;
+        if (PAUSE_SCREEN_DATA.unk_22D < sNavConversationPalTimers_57beb8[PAUSE_SCREEN_DATA.unk_22C])
+            return;
+
+        PAUSE_SCREEN_DATA.unk_22D = 0;
+        PAUSE_SCREEN_DATA.unk_22C++;
+        if (PAUSE_SCREEN_DATA.unk_22C > 3)
+            PAUSE_SCREEN_DATA.unk_22C = 0;
+
+        dst = PALRAM_BASE + 0x138;
+        for (j = PAUSE_SCREEN_DATA.unk_22C * 16 + 12, i = 0; i < 4; i++, j++, dst++)
+            *dst = sNavConversationPal_57bd34[0][j];
+    }
+    else if (PAUSE_SCREEN_DATA.unk_0 == 2)
+    {
+        PAUSE_SCREEN_DATA.unk_22D++;
+        if (PAUSE_SCREEN_DATA.unk_22D < sNavConversationPalTimers_57bebc[PAUSE_SCREEN_DATA.unk_22C])
+            return;
+
+        PAUSE_SCREEN_DATA.unk_22D = 0;
+        PAUSE_SCREEN_DATA.unk_22C++;
+        if (PAUSE_SCREEN_DATA.unk_22C > 7)
+            PAUSE_SCREEN_DATA.unk_22C = 0;
+
+        dst = PALRAM_BASE + 0x194;
+        for (j = PAUSE_SCREEN_DATA.unk_22C * 16 + 10, i = 0; i < 6; i++, j++, dst++)
+            *dst = sNavConversationPal_57bdb4[0][j];
+    }
 }
 
 /**
