@@ -6460,27 +6460,27 @@ void unk_7d27c(void)
 
     if (gNavConversationTargetLocation == NAV_TARGET_LOC_NONE)
     {
-        PAUSE_SCREEN_DATA.unk_240 = 0;
+        PAUSE_SCREEN_DATA.bslDiagram.stage = 0;
         return;
     }
 
-    PAUSE_SCREEN_DATA.unk_240 = 1;
+    PAUSE_SCREEN_DATA.bslDiagram.stage = 1;
     if (PAUSE_SCREEN_DATA.conversationNumber == gPreviousNavigationConversation)
-        PAUSE_SCREEN_DATA.unk_24A = 2;
+        PAUSE_SCREEN_DATA.bslDiagram.targetStage = 2;
     else
-        PAUSE_SCREEN_DATA.unk_24A = 1;
+        PAUSE_SCREEN_DATA.bslDiagram.targetStage = 1;
 
     target = sEvent_57607D[gNavConversationTargetLocation];
     if (target < 0)
         return;
 
-    PAUSE_SCREEN_DATA.unk_245 = target;
-    if (target == (s8)PAUSE_SCREEN_DATA.unk_244)
+    PAUSE_SCREEN_DATA.bslDiagram.targetRotation = target;
+    if (target == PAUSE_SCREEN_DATA.bslDiagram.rotation)
         return;
 
-    PAUSE_SCREEN_DATA.unk_240 = 4;
+    PAUSE_SCREEN_DATA.bslDiagram.stage = 4;
 
-    diff = (s8)PAUSE_SCREEN_DATA.unk_245 - (s8)PAUSE_SCREEN_DATA.unk_244;
+    diff = PAUSE_SCREEN_DATA.bslDiagram.targetRotation - PAUSE_SCREEN_DATA.bslDiagram.rotation;
     sign = 1;
     if (diff < 0)
         sign = -1;
@@ -6497,5 +6497,5 @@ void unk_7d27c(void)
         dir = 1;
     }
 
-    PAUSE_SCREEN_DATA.unk_246 = sign * dir;
+    PAUSE_SCREEN_DATA.bslDiagram.rotationDirection = sign * dir;
 }
