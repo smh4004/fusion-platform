@@ -329,7 +329,10 @@ const u8 sNavConversationPortraitOamIds[6][3] = {
     }
 };
 
-static const u8 sBlob_576802_57bbc4[] = INCBIN_U8("data/Blob_576802_57bbc4.bin");
+const u8 sNavConversationMosaicTarget = 0xEE;
+static const u8 sPadding_576803 = 0;
+
+static const u8 sBlob_576804_57bbc4[] = INCBIN_U8("data/Blob_576804_57bbc4.bin");
 
 const u8 sNavConversationPopUpAnim_57bbc4[6 * 2] = {
     0, 20,

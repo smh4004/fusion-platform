@@ -73,6 +73,8 @@ struct NavConversationTarget {
 extern const struct NavConversationTarget sNavConversationTargets[33];
 extern const u8 sNavConversationTargetTextOamIds[4];
 
+extern const u8 sNavConversationMosaicTarget;
+
 struct NavConversationPopUp {
     const u8* pAnimation; // Pairs of (frame, duration)
     u8 animationLength;
