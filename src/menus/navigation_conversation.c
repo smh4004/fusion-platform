@@ -4924,9 +4924,10 @@ void unk_7c3b4(void)
         PAUSE_SCREEN_DATA.unk_228 = 0;
 }
 
-// 0x0807C440
-#define PALRAM_BG ((u16*)PALRAM_BASE)
-#define PALRAM_BASE_U16 ((vu16*)0x5000000)
+/**
+ * @brief 7c440 | 174 | Animates the navigation room palettes
+ * 
+ */
 void unk_7c440(void)
 {
     u16* dst;
