@@ -843,212 +843,114 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
     return slot;
 }
 
-// 0x0809B8AC
-NAKED_FUNCTION
+/**
+ * @brief 9b8ac | 178 | Processes a part of the BSL
+ * 
+ */
 void CutsceneRestrictedLabDetachingProcessBslPart(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r3, [r2, #0x14]\n\
-	cmp r3, #0\n\
-	bne _0809B98C\n\
-	ldrb r0, [r2, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r2, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #9\n\
-	bne _0809B8CC\n\
-	strb r3, [r2, #0x13]\n\
-	ldrh r0, [r2]\n\
-	subs r0, #1\n\
-	strh r0, [r2]\n\
-_0809B8CC:\n\
-	ldrh r0, [r2, #0xe]\n\
-	adds r0, #1\n\
-	strh r0, [r2, #0xe]\n\
-	movs r4, #6\n\
-	ldrsh r1, [r2, r4]\n\
-	cmp r1, #1\n\
-	beq _0809B90C\n\
-	cmp r1, #1\n\
-	bgt _0809B8E4\n\
-	cmp r1, #0\n\
-	beq _0809B8EA\n\
-	b _0809B954\n\
-_0809B8E4:\n\
-	cmp r1, #2\n\
-	beq _0809B930\n\
-	b _0809B954\n\
-_0809B8EA:\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #4\n\
-	bne _0809B964\n\
-	strh r3, [r2, #0xe]\n\
-	ldrh r0, [r2, #4]\n\
-	adds r0, #2\n\
-	strh r0, [r2, #4]\n\
-	lsls r0, r0, #0x10\n\
-	ldr r1, _0809B908 @ =0x017F0000\n\
-	cmp r0, r1\n\
-	ble _0809B964\n\
-	movs r0, #1\n\
-	strh r0, [r2, #6]\n\
-	b _0809B964\n\
-	.align 2, 0\n\
-_0809B908: .4byte 0x017F0000\n\
-_0809B90C:\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #5\n\
-	bne _0809B964\n\
-	strh r3, [r2, #0xe]\n\
-	ldrh r0, [r2, #4]\n\
-	adds r0, #2\n\
-	strh r0, [r2, #4]\n\
-	lsls r0, r0, #0x10\n\
-	ldr r1, _0809B92C @ =0x019F0000\n\
-	cmp r0, r1\n\
-	ble _0809B964\n\
-	movs r0, #2\n\
-	strh r0, [r2, #6]\n\
-	b _0809B964\n\
-	.align 2, 0\n\
-_0809B92C: .4byte 0x019F0000\n\
-_0809B930:\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #6\n\
-	bne _0809B964\n\
-	strh r3, [r2, #0xe]\n\
-	ldrh r0, [r2, #4]\n\
-	adds r0, #2\n\
-	strh r0, [r2, #4]\n\
-	lsls r0, r0, #0x10\n\
-	ldr r1, _0809B950 @ =0x01BF0000\n\
-	cmp r0, r1\n\
-	ble _0809B964\n\
-	movs r0, #3\n\
-	strh r0, [r2, #6]\n\
-	b _0809B964\n\
-	.align 2, 0\n\
-_0809B950: .4byte 0x01BF0000\n\
-_0809B954:\n\
-	ldrh r0, [r2, #0xe]\n\
-	cmp r0, #7\n\
-	bne _0809B964\n\
-	movs r0, #0\n\
-	strh r0, [r2, #0xe]\n\
-	ldrh r0, [r2, #4]\n\
-	adds r0, #2\n\
-	strh r0, [r2, #4]\n\
-_0809B964:\n\
-	movs r1, #4\n\
-	ldrsh r0, [r2, r1]\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #2\n\
-	cmp r0, r1\n\
-	ble _0809B972\n\
-	strh r1, [r2, #4]\n\
-_0809B972:\n\
-	ldr r0, _0809B988 @ =gNonGameplayRam\n\
-	ldrb r1, [r0, #0x10]\n\
-	cmp r1, #1\n\
-	bne _0809BA1C\n\
-	movs r0, #0\n\
-	strb r1, [r2, #0x14]\n\
-	strb r0, [r2, #0x13]\n\
-	strh r0, [r2, #6]\n\
-	strh r0, [r2, #0xe]\n\
-	b _0809BA1C\n\
-	.align 2, 0\n\
-_0809B988: .4byte gNonGameplayRam\n\
-_0809B98C:\n\
-	cmp r3, #1\n\
-	bne _0809B9C0\n\
-	ldrb r0, [r2, #0x13]\n\
-	adds r0, #1\n\
-	movs r1, #0\n\
-	strb r0, [r2, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #9\n\
-	bne _0809B9A8\n\
-	strb r1, [r2, #0x13]\n\
-	ldrh r0, [r2]\n\
-	subs r0, #1\n\
-	strh r0, [r2]\n\
-_0809B9A8:\n\
-	ldrb r0, [r2, #0x10]\n\
-	cmp r0, #3\n\
-	bne _0809B9B6\n\
-	ldrh r0, [r2, #2]\n\
-	adds r0, #6\n\
-	strh r0, [r2, #2]\n\
-	strh r0, [r2, #8]\n\
-_0809B9B6:\n\
-	strh r1, [r2, #0xe]\n\
-	strh r1, [r2, #0xa]\n\
-	movs r0, #2\n\
-	strb r0, [r2, #0x14]\n\
-	b _0809BA1C\n\
-_0809B9C0:\n\
-	cmp r3, #2\n\
-	bne _0809BA1C\n\
-	ldrb r0, [r2, #0x13]\n\
-	adds r0, #1\n\
-	movs r1, #0\n\
-	strb r0, [r2, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #9\n\
-	bne _0809B9DC\n\
-	strb r1, [r2, #0x13]\n\
-	ldrh r0, [r2]\n\
-	subs r0, #1\n\
-	strh r0, [r2]\n\
-_0809B9DC:\n\
-	ldrh r0, [r2, #0xa]\n\
-	adds r0, #1\n\
-	strh r0, [r2, #0xa]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #7\n\
-	bne _0809BA00\n\
-	strh r1, [r2, #0xa]\n\
-	ldrh r0, [r2, #4]\n\
-	adds r0, #2\n\
-	strh r0, [r2, #4]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #2\n\
-	cmp r0, r1\n\
-	ble _0809BA00\n\
-	strh r1, [r2, #4]\n\
-_0809BA00:\n\
-	ldrh r0, [r2, #0xe]\n\
-	adds r0, #1\n\
-	strh r0, [r2, #0xe]\n\
-	ldrb r0, [r2, #0x10]\n\
-	cmp r0, #3\n\
-	bne _0809BA1C\n\
-	ldrh r0, [r2, #0xe]\n\
-	adds r4, r0, #0\n\
-	muls r4, r0, r4\n\
-	adds r0, r4, #0\n\
-	asrs r0, r0, #0xa\n\
-	ldrh r1, [r2, #8]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r2, #2]\n\
-_0809BA1C:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    if (pOam->stage == 0)
+    {
+        pOam->timer++;
+        if (pOam->timer == 9)
+        {
+            pOam->timer = 0;
+            pOam->xPosition--;
+        }
+
+        pOam->unk_E++;
+        switch (pOam->spawnX)
+        {
+            case 0:
+            if (pOam->unk_E == 4)
+            {
+                pOam->unk_E = 0;
+                pOam->scaling += 2;
+                if (pOam->scaling > 0x17F)
+                    pOam->spawnX = 1;
+            }
+            break;
+
+            case 1:
+            if (pOam->unk_E == 5)
+            {
+                pOam->unk_E = 0;
+                pOam->scaling += 2;
+                if (pOam->scaling > 0x19F)
+                    pOam->spawnX = 2;
+            }
+            break;
+
+            case 2:
+            if (pOam->unk_E == 6)
+            {
+                pOam->unk_E = 0;
+                pOam->scaling += 2;
+                if (pOam->scaling > 0x1BF)
+                    pOam->spawnX = 3;
+            }
+            break;
+
+            default:
+            if (pOam->unk_E == 7)
+            {
+                pOam->unk_E = 0;
+                pOam->scaling += 2;
+            }
+        }
+
+        if (pOam->scaling > 0x200)
+            pOam->scaling = 0x200;
+
+        if (CUTSCENE_OAM_DATA.subStage == 1)
+        {
+            pOam->stage = CUTSCENE_OAM_DATA.subStage;
+            pOam->timer = 0;
+            pOam->spawnX = 0;
+            pOam->unk_E = 0;
+        }
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->timer++;
+        if (pOam->timer == 9)
+        {
+            pOam->timer = 0;
+            pOam->xPosition--;
+        }
+
+        if (pOam->type == 3)
+        {
+            pOam->yPosition += 6;
+            pOam->spawnY = pOam->yPosition;
+        }
+
+        pOam->unk_E = 0;
+        pOam->unk_A = 0;
+        pOam->stage = 2;
+    }
+    else if (pOam->stage == 2)
+    {
+        pOam->timer++;
+        if (pOam->timer == 9)
+        {
+            pOam->timer = 0;
+            pOam->xPosition--;
+        }
+
+        pOam->unk_A++;
+        if (pOam->unk_A == 7)
+        {
+            pOam->unk_A = 0;
+            pOam->scaling += 2;
+            if (pOam->scaling > 0x200)
+                pOam->scaling = 0x200;
+        }
+
+        pOam->unk_E++;
+        if (pOam->type == 3)
+            pOam->yPosition = ((pOam->unk_E * pOam->unk_E) >> 10) + pOam->spawnY;
+    }
 }
 
 /**
