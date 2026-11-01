@@ -14,11 +14,13 @@
 #include "constants/navigation.h"
 
 #include "structs/connection.h"
+#include "structs/display.h"
 #include "structs/event.h"
 #include "structs/menus/pause_screen.h"
 
 #include "audio_wrappers.h"
 #include "dma.h"
+#include "io.h"
 #include "syscalls.h"
 #include "text.h"
 
