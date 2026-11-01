@@ -38,7 +38,70 @@ static Func_T sNavConversationPopUpFunctions[3] = {
     NavigationConversationClearPopUpGraphics
 };
 
-static u8 sBlob_79c17c_79c27c[] = INCBIN_U8("data/Blob_79c17c_79c27c.bin");
+static u8 sNavConversationData_79c17c[4] = { 5, 4, 6, 45 };
+
+static u8 sBslDiagramOamIds[36] = {
+    PAUSE_OAM_ID_BSL_DIAGRAM_0_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_10_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_20_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_30_DEGREES,
+    PAUSE_OAM_ID_BSL_DIAGRAM_40_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_50_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_60_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_70_DEGREES,
+    PAUSE_OAM_ID_BSL_DIAGRAM_80_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_90_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_100_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_110_DEGREES,
+    PAUSE_OAM_ID_BSL_DIAGRAM_120_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_130_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_140_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_150_DEGREES,
+    PAUSE_OAM_ID_BSL_DIAGRAM_160_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_170_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_180_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_190_DEGREES,
+    PAUSE_OAM_ID_BSL_DIAGRAM_200_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_210_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_220_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_230_DEGREES,
+    PAUSE_OAM_ID_BSL_DIAGRAM_240_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_250_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_260_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_270_DEGREES,
+    PAUSE_OAM_ID_BSL_DIAGRAM_280_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_290_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_300_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_310_DEGREES,
+    PAUSE_OAM_ID_BSL_DIAGRAM_320_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_330_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_340_DEGREES, PAUSE_OAM_ID_BSL_DIAGRAM_350_DEGREES
+};
+
+static s8 sBslDiagramTargetOffsets[36][3] = {
+    [0] = { 7, -6, 0 },
+    [1] = { 5, -6, 0 },
+    [2] = { 2, -6, 0 },
+    [3] = { -1, -6, 0 },
+    [4] = { -4, -6, 0 },
+    [5] = { -7, -6, 0 },
+    [6] = { -9, -6, 0 },
+    [7] = { -12, -7, 0 },
+    [8] = { -15, -8, 0 },
+    [9] = { -17, -9, 0 },
+    [10] = { -18, -11, 0 },
+    [11] = { -18, -12, 0 },
+    [12] = { -18, -13, 0 },
+    [13] = { -18, -14, 0 },
+    [14] = { -17, -15, 0 },
+    [15] = { -16, -16, 0 },
+    [16] = { -14, -17, 0 },
+    [17] = { -12, -18, 0 },
+    [18] = { -10, -19, 0 },
+    [19] = { -8, -19, 0 },
+    [20] = { -5, -19, 0 },
+    [21] = { -2, -19, 0 },
+    [22] = { 1, -19, 0 },
+    [23] = { 5, -19, 0 },
+    [24] = { 8, -19, 0 },
+    [25] = { 11, -18, 0 },
+    [26] = { 13, -17, 0 },
+    [27] = { 15, -16, 0 },
+    [28] = { 16, -15, 0 },
+    [29] = { 16, -14, 0 },
+    [30] = { 16, -13, 0 },
+    [31] = { 16, -12, 0 },
+    [32] = { 16, -10, 0 },
+    [33] = { 15, -9, 0 },
+    [34] = { 13, -8, 0 },
+    [35] = { 10, -7, 0 }
+};
+
+static s8 sMainDeckDiagramTargetOffsets[8][3] = {
+    [0] = { 0, 0, 0 },
+    [1] = { 0, -38, 1 },
+    [2] = { 2, -28, 1 },
+    [3] = { 2, -18, 0 },
+    [4] = { 2, -10, 0 },
+    [5] = { 2, 20, 0 },
+    [6] = { 0, 30, 0 }
+};
+
+static u8 sBlob_79c228_79c27c[] = INCBIN_U8("data/Blob_79c228_79c27c.bin");
 
 // 0x08079AFC
 NAKED_FUNCTION
