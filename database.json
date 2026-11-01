@@ -27769,10 +27769,18 @@
     "size": 1
   },
   {
-    "path": "Blob_73422c_7478a0.bin",
-    "count": "0x13674",
+    "path": "Blob_73422c_73dba4.bin",
+    "count": "0x9978",
     "addr": {
       "us": "0x73422C"
+    },
+    "size": 1
+  },
+  {
+    "path": "Blob_73dbb0_7478a0.bin",
+    "count": "0x9CF0",
+    "addr": {
+      "us": "0x73DBB0"
     },
     "size": 1
   },
