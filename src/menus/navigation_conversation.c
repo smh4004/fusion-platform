@@ -3268,140 +3268,82 @@ u8 NavigationConversationScrollMapToDestination(u8 x, u8 y)
     return ended;
 }
 
-// 0x0807B56C
-NAKED_FUNCTION
+/**
+ * @brief 7b56c | 108 | Handles the pop-up window sequence of a navigation conversation
+ * 
+ */
 void unk_7b56c(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	ldr r1, _0807B588 @ =gNonGameplayRam\n\
-	ldrb r0, [r1, #0xa]\n\
-	adds r0, #1\n\
-	strb r0, [r1, #0xa]\n\
-	ldrb r0, [r1, #0xb]\n\
-	adds r5, r1, #0\n\
-	cmp r0, #9\n\
-	bhi _0807B668\n\
-	lsls r0, r0, #2\n\
-	ldr r1, _0807B58C @ =_0807B590\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_0807B588: .4byte gNonGameplayRam\n\
-_0807B58C: .4byte _0807B590\n\
-_0807B590: @ jump table\n\
-	.4byte _0807B668 @ case 0\n\
-	.4byte _0807B5B8 @ case 1\n\
-	.4byte _0807B5BE @ case 2\n\
-	.4byte _0807B5CE @ case 3\n\
-	.4byte _0807B5EE @ case 4\n\
-	.4byte _0807B612 @ case 5\n\
-	.4byte _0807B624 @ case 6\n\
-	.4byte _0807B650 @ case 7\n\
-	.4byte _0807B668 @ case 8\n\
-	.4byte _0807B668 @ case 9\n\
-_0807B5B8:\n\
-	movs r0, #0\n\
-	strb r0, [r5, #0xa]\n\
-	b _0807B662\n\
-_0807B5BE:\n\
-	ldrh r1, [r5, #4]\n\
-	movs r0, #0x40\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _0807B668\n\
-	movs r0, #0\n\
-	strb r0, [r5, #0xa]\n\
-	b _0807B662\n\
-_0807B5CE:\n\
-	adds r1, r5, #0\n\
-	adds r1, #0xea\n\
-	movs r4, #0\n\
-	movs r0, #0x41\n\
-	strb r0, [r1]\n\
-	adds r0, r5, #0\n\
-	adds r0, #0xe8\n\
-	strb r4, [r0]\n\
-	adds r0, #1\n\
-	strb r4, [r0]\n\
-	movs r0, #0x8e\n\
-	lsls r0, r0, #1\n\
-	bl SoundPlay\n\
-	strb r4, [r5, #0xa]\n\
-	b _0807B662\n\
-_0807B5EE:\n\
-	ldrb r0, [r5, #0xa]\n\
-	cmp r0, #0x1e\n\
-	bls _0807B668\n\
-	movs r0, #0x86\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	movs r2, #0\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-	strb r2, [r5, #0xa]\n\
-	ldrb r0, [r5, #0xb]\n\
-	adds r0, #1\n\
-	strb r0, [r5, #0xb]\n\
-	ldrh r1, [r5, #4]\n\
-	movs r0, #0x80\n\
-	orrs r0, r1\n\
-	strh r0, [r5, #4]\n\
-	b _0807B668\n\
-_0807B612:\n\
-	ldrh r1, [r5, #4]\n\
-	movs r0, #0x40\n\
-	ands r0, r1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0\n\
-	bne _0807B668\n\
-	strb r0, [r5, #0xa]\n\
-	b _0807B662\n\
-_0807B624:\n\
-	movs r0, #0x86\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	movs r4, #0\n\
-	movs r0, #3\n\
-	strb r0, [r1]\n\
-	adds r1, r5, #0\n\
-	adds r1, #0xea\n\
-	movs r0, #0x42\n\
-	strb r0, [r1]\n\
-	adds r0, r5, #0\n\
-	adds r0, #0xe8\n\
-	strb r4, [r0]\n\
-	adds r0, #1\n\
-	strb r4, [r0]\n\
-	ldr r0, _0807B64C @ =0x0000011D\n\
-	bl SoundPlay\n\
-	strb r4, [r5, #0xa]\n\
-	b _0807B662\n\
-	.align 2, 0\n\
-_0807B64C: .4byte 0x0000011D\n\
-_0807B650:\n\
-	ldrb r0, [r5, #0xa]\n\
-	cmp r0, #0x1e\n\
-	bls _0807B668\n\
-	ldrh r1, [r5, #4]\n\
-	ldr r0, _0807B670 @ =0x0000FF7F\n\
-	ands r0, r1\n\
-	movs r1, #0\n\
-	strh r0, [r5, #4]\n\
-	strb r1, [r5, #0xa]\n\
-_0807B662:\n\
-	ldrb r0, [r5, #0xb]\n\
-	adds r0, #1\n\
-	strb r0, [r5, #0xb]\n\
-_0807B668:\n\
-	pop {r4, r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807B670: .4byte 0x0000FF7F\n\
-    .syntax divided\n");
+    PAUSE_SCREEN_DATA.unk_A++;
+
+    switch (PAUSE_SCREEN_DATA.unk_B)
+    {
+        case 0:
+            break;
+
+        case 1:
+            PAUSE_SCREEN_DATA.unk_A = 0;
+            PAUSE_SCREEN_DATA.unk_B++;
+            break;
+
+        case 2:
+            if (PAUSE_SCREEN_DATA.typeFlags & 0x40)
+            {
+                PAUSE_SCREEN_DATA.unk_A = 0;
+                PAUSE_SCREEN_DATA.unk_B++;
+            }
+            break;
+
+        case 3:
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_POP_UP_WINDOW].oamId = PAUSE_OAM_ID_POP_UP_WINDOW;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_POP_UP_WINDOW].animationDurationCounter = 0;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_POP_UP_WINDOW].currentAnimationFrame = 0;
+            SoundPlay(SOUND_11C);
+            PAUSE_SCREEN_DATA.unk_A = 0;
+            PAUSE_SCREEN_DATA.unk_B++;
+            break;
+
+        case 4:
+            if (PAUSE_SCREEN_DATA.unk_A > 30)
+            {
+                PAUSE_SCREEN_DATA.currentPopUp = 1;
+                PAUSE_SCREEN_DATA.unk_A = 0;
+                PAUSE_SCREEN_DATA.unk_B++;
+                PAUSE_SCREEN_DATA.typeFlags |= 0x80;
+            }
+            break;
+
+        case 5:
+            if (!(PAUSE_SCREEN_DATA.typeFlags & 0x40))
+            {
+                PAUSE_SCREEN_DATA.unk_A = 0;
+                PAUSE_SCREEN_DATA.unk_B++;
+            }
+            break;
+
+        case 6:
+            PAUSE_SCREEN_DATA.currentPopUp = 3;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_POP_UP_WINDOW].oamId = PAUSE_OAM_ID_POP_UP_WINDOW_CLOSING;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_POP_UP_WINDOW].animationDurationCounter = 0;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_POP_UP_WINDOW].currentAnimationFrame = 0;
+            SoundPlay(SOUND_11D);
+            PAUSE_SCREEN_DATA.unk_A = 0;
+            PAUSE_SCREEN_DATA.unk_B++;
+            break;
+
+        case 7:
+            if (PAUSE_SCREEN_DATA.unk_A > 30)
+            {
+                PAUSE_SCREEN_DATA.typeFlags &= ~0x80;
+                PAUSE_SCREEN_DATA.unk_A = 0;
+                PAUSE_SCREEN_DATA.unk_B++;
+            }
+            break;
+
+        case 8:
+        case 9:
+            break;
+    }
 }
 
 // 0x0807B674
