@@ -134,6 +134,7 @@ extern s8 gLanguage;
 struct GameCompletion {
     s8 completedGame;
     s8 introPlayed;
+    u8 unk_2;
 };
 
 extern struct GameCompletion gGameCompletion;

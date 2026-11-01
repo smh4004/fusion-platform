@@ -30,6 +30,7 @@ SECTIONS {
         . = 0x0000000c; gWrittenToWinin_H = .;
         . = 0x0000000d; gWrittenToWinout_L = .;
         . = 0x0000000e; gBackdropColor = .;
+        . = 0x00000010; gSramHeaderUnk_3000010 = .;
         . = 0x00000011; gLanguage = .;
         . = 0x00000014; gGameCompletion = .;
         . = 0x00000018; gMonochromeFading = .;
@@ -67,6 +68,8 @@ SECTIONS {
         . = 0x00000049; gLastElevatorUsed = .;
         . = 0x0000004a; gCurrentEventBasedEffect = .;
         . = 0x0000004b; gQueuedEventBasedEffect = .;
+        . = 0x0000004c; gUnk_300004c = .;
+        . = 0x0000004d; gUnk_300004d = .;
         . = 0x0000004e; gScreenShakeXOffset = .;
         . = 0x0000004f; gScreenShakeYOffset = .;
         . = 0x00000050; gUnk_3000050 = .;
@@ -156,7 +159,10 @@ SECTIONS {
         . = 0x00000b8a; gRoomEventTrigger = .;
         . = 0x00000b8b; gIsLoadingFile = .;
         . = 0x00000b8d; gMostRecentSaveFile = .;
+        . = 0x00000b8e; gSramCorruptFlag = .;
         . = 0x00000b8f; gUnk_3000b8f = .;
+        . = 0x00000b90; gHasSaved = .;
+        . = 0x00000b94; gSaveFilesInfo = .;
         . = 0x00000bd0; gBootDebugOptions = .;
         . = 0x00000bdc; gCurrentCutscene = .;
         . = 0x00000bde; gMainGameMode = .;
