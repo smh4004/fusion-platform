@@ -23,8 +23,7 @@ struct SaveFileInfo {
     s8 introPlayed;
 };
 
-// Not yet a linker symbol (the save file code that owns it is still being decompiled)
-#define gSaveFilesInfo ((struct SaveFileInfo*)0x3000b94)
+extern struct SaveFileInfo gSaveFilesInfo[3];
 
 struct FileSelectOam;
 typedef void (*FileSelectOamFunc_T)(struct FileSelectOam*);

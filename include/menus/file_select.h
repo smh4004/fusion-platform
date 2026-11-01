@@ -4,12 +4,12 @@
 #include "types.h"
 #include "structs/menus/file_select.h"
 
-s8 FileSelectHandler(void);
+s32 FileSelectHandler(void);
 void FileSelectInit(void);
 void FileSelectVblank(void);
 void unk_9eaa4(void);
 u8 FileSelectInput(void);
-u8 FileSelectSetupOam(u8 type, u16 xPosition, u16 yPosition, u8 unused);
+u8 FileSelectSetupOam();
 void FileSelectProcessSamusHead(struct FileSelectOam* pOam);
 void FileSelectProcessCursor(struct FileSelectOam* pOam);
 void FileSelectProcessDeleteArrow(struct FileSelectOam* pOam);
@@ -28,7 +28,7 @@ void unk_a0424(struct FileSelectOam* pOam);
 void unk_a0518(struct FileSelectOam* pOam);
 void FileSelectDrawFileInfo(u8 file);
 void FileSelectDrawText(u8 textId);
-u8 FileSelectProcessCorruptedFile(void);
+boolu32 FileSelectProcessCorruptedFile(void);
 void FileSelectDrawFileCorruptedText(u8 file);
 void FileSelectDrawCorruptionText(u8 textId);
 void FileSelectDestroyOamOfType(u8 type);

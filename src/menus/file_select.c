@@ -17,492 +17,184 @@
 
 #include "structs/save_file.h"
 
-// 0x0809E598
-NAKED_FUNCTION
-s8 FileSelectHandler(void)
+// TODO move to the save file header once that code is decompiled
+void Sram_WriteFileInfo(void);
+
+/**
+ * @brief 9e598 | 1b8 | TODO
+ * 
+ */
+s32 FileSelectHandler(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	movs r5, #0\n\
-	ldr r0, _0809E5B4 @ =gSubGameMode1\n\
-	movs r2, #0\n\
-	ldrsh r1, [r0, r2]\n\
-	adds r2, r0, #0\n\
-	cmp r1, #5\n\
-	bls _0809E5AA\n\
-	b _0809E738\n\
-_0809E5AA:\n\
-	lsls r0, r1, #2\n\
-	ldr r1, _0809E5B8 @ =_0809E5BC\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_0809E5B4: .4byte gSubGameMode1\n\
-_0809E5B8: .4byte _0809E5BC\n\
-_0809E5BC: @ jump table\n\
-	.4byte _0809E5D4 @ case 0\n\
-	.4byte _0809E644 @ case 1\n\
-	.4byte _0809E69C @ case 2\n\
-	.4byte _0809E6BC @ case 3\n\
-	.4byte _0809E6E4 @ case 4\n\
-	.4byte _0809E704 @ case 5\n\
-_0809E5D4:\n\
-	bl FileSelectInit\n\
-	ldr r1, _0809E614 @ =0x03000B94\n\
-	ldrb r0, [r1, #1]\n\
-	cmp r0, #0\n\
-	bne _0809E624\n\
-	ldrb r0, [r1, #0x15]\n\
-	cmp r0, #0\n\
-	bne _0809E624\n\
-	adds r0, r1, #0\n\
-	adds r0, #0x29\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	bne _0809E624\n\
-	ldr r0, _0809E618 @ =0x03000B8D\n\
-	ldrb r2, [r0]\n\
-	lsls r2, r2, #0x14\n\
-	movs r0, #0xc4\n\
-	lsls r0, r0, #0xe\n\
-	adds r2, r2, r0\n\
-	asrs r2, r2, #0x10\n\
-	movs r0, #1\n\
-	movs r1, #0xf\n\
-	movs r3, #0\n\
-	bl FileSelectSetupOam\n\
-	ldr r1, _0809E61C @ =0x04000014\n\
-	movs r0, #2\n\
-	strh r0, [r1]\n\
-	ldr r1, _0809E620 @ =gSubGameMode1\n\
-	movs r0, #1\n\
-	b _0809E736\n\
-	.align 2, 0\n\
-_0809E614: .4byte 0x03000B94\n\
-_0809E618: .4byte 0x03000B8D\n\
-_0809E61C: .4byte 0x04000014\n\
-_0809E620: .4byte gSubGameMode1\n\
-_0809E624:\n\
-	ldr r1, _0809E638 @ =0x04000014\n\
-	ldr r2, _0809E63C @ =0x0000FFD0\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	movs r0, #0x30\n\
-	strh r0, [r1]\n\
-	ldr r1, _0809E640 @ =gSubGameMode1\n\
-	movs r0, #5\n\
-	b _0809E736\n\
-	.align 2, 0\n\
-_0809E638: .4byte 0x04000014\n\
-_0809E63C: .4byte 0x0000FFD0\n\
-_0809E640: .4byte gSubGameMode1\n\
-_0809E644:\n\
-	ldr r4, _0809E65C @ =gNonGameplayRam\n\
-	ldrb r0, [r4, #0xc]\n\
-	adds r0, #1\n\
-	strb r0, [r4, #0xc]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #1\n\
-	bne _0809E660\n\
-	movs r0, #1\n\
-	bl FileSelectDrawText\n\
-	b _0809E738\n\
-	.align 2, 0\n\
-_0809E65C: .4byte gNonGameplayRam\n\
-_0809E660:\n\
-	cmp r0, #2\n\
-	bne _0809E66C\n\
-	movs r0, #0\n\
-	bl FileSelectDrawFileInfo\n\
-	b _0809E738\n\
-_0809E66C:\n\
-	cmp r0, #3\n\
-	bne _0809E678\n\
-	movs r0, #1\n\
-	bl FileSelectDrawFileInfo\n\
-	b _0809E738\n\
-_0809E678:\n\
-	cmp r0, #4\n\
-	bne _0809E738\n\
-	movs r0, #2\n\
-	bl FileSelectDrawFileInfo\n\
-	movs r0, #0\n\
-	strb r0, [r4, #0xc]\n\
-	ldr r1, _0809E694 @ =gWrittenToBldy\n\
-	movs r0, #0xe\n\
-	strh r0, [r1]\n\
-	ldr r1, _0809E698 @ =gSubGameMode1\n\
-	movs r0, #2\n\
-	b _0809E736\n\
-	.align 2, 0\n\
-_0809E694: .4byte gWrittenToBldy\n\
-_0809E698: .4byte gSubGameMode1\n\
-_0809E69C:\n\
-	bl FileSelectDrawAllOam\n\
-	ldr r1, _0809E6AC @ =gWrittenToBldy\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0\n\
-	beq _0809E6B0\n\
-	subs r0, #1\n\
-	b _0809E736\n\
-	.align 2, 0\n\
-_0809E6AC: .4byte gWrittenToBldy\n\
-_0809E6B0:\n\
-	ldr r1, _0809E6B8 @ =gSubGameMode1\n\
-	ldrh r0, [r1]\n\
-	adds r0, #1\n\
-	b _0809E736\n\
-	.align 2, 0\n\
-_0809E6B8: .4byte gSubGameMode1\n\
-_0809E6BC:\n\
-	bl FileSelectInput\n\
-	ldr r1, _0809E6DC @ =gNonGameplayRam\n\
-	strb r0, [r1, #0x12]\n\
-	lsls r0, r0, #0x18\n\
-	cmp r0, #0\n\
-	beq _0809E738\n\
-	ldr r1, _0809E6E0 @ =gSubGameMode1\n\
-	ldrh r0, [r1]\n\
-	adds r0, #1\n\
-	strh r0, [r1]\n\
-	movs r0, #0x14\n\
-	bl FadeMusic\n\
-	b _0809E738\n\
-	.align 2, 0\n\
-_0809E6DC: .4byte gNonGameplayRam\n\
-_0809E6E0: .4byte gSubGameMode1\n\
-_0809E6E4:\n\
-	ldr r1, _0809E6F0 @ =gWrittenToBldy\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0xf\n\
-	bhi _0809E6F4\n\
-	adds r0, #1\n\
-	b _0809E736\n\
-	.align 2, 0\n\
-_0809E6F0: .4byte gWrittenToBldy\n\
-_0809E6F4:\n\
-	ldr r0, _0809E700 @ =gNonGameplayRam\n\
-	movs r5, #0x12\n\
-	ldrsb r5, [r0, r5]\n\
-	movs r0, #0\n\
-	strh r0, [r2]\n\
-	b _0809E738\n\
-	.align 2, 0\n\
-_0809E700: .4byte gNonGameplayRam\n\
-_0809E704:\n\
-	bl FileSelectProcessCorruptedFile\n\
-	cmp r0, #0\n\
-	beq _0809E738\n\
-	ldr r1, _0809E740 @ =0x04000014\n\
-	movs r0, #2\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r2, _0809E744 @ =0x0000FFFA\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _0809E748 @ =0x03000B8D\n\
-	ldrb r2, [r0]\n\
-	lsls r2, r2, #0x14\n\
-	movs r0, #0xc4\n\
-	lsls r0, r0, #0xe\n\
-	adds r2, r2, r0\n\
-	asrs r2, r2, #0x10\n\
-	movs r0, #1\n\
-	movs r1, #0xf\n\
-	movs r3, #0\n\
-	bl FileSelectSetupOam\n\
-	ldr r1, _0809E74C @ =gSubGameMode1\n\
-	movs r0, #3\n\
-_0809E736:\n\
-	strh r0, [r1]\n\
-_0809E738:\n\
-	adds r0, r5, #0\n\
-	pop {r4, r5}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_0809E740: .4byte 0x04000014\n\
-_0809E744: .4byte 0x0000FFFA\n\
-_0809E748: .4byte 0x03000B8D\n\
-_0809E74C: .4byte gSubGameMode1\n\
-    .syntax divided\n");
+    s32 result;
+
+    result = 0;
+
+    switch (gSubGameMode1)
+    {
+        case 0:
+            FileSelectInit();
+            if (gSaveFilesInfo[0].corruptionFlag == 0 && gSaveFilesInfo[1].corruptionFlag == 0 &&
+                gSaveFilesInfo[2].corruptionFlag == 0)
+            {
+                FileSelectSetupOam(1, 15, (s16)(gMostRecentSaveFile * 16 + 49), 0);
+                WRITE_16(REG_BG1HOFS, 2);
+                gSubGameMode1 = 1;
+            }
+            else
+            {
+                WRITE_16(REG_BG1HOFS, -48);
+                WRITE_16(REG_BG1VOFS, 48);
+                gSubGameMode1 = 5;
+            }
+            break;
+
+        case 1:
+            FILE_SELECT_DATA.stage++;
+            if (FILE_SELECT_DATA.stage == 1)
+            {
+                FileSelectDrawText(1);
+            }
+            else if (FILE_SELECT_DATA.stage == 2)
+            {
+                FileSelectDrawFileInfo(0);
+            }
+            else if (FILE_SELECT_DATA.stage == 3)
+            {
+                FileSelectDrawFileInfo(1);
+            }
+            else if (FILE_SELECT_DATA.stage == 4)
+            {
+                FileSelectDrawFileInfo(2);
+                FILE_SELECT_DATA.stage = 0;
+                gWrittenToBldy = 14;
+                gSubGameMode1 = 2;
+            }
+            break;
+
+        case 2:
+            FileSelectDrawAllOam();
+            if (gWrittenToBldy != 0)
+                gWrittenToBldy--;
+            else
+                gSubGameMode1++;
+            break;
+
+        case 3:
+            FILE_SELECT_DATA.result = FileSelectInput();
+            if (FILE_SELECT_DATA.result)
+            {
+                gSubGameMode1++;
+                FadeMusic(20);
+            }
+            break;
+
+        case 4:
+            if (gWrittenToBldy < BLDY_MAX_VALUE)
+            {
+                gWrittenToBldy++;
+            }
+            else
+            {
+                result = FILE_SELECT_DATA.result;
+                gSubGameMode1 = 0;
+            }
+            break;
+
+        case 5:
+            if (FileSelectProcessCorruptedFile())
+            {
+                WRITE_16(REG_BG1HOFS, 2);
+                WRITE_16(REG_BG1VOFS, -6);
+                FileSelectSetupOam(1, 15, (s16)(gMostRecentSaveFile * 16 + 49), 0);
+                gSubGameMode1 = 3;
+            }
+            break;
+    }
+
+    return result;
 }
 
-// 0x0809E750
-NAKED_FUNCTION
+/**
+ * @brief 9e750 | 290 | TODO
+ * 
+ */
 void FileSelectInit(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, #4\n\
-	ldr r3, _0809E920 @ =0x04000208\n\
-	movs r4, #0\n\
-	strh r4, [r3]\n\
-	ldr r2, _0809E924 @ =0x04000004\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _0809E928 @ =0x0000FFEF\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r2, _0809E92C @ =0x04000200\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _0809E930 @ =0x0000FFFD\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #1\n\
-	strh r0, [r3]\n\
-	ldr r0, _0809E934 @ =unk_9eaa4\n\
-	bl CallbackSetVBlank\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #0x13\n\
-	strh r4, [r0]\n\
-	ldr r1, _0809E938 @ =0x04000050\n\
-	movs r0, #0xff\n\
-	strh r0, [r1]\n\
-	ldr r0, _0809E93C @ =gWrittenToBldy\n\
-	movs r1, #0x10\n\
-	strh r1, [r0]\n\
-	ldr r0, _0809E940 @ =0x04000054\n\
-	strh r1, [r0]\n\
-	bl ClearGfxRam\n\
-	ldr r0, _0809E944 @ =gNextOamSlot\n\
-	strb r4, [r0]\n\
-	bl ResetFreeOam\n\
-	movs r6, #0\n\
-	str r6, [sp]\n\
-	ldr r4, _0809E948 @ =0x040000D4\n\
-	mov r0, sp\n\
-	str r0, [r4]\n\
-	ldr r0, _0809E94C @ =gNonGameplayRam\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _0809E950 @ =0x85000150\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _0809E954 @ =0x0400000E\n\
-	strh r6, [r0]\n\
-	subs r0, #2\n\
-	strh r6, [r0]\n\
-	subs r0, #2\n\
-	strh r6, [r0]\n\
-	subs r0, #2\n\
-	strh r6, [r0]\n\
-	adds r0, #8\n\
-	strh r6, [r0]\n\
-	adds r0, #2\n\
-	strh r6, [r0]\n\
-	adds r0, #2\n\
-	strh r6, [r0]\n\
-	ldr r1, _0809E958 @ =0x04000016\n\
-	ldr r2, _0809E95C @ =0x0000FFFA\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _0809E960 @ =0x04000018\n\
-	strh r6, [r0]\n\
-	adds r0, #2\n\
-	strh r6, [r0]\n\
-	adds r0, #2\n\
-	strh r6, [r0]\n\
-	adds r0, #2\n\
-	strh r6, [r0]\n\
-	ldr r0, _0809E964 @ =0x08742FB4\n\
-	movs r1, #0xc0\n\
-	lsls r1, r1, #0x13\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0809E968 @ =0x087470E0\n\
-	ldr r1, _0809E96C @ =0x0600F800\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0809E970 @ =0x087476A0\n\
-	str r0, [r4]\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #0x13\n\
-	mov r8, r0\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _0809E974 @ =0x84000080\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _0809E978 @ =0x0873CFAC\n\
-	ldr r1, _0809E97C @ =0x0600E000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0809E980 @ =0x0873D380\n\
-	movs r5, #0x80\n\
-	lsls r5, r5, #0x12\n\
-	adds r1, r5, #0\n\
-	bl LZ77UncompVram\n\
-	str r5, [r4]\n\
-	ldr r0, _0809E984 @ =0x0600E800\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _0809E988 @ =0x84000200\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _0809E98C @ =0x0873D5EC\n\
-	ldr r1, _0809E990 @ =0x0600F000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0809E994 @ =0x0873DB84\n\
-	str r0, [r4]\n\
-	mov r2, r8\n\
-	str r2, [r4, #4]\n\
-	ldr r0, _0809E998 @ =0x84000008\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r1, _0809E99C @ =0x0873DAC4\n\
-	str r1, [r4]\n\
-	str r2, [r4, #4]\n\
-	ldr r0, _0809E9A0 @ =0x84000002\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	adds r1, #8\n\
-	str r1, [r4]\n\
-	ldr r0, _0809E9A4 @ =0x0500001C\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _0809E9A8 @ =0x84000001\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	strh r6, [r2]\n\
-	movs r3, #0\n\
-	ldr r7, _0809E9AC @ =0x02000800\n\
-	ldr r5, _0809E9B0 @ =0x02000340\n\
-	ldr r6, _0809E9B4 @ =0x00000FFF\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #5\n\
-	adds r4, r0, #0\n\
-_0809E86A:\n\
-	adds r2, r3, r7\n\
-	adds r0, r3, r5\n\
-	ldrh r1, [r0]\n\
-	adds r0, r6, #0\n\
-	ands r0, r1\n\
-	orrs r0, r4\n\
-	strh r0, [r2]\n\
-	adds r3, #2\n\
-	cmp r3, #0xff\n\
-	bls _0809E86A\n\
-	ldr r0, _0809E9B8 @ =0x0873DC20\n\
-	ldr r1, _0809E9BC @ =0x06010000\n\
-	bl LZ77UncompVram\n\
-	ldr r1, _0809E948 @ =0x040000D4\n\
-	ldr r0, _0809E9C0 @ =0x08740D08\n\
-	str r0, [r1]\n\
-	ldr r0, _0809E9C4 @ =0x05000200\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0809E974 @ =0x84000080\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r4, _0809E94C @ =gNonGameplayRam\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	ldr r1, _0809E9C8 @ =0x0879EC68\n\
-	ldr r0, _0809E9CC @ =0x03000011\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	ldr r0, [r0]\n\
-	str r0, [r4, #4]\n\
-	bl Sram_WriteFileInfo\n\
-	ldr r0, _0809E9D0 @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r4, #0xd]\n\
-	movs r0, #9\n\
-	movs r1, #0x66\n\
-	movs r2, #0x74\n\
-	movs r3, #1\n\
-	bl FileSelectSetupOam\n\
-	movs r0, #6\n\
-	movs r1, #0x8e\n\
-	movs r2, #0x74\n\
-	movs r3, #1\n\
-	bl FileSelectSetupOam\n\
-	movs r0, #7\n\
-	movs r1, #0x84\n\
-	movs r2, #0x30\n\
-	movs r3, #1\n\
-	bl FileSelectSetupOam\n\
-	bl FileSelectDrawAllOam\n\
-	ldr r1, _0809E954 @ =0x0400000E\n\
-	ldr r2, _0809E9D4 @ =0x00001F03\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	subs r1, #2\n\
-	ldr r2, _0809E9D8 @ =0x00001C0A\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	subs r1, #2\n\
-	adds r2, #0xff\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	subs r1, #2\n\
-	adds r2, #0xff\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	subs r1, #8\n\
-	movs r2, #0xe0\n\
-	lsls r2, r2, #5\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _0809E9DC @ =FileSelectVblank\n\
-	bl CallbackSetVBlank\n\
-	add sp, #4\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809E920: .4byte 0x04000208\n\
-_0809E924: .4byte 0x04000004\n\
-_0809E928: .4byte 0x0000FFEF\n\
-_0809E92C: .4byte 0x04000200\n\
-_0809E930: .4byte 0x0000FFFD\n\
-_0809E934: .4byte unk_9eaa4\n\
-_0809E938: .4byte 0x04000050\n\
-_0809E93C: .4byte gWrittenToBldy\n\
-_0809E940: .4byte 0x04000054\n\
-_0809E944: .4byte gNextOamSlot\n\
-_0809E948: .4byte 0x040000D4\n\
-_0809E94C: .4byte gNonGameplayRam\n\
-_0809E950: .4byte 0x85000150\n\
-_0809E954: .4byte 0x0400000E\n\
-_0809E958: .4byte 0x04000016\n\
-_0809E95C: .4byte 0x0000FFFA\n\
-_0809E960: .4byte 0x04000018\n\
-_0809E964: .4byte 0x08742FB4\n\
-_0809E968: .4byte 0x087470E0\n\
-_0809E96C: .4byte 0x0600F800\n\
-_0809E970: .4byte 0x087476A0\n\
-_0809E974: .4byte 0x84000080\n\
-_0809E978: .4byte 0x0873CFAC\n\
-_0809E97C: .4byte 0x0600E000\n\
-_0809E980: .4byte 0x0873D380\n\
-_0809E984: .4byte 0x0600E800\n\
-_0809E988: .4byte 0x84000200\n\
-_0809E98C: .4byte 0x0873D5EC\n\
-_0809E990: .4byte 0x0600F000\n\
-_0809E994: .4byte 0x0873DB84\n\
-_0809E998: .4byte 0x84000008\n\
-_0809E99C: .4byte 0x0873DAC4\n\
-_0809E9A0: .4byte 0x84000002\n\
-_0809E9A4: .4byte 0x0500001C\n\
-_0809E9A8: .4byte 0x84000001\n\
-_0809E9AC: .4byte 0x02000800\n\
-_0809E9B0: .4byte 0x02000340\n\
-_0809E9B4: .4byte 0x00000FFF\n\
-_0809E9B8: .4byte 0x0873DC20\n\
-_0809E9BC: .4byte 0x06010000\n\
-_0809E9C0: .4byte 0x08740D08\n\
-_0809E9C4: .4byte 0x05000200\n\
-_0809E9C8: .4byte 0x0879EC68\n\
-_0809E9CC: .4byte 0x03000011\n\
-_0809E9D0: .4byte 0x03000B8D\n\
-_0809E9D4: .4byte 0x00001F03\n\
-_0809E9D8: .4byte 0x00001C0A\n\
-_0809E9DC: .4byte FileSelectVblank\n\
-    .syntax divided\n");
+    u32 zero;
+    u32 i;
+
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
+
+    CallbackSetVBlank(unk_9eaa4);
+
+    WRITE_16(REG_DISPCNT, 0);
+    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+    gWrittenToBldy = BLDY_MAX_VALUE;
+    WRITE_16(REG_BLDY, BLDY_MAX_VALUE);
+
+    ClearGfxRam();
+    gNextOamSlot = 0;
+    ResetFreeOam();
+
+    zero = 0;
+    DMA_SET(3, &zero, &gNonGameplayRam, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, sizeof(gNonGameplayRam) / sizeof(u32)));
+
+    WRITE_16(REG_BG3CNT, 0);
+    WRITE_16(REG_BG2CNT, 0);
+    WRITE_16(REG_BG1CNT, 0);
+    WRITE_16(REG_BG0CNT, 0);
+
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, -6);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
+
+    LZ77UncompVram((const void*)0x8742fb4, VRAM_BASE);
+    LZ77UncompVram((const void*)0x87470e0, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const void*)0x87476a0, PALRAM_BASE, PAL_SIZE / sizeof(u32));
+
+    LZ77UncompVram((const void*)0x873cfac, VRAM_BASE + 0xE000);
+    LZ77UncompVram((const void*)0x873d380, EWRAM_BASE);
+    DMA3_COPY_32(EWRAM_BASE, VRAM_BASE + 0xE800, 0x800 / sizeof(u32));
+    LZ77UncompVram((const void*)0x873d5ec, VRAM_BASE + 0xF000);
+
+    DMA3_COPY_32((const void*)0x873db84, PALRAM_BASE, 0x20 / sizeof(u32));
+    DMA3_COPY_32(sFileSelectBackdropColors, PALRAM_BASE, 8 / sizeof(u32));
+    DMA3_COPY_32(&sFileSelectBackdropColors[4], PALRAM_BASE + 0x1C, 4 / sizeof(u32));
+    SET_BACKDROP_COLOR(0);
+
+    for (i = 0; i < 0x100; i += 2)
+        *(u16*)(EWRAM_BASE + 0x800 + i) = (*(u16*)(EWRAM_BASE + 0x340 + i) & 0xFFF) | 0x1000;
+
+    LZ77UncompVram((const void*)0x873dc20, VRAM_OBJ);
+    DMA3_COPY_32((const void*)0x8740d08, PALRAM_OBJ, PAL_SIZE / sizeof(u32));
+
+    FILE_SELECT_DATA.textId = 0;
+    FILE_SELECT_DATA.pText = sFileSelectTextPointers[gLanguage][0];
+
+    Sram_WriteFileInfo();
+    FILE_SELECT_DATA.currentFile = gMostRecentSaveFile;
+
+    FileSelectSetupOam(9, 102, 116, 1);
+    FileSelectSetupOam(6, 142, 116, 1);
+    FileSelectSetupOam(7, 132, 48, 1);
+    FileSelectDrawAllOam();
+
+    WRITE_16(REG_BG3CNT, CREATE_BGCNT(0, 31, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG2CNT, CREATE_BGCNT(2, 28, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(2, 29, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(2, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+
+    WRITE_16(REG_DISPCNT, DCNT_BG2 | DCNT_BG3 | DCNT_OBJ);
+    CallbackSetVBlank(FileSelectVblank);
 }
 
 /**
@@ -1906,7 +1598,8 @@ _0809F50A:\n\
 
 // 0x0809F518
 NAKED_FUNCTION
-u8 FileSelectSetupOam(u8 type, u16 xPosition, u16 yPosition, u8 unused)
+u8 FileSelectSetupOam(type, xPosition, yPosition, unused)
+u8 type; u16 xPosition; u16 yPosition; u8 unused;
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -4640,7 +4333,7 @@ _080A0B80: .4byte gNonGameplayRam\n\
 
 // 0x080A0B84
 NAKED_FUNCTION
-u8 FileSelectProcessCorruptedFile(void)
+boolu32 FileSelectProcessCorruptedFile(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, lr}\n\

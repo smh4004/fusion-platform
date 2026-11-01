@@ -5,6 +5,7 @@
 #include "oam.h"
 #include "constants/game_state.h"
 
+extern const u16 sFileSelectBackdropColors[6];
 extern const u8 sFileSelectOamXFlipOffsets[3][4];
 extern const struct FrameData* sFileSelectFileOverlayOamPointers[5];
 extern const struct FrameData* sFileSelectCursorOamPointers[3][3];
