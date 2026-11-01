@@ -329,7 +329,233 @@ const u8 sNavConversationPortraitOamIds[6][3] = {
     }
 };
 
-static const u8 sBlob_576802_581510[] = INCBIN_U8("data/Blob_576802_581510.bin");
+static const u8 sBlob_576802_57bbc4[] = INCBIN_U8("data/Blob_576802_57bbc4.bin");
+
+const u8 sNavConversationPopUpAnim_57bbc4[6 * 2] = {
+    0, 20,
+    1, 10,
+    2, 10,
+    3, 13,
+    2, 13,
+    1, 13
+};
+
+const u8 sNavConversationPopUpAnim_57bbd0[16 * 2] = {
+    0, 3,
+    1, 3,
+    2, 3,
+    3, 3,
+    4, 3,
+    5, 3,
+    6, 3,
+    7, 3,
+    8, 3,
+    9, 3,
+    10, 3,
+    11, 3,
+    12, 3,
+    13, 3,
+    14, 3,
+    15, 3
+};
+
+const u8 sNavConversationPopUpAnim_57bbf0[48 * 2] = {
+    0, 8,
+    1, 8,
+    2, 8,
+    1, 8,
+    0, 8,
+    1, 8,
+    2, 8,
+    1, 8,
+    0, 8,
+    3, 8,
+    4, 8,
+    3, 8,
+    0, 8,
+    3, 8,
+    4, 8,
+    5, 8,
+    6, 8,
+    9, 8,
+    10, 8,
+    9, 8,
+    6, 8,
+    7, 8,
+    8, 8,
+    7, 8,
+    6, 8,
+    11, 8,
+    12, 8,
+    11, 8,
+    6, 8,
+    7, 8,
+    8, 8,
+    7, 8,
+    6, 8,
+    5, 8,
+    4, 8,
+    3, 8,
+    0, 8,
+    13, 8,
+    14, 8,
+    15, 8,
+    16, 8,
+    17, 8,
+    18, 8,
+    17, 8,
+    16, 8,
+    15, 8,
+    14, 8,
+    13, 8
+};
+
+const struct NavConversationPopUp sNavConversationPopUps[5] = {
+    [0] = {
+        .pAnimation = sNavConversationPopUpAnim_57bbc4,
+        .animationLength = 6,
+        .pPalette = (const u16*)0x8576804,
+        .pFlashingPalette = (const u16*)0x8576824,
+        .flashingPaletteDelay = 0,
+        .rows = 6,
+        .vramRow = 0,
+        .size = 8,
+        .unk_12_4 = 0,
+        .pGraphics = (const u32*)0x8576904
+    },
+    [1] = {
+        .pAnimation = sNavConversationPopUpAnim_57bbc4,
+        .animationLength = 6,
+        .pPalette = (const u16*)0x8576804,
+        .pFlashingPalette = (const u16*)0x8576824,
+        .flashingPaletteDelay = 0,
+        .rows = 6,
+        .vramRow = 0,
+        .size = 8,
+        .unk_12_4 = 0,
+        .pGraphics = (const u32*)0x8576904
+    },
+    [2] = {
+        .pAnimation = sNavConversationPopUpAnim_57bbd0,
+        .animationLength = 16,
+        .pPalette = (const u16*)0x8576844,
+        .pFlashingPalette = (const u16*)0x8576864,
+        .flashingPaletteDelay = 0,
+        .rows = 4,
+        .vramRow = 1,
+        .size = 4,
+        .unk_12_4 = 2,
+        .pGraphics = (const u32*)0x8577024
+    },
+    [3] = {
+        .pAnimation = sNavConversationPopUpAnim_57bbf0,
+        .animationLength = 48,
+        .pPalette = (const u16*)0x8576884,
+        .pFlashingPalette = (const u16*)0x85768A4,
+        .flashingPaletteDelay = 0,
+        .rows = 6,
+        .vramRow = 0,
+        .size = 8,
+        .unk_12_4 = 0,
+        .pGraphics = (const u32*)0x8578750
+    },
+    [4] = {
+        .pAnimation = sNavConversationPopUpAnim_57bbd0,
+        .animationLength = 16,
+        .pPalette = (const u16*)0x85768C4,
+        .pFlashingPalette = (const u16*)0x85768E4,
+        .flashingPaletteDelay = 0,
+        .rows = 4,
+        .vramRow = 1,
+        .size = 4,
+        .unk_12_4 = 2,
+        .pGraphics = (const u32*)0x8577024
+    }
+};
+
+const u8 sNavConversationPopUpsPerConversation[3][4] = {
+    [0] = { NAV_CONVO_UNLOCKED_LEVEL_0_HATCHES, 2, 1, 0 },
+    [1] = { NAV_CONVO_GO_DOWNLOAD_VARIA_SUIT, 4, 0, 0 },
+    [2] = { NAV_CONVO_REACTIVATE_THE_AUXILIARY_POWER_SYSTEM, 3, 0, 0 }
+};
+
+const u16 sNavConversationPal_57bcd4[16] = {
+    0x7C1F, 0x701B, 0x6017, 0x701B, 0x7C1F, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+};
+
+const u16 sNavConversationPal_57bcf4[2][16] = {
+    [0] = {
+        0x3704, 0x32A4, 0x2A25, 0x32A4, 0x3704, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [1] = {
+        0x108F, 0x14B3, 0x18D7, 0x14B3, 0x108F, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    }
+};
+
+const u16 sNavConversationPal_57bd34[4][16] = {
+    [0] = {
+        0x0000, 0x0000, 0x0080, 0x04C0, 0x1545, 0x29CA, 0x362D, 0x46B1,
+        0x1752, 0x5314, 0x0000, 0x0000, 0x6BFF, 0x47BD, 0x2BB7, 0x1B93
+    },
+    [1] = {
+        0x0000, 0x0000, 0x0080, 0x04C0, 0x1545, 0x29CA, 0x362D, 0x46B1,
+        0x1752, 0x5314, 0x0000, 0x0000, 0x47BD, 0x2BB7, 0x1B93, 0x6BFF
+    },
+    [2] = {
+        0x0000, 0x0000, 0x0080, 0x04C0, 0x1545, 0x29CA, 0x362D, 0x46B1,
+        0x1752, 0x5314, 0x0000, 0x0000, 0x2BB7, 0x1B93, 0x6BFF, 0x47BD
+    },
+    [3] = {
+        0x0000, 0x0000, 0x0080, 0x04C0, 0x1545, 0x29CA, 0x362D, 0x46B1,
+        0x1752, 0x5314, 0x0000, 0x0000, 0x1B93, 0x6BFF, 0x47BD, 0x2BB7
+    }
+};
+
+const u16 sNavConversationPal_57bdb4[8][16] = {
+    [0] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x0252, 0x0172, 0x0052, 0x43E2, 0x3704, 0x34C3
+    },
+    [1] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x06B5, 0x05D5, 0x04B5, 0x3BA1, 0x2AC3, 0x38E4
+    },
+    [2] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x0F39, 0x0E59, 0x0D19, 0x2F41, 0x2262, 0x3D05
+    },
+    [3] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x179C, 0x16BC, 0x159C, 0x2700, 0x1621, 0x4526
+    },
+    [4] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x1FFF, 0x1F3F, 0x1DFF, 0x1AA0, 0x0DC0, 0x4968
+    },
+    [5] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x179C, 0x16BC, 0x159C, 0x2700, 0x1621, 0x4526
+    },
+    [6] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x0F39, 0x0E59, 0x0D19, 0x2F41, 0x2262, 0x3D05
+    },
+    [7] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x06B5, 0x05D5, 0x04B5, 0x3BA1, 0x2AC3, 0x38E4
+    }
+};
+
+const u8 sNavConversationPalTimers_57beb4[4] = { 32, 16, 16, 16 };
+
+const u8 sNavConversationPalTimers_57beb8[4] = { 7, 7, 7, 7 };
+
+const u8 sNavConversationPalTimers_57bebc[8] = { 8, 8, 8, 8, 8, 8, 8, 8 };
+
+static const u8 sBlob_57bec4_581510[] = INCBIN_U8("data/Blob_57bec4_581510.bin");
 
 const u8 sPauseDebugEventNames[EVENT_END][EVENT_NAME_SIZE] = {
     [EVENT_NONE] = SHIFT_JIS("TOHOKANKO   トクベツホカンコヘ ムカエ  "),

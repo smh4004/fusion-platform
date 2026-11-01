@@ -69,7 +69,7 @@ struct PauseScreenData {
     u8 mapY;
     u8 currentArea;
     u8 navTargetTextDirection;
-    const u32* pNavConvPopUpGraphicsPointer;
+    const u8* pNavConvPopUpGraphicsPointer;
     u8 currentPopUp;
     u8 unk_219;
     u8 unk_21A;

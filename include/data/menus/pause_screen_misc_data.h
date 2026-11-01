@@ -73,6 +73,32 @@ struct NavConversationTarget {
 extern const struct NavConversationTarget sNavConversationTargets[33];
 extern const u8 sNavConversationTargetTextOamIds[4];
 
+struct NavConversationPopUp {
+    const u8* pAnimation; // Pairs of (frame, duration)
+    u8 animationLength;
+    const u16* pPalette;
+    const u16* pFlashingPalette;
+    u8 flashingPaletteDelay;
+    u8 rows:4;
+    u8 vramRow:4;
+    u8 size:4;
+    u8 unk_12_4:4;
+    const u32* pGraphics;
+};
+
+extern const u8 sNavConversationPopUpAnim_57bbc4[6 * 2];
+extern const u8 sNavConversationPopUpAnim_57bbd0[16 * 2];
+extern const u8 sNavConversationPopUpAnim_57bbf0[48 * 2];
+extern const struct NavConversationPopUp sNavConversationPopUps[5];
+extern const u8 sNavConversationPopUpsPerConversation[3][4];
+extern const u16 sNavConversationPal_57bcd4[16];
+extern const u16 sNavConversationPal_57bcf4[2][16];
+extern const u16 sNavConversationPal_57bd34[4][16];
+extern const u16 sNavConversationPal_57bdb4[8][16];
+extern const u8 sNavConversationPalTimers_57beb4[4];
+extern const u8 sNavConversationPalTimers_57beb8[4];
+extern const u8 sNavConversationPalTimers_57bebc[8];
+
 // ...
 
 extern const u8 sNavConversationPortraitOamIds[6][3];

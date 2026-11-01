@@ -5067,78 +5067,31 @@ void NavigationConversationClearPopUpGraphics(void)
 }
 
 // 0x0807C3B4
-NAKED_FUNCTION
 void unk_7c3b4(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	ldr r4, _0807C42C @ =0x0857BC50\n\
-	ldr r5, _0807C430 @ =gNonGameplayRam\n\
-	ldr r0, _0807C434 @ =0x0000021A\n\
-	adds r2, r5, r0\n\
-	ldrb r0, [r2]\n\
-	lsls r1, r0, #1\n\
-	adds r1, r1, r0\n\
-	lsls r1, r1, #3\n\
-	adds r1, r1, r4\n\
-	ldrb r0, [r1, #0x10]\n\
-	cmp r0, #0\n\
-	beq _0807C424\n\
-	ldr r1, _0807C438 @ =0x00000229\n\
-	adds r3, r5, r1\n\
-	ldrb r1, [r3]\n\
-	adds r1, #1\n\
-	movs r6, #0\n\
-	strb r1, [r3]\n\
-	ldrb r2, [r2]\n\
-	lsls r0, r2, #1\n\
-	adds r0, r0, r2\n\
-	lsls r2, r0, #3\n\
-	adds r0, r2, r4\n\
-	lsls r1, r1, #0x18\n\
-	lsrs r1, r1, #0x18\n\
-	ldrb r0, [r0, #0x10]\n\
-	cmp r1, r0\n\
-	blo _0807C424\n\
-	strb r6, [r3]\n\
-	adds r0, r4, #0\n\
-	adds r0, #0xc\n\
-	adds r0, r2, r0\n\
-	movs r1, #0x8a\n\
-	lsls r1, r1, #2\n\
-	adds r4, r5, r1\n\
-	ldrb r1, [r4]\n\
-	lsls r1, r1, #1\n\
-	ldr r3, [r0]\n\
-	adds r2, r3, r1\n\
-	ldrh r0, [r2]\n\
-	cmp r0, #0\n\
-	bne _0807C40E\n\
-	strb r6, [r4]\n\
-	adds r2, r3, #0\n\
-_0807C40E:\n\
-	ldr r1, _0807C43C @ =0x050003FE\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r1]\n\
-	ldrb r0, [r4]\n\
-	adds r0, #1\n\
-	strb r0, [r4]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #0xf\n\
-	bls _0807C424\n\
-	strb r6, [r4]\n\
-_0807C424:\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807C42C: .4byte 0x0857BC50\n\
-_0807C430: .4byte gNonGameplayRam\n\
-_0807C434: .4byte 0x0000021A\n\
-_0807C438: .4byte 0x00000229\n\
-_0807C43C: .4byte 0x050003FE\n\
-    .syntax divided\n");
+    const u16* pColor;
+    const u16* pPalette;
+
+    if (sNavConversationPopUps[PAUSE_SCREEN_DATA.unk_21A].flashingPaletteDelay == 0)
+        return;
+
+    PAUSE_SCREEN_DATA.unk_229++;
+    if (PAUSE_SCREEN_DATA.unk_229 < sNavConversationPopUps[PAUSE_SCREEN_DATA.unk_21A].flashingPaletteDelay)
+        return;
+
+    PAUSE_SCREEN_DATA.unk_229 = 0;
+    pColor = &sNavConversationPopUps[PAUSE_SCREEN_DATA.unk_21A].pFlashingPalette[PAUSE_SCREEN_DATA.unk_228];
+    if (*pColor == 0)
+    {
+        PAUSE_SCREEN_DATA.unk_228 = 0;
+        pColor = sNavConversationPopUps[PAUSE_SCREEN_DATA.unk_21A].pFlashingPalette;
+    }
+
+    *(u16*)(PALRAM_OBJ + PAL_ROW_SIZE * 15 + 15 * sizeof(u16)) = *pColor;
+
+    PAUSE_SCREEN_DATA.unk_228++;
+    if (PAUSE_SCREEN_DATA.unk_228 > 15)
+        PAUSE_SCREEN_DATA.unk_228 = 0;
 }
 
 // 0x0807C440
