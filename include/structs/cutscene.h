@@ -100,10 +100,8 @@ struct CutsceneData {
     u16 unk_A;
     const u16* pText;
     u16 timer;
-    u8 unk_12;
-    u8 unk_13;
-    u8 unk_14;
-    u8 unk_15;
+    u16 bg2YPosition;
+    u16 bg1YPosition;
     u8 unk_16;
     u8 textState;
     union {
