@@ -426,7 +426,7 @@ _0809ACD0: .4byte CutsceneSecretConversationProcessIncomingDispatch\n\
 
 // 0x0809ACD4
 NAKED_FUNCTION
-void CutsceneSecretConversationProcessNavigationPanel(struct CutsceneMonologueOam* pOam)
+void CutsceneSecretConversationProcessNavigationPanel(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -450,7 +450,7 @@ _0809ACF0: .4byte 0x086792A8\n\
 
 // 0x0809ACF4
 NAKED_FUNCTION
-void CutsceneSecretConversationProcessIncomingDispatch(struct CutsceneMonologueOam* pOam)
+void CutsceneSecretConversationProcessIncomingDispatch(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, lr}\n\

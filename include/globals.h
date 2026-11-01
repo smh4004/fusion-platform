@@ -23,6 +23,7 @@ union NonGameplayRam {
     struct IntroData intro;
     struct EndingData ending;
     struct CutsceneData cutscene;
+    struct CutsceneOamData cutsceneOam;
     u8 size[1344];
 };
 
@@ -34,6 +35,7 @@ extern union NonGameplayRam gNonGameplayRam;
 #define SA_X_CLOSE_UP_DATA gNonGameplayRam.saXCloseUp
 #define ENDING_DATA gNonGameplayRam.ending
 #define CUTSCENE_DATA gNonGameplayRam.cutscene
+#define CUTSCENE_OAM_DATA gNonGameplayRam.cutsceneOam
 
 extern u8 gSpriteGfxBackup[0x8000];
 

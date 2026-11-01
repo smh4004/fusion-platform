@@ -106,8 +106,24 @@ struct CutsceneData {
     u8 textState;
     union {
         struct CutsceneMonologueData monologue;
-        struct CutsceneOam oam[16];
     } u;
+};
+
+struct CutsceneOamData {
+    u16 stage;
+    u16 unk_2;
+    u16 unk_4;
+    u16 unk_6;
+    u16 timer;
+    s16 unk_A;
+    s16 unk_C;
+    u16 unk_E;
+    u8 subStage;
+    u8 unk_11;
+    u8 oamCount;
+    u8 unk_13;
+    u8 unk_14[4];
+    struct CutsceneOam oam[16];
 };
 
 #endif /* CUTSCENE_STRUCT_H */

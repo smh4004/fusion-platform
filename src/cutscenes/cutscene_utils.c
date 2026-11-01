@@ -20,162 +20,61 @@
 #include "data/sprite_data.h"
 #include "data/haze_data.h"
 
-// 0x0809D0A0
-NAKED_FUNCTION
+/**
+ * @brief 9d0a0 | 124 | Sets up the window of a cutscene
+ * 
+ */
 void unk_9d0a0(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	ldr r1, _0809D0E4 @ =0x040000D4\n\
-	ldr r0, _0809D0E8 @ =0x02001000\n\
-	str r0, [r1]\n\
-	ldr r0, _0809D0EC @ =0x02002000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0809D0F0 @ =0x84000054\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r3, _0809D0F4 @ =gNonGameplayRam\n\
-	ldrh r0, [r3, #0xe]\n\
-	ldrh r2, [r3, #0xa]\n\
-	subs r1, r0, r2\n\
-	lsls r1, r1, #0x10\n\
-	adds r0, r0, r2\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r7, r0, #0x10\n\
-	lsrs r2, r1, #0x10\n\
-	asrs r0, r1, #0x10\n\
-	cmp r0, #0\n\
-	bge _0809D0F8\n\
-	rsbs r0, r0, #0\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r5, r0, #0x10\n\
-	movs r1, #0xa\n\
-	ldrsh r0, [r3, r1]\n\
-	lsls r0, r0, #1\n\
-	movs r2, #0\n\
-	cmp r5, r0\n\
-	ble _0809D0FA\n\
-	movs r2, #0xa1\n\
-	b _0809D0FA\n\
-	.align 2, 0\n\
-_0809D0E4: .4byte 0x040000D4\n\
-_0809D0E8: .4byte 0x02001000\n\
-_0809D0EC: .4byte 0x02002000\n\
-_0809D0F0: .4byte 0x84000054\n\
-_0809D0F4: .4byte gNonGameplayRam\n\
-_0809D0F8:\n\
-	movs r5, #0\n\
-_0809D0FA:\n\
-	lsls r0, r7, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #0x9f\n\
-	ble _0809D104\n\
-	movs r7, #0xa0\n\
-_0809D104:\n\
-	ldr r0, _0809D1B8 @ =0x083E3294\n\
-	movs r4, #0xa\n\
-	ldrsh r1, [r3, r4]\n\
-	lsls r1, r1, #2\n\
-	adds r1, r1, r0\n\
-	ldr r1, [r1]\n\
-	mov ip, r1\n\
-	ldr r4, _0809D1BC @ =0x02001000\n\
-	movs r6, #0\n\
-	lsls r0, r2, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	lsls r2, r7, #0x10\n\
-	cmp r6, r0\n\
-	bge _0809D138\n\
-	movs r7, #0\n\
-	adds r1, r0, #0\n\
-_0809D124:\n\
-	strh r7, [r4]\n\
-	adds r4, #2\n\
-	lsls r0, r6, #0x10\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #9\n\
-	adds r0, r0, r3\n\
-	lsrs r6, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, r1\n\
-	blt _0809D124\n\
-_0809D138:\n\
-	lsls r0, r6, #0x10\n\
-	asrs r1, r2, #0x10\n\
-	cmp r0, r2\n\
-	bgt _0809D192\n\
-	ldr r0, _0809D1C0 @ =gNonGameplayRam\n\
-	mov r8, r0\n\
-	adds r7, r1, #0\n\
-_0809D146:\n\
-	lsls r0, r5, #2\n\
-	add r0, ip\n\
-	mov r2, r8\n\
-	ldrh r1, [r2, #0xc]\n\
-	ldrh r2, [r0, #2]\n\
-	adds r2, r1, r2\n\
-	lsls r2, r2, #0x10\n\
-	ldrh r0, [r0]\n\
-	adds r1, r1, r0\n\
-	lsls r1, r1, #0x10\n\
-	lsrs r3, r1, #0x10\n\
-	lsrs r1, r2, #0x10\n\
-	cmp r2, #0\n\
-	bge _0809D164\n\
-	movs r1, #0\n\
-_0809D164:\n\
-	lsls r0, r3, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #0xf0\n\
-	ble _0809D16E\n\
-	movs r3, #0xf0\n\
-_0809D16E:\n\
-	lsls r1, r1, #0x10\n\
-	asrs r1, r1, #8\n\
-	lsls r0, r3, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	orrs r0, r1\n\
-	strh r0, [r4]\n\
-	adds r4, #2\n\
-	adds r0, r5, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r5, r0, #0x10\n\
-	lsls r0, r6, #0x10\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #9\n\
-	adds r0, r0, r3\n\
-	lsrs r6, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, r7\n\
-	ble _0809D146\n\
-_0809D192:\n\
-	lsls r1, r6, #0x10\n\
-	asrs r0, r1, #0x10\n\
-	cmp r0, #0x9f\n\
-	bgt _0809D1AC\n\
-	movs r2, #0\n\
-_0809D19C:\n\
-	strh r2, [r4]\n\
-	adds r4, #2\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #9\n\
-	adds r1, r1, r0\n\
-	asrs r0, r1, #0x10\n\
-	cmp r0, #0x9f\n\
-	ble _0809D19C\n\
-_0809D1AC:\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809D1B8: .4byte 0x083E3294\n\
-_0809D1BC: .4byte 0x02001000\n\
-_0809D1C0: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    s16 start;
+    s16 end;
+    u16 subSlice;
+    u16* dst;
+    s16 i;
+    const s16* src;
+    s16 left;
+    s16 right;
+
+    DMA3_COPY_32(EWRAM_BASE + 0x1000, EWRAM_BASE + 0x2000, 0x150 / 4);
+
+    start = CUTSCENE_OAM_DATA.unk_E - CUTSCENE_OAM_DATA.unk_A;
+    end = CUTSCENE_OAM_DATA.unk_E + CUTSCENE_OAM_DATA.unk_A;
+    if (start < 0)
+    {
+        subSlice = -start;
+        if (subSlice > CUTSCENE_OAM_DATA.unk_A * 2)
+            start = 161;
+        else
+            start = 0;
+    }
+    else
+    {
+        subSlice = 0;
+    }
+
+    if (end > 159)
+        end = 160;
+
+    src = sHaze_PowerBomb_WindowValuesPointers[CUTSCENE_OAM_DATA.unk_A];
+    dst = EWRAM_BASE + 0x1000;
+
+    for (i = 0; i < start; i++)
+        *dst++ = 0;
+
+    for (; i <= end; i++)
+    {
+        right = CUTSCENE_OAM_DATA.unk_C + src[subSlice * 2 + 1];
+        left = CUTSCENE_OAM_DATA.unk_C + src[subSlice * 2 + 0];
+        if (right < 0)
+            right = 0;
+        if (left > 240)
+            left = 240;
+        *dst++ = left | right << 8;
+        subSlice++;
+    }
+
+    for (; i < 160; i++)
+        *dst++ = 0;
 }
 
 // 0x0809D1C4
@@ -200,227 +99,104 @@ _0809D1E0: .4byte 0x02002000\n\
     .syntax divided\n");
 }
 
-// 0x0809D1E4
-NAKED_FUNCTION
+/**
+ * @brief 9d1e4 | 44 | Destroys the first cutscene OAM of a type
+ * 
+ */
 void CutsceneMonologueDestroyOamOfType(u8 type)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	movs r3, #0\n\
-	ldr r6, _0809D214 @ =gNonGameplayRam\n\
-	movs r7, #2\n\
-	rsbs r7, r7, #0\n\
-	movs r5, #0\n\
-_0809D1F4:\n\
-	lsls r0, r3, #3\n\
-	adds r0, r0, r3\n\
-	lsls r0, r0, #2\n\
-	adds r2, r0, r6\n\
-	adds r1, r2, #0\n\
-	adds r1, #0x28\n\
-	ldrb r0, [r1]\n\
-	cmp r0, r4\n\
-	bne _0809D218\n\
-	strb r5, [r1]\n\
-	adds r2, #0x2e\n\
-	ldrb r1, [r2]\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	strb r0, [r2]\n\
-	b _0809D222\n\
-	.align 2, 0\n\
-_0809D214: .4byte gNonGameplayRam\n\
-_0809D218:\n\
-	adds r0, r3, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r3, r0, #0x18\n\
-	cmp r3, #0xf\n\
-	bls _0809D1F4\n\
-_0809D222:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < ARRAY_SIZE(CUTSCENE_OAM_DATA.oam); i++)
+    {
+        if (CUTSCENE_OAM_DATA.oam[i].type == type)
+        {
+            CUTSCENE_OAM_DATA.oam[i].type = 0;
+            CUTSCENE_OAM_DATA.oam[i].enabled = FALSE;
+            break;
+        }
+    }
 }
 
-// 0x0809D228
-NAKED_FUNCTION
+/**
+ * @brief 9d228 | 20 | Fades in a cutscene
+ * 
+ */
 void CutsceneFadeIn(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	bl CutsceneProcessOam\n\
-	bl CutsceneDrawAllOam\n\
-	ldr r1, _0809D244 @ =gWrittenToBldy\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0\n\
-	beq _0809D23E\n\
-	subs r0, #1\n\
-	strh r0, [r1]\n\
-_0809D23E:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809D244: .4byte gWrittenToBldy\n\
-    .syntax divided\n");
+    CutsceneProcessOam();
+    CutsceneDrawAllOam();
+    if (gWrittenToBldy != 0)
+        gWrittenToBldy--;
 }
 
-// 0x0809D248
-NAKED_FUNCTION
+/**
+ * @brief 9d248 | 20 | Fades out a cutscene
+ * 
+ */
 void CutsceneFadeOut(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	bl CutsceneProcessOam\n\
-	bl CutsceneDrawAllOam\n\
-	ldr r1, _0809D264 @ =gWrittenToBldy\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0xf\n\
-	bhi _0809D25E\n\
-	adds r0, #1\n\
-	strh r0, [r1]\n\
-_0809D25E:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809D264: .4byte gWrittenToBldy\n\
-    .syntax divided\n");
+    CutsceneProcessOam();
+    CutsceneDrawAllOam();
+    if (gWrittenToBldy < BLDY_MAX_VALUE)
+        gWrittenToBldy++;
 }
 
-// 0x0809D268
-NAKED_FUNCTION
+/**
+ * @brief 9d268 | 44 | Destroys the first cutscene OAM of a type
+ * 
+ */
 void CutsceneDestroyOamOfType(u8 type)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	movs r3, #0\n\
-	ldr r6, _0809D298 @ =gNonGameplayRam\n\
-	movs r7, #2\n\
-	rsbs r7, r7, #0\n\
-	movs r5, #0\n\
-_0809D278:\n\
-	lsls r0, r3, #3\n\
-	adds r0, r0, r3\n\
-	lsls r0, r0, #2\n\
-	adds r2, r0, r6\n\
-	adds r1, r2, #0\n\
-	adds r1, #0x28\n\
-	ldrb r0, [r1]\n\
-	cmp r0, r4\n\
-	bne _0809D29C\n\
-	strb r5, [r1]\n\
-	adds r2, #0x2e\n\
-	ldrb r1, [r2]\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	strb r0, [r2]\n\
-	b _0809D2A6\n\
-	.align 2, 0\n\
-_0809D298: .4byte gNonGameplayRam\n\
-_0809D29C:\n\
-	adds r0, r3, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r3, r0, #0x18\n\
-	cmp r3, #0xf\n\
-	bls _0809D278\n\
-_0809D2A6:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < ARRAY_SIZE(CUTSCENE_OAM_DATA.oam); i++)
+    {
+        if (CUTSCENE_OAM_DATA.oam[i].type == type)
+        {
+            CUTSCENE_OAM_DATA.oam[i].type = 0;
+            CUTSCENE_OAM_DATA.oam[i].enabled = FALSE;
+            break;
+        }
+    }
 }
 
-// 0x0809D2AC
-NAKED_FUNCTION
+/**
+ * @brief 9d2ac | 48 | Processes every cutscene OAM
+ * 
+ */
 void CutsceneProcessOam(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	ldr r1, _0809D2F0 @ =gNonGameplayRam\n\
-	movs r0, #0\n\
-	strb r0, [r1, #0x12]\n\
-	movs r5, #0\n\
-	adds r4, r1, #0\n\
-_0809D2B8:\n\
-	lsls r0, r5, #3\n\
-	adds r0, r0, r5\n\
-	lsls r2, r0, #2\n\
-	adds r0, r2, r4\n\
-	adds r0, #0x28\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	beq _0809D2E0\n\
-	adds r1, r4, #0\n\
-	adds r1, #0x38\n\
-	adds r1, r2, r1\n\
-	adds r0, r4, #0\n\
-	adds r0, #0x18\n\
-	adds r0, r2, r0\n\
-	ldr r1, [r1]\n\
-	bl _call_via_r1\n\
-	ldrb r0, [r4, #0x12]\n\
-	adds r0, #1\n\
-	strb r0, [r4, #0x12]\n\
-_0809D2E0:\n\
-	adds r0, r5, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r5, r0, #0x18\n\
-	cmp r5, #0xf\n\
-	bls _0809D2B8\n\
-	pop {r4, r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809D2F0: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    u8 i;
+
+    CUTSCENE_OAM_DATA.oamCount = 0;
+    for (i = 0; i < ARRAY_SIZE(CUTSCENE_OAM_DATA.oam); i++)
+    {
+        if (CUTSCENE_OAM_DATA.oam[i].type != 0)
+        {
+            CUTSCENE_OAM_DATA.oam[i].pFunction(&CUTSCENE_OAM_DATA.oam[i]);
+            CUTSCENE_OAM_DATA.oamCount++;
+        }
+    }
 }
 
-// 0x0809D2F4
-NAKED_FUNCTION
+/**
+ * @brief 9d2f4 | 4c | Draws every cutscene OAM
+ * 
+ */
 void CutsceneDrawAllOam(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	movs r4, #0\n\
-	ldr r5, _0809D334 @ =gNonGameplayRam\n\
-	adds r6, r5, #0\n\
-	adds r6, #0x18\n\
-_0809D2FE:\n\
-	lsls r0, r4, #3\n\
-	adds r0, r0, r4\n\
-	lsls r1, r0, #2\n\
-	adds r0, r1, r5\n\
-	adds r0, #0x2e\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x1f\n\
-	cmp r0, #0\n\
-	beq _0809D316\n\
-	adds r0, r1, r6\n\
-	bl CutsceneDrawOam\n\
-_0809D316:\n\
-	adds r0, r4, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	cmp r4, #0xf\n\
-	bls _0809D2FE\n\
-	bl ResetFreeOam\n\
-	ldr r0, _0809D338 @ =gNextOamSlot\n\
-	movs r1, #0\n\
-	strb r1, [r0]\n\
-	ldr r0, _0809D33C @ =0x03001238\n\
-	strb r1, [r0]\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809D334: .4byte gNonGameplayRam\n\
-_0809D338: .4byte gNextOamSlot\n\
-_0809D33C: .4byte 0x03001238\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < ARRAY_SIZE(CUTSCENE_OAM_DATA.oam); i++)
+    {
+        if (CUTSCENE_OAM_DATA.oam[i].enabled)
+            CutsceneDrawOam(&CUTSCENE_OAM_DATA.oam[i]);
+    }
+
+    ResetFreeOam();
+    gNextOamSlot = 0;
+    gUnk_3001238 = 0;
 }
 
 // 0x0809D340
@@ -1480,12 +1256,11 @@ _0809DB6C: .4byte 0xFFFFFC00\n\
     .syntax divided\n");
 }
 
-// 0x0809DB70
-NAKED_FUNCTION
+/**
+ * @brief 9db70 | 4 | Empty function
+ * 
+ */
 void unk_9db70(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	bx lr\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    return;
 }

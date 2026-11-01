@@ -43,8 +43,8 @@ boolu32 CutsceneSecretConversation(void);
 void CutsceneSecretConversationInit(void);
 boolu32 CutsceneSecretConversationProcess(void);
 u8 CutsceneSecretConversationSetupOam(u8 type, s16 xPosition, s16 yPosition);
-void CutsceneSecretConversationProcessNavigationPanel(struct CutsceneMonologueOam* pOam);
-void CutsceneSecretConversationProcessIncomingDispatch(struct CutsceneMonologueOam* pOam);
+void CutsceneSecretConversationProcessNavigationPanel(struct CutsceneOam* pOam);
+void CutsceneSecretConversationProcessIncomingDispatch(struct CutsceneOam* pOam);
 void CutsceneSecretConversationVblank(void);
 void unk_9ae0c(void);
 
