@@ -2,6 +2,10 @@
 #include "globals.h"
 #include "macros.h"
 #include "dma.h"
+#include "callbacks.h"
+#include "audio/track_internal.h"
+#include "constants/samus.h"
+#include "structs/samus.h"
 #include "sram_misc.h"
 #include "sram/sram.h"
 
@@ -291,310 +295,132 @@ _0807F0F4: .4byte 0x08582248\n\
     .syntax divided\n");
 }
 
-// 0x0807F0F8
-NAKED_FUNCTION
+/**
+ * @brief 7f0f8 | 138 | Saves the game after the intro, split in several stages
+ * 
+ */
 void Sram_ProcessIntroSave(u8 stage)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	sub sp, #4\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r1, r0, #0x18\n\
-	adds r3, r1, #0\n\
-	ldr r6, _0807F128 @ =0x03000B94\n\
-	ldr r4, _0807F12C @ =0x03000B8D\n\
-	ldrb r0, [r4]\n\
-	lsls r2, r0, #2\n\
-	adds r0, r2, r0\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r6\n\
-	ldrb r5, [r0, #0xf]\n\
-	cmp r5, #0\n\
-	beq _0807F17C\n\
-	cmp r1, #2\n\
-	bgt _0807F130\n\
-	cmp r1, #1\n\
-	blt _0807F120\n\
-	b _0807F222\n\
-_0807F120:\n\
-	cmp r1, #0\n\
-	beq _0807F136\n\
-	b _0807F21C\n\
-	.align 2, 0\n\
-_0807F128: .4byte 0x03000B94\n\
-_0807F12C: .4byte 0x03000B8D\n\
-_0807F130:\n\
-	cmp r1, #3\n\
-	beq _0807F158\n\
-	b _0807F21C\n\
-_0807F136:\n\
-	ldr r1, _0807F150 @ =gDisableSoftReset\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-	ldr r0, _0807F154 @ =0x03000014\n\
-	movs r2, #1\n\
-	strb r2, [r0, #1]\n\
-	ldrb r1, [r4]\n\
-	lsls r0, r1, #2\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r6\n\
-	strb r2, [r0, #0x11]\n\
-	b _0807F222\n\
-	.align 2, 0\n\
-_0807F150: .4byte gDisableSoftReset\n\
-_0807F154: .4byte 0x03000014\n\
-_0807F158:\n\
-	ldr r0, _0807F174 @ =0x0858225C\n\
-	adds r0, r2, r0\n\
-	ldr r1, [r0]\n\
-	ldr r0, _0807F178 @ =0x08582268\n\
-	adds r0, r2, r0\n\
-	ldr r2, [r0]\n\
-	movs r3, #0x90\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	b _0807F21C\n\
-	.align 2, 0\n\
-_0807F174: .4byte 0x0858225C\n\
-_0807F178: .4byte 0x08582268\n\
-_0807F17C:\n\
-	cmp r1, #1\n\
-	beq _0807F1E4\n\
-	cmp r1, #1\n\
-	bgt _0807F18A\n\
-	cmp r1, #0\n\
-	beq _0807F194\n\
-	b _0807F21C\n\
-_0807F18A:\n\
-	cmp r3, #2\n\
-	beq _0807F1EA\n\
-	cmp r3, #3\n\
-	beq _0807F1F0\n\
-	b _0807F21C\n\
-_0807F194:\n\
-	ldr r1, _0807F1D8 @ =gDisableSoftReset\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-	ldr r3, _0807F1DC @ =0x03000014\n\
-	movs r2, #1\n\
-	strb r2, [r3, #1]\n\
-	ldrb r1, [r4]\n\
-	lsls r0, r1, #2\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r6\n\
-	strb r2, [r0, #0x11]\n\
-	ldrb r1, [r4]\n\
-	lsls r0, r1, #2\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r6\n\
-	ldrb r0, [r0, #0x10]\n\
-	strb r0, [r3]\n\
-	ldr r1, _0807F1E0 @ =0x0858225C\n\
-	ldrb r0, [r4]\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r2, [r0]\n\
-	movs r3, #0xc0\n\
-	lsls r3, r3, #2\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	movs r1, #0\n\
-	bl BitFill\n\
-	b _0807F222\n\
-	.align 2, 0\n\
-_0807F1D8: .4byte gDisableSoftReset\n\
-_0807F1DC: .4byte 0x03000014\n\
-_0807F1E0: .4byte 0x0858225C\n\
-_0807F1E4:\n\
-	bl Sram_WriteHeaderAndGameInfo\n\
-	b _0807F222\n\
-_0807F1EA:\n\
-	bl WriteMostRecentFileToSram\n\
-	b _0807F222\n\
-_0807F1F0:\n\
-	ldr r0, _0807F210 @ =0x0858225C\n\
-	adds r0, r2, r0\n\
-	ldr r1, [r0]\n\
-	ldr r0, _0807F214 @ =0x08582268\n\
-	adds r0, r2, r0\n\
-	ldr r2, [r0]\n\
-	movs r3, #0x90\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r0, _0807F218 @ =gDisableSoftReset\n\
-	strb r5, [r0]\n\
-	b _0807F222\n\
-	.align 2, 0\n\
-_0807F210: .4byte 0x0858225C\n\
-_0807F214: .4byte 0x08582268\n\
-_0807F218: .4byte gDisableSoftReset\n\
-_0807F21C:\n\
-	ldr r1, _0807F22C @ =gDisableSoftReset\n\
-	movs r0, #0\n\
-	strb r0, [r1]\n\
-_0807F222:\n\
-	add sp, #4\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807F22C: .4byte gDisableSoftReset\n\
-    .syntax divided\n");
+    if (gSaveFilesInfo[gMostRecentSaveFile].hasSaved)
+    {
+        switch (stage)
+        {
+            case 0:
+                gDisableSoftReset = TRUE;
+                gGameCompletion.introPlayed = TRUE;
+                gSaveFilesInfo[gMostRecentSaveFile].introPlayed = TRUE;
+                break;
+
+            case 1:
+            case 2:
+                break;
+
+            case 3:
+                DmaTransfer(3, sSaveDataEwramPointers[gMostRecentSaveFile],
+                    (void*)sSaveDataEwramBackupPointers[gMostRecentSaveFile], sizeof(struct SaveFile), 16);
+
+            default:
+                gDisableSoftReset = FALSE;
+        }
+    }
+    else
+    {
+        switch (stage)
+        {
+            case 0:
+                gDisableSoftReset = TRUE;
+                gGameCompletion.introPlayed = TRUE;
+                gSaveFilesInfo[gMostRecentSaveFile].introPlayed = TRUE;
+                gGameCompletion.completedGame = gSaveFilesInfo[gMostRecentSaveFile].completedGame;
+                BitFill(3, 0, (void*)sSaveDataEwramPointers[gMostRecentSaveFile], 0x300, 16);
+                break;
+
+            case 1:
+                Sram_WriteHeaderAndGameInfo();
+                break;
+
+            case 2:
+                WriteMostRecentFileToSram();
+                break;
+
+            case 3:
+                DmaTransfer(3, sSaveDataEwramPointers[gMostRecentSaveFile],
+                    (void*)sSaveDataEwramBackupPointers[gMostRecentSaveFile], sizeof(struct SaveFile), 16);
+                gDisableSoftReset = FALSE;
+                break;
+
+            default:
+                gDisableSoftReset = FALSE;
+        }
+    }
 }
 
-// 0x0807F230
-NAKED_FUNCTION
+/**
+ * @brief 7f230 | 84 | Writes the header and game completion of the current save file
+ * 
+ */
 void Sram_WriteHeaderAndGameInfo(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	ldr r5, _0807F2A0 @ =0x0858225C\n\
-	ldr r4, _0807F2A4 @ =0x03000B8D\n\
-	ldrb r0, [r4]\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r5\n\
-	ldr r6, [r0]\n\
-	ldr r1, _0807F2A8 @ =0x08582200\n\
-	adds r0, r6, #0\n\
-	bl Sram_StringCopy_MetroidEpisode4A\n\
-	movs r0, #0\n\
-	str r0, [r6, #0x10]\n\
-	subs r0, #1\n\
-	str r0, [r6, #0x14]\n\
-	ldr r1, _0807F2AC @ =0x03000014\n\
-	ldrb r0, [r1, #1]\n\
-	strb r0, [r6, #0x19]\n\
-	ldrb r0, [r1]\n\
-	strb r0, [r6, #0x18]\n\
-	adds r0, r6, #0\n\
-	adds r0, #0xf0\n\
-	ldr r1, _0807F2B0 @ =0x085821F8\n\
-	bl Sram_StringCopy_SAVE_END\n\
-	ldrb r0, [r4]\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r5\n\
-	ldr r2, [r0]\n\
-	movs r1, #0\n\
-	movs r3, #0x8f\n\
-_0807F26E:\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	subs r3, #1\n\
-	cmp r3, #0\n\
-	bge _0807F26E\n\
-	str r1, [r6, #0x10]\n\
-	mvns r0, r1\n\
-	str r0, [r6, #0x14]\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807F2A0: .4byte 0x0858225C\n\
-_0807F2A4: .4byte 0x03000B8D\n\
-_0807F2A8: .4byte 0x08582200\n\
-_0807F2AC: .4byte 0x03000014\n\
-_0807F2B0: .4byte 0x085821F8\n\
-    .syntax divided\n");
+    s32 i;
+    u32* ptr;
+    s32 checksum;
+    struct SaveFile* pFile;
+
+    pFile = (struct SaveFile*)sSaveDataEwramPointers[gMostRecentSaveFile];
+    Sram_StringCopy_MetroidEpisode4A(pFile->MetroidEpisode4A_Text, sSramMetroidEpisodeText);
+
+    pFile->checksum = 0;
+    pFile->notChecksum = -1;
+    pFile->gameCompletion.introPlayed = gGameCompletion.introPlayed;
+    pFile->gameCompletion.completedGame = gGameCompletion.completedGame;
+
+    Sram_StringCopy_SAVE_END(pFile->SAVE_END_Text, sSramSaveEndText);
+
+    ptr = (u32*)sSaveDataEwramPointers[gMostRecentSaveFile];
+    checksum = 0;
+    for (i = SRAM_GET_CHECKSUM_SIZE(struct SaveFile, 8, u32) - 1; i >= 0; i--)
+    {
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+    }
+
+    pFile->checksum = checksum;
+    pFile->notChecksum = ~checksum;
 }
 
-// 0x0807F2B4
-NAKED_FUNCTION
+/**
+ * @brief 7f2b4 | 90 | Saves the game after the ending, split in several stages
+ * 
+ */
 void Sram_ProcessEndingSave(u8 stage)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	sub sp, #4\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r1, r0, #0x18\n\
-	cmp r1, #1\n\
-	beq _0807F2DA\n\
-	cmp r1, #1\n\
-	bgt _0807F2CA\n\
-	cmp r1, #0\n\
-	beq _0807F2D4\n\
-	b _0807F330\n\
-_0807F2CA:\n\
-	cmp r1, #2\n\
-	beq _0807F2E8\n\
-	cmp r1, #3\n\
-	beq _0807F310\n\
-	b _0807F330\n\
-_0807F2D4:\n\
-	bl ReadMostRecentFileToEwram\n\
-	b _0807F330\n\
-_0807F2DA:\n\
-	ldr r0, _0807F2E4 @ =0x03000014\n\
-	strb r1, [r0]\n\
-	bl Sram_CopyGameCompletion\n\
-	b _0807F330\n\
-	.align 2, 0\n\
-_0807F2E4: .4byte 0x03000014\n\
-_0807F2E8:\n\
-	bl WriteMostRecentFileToSram\n\
-	ldr r2, _0807F304 @ =0x03000B94\n\
-	ldr r0, _0807F308 @ =0x03000B8D\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, #2\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r2\n\
-	ldr r1, _0807F30C @ =0x03000014\n\
-	ldrb r1, [r1]\n\
-	strb r1, [r0, #0x10]\n\
-	b _0807F330\n\
-	.align 2, 0\n\
-_0807F304: .4byte 0x03000B94\n\
-_0807F308: .4byte 0x03000B8D\n\
-_0807F30C: .4byte 0x03000014\n\
-_0807F310:\n\
-	ldr r1, _0807F338 @ =0x0858225C\n\
-	ldr r0, _0807F33C @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #2\n\
-	adds r1, r0, r1\n\
-	ldr r1, [r1]\n\
-	ldr r2, _0807F340 @ =0x08582268\n\
-	adds r0, r0, r2\n\
-	ldr r2, [r0]\n\
-	movs r3, #0x90\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-_0807F330:\n\
-	add sp, #4\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807F338: .4byte 0x0858225C\n\
-_0807F33C: .4byte 0x03000B8D\n\
-_0807F340: .4byte 0x08582268\n\
-    .syntax divided\n");
+    switch (stage)
+    {
+        case 0:
+            ReadMostRecentFileToEwram();
+            break;
+
+        case 1:
+            gGameCompletion.completedGame = stage;
+            Sram_CopyGameCompletion();
+            break;
+
+        case 2:
+            WriteMostRecentFileToSram();
+            gSaveFilesInfo[gMostRecentSaveFile].completedGame = gGameCompletion.completedGame;
+            break;
+
+        case 3:
+            DmaTransfer(3, sSaveDataEwramPointers[gMostRecentSaveFile],
+                (void*)sSaveDataEwramBackupPointers[gMostRecentSaveFile], sizeof(struct SaveFile), 16);
+            break;
+    }
 }
 
 /**
@@ -631,89 +457,37 @@ void Sram_CopyGameCompletion(void)
     pFile->notChecksum = ~checksum;
 }
 
-// 0x0807F3AC
-NAKED_FUNCTION
+/**
+ * @brief 7f3ac | a4 | Saves the game, split in several stages
+ * 
+ */
 void Sram_QuickSave(u8 stage)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	sub sp, #4\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	adds r1, r0, #0\n\
-	cmp r0, #1\n\
-	beq _0807F3E8\n\
-	cmp r0, #1\n\
-	bgt _0807F3C4\n\
-	cmp r0, #0\n\
-	beq _0807F3CE\n\
-	b _0807F434\n\
-_0807F3C4:\n\
-	cmp r1, #2\n\
-	beq _0807F3F2\n\
-	cmp r1, #3\n\
-	beq _0807F414\n\
-	b _0807F434\n\
-_0807F3CE:\n\
-	ldr r0, _0807F3E0 @ =gDisableSoftReset\n\
-	movs r1, #1\n\
-	strb r1, [r0]\n\
-	ldr r0, _0807F3E4 @ =0x03000B90\n\
-	strb r1, [r0]\n\
-	bl WriteMostRecentFileBackupToSram\n\
-	b _0807F43A\n\
-	.align 2, 0\n\
-_0807F3E0: .4byte gDisableSoftReset\n\
-_0807F3E4: .4byte 0x03000B90\n\
-_0807F3E8:\n\
-	bl SramWrite_WorldData\n\
-	bl SramWrite_ToEwram\n\
-	b _0807F43A\n\
-_0807F3F2:\n\
-	bl WriteMostRecentFileToSram\n\
-	ldr r2, _0807F40C @ =0x03000B94\n\
-	ldr r0, _0807F410 @ =0x03000B8D\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, #2\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r2\n\
-	movs r1, #1\n\
-	strb r1, [r0]\n\
-	b _0807F43A\n\
-	.align 2, 0\n\
-_0807F40C: .4byte 0x03000B94\n\
-_0807F410: .4byte 0x03000B8D\n\
-_0807F414:\n\
-	ldr r1, _0807F440 @ =0x0858225C\n\
-	ldr r0, _0807F444 @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #2\n\
-	adds r1, r0, r1\n\
-	ldr r1, [r1]\n\
-	ldr r2, _0807F448 @ =0x08582268\n\
-	adds r0, r0, r2\n\
-	ldr r2, [r0]\n\
-	movs r3, #0x90\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-_0807F434:\n\
-	ldr r1, _0807F44C @ =gDisableSoftReset\n\
-	movs r0, #0\n\
-	strb r0, [r1]\n\
-_0807F43A:\n\
-	add sp, #4\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807F440: .4byte 0x0858225C\n\
-_0807F444: .4byte 0x03000B8D\n\
-_0807F448: .4byte 0x08582268\n\
-_0807F44C: .4byte gDisableSoftReset\n\
-    .syntax divided\n");
+    switch (stage)
+    {
+        case 0:
+            gDisableSoftReset = TRUE;
+            gHasSaved = TRUE;
+            WriteMostRecentFileBackupToSram();
+            break;
+
+        case 1:
+            SramWrite_WorldData();
+            SramWrite_ToEwram();
+            break;
+
+        case 2:
+            WriteMostRecentFileToSram();
+            gSaveFilesInfo[gMostRecentSaveFile].exists = TRUE;
+            break;
+
+        case 3:
+            DmaTransfer(3, sSaveDataEwramPointers[gMostRecentSaveFile],
+                (void*)sSaveDataEwramBackupPointers[gMostRecentSaveFile], sizeof(struct SaveFile), 16);
+
+        default:
+            gDisableSoftReset = FALSE;
+    }
 }
 
 // 0x0807F450
@@ -1894,36 +1668,20 @@ _0807FE5C: .4byte 0x0000FFFF\n\
     .syntax divided\n");
 }
 
-// 0x0807FE60
-NAKED_FUNCTION
+/**
+ * @brief 7fe60 | 34 | Loads the current save file if a file is being loaded
+ * 
+ */
 void SramLoad_CurrentSave(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	ldr r0, _0807FE8C @ =gIsLoadingFile\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	cmp r0, #1\n\
-	bne _0807FE88\n\
-	bl SramRead_FromEwram\n\
-	bl SramRead_WorldData\n\
-	ldr r0, _0807FE90 @ =gSamusData\n\
-	movs r2, #0\n\
-	movs r1, #0x3d\n\
-	strb r1, [r0, #1]\n\
-	adds r1, r0, #0\n\
-	adds r1, #0x21\n\
-	strb r2, [r1]\n\
-	adds r0, #0x22\n\
-	strb r2, [r0]\n\
-_0807FE88:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807FE8C: .4byte gIsLoadingFile\n\
-_0807FE90: .4byte gSamusData\n\
-    .syntax divided\n");
+    if (gIsLoadingFile == TRUE)
+    {
+        SramRead_FromEwram();
+        SramRead_WorldData();
+        gSamusData.pose = SPOSE_LOADING_SAVE;
+        gSamusData.animationDurationCounter = 0;
+        gSamusData.currentAnimationFrame = 0;
+    }
 }
 
 /**
@@ -3309,41 +3067,25 @@ void Sram_LoadingfileVblank(void)
     c = 0;
 }
 
-// 0x0808095C
-NAKED_FUNCTION
+/**
+ * @brief 8095c | c | V-blank code after loading a file
+ * 
+ */
 void Sram_AfterLoadingFileVblank(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	bl UpdateAudio\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    UpdateAudio();
 }
 
-// 0x08080968
-NAKED_FUNCTION
-u32 Sram_ChecLoadSaveFileWithBlank(void)
+/**
+ * @brief 80968 | 2c | Checks and loads the current save file with the loading v-blank
+ * 
+ */
+s32 Sram_ChecLoadSaveFileWithBlank(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	ldr r0, _08080988 @ =Sram_AfterLoadingFileVblank\n\
-	bl CallbackSetVBlank\n\
-	bl Sram_CheckLoadSaveFile\n\
-	ldr r0, _0808098C @ =Sram_LoadingfileVblank\n\
-	bl CallbackSetVBlank\n\
-	ldr r0, _08080990 @ =gIsLoadingFile\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_08080988: .4byte Sram_AfterLoadingFileVblank\n\
-_0808098C: .4byte Sram_LoadingfileVblank\n\
-_08080990: .4byte gIsLoadingFile\n\
-    .syntax divided\n");
+    CallbackSetVBlank(Sram_AfterLoadingFileVblank);
+    Sram_CheckLoadSaveFile();
+    CallbackSetVBlank(Sram_LoadingfileVblank);
+    return gIsLoadingFile;
 }
 
 /**

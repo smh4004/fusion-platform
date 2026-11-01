@@ -37,7 +37,7 @@ void Sram_CopyFile(u8 dst, u8 stage);
 void Sram_WriteFileInfo(void);
 void Sram_LoadingfileVblank(void);
 void Sram_AfterLoadingFileVblank(void);
-u32 Sram_ChecLoadSaveFileWithBlank(void);
+s32 Sram_ChecLoadSaveFileWithBlank(void);
 void Sram_SetCurrentFile(u8 file);
 
 #endif /* SAVE_FILE_H */
