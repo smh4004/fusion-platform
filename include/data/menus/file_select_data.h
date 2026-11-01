@@ -7,6 +7,8 @@
 
 extern const u16 sFileSelectBackdropColors[6];
 extern const u8 sFileSelectOamXFlipOffsets[3][4];
+extern const u8 sFileSelectCopyArrowXPositions[LANGUAGE_COUNT][2];
+extern const u8 sFileSelectEraseArrowXPositions[LANGUAGE_COUNT][2];
 extern const struct FrameData* sFileSelectFileOverlayOamPointers[5];
 extern const struct FrameData* sFileSelectCursorOamPointers[3][3];
 extern const u16* sFileSelectAreaNameFrames_Default[6];

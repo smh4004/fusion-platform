@@ -1,5 +1,6 @@
 #include "data/sa_x_close_up.h"
 #include "macros.h"
+#include "constants/game_state.h"
 
 const u16 sSaXCloseUpPal[16 * 16] = INCBIN_U16("data/sa_x_close_up/palette.pal");
 const u16 sSaXCloseUpPalGrayscale[16 * 16] = INCBIN_U16("data/sa_x_close_up/palette_grayscale.pal");
@@ -43,4 +44,24 @@ const u8 sFileSelectOamXFlipOffsets[3][4] = {
     }
 };
 
-static const u8 sBlob_73dbb0_7478a0[] = INCBIN_U8("data/Blob_73dbb0_7478a0.bin");
+const u8 sFileSelectCopyArrowXPositions[LANGUAGE_COUNT][2] = {
+    [0] = { 120, 160 },
+    [1] = { 120, 160 },
+    [2] = { 119, 166 },
+    [3] = { 119, 164 },
+    [4] = { 119, 164 },
+    [5] = { 119, 159 },
+    [6] = { 119, 159 }
+};
+
+const u8 sFileSelectEraseArrowXPositions[LANGUAGE_COUNT][2] = {
+    [0] = { 120, 160 },
+    [1] = { 120, 160 },
+    [2] = { 119, 166 },
+    [3] = { 119, 164 },
+    [4] = { 119, 164 },
+    [5] = { 119, 159 },
+    [6] = { 119, 159 }
+};
+
+static const u8 sBlob_73dbcc_7478a0[] = INCBIN_U8("data/Blob_73dbcc_7478a0.bin");
