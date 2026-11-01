@@ -372,7 +372,7 @@ const struct FrameData* sFileSelectCursorOamPointers[3][3] = {
     }
 };
 
-const u16* sFileSelectAreaNameFrames_Default[6] = {
+const u16* sFileSelectTextPositions_Default[6] = {
     (const u16*)0x873dbcc,
     (const u16*)0x873dbd8,
     (const u16*)0x873dbde,
@@ -381,7 +381,7 @@ const u16* sFileSelectAreaNameFrames_Default[6] = {
     (const u16*)0x873dbe4
 };
 
-const u16* sFileSelectAreaNameFrames_German[6] = {
+const u16* sFileSelectTextPositions_German[6] = {
     (const u16*)0x873dbea,
     (const u16*)0x873dbf6,
     (const u16*)0x873dbfc,
@@ -390,7 +390,7 @@ const u16* sFileSelectAreaNameFrames_German[6] = {
     (const u16*)0x873dc02
 };
 
-const u16* sFileSelectAreaNameFrames_French[6] = {
+const u16* sFileSelectTextPositions_French[6] = {
     (const u16*)0x873dc08,
     (const u16*)0x873dbf6,
     (const u16*)0x873dbfc,
@@ -399,7 +399,7 @@ const u16* sFileSelectAreaNameFrames_French[6] = {
     (const u16*)0x873dc02
 };
 
-const u16* sFileSelectAreaNameFrames_Spanish[6] = {
+const u16* sFileSelectTextPositions_Spanish[6] = {
     (const u16*)0x873dc14,
     (const u16*)0x873dbf6,
     (const u16*)0x873dbfc,
@@ -408,14 +408,14 @@ const u16* sFileSelectAreaNameFrames_Spanish[6] = {
     (const u16*)0x873dc02
 };
 
-const u16* const* sFileSelectAreaNameFramesPointers[LANGUAGE_COUNT] = {
-    sFileSelectAreaNameFrames_Default,
-    sFileSelectAreaNameFrames_Default,
-    sFileSelectAreaNameFrames_German,
-    sFileSelectAreaNameFrames_German,
-    sFileSelectAreaNameFrames_French,
-    sFileSelectAreaNameFrames_German,
-    sFileSelectAreaNameFrames_Spanish
+const u16* const* sFileSelectTextPositionsPointers[LANGUAGE_COUNT] = {
+    sFileSelectTextPositions_Default,
+    sFileSelectTextPositions_Default,
+    sFileSelectTextPositions_German,
+    sFileSelectTextPositions_German,
+    sFileSelectTextPositions_French,
+    sFileSelectTextPositions_German,
+    sFileSelectTextPositions_Spanish
 };
 
 const struct FrameData* sFileSelectAreaNameOamPointers[LANGUAGE_COUNT][7] = {

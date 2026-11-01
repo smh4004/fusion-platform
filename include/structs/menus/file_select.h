@@ -48,8 +48,8 @@ struct FileSelectOam {
 };
 
 struct FileSelectData {
-    u16 timer;
-    u16 unk_2;
+    u16 textX;
+    u16 textY;
     const u16* pText;
     u16 textId;
     s16 menuState;
@@ -60,7 +60,7 @@ struct FileSelectData {
     u8 unk_10;
     u8 bgToggle;
     s8 result;
-    u8 unk_13;
+    u8 textIndent;
     u8 unk_14;
     u8 unk_15;
     u8 padding_16[2];
