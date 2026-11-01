@@ -1,9 +1,28 @@
+#include "cutscene.h"
 #include "globals.h"
 #include "macros.h"
+#include "callbacks.h"
+#include "syscalls.h"
+#include "init_helpers.h"
+#include "oam.h"
+#include "text.h"
+#include "audio_wrappers.h"
+#include "music_wrappers.h"
+#include "audio/track_internal.h"
+#include "new_file_intro.h"
+
+#include "constants/audio.h"
+#include "constants/text.h"
+
+#include "data/audio.h"
+#include "data/generic_data.h"
+#include "data/intro_data.h"
+#include "data/sprite_data.h"
+#include "data/haze_data.h"
 
 // 0x0809994C
 NAKED_FUNCTION
-void CutsceneHandler(void)
+boolu32 CutsceneHandler(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, lr}\n\

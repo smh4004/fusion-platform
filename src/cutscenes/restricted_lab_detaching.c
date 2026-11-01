@@ -1,9 +1,28 @@
+#include "cutscene.h"
 #include "globals.h"
 #include "macros.h"
+#include "callbacks.h"
+#include "syscalls.h"
+#include "init_helpers.h"
+#include "oam.h"
+#include "text.h"
+#include "audio_wrappers.h"
+#include "music_wrappers.h"
+#include "audio/track_internal.h"
+#include "new_file_intro.h"
+
+#include "constants/audio.h"
+#include "constants/text.h"
+
+#include "data/audio.h"
+#include "data/generic_data.h"
+#include "data/intro_data.h"
+#include "data/sprite_data.h"
+#include "data/haze_data.h"
 
 // 0x0809AE18
 NAKED_FUNCTION
-void CutsceneRestrictedLabDetaching(void)
+boolu32 CutsceneRestrictedLabDetaching(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, lr}\n\
@@ -225,7 +244,7 @@ _0809AFFC: .4byte CutsceneRestrictedLabDetachingVblank\n\
 
 // 0x0809B000
 NAKED_FUNCTION
-void CutsceneRestrictedLabDetachingProcess(void)
+boolu32 CutsceneRestrictedLabDetachingProcess(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -660,7 +679,7 @@ _0809B36C: .4byte 0x85000090\n\
 
 // 0x0809B370
 NAKED_FUNCTION
-void CutsceneRestrictedLabDetachingProcessFallingLab(void)
+void CutsceneRestrictedLabDetachingProcessFallingLab(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -778,7 +797,7 @@ _0809B438: .4byte 0x000001FF\n\
 
 // 0x0809B43C
 NAKED_FUNCTION
-void CutsceneRestrictedLabDetachingSetupOam(void)
+u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 descendingSearch)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -1361,7 +1380,7 @@ _0809B8A8: .4byte CutsceneRestrictedLabDetachingProcessFallingLab\n\
 
 // 0x0809B8AC
 NAKED_FUNCTION
-void CutsceneRestrictedLabDetachingProcessBslPart(void)
+void CutsceneRestrictedLabDetachingProcessBslPart(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -1569,7 +1588,7 @@ _0809BA1C:\n\
 
 // 0x0809BA24
 NAKED_FUNCTION
-void CutsceneRestrictedLabDetachingProcessScrolling(void)
+void CutsceneRestrictedLabDetachingProcessScrolling(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -1599,7 +1618,7 @@ _0809BA4C: .4byte 0x0400001C\n\
 
 // 0x0809BA50
 NAKED_FUNCTION
-void unk_9ba50(void)
+void unk_9ba50(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -1667,7 +1686,7 @@ _0809BABC:\n\
 
 // 0x0809BAC0
 NAKED_FUNCTION
-void unk_9bac0(void)
+void unk_9bac0(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -1735,7 +1754,7 @@ _0809BB2C:\n\
 
 // 0x0809BB30
 NAKED_FUNCTION
-void unk_9bb30(void)
+void unk_9bb30(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -1853,7 +1872,7 @@ _0809BC00: .4byte 0x84000008\n\
 
 // 0x0809BC04
 NAKED_FUNCTION
-void unk_9bc04(void)
+void unk_9bc04(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -1973,7 +1992,7 @@ _0809BCD8: .4byte 0x84000008\n\
 
 // 0x0809BCDC
 NAKED_FUNCTION
-void unk_9bcdc(void)
+void unk_9bcdc(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -2018,7 +2037,7 @@ _0809BD20: .4byte 0x04000018\n\
 
 // 0x0809BD24
 NAKED_FUNCTION
-void unk_9bd24(void)
+void unk_9bd24(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -2135,7 +2154,7 @@ _0809BDF4: .4byte 0x84000008\n\
 
 // 0x0809BDF8
 NAKED_FUNCTION
-void unk_9bdf8(void)
+void unk_9bdf8(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -2222,7 +2241,7 @@ _0809BE88:\n\
 
 // 0x0809BE8C
 NAKED_FUNCTION
-void unk_9be8c(void)
+void unk_9be8c(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -2325,7 +2344,7 @@ _0809BF50: .4byte gWrittenToBldalpha_Evb\n\
 
 // 0x0809BF54
 NAKED_FUNCTION
-void unk_9bf54(void)
+void unk_9bf54(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -2382,7 +2401,7 @@ _0809BFB4: .4byte sRandomNumberTable\n\
 
 // 0x0809BFB8
 NAKED_FUNCTION
-void unk_9bfb8(void)
+void unk_9bfb8(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -2469,7 +2488,7 @@ _0809C046:\n\
 
 // 0x0809C04C
 NAKED_FUNCTION
-void unk_9c04c(void)
+void unk_9c04c(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -2503,7 +2522,7 @@ _0809C07C: .4byte 0x04000018\n\
 
 // 0x0809C080
 NAKED_FUNCTION
-void unk_9c080(void)
+void unk_9c080(u8 type, s16 xPosition, s16 yPosition, u16 param_4)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -2535,7 +2554,7 @@ _0809C0B0: .4byte gNonGameplayRam\n\
 
 // 0x0809C0B4
 NAKED_FUNCTION
-void unk_9c0b4(void)
+void unk_9c0b4(u8 type, s16 xPosition, s16 yPosition, u16 param_4, u16 param_5)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, lr}\n\
@@ -2571,7 +2590,7 @@ _0809C0EC: .4byte gNonGameplayRam\n\
 
 // 0x0809C0F0
 NAKED_FUNCTION
-void CutsceneRestrictedLabDetachingGetPositionOfOamByType(void)
+void CutsceneRestrictedLabDetachingGetPositionOfOamByType(u8 type, s16* pXPosition, s16* pYPosition)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, lr}\n\

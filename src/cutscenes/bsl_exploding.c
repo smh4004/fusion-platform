@@ -1,9 +1,28 @@
+#include "cutscene.h"
 #include "globals.h"
 #include "macros.h"
+#include "callbacks.h"
+#include "syscalls.h"
+#include "init_helpers.h"
+#include "oam.h"
+#include "text.h"
+#include "audio_wrappers.h"
+#include "music_wrappers.h"
+#include "audio/track_internal.h"
+#include "new_file_intro.h"
+
+#include "constants/audio.h"
+#include "constants/text.h"
+
+#include "data/audio.h"
+#include "data/generic_data.h"
+#include "data/intro_data.h"
+#include "data/sprite_data.h"
+#include "data/haze_data.h"
 
 // 0x0809C1C8
 NAKED_FUNCTION
-void CutsceneBslExploding(void)
+boolu32 CutsceneBslExploding(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, lr}\n\
@@ -244,7 +263,7 @@ _0809C3E0: .4byte CutsceneBslExplodingVblank\n\
 
 // 0x0809C3E4
 NAKED_FUNCTION
-void CutsceneBslExplodingProcess(void)
+boolu32 CutsceneBslExplodingProcess(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, lr}\n\
@@ -512,7 +531,7 @@ _0809C5F4: .4byte 0x04000050\n\
 
 // 0x0809C5F8
 NAKED_FUNCTION
-void CutsceneBslExplodingProcessScrolling(void)
+void CutsceneBslExplodingProcessScrolling(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -542,7 +561,7 @@ _0809C620: .4byte 0x0400001C\n\
 
 // 0x0809C624
 NAKED_FUNCTION
-void CutsceneBslExplodingProcessBslFar(void)
+void CutsceneBslExplodingProcessBslFar(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -597,7 +616,7 @@ _0809C67A:\n\
 
 // 0x0809C680
 NAKED_FUNCTION
-void CutsceneBslExplodingProcessExplosions(void)
+void CutsceneBslExplodingProcessExplosions(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -628,7 +647,7 @@ _0809C6A6:\n\
 
 // 0x0809C6AC
 NAKED_FUNCTION
-void CutsceneBslExplodingSetupOam(void)
+u8 CutsceneBslExplodingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 descendingSearch)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -851,7 +870,7 @@ _0809C84C: .4byte CutsceneBslExplodingProcessExplosions\n\
 
 // 0x0809C850
 NAKED_FUNCTION
-void CutsceneBslExplodingGetOamInfoByType(void)
+u8 CutsceneBslExplodingGetOamInfoByType(u8 type, s16* pXPosition, s16* pYPosition, s16* pScaling)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\

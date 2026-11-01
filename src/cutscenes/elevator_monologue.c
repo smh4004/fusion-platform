@@ -1,9 +1,28 @@
+#include "cutscene.h"
 #include "globals.h"
 #include "macros.h"
+#include "callbacks.h"
+#include "syscalls.h"
+#include "init_helpers.h"
+#include "oam.h"
+#include "text.h"
+#include "audio_wrappers.h"
+#include "music_wrappers.h"
+#include "audio/track_internal.h"
+#include "new_file_intro.h"
+
+#include "constants/audio.h"
+#include "constants/text.h"
+
+#include "data/audio.h"
+#include "data/generic_data.h"
+#include "data/intro_data.h"
+#include "data/sprite_data.h"
+#include "data/haze_data.h"
 
 // 0x08099B04
 NAKED_FUNCTION
-void CutsceneProcess(void)
+boolu32 CutsceneProcess(void)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -86,7 +105,7 @@ _08099BA2:\n\
 
 // 0x08099BAC
 NAKED_FUNCTION
-void CutsceneElevatorMonologue(void)
+boolu32 CutsceneElevatorMonologue(u8 param_1)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, lr}\n\
@@ -163,7 +182,7 @@ _08099C34: .4byte gWrittenToBldy\n\
 
 // 0x08099C38
 NAKED_FUNCTION
-void CutsceneElevatorMonologueInit(void)
+void CutsceneElevatorMonologueInit(u8 param_1)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, lr}\n\
@@ -400,7 +419,7 @@ _08099E60: .4byte CutsceneElevatorMonologueVblank\n\
 
 // 0x08099E64
 NAKED_FUNCTION
-void CutsceneElevatorMonologueProcess(void)
+boolu32 CutsceneElevatorMonologueProcess(void)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -436,7 +455,7 @@ _08099E8E:\n\
 
 // 0x08099EA0
 NAKED_FUNCTION
-void CutsceneElevatorMonologueSetupOam(void)
+u8 CutsceneElevatorMonologueSetupOam(u8 type, s16 xPosition, s16 yPosition)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -675,7 +694,7 @@ _0809A084: .4byte unk_9a1a8\n\
 
 // 0x0809A088
 NAKED_FUNCTION
-void CutsceneProcessElevatorScrolling(void)
+void CutsceneProcessElevatorScrolling(struct CutsceneMonologueOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, lr}\n\
@@ -824,7 +843,7 @@ _0809A1A4: .4byte 0x0000FFFF\n\
 
 // 0x0809A1A8
 NAKED_FUNCTION
-void unk_9a1a8(void)
+void unk_9a1a8(struct CutsceneMonologueOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, lr}\n\

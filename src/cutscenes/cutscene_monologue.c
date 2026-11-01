@@ -1,9 +1,28 @@
+#include "cutscene.h"
 #include "globals.h"
 #include "macros.h"
+#include "callbacks.h"
+#include "syscalls.h"
+#include "init_helpers.h"
+#include "oam.h"
+#include "text.h"
+#include "audio_wrappers.h"
+#include "music_wrappers.h"
+#include "audio/track_internal.h"
+#include "new_file_intro.h"
+
+#include "constants/audio.h"
+#include "constants/text.h"
+
+#include "data/audio.h"
+#include "data/generic_data.h"
+#include "data/intro_data.h"
+#include "data/sprite_data.h"
+#include "data/haze_data.h"
 
 // 0x0809C938
 NAKED_FUNCTION
-void CutsceneMonologueProcessCursor(void)
+void CutsceneMonologueProcessCursor(struct CutsceneMonologueOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -110,7 +129,7 @@ _0809C9F4:\n\
 
 // 0x0809C9F8
 NAKED_FUNCTION
-void CutsceneMonologueProcessSpecialTextCharacters(void)
+boolu32 CutsceneMonologueProcessSpecialTextCharacters(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, lr}\n\
@@ -789,7 +808,7 @@ _0809CEBC: .4byte gNextOamSlot\n\
 
 // 0x0809CEC0
 NAKED_FUNCTION
-void CutsceneMnologueDrawOam(void)
+void CutsceneMnologueDrawOam(struct CutsceneMonologueOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -991,7 +1010,7 @@ _0809D044: .4byte gNextOamSlot\n\
 
 // 0x0809D048
 NAKED_FUNCTION
-void CutsceneMonologueResetOam(void)
+void CutsceneMonologueResetOam(u8 slot)
 {
     asm(" .syntax unified\n\
 	lsls r0, r0, #0x18\n\
@@ -1037,7 +1056,7 @@ _0809D098: .4byte 0x00000222\n\
 
 // 0x0809D09C
 NAKED_FUNCTION
-void unk_9d09c(void)
+void unk_9d09c(struct CutsceneMonologueOam* pOam)
 {
     asm(" .syntax unified\n\
 	bx lr\n\

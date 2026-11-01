@@ -1,9 +1,28 @@
+#include "cutscene.h"
 #include "globals.h"
 #include "macros.h"
+#include "callbacks.h"
+#include "syscalls.h"
+#include "init_helpers.h"
+#include "oam.h"
+#include "text.h"
+#include "audio_wrappers.h"
+#include "music_wrappers.h"
+#include "audio/track_internal.h"
+#include "new_file_intro.h"
+
+#include "constants/audio.h"
+#include "constants/text.h"
+
+#include "data/audio.h"
+#include "data/generic_data.h"
+#include "data/intro_data.h"
+#include "data/sprite_data.h"
+#include "data/haze_data.h"
 
 // 0x0809A9A8
 NAKED_FUNCTION
-void CutsceneSecretConversation(void)
+boolu32 CutsceneSecretConversation(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, lr}\n\
@@ -206,7 +225,7 @@ _0809AB60: .4byte CutsceneSecretConversationVblank\n\
 
 // 0x0809AB64
 NAKED_FUNCTION
-void CutsceneSecretConversationProcess(void)
+boolu32 CutsceneSecretConversationProcess(void)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -263,7 +282,7 @@ _0809ABBE:\n\
 
 // 0x0809ABC8
 NAKED_FUNCTION
-void CutsceneSecretConversationSetupOam(void)
+u8 CutsceneSecretConversationSetupOam(u8 type, s16 xPosition, s16 yPosition)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -407,7 +426,7 @@ _0809ACD0: .4byte CutsceneSecretConversationProcessIncomingDispatch\n\
 
 // 0x0809ACD4
 NAKED_FUNCTION
-void CutsceneSecretConversationProcessNavigationPanel(void)
+void CutsceneSecretConversationProcessNavigationPanel(struct CutsceneMonologueOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -431,7 +450,7 @@ _0809ACF0: .4byte 0x086792A8\n\
 
 // 0x0809ACF4
 NAKED_FUNCTION
-void CutsceneSecretConversationProcessIncomingDispatch(void)
+void CutsceneSecretConversationProcessIncomingDispatch(struct CutsceneMonologueOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, lr}\n\

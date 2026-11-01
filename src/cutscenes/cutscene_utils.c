@@ -1,5 +1,24 @@
+#include "cutscene.h"
 #include "globals.h"
 #include "macros.h"
+#include "callbacks.h"
+#include "syscalls.h"
+#include "init_helpers.h"
+#include "oam.h"
+#include "text.h"
+#include "audio_wrappers.h"
+#include "music_wrappers.h"
+#include "audio/track_internal.h"
+#include "new_file_intro.h"
+
+#include "constants/audio.h"
+#include "constants/text.h"
+
+#include "data/audio.h"
+#include "data/generic_data.h"
+#include "data/intro_data.h"
+#include "data/sprite_data.h"
+#include "data/haze_data.h"
 
 // 0x0809D0A0
 NAKED_FUNCTION
@@ -183,7 +202,7 @@ _0809D1E0: .4byte 0x02002000\n\
 
 // 0x0809D1E4
 NAKED_FUNCTION
-void CutsceneMonologueDestroyOamOfType(void)
+void CutsceneMonologueDestroyOamOfType(u8 type)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -272,7 +291,7 @@ _0809D264: .4byte gWrittenToBldy\n\
 
 // 0x0809D268
 NAKED_FUNCTION
-void CutsceneDestroyOamOfType(void)
+void CutsceneDestroyOamOfType(u8 type)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -406,7 +425,7 @@ _0809D33C: .4byte 0x03001238\n\
 
 // 0x0809D340
 NAKED_FUNCTION
-void CutsceneDrawOam(void)
+void CutsceneDrawOam(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -1463,7 +1482,7 @@ _0809DB6C: .4byte 0xFFFFFC00\n\
 
 // 0x0809DB70
 NAKED_FUNCTION
-void unk_9db70(void)
+void unk_9db70(struct CutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	bx lr\n\
