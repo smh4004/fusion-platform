@@ -23,7 +23,12 @@
 #include "text.h"
 
 #include "constants/audio.h"
+#include "constants/text.h"
 
+
+// sNavConversationTextPointers and sPauseScreenTextPointers are static in pause_screen.c
+#define sNavConversationTextPointers_ ((u16***)0x879C0F0)
+#define sPauseScreenTextPointers_ ((u16***)0x879C10C)
 
 static Func_T sNavConversationPopUpFunctions[3] = {
     unk_7bde0,
@@ -6565,114 +6570,55 @@ _0807D278: .4byte 0x0879C180\n\
     .syntax divided\n");
 }
 
-// 0x0807D27C
-NAKED_FUNCTION
+/**
+ * @brief 7d27c | d0 | Sets up the BSL diagram rotation towards the navigation target
+ * 
+ */
 void unk_7d27c(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	ldr r0, _0807D294 @ =0x0300004C\n\
-	ldrb r1, [r0]\n\
-	adds r5, r0, #0\n\
-	cmp r1, #0\n\
-	bne _0807D29C\n\
-	ldr r0, _0807D298 @ =gNonGameplayRam\n\
-	movs r2, #0x90\n\
-	lsls r2, r2, #2\n\
-	adds r0, r0, r2\n\
-	b _0807D33E\n\
-	.align 2, 0\n\
-_0807D294: .4byte 0x0300004C\n\
-_0807D298: .4byte gNonGameplayRam\n\
-_0807D29C:\n\
-	ldr r0, _0807D2C4 @ =gNonGameplayRam\n\
-	movs r2, #0x90\n\
-	lsls r2, r2, #2\n\
-	adds r1, r0, r2\n\
-	movs r4, #1\n\
-	strb r4, [r1]\n\
-	subs r2, #0x20\n\
-	adds r1, r0, r2\n\
-	ldr r2, _0807D2C8 @ =gPreviousNavigationConversation\n\
-	ldrb r1, [r1]\n\
-	adds r3, r0, #0\n\
-	ldrb r2, [r2]\n\
-	cmp r1, r2\n\
-	bne _0807D2D0\n\
-	ldr r0, _0807D2CC @ =0x0000024A\n\
-	adds r1, r3, r0\n\
-	movs r0, #2\n\
-	strb r0, [r1]\n\
-	b _0807D2D6\n\
-	.align 2, 0\n\
-_0807D2C4: .4byte gNonGameplayRam\n\
-_0807D2C8: .4byte gPreviousNavigationConversation\n\
-_0807D2CC: .4byte 0x0000024A\n\
-_0807D2D0:\n\
-	ldr r1, _0807D324 @ =0x0000024A\n\
-	adds r0, r3, r1\n\
-	strb r4, [r0]\n\
-_0807D2D6:\n\
-	ldr r1, _0807D328 @ =0x0857607D\n\
-	ldrb r0, [r5]\n\
-	adds r0, r0, r1\n\
-	ldrb r1, [r0]\n\
-	movs r2, #0\n\
-	ldrsb r2, [r0, r2]\n\
-	cmp r2, #0\n\
-	blt _0807D340\n\
-	ldr r0, _0807D32C @ =0x00000245\n\
-	adds r5, r3, r0\n\
-	strb r1, [r5]\n\
-	movs r1, #0x91\n\
-	lsls r1, r1, #2\n\
-	adds r4, r3, r1\n\
-	movs r0, #0\n\
-	ldrsb r0, [r4, r0]\n\
-	cmp r2, r0\n\
-	beq _0807D340\n\
-	movs r2, #0x90\n\
-	lsls r2, r2, #2\n\
-	adds r1, r3, r2\n\
-	movs r0, #4\n\
-	strb r0, [r1]\n\
-	movs r1, #0\n\
-	ldrsb r1, [r5, r1]\n\
-	movs r0, #0\n\
-	ldrsb r0, [r4, r0]\n\
-	subs r1, r1, r0\n\
-	movs r0, #1\n\
-	cmp r1, #0\n\
-	bge _0807D316\n\
-	subs r0, #2\n\
-_0807D316:\n\
-	muls r1, r0, r1\n\
-	cmp r1, #0x12\n\
-	ble _0807D330\n\
-	movs r1, #1\n\
-	rsbs r1, r1, #0\n\
-	b _0807D338\n\
-	.align 2, 0\n\
-_0807D324: .4byte 0x0000024A\n\
-_0807D328: .4byte 0x0857607D\n\
-_0807D32C: .4byte 0x00000245\n\
-_0807D330:\n\
-	cmp r1, #0x12\n\
-	bne _0807D336\n\
-	movs r0, #1\n\
-_0807D336:\n\
-	movs r1, #1\n\
-_0807D338:\n\
-	muls r1, r0, r1\n\
-	ldr r2, _0807D348 @ =0x00000246\n\
-	adds r0, r3, r2\n\
-_0807D33E:\n\
-	strb r1, [r0]\n\
-_0807D340:\n\
-	pop {r4, r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807D348: .4byte 0x00000246\n\
-    .syntax divided\n");
+    s8 target;
+    s32 diff;
+    s32 sign;
+    s32 dir;
+
+    if (gNavConversationTargetLocation == NAV_TARGET_LOC_NONE)
+    {
+        PAUSE_SCREEN_DATA.unk_240 = 0;
+        return;
+    }
+
+    PAUSE_SCREEN_DATA.unk_240 = 1;
+    if (PAUSE_SCREEN_DATA.conversationNumber == gPreviousNavigationConversation)
+        PAUSE_SCREEN_DATA.unk_24A = 2;
+    else
+        PAUSE_SCREEN_DATA.unk_24A = 1;
+
+    target = sEvent_57607D[gNavConversationTargetLocation];
+    if (target < 0)
+        return;
+
+    PAUSE_SCREEN_DATA.unk_245 = target;
+    if (target == (s8)PAUSE_SCREEN_DATA.unk_244)
+        return;
+
+    PAUSE_SCREEN_DATA.unk_240 = 4;
+
+    diff = (s8)PAUSE_SCREEN_DATA.unk_245 - (s8)PAUSE_SCREEN_DATA.unk_244;
+    sign = 1;
+    if (diff < 0)
+        sign = -1;
+
+    diff *= sign;
+    if (diff > 18)
+    {
+        dir = -1;
+    }
+    else
+    {
+        if (diff == 18)
+            sign = 1;
+        dir = 1;
+    }
+
+    PAUSE_SCREEN_DATA.unk_246 = sign * dir;
 }
