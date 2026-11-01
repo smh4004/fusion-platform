@@ -18,3 +18,11 @@
 
 - `CutsceneBslExplodingInit` (0x9c254): everything matches except one register
   (`ldr r1` vs `ldr r2`) for the palette base 0x868101c in the final DMA.
+
+## src/cutscenes/restricted_lab_detaching.c
+
+- `unk_9bb30`, `unk_9bc04`, `unk_9bd24` (0x9bb30..): debris movers with a palette
+  cycle (DMA of `((const u16*)0x868161c/0x868141c/0x868181c)[unk_C * 16]` to OBJ
+  palette). Logic matches; agbcc keeps pOam in r2 instead of r3 because of the
+  register pressure of the final DMA (the original loads the DMA register base
+  before the palette address).
