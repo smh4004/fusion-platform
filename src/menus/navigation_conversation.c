@@ -24,12 +24,15 @@
 #include "io.h"
 #include "menus/pause_screen.h"
 #include "menus/pause_screen_map.h"
+#include "new_file_intro.h"
 #include "oam_id.h"
 #include "syscalls.h"
 #include "text.h"
 
 #include "constants/audio.h"
 #include "constants/text.h"
+
+#include "gba/keys.h"
 
 
 // sNavConversationTextPointers and sPauseScreenTextPointers are static in pause_screen.c
@@ -913,6 +916,8 @@ _0807A0F8: .4byte gNonGameplayRam\n\
 }
 
 // 0x0807A0FC
+#define gLanguage_ (*(vs8*)0x3000011)
+#define gLanguage_ (*(vs8*)0x3000011)
 NAKED_FUNCTION
 u8 unk_7a0fc(u8 arg0)
 {
