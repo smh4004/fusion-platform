@@ -694,587 +694,153 @@ void CutsceneRestrictedLabDetachingProcessFallingLab(struct CutsceneOam* pOam)
     }
 }
 
-// 0x0809B43C
-NAKED_FUNCTION
+/**
+ * @brief 9b43c | 470 | Sets up a restricted lab detaching OAM
+ * 
+ */
 u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sb\n\
-	mov r6, r8\n\
-	push {r6, r7}\n\
-	sub sp, #4\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	lsls r1, r1, #0x10\n\
-	lsrs r1, r1, #0x10\n\
-	mov sb, r1\n\
-	lsls r2, r2, #0x10\n\
-	lsrs r6, r2, #0x10\n\
-	movs r0, #0\n\
-	mov r8, r0\n\
-	ldr r1, _0809B490 @ =gNonGameplayRam\n\
-	adds r0, r1, #0\n\
-	adds r0, #0x28\n\
-	ldrb r0, [r0]\n\
-	adds r7, r1, #0\n\
-	cmp r0, #0\n\
-	beq _0809B484\n\
-_0809B466:\n\
-	mov r0, r8\n\
-	adds r0, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	mov r8, r0\n\
-	cmp r0, #0xf\n\
-	bhi _0809B48A\n\
-	lsls r0, r0, #3\n\
-	add r0, r8\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	adds r0, #0x28\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	bne _0809B466\n\
-_0809B484:\n\
-	mov r2, r8\n\
-	cmp r2, #0xf\n\
-	bls _0809B494\n\
-_0809B48A:\n\
-	movs r0, #0x10\n\
-	b _0809B896\n\
-	.align 2, 0\n\
-_0809B490: .4byte gNonGameplayRam\n\
-_0809B494:\n\
-	movs r0, #0\n\
-	str r0, [sp]\n\
-	ldr r1, _0809B500 @ =0x040000D4\n\
-	mov r3, sp\n\
-	str r3, [r1]\n\
-	mov r0, r8\n\
-	lsls r2, r0, #3\n\
-	adds r0, r2, r0\n\
-	lsls r5, r0, #2\n\
-	ldr r3, _0809B504 @ =0x0300149C\n\
-	mov ip, r3\n\
-	adds r0, r5, r3\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0809B508 @ =0x85000009\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	mov r0, ip\n\
-	subs r0, #0x18\n\
-	adds r3, r5, r0\n\
-	mov r0, sb\n\
-	strh r0, [r3, #0x18]\n\
-	strh r6, [r3, #0x1a]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x28\n\
-	strb r4, [r0]\n\
-	adds r6, r3, #0\n\
-	adds r6, #0x2e\n\
-	ldrb r1, [r6]\n\
-	movs r0, #1\n\
-	orrs r1, r0\n\
-	strb r1, [r6]\n\
-	cmp r4, #1\n\
-	bne _0809B510\n\
-	adds r2, r3, #0\n\
-	adds r2, #0x30\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	movs r0, #0xc0\n\
-	lsls r0, r0, #1\n\
-	strh r0, [r3, #0x1c]\n\
-	ldrb r0, [r6]\n\
-	movs r1, #6\n\
-	orrs r0, r1\n\
-	strb r0, [r6]\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B50C @ =0x08680D54\n\
-	b _0809B570\n\
-	.align 2, 0\n\
-_0809B500: .4byte 0x040000D4\n\
-_0809B504: .4byte 0x0300149C\n\
-_0809B508: .4byte 0x85000009\n\
-_0809B50C: .4byte 0x08680D54\n\
-_0809B510:\n\
-	cmp r4, #2\n\
-	bne _0809B544\n\
-	adds r2, r3, #0\n\
-	adds r2, #0x30\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	movs r0, #0xc0\n\
-	lsls r0, r0, #1\n\
-	strh r0, [r3, #0x1c]\n\
-	ldrb r0, [r6]\n\
-	movs r1, #6\n\
-	orrs r0, r1\n\
-	strb r0, [r6]\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B540 @ =0x08680D64\n\
-	b _0809B570\n\
-	.align 2, 0\n\
-_0809B540: .4byte 0x08680D64\n\
-_0809B544:\n\
-	cmp r4, #3\n\
-	bne _0809B588\n\
-	adds r2, r3, #0\n\
-	adds r2, #0x30\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	movs r0, #0xc0\n\
-	lsls r0, r0, #1\n\
-	strh r0, [r3, #0x1c]\n\
-	ldrb r0, [r6]\n\
-	movs r1, #6\n\
-	orrs r0, r1\n\
-	strb r0, [r6]\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B580 @ =0x08680D74\n\
-_0809B570:\n\
-	str r1, [r0]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B584 @ =CutsceneRestrictedLabDetachingProcessBslPart\n\
-	str r1, [r0]\n\
-	b _0809B894\n\
-	.align 2, 0\n\
-_0809B580: .4byte 0x08680D74\n\
-_0809B584: .4byte CutsceneRestrictedLabDetachingProcessBslPart\n\
-_0809B588:\n\
-	cmp r4, #4\n\
-	bne _0809B5A4\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r1, r0\n\
-	strb r1, [r6]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B5A0 @ =CutsceneRestrictedLabDetachingProcessScrolling\n\
-	str r1, [r0]\n\
-	b _0809B894\n\
-	.align 2, 0\n\
-_0809B5A0: .4byte CutsceneRestrictedLabDetachingProcessScrolling\n\
-_0809B5A4:\n\
-	cmp r4, #5\n\
-	bne _0809B5B8\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B5B4 @ =0x08680E2C\n\
-	b _0809B5D6\n\
-	.align 2, 0\n\
-_0809B5B4: .4byte 0x08680E2C\n\
-_0809B5B8:\n\
-	cmp r4, #6\n\
-	bne _0809B5EC\n\
-	adds r2, r3, #0\n\
-	adds r2, #0x30\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B5E4 @ =0x08680E3C\n\
-_0809B5D6:\n\
-	str r1, [r0]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B5E8 @ =unk_9ba50\n\
-	str r1, [r0]\n\
-	b _0809B894\n\
-	.align 2, 0\n\
-_0809B5E4: .4byte 0x08680E3C\n\
-_0809B5E8: .4byte unk_9ba50\n\
-_0809B5EC:\n\
-	cmp r4, #7\n\
-	bne _0809B620\n\
-	adds r2, r3, #0\n\
-	adds r2, #0x30\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B618 @ =0x08680DA4\n\
-	str r1, [r0]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B61C @ =unk_9bac0\n\
-	str r1, [r0]\n\
-	b _0809B894\n\
-	.align 2, 0\n\
-_0809B618: .4byte 0x08680DA4\n\
-_0809B61C: .4byte unk_9bac0\n\
-_0809B620:\n\
-	cmp r4, #8\n\
-	bne _0809B654\n\
-	adds r2, r3, #0\n\
-	adds r2, #0x30\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B64C @ =0x08680D94\n\
-	str r1, [r0]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B650 @ =unk_9bb30\n\
-	str r1, [r0]\n\
-	b _0809B894\n\
-	.align 2, 0\n\
-_0809B64C: .4byte 0x08680D94\n\
-_0809B650: .4byte unk_9bb30\n\
-_0809B654:\n\
-	cmp r4, #9\n\
-	bne _0809B69C\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #1\n\
-	strh r0, [r3, #0x1c]\n\
-	adds r2, r3, #0\n\
-	adds r2, #0x30\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	ldrb r1, [r6]\n\
-	movs r0, #7\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #2\n\
-	orrs r0, r1\n\
-	strb r0, [r6]\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B694 @ =0x08680D84\n\
-	str r1, [r0]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B698 @ =unk_9bc04\n\
-	str r1, [r0]\n\
-	b _0809B894\n\
-	.align 2, 0\n\
-_0809B694: .4byte 0x08680D84\n\
-_0809B698: .4byte unk_9bc04\n\
-_0809B69C:\n\
-	cmp r4, #0xa\n\
-	bne _0809B6B8\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r1, r0\n\
-	strb r1, [r6]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r5, r0\n\
-	ldr r1, _0809B6B4 @ =unk_9bcdc\n\
-	str r1, [r0]\n\
-	b _0809B894\n\
-	.align 2, 0\n\
-_0809B6B4: .4byte unk_9bcdc\n\
-_0809B6B8:\n\
-	cmp r4, #0xb\n\
-	bne _0809B6DC\n\
-	add r2, r8\n\
-	lsls r2, r2, #2\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x34\n\
-	adds r0, r2, r0\n\
-	ldr r1, _0809B6D4 @ =0x08680DCC\n\
-	str r1, [r0]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x38\n\
-	adds r2, r2, r0\n\
-	ldr r0, _0809B6D8 @ =unk_9bac0\n\
-	b _0809B892\n\
-	.align 2, 0\n\
-_0809B6D4: .4byte 0x08680DCC\n\
-_0809B6D8: .4byte unk_9bac0\n\
-_0809B6DC:\n\
-	cmp r4, #0xc\n\
-	bne _0809B72C\n\
-	add r2, r8\n\
-	lsls r2, r2, #2\n\
-	adds r3, r2, r7\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #1\n\
-	strh r0, [r3, #0x1c]\n\
-	adds r4, r3, #0\n\
-	adds r4, #0x30\n\
-	ldrb r1, [r4]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r4]\n\
-	adds r3, #0x2e\n\
-	ldrb r1, [r3]\n\
-	movs r0, #7\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #2\n\
-	orrs r0, r1\n\
-	strb r0, [r3]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x34\n\
-	adds r0, r2, r0\n\
-	ldr r1, _0809B724 @ =0x08680FEC\n\
-	str r1, [r0]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x38\n\
-	adds r2, r2, r0\n\
-	ldr r0, _0809B728 @ =unk_9bd24\n\
-	b _0809B892\n\
-	.align 2, 0\n\
-_0809B724: .4byte 0x08680FEC\n\
-_0809B728: .4byte unk_9bd24\n\
-_0809B72C:\n\
-	cmp r4, #0xd\n\
-	bne _0809B77C\n\
-	add r2, r8\n\
-	lsls r2, r2, #2\n\
-	adds r3, r2, r7\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #1\n\
-	strh r0, [r3, #0x1c]\n\
-	adds r4, r3, #0\n\
-	adds r4, #0x30\n\
-	ldrb r1, [r4]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r4]\n\
-	adds r3, #0x2e\n\
-	ldrb r1, [r3]\n\
-	movs r0, #7\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #2\n\
-	orrs r0, r1\n\
-	strb r0, [r3]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x34\n\
-	adds r0, r2, r0\n\
-	ldr r1, _0809B774 @ =0x08680FC4\n\
-	str r1, [r0]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x38\n\
-	adds r2, r2, r0\n\
-	ldr r0, _0809B778 @ =unk_9bdf8\n\
-	b _0809B892\n\
-	.align 2, 0\n\
-_0809B774: .4byte 0x08680FC4\n\
-_0809B778: .4byte unk_9bdf8\n\
-_0809B77C:\n\
-	cmp r4, #0xe\n\
-	bne _0809B7A0\n\
-	add r2, r8\n\
-	lsls r2, r2, #2\n\
-	adds r1, r2, r7\n\
-	adds r1, #0x2e\n\
-	ldrb r3, [r1]\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r3\n\
-	strb r0, [r1]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x38\n\
-	adds r2, r2, r0\n\
-	ldr r0, _0809B79C @ =unk_9be8c\n\
-	b _0809B892\n\
-	.align 2, 0\n\
-_0809B79C: .4byte unk_9be8c\n\
-_0809B7A0:\n\
-	cmp r4, #0xf\n\
-	bne _0809B7C4\n\
-	add r2, r8\n\
-	lsls r2, r2, #2\n\
-	adds r1, r2, r7\n\
-	adds r1, #0x2e\n\
-	ldrb r3, [r1]\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r3\n\
-	strb r0, [r1]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x38\n\
-	adds r2, r2, r0\n\
-	ldr r0, _0809B7C0 @ =unk_9bf54\n\
-	b _0809B892\n\
-	.align 2, 0\n\
-_0809B7C0: .4byte unk_9bf54\n\
-_0809B7C4:\n\
-	cmp r4, #0x10\n\
-	bne _0809B80C\n\
-	add r2, r8\n\
-	lsls r2, r2, #2\n\
-	adds r3, r2, r7\n\
-	adds r4, r3, #0\n\
-	adds r4, #0x2e\n\
-	ldrb r1, [r4]\n\
-	movs r0, #0x19\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #8\n\
-	orrs r0, r1\n\
-	strb r0, [r4]\n\
-	adds r3, #0x30\n\
-	ldrb r1, [r3]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r3]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x34\n\
-	adds r0, r2, r0\n\
-	ldr r1, _0809B804 @ =0x08680F9C\n\
-	str r1, [r0]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x38\n\
-	adds r2, r2, r0\n\
-	ldr r0, _0809B808 @ =unk_9bfb8\n\
-	b _0809B892\n\
-	.align 2, 0\n\
-_0809B804: .4byte 0x08680F9C\n\
-_0809B808: .4byte unk_9bfb8\n\
-_0809B80C:\n\
-	cmp r4, #0x11\n\
-	bne _0809B830\n\
-	add r2, r8\n\
-	lsls r2, r2, #2\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x34\n\
-	adds r0, r2, r0\n\
-	ldr r1, _0809B828 @ =0x08680F74\n\
-	str r1, [r0]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x38\n\
-	adds r2, r2, r0\n\
-	ldr r0, _0809B82C @ =unk_9bfb8\n\
-	b _0809B892\n\
-	.align 2, 0\n\
-_0809B828: .4byte 0x08680F74\n\
-_0809B82C: .4byte unk_9bfb8\n\
-_0809B830:\n\
-	cmp r4, #0x12\n\
-	bne _0809B854\n\
-	add r2, r8\n\
-	lsls r2, r2, #2\n\
-	adds r1, r2, r7\n\
-	adds r1, #0x2e\n\
-	ldrb r3, [r1]\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r3\n\
-	strb r0, [r1]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x38\n\
-	adds r2, r2, r0\n\
-	ldr r0, _0809B850 @ =unk_9c04c\n\
-	b _0809B892\n\
-	.align 2, 0\n\
-_0809B850: .4byte unk_9c04c\n\
-_0809B854:\n\
-	cmp r4, #0x1e\n\
-	bne _0809B894\n\
-	add r2, r8\n\
-	lsls r2, r2, #2\n\
-	adds r3, r2, r7\n\
-	movs r0, #0xd0\n\
-	lsls r0, r0, #1\n\
-	strh r0, [r3, #0x1c]\n\
-	adds r4, r3, #0\n\
-	adds r4, #0x30\n\
-	ldrb r1, [r4]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r4]\n\
-	adds r3, #0x2e\n\
-	ldrb r0, [r3]\n\
-	movs r1, #6\n\
-	orrs r0, r1\n\
-	strb r0, [r3]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x34\n\
-	adds r0, r2, r0\n\
-	ldr r1, _0809B8A4 @ =0x08680F2C\n\
-	str r1, [r0]\n\
-	adds r0, r7, #0\n\
-	adds r0, #0x38\n\
-	adds r2, r2, r0\n\
-	ldr r0, _0809B8A8 @ =CutsceneRestrictedLabDetachingProcessFallingLab\n\
-_0809B892:\n\
-	str r0, [r2]\n\
-_0809B894:\n\
-	mov r0, r8\n\
-_0809B896:\n\
-	add sp, #4\n\
-	pop {r3, r4}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_0809B8A4: .4byte 0x08680F2C\n\
-_0809B8A8: .4byte CutsceneRestrictedLabDetachingProcessFallingLab\n\
-    .syntax divided\n");
+    u8 slot;
+
+    for (slot = 0; slot < ARRAY_SIZE(CUTSCENE_OAM_DATA.oam); slot++)
+    {
+        if (CUTSCENE_OAM_DATA.oam[slot].type == 0)
+            break;
+    }
+
+    if (slot >= ARRAY_SIZE(CUTSCENE_OAM_DATA.oam))
+        return ARRAY_SIZE(CUTSCENE_OAM_DATA.oam);
+
+    DMA3_FILL_32(0, &CUTSCENE_OAM_DATA.oam[slot], sizeof(struct CutsceneOam));
+
+    CUTSCENE_OAM_DATA.oam[slot].xPosition = xPosition;
+    CUTSCENE_OAM_DATA.oam[slot].yPosition = yPosition;
+    CUTSCENE_OAM_DATA.oam[slot].type = type;
+    CUTSCENE_OAM_DATA.oam[slot].enabled = TRUE;
+
+    if (type == 1)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1.5f);
+        CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_DOUBLE_SIZED;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680d54;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneRestrictedLabDetachingProcessBslPart;
+    }
+    else if (type == 2)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1.5f);
+        CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_DOUBLE_SIZED;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680d64;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneRestrictedLabDetachingProcessBslPart;
+    }
+    else if (type == 3)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1.5f);
+        CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_DOUBLE_SIZED;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680d74;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneRestrictedLabDetachingProcessBslPart;
+    }
+    else if (type == 4)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].enabled = FALSE;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneRestrictedLabDetachingProcessScrolling;
+    }
+    else if (type == 5)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680e2c;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9ba50;
+    }
+    else if (type == 6)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680e3c;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9ba50;
+    }
+    else if (type == 7)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680da4;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bac0;
+    }
+    else if (type == 8)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680d94;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bb30;
+    }
+    else if (type == 9)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1);
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680d84;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bc04;
+    }
+    else if (type == 10)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].enabled = FALSE;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bcdc;
+    }
+    else if (type == 11)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680dcc;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bac0;
+    }
+    else if (type == 12)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1);
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680fec;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bd24;
+    }
+    else if (type == 13)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1);
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680fc4;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bdf8;
+    }
+    else if (type == 14)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].enabled = FALSE;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9be8c;
+    }
+    else if (type == 15)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].enabled = FALSE;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bf54;
+    }
+    else if (type == 16)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].unk_16_3 = 1;
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680f9c;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bfb8;
+    }
+    else if (type == 17)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680f74;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bfb8;
+    }
+    else if (type == 18)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].enabled = FALSE;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9c04c;
+    }
+    else if (type == 30)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].scaling = 0x1A0;
+        CUTSCENE_OAM_DATA.oam[slot].priority = 1;
+        CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_DOUBLE_SIZED;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680f2c;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneRestrictedLabDetachingProcessFallingLab;
+    }
+
+    return slot;
 }
 
 // 0x0809B8AC
