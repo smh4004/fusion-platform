@@ -20,81 +20,48 @@
 #include "data/sprite_data.h"
 #include "data/haze_data.h"
 
-// 0x0809C1C8
-NAKED_FUNCTION
+/**
+ * @brief 9c1c8 | 8c | Main handler for the BSL exploding cutscene
+ * 
+ */
 boolu32 CutsceneBslExploding(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	movs r6, #0\n\
-	ldr r4, _0809C1E0 @ =gNonGameplayRam\n\
-	ldrh r0, [r4]\n\
-	cmp r0, #1\n\
-	beq _0809C1F8\n\
-	cmp r0, #1\n\
-	bgt _0809C1E4\n\
-	cmp r0, #0\n\
-	beq _0809C1EE\n\
-	b _0809C246\n\
-	.align 2, 0\n\
-_0809C1E0: .4byte gNonGameplayRam\n\
-_0809C1E4:\n\
-	cmp r0, #2\n\
-	beq _0809C220\n\
-	cmp r0, #3\n\
-	beq _0809C238\n\
-	b _0809C246\n\
-_0809C1EE:\n\
-	movs r0, #1\n\
-	strh r0, [r4]\n\
-	bl CutsceneBslExplodingInit\n\
-	b _0809C246\n\
-_0809C1F8:\n\
-	ldr r5, _0809C218 @ =gWrittenToBldy\n\
-	ldrh r0, [r5]\n\
-	cmp r0, #0x10\n\
-	bne _0809C206\n\
-	ldr r0, _0809C21C @ =0x00000247\n\
-	bl SoundPlay_3b1c\n\
-_0809C206:\n\
-	bl CutsceneFadeIn\n\
-	ldrh r0, [r5]\n\
-	cmp r0, #0\n\
-	bne _0809C246\n\
-	ldrh r0, [r4]\n\
-	adds r0, #1\n\
-	strh r0, [r4]\n\
-	b _0809C246\n\
-	.align 2, 0\n\
-_0809C218: .4byte gWrittenToBldy\n\
-_0809C21C: .4byte 0x00000247\n\
-_0809C220:\n\
-	bl CutsceneBslExplodingProcess\n\
-	cmp r0, #0\n\
-	beq _0809C246\n\
-	movs r0, #3\n\
-	strh r0, [r4]\n\
-	ldr r1, _0809C234 @ =0x04000050\n\
-	movs r0, #0xbf\n\
-	strh r0, [r1]\n\
-	b _0809C246\n\
-	.align 2, 0\n\
-_0809C234: .4byte 0x04000050\n\
-_0809C238:\n\
-	bl CutsceneFadeOut\n\
-	ldr r0, _0809C250 @ =gWrittenToBldy\n\
-	ldrh r0, [r0]\n\
-	cmp r0, #0x10\n\
-	bne _0809C246\n\
-	movs r6, #1\n\
-_0809C246:\n\
-	adds r0, r6, #0\n\
-	pop {r4, r5, r6}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_0809C250: .4byte gWrittenToBldy\n\
-    .syntax divided\n");
+    boolu32 ended;
+
+    ended = FALSE;
+
+    switch (CUTSCENE_OAM_DATA.stage)
+    {
+        case 0:
+            CUTSCENE_OAM_DATA.stage = 1;
+            CutsceneBslExplodingInit();
+            break;
+
+        case 1:
+            if (gWrittenToBldy == BLDY_MAX_VALUE)
+                SoundPlay_3b1c(SOUND_247);
+
+            CutsceneFadeIn();
+            if (gWrittenToBldy == 0)
+                CUTSCENE_OAM_DATA.stage++;
+            break;
+
+        case 2:
+            if (CutsceneBslExplodingProcess())
+            {
+                CUTSCENE_OAM_DATA.stage = 3;
+                WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
+            }
+            break;
+
+        case 3:
+            CutsceneFadeOut();
+            if (gWrittenToBldy == BLDY_MAX_VALUE)
+                ended = TRUE;
+            break;
+    }
+
+    return ended;
 }
 
 // 0x0809C254
@@ -529,473 +496,179 @@ _0809C5F4: .4byte 0x04000050\n\
     .syntax divided\n");
 }
 
-// 0x0809C5F8
-NAKED_FUNCTION
+/**
+ * @brief 9c5f8 | 2c | Processes the scrolling of the BSL exploding cutscene
+ * 
+ */
 void CutsceneBslExplodingProcessScrolling(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r2, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #0x1e\n\
-	bne _0809C614\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0x13]\n\
-	ldrh r0, [r2]\n\
-	subs r0, #1\n\
-	strh r0, [r2]\n\
-_0809C614:\n\
-	ldr r1, _0809C620 @ =0x0400001C\n\
-	ldrh r0, [r2]\n\
-	strh r0, [r1]\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809C620: .4byte 0x0400001C\n\
-    .syntax divided\n");
+    pOam->timer++;
+    if (pOam->timer == 30)
+    {
+        pOam->timer = 0;
+        pOam->xPosition--;
+    }
+
+    WRITE_16(REG_BG3HOFS, pOam->xPosition);
 }
 
-// 0x0809C624
-NAKED_FUNCTION
+/**
+ * @brief 9c624 | 5c | Processes the far BSL
+ * 
+ */
 void CutsceneBslExplodingProcessBslFar(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r1, [r2, #0x14]\n\
-	cmp r1, #0\n\
-	bne _0809C654\n\
-	ldr r3, _0809C64C @ =gNonGameplayRam\n\
-	ldrb r0, [r3, #0x10]\n\
-	cmp r0, #5\n\
-	bne _0809C67A\n\
-	movs r4, #0xc\n\
-	ldrsh r0, [r3, r4]\n\
-	cmp r0, #5\n\
-	bne _0809C67A\n\
-	strb r1, [r2, #0x12]\n\
-	strb r1, [r2, #0x11]\n\
-	ldr r0, _0809C650 @ =0x08680ECC\n\
-	str r0, [r2, #0x1c]\n\
-	movs r0, #1\n\
-	strb r0, [r2, #0x14]\n\
-	b _0809C67A\n\
-	.align 2, 0\n\
-_0809C64C: .4byte gNonGameplayRam\n\
-_0809C650: .4byte 0x08680ECC\n\
-_0809C654:\n\
-	cmp r1, #1\n\
-	bne _0809C67A\n\
-	ldrb r0, [r2, #0x11]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r2, #0x1c]\n\
-	adds r1, r1, r0\n\
-	ldrb r0, [r1, #4]\n\
-	ldrb r3, [r2, #0x12]\n\
-	cmp r0, r3\n\
-	bne _0809C67A\n\
-	ldrb r1, [r1, #0xc]\n\
-	cmp r1, #0\n\
-	bne _0809C67A\n\
-	strb r1, [r2, #0x10]\n\
-	ldrb r1, [r2, #0x16]\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	strb r0, [r2, #0x16]\n\
-_0809C67A:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    const struct FrameData* pFrame;
+
+    if (pOam->stage == 0)
+    {
+        if (CUTSCENE_OAM_DATA.subStage == 5 && CUTSCENE_OAM_DATA.unk_C == 5)
+        {
+            pOam->animationDurationCounter = 0;
+            pOam->currentAnimationFrame = 0;
+            pOam->pOam = (const struct FrameData*)0x8680ecc;
+            pOam->stage = 1;
+        }
+    }
+    else if (pOam->stage == 1)
+    {
+        pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+        if (pFrame[0].timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+        {
+            pOam->type = 0;
+            pOam->enabled = FALSE;
+        }
+    }
 }
 
-// 0x0809C680
-NAKED_FUNCTION
+/**
+ * @brief 9c680 | 2c | Processes the explosions
+ * 
+ */
 void CutsceneBslExplodingProcessExplosions(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x11]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r2, #0x1c]\n\
-	adds r1, r1, r0\n\
-	ldrb r0, [r1, #4]\n\
-	ldrb r3, [r2, #0x12]\n\
-	cmp r0, r3\n\
-	bne _0809C6A6\n\
-	ldrb r1, [r1, #0xc]\n\
-	cmp r1, #0\n\
-	bne _0809C6A6\n\
-	strb r1, [r2, #0x10]\n\
-	ldrb r1, [r2, #0x16]\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	strb r0, [r2, #0x16]\n\
-_0809C6A6:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    const struct FrameData* pFrame;
+
+    pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+    if (pFrame[0].timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+    {
+        pOam->type = 0;
+        pOam->enabled = FALSE;
+    }
 }
 
-// 0x0809C6AC
-NAKED_FUNCTION
+/**
+ * @brief 9c6ac | 1a4 | Sets up a BSL exploding OAM
+ * 
+ */
 u8 CutsceneBslExplodingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 descendingSearch)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, #4\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r5, r0, #0x18\n\
-	lsls r1, r1, #0x10\n\
-	lsrs r1, r1, #0x10\n\
-	mov r8, r1\n\
-	lsls r2, r2, #0x10\n\
-	lsrs r7, r2, #0x10\n\
-	lsls r3, r3, #0x18\n\
-	cmp r3, #0\n\
-	bne _0809C708\n\
-	movs r2, #0\n\
-	ldr r1, _0809C704 @ =gNonGameplayRam\n\
-	adds r0, r1, #0\n\
-	adds r0, #0x28\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	beq _0809C6F8\n\
-	adds r3, r1, #0\n\
-_0809C6D8:\n\
-	lsls r0, r2, #0x18\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #0x11\n\
-	adds r0, r0, r1\n\
-	lsrs r2, r0, #0x18\n\
-	asrs r1, r0, #0x18\n\
-	cmp r1, #0xf\n\
-	bgt _0809C742\n\
-	lsls r0, r1, #3\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r3\n\
-	adds r0, #0x28\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	bne _0809C6D8\n\
-_0809C6F8:\n\
-	lsls r0, r2, #0x18\n\
-	asrs r1, r0, #0x18\n\
-	adds r6, r0, #0\n\
-	cmp r1, #0xf\n\
-	ble _0809C74C\n\
-	b _0809C742\n\
-	.align 2, 0\n\
-_0809C704: .4byte gNonGameplayRam\n\
-_0809C708:\n\
-	movs r2, #0xf\n\
-	ldr r1, _0809C748 @ =gNonGameplayRam\n\
-	movs r3, #0x91\n\
-	lsls r3, r3, #2\n\
-	adds r0, r1, r3\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	beq _0809C73A\n\
-	adds r3, r1, #0\n\
-_0809C71A:\n\
-	lsls r0, r2, #0x18\n\
-	movs r1, #0xff\n\
-	lsls r1, r1, #0x18\n\
-	adds r0, r0, r1\n\
-	lsrs r2, r0, #0x18\n\
-	asrs r1, r0, #0x18\n\
-	cmp r1, #0\n\
-	blt _0809C742\n\
-	lsls r0, r1, #3\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r3\n\
-	adds r0, #0x28\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	bne _0809C71A\n\
-_0809C73A:\n\
-	lsls r0, r2, #0x18\n\
-	adds r6, r0, #0\n\
-	cmp r6, #0\n\
-	bge _0809C74C\n\
-_0809C742:\n\
-	movs r0, #0x10\n\
-	b _0809C83A\n\
-	.align 2, 0\n\
-_0809C748: .4byte gNonGameplayRam\n\
-_0809C74C:\n\
-	movs r0, #0\n\
-	str r0, [sp]\n\
-	ldr r2, _0809C7A0 @ =0x040000D4\n\
-	mov r3, sp\n\
-	str r3, [r2]\n\
-	asrs r1, r6, #0x18\n\
-	lsls r0, r1, #3\n\
-	adds r0, r0, r1\n\
-	lsls r4, r0, #2\n\
-	ldr r0, _0809C7A4 @ =0x0300149C\n\
-	mov ip, r0\n\
-	adds r0, r4, r0\n\
-	str r0, [r2, #4]\n\
-	ldr r0, _0809C7A8 @ =0x85000009\n\
-	str r0, [r2, #8]\n\
-	ldr r0, [r2, #8]\n\
-	mov r0, ip\n\
-	subs r0, #0x18\n\
-	adds r2, r4, r0\n\
-	mov r1, r8\n\
-	strh r1, [r2, #0x18]\n\
-	strh r7, [r2, #0x1a]\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x28\n\
-	strb r5, [r0]\n\
-	adds r3, r2, #0\n\
-	adds r3, #0x2e\n\
-	ldrb r1, [r3]\n\
-	movs r0, #1\n\
-	orrs r1, r0\n\
-	strb r1, [r3]\n\
-	cmp r5, #1\n\
-	bne _0809C7B0\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r1, r0\n\
-	strb r1, [r3]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _0809C7AC @ =CutsceneBslExplodingProcessScrolling\n\
-	b _0809C836\n\
-	.align 2, 0\n\
-_0809C7A0: .4byte 0x040000D4\n\
-_0809C7A4: .4byte 0x0300149C\n\
-_0809C7A8: .4byte 0x85000009\n\
-_0809C7AC: .4byte CutsceneBslExplodingProcessScrolling\n\
-_0809C7B0:\n\
-	cmp r5, #0x14\n\
-	bne _0809C7E0\n\
-	adds r2, #0x30\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #8\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _0809C7D8 @ =0x08680FFC\n\
-	str r1, [r0]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _0809C7DC @ =unk_9db70\n\
-	b _0809C836\n\
-	.align 2, 0\n\
-_0809C7D8: .4byte 0x08680FFC\n\
-_0809C7DC: .4byte unk_9db70\n\
-_0809C7E0:\n\
-	cmp r5, #0x15\n\
-	bne _0809C810\n\
-	adds r2, #0x30\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #8\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _0809C808 @ =0x0868100C\n\
-	str r1, [r0]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _0809C80C @ =CutsceneBslExplodingProcessBslFar\n\
-	b _0809C836\n\
-	.align 2, 0\n\
-_0809C808: .4byte 0x0868100C\n\
-_0809C80C: .4byte CutsceneBslExplodingProcessBslFar\n\
-_0809C810:\n\
-	cmp r5, #0x16\n\
-	bne _0809C838\n\
-	adds r2, #0x30\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #8\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	mov r0, ip\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _0809C848 @ =0x08680ECC\n\
-	str r1, [r0]\n\
-	mov r0, ip\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _0809C84C @ =CutsceneBslExplodingProcessExplosions\n\
-_0809C836:\n\
-	str r1, [r0]\n\
-_0809C838:\n\
-	lsrs r0, r6, #0x18\n\
-_0809C83A:\n\
-	add sp, #4\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_0809C848: .4byte 0x08680ECC\n\
-_0809C84C: .4byte CutsceneBslExplodingProcessExplosions\n\
-    .syntax divided\n");
+    s8 slot;
+
+    if (!descendingSearch)
+    {
+        for (slot = 0; slot < ARRAY_SIZE(CUTSCENE_OAM_DATA.oam); slot++)
+        {
+            if (CUTSCENE_OAM_DATA.oam[slot].type == 0)
+                break;
+        }
+        
+        if (slot > 15)
+            return 16;
+    }
+    else
+    {
+        for (slot = ARRAY_SIZE(CUTSCENE_OAM_DATA.oam) - 1; slot >= 0; slot--)
+        {
+            if (CUTSCENE_OAM_DATA.oam[slot].type == 0)
+                break;
+        }
+        
+        if (slot < 0)
+            return 16;
+    }
+
+    DMA3_FILL_32(0, &CUTSCENE_OAM_DATA.oam[slot], sizeof(struct CutsceneOam));
+
+    CUTSCENE_OAM_DATA.oam[slot].xPosition = xPosition;
+    CUTSCENE_OAM_DATA.oam[slot].yPosition = yPosition;
+    CUTSCENE_OAM_DATA.oam[slot].type = type;
+    CUTSCENE_OAM_DATA.oam[slot].enabled = TRUE;
+
+    if (type == 1)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].enabled = FALSE;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneBslExplodingProcessScrolling;
+    }
+    else if (type == 20)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].priority = 2;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680ffc;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9db70;
+    }
+    else if (type == 21)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].priority = 2;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x868100c;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneBslExplodingProcessBslFar;
+    }
+    else if (type == 22)
+    {
+        CUTSCENE_OAM_DATA.oam[slot].priority = 2;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680ecc;
+        CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneBslExplodingProcessExplosions;
+    }
+
+    return slot;
 }
 
-// 0x0809C850
-NAKED_FUNCTION
+/**
+ * @brief 9c850 | 58 | Gets the position and scaling of a BSL exploding OAM by type
+ * 
+ */
 u8 CutsceneBslExplodingGetOamInfoByType(u8 type, s16* pXPosition, s16* pYPosition, s16* pScaling)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	adds r4, r1, #0\n\
-	adds r5, r2, #0\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r6, r0, #0x18\n\
-	movs r2, #0\n\
-	ldr r7, _0809C880 @ =gNonGameplayRam\n\
-_0809C85E:\n\
-	lsls r0, r2, #3\n\
-	adds r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r1, r0, r7\n\
-	adds r0, r1, #0\n\
-	adds r0, #0x28\n\
-	ldrb r0, [r0]\n\
-	cmp r0, r6\n\
-	bne _0809C884\n\
-	ldrh r0, [r1, #0x18]\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r1, #0x1a]\n\
-	strh r0, [r5]\n\
-	ldrh r0, [r1, #0x1c]\n\
-	strh r0, [r3]\n\
-	adds r0, r2, #0\n\
-	b _0809C8A2\n\
-	.align 2, 0\n\
-_0809C880: .4byte gNonGameplayRam\n\
-_0809C884:\n\
-	adds r0, r2, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r2, r0, #0x18\n\
-	cmp r2, #0xf\n\
-	bls _0809C85E\n\
-	movs r1, #0x96\n\
-	lsls r1, r1, #1\n\
-	adds r0, r1, #0\n\
-	strh r0, [r4]\n\
-	movs r0, #0xc8\n\
-	strh r0, [r5]\n\
-	subs r1, #0x2c\n\
-	adds r0, r1, #0\n\
-	strh r0, [r3]\n\
-	movs r0, #0\n\
-_0809C8A2:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-    .syntax divided\n");
+    u8 slot;
+
+    for (slot = 0; slot < ARRAY_SIZE(CUTSCENE_OAM_DATA.oam); slot++)
+    {
+        if (CUTSCENE_OAM_DATA.oam[slot].type == type)
+        {
+            *pXPosition = CUTSCENE_OAM_DATA.oam[slot].xPosition;
+            *pYPosition = CUTSCENE_OAM_DATA.oam[slot].yPosition;
+            *pScaling = CUTSCENE_OAM_DATA.oam[slot].scaling;
+            return slot;
+        }
+    }
+
+    *pXPosition = 300;
+    *pYPosition = 200;
+    *pScaling = Q_8_8(1);
+    return 0;
 }
 
-// 0x0809C8A8
-NAKED_FUNCTION
+/**
+ * @brief 9c8a8 | 84 | V-blank for the BSL exploding cutscene
+ * 
+ */
 void CutsceneBslExplodingVblank(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	ldr r3, _0809C8FC @ =0x040000D4\n\
-	ldr r0, _0809C900 @ =gOamData\n\
-	str r0, [r3]\n\
-	movs r0, #0xe0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r3, #4]\n\
-	ldr r0, _0809C904 @ =0x84000100\n\
-	str r0, [r3, #8]\n\
-	ldr r0, [r3, #8]\n\
-	ldr r2, _0809C908 @ =0x04000052\n\
-	ldr r0, _0809C90C @ =gWrittenToBldalpha_Evb\n\
-	ldrh r0, [r0]\n\
-	lsls r0, r0, #8\n\
-	ldr r1, _0809C910 @ =gWrittenToBldalpha_Eva\n\
-	ldrh r1, [r1]\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r1, _0809C914 @ =0x04000054\n\
-	ldr r0, _0809C918 @ =gWrittenToBldy\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0809C91C @ =gNonGameplayRam\n\
-	movs r2, #0xa\n\
-	ldrsh r0, [r1, r2]\n\
-	cmp r0, #1\n\
-	bne _0809C8F8\n\
-	movs r0, #0\n\
-	strh r0, [r1, #0xa]\n\
-	movs r2, #0xc\n\
-	ldrsh r0, [r1, r2]\n\
-	lsls r0, r0, #5\n\
-	ldr r1, _0809C920 @ =0x0868101C\n\
-	adds r0, r0, r1\n\
-	str r0, [r3]\n\
-	ldr r0, _0809C924 @ =0x05000120\n\
-	str r0, [r3, #4]\n\
-	ldr r0, _0809C928 @ =0x84000008\n\
-	str r0, [r3, #8]\n\
-	ldr r0, [r3, #8]\n\
-_0809C8F8:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809C8FC: .4byte 0x040000D4\n\
-_0809C900: .4byte gOamData\n\
-_0809C904: .4byte 0x84000100\n\
-_0809C908: .4byte 0x04000052\n\
-_0809C90C: .4byte gWrittenToBldalpha_Evb\n\
-_0809C910: .4byte gWrittenToBldalpha_Eva\n\
-_0809C914: .4byte 0x04000054\n\
-_0809C918: .4byte gWrittenToBldy\n\
-_0809C91C: .4byte gNonGameplayRam\n\
-_0809C920: .4byte 0x0868101C\n\
-_0809C924: .4byte 0x05000120\n\
-_0809C928: .4byte 0x84000008\n\
-    .syntax divided\n");
+    DMA3_COPY_32(gOamData, OAM_BASE, OAM_SIZE / 4);
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_Evb, gWrittenToBldalpha_Eva));
+    WRITE_16(REG_BLDY, gWrittenToBldy);
+
+    if (CUTSCENE_OAM_DATA.unk_A == 1)
+    {
+        CUTSCENE_OAM_DATA.unk_A = 0;
+        DMA3_COPY_32(&((const u16*)0x868101c)[CUTSCENE_OAM_DATA.unk_C * 16], PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
+    }
 }
 
-// 0x0809C92C
-NAKED_FUNCTION
+/**
+ * @brief 9c92c | c | V-blank that only updates the audio
+ * 
+ */
 void unk_9c92c(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	bl UpdateAudio\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    UpdateAudio();
 }

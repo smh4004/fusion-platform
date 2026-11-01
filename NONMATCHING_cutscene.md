@@ -13,3 +13,8 @@
   (scrolling BG2/BG1, fading BLDALPHA between 4 and 10) produces the right code
   except that agbcc cross-jumps the identical "bg1YPosition -= 3; write BG1VOFS"
   tails of the stage 1 and stage 2 branches, while the original keeps two copies.
+
+## src/cutscenes/bsl_exploding.c
+
+- `CutsceneBslExplodingInit` (0x9c254): everything matches except one register
+  (`ldr r1` vs `ldr r2`) for the palette base 0x868101c in the final DMA.
