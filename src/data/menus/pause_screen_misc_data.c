@@ -252,7 +252,9 @@ const u8 sCharacterWidths[1184] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
 };
 
-static const u8 sBlob_5766D4_5766e0[] = INCBIN_U8("data/Blob_5766D4_5766e0.bin");
+const struct NavConversationPopUpData sNavConversationPopUpDataInit = {
+    .pGraphics = NULL
+};
 
 const u8 sNavConversationTextBoxCursorYPositions[NAV_TEXT_BOX_COUNT][2] = {
     [NAV_TEXT_BOX_BOTTOM] = { 128, 150 },

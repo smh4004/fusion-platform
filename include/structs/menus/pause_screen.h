@@ -29,6 +29,18 @@ struct PSD_28 {
     u8 unk_3;
 };
 
+struct NavConversationPopUpData {
+    const u8* pGraphics;
+    u8 stage;
+    u8 setIndex;
+    u8 id;
+    u8 timer;
+    u8 animationFrame;
+    u8 fadeTimer;
+    u8 unk_E;
+    u8 unk_F;
+};
+
 struct BslDiagramData {
     u8 stage;
     u8 unk_1;
@@ -88,15 +100,7 @@ struct PauseScreenData {
     u8 mapY;
     u8 currentArea;
     u8 navTargetTextDirection;
-    const u8* pNavConvPopUpGraphicsPointer;
-    u8 currentPopUp;
-    u8 unk_219;
-    u8 unk_21A;
-    u8 unk_21B;
-    u8 unk_21C;
-    u8 unk_21D;
-    u8 unk_21E;
-    u8 unk_21F;
+    struct NavConversationPopUpData popUp;
     u8 conversationNumber;
     u8 conversationOnRepeat;
     u8 unk_222;

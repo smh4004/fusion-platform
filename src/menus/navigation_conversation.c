@@ -3372,7 +3372,7 @@ void unk_7b56c(void)
         case 4:
             if (PAUSE_SCREEN_DATA.unk_A > 30)
             {
-                PAUSE_SCREEN_DATA.currentPopUp = 1;
+                PAUSE_SCREEN_DATA.popUp.stage = 1;
                 PAUSE_SCREEN_DATA.unk_A = 0;
                 PAUSE_SCREEN_DATA.unk_B++;
                 PAUSE_SCREEN_DATA.typeFlags |= 0x80;
@@ -3388,7 +3388,7 @@ void unk_7b56c(void)
             break;
 
         case 6:
-            PAUSE_SCREEN_DATA.currentPopUp = 3;
+            PAUSE_SCREEN_DATA.popUp.stage = 3;
             PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_POP_UP_WINDOW].oamId = PAUSE_OAM_ID_POP_UP_WINDOW_CLOSING;
             PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_POP_UP_WINDOW].animationDurationCounter = 0;
             PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_POP_UP_WINDOW].currentAnimationFrame = 0;
@@ -4273,13 +4273,13 @@ void NavigationConversationLoadPopUpGraphics(void)
  */
 void NavigationConversationUpdatePopUp(void)
 {
-    if (PAUSE_SCREEN_DATA.currentPopUp == 0)
+    if (PAUSE_SCREEN_DATA.popUp.stage == 0)
         return;
 
-    PAUSE_SCREEN_DATA.unk_21B++;
-    sNavConversationPopUpFunctions[PAUSE_SCREEN_DATA.currentPopUp - 1]();
+    PAUSE_SCREEN_DATA.popUp.timer++;
+    sNavConversationPopUpFunctions[PAUSE_SCREEN_DATA.popUp.stage - 1]();
 
-    if (PAUSE_SCREEN_DATA.unk_21D != 0)
+    if (PAUSE_SCREEN_DATA.popUp.fadeTimer != 0)
         NavigationConversationFadeInPopUpPalette();
 }
 
@@ -4549,7 +4549,7 @@ void NavigationConversationFadeInPopUpPalette(void)
     u8 target[3];
     u8 current[3];
 
-    src = sNavConversationPopUps[PAUSE_SCREEN_DATA.unk_21A].pPalette;
+    src = sNavConversationPopUps[PAUSE_SCREEN_DATA.popUp.id].pPalette;
     dst = PALRAM_OBJ + PAL_ROW_SIZE * 15;
 
     for (i = 0; i < PAL_ROW; i++, src++, dst++)
@@ -4573,10 +4573,10 @@ void NavigationConversationFadeInPopUpPalette(void)
         *dst = COLOR_GRAD(current[0], current[1], current[2]);
     }
 
-    if (PAUSE_SCREEN_DATA.unk_21D > 32)
-        PAUSE_SCREEN_DATA.unk_21D = 0;
+    if (PAUSE_SCREEN_DATA.popUp.fadeTimer > 32)
+        PAUSE_SCREEN_DATA.popUp.fadeTimer = 0;
     else
-        PAUSE_SCREEN_DATA.unk_21D++;
+        PAUSE_SCREEN_DATA.popUp.fadeTimer++;
 }
 
 // 0x0807C0D0
@@ -4891,14 +4891,14 @@ void NavigationConversationClearPopUpGraphics(void)
 
     DMA3_FILL_32(0, PALRAM_OBJ + PAL_ROW_SIZE * 15, PAL_ROW_SIZE);
 
-    if (PAUSE_SCREEN_DATA.unk_21A == 3)
+    if (PAUSE_SCREEN_DATA.popUp.id == 3)
         SoundStop(SOUND_125);
 
-    PAUSE_SCREEN_DATA.currentPopUp = 0;
-    PAUSE_SCREEN_DATA.unk_21C = 0;
-    PAUSE_SCREEN_DATA.unk_21B = 0;
-    PAUSE_SCREEN_DATA.unk_21D = 0;
-    PAUSE_SCREEN_DATA.unk_219++;
+    PAUSE_SCREEN_DATA.popUp.stage = 0;
+    PAUSE_SCREEN_DATA.popUp.animationFrame = 0;
+    PAUSE_SCREEN_DATA.popUp.timer = 0;
+    PAUSE_SCREEN_DATA.popUp.fadeTimer = 0;
+    PAUSE_SCREEN_DATA.popUp.setIndex++;
 }
 
 /**
@@ -4910,19 +4910,19 @@ void unk_7c3b4(void)
     const u16* pColor;
     const u16* pPalette;
 
-    if (sNavConversationPopUps[PAUSE_SCREEN_DATA.unk_21A].flashingPaletteDelay == 0)
+    if (sNavConversationPopUps[PAUSE_SCREEN_DATA.popUp.id].flashingPaletteDelay == 0)
         return;
 
     PAUSE_SCREEN_DATA.unk_229++;
-    if (PAUSE_SCREEN_DATA.unk_229 < sNavConversationPopUps[PAUSE_SCREEN_DATA.unk_21A].flashingPaletteDelay)
+    if (PAUSE_SCREEN_DATA.unk_229 < sNavConversationPopUps[PAUSE_SCREEN_DATA.popUp.id].flashingPaletteDelay)
         return;
 
     PAUSE_SCREEN_DATA.unk_229 = 0;
-    pColor = &sNavConversationPopUps[PAUSE_SCREEN_DATA.unk_21A].pFlashingPalette[PAUSE_SCREEN_DATA.unk_228];
+    pColor = &sNavConversationPopUps[PAUSE_SCREEN_DATA.popUp.id].pFlashingPalette[PAUSE_SCREEN_DATA.unk_228];
     if (*pColor == 0)
     {
         PAUSE_SCREEN_DATA.unk_228 = 0;
-        pColor = sNavConversationPopUps[PAUSE_SCREEN_DATA.unk_21A].pFlashingPalette;
+        pColor = sNavConversationPopUps[PAUSE_SCREEN_DATA.popUp.id].pFlashingPalette;
     }
 
     *(u16*)(PALRAM_OBJ + PAL_ROW_SIZE * 15 + 15 * sizeof(u16)) = *pColor;

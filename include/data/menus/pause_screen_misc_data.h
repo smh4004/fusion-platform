@@ -61,6 +61,8 @@ extern const u8 sCharacterWidths[1184];
 
 // ...
 
+extern const struct NavConversationPopUpData sNavConversationPopUpDataInit;
+
 extern const u8 sNavConversationTextBoxCursorYPositions[NAV_TEXT_BOX_COUNT][2];
 
 struct NavConversationTarget {
