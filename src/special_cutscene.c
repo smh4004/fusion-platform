@@ -1,489 +1,222 @@
+#include "special_cutscene.h"
+#include "new_file_intro.h"
 #include "globals.h"
 #include "macros.h"
+#include "callbacks.h"
+#include "syscalls.h"
+#include "text.h"
+#include "init_helpers.h"
+#include "oam.h"
+#include "audio_wrappers.h"
+#include "music_wrappers.h"
 
-// 0x08097DD0
-NAKED_FUNCTION
-void NewFileIntroCheckMonologueEnded(void)
+#include "constants/audio.h"
+#include "constants/text.h"
+
+#include "data/generic_data.h"
+#include "data/intro_data.h"
+
+/**
+ * @brief 97dd0 | d8 | Checks if the monologue ended, and handles waiting and page changes
+ * 
+ */
+boolu32 NewFileIntroCheckMonologueEnded(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	movs r0, #0\n\
-	mov r8, r0\n\
-	ldr r6, _08097E0C @ =gNonGameplayRam\n\
-	movs r0, #0x83\n\
-	lsls r0, r0, #2\n\
-	adds r7, r6, r0\n\
-	ldrh r0, [r7]\n\
-	adds r4, r0, #1\n\
-	strh r4, [r7]\n\
-	ldr r3, [r6]\n\
-	ldrh r2, [r3]\n\
-	adds r5, r2, #0\n\
-	movs r0, #0xff\n\
-	lsls r0, r0, #8\n\
-	mov ip, r0\n\
-	cmp r5, ip\n\
-	bne _08097E14\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	ldr r7, _08097E10 @ =0x00000213\n\
-	adds r1, r6, r7\n\
-	movs r0, #0x64\n\
-	strb r0, [r1]\n\
-	movs r0, #1\n\
-	mov r8, r0\n\
-	b _08097E96\n\
-	.align 2, 0\n\
-_08097E0C: .4byte gNonGameplayRam\n\
-_08097E10: .4byte 0x00000213\n\
-_08097E14:\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r5, r0\n\
-	bne _08097E68\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	movs r7, #0x86\n\
-	lsls r7, r7, #2\n\
-	adds r4, r6, r7\n\
-	ldrb r1, [r4]\n\
-	cmp r1, #1\n\
-	bne _08097E96\n\
-	adds r2, r3, #2\n\
-	str r2, [r6]\n\
-	subs r7, #5\n\
-	adds r0, r6, r7\n\
-	strb r1, [r0]\n\
-	ldrh r1, [r3, #2]\n\
-	movs r0, #0xfd\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _08097E46\n\
-	movs r0, #2\n\
-	strb r0, [r4]\n\
-	b _08097E96\n\
-_08097E46:\n\
-	cmp r1, ip\n\
-	beq _08097E5C\n\
-	cmp r1, r5\n\
-	bne _08097E62\n\
-	movs r0, #4\n\
-	strb r0, [r4]\n\
-	adds r0, r2, #2\n\
-	str r0, [r6]\n\
-	ldrh r0, [r2, #2]\n\
-	cmp r0, ip\n\
-	bne _08097E96\n\
-_08097E5C:\n\
-	movs r0, #3\n\
-	strb r0, [r4]\n\
-	b _08097E96\n\
-_08097E62:\n\
-	movs r0, #0\n\
-	strb r0, [r4]\n\
-	b _08097E96\n\
-_08097E68:\n\
-	mov r0, ip\n\
-	ands r0, r2\n\
-	movs r1, #0xe1\n\
-	lsls r1, r1, #8\n\
-	cmp r0, r1\n\
-	bne _08097E82\n\
-	movs r1, #0xff\n\
-	ands r1, r2\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r1, r0\n\
-	bhi _08097E96\n\
-	b _08097E8A\n\
-_08097E82:\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #2\n\
-	bls _08097E96\n\
-_08097E8A:\n\
-	ldr r0, _08097EA4 @ =0x00000213\n\
-	adds r1, r6, r0\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-_08097E96:\n\
-	mov r0, r8\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_08097EA4: .4byte 0x00000213\n\
-    .syntax divided\n");
+    boolu32 ended;
+    const u16* pText;
+    const u16* pNext;
+
+    ended = FALSE;
+    INTRO_DATA.unk_20C++;
+    pText = INTRO_DATA.pText;
+
+    if (*pText == CHAR_TERMINATOR)
+    {
+        INTRO_DATA.unk_20C = 0;
+        INTRO_DATA.unk_213 = 100;
+        ended = TRUE;
+    }
+    else if (*pText == CHAR_NEXT_PAGE_ARROW)
+    {
+        INTRO_DATA.unk_20C = 0;
+        if (INTRO_DATA.unk_218 == 1)
+        {
+            pNext = &pText[1];
+            INTRO_DATA.pText = pNext;
+            INTRO_DATA.unk_213 = INTRO_DATA.unk_218;
+            if (pText[1] == CHAR_NEW_PAGE)
+            {
+                INTRO_DATA.unk_218 = 2;
+            }
+            else if (pText[1] == CHAR_TERMINATOR)
+            {
+                INTRO_DATA.unk_218 = 3;
+            }
+            else if (pText[1] == CHAR_NEXT_PAGE_ARROW)
+            {
+                INTRO_DATA.unk_218 = 4;
+                INTRO_DATA.pText = &pNext[1];
+                if (pNext[1] == CHAR_TERMINATOR)
+                    INTRO_DATA.unk_218 = 3;
+            }
+            else
+            {
+                INTRO_DATA.unk_218 = 0;
+            }
+        }
+    }
+    else if ((*pText & 0xFF00) == 0xE100)
+    {
+        if ((*pText & 0xFF) <= INTRO_DATA.unk_20C)
+        {
+            INTRO_DATA.unk_213 = 1;
+            INTRO_DATA.unk_20C = 0;
+        }
+    }
+    else if (INTRO_DATA.unk_20C > 2)
+    {
+        INTRO_DATA.unk_213 = 1;
+        INTRO_DATA.unk_20C = 0;
+    }
+
+    return ended;
 }
 
-// 0x08097EA8
-NAKED_FUNCTION
-void EndingCheckMonologueEnded(void)
+/**
+ * @brief 97ea8 | d8 | Checks if the monologue ended, and handles waiting and page changes
+ * 
+ */
+boolu32 EndingCheckMonologueEnded(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	movs r0, #0\n\
-	mov r8, r0\n\
-	ldr r6, _08097EE4 @ =gNonGameplayRam\n\
-	movs r0, #0x83\n\
-	lsls r0, r0, #2\n\
-	adds r7, r6, r0\n\
-	ldrh r0, [r7]\n\
-	adds r4, r0, #1\n\
-	strh r4, [r7]\n\
-	ldr r3, [r6]\n\
-	ldrh r2, [r3]\n\
-	adds r5, r2, #0\n\
-	movs r0, #0xff\n\
-	lsls r0, r0, #8\n\
-	mov ip, r0\n\
-	cmp r5, ip\n\
-	bne _08097EEC\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	ldr r7, _08097EE8 @ =0x00000213\n\
-	adds r1, r6, r7\n\
-	movs r0, #0x64\n\
-	strb r0, [r1]\n\
-	movs r0, #1\n\
-	mov r8, r0\n\
-	b _08097F6E\n\
-	.align 2, 0\n\
-_08097EE4: .4byte gNonGameplayRam\n\
-_08097EE8: .4byte 0x00000213\n\
-_08097EEC:\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r5, r0\n\
-	bne _08097F40\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	movs r7, #0x86\n\
-	lsls r7, r7, #2\n\
-	adds r4, r6, r7\n\
-	ldrb r1, [r4]\n\
-	cmp r1, #1\n\
-	bne _08097F6E\n\
-	adds r2, r3, #2\n\
-	str r2, [r6]\n\
-	subs r7, #5\n\
-	adds r0, r6, r7\n\
-	strb r1, [r0]\n\
-	ldrh r1, [r3, #2]\n\
-	movs r0, #0xfd\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _08097F1E\n\
-	movs r0, #2\n\
-	strb r0, [r4]\n\
-	b _08097F6E\n\
-_08097F1E:\n\
-	cmp r1, ip\n\
-	beq _08097F34\n\
-	cmp r1, r5\n\
-	bne _08097F3A\n\
-	movs r0, #4\n\
-	strb r0, [r4]\n\
-	adds r0, r2, #2\n\
-	str r0, [r6]\n\
-	ldrh r0, [r2, #2]\n\
-	cmp r0, ip\n\
-	bne _08097F6E\n\
-_08097F34:\n\
-	movs r0, #3\n\
-	strb r0, [r4]\n\
-	b _08097F6E\n\
-_08097F3A:\n\
-	movs r0, #0\n\
-	strb r0, [r4]\n\
-	b _08097F6E\n\
-_08097F40:\n\
-	mov r0, ip\n\
-	ands r0, r2\n\
-	movs r1, #0xe1\n\
-	lsls r1, r1, #8\n\
-	cmp r0, r1\n\
-	bne _08097F5A\n\
-	movs r1, #0xff\n\
-	ands r1, r2\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r1, r0\n\
-	bhi _08097F6E\n\
-	b _08097F62\n\
-_08097F5A:\n\
-	lsls r0, r4, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #3\n\
-	bls _08097F6E\n\
-_08097F62:\n\
-	ldr r0, _08097F7C @ =0x00000213\n\
-	adds r1, r6, r0\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-_08097F6E:\n\
-	mov r0, r8\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_08097F7C: .4byte 0x00000213\n\
-    .syntax divided\n");
+    boolu32 ended;
+    const u16* pText;
+    const u16* pNext;
+
+    ended = FALSE;
+    INTRO_DATA.unk_20C++;
+    pText = INTRO_DATA.pText;
+
+    if (*pText == CHAR_TERMINATOR)
+    {
+        INTRO_DATA.unk_20C = 0;
+        INTRO_DATA.unk_213 = 100;
+        ended = TRUE;
+    }
+    else if (*pText == CHAR_NEXT_PAGE_ARROW)
+    {
+        INTRO_DATA.unk_20C = 0;
+        if (INTRO_DATA.unk_218 == 1)
+        {
+            pNext = &pText[1];
+            INTRO_DATA.pText = pNext;
+            INTRO_DATA.unk_213 = INTRO_DATA.unk_218;
+            if (pText[1] == CHAR_NEW_PAGE)
+            {
+                INTRO_DATA.unk_218 = 2;
+            }
+            else if (pText[1] == CHAR_TERMINATOR)
+            {
+                INTRO_DATA.unk_218 = 3;
+            }
+            else if (pText[1] == CHAR_NEXT_PAGE_ARROW)
+            {
+                INTRO_DATA.unk_218 = 4;
+                INTRO_DATA.pText = &pNext[1];
+                if (pNext[1] == CHAR_TERMINATOR)
+                    INTRO_DATA.unk_218 = 3;
+            }
+            else
+            {
+                INTRO_DATA.unk_218 = 0;
+            }
+        }
+    }
+    else if ((*pText & 0xFF00) == 0xE100)
+    {
+        if ((*pText & 0xFF) <= INTRO_DATA.unk_20C)
+        {
+            INTRO_DATA.unk_213 = 1;
+            INTRO_DATA.unk_20C = 0;
+        }
+    }
+    else if (INTRO_DATA.unk_20C > 3)
+    {
+        INTRO_DATA.unk_213 = 1;
+        INTRO_DATA.unk_20C = 0;
+    }
+
+    return ended;
 }
 
-// 0x08097F80
-NAKED_FUNCTION
+/**
+ * @brief 97f80 | 1d8 | Draws the next character of a monologue
+ * 
+ */
 void SpecialCutsceneProcessMonologue(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, #8\n\
-	ldr r5, _08097FF0 @ =gNonGameplayRam\n\
-	ldr r2, [r5]\n\
-	ldrh r3, [r2]\n\
-	adds r1, r3, #0\n\
-	movs r6, #0xff\n\
-	lsls r6, r6, #8\n\
-	adds r4, r5, #0\n\
-	cmp r1, r6\n\
-	bne _08097F9C\n\
-	b _08098142\n\
-_08097F9C:\n\
-	movs r0, #0xfe\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _08097FF8\n\
-	ldrh r0, [r4, #0xc]\n\
-	adds r0, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r2, r0, #0x10\n\
-	cmp r2, #0x1b\n\
-	bhi _08097FD4\n\
-	adds r6, r4, #0\n\
-	adds r5, #0x14\n\
-	movs r3, #0xff\n\
-_08097FB6:\n\
-	ldrh r1, [r6, #0xe]\n\
-	lsrs r1, r1, #1\n\
-	lsls r0, r1, #3\n\
-	subs r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r2, r0\n\
-	adds r0, r0, r5\n\
-	ldrb r1, [r0]\n\
-	orrs r1, r3\n\
-	strb r1, [r0]\n\
-	adds r0, r2, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r2, r0, #0x10\n\
-	cmp r2, #0x1b\n\
-	bls _08097FB6\n\
-_08097FD4:\n\
-	movs r1, #0\n\
-	movs r0, #0\n\
-	strh r0, [r4, #0xc]\n\
-	ldrh r0, [r4, #0xe]\n\
-	adds r0, #2\n\
-	strh r0, [r4, #0xe]\n\
-	ldr r0, [r4]\n\
-	adds r0, #2\n\
-	str r0, [r4]\n\
-	ldr r2, _08097FF4 @ =0x00000212\n\
-	adds r0, r4, r2\n\
-	strb r1, [r0]\n\
-	b _08098142\n\
-	.align 2, 0\n\
-_08097FF0: .4byte gNonGameplayRam\n\
-_08097FF4: .4byte 0x00000212\n\
-_08097FF8:\n\
-	movs r0, #0xfd\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _0809807C\n\
-	movs r2, #0\n\
-	str r2, [sp, #4]\n\
-	ldr r1, _08098064 @ =0x040000D4\n\
-	add r5, sp, #4\n\
-	str r5, [r1]\n\
-	movs r0, #0xc0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08098068 @ =0x85001200\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	movs r3, #0\n\
-	strh r2, [r4, #0x12]\n\
-	strh r2, [r4, #0x10]\n\
-	strh r2, [r4, #0xe]\n\
-	strh r2, [r4, #0xc]\n\
-	ldr r0, [r4]\n\
-	adds r0, #2\n\
-	str r0, [r4]\n\
-	ldr r5, _0809806C @ =0x00000212\n\
-	adds r0, r4, r5\n\
-	strb r3, [r0]\n\
-	str r2, [sp, #4]\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	adds r0, r4, #0\n\
-	adds r0, #0x14\n\
-	str r0, [r1, #4]\n\
-	ldr r3, _08098070 @ =0x8500003F\n\
-	str r3, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	str r2, [sp, #4]\n\
-	add r2, sp, #4\n\
-	str r2, [r1]\n\
-	movs r5, #0x88\n\
-	lsls r5, r5, #1\n\
-	adds r0, r4, r5\n\
-	str r0, [r1, #4]\n\
-	str r3, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #0x12\n\
-	str r0, [r1]\n\
-	ldr r0, _08098074 @ =0x06004800\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08098078 @ =0x84000200\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	b _08098142\n\
-	.align 2, 0\n\
-_08098064: .4byte 0x040000D4\n\
-_08098068: .4byte 0x85001200\n\
-_0809806C: .4byte 0x00000212\n\
-_08098070: .4byte 0x8500003F\n\
-_08098074: .4byte 0x06004800\n\
-_08098078: .4byte 0x84000200\n\
-_0809807C:\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _0809808C\n\
-	ldrh r0, [r4, #0xc]\n\
-	adds r0, #1\n\
-	strh r0, [r4, #0xc]\n\
-	b _08098142\n\
-_0809808C:\n\
-	adds r0, r6, #0\n\
-	ands r0, r3\n\
-	movs r1, #0xe1\n\
-	lsls r1, r1, #8\n\
-	cmp r0, r1\n\
-	bne _0809809E\n\
-	adds r0, r2, #2\n\
-	str r0, [r4]\n\
-	b _08098142\n\
-_0809809E:\n\
-	ldrh r4, [r5, #0xc]\n\
-	lsls r4, r4, #5\n\
-	ldrh r0, [r5, #0xe]\n\
-	lsls r0, r0, #0xa\n\
-	adds r4, r4, r0\n\
-	movs r0, #0xc0\n\
-	lsls r0, r0, #0x13\n\
-	adds r4, r4, r0\n\
-	ldrh r0, [r2]\n\
-	bl TextGetCharacterWidth\n\
-	mov r8, r0\n\
-	ldr r0, [r5]\n\
-	ldrh r0, [r0]\n\
-	mov r1, r8\n\
-	lsls r2, r1, #0x18\n\
-	lsrs r2, r2, #0x18\n\
-	ldr r1, _08098150 @ =0x00000212\n\
-	adds r6, r5, r1\n\
-	ldrb r3, [r6]\n\
-	movs r1, #0\n\
-	str r1, [sp]\n\
-	adds r1, r4, #0\n\
-	bl TextDrawCharacter\n\
-	ldrh r0, [r5, #0xc]\n\
-	cmp r0, #0x1b\n\
-	bhi _0809813A\n\
-	ldrh r1, [r5, #0xe]\n\
-	lsrs r1, r1, #1\n\
-	lsls r0, r1, #3\n\
-	subs r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	ldrh r2, [r5, #0xc]\n\
-	adds r0, r0, r2\n\
-	adds r7, r5, #0\n\
-	adds r7, #0x14\n\
-	adds r0, r0, r7\n\
-	movs r1, #4\n\
-	strb r1, [r0]\n\
-	ldrb r0, [r6]\n\
-	add r0, r8\n\
-	strb r0, [r6]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	adds r4, r5, #0\n\
-	cmp r0, #7\n\
-	bls _0809813A\n\
-	adds r2, r4, #0\n\
-	adds r3, r6, #0\n\
-	adds r4, r7, #0\n\
-_08098104:\n\
-	ldrb r0, [r3]\n\
-	adds r1, r0, #0\n\
-	subs r1, #8\n\
-	strb r1, [r3]\n\
-	ldrh r0, [r2, #0xc]\n\
-	adds r0, #1\n\
-	strh r0, [r2, #0xc]\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0x1b\n\
-	bhi _0809813A\n\
-	lsls r0, r1, #0x18\n\
-	cmp r0, #0\n\
-	beq _08098134\n\
-	ldrh r0, [r2, #0xe]\n\
-	lsrs r0, r0, #1\n\
-	lsls r1, r0, #3\n\
-	subs r1, r1, r0\n\
-	lsls r1, r1, #2\n\
-	ldrh r5, [r2, #0xc]\n\
-	adds r1, r1, r5\n\
-	adds r1, r1, r4\n\
-	movs r0, #4\n\
-	strb r0, [r1]\n\
-_08098134:\n\
-	ldrb r0, [r3]\n\
-	cmp r0, #7\n\
-	bhi _08098104\n\
-_0809813A:\n\
-	ldr r1, _08098154 @ =gNonGameplayRam\n\
-	ldr r0, [r1]\n\
-	adds r0, #2\n\
-	str r0, [r1]\n\
-_08098142:\n\
-	add sp, #8\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08098150: .4byte 0x00000212\n\
-_08098154: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    u16 i;
+    u32* dst;
+    u32 width;
+
+    if (*INTRO_DATA.pText == CHAR_TERMINATOR)
+        return;
+
+    if (*INTRO_DATA.pText == CHAR_NEW_LINE)
+    {
+        for (i = INTRO_DATA.unk_C + 1; i < 28; i++)
+            INTRO_DATA.unk_14[i + (INTRO_DATA.unk_E / 2) * 28] |= 0xFF;
+
+        INTRO_DATA.unk_C = 0;
+        INTRO_DATA.unk_E += 2;
+        INTRO_DATA.pText++;
+        INTRO_DATA.unk_212 = 0;
+    }
+    else if (*INTRO_DATA.pText == CHAR_NEW_PAGE)
+    {
+        DMA3_FILL_32(0, VRAM_BASE, 0x4800);
+        INTRO_DATA.unk_12 = 0;
+        INTRO_DATA.unk_10 = 0;
+        INTRO_DATA.unk_E = 0;
+        INTRO_DATA.unk_C = 0;
+        INTRO_DATA.pText++;
+        INTRO_DATA.unk_212 = 0;
+        DMA3_FILL_32(0, INTRO_DATA.unk_14, 0xFC);
+        DMA3_FILL_32(0, &INTRO_DATA.unk_110, 0xFC);
+        DMA3_COPY_32(EWRAM_BASE, VRAM_BASE + 0x4800, 0x800 / 4);
+    }
+    else if (*INTRO_DATA.pText == CHAR_NEXT_PAGE_ARROW)
+    {
+        INTRO_DATA.unk_C++;
+    }
+    else if ((*INTRO_DATA.pText & 0xFF00) == 0xE100)
+    {
+        INTRO_DATA.pText++;
+    }
+    else
+    {
+        dst = (u32*)(INTRO_DATA.unk_C * 32 + INTRO_DATA.unk_E * 1024 + VRAM_BASE);
+        width = TextGetCharacterWidth(*INTRO_DATA.pText);
+        TextDrawCharacter(*INTRO_DATA.pText, dst, width, INTRO_DATA.unk_212, 0);
+
+        if (INTRO_DATA.unk_C < 28)
+        {
+            INTRO_DATA.unk_14[(INTRO_DATA.unk_E / 2) * 28 + INTRO_DATA.unk_C] = 4;
+            INTRO_DATA.unk_212 += width;
+
+            while (INTRO_DATA.unk_212 >= 8)
+            {
+                INTRO_DATA.unk_212 -= 8;
+                INTRO_DATA.unk_C++;
+                if (INTRO_DATA.unk_C >= 28)
+                    break;
+
+                if (INTRO_DATA.unk_212 != 0)
+                    INTRO_DATA.unk_14[(INTRO_DATA.unk_E / 2) * 28 + INTRO_DATA.unk_C] = 4;
+            }
+        }
+
+        INTRO_DATA.pText++;
+    }
 }
 
 // 0x08098158
@@ -1545,131 +1278,58 @@ _0809893C: .4byte 0x00000212\n\
     .syntax divided\n");
 }
 
-// 0x08098940
-NAKED_FUNCTION
-void Dma3Transfer_Unused1(void)
+/**
+ * @brief 98940 | 40 | Transfers several 0x400 byte blocks with DMA 3
+ * 
+ */
+void Dma3Transfer_Unused1(void* src, void* dst, u32 size, u16 count)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	adds r5, r0, #0\n\
-	adds r4, r1, #0\n\
-	lsls r3, r3, #0x10\n\
-	lsrs r7, r3, #0x10\n\
-	lsls r2, r2, #0x15\n\
-	movs r3, #0\n\
-	cmp r3, r7\n\
-	bhs _08098976\n\
-	ldr r1, _0809897C @ =0x040000D4\n\
-	lsrs r2, r2, #0x12\n\
-	movs r0, #0x84\n\
-	lsls r0, r0, #0x18\n\
-	orrs r2, r0\n\
-	movs r6, #0x80\n\
-	lsls r6, r6, #3\n\
-_08098960:\n\
-	str r5, [r1]\n\
-	str r4, [r1, #4]\n\
-	str r2, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	adds r5, r5, r6\n\
-	adds r4, r4, r6\n\
-	adds r0, r3, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r3, r0, #0x10\n\
-	cmp r3, r7\n\
-	blo _08098960\n\
-_08098976:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809897C: .4byte 0x040000D4\n\
-    .syntax divided\n");
+    u16 i;
+
+    size <<= 21;
+
+    for (i = 0; i < count; i++)
+    {
+        DMA_SET(3, src, dst, C_32_2_16(DMA_ENABLE | DMA_32BIT, size >> 18));
+        src += 0x400;
+        dst += 0x400;
+    }
 }
 
-// 0x08098980
-NAKED_FUNCTION
-void Dma3Transfer_Unused2(void)
+/**
+ * @brief 98980 | 3c | Transfers several 0x40 byte blocks with DMA 3
+ * 
+ */
+void Dma3Transfer_Unused2(void* src, void* dst, u32 size, u16 count)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	adds r5, r0, #0\n\
-	adds r4, r1, #0\n\
-	lsls r3, r3, #0x10\n\
-	lsrs r6, r3, #0x10\n\
-	lsls r2, r2, #0x11\n\
-	movs r3, #0\n\
-	cmp r3, r6\n\
-	bhs _080989B2\n\
-	ldr r1, _080989B8 @ =0x040000D4\n\
-	lsrs r2, r2, #0x11\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #0x18\n\
-	orrs r2, r0\n\
-_0809899C:\n\
-	str r5, [r1]\n\
-	str r4, [r1, #4]\n\
-	str r2, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	adds r5, #0x40\n\
-	adds r4, #0x40\n\
-	adds r0, r3, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r3, r0, #0x10\n\
-	cmp r3, r6\n\
-	blo _0809899C\n\
-_080989B2:\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080989B8: .4byte 0x040000D4\n\
-    .syntax divided\n");
+    u16 i;
+
+    size <<= 17;
+    for (i = 0; i < count; i++)
+    {
+        DMA_SET(3, src, dst, C_32_2_16(DMA_ENABLE, size >> 17));
+        src += 0x40;
+        dst += 0x40;
+    }
 }
 
-// 0x080989BC
-NAKED_FUNCTION
-void Dma3Clear_Unused(void)
+/**
+ * @brief 989bc | 48 | Clears several 0x400 byte blocks with DMA 3
+ * 
+ */
+void Dma3Clear_Unused(void* dst, u32 size, u16 count)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	sub sp, #4\n\
-	adds r4, r0, #0\n\
-	lsls r2, r2, #0x10\n\
-	lsrs r5, r2, #0x10\n\
-	lsls r1, r1, #0x15\n\
-	movs r2, #0\n\
-	cmp r2, r5\n\
-	bhs _080989F6\n\
-	movs r7, #0\n\
-	ldr r3, _08098A00 @ =0x040000D4\n\
-	lsrs r1, r1, #0x12\n\
-	movs r0, #0x85\n\
-	lsls r0, r0, #0x18\n\
-	orrs r1, r0\n\
-	movs r6, #0x80\n\
-	lsls r6, r6, #3\n\
-_080989DE:\n\
-	str r7, [sp]\n\
-	mov r0, sp\n\
-	str r0, [r3]\n\
-	str r4, [r3, #4]\n\
-	str r1, [r3, #8]\n\
-	ldr r0, [r3, #8]\n\
-	adds r4, r4, r6\n\
-	adds r0, r2, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r2, r0, #0x10\n\
-	cmp r2, r5\n\
-	blo _080989DE\n\
-_080989F6:\n\
-	add sp, #4\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08098A00: .4byte 0x040000D4\n\
-    .syntax divided\n");
+    u16 i;
+    vu32 zero;
+
+    size <<= 21;
+
+    for (i = 0; i < count; i++)
+    {
+        zero = 0;
+        DMA_SET(3, &zero, dst, C_32_2_16(DMA_ENABLE | DMA_SRC_FIXED | DMA_32BIT, size >> 18));
+        dst += 0x400;
+    }
 }
 
 // 0x08098A04
@@ -1925,307 +1585,134 @@ _08098BC8: .4byte 0x03001678\n\
     .syntax divided\n");
 }
 
-// 0x08098BCC
-NAKED_FUNCTION
+/**
+ * @brief 98bcc | 20 | Fades in a special cutscene
+ * 
+ */
 void SpecialCutsceneFadeIn(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	bl SpecialCutsceneProcessOam\n\
-	bl SpecialCutsceneDrawAllOam\n\
-	ldr r1, _08098BE8 @ =gWrittenToBldy\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0\n\
-	beq _08098BE2\n\
-	subs r0, #1\n\
-	strh r0, [r1]\n\
-_08098BE2:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08098BE8: .4byte gWrittenToBldy\n\
-    .syntax divided\n");
+    SpecialCutsceneProcessOam();
+    SpecialCutsceneDrawAllOam();
+    if (gWrittenToBldy != 0)
+        gWrittenToBldy--;
 }
 
-// 0x08098BEC
-NAKED_FUNCTION
+/**
+ * @brief 98bec | 20 | Fades out a special cutscene
+ * 
+ */
 void SpecialCutsceneFadOut(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	bl SpecialCutsceneProcessOam\n\
-	bl SpecialCutsceneDrawAllOam\n\
-	ldr r1, _08098C08 @ =gWrittenToBldy\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0xf\n\
-	bhi _08098C02\n\
-	adds r0, #1\n\
-	strh r0, [r1]\n\
-_08098C02:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08098C08: .4byte gWrittenToBldy\n\
-    .syntax divided\n");
+    SpecialCutsceneProcessOam();
+    SpecialCutsceneDrawAllOam();
+    if (gWrittenToBldy < BLDY_MAX_VALUE)
+        gWrittenToBldy++;
 }
 
-// 0x08098C0C
-NAKED_FUNCTION
-void NewFileIntroProcessTextCursor(void)
+/**
+ * @brief 98c0c | 2c | Processes the new file intro text cursor
+ * 
+ */
+void NewFileIntroProcessTextCursor(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldr r0, _08098C28 @ =gNonGameplayRam\n\
-	ldr r0, [r0]\n\
-	ldrh r1, [r0]\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _08098C2C\n\
-	movs r0, #0xeb\n\
-	strh r0, [r2, #0xc]\n\
-	movs r0, #0x98\n\
-	strh r0, [r2, #0xe]\n\
-	b _08098C32\n\
-	.align 2, 0\n\
-_08098C28: .4byte gNonGameplayRam\n\
-_08098C2C:\n\
-	movs r0, #0x82\n\
-	lsls r0, r0, #1\n\
-	strh r0, [r2, #0xc]\n\
-_08098C32:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    if (*INTRO_DATA.pText == CHAR_NEXT_PAGE_ARROW)
+    {
+        pOam->xPosition = 235;
+        pOam->yPosition = 152;
+    }
+    else
+    {
+        pOam->xPosition = 260;
+    }
 }
 
-// 0x08098C38
-NAKED_FUNCTION
+/**
+ * @brief 98c38 | 34 | Disables the drawing of every special cutscene OAM
+ * 
+ */
 void SpecialCutsceneClearOam(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	movs r3, #0\n\
-	ldr r6, _08098C68 @ =gNonGameplayRam\n\
-	movs r4, #0x8d\n\
-	lsls r4, r4, #2\n\
-	movs r5, #2\n\
-	rsbs r5, r5, #0\n\
-_08098C46:\n\
-	lsls r1, r3, #3\n\
-	adds r1, r1, r3\n\
-	lsls r1, r1, #2\n\
-	adds r1, r1, r6\n\
-	adds r1, r1, r4\n\
-	ldrb r2, [r1]\n\
-	adds r0, r5, #0\n\
-	ands r0, r2\n\
-	strb r0, [r1]\n\
-	adds r0, r3, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r3, r0, #0x18\n\
-	cmp r3, #0x13\n\
-	bls _08098C46\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08098C68: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < ARRAY_SIZE(INTRO_DATA.oam); i++)
+        INTRO_DATA.oam[i].unk_18_0 = 0;
 }
 
-// 0x08098C6C
-NAKED_FUNCTION
+/**
+ * @brief 98c6c | 3c | Enables the drawing of every active special cutscene OAM
+ * 
+ */
 void SpecialCutsceneEnableOam(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	movs r2, #0\n\
-	ldr r6, _08098CA4 @ =gNonGameplayRam\n\
-	movs r5, #0x8b\n\
-	lsls r5, r5, #2\n\
-	movs r4, #0x8d\n\
-	lsls r4, r4, #2\n\
-	movs r3, #1\n\
-_08098C7C:\n\
-	lsls r0, r2, #3\n\
-	adds r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r1, r0, r6\n\
-	adds r0, r1, r5\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	beq _08098C94\n\
-	adds r1, r1, r4\n\
-	ldrb r0, [r1]\n\
-	orrs r0, r3\n\
-	strb r0, [r1]\n\
-_08098C94:\n\
-	adds r0, r2, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r2, r0, #0x18\n\
-	cmp r2, #0x13\n\
-	bls _08098C7C\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08098CA4: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < ARRAY_SIZE(INTRO_DATA.oam); i++)
+    {
+        if (INTRO_DATA.oam[i].type != 0)
+            INTRO_DATA.oam[i].unk_18_0 = 1;
+    }
 }
 
-// 0x08098CA8
-NAKED_FUNCTION
-void SpecialCutsceneDestroyOamOfType(void)
+/**
+ * @brief 98ca8 | 4c | Destroys the first special cutscene OAM of a type
+ * 
+ */
+void SpecialCutsceneDestroyOamOfType(u8 type)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	movs r3, #0\n\
-	ldr r6, _08098CE0 @ =gNonGameplayRam\n\
-	movs r7, #2\n\
-	rsbs r7, r7, #0\n\
-	movs r5, #0x8b\n\
-	lsls r5, r5, #2\n\
-_08098CBA:\n\
-	lsls r0, r3, #3\n\
-	adds r0, r0, r3\n\
-	lsls r0, r0, #2\n\
-	adds r2, r0, r6\n\
-	adds r1, r2, r5\n\
-	ldrb r0, [r1]\n\
-	cmp r0, r4\n\
-	bne _08098CE4\n\
-	movs r0, #0\n\
-	strb r0, [r1]\n\
-	movs r0, #0x8d\n\
-	lsls r0, r0, #2\n\
-	adds r2, r2, r0\n\
-	ldrb r1, [r2]\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	strb r0, [r2]\n\
-	b _08098CEE\n\
-	.align 2, 0\n\
-_08098CE0: .4byte gNonGameplayRam\n\
-_08098CE4:\n\
-	adds r0, r3, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r3, r0, #0x18\n\
-	cmp r3, #0x13\n\
-	bls _08098CBA\n\
-_08098CEE:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < ARRAY_SIZE(INTRO_DATA.oam); i++)
+    {
+        if (INTRO_DATA.oam[i].type == type)
+        {
+            INTRO_DATA.oam[i].type = 0;
+            INTRO_DATA.oam[i].unk_18_0 = 0;
+            break;
+        }
+    }
 }
 
-// 0x08098CF4
-NAKED_FUNCTION
+/**
+ * @brief 98cf4 | 58 | Processes every special cutscene OAM
+ * 
+ */
 void SpecialCutsceneProcessOam(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	ldr r0, _08098D44 @ =gNonGameplayRam\n\
-	ldr r1, _08098D48 @ =0x00000215\n\
-	adds r2, r0, r1\n\
-	movs r1, #0\n\
-	strb r1, [r2]\n\
-	movs r4, #0\n\
-	adds r5, r0, #0\n\
-	adds r6, r2, #0\n\
-_08098D06:\n\
-	lsls r0, r4, #3\n\
-	adds r0, r0, r4\n\
-	lsls r2, r0, #2\n\
-	adds r0, r2, r5\n\
-	movs r3, #0x8b\n\
-	lsls r3, r3, #2\n\
-	adds r0, r0, r3\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	beq _08098D34\n\
-	movs r0, #0x8f\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	adds r1, r2, r1\n\
-	subs r3, #0x10\n\
-	adds r0, r5, r3\n\
-	adds r0, r2, r0\n\
-	ldr r1, [r1]\n\
-	bl _call_via_r1\n\
-	ldrb r0, [r6]\n\
-	adds r0, #1\n\
-	strb r0, [r6]\n\
-_08098D34:\n\
-	adds r0, r4, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	cmp r4, #0x13\n\
-	bls _08098D06\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08098D44: .4byte gNonGameplayRam\n\
-_08098D48: .4byte 0x00000215\n\
-    .syntax divided\n");
+    u8 i;
+
+    INTRO_DATA.unk_215 = 0;
+    for (i = 0; i < ARRAY_SIZE(INTRO_DATA.oam); i++)
+    {
+        if (INTRO_DATA.oam[i].type != 0)
+        {
+            ((void (*)(struct SpecialCutsceneOam*))INTRO_DATA.oam[i].pFunction)(&INTRO_DATA.oam[i]);
+            INTRO_DATA.unk_215++;
+        }
+    }
 }
 
-// 0x08098D4C
-NAKED_FUNCTION
+/**
+ * @brief 98d4c | 54 | Draws every special cutscene OAM
+ * 
+ */
 void SpecialCutsceneDrawAllOam(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	movs r4, #0\n\
-	ldr r5, _08098D94 @ =gNonGameplayRam\n\
-	movs r0, #0x87\n\
-	lsls r0, r0, #2\n\
-	adds r6, r5, r0\n\
-_08098D58:\n\
-	lsls r0, r4, #3\n\
-	adds r0, r0, r4\n\
-	lsls r1, r0, #2\n\
-	adds r0, r1, r5\n\
-	movs r2, #0x8d\n\
-	lsls r2, r2, #2\n\
-	adds r0, r0, r2\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x1f\n\
-	cmp r0, #0\n\
-	beq _08098D74\n\
-	adds r0, r1, r6\n\
-	bl SpecialCutsceneDrawOam\n\
-_08098D74:\n\
-	adds r0, r4, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	cmp r4, #0x13\n\
-	bls _08098D58\n\
-	bl ResetFreeOam\n\
-	ldr r0, _08098D98 @ =gNextOamSlot\n\
-	movs r1, #0\n\
-	strb r1, [r0]\n\
-	ldr r0, _08098D9C @ =0x03001238\n\
-	strb r1, [r0]\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08098D94: .4byte gNonGameplayRam\n\
-_08098D98: .4byte gNextOamSlot\n\
-_08098D9C: .4byte 0x03001238\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < ARRAY_SIZE(INTRO_DATA.oam); i++)
+    {
+        if (INTRO_DATA.oam[i].unk_18_0)
+            SpecialCutsceneDrawOam(&INTRO_DATA.oam[i]);
+    }
+
+    ResetFreeOam();
+    gNextOamSlot = 0;
+    gUnk_3001238 = 0;
 }
 
 // 0x08098DA0
 NAKED_FUNCTION
-void SpecialCutsceneDrawOam(void)
+void SpecialCutsceneDrawOam(struct SpecialCutsceneOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -3617,7 +3104,7 @@ _080998A8: .4byte NewFileIntroVblank\n\
 
 // 0x080998AC
 NAKED_FUNCTION
-void SpecialCutsceneGetRandomNumber(void)
+u8 SpecialCutsceneGetRandomNumber(void)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\

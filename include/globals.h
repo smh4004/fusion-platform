@@ -111,6 +111,7 @@ extern u16 gBg3YPosition;
 
 extern u16 gUnk_3001234;
 extern u16 gUnk_3001236;
+extern u8 gUnk_3001238;
 
 extern u8 gSpritesetNumber;
 
