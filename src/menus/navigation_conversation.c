@@ -7,6 +7,7 @@
 #include "data/event_data.h"
 #include "data/menus/pause_screen_misc_data.h"
 #include "data/sa_x_close_up.h"
+#include "data/menus/pause_screen_data.h"
 
 #include "constants/connection.h"
 #include "constants/event.h"
@@ -20,6 +21,7 @@
 #include "structs/minimap.h"
 
 #include "audio_wrappers.h"
+#include "callbacks.h"
 #include "dma.h"
 #include "io.h"
 #include "menus/pause_screen.h"
@@ -4658,915 +4660,270 @@ void NavigationConversationLoadSpecialGraphics(void)
     }
 }
 
-// 0x0807C630
-NAKED_FUNCTION
+/**
+ * @brief 7c630 | 83c | Handles the special graphics sequence (ship room / SA-X close-up) of a navigation conversation
+ * 
+ */
 void unk_7c630(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	sub sp, #4\n\
-	ldr r1, _0807C650 @ =gNonGameplayRam\n\
-	ldr r2, _0807C654 @ =0x00000265\n\
-	adds r0, r1, r2\n\
-	ldrb r0, [r0]\n\
-	adds r4, r1, #0\n\
-	cmp r0, #0x25\n\
-	bls _0807C646\n\
-	bl _0807CE56\n\
-_0807C646:\n\
-	lsls r0, r0, #2\n\
-	ldr r1, _0807C658 @ =_0807C65C\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_0807C650: .4byte gNonGameplayRam\n\
-_0807C654: .4byte 0x00000265\n\
-_0807C658: .4byte _0807C65C\n\
-_0807C65C: @ jump table\n\
-	.4byte _0807C6F4 @ case 0\n\
-	.4byte _0807C770 @ case 1\n\
-	.4byte _0807C79C @ case 2\n\
-	.4byte _0807C7B8 @ case 3\n\
-	.4byte _0807C7E4 @ case 4\n\
-	.4byte _0807C810 @ case 5\n\
-	.4byte _0807C82C @ case 6\n\
-	.4byte _0807C858 @ case 7\n\
-	.4byte _0807C884 @ case 8\n\
-	.4byte _0807C8A0 @ case 9\n\
-	.4byte _0807C8CC @ case 10\n\
-	.4byte _0807C924 @ case 11\n\
-	.4byte _0807C940 @ case 12\n\
-	.4byte _0807C970 @ case 13\n\
-	.4byte _0807C99C @ case 14\n\
-	.4byte _0807C9C8 @ case 15\n\
-	.4byte _0807C9F0 @ case 16\n\
-	.4byte _0807CA10 @ case 17\n\
-	.4byte _0807CA50 @ case 18\n\
-	.4byte _0807CA90 @ case 19\n\
-	.4byte _0807CAD0 @ case 20\n\
-	.4byte _0807CAFC @ case 21\n\
-	.4byte _0807CB20 @ case 22\n\
-	.4byte _0807CB58 @ case 23\n\
-	.4byte _0807CBB0 @ case 24\n\
-	.4byte _0807CBE0 @ case 25\n\
-	.4byte _0807CC18 @ case 26\n\
-	.4byte _0807CC4C @ case 27\n\
-	.4byte _0807CC70 @ case 28\n\
-	.4byte _0807CC9C @ case 29\n\
-	.4byte _0807CCC8 @ case 30\n\
-	.4byte _0807CCE4 @ case 31\n\
-	.4byte _0807CD30 @ case 32\n\
-	.4byte _0807CD5C @ case 33\n\
-	.4byte _0807CD78 @ case 34\n\
-	.4byte _0807CDA4 @ case 35\n\
-	.4byte _0807CDD0 @ case 36\n\
-	.4byte _0807CE10 @ case 37\n\
-_0807C6F4:\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #0x13\n\
-	ldrh r1, [r0]\n\
-	ldr r3, _0807C74C @ =0x0000026A\n\
-	adds r0, r4, r3\n\
-	movs r2, #0\n\
-	strh r1, [r0]\n\
-	ldr r0, _0807C750 @ =0x0400000E\n\
-	ldrh r1, [r0]\n\
-	adds r3, #2\n\
-	adds r0, r4, r3\n\
-	strh r1, [r0]\n\
-	ldr r0, _0807C754 @ =0x0400000C\n\
-	ldrh r1, [r0]\n\
-	adds r3, #2\n\
-	adds r0, r4, r3\n\
-	strh r1, [r0]\n\
-	ldr r0, _0807C758 @ =0x04000050\n\
-	ldrh r1, [r0]\n\
-	adds r3, #2\n\
-	adds r0, r4, r3\n\
-	strh r1, [r0]\n\
-	ldr r0, _0807C75C @ =0x04000052\n\
-	ldrh r1, [r0]\n\
-	adds r3, #2\n\
-	adds r0, r4, r3\n\
-	strh r1, [r0]\n\
-	movs r1, #0x9a\n\
-	lsls r1, r1, #2\n\
-	adds r0, r4, r1\n\
-	strh r2, [r0]\n\
-	ldr r1, _0807C760 @ =0x040000D4\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r1]\n\
-	ldr r0, _0807C764 @ =0x02035000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0807C768 @ =0x80000100\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r2, _0807C76C @ =0x00000265\n\
-	adds r1, r4, r2\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807C74C: .4byte 0x0000026A\n\
-_0807C750: .4byte 0x0400000E\n\
-_0807C754: .4byte 0x0400000C\n\
-_0807C758: .4byte 0x04000050\n\
-_0807C75C: .4byte 0x04000052\n\
-_0807C760: .4byte 0x040000D4\n\
-_0807C764: .4byte 0x02035000\n\
-_0807C768: .4byte 0x80000100\n\
-_0807C76C: .4byte 0x00000265\n\
-_0807C770:\n\
-	ldr r1, _0807C78C @ =0x06004000\n\
-	ldr r2, _0807C790 @ =0x02008000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807C794 @ =gNonGameplayRam\n\
-	ldr r3, _0807C798 @ =0x00000265\n\
-	adds r1, r1, r3\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807C78C: .4byte 0x06004000\n\
-_0807C790: .4byte 0x02008000\n\
-_0807C794: .4byte gNonGameplayRam\n\
-_0807C798: .4byte 0x00000265\n\
-_0807C79C:\n\
-	ldr r1, _0807C7B0 @ =0x06005000\n\
-	ldr r2, _0807C7B4 @ =0x02009000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	b _0807CDE8\n\
-	.align 2, 0\n\
-_0807C7B0: .4byte 0x06005000\n\
-_0807C7B4: .4byte 0x02009000\n\
-_0807C7B8:\n\
-	ldr r1, _0807C7D4 @ =0x06006000\n\
-	ldr r2, _0807C7D8 @ =0x0200A000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807C7DC @ =gNonGameplayRam\n\
-	ldr r2, _0807C7E0 @ =0x00000265\n\
-	adds r1, r1, r2\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807C7D4: .4byte 0x06006000\n\
-_0807C7D8: .4byte 0x0200A000\n\
-_0807C7DC: .4byte gNonGameplayRam\n\
-_0807C7E0: .4byte 0x00000265\n\
-_0807C7E4:\n\
-	ldr r1, _0807C800 @ =0x06007000\n\
-	ldr r2, _0807C804 @ =0x0200B000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807C808 @ =gNonGameplayRam\n\
-	ldr r3, _0807C80C @ =0x00000265\n\
-	adds r1, r1, r3\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807C800: .4byte 0x06007000\n\
-_0807C804: .4byte 0x0200B000\n\
-_0807C808: .4byte gNonGameplayRam\n\
-_0807C80C: .4byte 0x00000265\n\
-_0807C810:\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #0x12\n\
-	ldr r2, _0807C828 @ =0x06004000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	b _0807CDE8\n\
-	.align 2, 0\n\
-_0807C828: .4byte 0x06004000\n\
-_0807C82C:\n\
-	ldr r1, _0807C848 @ =0x02001000\n\
-	ldr r2, _0807C84C @ =0x06005000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807C850 @ =gNonGameplayRam\n\
-	ldr r2, _0807C854 @ =0x00000265\n\
-	adds r1, r1, r2\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807C848: .4byte 0x02001000\n\
-_0807C84C: .4byte 0x06005000\n\
-_0807C850: .4byte gNonGameplayRam\n\
-_0807C854: .4byte 0x00000265\n\
-_0807C858:\n\
-	ldr r1, _0807C874 @ =0x02002000\n\
-	ldr r2, _0807C878 @ =0x06006000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807C87C @ =gNonGameplayRam\n\
-	ldr r3, _0807C880 @ =0x00000265\n\
-	adds r1, r1, r3\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807C874: .4byte 0x02002000\n\
-_0807C878: .4byte 0x06006000\n\
-_0807C87C: .4byte gNonGameplayRam\n\
-_0807C880: .4byte 0x00000265\n\
-_0807C884:\n\
-	ldr r1, _0807C898 @ =0x02003000\n\
-	ldr r2, _0807C89C @ =0x06007000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	b _0807CDE8\n\
-	.align 2, 0\n\
-_0807C898: .4byte 0x02003000\n\
-_0807C89C: .4byte 0x06007000\n\
-_0807C8A0:\n\
-	ldr r1, _0807C8BC @ =0x02004000\n\
-	ldr r2, _0807C8C0 @ =0x06008000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807C8C4 @ =gNonGameplayRam\n\
-	ldr r2, _0807C8C8 @ =0x00000265\n\
-	adds r1, r1, r2\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807C8BC: .4byte 0x02004000\n\
-_0807C8C0: .4byte 0x06008000\n\
-_0807C8C4: .4byte gNonGameplayRam\n\
-_0807C8C8: .4byte 0x00000265\n\
-_0807C8CC:\n\
-	ldr r1, _0807C8F8 @ =0x02005000\n\
-	ldr r2, _0807C8FC @ =0x06009000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r4, #0x10\n\
-	str r4, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r2, _0807C900 @ =gNonGameplayRam\n\
-	movs r3, #0x88\n\
-	lsls r3, r3, #2\n\
-	adds r0, r2, r3\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0x35\n\
-	bne _0807C908\n\
-	ldr r0, _0807C904 @ =0x00000265\n\
-	adds r1, r2, r0\n\
-	movs r0, #0xd\n\
-	strb r0, [r1]\n\
-	b _0807CE56\n\
-	.align 2, 0\n\
-_0807C8F8: .4byte 0x02005000\n\
-_0807C8FC: .4byte 0x06009000\n\
-_0807C900: .4byte gNonGameplayRam\n\
-_0807C904: .4byte 0x00000265\n\
-_0807C908:\n\
-	ldr r1, _0807C918 @ =gWrittenToBldalpha_Evb\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _0807C91C @ =gWrittenToBldalpha_Eva\n\
-	strh r4, [r0]\n\
-	ldr r3, _0807C920 @ =0x00000265\n\
-	adds r1, r2, r3\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807C918: .4byte gWrittenToBldalpha_Evb\n\
-_0807C91C: .4byte gWrittenToBldalpha_Eva\n\
-_0807C920: .4byte 0x00000265\n\
-_0807C924:\n\
-	ldr r1, _0807C938 @ =0x02006000\n\
-	ldr r2, _0807C93C @ =0x0600A000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	b _0807CDE8\n\
-	.align 2, 0\n\
-_0807C938: .4byte 0x02006000\n\
-_0807C93C: .4byte 0x0600A000\n\
-_0807C940:\n\
-	ldr r1, _0807C960 @ =0x02007000\n\
-	ldr r2, _0807C964 @ =0x0600B000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r0, _0807C968 @ =gNonGameplayRam\n\
-	ldr r1, _0807C96C @ =0x00000265\n\
-	adds r0, r0, r1\n\
-	movs r1, #0x15\n\
-	strb r1, [r0]\n\
-	b _0807CE56\n\
-	.align 2, 0\n\
-_0807C960: .4byte 0x02007000\n\
-_0807C964: .4byte 0x0600B000\n\
-_0807C968: .4byte gNonGameplayRam\n\
-_0807C96C: .4byte 0x00000265\n\
-_0807C970:\n\
-	ldr r1, _0807C98C @ =0x02006000\n\
-	ldr r2, _0807C990 @ =0x0600A000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807C994 @ =gNonGameplayRam\n\
-	ldr r2, _0807C998 @ =0x00000265\n\
-	adds r1, r1, r2\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807C98C: .4byte 0x02006000\n\
-_0807C990: .4byte 0x0600A000\n\
-_0807C994: .4byte gNonGameplayRam\n\
-_0807C998: .4byte 0x00000265\n\
-_0807C99C:\n\
-	ldr r1, _0807C9B8 @ =0x02007000\n\
-	ldr r2, _0807C9BC @ =0x0600B000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807C9C0 @ =gNonGameplayRam\n\
-	ldr r3, _0807C9C4 @ =0x00000265\n\
-	adds r1, r1, r3\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807C9B8: .4byte 0x02007000\n\
-_0807C9BC: .4byte 0x0600B000\n\
-_0807C9C0: .4byte gNonGameplayRam\n\
-_0807C9C4: .4byte 0x00000265\n\
-_0807C9C8:\n\
-	ldr r1, _0807C9E0 @ =0x040000D4\n\
-	ldr r0, _0807C9E4 @ =0x0857BEC4\n\
-	str r0, [r1]\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0807C9E8 @ =0x80000100\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r0, _0807C9EC @ =PauseScreenVBlank_Unused\n\
-	b _0807CDE4\n\
-	.align 2, 0\n\
-_0807C9E0: .4byte 0x040000D4\n\
-_0807C9E4: .4byte 0x0857BEC4\n\
-_0807C9E8: .4byte 0x80000100\n\
-_0807C9EC: .4byte PauseScreenVBlank_Unused\n\
-_0807C9F0:\n\
-	ldr r1, _0807CA08 @ =0x0300000A\n\
-	ldr r2, _0807CA0C @ =0x00001407\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	movs r3, #0x9a\n\
-	lsls r3, r3, #2\n\
-	adds r2, r4, r3\n\
-	ldrh r1, [r2]\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #4\n\
-	b _0807CB7C\n\
-	.align 2, 0\n\
-_0807CA08: .4byte 0x0300000A\n\
-_0807CA0C: .4byte 0x00001407\n\
-_0807CA10:\n\
-	ldr r3, _0807CA3C @ =0x00000266\n\
-	adds r2, r4, r3\n\
-	ldrb r0, [r2]\n\
-	adds r0, #1\n\
-	strb r0, [r2]\n\
-	ldr r1, _0807CA40 @ =0x0879C17C\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	bhi _0807CA28\n\
-	b _0807CE56\n\
-_0807CA28:\n\
-	ldr r1, _0807CA44 @ =0x0300000A\n\
-	ldr r3, _0807CA48 @ =0x00001507\n\
-	adds r0, r3, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _0807CA4C @ =0x00000265\n\
-	adds r1, r4, r0\n\
-	ldrb r0, [r1]\n\
-	adds r0, #1\n\
-	strb r0, [r1]\n\
-	b _0807CC38\n\
-	.align 2, 0\n\
-_0807CA3C: .4byte 0x00000266\n\
-_0807CA40: .4byte 0x0879C17C\n\
-_0807CA44: .4byte 0x0300000A\n\
-_0807CA48: .4byte 0x00001507\n\
-_0807CA4C: .4byte 0x00000265\n\
-_0807CA50:\n\
-	ldr r1, _0807CA7C @ =0x00000266\n\
-	adds r2, r4, r1\n\
-	ldrb r0, [r2]\n\
-	adds r0, #1\n\
-	strb r0, [r2]\n\
-	ldr r1, _0807CA80 @ =0x0879C17C\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	ldrb r1, [r1, #1]\n\
-	cmp r0, r1\n\
-	bhi _0807CA68\n\
-	b _0807CE56\n\
-_0807CA68:\n\
-	ldr r1, _0807CA84 @ =0x0300000A\n\
-	ldr r3, _0807CA88 @ =0x00001607\n\
-	adds r0, r3, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _0807CA8C @ =0x00000265\n\
-	adds r1, r4, r0\n\
-	ldrb r0, [r1]\n\
-	adds r0, #1\n\
-	strb r0, [r1]\n\
-	b _0807CC38\n\
-	.align 2, 0\n\
-_0807CA7C: .4byte 0x00000266\n\
-_0807CA80: .4byte 0x0879C17C\n\
-_0807CA84: .4byte 0x0300000A\n\
-_0807CA88: .4byte 0x00001607\n\
-_0807CA8C: .4byte 0x00000265\n\
-_0807CA90:\n\
-	ldr r1, _0807CABC @ =0x00000266\n\
-	adds r2, r4, r1\n\
-	ldrb r0, [r2]\n\
-	adds r0, #1\n\
-	strb r0, [r2]\n\
-	ldr r1, _0807CAC0 @ =0x0879C17C\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	ldrb r1, [r1, #2]\n\
-	cmp r0, r1\n\
-	bhi _0807CAA8\n\
-	b _0807CE56\n\
-_0807CAA8:\n\
-	ldr r1, _0807CAC4 @ =0x0300000A\n\
-	ldr r3, _0807CAC8 @ =0x00001707\n\
-	adds r0, r3, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _0807CACC @ =0x00000265\n\
-	adds r1, r4, r0\n\
-	ldrb r0, [r1]\n\
-	adds r0, #1\n\
-	strb r0, [r1]\n\
-	b _0807CC38\n\
-	.align 2, 0\n\
-_0807CABC: .4byte 0x00000266\n\
-_0807CAC0: .4byte 0x0879C17C\n\
-_0807CAC4: .4byte 0x0300000A\n\
-_0807CAC8: .4byte 0x00001707\n\
-_0807CACC: .4byte 0x00000265\n\
-_0807CAD0:\n\
-	ldr r1, _0807CAF0 @ =0x00000266\n\
-	adds r2, r4, r1\n\
-	ldrb r0, [r2]\n\
-	adds r0, #1\n\
-	strb r0, [r2]\n\
-	ldr r1, _0807CAF4 @ =0x0879C17C\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	ldrb r1, [r1, #3]\n\
-	cmp r0, r1\n\
-	bhi _0807CAE8\n\
-	b _0807CE56\n\
-_0807CAE8:\n\
-	ldr r3, _0807CAF8 @ =0x00000265\n\
-	adds r0, r4, r3\n\
-	b _0807CC34\n\
-	.align 2, 0\n\
-_0807CAF0: .4byte 0x00000266\n\
-_0807CAF4: .4byte 0x0879C17C\n\
-_0807CAF8: .4byte 0x00000265\n\
-_0807CAFC:\n\
-	ldr r0, _0807CB10 @ =0x087338C0\n\
-	ldr r1, _0807CB14 @ =0x06007800\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0807CB18 @ =0x08733D58\n\
-	ldr r1, _0807CB1C @ =0x0600B800\n\
-	bl LZ77UncompVram\n\
-	b _0807CDE8\n\
-	.align 2, 0\n\
-_0807CB10: .4byte 0x087338C0\n\
-_0807CB14: .4byte 0x06007800\n\
-_0807CB18: .4byte 0x08733D58\n\
-_0807CB1C: .4byte 0x0600B800\n\
-_0807CB20:\n\
-	ldr r1, _0807CB40 @ =0x040000D4\n\
-	ldr r0, _0807CB44 @ =0x0872F0E0\n\
-	str r0, [r1]\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0807CB48 @ =0x80000100\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r0, _0807CB4C @ =PauseScreenVBlank_Unused\n\
-	bl CallbackSetVBlank\n\
-	ldr r1, _0807CB50 @ =gNonGameplayRam\n\
-	ldr r2, _0807CB54 @ =0x00000265\n\
-	adds r1, r1, r2\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807CB40: .4byte 0x040000D4\n\
-_0807CB44: .4byte 0x0872F0E0\n\
-_0807CB48: .4byte 0x80000100\n\
-_0807CB4C: .4byte PauseScreenVBlank_Unused\n\
-_0807CB50: .4byte gNonGameplayRam\n\
-_0807CB54: .4byte 0x00000265\n\
-_0807CB58:\n\
-	ldr r1, _0807CB98 @ =0x0400000C\n\
-	ldr r3, _0807CB9C @ =0x00000F06\n\
-	adds r0, r3, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r2, _0807CBA0 @ =0x00001707\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #0x42\n\
-	ldr r3, _0807CBA4 @ =0x00000844\n\
-	adds r0, r3, #0\n\
-	strh r0, [r1]\n\
-	movs r0, #0x9a\n\
-	lsls r0, r0, #2\n\
-	adds r2, r4, r0\n\
-	ldrh r1, [r2]\n\
-	movs r3, #0xc0\n\
-	lsls r3, r3, #4\n\
-_0807CB7C:\n\
-	adds r0, r3, #0\n\
-	movs r3, #0\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r0, _0807CBA8 @ =0x00000265\n\
-	adds r1, r4, r0\n\
-	ldrb r0, [r1]\n\
-	adds r0, #1\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807CBAC @ =0x00000266\n\
-	adds r0, r4, r1\n\
-	strb r3, [r0]\n\
-	b _0807CE56\n\
-	.align 2, 0\n\
-_0807CB98: .4byte 0x0400000C\n\
-_0807CB9C: .4byte 0x00000F06\n\
-_0807CBA0: .4byte 0x00001707\n\
-_0807CBA4: .4byte 0x00000844\n\
-_0807CBA8: .4byte 0x00000265\n\
-_0807CBAC: .4byte 0x00000266\n\
-_0807CBB0:\n\
-	ldr r3, _0807CBD4 @ =0x00000266\n\
-	adds r2, r4, r3\n\
-	ldrb r0, [r2]\n\
-	adds r0, #1\n\
-	strb r0, [r2]\n\
-	ldr r1, _0807CBD8 @ =0x0873421C\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	bhi _0807CBC8\n\
-	b _0807CE56\n\
-_0807CBC8:\n\
-	ldr r1, _0807CBDC @ =0x00000265\n\
-	adds r0, r4, r1\n\
-	ldrb r1, [r0]\n\
-	adds r1, #1\n\
-	b _0807CC36\n\
-	.align 2, 0\n\
-_0807CBD4: .4byte 0x00000266\n\
-_0807CBD8: .4byte 0x0873421C\n\
-_0807CBDC: .4byte 0x00000265\n\
-_0807CBE0:\n\
-	ldr r1, _0807CBF8 @ =gWrittenToBldalpha_Eva\n\
-	ldrh r0, [r1]\n\
-	adds r2, r0, #0\n\
-	cmp r2, #0\n\
-	bne _0807CC04\n\
-	ldr r3, _0807CBFC @ =0x00000265\n\
-	adds r0, r4, r3\n\
-	ldrb r1, [r0]\n\
-	adds r1, #1\n\
-	strb r1, [r0]\n\
-	ldr r1, _0807CC00 @ =0x00000266\n\
-	b _0807CE52\n\
-	.align 2, 0\n\
-_0807CBF8: .4byte gWrittenToBldalpha_Eva\n\
-_0807CBFC: .4byte 0x00000265\n\
-_0807CC00: .4byte 0x00000266\n\
-_0807CC04:\n\
-	subs r0, #1\n\
-	strh r0, [r1]\n\
-	ldr r2, _0807CC14 @ =gWrittenToBldalpha_Evb\n\
-	movs r1, #0x10\n\
-	subs r1, r1, r0\n\
-	strh r1, [r2]\n\
-	b _0807CE56\n\
-	.align 2, 0\n\
-_0807CC14: .4byte gWrittenToBldalpha_Evb\n\
-_0807CC18:\n\
-	ldr r3, _0807CC40 @ =0x00000266\n\
-	adds r2, r4, r3\n\
-	ldrb r0, [r2]\n\
-	adds r0, #1\n\
-	strb r0, [r2]\n\
-	ldr r1, _0807CC44 @ =0x0873421C\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	ldrb r1, [r1, #1]\n\
-	cmp r0, r1\n\
-	bhi _0807CC30\n\
-	b _0807CE56\n\
-_0807CC30:\n\
-	ldr r1, _0807CC48 @ =0x00000265\n\
-	adds r0, r4, r1\n\
-_0807CC34:\n\
-	movs r1, #0x1b\n\
-_0807CC36:\n\
-	strb r1, [r0]\n\
-_0807CC38:\n\
-	movs r0, #0\n\
-	strb r0, [r2]\n\
-	b _0807CE56\n\
-	.align 2, 0\n\
-_0807CC40: .4byte 0x00000266\n\
-_0807CC44: .4byte 0x0873421C\n\
-_0807CC48: .4byte 0x00000265\n\
-_0807CC4C:\n\
-	movs r2, #0x9a\n\
-	lsls r2, r2, #2\n\
-	adds r1, r4, r2\n\
-	movs r2, #0\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	ldr r3, _0807CC68 @ =0x00000265\n\
-	adds r1, r4, r3\n\
-	ldrb r0, [r1]\n\
-	adds r0, #1\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807CC6C @ =0x00000266\n\
-	b _0807CE52\n\
-	.align 2, 0\n\
-_0807CC68: .4byte 0x00000265\n\
-_0807CC6C: .4byte 0x00000266\n\
-_0807CC70:\n\
-	ldr r1, _0807CC8C @ =0x08561FA8\n\
-	ldr r2, _0807CC90 @ =0x06008000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807CC94 @ =gNonGameplayRam\n\
-	ldr r2, _0807CC98 @ =0x00000265\n\
-	adds r1, r1, r2\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807CC8C: .4byte 0x08561FA8\n\
-_0807CC90: .4byte 0x06008000\n\
-_0807CC94: .4byte gNonGameplayRam\n\
-_0807CC98: .4byte 0x00000265\n\
-_0807CC9C:\n\
-	ldr r1, _0807CCB8 @ =0x08562FA8\n\
-	ldr r2, _0807CCBC @ =0x06009000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807CCC0 @ =gNonGameplayRam\n\
-	ldr r3, _0807CCC4 @ =0x00000265\n\
-	adds r1, r1, r3\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807CCB8: .4byte 0x08562FA8\n\
-_0807CCBC: .4byte 0x06009000\n\
-_0807CCC0: .4byte gNonGameplayRam\n\
-_0807CCC4: .4byte 0x00000265\n\
-_0807CCC8:\n\
-	ldr r1, _0807CCDC @ =0x08563FA8\n\
-	ldr r2, _0807CCE0 @ =0x0600A000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	b _0807CDE8\n\
-	.align 2, 0\n\
-_0807CCDC: .4byte 0x08563FA8\n\
-_0807CCE0: .4byte 0x0600A000\n\
-_0807CCE4:\n\
-	ldr r1, _0807CD10 @ =0x08564FA8\n\
-	ldr r2, _0807CD14 @ =0x0600B000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #4\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807CD18 @ =0x040000D4\n\
-	ldr r0, _0807CD1C @ =0x06009800\n\
-	str r0, [r1]\n\
-	ldr r0, _0807CD20 @ =0x06009400\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0807CD24 @ =0x80000200\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r1, _0807CD28 @ =gNonGameplayRam\n\
-	ldr r2, _0807CD2C @ =0x00000265\n\
-	adds r1, r1, r2\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807CD10: .4byte 0x08564FA8\n\
-_0807CD14: .4byte 0x0600B000\n\
-_0807CD18: .4byte 0x040000D4\n\
-_0807CD1C: .4byte 0x06009800\n\
-_0807CD20: .4byte 0x06009400\n\
-_0807CD24: .4byte 0x80000200\n\
-_0807CD28: .4byte gNonGameplayRam\n\
-_0807CD2C: .4byte 0x00000265\n\
-_0807CD30:\n\
-	ldr r1, _0807CD4C @ =0x02008000\n\
-	ldr r2, _0807CD50 @ =0x06004000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807CD54 @ =gNonGameplayRam\n\
-	ldr r3, _0807CD58 @ =0x00000265\n\
-	adds r1, r1, r3\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807CD4C: .4byte 0x02008000\n\
-_0807CD50: .4byte 0x06004000\n\
-_0807CD54: .4byte gNonGameplayRam\n\
-_0807CD58: .4byte 0x00000265\n\
-_0807CD5C:\n\
-	ldr r1, _0807CD70 @ =0x02009000\n\
-	ldr r2, _0807CD74 @ =0x06005000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	b _0807CDE8\n\
-	.align 2, 0\n\
-_0807CD70: .4byte 0x02009000\n\
-_0807CD74: .4byte 0x06005000\n\
-_0807CD78:\n\
-	ldr r1, _0807CD94 @ =0x0200A000\n\
-	ldr r2, _0807CD98 @ =0x06006000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807CD9C @ =gNonGameplayRam\n\
-	ldr r2, _0807CDA0 @ =0x00000265\n\
-	adds r1, r1, r2\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807CD94: .4byte 0x0200A000\n\
-_0807CD98: .4byte 0x06006000\n\
-_0807CD9C: .4byte gNonGameplayRam\n\
-_0807CDA0: .4byte 0x00000265\n\
-_0807CDA4:\n\
-	ldr r1, _0807CDC0 @ =0x0200B000\n\
-	ldr r2, _0807CDC4 @ =0x06007000\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	ldr r1, _0807CDC8 @ =gNonGameplayRam\n\
-	ldr r3, _0807CDCC @ =0x00000265\n\
-	adds r1, r1, r3\n\
-	b _0807CDEE\n\
-	.align 2, 0\n\
-_0807CDC0: .4byte 0x0200B000\n\
-_0807CDC4: .4byte 0x06007000\n\
-_0807CDC8: .4byte gNonGameplayRam\n\
-_0807CDCC: .4byte 0x00000265\n\
-_0807CDD0:\n\
-	ldr r1, _0807CDF8 @ =0x040000D4\n\
-	ldr r0, _0807CDFC @ =0x02035000\n\
-	str r0, [r1]\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0807CE00 @ =0x80000100\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r0, _0807CE04 @ =PauseScreenVBlank\n\
-_0807CDE4:\n\
-	bl CallbackSetVBlank\n\
-_0807CDE8:\n\
-	ldr r1, _0807CE08 @ =gNonGameplayRam\n\
-	ldr r0, _0807CE0C @ =0x00000265\n\
-	adds r1, r1, r0\n\
-_0807CDEE:\n\
-	ldrb r0, [r1]\n\
-	adds r0, #1\n\
-	strb r0, [r1]\n\
-	b _0807CE56\n\
-	.align 2, 0\n\
-_0807CDF8: .4byte 0x040000D4\n\
-_0807CDFC: .4byte 0x02035000\n\
-_0807CE00: .4byte 0x80000100\n\
-_0807CE04: .4byte PauseScreenVBlank\n\
-_0807CE08: .4byte gNonGameplayRam\n\
-_0807CE0C: .4byte 0x00000265\n\
-_0807CE10:\n\
-	ldr r1, _0807CE60 @ =0x0400000E\n\
-	movs r2, #0x9b\n\
-	lsls r2, r2, #2\n\
-	adds r0, r4, r2\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	subs r1, #2\n\
-	ldr r3, _0807CE64 @ =0x0000026E\n\
-	adds r0, r4, r3\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #0x44\n\
-	adds r2, #4\n\
-	adds r0, r4, r2\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	adds r3, #4\n\
-	adds r0, r4, r3\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807CE68 @ =0x0000026A\n\
-	adds r0, r4, r1\n\
-	ldrh r1, [r0]\n\
-	subs r2, #8\n\
-	adds r0, r4, r2\n\
-	movs r2, #0\n\
-	strh r1, [r0]\n\
-	subs r3, #0xd\n\
-	adds r0, r4, r3\n\
-	strb r2, [r0]\n\
-	movs r1, #0x99\n\
-	lsls r1, r1, #2\n\
-_0807CE52:\n\
-	adds r0, r4, r1\n\
-	strb r2, [r0]\n\
-_0807CE56:\n\
-	add sp, #4\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807CE60: .4byte 0x0400000E\n\
-_0807CE64: .4byte 0x0000026E\n\
-_0807CE68: .4byte 0x0000026A\n\
-    .syntax divided\n");
+    switch (PAUSE_SCREEN_DATA.unk_265)
+    {
+        case 0:
+            PAUSE_SCREEN_DATA.dispcntBackup = READ_16(REG_DISPCNT);
+            PAUSE_SCREEN_DATA.bg3CntBackup = READ_16(REG_BG3CNT);
+            PAUSE_SCREEN_DATA.bg2CntBackup = READ_16(REG_BG2CNT);
+            PAUSE_SCREEN_DATA.bldcntBackup = READ_16(REG_BLDCNT);
+            PAUSE_SCREEN_DATA.bldalphaBackup = READ_16(REG_BLDALPHA);
+            PAUSE_SCREEN_DATA.dispcnt = 0;
+            DMA3_COPY_16(PALRAM_BASE, EWRAM_BASE + 0x35000, PAL_SIZE / 2);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 1:
+            DmaTransfer(3, VRAM_BASE + 0x4000, EWRAM_BASE + 0x8000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 2:
+            DmaTransfer(3, VRAM_BASE + 0x5000, EWRAM_BASE + 0x9000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 3:
+            DmaTransfer(3, VRAM_BASE + 0x6000, EWRAM_BASE + 0xA000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 4:
+            DmaTransfer(3, VRAM_BASE + 0x7000, EWRAM_BASE + 0xB000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 5:
+            DmaTransfer(3, EWRAM_BASE + 0x0000, VRAM_BASE + 0x4000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 6:
+            DmaTransfer(3, EWRAM_BASE + 0x1000, VRAM_BASE + 0x5000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 7:
+            DmaTransfer(3, EWRAM_BASE + 0x2000, VRAM_BASE + 0x6000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 8:
+            DmaTransfer(3, EWRAM_BASE + 0x3000, VRAM_BASE + 0x7000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 9:
+            DmaTransfer(3, EWRAM_BASE + 0x4000, VRAM_BASE + 0x8000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 10:
+            DmaTransfer(3, EWRAM_BASE + 0x5000, VRAM_BASE + 0x9000, 0x1000, 16);
+            if (PAUSE_SCREEN_DATA.conversationNumber == NAV_CONVO_GO_TO_OPERATIONS_ROOM)
+            {
+                PAUSE_SCREEN_DATA.unk_265 = 13;
+                break;
+            }
+
+            gWrittenToBldalpha_Evb = 0;
+            gWrittenToBldalpha_Eva = 16;
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 11:
+            DmaTransfer(3, EWRAM_BASE + 0x6000, VRAM_BASE + 0xA000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 12:
+            DmaTransfer(3, EWRAM_BASE + 0x7000, VRAM_BASE + 0xB000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265 = 21;
+            break;
+
+        case 13:
+            DmaTransfer(3, EWRAM_BASE + 0x6000, VRAM_BASE + 0xA000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 14:
+            DmaTransfer(3, EWRAM_BASE + 0x7000, VRAM_BASE + 0xB000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 15:
+            DMA3_COPY_16(sNavConversationSpecialPal, PALRAM_BASE, PAL_SIZE / 2);
+            CallbackSetVBlank(PauseScreenVBlank_Unused);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 16:
+            gWrittenToBg3cnt = 0x1407;
+            PAUSE_SCREEN_DATA.dispcnt |= DCNT_BG3;
+            PAUSE_SCREEN_DATA.unk_265++;
+            PAUSE_SCREEN_DATA.unk_266 = 0;
+            break;
+
+        case 17:
+            PAUSE_SCREEN_DATA.unk_266++;
+            if (PAUSE_SCREEN_DATA.unk_266 > sNavConversationData_79c17c[0])
+            {
+                gWrittenToBg3cnt = 0x1507;
+                PAUSE_SCREEN_DATA.unk_265++;
+                PAUSE_SCREEN_DATA.unk_266 = 0;
+            }
+            break;
+
+        case 18:
+            PAUSE_SCREEN_DATA.unk_266++;
+            if (PAUSE_SCREEN_DATA.unk_266 > sNavConversationData_79c17c[1])
+            {
+                gWrittenToBg3cnt = 0x1607;
+                PAUSE_SCREEN_DATA.unk_265++;
+                PAUSE_SCREEN_DATA.unk_266 = 0;
+            }
+            break;
+
+        case 19:
+            PAUSE_SCREEN_DATA.unk_266++;
+            if (PAUSE_SCREEN_DATA.unk_266 > sNavConversationData_79c17c[2])
+            {
+                gWrittenToBg3cnt = 0x1707;
+                PAUSE_SCREEN_DATA.unk_265++;
+                PAUSE_SCREEN_DATA.unk_266 = 0;
+            }
+            break;
+
+        case 20:
+            PAUSE_SCREEN_DATA.unk_266++;
+            if (PAUSE_SCREEN_DATA.unk_266 > sNavConversationData_79c17c[3])
+            {
+                PAUSE_SCREEN_DATA.unk_265 = 27;
+                PAUSE_SCREEN_DATA.unk_266 = 0;
+            }
+            break;
+
+        case 21:
+            LZ77UncompVram(sSaXCloseUpTileTable1, VRAM_BASE + 0x7800);
+            LZ77UncompVram(sSaXCloseUpTileTable2, VRAM_BASE + 0xB800);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 22:
+            DMA3_COPY_16(sSaXCloseUpPalGrayscale, PALRAM_BASE, PAL_SIZE / 2);
+            CallbackSetVBlank(PauseScreenVBlank_Unused);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 23:
+            WRITE_16(REG_BG2CNT, 0xF06);
+            WRITE_16(REG_BG3CNT, 0x1707);
+            WRITE_16(REG_BLDCNT, 0x844);
+            PAUSE_SCREEN_DATA.dispcnt |= DCNT_BG2 | DCNT_BG3;
+            PAUSE_SCREEN_DATA.unk_265++;
+            PAUSE_SCREEN_DATA.unk_266 = 0;
+            break;
+
+        case 24:
+            PAUSE_SCREEN_DATA.unk_266++;
+            if (PAUSE_SCREEN_DATA.unk_266 > sSaXCloseUpDurations[0])
+            {
+                PAUSE_SCREEN_DATA.unk_265++;
+                PAUSE_SCREEN_DATA.unk_266 = 0;
+            }
+            break;
+
+        case 25:
+            if (gWrittenToBldalpha_Eva == 0)
+            {
+                PAUSE_SCREEN_DATA.unk_265++;
+                PAUSE_SCREEN_DATA.unk_266 = 0;
+            }
+            else
+            {
+                gWrittenToBldalpha_Eva--;
+                gWrittenToBldalpha_Evb = 16 - gWrittenToBldalpha_Eva;
+            }
+            break;
+
+        case 26:
+            PAUSE_SCREEN_DATA.unk_266++;
+            if (PAUSE_SCREEN_DATA.unk_266 > sSaXCloseUpDurations[1])
+            {
+                PAUSE_SCREEN_DATA.unk_265 = 27;
+                PAUSE_SCREEN_DATA.unk_266 = 0;
+            }
+            break;
+
+        case 27:
+            PAUSE_SCREEN_DATA.dispcnt = 0;
+            PAUSE_SCREEN_DATA.unk_265++;
+            PAUSE_SCREEN_DATA.unk_266 = 0;
+            break;
+
+        case 28:
+            DmaTransfer(3, sMinimapTilesGfx, VRAM_BASE + 0x8000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 29:
+            DmaTransfer(3, sMinimapTilesGfx + 0x1000, VRAM_BASE + 0x9000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 30:
+            DmaTransfer(3, sMinimapTilesGfx + 0x2000, VRAM_BASE + 0xA000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 31:
+            DmaTransfer(3, sMinimapTilesGfx + 0x3000, VRAM_BASE + 0xB000, 0x800, 16);
+            DMA3_COPY_16(VRAM_BASE + 0x9800, VRAM_BASE + 0x9400, 0x200);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 32:
+            DmaTransfer(3, EWRAM_BASE + 0x8000, VRAM_BASE + 0x4000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 33:
+            DmaTransfer(3, EWRAM_BASE + 0x9000, VRAM_BASE + 0x5000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 34:
+            DmaTransfer(3, EWRAM_BASE + 0xA000, VRAM_BASE + 0x6000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 35:
+            DmaTransfer(3, EWRAM_BASE + 0xB000, VRAM_BASE + 0x7000, 0x1000, 16);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 36:
+            DMA3_COPY_16(EWRAM_BASE + 0x35000, PALRAM_BASE, PAL_SIZE / 2);
+            CallbackSetVBlank(PauseScreenVBlank);
+            PAUSE_SCREEN_DATA.unk_265++;
+            break;
+
+        case 37:
+            WRITE_16(REG_BG3CNT, PAUSE_SCREEN_DATA.bg3CntBackup);
+            WRITE_16(REG_BG2CNT, PAUSE_SCREEN_DATA.bg2CntBackup);
+            WRITE_16(REG_BLDCNT, PAUSE_SCREEN_DATA.bldcntBackup);
+            WRITE_16(REG_BLDALPHA, PAUSE_SCREEN_DATA.bldalphaBackup);
+            PAUSE_SCREEN_DATA.dispcnt = PAUSE_SCREEN_DATA.dispcntBackup;
+            PAUSE_SCREEN_DATA.unk_265 = 0;
+            PAUSE_SCREEN_DATA.unk_264 = 0;
+            break;
+    }
 }
 
 /**
