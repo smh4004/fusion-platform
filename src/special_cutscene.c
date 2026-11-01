@@ -9,7 +9,6 @@
 #include "oam.h"
 #include "audio_wrappers.h"
 #include "audio/track_internal.h"
-#include "music_wrappers.h"
 
 #include "constants/audio.h"
 #include "constants/text.h"
@@ -17,6 +16,10 @@
 #include "data/generic_data.h"
 #include "data/intro_data.h"
 #include "data/sprite_data.h"
+
+// The original called PlayCharacterAppearingSound without a prototype (its u8
+// argument is not narrowed), so music_wrappers.h is left out of this file
+void PlayCharacterAppearingSound();
 
 /**
  * @brief 97dd0 | d8 | Checks if the monologue ended, and handles waiting and page changes
@@ -390,894 +393,375 @@ _0809827C:\n\
     .syntax divided\n");
 }
 
-// 0x0809828C
-NAKED_FUNCTION
-void EndingProcessAdamText(void)
+/**
+ * @brief 9828c | 220 | Processes the Adam text of the ending
+ * 
+ */
+boolu32 EndingProcessAdamText(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sb\n\
-	mov r6, r8\n\
-	push {r6, r7}\n\
-	sub sp, #8\n\
-	movs r7, #0\n\
-	ldr r5, _080982E8 @ =gNonGameplayRam\n\
-	movs r0, #0x83\n\
-	lsls r0, r0, #2\n\
-	adds r6, r5, r0\n\
-	ldrh r0, [r6]\n\
-	adds r2, r0, #1\n\
-	movs r1, #0\n\
-	mov sb, r1\n\
-	strh r2, [r6]\n\
-	ldr r3, [r5]\n\
-	ldrh r4, [r3]\n\
-	adds r1, r4, #0\n\
-	movs r0, #0xff\n\
-	lsls r0, r0, #8\n\
-	mov ip, r0\n\
-	cmp r1, ip\n\
-	bne _080982FC\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0xf\n\
-	bhi _080982C4\n\
-	b _08098492\n\
-_080982C4:\n\
-	strh r7, [r6]\n\
-	str r7, [sp, #4]\n\
-	ldr r1, _080982EC @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _080982F0 @ =0x0600D000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _080982F4 @ =0x85000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	strh r7, [r5, #0xe]\n\
-	strh r7, [r5, #0xc]\n\
-	ldr r1, _080982F8 @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sb\n\
-	strb r1, [r0]\n\
-	movs r7, #1\n\
-	b _08098492\n\
-	.align 2, 0\n\
-_080982E8: .4byte gNonGameplayRam\n\
-_080982EC: .4byte 0x040000D4\n\
-_080982F0: .4byte 0x0600D000\n\
-_080982F4: .4byte 0x85000400\n\
-_080982F8: .4byte 0x00000212\n\
-_080982FC:\n\
-	movs r0, #0xfe\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _0809836C\n\
-	ldrh r0, [r5, #0xe]\n\
-	cmp r0, #1\n\
-	bhi _0809832C\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #5\n\
-	bhi _08098314\n\
-	b _08098492\n\
-_08098314:\n\
-	strh r7, [r6]\n\
-	movs r0, #2\n\
-	strh r0, [r5, #0xe]\n\
-	strh r7, [r5, #0xc]\n\
-	ldr r1, _08098328 @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sb\n\
-	strb r1, [r0]\n\
-	b _08098408\n\
-	.align 2, 0\n\
-_08098328: .4byte 0x00000212\n\
-_0809832C:\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0x7d\n\
-	bhi _08098336\n\
-	b _08098492\n\
-_08098336:\n\
-	strh r7, [r6]\n\
-	strh r7, [r5, #0xe]\n\
-	strh r7, [r5, #0xc]\n\
-	ldr r1, _0809835C @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sb\n\
-	strb r1, [r0]\n\
-	adds r0, r3, #2\n\
-	str r0, [r5]\n\
-	str r7, [sp, #4]\n\
-	ldr r1, _08098360 @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _08098364 @ =0x0600D000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08098368 @ =0x85000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	b _08098492\n\
-	.align 2, 0\n\
-_0809835C: .4byte 0x00000212\n\
-_08098360: .4byte 0x040000D4\n\
-_08098364: .4byte 0x0600D000\n\
-_08098368: .4byte 0x85000400\n\
-_0809836C:\n\
-	movs r0, #0xfd\n\
-	lsls r0, r0, #8\n\
-	mov r8, r0\n\
-	cmp r1, r8\n\
-	bne _080983B8\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0xf\n\
-	bhi _08098380\n\
-	b _08098492\n\
-_08098380:\n\
-	strh r7, [r6]\n\
-	str r7, [sp, #4]\n\
-	ldr r1, _080983A8 @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _080983AC @ =0x0600D000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _080983B0 @ =0x85000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	strh r7, [r5, #0xe]\n\
-	strh r7, [r5, #0xc]\n\
-	adds r0, r3, #2\n\
-	str r0, [r5]\n\
-	ldr r1, _080983B4 @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sb\n\
-	strb r1, [r0]\n\
-	b _08098492\n\
-	.align 2, 0\n\
-_080983A8: .4byte 0x040000D4\n\
-_080983AC: .4byte 0x0600D000\n\
-_080983B0: .4byte 0x85000400\n\
-_080983B4: .4byte 0x00000212\n\
-_080983B8:\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _080983EE\n\
-	strh r7, [r6]\n\
-	movs r0, #0x86\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	ldrb r0, [r1]\n\
-	cmp r0, #1\n\
-	bne _08098492\n\
-	adds r0, r3, #2\n\
-	str r0, [r5]\n\
-	ldrh r0, [r3, #2]\n\
-	cmp r0, r8\n\
-	bne _080983DE\n\
-	movs r0, #2\n\
-	strb r0, [r1]\n\
-	b _08098492\n\
-_080983DE:\n\
-	cmp r0, ip\n\
-	bne _080983E8\n\
-	movs r0, #3\n\
-	strb r0, [r1]\n\
-	b _08098492\n\
-_080983E8:\n\
-	mov r0, sb\n\
-	strb r0, [r1]\n\
-	b _08098492\n\
-_080983EE:\n\
-	mov r0, ip\n\
-	ands r0, r4\n\
-	movs r1, #0xe1\n\
-	lsls r1, r1, #8\n\
-	cmp r0, r1\n\
-	bne _0809840E\n\
-	movs r1, #0xff\n\
-	ands r1, r4\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r1, r0\n\
-	bhi _08098492\n\
-	strh r7, [r6]\n\
-_08098408:\n\
-	adds r0, r3, #2\n\
-	str r0, [r5]\n\
-	b _08098492\n\
-_0809840E:\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #5\n\
-	bls _08098492\n\
-	strh r7, [r6]\n\
-	ldrh r4, [r5, #0xc]\n\
-	lsls r4, r4, #5\n\
-	ldrh r0, [r5, #0xe]\n\
-	lsls r0, r0, #0xa\n\
-	adds r4, r4, r0\n\
-	ldr r1, _080984A4 @ =0x0600D000\n\
-	adds r4, r4, r1\n\
-	ldrh r0, [r3]\n\
-	bl TextGetCharacterWidth\n\
-	mov r8, r0\n\
-	ldr r0, [r5]\n\
-	ldrh r0, [r0]\n\
-	mov r1, r8\n\
-	lsls r2, r1, #0x18\n\
-	lsrs r2, r2, #0x18\n\
-	ldr r1, _080984A8 @ =0x00000212\n\
-	adds r6, r5, r1\n\
-	ldrb r3, [r6]\n\
-	str r7, [sp]\n\
-	adds r1, r4, #0\n\
-	bl TextDrawCharacter\n\
-	ldr r1, [r5]\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0x40\n\
-	beq _08098454\n\
-	movs r1, #1\n\
-	bl PlayCharacterAppearingSound\n\
-_08098454:\n\
-	ldrh r0, [r5, #0xc]\n\
-	adds r4, r5, #0\n\
-	cmp r0, #0x1f\n\
-	bhi _0809848C\n\
-	ldrb r0, [r6]\n\
-	add r0, r8\n\
-	strb r0, [r6]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bls _0809848C\n\
-	adds r3, r4, #0\n\
-	adds r2, r6, #0\n\
-_0809846E:\n\
-	ldrb r0, [r2]\n\
-	adds r1, r0, #0\n\
-	subs r1, #8\n\
-	strb r1, [r2]\n\
-	ldrh r0, [r3, #0xc]\n\
-	adds r0, #1\n\
-	strh r0, [r3, #0xc]\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0x1f\n\
-	bhi _0809848C\n\
-	lsls r0, r1, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bhi _0809846E\n\
-_0809848C:\n\
-	ldr r0, [r4]\n\
-	adds r0, #2\n\
-	str r0, [r4]\n\
-_08098492:\n\
-	adds r0, r7, #0\n\
-	add sp, #8\n\
-	pop {r3, r4}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_080984A4: .4byte 0x0600D000\n\
-_080984A8: .4byte 0x00000212\n\
-    .syntax divided\n");
+    boolu32 ended;
+    const u16* pText;
+    u32* dst;
+    u32 width;
+
+    ended = FALSE;
+    INTRO_DATA.unk_20C++;
+    pText = INTRO_DATA.pText;
+
+    if (*pText == CHAR_TERMINATOR)
+    {
+        if (INTRO_DATA.unk_20C > 15)
+        {
+            INTRO_DATA.unk_20C = 0;
+            DMA3_FILL_32(0, VRAM_BASE + 0xD000, 0x1000);
+            INTRO_DATA.unk_E = 0;
+            INTRO_DATA.unk_C = 0;
+            INTRO_DATA.unk_212 = 0;
+            ended = TRUE;
+        }
+    }
+    else if (*pText == CHAR_NEW_LINE)
+    {
+        if (INTRO_DATA.unk_E < 2)
+        {
+            if (INTRO_DATA.unk_20C > 5)
+            {
+                INTRO_DATA.unk_20C = 0;
+                INTRO_DATA.unk_E = 2;
+                INTRO_DATA.unk_C = 0;
+                INTRO_DATA.unk_212 = 0;
+                INTRO_DATA.pText = &pText[1];
+            }
+        }
+        else if (INTRO_DATA.unk_20C > 125)
+        {
+            INTRO_DATA.unk_20C = 0;
+            INTRO_DATA.unk_E = 0;
+            INTRO_DATA.unk_C = 0;
+            INTRO_DATA.unk_212 = 0;
+            INTRO_DATA.pText = &pText[1];
+            DMA3_FILL_32(0, VRAM_BASE + 0xD000, 0x1000);
+        }
+    }
+    else if (*pText == CHAR_NEW_PAGE)
+    {
+        if (INTRO_DATA.unk_20C > 15)
+        {
+            INTRO_DATA.unk_20C = 0;
+            DMA3_FILL_32(0, VRAM_BASE + 0xD000, 0x1000);
+            INTRO_DATA.unk_E = 0;
+            INTRO_DATA.unk_C = 0;
+            INTRO_DATA.pText = &pText[1];
+            INTRO_DATA.unk_212 = 0;
+        }
+    }
+    else if (*pText == CHAR_NEXT_PAGE_ARROW)
+    {
+        INTRO_DATA.unk_20C = 0;
+        if (INTRO_DATA.unk_218 == 1)
+        {
+            INTRO_DATA.pText = &pText[1];
+            if (pText[1] == CHAR_NEW_PAGE)
+            {
+                INTRO_DATA.unk_218 = 2;
+            }
+            else if (pText[1] == CHAR_TERMINATOR)
+            {
+                INTRO_DATA.unk_218 = 3;
+            }
+            else
+            {
+                INTRO_DATA.unk_218 = 0;
+            }
+        }
+    }
+    else if ((*pText & 0xFF00) == 0xE100)
+    {
+        if ((*pText & 0xFF) <= INTRO_DATA.unk_20C)
+        {
+            INTRO_DATA.unk_20C = 0;
+            INTRO_DATA.pText = &pText[1];
+        }
+    }
+    else if (INTRO_DATA.unk_20C > 5)
+    {
+        INTRO_DATA.unk_20C = 0;
+        dst = (u32*)(INTRO_DATA.unk_C * 32 + INTRO_DATA.unk_E * 1024 + VRAM_BASE + 0xD000);
+        width = TextGetCharacterWidth(*pText);
+        TextDrawCharacter(*INTRO_DATA.pText, dst, width, INTRO_DATA.unk_212, 0);
+
+        if (*INTRO_DATA.pText != 0x40)
+            PlayCharacterAppearingSound(*INTRO_DATA.pText, 1);
+
+        if (INTRO_DATA.unk_C < 32)
+        {
+            INTRO_DATA.unk_212 += width;
+            while (INTRO_DATA.unk_212 >= 8)
+            {
+                INTRO_DATA.unk_212 -= 8;
+                INTRO_DATA.unk_C++;
+                if (INTRO_DATA.unk_C >= 32)
+                    break;
+            }
+        }
+
+        INTRO_DATA.pText++;
+    }
+
+    return ended;
 }
 
-// 0x080984AC
-NAKED_FUNCTION
-void IntroProcessText(void)
+/**
+ * @brief 984ac | 244 | Processes the text of the intro cutscenes
+ * 
+ */
+boolu32 IntroProcessText(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	sub sp, #8\n\
-	movs r0, #0\n\
-	mov r8, r0\n\
-	ldr r5, _08098514 @ =gNonGameplayRam\n\
-	movs r1, #0x83\n\
-	lsls r1, r1, #2\n\
-	adds r7, r5, r1\n\
-	ldrh r0, [r7]\n\
-	adds r2, r0, #1\n\
-	movs r0, #0\n\
-	mov sl, r0\n\
-	strh r2, [r7]\n\
-	ldr r6, [r5]\n\
-	ldrh r4, [r6]\n\
-	adds r3, r4, #0\n\
-	movs r1, #0xff\n\
-	lsls r1, r1, #8\n\
-	mov ip, r1\n\
-	cmp r3, ip\n\
-	bne _08098528\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0xc\n\
-	bhi _080984E8\n\
-	b _080986D2\n\
-_080984E8:\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	mov r1, r8\n\
-	str r1, [sp, #4]\n\
-	ldr r1, _08098518 @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _0809851C @ =0x0600D000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08098520 @ =0x85000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	mov r1, r8\n\
-	strh r1, [r5, #0xe]\n\
-	strh r1, [r5, #0xc]\n\
-	ldr r1, _08098524 @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sl\n\
-	strb r1, [r0]\n\
-	movs r0, #1\n\
-	mov r8, r0\n\
-	b _080986D2\n\
-	.align 2, 0\n\
-_08098514: .4byte gNonGameplayRam\n\
-_08098518: .4byte 0x040000D4\n\
-_0809851C: .4byte 0x0600D000\n\
-_08098520: .4byte 0x85000400\n\
-_08098524: .4byte 0x00000212\n\
-_08098528:\n\
-	movs r0, #0xfe\n\
-	lsls r0, r0, #8\n\
-	cmp r3, r0\n\
-	bne _0809859C\n\
-	ldrh r0, [r5, #0xe]\n\
-	cmp r0, #1\n\
-	bhi _08098558\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #2\n\
-	bhi _08098540\n\
-	b _080986D2\n\
-_08098540:\n\
-	mov r1, r8\n\
-	strh r1, [r7]\n\
-	movs r0, #2\n\
-	strh r0, [r5, #0xe]\n\
-	strh r1, [r5, #0xc]\n\
-	ldr r1, _08098554 @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sl\n\
-	strb r1, [r0]\n\
-	b _08098654\n\
-	.align 2, 0\n\
-_08098554: .4byte 0x00000212\n\
-_08098558:\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0x7a\n\
-	bhi _08098562\n\
-	b _080986D2\n\
-_08098562:\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	strh r0, [r5, #0xe]\n\
-	strh r0, [r5, #0xc]\n\
-	ldr r1, _0809858C @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sl\n\
-	strb r1, [r0]\n\
-	adds r0, r6, #2\n\
-	str r0, [r5]\n\
-	mov r0, r8\n\
-	str r0, [sp, #4]\n\
-	ldr r1, _08098590 @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _08098594 @ =0x0600D000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08098598 @ =0x85000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	b _080986D2\n\
-	.align 2, 0\n\
-_0809858C: .4byte 0x00000212\n\
-_08098590: .4byte 0x040000D4\n\
-_08098594: .4byte 0x0600D000\n\
-_08098598: .4byte 0x85000400\n\
-_0809859C:\n\
-	movs r1, #0xfd\n\
-	lsls r1, r1, #8\n\
-	mov sb, r1\n\
-	cmp r3, sb\n\
-	bne _080985EC\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0xc\n\
-	bhi _080985B0\n\
-	b _080986D2\n\
-_080985B0:\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	mov r1, r8\n\
-	str r1, [sp, #4]\n\
-	ldr r1, _080985DC @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _080985E0 @ =0x0600D000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _080985E4 @ =0x85000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	mov r1, r8\n\
-	strh r1, [r5, #0xe]\n\
-	strh r1, [r5, #0xc]\n\
-	adds r0, r6, #2\n\
-	str r0, [r5]\n\
-	ldr r1, _080985E8 @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sl\n\
-	strb r1, [r0]\n\
-	b _080986D2\n\
-	.align 2, 0\n\
-_080985DC: .4byte 0x040000D4\n\
-_080985E0: .4byte 0x0600D000\n\
-_080985E4: .4byte 0x85000400\n\
-_080985E8: .4byte 0x00000212\n\
-_080985EC:\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r3, r0\n\
-	bne _08098638\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	movs r1, #0x86\n\
-	lsls r1, r1, #2\n\
-	adds r2, r5, r1\n\
-	ldrb r0, [r2]\n\
-	cmp r0, #1\n\
-	bne _080986D2\n\
-	adds r1, r6, #2\n\
-	str r1, [r5]\n\
-	ldrh r0, [r6, #2]\n\
-	cmp r0, sb\n\
-	bne _08098614\n\
-	movs r0, #2\n\
-	strb r0, [r2]\n\
-	b _080986D2\n\
-_08098614:\n\
-	cmp r0, ip\n\
-	beq _08098626\n\
-	cmp r0, r3\n\
-	bne _08098632\n\
-	adds r0, r1, #2\n\
-	str r0, [r5]\n\
-	ldrh r0, [r1, #2]\n\
-	cmp r0, ip\n\
-	bne _0809862C\n\
-_08098626:\n\
-	movs r0, #3\n\
-	strb r0, [r2]\n\
-	b _080986D2\n\
-_0809862C:\n\
-	movs r0, #4\n\
-	strb r0, [r2]\n\
-	b _080986D2\n\
-_08098632:\n\
-	mov r0, sl\n\
-	strb r0, [r2]\n\
-	b _080986D2\n\
-_08098638:\n\
-	mov r0, ip\n\
-	ands r0, r4\n\
-	movs r1, #0xe1\n\
-	lsls r1, r1, #8\n\
-	cmp r0, r1\n\
-	bne _0809865A\n\
-	movs r1, #0xff\n\
-	ands r1, r4\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r1, r0\n\
-	bhi _080986D2\n\
-	mov r1, r8\n\
-	strh r1, [r7]\n\
-_08098654:\n\
-	adds r0, r6, #2\n\
-	str r0, [r5]\n\
-	b _080986D2\n\
-_0809865A:\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #2\n\
-	bls _080986D2\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	ldrh r4, [r5, #0xc]\n\
-	lsls r4, r4, #5\n\
-	ldrh r0, [r5, #0xe]\n\
-	lsls r0, r0, #0xa\n\
-	adds r4, r4, r0\n\
-	ldr r1, _080986E4 @ =0x0600D000\n\
-	adds r4, r4, r1\n\
-	ldrh r0, [r6]\n\
-	bl TextGetCharacterWidth\n\
-	adds r7, r0, #0\n\
-	ldr r0, [r5]\n\
-	ldrh r0, [r0]\n\
-	lsls r2, r7, #0x18\n\
-	lsrs r2, r2, #0x18\n\
-	ldr r1, _080986E8 @ =0x00000212\n\
-	adds r6, r5, r1\n\
-	ldrb r3, [r6]\n\
-	mov r1, r8\n\
-	str r1, [sp]\n\
-	adds r1, r4, #0\n\
-	bl TextDrawCharacter\n\
-	ldrh r0, [r5, #0xc]\n\
-	cmp r0, #0x1f\n\
-	bhi _080986CA\n\
-	ldrb r0, [r6]\n\
-	adds r0, r0, r7\n\
-	strb r0, [r6]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bls _080986CA\n\
-	adds r3, r5, #0\n\
-	adds r2, r6, #0\n\
-_080986AC:\n\
-	ldrb r0, [r2]\n\
-	adds r1, r0, #0\n\
-	subs r1, #8\n\
-	strb r1, [r2]\n\
-	ldrh r0, [r3, #0xc]\n\
-	adds r0, #1\n\
-	strh r0, [r3, #0xc]\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0x1f\n\
-	bhi _080986CA\n\
-	lsls r0, r1, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bhi _080986AC\n\
-_080986CA:\n\
-	ldr r1, _080986EC @ =gNonGameplayRam\n\
-	ldr r0, [r1]\n\
-	adds r0, #2\n\
-	str r0, [r1]\n\
-_080986D2:\n\
-	mov r0, r8\n\
-	add sp, #8\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_080986E4: .4byte 0x0600D000\n\
-_080986E8: .4byte 0x00000212\n\
-_080986EC: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    boolu32 ended;
+    const u16* pText;
+    const u16* pNext;
+    u32* dst;
+    u32 width;
+
+    ended = FALSE;
+    INTRO_DATA.unk_20C++;
+    pText = INTRO_DATA.pText;
+
+    if (*pText == CHAR_TERMINATOR)
+    {
+        if (INTRO_DATA.unk_20C > 12)
+        {
+            INTRO_DATA.unk_20C = 0;
+            DMA3_FILL_32(0, VRAM_BASE + 0xD000, 0x1000);
+            INTRO_DATA.unk_E = 0;
+            INTRO_DATA.unk_C = 0;
+            INTRO_DATA.unk_212 = 0;
+            ended = TRUE;
+        }
+    }
+    else if (*pText == CHAR_NEW_LINE)
+    {
+        if (INTRO_DATA.unk_E < 2)
+        {
+            if (INTRO_DATA.unk_20C > 2)
+            {
+                INTRO_DATA.unk_20C = 0;
+                INTRO_DATA.unk_E = 2;
+                INTRO_DATA.unk_C = 0;
+                INTRO_DATA.unk_212 = 0;
+                INTRO_DATA.pText = &pText[1];
+            }
+        }
+        else if (INTRO_DATA.unk_20C > 122)
+        {
+            INTRO_DATA.unk_20C = 0;
+            INTRO_DATA.unk_E = 0;
+            INTRO_DATA.unk_C = 0;
+            INTRO_DATA.unk_212 = 0;
+            INTRO_DATA.pText = &pText[1];
+            DMA3_FILL_32(0, VRAM_BASE + 0xD000, 0x1000);
+        }
+    }
+    else if (*pText == CHAR_NEW_PAGE)
+    {
+        if (INTRO_DATA.unk_20C > 12)
+        {
+            INTRO_DATA.unk_20C = 0;
+            DMA3_FILL_32(0, VRAM_BASE + 0xD000, 0x1000);
+            INTRO_DATA.unk_E = 0;
+            INTRO_DATA.unk_C = 0;
+            INTRO_DATA.pText = &pText[1];
+            INTRO_DATA.unk_212 = 0;
+        }
+    }
+    else if (*pText == CHAR_NEXT_PAGE_ARROW)
+    {
+        INTRO_DATA.unk_20C = 0;
+        if (INTRO_DATA.unk_218 == 1)
+        {
+            pNext = &pText[1];
+            INTRO_DATA.pText = pNext;
+            if (pText[1] == CHAR_NEW_PAGE)
+            {
+                INTRO_DATA.unk_218 = 2;
+            }
+            else if (pText[1] == CHAR_TERMINATOR)
+            {
+                INTRO_DATA.unk_218 = 3;
+            }
+            else if (pText[1] == CHAR_NEXT_PAGE_ARROW)
+            {
+                INTRO_DATA.pText = &pNext[1];
+                if (pNext[1] == CHAR_TERMINATOR)
+                    INTRO_DATA.unk_218 = 3;
+                else
+                    INTRO_DATA.unk_218 = 4;
+            }
+            else
+            {
+                INTRO_DATA.unk_218 = 0;
+            }
+        }
+    }
+    else if ((*pText & 0xFF00) == 0xE100)
+    {
+        if ((*pText & 0xFF) <= INTRO_DATA.unk_20C)
+        {
+            INTRO_DATA.unk_20C = 0;
+            INTRO_DATA.pText = &pText[1];
+        }
+    }
+    else if (INTRO_DATA.unk_20C > 2)
+    {
+        INTRO_DATA.unk_20C = 0;
+        dst = (u32*)(INTRO_DATA.unk_C * 32 + INTRO_DATA.unk_E * 1024 + VRAM_BASE + 0xD000);
+        width = TextGetCharacterWidth(*pText);
+        TextDrawCharacter(*INTRO_DATA.pText, dst, width, INTRO_DATA.unk_212, 0);
+
+        if (INTRO_DATA.unk_C < 32)
+        {
+            INTRO_DATA.unk_212 += width;
+            while (INTRO_DATA.unk_212 >= 8)
+            {
+                INTRO_DATA.unk_212 -= 8;
+                INTRO_DATA.unk_C++;
+                if (INTRO_DATA.unk_C >= 32)
+                    break;
+            }
+        }
+
+        INTRO_DATA.pText++;
+    }
+
+    return ended;
 }
 
-// 0x080986F0
-NAKED_FUNCTION
-void NewFileIntroProcessAdamText(void)
+/**
+ * @brief 986f0 | 250 | Processes the Adam text of the new file intro
+ * 
+ */
+boolu32 NewFileIntroProcessAdamText(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	sub sp, #8\n\
-	movs r0, #0\n\
-	mov r8, r0\n\
-	ldr r5, _08098758 @ =gNonGameplayRam\n\
-	movs r1, #0x83\n\
-	lsls r1, r1, #2\n\
-	adds r7, r5, r1\n\
-	ldrh r0, [r7]\n\
-	adds r2, r0, #1\n\
-	movs r0, #0\n\
-	mov sl, r0\n\
-	strh r2, [r7]\n\
-	ldr r6, [r5]\n\
-	ldrh r4, [r6]\n\
-	adds r3, r4, #0\n\
-	movs r1, #0xff\n\
-	lsls r1, r1, #8\n\
-	mov ip, r1\n\
-	cmp r3, ip\n\
-	bne _0809876C\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0xc\n\
-	bhi _0809872C\n\
-	b _08098924\n\
-_0809872C:\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	mov r1, r8\n\
-	str r1, [sp, #4]\n\
-	ldr r1, _0809875C @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _08098760 @ =0x0600D000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08098764 @ =0x85000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	mov r1, r8\n\
-	strh r1, [r5, #0xe]\n\
-	strh r1, [r5, #0xc]\n\
-	ldr r1, _08098768 @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sl\n\
-	strb r1, [r0]\n\
-	movs r0, #1\n\
-	mov r8, r0\n\
-	b _08098924\n\
-	.align 2, 0\n\
-_08098758: .4byte gNonGameplayRam\n\
-_0809875C: .4byte 0x040000D4\n\
-_08098760: .4byte 0x0600D000\n\
-_08098764: .4byte 0x85000400\n\
-_08098768: .4byte 0x00000212\n\
-_0809876C:\n\
-	movs r0, #0xfe\n\
-	lsls r0, r0, #8\n\
-	cmp r3, r0\n\
-	bne _080987E0\n\
-	ldrh r0, [r5, #0xe]\n\
-	cmp r0, #1\n\
-	bhi _0809879C\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #2\n\
-	bhi _08098784\n\
-	b _08098924\n\
-_08098784:\n\
-	mov r1, r8\n\
-	strh r1, [r7]\n\
-	movs r0, #2\n\
-	strh r0, [r5, #0xe]\n\
-	strh r1, [r5, #0xc]\n\
-	ldr r1, _08098798 @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sl\n\
-	strb r1, [r0]\n\
-	b _08098898\n\
-	.align 2, 0\n\
-_08098798: .4byte 0x00000212\n\
-_0809879C:\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0x7a\n\
-	bhi _080987A6\n\
-	b _08098924\n\
-_080987A6:\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	strh r0, [r5, #0xe]\n\
-	strh r0, [r5, #0xc]\n\
-	ldr r1, _080987D0 @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sl\n\
-	strb r1, [r0]\n\
-	adds r0, r6, #2\n\
-	str r0, [r5]\n\
-	mov r0, r8\n\
-	str r0, [sp, #4]\n\
-	ldr r1, _080987D4 @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _080987D8 @ =0x0600D000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _080987DC @ =0x85000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	b _08098924\n\
-	.align 2, 0\n\
-_080987D0: .4byte 0x00000212\n\
-_080987D4: .4byte 0x040000D4\n\
-_080987D8: .4byte 0x0600D000\n\
-_080987DC: .4byte 0x85000400\n\
-_080987E0:\n\
-	movs r1, #0xfd\n\
-	lsls r1, r1, #8\n\
-	mov sb, r1\n\
-	cmp r3, sb\n\
-	bne _08098830\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0xc\n\
-	bhi _080987F4\n\
-	b _08098924\n\
-_080987F4:\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	mov r1, r8\n\
-	str r1, [sp, #4]\n\
-	ldr r1, _08098820 @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _08098824 @ =0x0600D000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08098828 @ =0x85000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	mov r1, r8\n\
-	strh r1, [r5, #0xe]\n\
-	strh r1, [r5, #0xc]\n\
-	adds r0, r6, #2\n\
-	str r0, [r5]\n\
-	ldr r1, _0809882C @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	mov r1, sl\n\
-	strb r1, [r0]\n\
-	b _08098924\n\
-	.align 2, 0\n\
-_08098820: .4byte 0x040000D4\n\
-_08098824: .4byte 0x0600D000\n\
-_08098828: .4byte 0x85000400\n\
-_0809882C: .4byte 0x00000212\n\
-_08098830:\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r3, r0\n\
-	bne _0809887C\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	movs r1, #0x86\n\
-	lsls r1, r1, #2\n\
-	adds r2, r5, r1\n\
-	ldrb r0, [r2]\n\
-	cmp r0, #1\n\
-	bne _08098924\n\
-	adds r1, r6, #2\n\
-	str r1, [r5]\n\
-	ldrh r0, [r6, #2]\n\
-	cmp r0, sb\n\
-	bne _08098858\n\
-	movs r0, #2\n\
-	strb r0, [r2]\n\
-	b _08098924\n\
-_08098858:\n\
-	cmp r0, ip\n\
-	beq _0809886A\n\
-	cmp r0, r3\n\
-	bne _08098876\n\
-	adds r0, r1, #2\n\
-	str r0, [r5]\n\
-	ldrh r0, [r1, #2]\n\
-	cmp r0, ip\n\
-	bne _08098870\n\
-_0809886A:\n\
-	movs r0, #3\n\
-	strb r0, [r2]\n\
-	b _08098924\n\
-_08098870:\n\
-	movs r0, #4\n\
-	strb r0, [r2]\n\
-	b _08098924\n\
-_08098876:\n\
-	mov r0, sl\n\
-	strb r0, [r2]\n\
-	b _08098924\n\
-_0809887C:\n\
-	mov r0, ip\n\
-	ands r0, r4\n\
-	movs r1, #0xe1\n\
-	lsls r1, r1, #8\n\
-	cmp r0, r1\n\
-	bne _0809889E\n\
-	movs r1, #0xff\n\
-	ands r1, r4\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r1, r0\n\
-	bhi _08098924\n\
-	mov r1, r8\n\
-	strh r1, [r7]\n\
-_08098898:\n\
-	adds r0, r6, #2\n\
-	str r0, [r5]\n\
-	b _08098924\n\
-_0809889E:\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #2\n\
-	bls _08098924\n\
-	mov r0, r8\n\
-	strh r0, [r7]\n\
-	ldrh r4, [r5, #0xc]\n\
-	lsls r4, r4, #5\n\
-	ldrh r0, [r5, #0xe]\n\
-	lsls r0, r0, #0xa\n\
-	adds r4, r4, r0\n\
-	ldr r1, _08098938 @ =0x0600D000\n\
-	adds r4, r4, r1\n\
-	ldrh r0, [r6]\n\
-	bl TextGetCharacterWidth\n\
-	adds r7, r0, #0\n\
-	ldr r0, [r5]\n\
-	ldrh r0, [r0]\n\
-	lsls r2, r7, #0x18\n\
-	lsrs r2, r2, #0x18\n\
-	ldr r1, _0809893C @ =0x00000212\n\
-	adds r6, r5, r1\n\
-	ldrb r3, [r6]\n\
-	mov r1, r8\n\
-	str r1, [sp]\n\
-	adds r1, r4, #0\n\
-	bl TextDrawCharacter\n\
-	ldr r1, [r5]\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0x40\n\
-	beq _080988E6\n\
-	movs r1, #1\n\
-	bl PlayCharacterAppearingSound\n\
-_080988E6:\n\
-	ldrh r0, [r5, #0xc]\n\
-	adds r4, r5, #0\n\
-	cmp r0, #0x1f\n\
-	bhi _0809891E\n\
-	ldrb r0, [r6]\n\
-	adds r0, r0, r7\n\
-	strb r0, [r6]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bls _0809891E\n\
-	adds r3, r4, #0\n\
-	adds r2, r6, #0\n\
-_08098900:\n\
-	ldrb r0, [r2]\n\
-	adds r1, r0, #0\n\
-	subs r1, #8\n\
-	strb r1, [r2]\n\
-	ldrh r0, [r3, #0xc]\n\
-	adds r0, #1\n\
-	strh r0, [r3, #0xc]\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0x1f\n\
-	bhi _0809891E\n\
-	lsls r0, r1, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bhi _08098900\n\
-_0809891E:\n\
-	ldr r0, [r4]\n\
-	adds r0, #2\n\
-	str r0, [r4]\n\
-_08098924:\n\
-	mov r0, r8\n\
-	add sp, #8\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_08098938: .4byte 0x0600D000\n\
-_0809893C: .4byte 0x00000212\n\
-    .syntax divided\n");
+    boolu32 ended;
+    const u16* pText;
+    const u16* pNext;
+    u32* dst;
+    u32 width;
+
+    ended = FALSE;
+    INTRO_DATA.unk_20C++;
+    pText = INTRO_DATA.pText;
+
+    if (*pText == CHAR_TERMINATOR)
+    {
+        if (INTRO_DATA.unk_20C > 12)
+        {
+            INTRO_DATA.unk_20C = 0;
+            DMA3_FILL_32(0, VRAM_BASE + 0xD000, 0x1000);
+            INTRO_DATA.unk_E = 0;
+            INTRO_DATA.unk_C = 0;
+            INTRO_DATA.unk_212 = 0;
+            ended = TRUE;
+        }
+    }
+    else if (*pText == CHAR_NEW_LINE)
+    {
+        if (INTRO_DATA.unk_E < 2)
+        {
+            if (INTRO_DATA.unk_20C > 2)
+            {
+                INTRO_DATA.unk_20C = 0;
+                INTRO_DATA.unk_E = 2;
+                INTRO_DATA.unk_C = 0;
+                INTRO_DATA.unk_212 = 0;
+                INTRO_DATA.pText = &pText[1];
+            }
+        }
+        else if (INTRO_DATA.unk_20C > 122)
+        {
+            INTRO_DATA.unk_20C = 0;
+            INTRO_DATA.unk_E = 0;
+            INTRO_DATA.unk_C = 0;
+            INTRO_DATA.unk_212 = 0;
+            INTRO_DATA.pText = &pText[1];
+            DMA3_FILL_32(0, VRAM_BASE + 0xD000, 0x1000);
+        }
+    }
+    else if (*pText == CHAR_NEW_PAGE)
+    {
+        if (INTRO_DATA.unk_20C > 12)
+        {
+            INTRO_DATA.unk_20C = 0;
+            DMA3_FILL_32(0, VRAM_BASE + 0xD000, 0x1000);
+            INTRO_DATA.unk_E = 0;
+            INTRO_DATA.unk_C = 0;
+            INTRO_DATA.pText = &pText[1];
+            INTRO_DATA.unk_212 = 0;
+        }
+    }
+    else if (*pText == CHAR_NEXT_PAGE_ARROW)
+    {
+        INTRO_DATA.unk_20C = 0;
+        if (INTRO_DATA.unk_218 == 1)
+        {
+            pNext = &pText[1];
+            INTRO_DATA.pText = pNext;
+            if (pText[1] == CHAR_NEW_PAGE)
+            {
+                INTRO_DATA.unk_218 = 2;
+            }
+            else if (pText[1] == CHAR_TERMINATOR)
+            {
+                INTRO_DATA.unk_218 = 3;
+            }
+            else if (pText[1] == CHAR_NEXT_PAGE_ARROW)
+            {
+                INTRO_DATA.pText = &pNext[1];
+                if (pNext[1] == CHAR_TERMINATOR)
+                    INTRO_DATA.unk_218 = 3;
+                else
+                    INTRO_DATA.unk_218 = 4;
+            }
+            else
+            {
+                INTRO_DATA.unk_218 = 0;
+            }
+        }
+    }
+    else if ((*pText & 0xFF00) == 0xE100)
+    {
+        if ((*pText & 0xFF) <= INTRO_DATA.unk_20C)
+        {
+            INTRO_DATA.unk_20C = 0;
+            INTRO_DATA.pText = &pText[1];
+        }
+    }
+    else if (INTRO_DATA.unk_20C > 2)
+    {
+        INTRO_DATA.unk_20C = 0;
+        dst = (u32*)(INTRO_DATA.unk_C * 32 + INTRO_DATA.unk_E * 1024 + VRAM_BASE + 0xD000);
+        width = TextGetCharacterWidth(*pText);
+        TextDrawCharacter(*INTRO_DATA.pText, dst, width, INTRO_DATA.unk_212, 0);
+
+        if (*INTRO_DATA.pText != 0x40)
+            PlayCharacterAppearingSound(*INTRO_DATA.pText, 1);
+
+        if (INTRO_DATA.unk_C < 32)
+        {
+            INTRO_DATA.unk_212 += width;
+            while (INTRO_DATA.unk_212 >= 8)
+            {
+                INTRO_DATA.unk_212 -= 8;
+                INTRO_DATA.unk_C++;
+                if (INTRO_DATA.unk_C >= 32)
+                    break;
+            }
+        }
+
+        INTRO_DATA.pText++;
+    }
+
+    return ended;
 }
 
 /**
