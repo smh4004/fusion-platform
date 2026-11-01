@@ -103,14 +103,14 @@ const struct FrameData* sIntroSpaceViewParticleOam[6] = {
     sOam_60ac18
 };
 
-const u32* sEndingAdamPanelGfxPointers[7] = {
-    (const u32*)0x879ce10,
-    (const u32*)0x879d194,
-    (const u32*)0x879d50c,
-    (const u32*)0x879d890,
-    (const u32*)0x879dc14,
-    (const u32*)0x879df98,
-    (const u32*)0x879e31c
+const u16** sEndingTextPointers[LANGUAGE_COUNT] = {
+    (const u16**)0x879ce10,
+    (const u16**)0x879d194,
+    (const u16**)0x879d50c,
+    (const u16**)0x879d890,
+    (const u16**)0x879dc14,
+    (const u16**)0x879df98,
+    (const u16**)0x879e31c
 };
 
 static const u32* sIntroSr388SurfaceBgGfxPointers[8] = {

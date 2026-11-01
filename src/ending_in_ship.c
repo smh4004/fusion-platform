@@ -1,662 +1,219 @@
+#include "ending_in_ship.h"
+#include "special_cutscene.h"
+#include "new_file_intro.h"
 #include "globals.h"
 #include "macros.h"
+#include "callbacks.h"
+#include "syscalls.h"
+#include "audio_wrappers.h"
+#include "music_wrappers.h"
 
-// 0x08095E24
-NAKED_FUNCTION
+#include "constants/audio.h"
+#include "constants/text.h"
+
+#include "data/generic_data.h"
+#include "data/intro_data.h"
+
+/**
+ * @brief 95e24 | 200 | Setup for the ending monologue
+ * 
+ */
 void EndingMonologueInit(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	mov r6, r8\n\
-	push {r6}\n\
-	sub sp, #4\n\
-	ldr r3, _08095F78 @ =0x04000208\n\
-	movs r0, #0\n\
-	strh r0, [r3]\n\
-	ldr r2, _08095F7C @ =0x04000004\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _08095F80 @ =0x0000FFEF\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r2, _08095F84 @ =0x04000200\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _08095F88 @ =0x0000FFFD\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #1\n\
-	strh r0, [r3]\n\
-	ldr r0, _08095F8C @ =unk_99940\n\
-	bl CallbackSetVBlank\n\
-	movs r6, #0\n\
-	str r6, [sp]\n\
-	ldr r4, _08095F90 @ =0x040000D4\n\
-	mov r0, sp\n\
-	str r0, [r4]\n\
-	ldr r1, _08095F94 @ =gNonGameplayRam\n\
-	mov r8, r1\n\
-	str r1, [r4, #4]\n\
-	ldr r0, _08095F98 @ =0x85000150\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _08095F9C @ =0x086150E8\n\
-	ldr r1, _08095FA0 @ =0x06010000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _08095FA4 @ =0x08636638\n\
-	str r0, [r4]\n\
-	ldr r0, _08095FA8 @ =0x05000200\n\
-	str r0, [r4, #4]\n\
-	ldr r5, _08095FAC @ =0x84000080\n\
-	str r5, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _08095FB0 @ =0x086186A4\n\
-	ldr r1, _08095FB4 @ =0x06008000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _08095FB8 @ =0x086377F8\n\
-	ldr r1, _08095FBC @ =0x0600F800\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _08095FC0 @ =0x08636438\n\
-	str r0, [r4]\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r4, #4]\n\
-	str r5, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _08095FC4 @ =0x08662804\n\
-	movs r5, #0x80\n\
-	lsls r5, r5, #0x12\n\
-	adds r1, r5, #0\n\
-	bl LZ77UncompWram\n\
-	str r5, [r4]\n\
-	ldr r0, _08095FC8 @ =0x06004800\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _08095FCC @ =0x84000200\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	str r6, [sp]\n\
-	mov r2, sp\n\
-	str r2, [r4]\n\
-	movs r0, #0xc0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _08095FD0 @ =0x85001200\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _08095FD4 @ =0x08663820\n\
-	str r0, [r4]\n\
-	ldr r0, _08095FD8 @ =0x05000180\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _08095FDC @ =0x84000020\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _08095FE0 @ =gBg1XPosition\n\
-	strh r6, [r0]\n\
-	ldr r0, _08095FE4 @ =gBg1YPosition\n\
-	strh r6, [r0]\n\
-	ldr r0, _08095FE8 @ =0x0300122C\n\
-	strh r6, [r0]\n\
-	ldr r0, _08095FEC @ =0x0300122E\n\
-	strh r6, [r0]\n\
-	ldr r0, _08095FF0 @ =0x03001230\n\
-	strh r6, [r0]\n\
-	ldr r0, _08095FF4 @ =0x03001232\n\
-	strh r6, [r0]\n\
-	ldr r0, _08095FF8 @ =0x04000010\n\
-	strh r6, [r0]\n\
-	ldr r1, _08095FFC @ =0x04000012\n\
-	movs r0, #4\n\
-	strh r0, [r1]\n\
-	ldr r0, _08096000 @ =0x04000014\n\
-	strh r6, [r0]\n\
-	adds r0, #2\n\
-	strh r6, [r0]\n\
-	adds r0, #2\n\
-	strh r6, [r0]\n\
-	adds r0, #2\n\
-	strh r6, [r0]\n\
-	adds r0, #2\n\
-	strh r6, [r0]\n\
-	adds r0, #2\n\
-	strh r6, [r0]\n\
-	subs r1, #0xa\n\
-	movs r2, #0x90\n\
-	lsls r2, r2, #4\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r2, _08096004 @ =0x00001E01\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #4\n\
-	ldr r2, _08096008 @ =0x00001F0B\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #0x42\n\
-	movs r0, #0xff\n\
-	strh r0, [r1]\n\
-	ldr r0, _0809600C @ =gWrittenToBldy\n\
-	movs r1, #0x10\n\
-	strh r1, [r0]\n\
-	ldr r0, _08096010 @ =0x04000054\n\
-	strh r1, [r0]\n\
-	ldr r0, _08096014 @ =gWrittenToBldalpha_Eva\n\
-	strh r6, [r0]\n\
-	ldr r0, _08096018 @ =gWrittenToBldalpha_Evb\n\
-	strh r1, [r0]\n\
-	movs r1, #0x82\n\
-	lsls r1, r1, #1\n\
-	movs r0, #1\n\
-	movs r2, #0xb4\n\
-	movs r3, #0\n\
-	bl EndingDialogueSetupOam\n\
-	bl SpecialCutsceneProcessOam\n\
-	bl SpecialCutsceneDrawAllOam\n\
-	ldr r0, _0809601C @ =0x0863A19C\n\
-	mov r1, r8\n\
-	str r0, [r1]\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #0x13\n\
-	movs r2, #0xc0\n\
-	lsls r2, r2, #5\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _08096020 @ =EndingMonologueVblank\n\
-	bl CallbackSetVBlank\n\
-	add sp, #4\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08095F78: .4byte 0x04000208\n\
-_08095F7C: .4byte 0x04000004\n\
-_08095F80: .4byte 0x0000FFEF\n\
-_08095F84: .4byte 0x04000200\n\
-_08095F88: .4byte 0x0000FFFD\n\
-_08095F8C: .4byte unk_99940\n\
-_08095F90: .4byte 0x040000D4\n\
-_08095F94: .4byte gNonGameplayRam\n\
-_08095F98: .4byte 0x85000150\n\
-_08095F9C: .4byte 0x086150E8\n\
-_08095FA0: .4byte 0x06010000\n\
-_08095FA4: .4byte 0x08636638\n\
-_08095FA8: .4byte 0x05000200\n\
-_08095FAC: .4byte 0x84000080\n\
-_08095FB0: .4byte 0x086186A4\n\
-_08095FB4: .4byte 0x06008000\n\
-_08095FB8: .4byte 0x086377F8\n\
-_08095FBC: .4byte 0x0600F800\n\
-_08095FC0: .4byte 0x08636438\n\
-_08095FC4: .4byte 0x08662804\n\
-_08095FC8: .4byte 0x06004800\n\
-_08095FCC: .4byte 0x84000200\n\
-_08095FD0: .4byte 0x85001200\n\
-_08095FD4: .4byte 0x08663820\n\
-_08095FD8: .4byte 0x05000180\n\
-_08095FDC: .4byte 0x84000020\n\
-_08095FE0: .4byte gBg1XPosition\n\
-_08095FE4: .4byte gBg1YPosition\n\
-_08095FE8: .4byte 0x0300122C\n\
-_08095FEC: .4byte 0x0300122E\n\
-_08095FF0: .4byte 0x03001230\n\
-_08095FF4: .4byte 0x03001232\n\
-_08095FF8: .4byte 0x04000010\n\
-_08095FFC: .4byte 0x04000012\n\
-_08096000: .4byte 0x04000014\n\
-_08096004: .4byte 0x00001E01\n\
-_08096008: .4byte 0x00001F0B\n\
-_0809600C: .4byte gWrittenToBldy\n\
-_08096010: .4byte 0x04000054\n\
-_08096014: .4byte gWrittenToBldalpha_Eva\n\
-_08096018: .4byte gWrittenToBldalpha_Evb\n\
-_0809601C: .4byte 0x0863A19C\n\
-_08096020: .4byte EndingMonologueVblank\n\
-    .syntax divided\n");
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
+
+    CallbackSetVBlank(unk_99940);
+
+    DMA3_FILL_32(0, &gNonGameplayRam, sizeof(gNonGameplayRam));
+
+    LZ77UncompVram((const u32*)0x86150e8, VRAM_OBJ);
+    DMA3_COPY_32((const u16*)0x8636638, PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
+
+    LZ77UncompVram((const u32*)0x86186a4, VRAM_BASE + 0x8000);
+    LZ77UncompVram((const u32*)0x86377f8, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const u16*)0x8636438, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+
+    LZ77UncompWram(sIntroTilemap_662804, EWRAM_BASE);
+    DMA3_COPY_32(EWRAM_BASE, VRAM_BASE + 0x4800, 0x800 / 4);
+    DMA3_FILL_32(0, VRAM_BASE, 0x4800);
+    DMA3_COPY_32(sIntroPal_663820, PALRAM_BASE + 0x180, 4 * PAL_ROW_SIZE / 4);
+
+    gBg1XPosition = 0;
+    gBg1YPosition = 0;
+    gBg2XPosition = 0;
+    gBg2YPosition = 0;
+    gBg3XPosition = 0;
+    gBg3YPosition = 0;
+
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 4);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, 0);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
+
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 9, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG3CNT, CREATE_BGCNT(2, 31, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
+
+    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+    gWrittenToBldy = BLDY_MAX_VALUE;
+    WRITE_16(REG_BLDY, BLDY_MAX_VALUE);
+    gWrittenToBldalpha_Eva = 0;
+    gWrittenToBldalpha_Evb = BLDALPHA_MAX_VALUE;
+
+    EndingDialogueSetupOam(1, 260, 180, FALSE);
+
+    SpecialCutsceneProcessOam();
+    SpecialCutsceneDrawAllOam();
+
+    INTRO_DATA.pText = sCutsceneTextNone;
+
+    WRITE_16(REG_DISPCNT, DCNT_BG3 | DCNT_OBJ);
+
+    CallbackSetVBlank(EndingMonologueVblank);
 }
 
-// 0x08096024
-NAKED_FUNCTION
+/**
+ * @brief 96024 | 204 | Setup for the ending conversation with Adam
+ * 
+ */
 void EndingAdamConversationInit(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	sub sp, #8\n\
-	ldr r3, _0809617C @ =0x04000208\n\
-	movs r0, #0\n\
-	strh r0, [r3]\n\
-	ldr r2, _08096180 @ =0x04000004\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _08096184 @ =0x0000FFEF\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r2, _08096188 @ =0x04000200\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _0809618C @ =0x0000FFFD\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #1\n\
-	strh r0, [r3]\n\
-	ldr r0, _08096190 @ =unk_99940\n\
-	bl CallbackSetVBlank\n\
-	movs r5, #0\n\
-	str r5, [sp]\n\
-	ldr r4, _08096194 @ =0x040000D4\n\
-	mov r0, sp\n\
-	str r0, [r4]\n\
-	ldr r6, _08096198 @ =0x030016A0\n\
-	str r6, [r4, #4]\n\
-	ldr r0, _0809619C @ =0x850000B4\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	add r1, sp, #4\n\
-	strh r5, [r1]\n\
-	str r1, [r4]\n\
-	ldr r2, _080961A0 @ =0xFFFFFDF8\n\
-	adds r0, r6, r2\n\
-	str r0, [r4, #4]\n\
-	ldr r2, _080961A4 @ =0x8100007E\n\
-	str r2, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	strh r5, [r1]\n\
-	str r1, [r4]\n\
-	ldr r1, _080961A8 @ =0xFFFFFEF4\n\
-	adds r0, r6, r1\n\
-	str r0, [r4, #4]\n\
-	str r2, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _080961AC @ =0x086131C8\n\
-	ldr r1, _080961B0 @ =0x06008000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _080961B4 @ =0x08637238\n\
-	ldr r1, _080961B8 @ =0x0600F800\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _080961BC @ =0x08598898\n\
-	ldr r1, _080961C0 @ =0x0600E000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _080961C4 @ =0x08636438\n\
-	str r0, [r4]\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _080961C8 @ =0x84000080\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _080961CC @ =0x03001224\n\
-	ldr r1, _080961D0 @ =0x0000FFF8\n\
-	adds r2, r1, #0\n\
-	strh r2, [r0]\n\
-	ldr r0, _080961D4 @ =0x03001226\n\
-	movs r1, #8\n\
-	strh r1, [r0]\n\
-	ldr r0, _080961D8 @ =gBg1XPosition\n\
-	strh r5, [r0]\n\
-	ldr r0, _080961DC @ =gBg1YPosition\n\
-	strh r5, [r0]\n\
-	ldr r0, _080961E0 @ =0x0300122C\n\
-	strh r5, [r0]\n\
-	ldr r0, _080961E4 @ =0x0300122E\n\
-	strh r5, [r0]\n\
-	ldr r0, _080961E8 @ =0x03001230\n\
-	strh r5, [r0]\n\
-	ldr r0, _080961EC @ =0x03001232\n\
-	strh r5, [r0]\n\
-	ldr r0, _080961F0 @ =0x04000010\n\
-	strh r2, [r0]\n\
-	adds r0, #2\n\
-	strh r1, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	ldr r1, _080961F4 @ =0x04000008\n\
-	ldr r2, _080961F8 @ =0x00001C08\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #6\n\
-	ldr r2, _080961FC @ =0x00001F0B\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #0x42\n\
-	movs r0, #0xff\n\
-	strh r0, [r1]\n\
-	ldr r0, _08096200 @ =gWrittenToBldy\n\
-	movs r1, #0x10\n\
-	strh r1, [r0]\n\
-	ldr r0, _08096204 @ =0x04000054\n\
-	strh r1, [r0]\n\
-	ldr r0, _08096208 @ =gWrittenToBldalpha_Eva\n\
-	strh r1, [r0]\n\
-	ldr r0, _0809620C @ =gWrittenToBldalpha_Evb\n\
-	strh r1, [r0]\n\
-	ldr r2, _08096210 @ =0x04000052\n\
-	lsls r0, r1, #8\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #2\n\
-	movs r1, #0x70\n\
-	movs r2, #0x50\n\
-	movs r3, #1\n\
-	bl EndingDialogueSetupOam\n\
-	movs r0, #3\n\
-	movs r1, #0x70\n\
-	movs r2, #0x50\n\
-	movs r3, #1\n\
-	bl EndingDialogueSetupOam\n\
-	movs r0, #4\n\
-	movs r1, #0x70\n\
-	movs r2, #0x50\n\
-	movs r3, #1\n\
-	bl EndingDialogueSetupOam\n\
-	bl SpecialCutsceneProcessOam\n\
-	bl SpecialCutsceneDrawAllOam\n\
-	ldr r0, _08096214 @ =0xFFFFFDE4\n\
-	adds r6, r6, r0\n\
-	ldr r0, _08096218 @ =0x0863A19C\n\
-	str r0, [r6]\n\
-	str r5, [sp]\n\
-	mov r1, sp\n\
-	str r1, [r4]\n\
-	ldr r0, _0809621C @ =0x0600D000\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _08096220 @ =0x85000400\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #0x13\n\
-	movs r2, #0xc8\n\
-	lsls r2, r2, #5\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _08096224 @ =EndingConversationAndAnimalsVblank\n\
-	bl CallbackSetVBlank\n\
-	add sp, #8\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809617C: .4byte 0x04000208\n\
-_08096180: .4byte 0x04000004\n\
-_08096184: .4byte 0x0000FFEF\n\
-_08096188: .4byte 0x04000200\n\
-_0809618C: .4byte 0x0000FFFD\n\
-_08096190: .4byte unk_99940\n\
-_08096194: .4byte 0x040000D4\n\
-_08096198: .4byte 0x030016A0\n\
-_0809619C: .4byte 0x850000B4\n\
-_080961A0: .4byte 0xFFFFFDF8\n\
-_080961A4: .4byte 0x8100007E\n\
-_080961A8: .4byte 0xFFFFFEF4\n\
-_080961AC: .4byte 0x086131C8\n\
-_080961B0: .4byte 0x06008000\n\
-_080961B4: .4byte 0x08637238\n\
-_080961B8: .4byte 0x0600F800\n\
-_080961BC: .4byte 0x08598898\n\
-_080961C0: .4byte 0x0600E000\n\
-_080961C4: .4byte 0x08636438\n\
-_080961C8: .4byte 0x84000080\n\
-_080961CC: .4byte 0x03001224\n\
-_080961D0: .4byte 0x0000FFF8\n\
-_080961D4: .4byte 0x03001226\n\
-_080961D8: .4byte gBg1XPosition\n\
-_080961DC: .4byte gBg1YPosition\n\
-_080961E0: .4byte 0x0300122C\n\
-_080961E4: .4byte 0x0300122E\n\
-_080961E8: .4byte 0x03001230\n\
-_080961EC: .4byte 0x03001232\n\
-_080961F0: .4byte 0x04000010\n\
-_080961F4: .4byte 0x04000008\n\
-_080961F8: .4byte 0x00001C08\n\
-_080961FC: .4byte 0x00001F0B\n\
-_08096200: .4byte gWrittenToBldy\n\
-_08096204: .4byte 0x04000054\n\
-_08096208: .4byte gWrittenToBldalpha_Eva\n\
-_0809620C: .4byte gWrittenToBldalpha_Evb\n\
-_08096210: .4byte 0x04000052\n\
-_08096214: .4byte 0xFFFFFDE4\n\
-_08096218: .4byte 0x0863A19C\n\
-_0809621C: .4byte 0x0600D000\n\
-_08096220: .4byte 0x85000400\n\
-_08096224: .4byte EndingConversationAndAnimalsVblank\n\
-    .syntax divided\n");
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
+
+    CallbackSetVBlank(unk_99940);
+
+    DMA3_FILL_32(0, INTRO_DATA.oam, sizeof(INTRO_DATA.oam));
+    DMA3_FILL_16(0, INTRO_DATA.unk_14, sizeof(INTRO_DATA.unk_14));
+    DMA3_FILL_16(0, &INTRO_DATA.unk_110, sizeof(INTRO_DATA.unk_14));
+
+    LZ77UncompVram((const u32*)0x86131c8, VRAM_BASE + 0x8000);
+    LZ77UncompVram((const u32*)0x8637238, VRAM_BASE + 0xF800);
+    LZ77UncompVram(sIntroSamusShipFlyingTextTilemap, VRAM_BASE + 0xE000);
+    DMA3_COPY_32((const u16*)0x8636438, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+
+    gBg0XPosition = -8;
+    gBg0YPosition = 8;
+    gBg1XPosition = 0;
+    gBg1YPosition = 0;
+    gBg2XPosition = 0;
+    gBg2YPosition = 0;
+    gBg3XPosition = 0;
+    gBg3YPosition = 0;
+
+    WRITE_16(REG_BG0HOFS, -8);
+    WRITE_16(REG_BG0VOFS, 8);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, 0);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
+
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(2, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG3CNT, CREATE_BGCNT(2, 31, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
+
+    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+    gWrittenToBldy = BLDY_MAX_VALUE;
+    WRITE_16(REG_BLDY, BLDY_MAX_VALUE);
+    gWrittenToBldalpha_Eva = BLDALPHA_MAX_VALUE;
+    gWrittenToBldalpha_Evb = BLDALPHA_MAX_VALUE;
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_Evb, gWrittenToBldalpha_Eva));
+
+    EndingDialogueSetupOam(2, 112, 80, TRUE);
+    EndingDialogueSetupOam(3, 112, 80, TRUE);
+    EndingDialogueSetupOam(4, 112, 80, TRUE);
+
+    SpecialCutsceneProcessOam();
+    SpecialCutsceneDrawAllOam();
+
+    INTRO_DATA.pText = sCutsceneTextNone;
+
+    DMA3_FILL_32(0, VRAM_BASE + 0xD000, (VRAM_SIZE / 6) / 4);
+
+    WRITE_16(REG_DISPCNT, DCNT_BG0 | DCNT_BG3 | DCNT_OBJ);
+
+    CallbackSetVBlank(EndingConversationAndAnimalsVblank);
 }
 
-// 0x08096228
-NAKED_FUNCTION
+/**
+ * @brief 96228 | 220 | Setup for the ending animals scene
+ * 
+ */
 void EndingAnimalsInit(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	mov r6, r8\n\
-	push {r6}\n\
-	sub sp, #8\n\
-	ldr r3, _08096390 @ =0x04000208\n\
-	movs r0, #0\n\
-	strh r0, [r3]\n\
-	ldr r2, _08096394 @ =0x04000004\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _08096398 @ =0x0000FFEF\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r2, _0809639C @ =0x04000200\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _080963A0 @ =0x0000FFFD\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #1\n\
-	strh r0, [r3]\n\
-	ldr r0, _080963A4 @ =unk_99940\n\
-	bl CallbackSetVBlank\n\
-	movs r5, #0\n\
-	str r5, [sp]\n\
-	ldr r4, _080963A8 @ =0x040000D4\n\
-	mov r0, sp\n\
-	str r0, [r4]\n\
-	ldr r1, _080963AC @ =0x030016A0\n\
-	mov r8, r1\n\
-	str r1, [r4, #4]\n\
-	ldr r0, _080963B0 @ =0x850000B4\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	add r6, sp, #4\n\
-	strh r5, [r6]\n\
-	str r6, [r4]\n\
-	ldr r0, _080963B4 @ =0xFFFFFDF8\n\
-	add r0, r8\n\
-	str r0, [r4, #4]\n\
-	ldr r1, _080963B8 @ =0x8100007E\n\
-	str r1, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	strh r5, [r6]\n\
-	str r6, [r4]\n\
-	ldr r0, _080963BC @ =0xFFFFFEF4\n\
-	add r0, r8\n\
-	str r0, [r4, #4]\n\
-	str r1, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _080963C0 @ =0x0861B89C\n\
-	movs r1, #0xc0\n\
-	lsls r1, r1, #0x13\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _080963C4 @ =0x086217A8\n\
-	ldr r1, _080963C8 @ =0x06008000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _080963CC @ =0x08638654\n\
-	ldr r1, _080963D0 @ =0x0600F000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _080963D4 @ =0x08637DB8\n\
-	ldr r1, _080963D8 @ =0x0600F800\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _080963DC @ =0x08636838\n\
-	str r0, [r4]\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _080963E0 @ =0x84000080\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r2, _080963E4 @ =0x000002FF\n\
-	adds r0, r2, #0\n\
-	strh r0, [r6]\n\
-	str r6, [r4]\n\
-	ldr r0, _080963E8 @ =0x0600F500\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _080963EC @ =0x81000180\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _080963F0 @ =0x03001224\n\
-	strh r5, [r0]\n\
-	ldr r0, _080963F4 @ =0x03001226\n\
-	strh r5, [r0]\n\
-	ldr r0, _080963F8 @ =gBg1XPosition\n\
-	strh r5, [r0]\n\
-	ldr r0, _080963FC @ =gBg1YPosition\n\
-	strh r5, [r0]\n\
-	ldr r0, _08096400 @ =0x0300122C\n\
-	strh r5, [r0]\n\
-	ldr r0, _08096404 @ =0x03001230\n\
-	strh r5, [r0]\n\
-	ldr r1, _08096408 @ =0x0300122E\n\
-	ldr r2, _0809640C @ =0x0000FFE2\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _08096410 @ =0x03001232\n\
-	movs r1, #0xe2\n\
-	strh r1, [r0]\n\
-	ldr r0, _08096414 @ =0x04000010\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r5, [r0]\n\
-	adds r0, #2\n\
-	strh r1, [r0]\n\
-	ldr r1, _08096418 @ =0x0400000C\n\
-	ldr r2, _0809641C @ =0x00001E0A\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	adds r2, #0xf9\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #0x42\n\
-	movs r0, #0xff\n\
-	strh r0, [r1]\n\
-	ldr r0, _08096420 @ =gWrittenToBldy\n\
-	movs r1, #0x10\n\
-	strh r1, [r0]\n\
-	ldr r0, _08096424 @ =0x04000054\n\
-	strh r1, [r0]\n\
-	ldr r0, _08096428 @ =gWrittenToBldalpha_Eva\n\
-	strh r1, [r0]\n\
-	ldr r0, _0809642C @ =gWrittenToBldalpha_Evb\n\
-	strh r1, [r0]\n\
-	ldr r2, _08096430 @ =0x04000052\n\
-	lsls r0, r1, #8\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #0x14\n\
-	movs r1, #0\n\
-	movs r2, #0\n\
-	movs r3, #0\n\
-	bl EndingDialogueSetupOam\n\
-	bl SpecialCutsceneProcessOam\n\
-	bl SpecialCutsceneDrawAllOam\n\
-	ldr r0, _08096434 @ =0xFFFFFDE4\n\
-	add r8, r0\n\
-	ldr r0, _08096438 @ =0x0863A19C\n\
-	mov r1, r8\n\
-	str r0, [r1]\n\
-	str r5, [sp]\n\
-	mov r2, sp\n\
-	str r2, [r4]\n\
-	ldr r0, _0809643C @ =0x0600D000\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _08096440 @ =0x85000400\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #0x13\n\
-	movs r2, #0xe0\n\
-	lsls r2, r2, #5\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _08096444 @ =EndingConversationAndAnimalsVblank\n\
-	bl CallbackSetVBlank\n\
-	add sp, #8\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08096390: .4byte 0x04000208\n\
-_08096394: .4byte 0x04000004\n\
-_08096398: .4byte 0x0000FFEF\n\
-_0809639C: .4byte 0x04000200\n\
-_080963A0: .4byte 0x0000FFFD\n\
-_080963A4: .4byte unk_99940\n\
-_080963A8: .4byte 0x040000D4\n\
-_080963AC: .4byte 0x030016A0\n\
-_080963B0: .4byte 0x850000B4\n\
-_080963B4: .4byte 0xFFFFFDF8\n\
-_080963B8: .4byte 0x8100007E\n\
-_080963BC: .4byte 0xFFFFFEF4\n\
-_080963C0: .4byte 0x0861B89C\n\
-_080963C4: .4byte 0x086217A8\n\
-_080963C8: .4byte 0x06008000\n\
-_080963CC: .4byte 0x08638654\n\
-_080963D0: .4byte 0x0600F000\n\
-_080963D4: .4byte 0x08637DB8\n\
-_080963D8: .4byte 0x0600F800\n\
-_080963DC: .4byte 0x08636838\n\
-_080963E0: .4byte 0x84000080\n\
-_080963E4: .4byte 0x000002FF\n\
-_080963E8: .4byte 0x0600F500\n\
-_080963EC: .4byte 0x81000180\n\
-_080963F0: .4byte 0x03001224\n\
-_080963F4: .4byte 0x03001226\n\
-_080963F8: .4byte gBg1XPosition\n\
-_080963FC: .4byte gBg1YPosition\n\
-_08096400: .4byte 0x0300122C\n\
-_08096404: .4byte 0x03001230\n\
-_08096408: .4byte 0x0300122E\n\
-_0809640C: .4byte 0x0000FFE2\n\
-_08096410: .4byte 0x03001232\n\
-_08096414: .4byte 0x04000010\n\
-_08096418: .4byte 0x0400000C\n\
-_0809641C: .4byte 0x00001E0A\n\
-_08096420: .4byte gWrittenToBldy\n\
-_08096424: .4byte 0x04000054\n\
-_08096428: .4byte gWrittenToBldalpha_Eva\n\
-_0809642C: .4byte gWrittenToBldalpha_Evb\n\
-_08096430: .4byte 0x04000052\n\
-_08096434: .4byte 0xFFFFFDE4\n\
-_08096438: .4byte 0x0863A19C\n\
-_0809643C: .4byte 0x0600D000\n\
-_08096440: .4byte 0x85000400\n\
-_08096444: .4byte EndingConversationAndAnimalsVblank\n\
-    .syntax divided\n");
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
+
+    CallbackSetVBlank(unk_99940);
+
+    DMA3_FILL_32(0, INTRO_DATA.oam, sizeof(INTRO_DATA.oam));
+    DMA3_FILL_16(0, INTRO_DATA.unk_14, sizeof(INTRO_DATA.unk_14));
+    DMA3_FILL_16(0, &INTRO_DATA.unk_110, sizeof(INTRO_DATA.unk_14));
+
+    LZ77UncompVram((const u32*)0x861b89c, VRAM_BASE);
+    LZ77UncompVram((const u32*)0x86217a8, VRAM_BASE + 0x8000);
+    LZ77UncompVram((const u32*)0x8638654, VRAM_BASE + 0xF000);
+    LZ77UncompVram((const u32*)0x8637db8, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const u16*)0x8636838, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    DMA3_FILL_16(0x2FF, VRAM_BASE + 0xF500, 0x300);
+
+    gBg0XPosition = 0;
+    gBg0YPosition = 0;
+    gBg1XPosition = 0;
+    gBg1YPosition = 0;
+    gBg2XPosition = 0;
+    gBg3XPosition = 0;
+    gBg2YPosition = -30;
+    gBg3YPosition = 226;
+
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, 0);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 226);
+
+    WRITE_16(REG_BG2CNT, CREATE_BGCNT(2, 30, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG3CNT, CREATE_BGCNT(0, 31, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
+
+    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+    gWrittenToBldy = BLDY_MAX_VALUE;
+    WRITE_16(REG_BLDY, BLDY_MAX_VALUE);
+    gWrittenToBldalpha_Eva = BLDALPHA_MAX_VALUE;
+    gWrittenToBldalpha_Evb = BLDALPHA_MAX_VALUE;
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_Evb, gWrittenToBldalpha_Eva));
+
+    EndingDialogueSetupOam(20, 0, 0, FALSE);
+
+    SpecialCutsceneProcessOam();
+    SpecialCutsceneDrawAllOam();
+
+    INTRO_DATA.pText = sCutsceneTextNone;
+
+    DMA3_FILL_32(0, VRAM_BASE + 0xD000, (VRAM_SIZE / 6) / 4);
+
+    WRITE_16(REG_DISPCNT, DCNT_BG2 | DCNT_BG3 | DCNT_OBJ);
+
+    CallbackSetVBlank(EndingConversationAndAnimalsVblank);
 }
 
 // 0x08096448
 NAKED_FUNCTION
-void EndingInShipProcess(void)
+boolu32 EndingInShipProcess(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -1276,1509 +833,632 @@ _08096920:\n\
     .syntax divided\n");
 }
 
-// 0x08096928
-NAKED_FUNCTION
+/**
+ * @brief 96928 | 88 | Main handler for the ending in ship cutscenes
+ * 
+ */
 boolu32 EndingInShip(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	movs r5, #0\n\
-	ldr r4, _08096940 @ =gNonGameplayRam\n\
-	ldrh r0, [r4, #8]\n\
-	cmp r0, #1\n\
-	beq _08096954\n\
-	cmp r0, #1\n\
-	bgt _08096944\n\
-	cmp r0, #0\n\
-	beq _0809694E\n\
-	b _080969A8\n\
-	.align 2, 0\n\
-_08096940: .4byte gNonGameplayRam\n\
-_08096944:\n\
-	cmp r0, #2\n\
-	beq _0809696C\n\
-	cmp r0, #3\n\
-	beq _08096988\n\
-	b _080969A8\n\
-_0809694E:\n\
-	bl EndingMonologueInit\n\
-	b _08096960\n\
-_08096954:\n\
-	bl SpecialCutsceneFadeIn\n\
-	ldr r0, _08096968 @ =gWrittenToBldy\n\
-	ldrh r0, [r0]\n\
-	cmp r0, #0\n\
-	bne _080969A8\n\
-_08096960:\n\
-	movs r0, #2\n\
-	strh r0, [r4, #8]\n\
-	b _080969A8\n\
-	.align 2, 0\n\
-_08096968: .4byte gWrittenToBldy\n\
-_0809696C:\n\
-	bl EndingInShipProcess\n\
-	cmp r0, #0\n\
-	beq _080969A8\n\
-	movs r1, #0x85\n\
-	lsls r1, r1, #2\n\
-	adds r0, r4, r1\n\
-	strb r5, [r0]\n\
-	subs r1, #1\n\
-	adds r0, r4, r1\n\
-	strb r5, [r0]\n\
-	movs r0, #3\n\
-	strh r0, [r4, #8]\n\
-	b _080969A8\n\
-_08096988:\n\
-	ldr r1, _08096998 @ =gWrittenToBldy\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0xf\n\
-	bhi _0809699C\n\
-	adds r0, #1\n\
-	strh r0, [r1]\n\
-	b _080969A0\n\
-	.align 2, 0\n\
-_08096998: .4byte gWrittenToBldy\n\
-_0809699C:\n\
-	strh r5, [r4, #8]\n\
-	movs r5, #1\n\
-_080969A0:\n\
-	bl SpecialCutsceneProcessOam\n\
-	bl SpecialCutsceneDrawAllOam\n\
-_080969A8:\n\
-	adds r0, r5, #0\n\
-	pop {r4, r5}\n\
-	pop {r1}\n\
-	bx r1\n\
-    .syntax divided\n");
+    boolu32 ended;
+
+    ended = FALSE;
+
+    switch (INTRO_DATA.stage)
+    {
+        case 0:
+            EndingMonologueInit();
+            INTRO_DATA.stage = 2;
+            break;
+
+        case 1:
+            SpecialCutsceneFadeIn();
+            if (gWrittenToBldy == 0)
+                INTRO_DATA.stage = 2;
+            break;
+
+        case 2:
+            if (EndingInShipProcess())
+            {
+                INTRO_DATA.subStage = 0;
+                INTRO_DATA.unk_213 = 0;
+                INTRO_DATA.stage = 3;
+            }
+            break;
+
+        case 3:
+            if (gWrittenToBldy < BLDY_MAX_VALUE)
+            {
+                gWrittenToBldy++;
+            }
+            else
+            {
+                INTRO_DATA.stage = 0;
+                ended = TRUE;
+            }
+
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+    }
+
+    return ended;
 }
 
-// 0x080969B0
-NAKED_FUNCTION
-void EndingProcessMonologueCursor(void)
+/**
+ * @brief 969b0 | 30 | Processes the monologue text cursor
+ * 
+ */
+void EndingProcessMonologueCursor(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldr r3, _080969D0 @ =gNonGameplayRam\n\
-	ldr r0, [r3]\n\
-	ldrh r1, [r0]\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _080969D4\n\
-	movs r0, #0x76\n\
-	strh r0, [r2, #0xc]\n\
-	ldrh r0, [r3, #0xe]\n\
-	lsls r0, r0, #3\n\
-	adds r0, #0x18\n\
-	strh r0, [r2, #0xe]\n\
-	b _080969DA\n\
-	.align 2, 0\n\
-_080969D0: .4byte gNonGameplayRam\n\
-_080969D4:\n\
-	movs r0, #0x82\n\
-	lsls r0, r0, #1\n\
-	strh r0, [r2, #0xc]\n\
-_080969DA:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    if (*INTRO_DATA.pText == CHAR_NEXT_PAGE_ARROW)
+    {
+        pOam->xPosition = 118;
+        pOam->yPosition = INTRO_DATA.unk_E * 8 + 24;
+    }
+    else
+    {
+        pOam->xPosition = 260;
+    }
 }
 
-// 0x080969E0
-NAKED_FUNCTION
-void unk_969e0(void)
+/**
+ * @brief 969e0 | 28 | To document
+ * 
+ */
+void unk_969e0(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x14]\n\
-	cmp r0, #0\n\
-	bne _08096A02\n\
-	ldrb r0, [r2, #0x11]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r2, #0x1c]\n\
-	adds r1, r1, r0\n\
-	ldrb r0, [r1, #4]\n\
-	ldrb r3, [r2, #0x12]\n\
-	cmp r0, r3\n\
-	bne _08096A02\n\
-	ldrb r1, [r1, #0xc]\n\
-	cmp r1, #0\n\
-	bne _08096A02\n\
-	strb r1, [r2, #0x12]\n\
-_08096A02:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    const struct FrameData* pFrame;
+
+    if (pOam->stage == 0)
+    {
+        pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+        if (pFrame[0].timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+            pOam->animationDurationCounter = 0;
+    }
 }
 
-// 0x08096A08
-NAKED_FUNCTION
-void EndingProcessSr388RadarView(void)
+/**
+ * @brief 96a08 | 34 | Processes the SR388 radar view
+ * 
+ */
+void EndingProcessSr388RadarView(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x14]\n\
-	cmp r0, #0\n\
-	bne _08096A34\n\
-	ldrb r0, [r2, #0x11]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r2, #0x1c]\n\
-	adds r1, r1, r0\n\
-	ldrb r0, [r1, #4]\n\
-	ldrb r3, [r2, #0x12]\n\
-	cmp r0, r3\n\
-	bne _08096A34\n\
-	ldrb r1, [r1, #0xc]\n\
-	cmp r1, #0\n\
-	bne _08096A34\n\
-	strb r1, [r2, #0x12]\n\
-	strb r1, [r2, #0x11]\n\
-	ldr r0, _08096A38 @ =0x08633EC4\n\
-	str r0, [r2, #0x1c]\n\
-	movs r0, #1\n\
-	strb r0, [r2, #0x14]\n\
-_08096A34:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08096A38: .4byte 0x08633EC4\n\
-    .syntax divided\n");
+    const struct FrameData* pFrame;
+
+    if (pOam->stage == 0)
+    {
+        pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+        if (pFrame[0].timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+        {
+            pOam->animationDurationCounter = 0;
+            pOam->currentAnimationFrame = 0;
+            pOam->pOam = (const struct FrameData*)0x8633ec4;
+            pOam->stage = 1;
+        }
+    }
 }
 
-// 0x08096A3C
-NAKED_FUNCTION
-void EndingProcessSamusViewRadarView(void)
+/**
+ * @brief 96a3c | 34 | Processes the Samus view radar view
+ * 
+ */
+void EndingProcessSamusViewRadarView(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x14]\n\
-	cmp r0, #0\n\
-	bne _08096A68\n\
-	ldrb r0, [r2, #0x11]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r2, #0x1c]\n\
-	adds r1, r1, r0\n\
-	ldrb r0, [r1, #4]\n\
-	ldrb r3, [r2, #0x12]\n\
-	cmp r0, r3\n\
-	bne _08096A68\n\
-	ldrb r1, [r1, #0xc]\n\
-	cmp r1, #0\n\
-	bne _08096A68\n\
-	strb r1, [r2, #0x12]\n\
-	strb r1, [r2, #0x11]\n\
-	ldr r0, _08096A6C @ =0x08633F0C\n\
-	str r0, [r2, #0x1c]\n\
-	movs r0, #1\n\
-	strb r0, [r2, #0x14]\n\
-_08096A68:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08096A6C: .4byte 0x08633F0C\n\
-    .syntax divided\n");
+    const struct FrameData* pFrame;
+
+    if (pOam->stage == 0)
+    {
+        pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+        if (pFrame[0].timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+        {
+            pOam->animationDurationCounter = 0;
+            pOam->currentAnimationFrame = 0;
+            pOam->pOam = (const struct FrameData*)0x8633f0c;
+            pOam->stage = 1;
+        }
+    }
 }
 
-// 0x08096A70
-NAKED_FUNCTION
-void unk_96a70(void)
+/**
+ * @brief 96a70 | 9c | To document
+ * 
+ */
+void unk_96a70(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	adds r4, r0, #0\n\
-	ldrb r0, [r4, #0x11]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r4, #0x1c]\n\
-	adds r6, r1, r0\n\
-	ldrb r5, [r4, #0x14]\n\
-	cmp r5, #0\n\
-	bne _08096AB4\n\
-	ldr r0, [r4, #0x10]\n\
-	ldr r1, _08096AAC @ =0x00FFFF00\n\
-	ands r0, r1\n\
-	ldr r1, _08096AB0 @ =0x00010100\n\
-	cmp r0, r1\n\
-	bne _08096A96\n\
-	movs r0, #0x8e\n\
-	lsls r0, r0, #1\n\
-	bl SoundPlay\n\
-_08096A96:\n\
-	ldrb r0, [r6, #4]\n\
-	ldrb r1, [r4, #0x12]\n\
-	cmp r0, r1\n\
-	bne _08096B06\n\
-	ldrb r0, [r6, #0xc]\n\
-	cmp r0, #0\n\
-	bne _08096B06\n\
-	strb r5, [r4, #0x12]\n\
-	movs r0, #1\n\
-	strb r0, [r4, #0x14]\n\
-	b _08096B06\n\
-	.align 2, 0\n\
-_08096AAC: .4byte 0x00FFFF00\n\
-_08096AB0: .4byte 0x00010100\n\
-_08096AB4:\n\
-	cmp r5, #1\n\
-	bne _08096AE8\n\
-	movs r1, #0\n\
-	strb r1, [r4, #0x12]\n\
-	ldr r0, _08096ADC @ =gNonGameplayRam\n\
-	movs r2, #0x85\n\
-	lsls r2, r2, #2\n\
-	adds r0, r0, r2\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0xb\n\
-	bne _08096B06\n\
-	strb r1, [r4, #0x11]\n\
-	ldr r0, _08096AE0 @ =0x08633244\n\
-	str r0, [r4, #0x1c]\n\
-	ldr r0, _08096AE4 @ =0x0000011D\n\
-	bl SoundPlay\n\
-	movs r0, #2\n\
-	strb r0, [r4, #0x14]\n\
-	b _08096B06\n\
-	.align 2, 0\n\
-_08096ADC: .4byte gNonGameplayRam\n\
-_08096AE0: .4byte 0x08633244\n\
-_08096AE4: .4byte 0x0000011D\n\
-_08096AE8:\n\
-	cmp r5, #2\n\
-	bne _08096B06\n\
-	ldrb r0, [r6, #4]\n\
-	ldrb r1, [r4, #0x12]\n\
-	cmp r0, r1\n\
-	bne _08096B06\n\
-	ldrb r1, [r6, #0xc]\n\
-	cmp r1, #0\n\
-	bne _08096B06\n\
-	strb r1, [r4, #0x10]\n\
-	ldrb r1, [r4, #0x18]\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	strb r0, [r4, #0x18]\n\
-_08096B06:\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    const struct FrameData* pFrame;
+
+    pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+
+    if (pOam->stage == 0)
+    {
+        if (pOam->currentAnimationFrame == 1 && pOam->animationDurationCounter == 1)
+            SoundPlay(SOUND_11C);
+
+        if (pFrame[0].timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+        {
+            pOam->animationDurationCounter = 0;
+            pOam->stage = 1;
+        }
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->animationDurationCounter = 0;
+        if (INTRO_DATA.subStage == 11)
+        {
+            pOam->currentAnimationFrame = 0;
+            pOam->pOam = (const struct FrameData*)0x8633244;
+            SoundPlay(SOUND_11D);
+            pOam->stage = 2;
+        }
+    }
+    else if (pOam->stage == 2)
+    {
+        if (pFrame[0].timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+        {
+            pOam->type = 0;
+            pOam->unk_18_0 = 0;
+        }
+    }
 }
 
-// 0x08096B0C
-NAKED_FUNCTION
-void EndingProcessAdamTextCursor(void)
+/**
+ * @brief 96b0c | 8c | Processes the Adam text cursor
+ * 
+ */
+void EndingProcessAdamTextCursor(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	adds r2, r0, #0\n\
-	ldr r3, _08096B28 @ =gNonGameplayRam\n\
-	ldr r0, [r3]\n\
-	ldrh r1, [r0]\n\
-	movs r0, #0xff\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _08096B2C\n\
-	movs r0, #0x91\n\
-	lsls r0, r0, #1\n\
-	strh r0, [r2, #0xc]\n\
-	b _08096B8E\n\
-	.align 2, 0\n\
-_08096B28: .4byte gNonGameplayRam\n\
-_08096B2C:\n\
-	movs r0, #0xfe\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	beq _08096B70\n\
-	movs r0, #0xfd\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _08096B54\n\
-	movs r0, #0\n\
-	movs r1, #0x91\n\
-	lsls r1, r1, #1\n\
-	strh r1, [r2, #0xc]\n\
-	strb r0, [r2, #0x12]\n\
-	strb r0, [r2, #0x11]\n\
-	ldr r0, _08096B50 @ =0x08633E8C\n\
-	str r0, [r2, #0x1c]\n\
-	b _08096B8E\n\
-	.align 2, 0\n\
-_08096B50: .4byte 0x08633E8C\n\
-_08096B54:\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _08096B70\n\
-	movs r0, #0x78\n\
-	strh r0, [r2, #0xc]\n\
-	movs r0, #0x9a\n\
-	strh r0, [r2, #0xe]\n\
-	ldr r0, _08096B6C @ =0x08633E64\n\
-	str r0, [r2, #0x1c]\n\
-	b _08096B8E\n\
-	.align 2, 0\n\
-_08096B6C: .4byte 0x08633E64\n\
-_08096B70:\n\
-	ldrh r0, [r3, #0xc]\n\
-	ldr r4, _08096B94 @ =0x00000212\n\
-	adds r1, r3, r4\n\
-	lsls r0, r0, #3\n\
-	ldrb r1, [r1]\n\
-	adds r0, r0, r1\n\
-	adds r0, #0xe\n\
-	movs r1, #0\n\
-	strh r0, [r2, #0xc]\n\
-	ldrh r0, [r3, #0xe]\n\
-	lsls r0, r0, #3\n\
-	adds r0, #0x84\n\
-	strh r0, [r2, #0xe]\n\
-	strb r1, [r2, #0x12]\n\
-	strb r1, [r2, #0x11]\n\
-_08096B8E:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08096B94: .4byte 0x00000212\n\
-    .syntax divided\n");
+    struct IntroData* pIntro;
+
+    pIntro = &INTRO_DATA;
+    if (*pIntro->pText == CHAR_TERMINATOR)
+    {
+        pOam->xPosition = 290;
+        return;
+    }
+
+    if (*pIntro->pText != CHAR_NEW_LINE)
+    {
+        if (*pIntro->pText == CHAR_NEW_PAGE)
+        {
+            pOam->xPosition = 290;
+            pOam->animationDurationCounter = 0;
+            pOam->currentAnimationFrame = 0;
+            pOam->pOam = (const struct FrameData*)0x8633e8c;
+            return;
+        }
+
+        if (*pIntro->pText == CHAR_NEXT_PAGE_ARROW)
+        {
+            pOam->xPosition = 120;
+            pOam->yPosition = 154;
+            pOam->pOam = (const struct FrameData*)0x8633e64;
+            return;
+        }
+    }
+
+    pOam->xPosition = pIntro->unk_C * 8 + pIntro->unk_212 + 14;
+    pOam->yPosition = pIntro->unk_E * 8 + 132;
+    pOam->animationDurationCounter = 0;
+    pOam->currentAnimationFrame = 0;
 }
 
-// 0x08096B98
-NAKED_FUNCTION
-void EndingProcessAdamPanel(void)
+/**
+ * @brief 96b98 | 1a8 | Processes the Adam conversation panel
+ * 
+ */
+void EndingProcessAdamPanel(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	adds r4, r0, #0\n\
-	ldrb r0, [r4, #0x14]\n\
-	cmp r0, #0\n\
-	bne _08096BD4\n\
-	strb r0, [r4, #0x12]\n\
-	strb r0, [r4, #0x11]\n\
-	ldrh r1, [r4, #0xe]\n\
-	movs r2, #0xe\n\
-	ldrsh r0, [r4, r2]\n\
-	cmp r0, #0x80\n\
-	ble _08096BB8\n\
-	adds r0, r1, #0\n\
-	subs r0, #8\n\
-	strh r0, [r4, #0xe]\n\
-	b _08096D34\n\
-_08096BB8:\n\
-	movs r0, #0x80\n\
-	strh r0, [r4, #0xe]\n\
-	ldrb r0, [r4, #0x10]\n\
-	cmp r0, #7\n\
-	bne _08096BC8\n\
-	ldr r0, _08096BD0 @ =0x0000020A\n\
-	bl SoundPlay\n\
-_08096BC8:\n\
-	movs r0, #1\n\
-	strb r0, [r4, #0x14]\n\
-	b _08096D34\n\
-	.align 2, 0\n\
-_08096BD0: .4byte 0x0000020A\n\
-_08096BD4:\n\
-	cmp r0, #1\n\
-	bne _08096C64\n\
-	ldrb r0, [r4, #0x11]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r4, #0x1c]\n\
-	adds r1, r1, r0\n\
-	ldrb r0, [r1, #4]\n\
-	ldrb r3, [r4, #0x12]\n\
-	cmp r0, r3\n\
-	bne _08096C12\n\
-	ldrb r1, [r1, #0xc]\n\
-	cmp r1, #0\n\
-	bne _08096BF4\n\
-	strb r1, [r4, #0x12]\n\
-	movs r0, #2\n\
-	strb r0, [r4, #0x14]\n\
-_08096BF4:\n\
-	ldrb r0, [r4, #0x10]\n\
-	cmp r0, #7\n\
-	beq _08096BFC\n\
-	b _08096D34\n\
-_08096BFC:\n\
-	ldrb r0, [r4, #0x11]\n\
-	cmp r0, #0xa\n\
-	bne _08096C12\n\
-	movs r0, #0xc\n\
-	ldrsh r1, [r4, r0]\n\
-	movs r3, #0xe\n\
-	ldrsh r2, [r4, r3]\n\
-	movs r0, #8\n\
-	movs r3, #0\n\
-	bl EndingDialogueSetupOam\n\
-_08096C12:\n\
-	ldrb r0, [r4, #0x10]\n\
-	cmp r0, #7\n\
-	beq _08096C1A\n\
-	b _08096D34\n\
-_08096C1A:\n\
-	ldrb r0, [r4, #0x11]\n\
-	cmp r0, #0xb\n\
-	beq _08096C22\n\
-	b _08096D34\n\
-_08096C22:\n\
-	ldrb r0, [r4, #0x12]\n\
-	cmp r0, #0xf\n\
-	beq _08096C2A\n\
-	b _08096D34\n\
-_08096C2A:\n\
-	ldr r2, _08096C54 @ =gNonGameplayRam\n\
-	ldr r0, _08096C58 @ =0x00000212\n\
-	adds r1, r2, r0\n\
-	movs r0, #0\n\
-	strb r0, [r1]\n\
-	strh r0, [r2, #0xe]\n\
-	strh r0, [r2, #0xc]\n\
-	ldr r1, _08096C5C @ =0x0879C3AC\n\
-	ldr r0, _08096C60 @ =0x03000011\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	movs r1, #0xe0\n\
-	lsls r1, r1, #1\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	str r0, [r2]\n\
-	b _08096D34\n\
-	.align 2, 0\n\
-_08096C54: .4byte gNonGameplayRam\n\
-_08096C58: .4byte 0x00000212\n\
-_08096C5C: .4byte 0x0879C3AC\n\
-_08096C60: .4byte 0x03000011\n\
-_08096C64:\n\
-	cmp r0, #2\n\
-	bne _08096C82\n\
-	movs r1, #0\n\
-	strb r1, [r4, #0x12]\n\
-	ldrb r0, [r4, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r4, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #1\n\
-	bne _08096D34\n\
-	strb r1, [r4, #0x13]\n\
-	movs r0, #3\n\
-	strb r0, [r4, #0x14]\n\
-	b _08096D34\n\
-_08096C82:\n\
-	cmp r0, #3\n\
-	bne _08096CCC\n\
-	movs r1, #0\n\
-	strb r1, [r4, #0x12]\n\
-	ldr r0, _08096CAC @ =gNonGameplayRam\n\
-	movs r2, #0x85\n\
-	lsls r2, r2, #2\n\
-	adds r0, r0, r2\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0xb\n\
-	bne _08096D34\n\
-	strb r1, [r4, #0x11]\n\
-	ldrb r0, [r4, #0x10]\n\
-	cmp r0, #7\n\
-	bne _08096CB8\n\
-	ldr r0, _08096CB0 @ =0x086332FC\n\
-	str r0, [r4, #0x1c]\n\
-	ldr r0, _08096CB4 @ =0x0000020B\n\
-	bl SoundPlay\n\
-	b _08096CC0\n\
-	.align 2, 0\n\
-_08096CAC: .4byte gNonGameplayRam\n\
-_08096CB0: .4byte 0x086332FC\n\
-_08096CB4: .4byte 0x0000020B\n\
-_08096CB8:\n\
-	cmp r0, #9\n\
-	bne _08096CC0\n\
-	ldr r0, _08096CC8 @ =0x086333CC\n\
-	str r0, [r4, #0x1c]\n\
-_08096CC0:\n\
-	movs r0, #4\n\
-	strb r0, [r4, #0x14]\n\
-	b _08096D34\n\
-	.align 2, 0\n\
-_08096CC8: .4byte 0x086333CC\n\
-_08096CCC:\n\
-	cmp r0, #4\n\
-	bne _08096CFC\n\
-	ldr r0, [r4, #0x10]\n\
-	ldr r1, _08096CF4 @ =0x00FFFF00\n\
-	ands r0, r1\n\
-	ldr r1, _08096CF8 @ =0x00030B00\n\
-	cmp r0, r1\n\
-	bne _08096D34\n\
-	ldrb r0, [r4, #0x10]\n\
-	cmp r0, #7\n\
-	bne _08096CE8\n\
-	movs r0, #8\n\
-	bl SpecialCutsceneDestroyOamOfType\n\
-_08096CE8:\n\
-	movs r0, #0\n\
-	strb r0, [r4, #0x12]\n\
-	movs r0, #5\n\
-	strb r0, [r4, #0x14]\n\
-	b _08096D34\n\
-	.align 2, 0\n\
-_08096CF4: .4byte 0x00FFFF00\n\
-_08096CF8: .4byte 0x00030B00\n\
-_08096CFC:\n\
-	cmp r0, #5\n\
-	bne _08096D34\n\
-	movs r2, #0\n\
-	strb r2, [r4, #0x12]\n\
-	ldrh r1, [r4, #0xe]\n\
-	movs r3, #0xe\n\
-	ldrsh r0, [r4, r3]\n\
-	cmp r0, #0xbf\n\
-	bgt _08096D16\n\
-	adds r0, r1, #0\n\
-	adds r0, #8\n\
-	strh r0, [r4, #0xe]\n\
-	b _08096D34\n\
-_08096D16:\n\
-	ldrb r0, [r4, #0x10]\n\
-	cmp r0, #7\n\
-	bne _08096D28\n\
-	ldr r0, _08096D3C @ =gNonGameplayRam\n\
-	movs r1, #0x85\n\
-	lsls r1, r1, #2\n\
-	adds r0, r0, r1\n\
-	movs r1, #0xc\n\
-	strb r1, [r0]\n\
-_08096D28:\n\
-	strb r2, [r4, #0x10]\n\
-	ldrb r1, [r4, #0x18]\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	strb r0, [r4, #0x18]\n\
-_08096D34:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08096D3C: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    const struct FrameData* pFrame;
+
+    if (pOam->stage == 0)
+    {
+        pOam->animationDurationCounter = 0;
+        pOam->currentAnimationFrame = 0;
+        if (pOam->yPosition > 128)
+        {
+            pOam->yPosition -= 8;
+        }
+        else
+        {
+            pOam->yPosition = 128;
+            if (pOam->type == 7)
+                SoundPlay(SOUND_20A);
+            pOam->stage = 1;
+        }
+    }
+    else if (pOam->stage == 1)
+    {
+        pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+        if (pFrame[0].timer == pOam->animationDurationCounter)
+        {
+            if (pFrame[1].timer == 0)
+            {
+                pOam->animationDurationCounter = 0;
+                pOam->stage = 2;
+            }
+
+            if (pOam->type != 7)
+                return;
+
+            if (pOam->currentAnimationFrame == 10)
+                EndingDialogueSetupOam(8, pOam->xPosition, pOam->yPosition, FALSE);
+        }
+
+        if (pOam->type != 7)
+            return;
+
+        if (pOam->currentAnimationFrame != 11)
+            return;
+
+        if (pOam->animationDurationCounter != 15)
+            return;
+
+        INTRO_DATA.unk_212 = 0;
+        INTRO_DATA.unk_E = 0;
+        INTRO_DATA.unk_C = 0;
+        INTRO_DATA.pText = sEndingTextPointers[gLanguage][112];
+    }
+    else if (pOam->stage == 2)
+    {
+        pOam->animationDurationCounter = 0;
+        pOam->timer++;
+        if (pOam->timer == 1)
+        {
+            pOam->timer = 0;
+            pOam->stage = 3;
+        }
+    }
+    else if (pOam->stage == 3)
+    {
+        pOam->animationDurationCounter = 0;
+        if (INTRO_DATA.subStage == 11)
+        {
+            pOam->currentAnimationFrame = 0;
+            if (pOam->type == 7)
+            {
+                pOam->pOam = (const struct FrameData*)0x86332fc;
+                SoundPlay(SOUND_20B);
+            }
+            else if (pOam->type == 9)
+            {
+                pOam->pOam = (const struct FrameData*)0x86333cc;
+            }
+            pOam->stage = 4;
+        }
+    }
+    else if (pOam->stage == 4)
+    {
+        if (pOam->currentAnimationFrame == 11 && pOam->animationDurationCounter == 3)
+        {
+            if (pOam->type == 7)
+                SpecialCutsceneDestroyOamOfType(8);
+            pOam->animationDurationCounter = 0;
+            pOam->stage = 5;
+        }
+    }
+    else if (pOam->stage == 5)
+    {
+        pOam->animationDurationCounter = 0;
+        if (pOam->yPosition < 192)
+        {
+            pOam->yPosition += 8;
+        }
+        else
+        {
+            if (pOam->type == 7)
+                INTRO_DATA.subStage = 12;
+            pOam->type = 0;
+            pOam->unk_18_0 = 0;
+        }
+    }
 }
 
-// 0x08096D40
-NAKED_FUNCTION
-void EndingProcessAdamIcon(void)
+/**
+ * @brief 96d40 | 88 | Processes the Adam icon
+ * 
+ */
+void EndingProcessAdamIcon(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	adds r2, r0, #0\n\
-	ldrb r3, [r2, #0x11]\n\
-	lsls r1, r3, #3\n\
-	ldr r0, [r2, #0x1c]\n\
-	adds r4, r0, r1\n\
-	ldrb r1, [r2, #0x14]\n\
-	cmp r1, #0\n\
-	bne _08096D80\n\
-	cmp r3, #3\n\
-	bne _08096D62\n\
-	strb r1, [r2, #0x12]\n\
-	strb r1, [r2, #0x11]\n\
-	ldr r0, _08096D78 @ =0x086338A4\n\
-	str r0, [r2, #0x1c]\n\
-	movs r0, #1\n\
-	strb r0, [r2, #0x14]\n\
-_08096D62:\n\
-	ldr r0, _08096D7C @ =gNonGameplayRam\n\
-	movs r3, #0x85\n\
-	lsls r3, r3, #2\n\
-	adds r0, r0, r3\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0xb\n\
-	bne _08096DC0\n\
-	strb r1, [r2, #0x12]\n\
-	strb r1, [r2, #0x11]\n\
-	b _08096D98\n\
-	.align 2, 0\n\
-_08096D78: .4byte 0x086338A4\n\
-_08096D7C: .4byte gNonGameplayRam\n\
-_08096D80:\n\
-	cmp r1, #1\n\
-	bne _08096DAC\n\
-	ldr r0, _08096DA4 @ =gNonGameplayRam\n\
-	movs r1, #0x85\n\
-	lsls r1, r1, #2\n\
-	adds r0, r0, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0xb\n\
-	bne _08096DC0\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0x12]\n\
-	strb r0, [r2, #0x11]\n\
-_08096D98:\n\
-	ldr r0, _08096DA8 @ =0x0863345C\n\
-	str r0, [r2, #0x1c]\n\
-	movs r0, #2\n\
-	strb r0, [r2, #0x14]\n\
-	b _08096DC0\n\
-	.align 2, 0\n\
-_08096DA4: .4byte gNonGameplayRam\n\
-_08096DA8: .4byte 0x0863345C\n\
-_08096DAC:\n\
-	cmp r1, #2\n\
-	bne _08096DC0\n\
-	ldrb r0, [r4, #4]\n\
-	ldrb r3, [r2, #0x12]\n\
-	cmp r0, r3\n\
-	bne _08096DC0\n\
-	ldrb r0, [r4, #0xc]\n\
-	cmp r0, #0\n\
-	bne _08096DC0\n\
-	strb r0, [r2, #0x12]\n\
-_08096DC0:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    const struct FrameData* pFrame;
+
+    pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+
+    if (pOam->stage == 0)
+    {
+        if (pOam->currentAnimationFrame == 3)
+        {
+            pOam->animationDurationCounter = 0;
+            pOam->currentAnimationFrame = 0;
+            pOam->pOam = (const struct FrameData*)0x86338a4;
+            pOam->stage = 1;
+        }
+
+        if (INTRO_DATA.subStage == 11)
+        {
+            pOam->animationDurationCounter = 0;
+            pOam->currentAnimationFrame = 0;
+            pOam->pOam = (const struct FrameData*)0x863345c;
+            pOam->stage = 2;
+        }
+    }
+    else if (pOam->stage == 1)
+    {
+        if (INTRO_DATA.subStage == 11)
+        {
+            pOam->animationDurationCounter = 0;
+            pOam->currentAnimationFrame = 0;
+            pOam->pOam = (const struct FrameData*)0x863345c;
+            pOam->stage = 2;
+        }
+    }
+    else if (pOam->stage == 2)
+    {
+        if (pFrame[0].timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+            pOam->animationDurationCounter = 0;
+    }
 }
 
-// 0x08096DC8
-NAKED_FUNCTION
-void EndingProcessAnimalsScrolling(void)
+/**
+ * @brief 96dc8 | 138 | Processes the scrolling of the animals scene
+ * 
+ */
+void EndingProcessAnimalsScrolling(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	sub sp, #4\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2, #0x13]\n\
-	adds r1, r0, #1\n\
-	movs r3, #0\n\
-	strb r1, [r2, #0x13]\n\
-	ldrb r0, [r2, #0x14]\n\
-	cmp r0, #0\n\
-	bne _08096E48\n\
-	ldr r0, _08096E20 @ =0x0300122C\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r2, #0xc]\n\
-	ldr r0, _08096E24 @ =0x0300122E\n\
-	ldrh r1, [r0]\n\
-	strh r1, [r2, #0xe]\n\
-	ldr r0, _08096E28 @ =0x03001230\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r2]\n\
-	ldr r0, _08096E2C @ =0x03001232\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r2, #2]\n\
-	lsls r1, r1, #0x10\n\
-	asrs r1, r1, #0x10\n\
-	movs r0, #0x20\n\
-	rsbs r0, r0, #0\n\
-	cmp r1, r0\n\
-	bge _08096E3C\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #7\n\
-	strh r0, [r2, #0xa]\n\
-	str r3, [sp]\n\
-	ldr r1, _08096E30 @ =0x040000D4\n\
-	mov r0, sp\n\
-	str r0, [r1]\n\
-	ldrh r0, [r2, #0xa]\n\
-	ldr r3, _08096E34 @ =0x06008000\n\
-	adds r0, r0, r3\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08096E38 @ =0x85000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	b _08096E42\n\
-	.align 2, 0\n\
-_08096E20: .4byte 0x0300122C\n\
-_08096E24: .4byte 0x0300122E\n\
-_08096E28: .4byte 0x03001230\n\
-_08096E2C: .4byte 0x03001232\n\
-_08096E30: .4byte 0x040000D4\n\
-_08096E34: .4byte 0x06008000\n\
-_08096E38: .4byte 0x85000400\n\
-_08096E3C:\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #7\n\
-	strh r0, [r2, #0xa]\n\
-_08096E42:\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0x13]\n\
-	b _08096E56\n\
-_08096E48:\n\
-	cmp r0, #1\n\
-	bne _08096E5C\n\
-	lsls r0, r1, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #0xa\n\
-	bne _08096EF6\n\
-	strb r3, [r2, #0x13]\n\
-_08096E56:\n\
-	movs r0, #2\n\
-	strb r0, [r2, #0x14]\n\
-	b _08096EF6\n\
-_08096E5C:\n\
-	ldr r0, _08096ED8 @ =gNonGameplayRam\n\
-	movs r4, #0x85\n\
-	lsls r4, r4, #2\n\
-	adds r0, r0, r4\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0xe\n\
-	bne _08096EF4\n\
-	lsls r0, r1, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #2\n\
-	bne _08096EA6\n\
-	strb r3, [r2, #0x13]\n\
-	ldrh r3, [r2, #0xe]\n\
-	movs r0, #0xe\n\
-	ldrsh r1, [r2, r0]\n\
-	movs r0, #0xa0\n\
-	rsbs r0, r0, #0\n\
-	cmp r1, r0\n\
-	ble _08096E8C\n\
-	subs r0, r3, #1\n\
-	strh r0, [r2, #0xe]\n\
-	ldrh r0, [r2, #8]\n\
-	adds r0, #1\n\
-	strh r0, [r2, #8]\n\
-_08096E8C:\n\
-	ldrh r1, [r2, #2]\n\
-	movs r3, #2\n\
-	ldrsh r0, [r2, r3]\n\
-	cmp r0, #0\n\
-	ble _08096E9A\n\
-	subs r0, r1, #1\n\
-	strh r0, [r2, #2]\n\
-_08096E9A:\n\
-	ldr r1, _08096EDC @ =0x0300122E\n\
-	ldrh r0, [r2, #0xe]\n\
-	strh r0, [r1]\n\
-	ldr r1, _08096EE0 @ =0x03001232\n\
-	ldrh r0, [r2, #2]\n\
-	strh r0, [r1]\n\
-_08096EA6:\n\
-	movs r4, #8\n\
-	ldrsh r0, [r2, r4]\n\
-	cmp r0, #9\n\
-	bne _08096EF6\n\
-	movs r1, #0\n\
-	strh r1, [r2, #8]\n\
-	ldrh r0, [r2, #0xa]\n\
-	cmp r0, #0\n\
-	beq _08096EF6\n\
-	ldr r3, _08096EE4 @ =0xFFFFFC00\n\
-	adds r0, r0, r3\n\
-	strh r0, [r2, #0xa]\n\
-	str r1, [sp]\n\
-	ldr r1, _08096EE8 @ =0x040000D4\n\
-	mov r4, sp\n\
-	str r4, [r1]\n\
-	ldrh r0, [r2, #0xa]\n\
-	ldr r2, _08096EEC @ =0x06008000\n\
-	adds r0, r0, r2\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08096EF0 @ =0x85000100\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	b _08096EF6\n\
-	.align 2, 0\n\
-_08096ED8: .4byte gNonGameplayRam\n\
-_08096EDC: .4byte 0x0300122E\n\
-_08096EE0: .4byte 0x03001232\n\
-_08096EE4: .4byte 0xFFFFFC00\n\
-_08096EE8: .4byte 0x040000D4\n\
-_08096EEC: .4byte 0x06008000\n\
-_08096EF0: .4byte 0x85000100\n\
-_08096EF4:\n\
-	strb r3, [r2, #0x13]\n\
-_08096EF6:\n\
-	add sp, #4\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    pOam->timer++;
+
+    if (pOam->stage == 0)
+    {
+        pOam->xPosition = gBg2XPosition;
+        pOam->yPosition = gBg2YPosition;
+        pOam->spawnX = gBg3XPosition;
+        pOam->spawnY = gBg3YPosition;
+
+        if (pOam->yPosition < -32)
+        {
+            pOam->unk_A = 0x4000;
+            DMA3_FILL_32(0, VRAM_BASE + 0x8000 + pOam->unk_A, 0x1000);
+        }
+        else
+        {
+            pOam->unk_A = 0x5000;
+        }
+
+        pOam->timer = 0;
+        pOam->stage = 2;
+    }
+    else if (pOam->stage == 1)
+    {
+        if (pOam->timer == 10)
+        {
+            pOam->timer = 0;
+            pOam->stage = 2;
+        }
+    }
+    else if (INTRO_DATA.subStage == 14)
+    {
+        if (pOam->timer == 2)
+        {
+            pOam->timer = 0;
+            if (pOam->yPosition > -160)
+            {
+                pOam->yPosition--;
+                pOam->unk_8++;
+            }
+
+            if (pOam->spawnY > 0)
+                pOam->spawnY--;
+
+            gBg2YPosition = pOam->yPosition;
+            gBg3YPosition = pOam->spawnY;
+        }
+
+        if (pOam->unk_8 == 9)
+        {
+            pOam->unk_8 = 0;
+            if (pOam->unk_A != 0)
+            {
+                pOam->unk_A -= 0x400;
+                DMA3_FILL_32(0, VRAM_BASE + 0x8000 + pOam->unk_A, 0x400);
+            }
+        }
+    }
+    else
+    {
+        pOam->timer = 0;
+    }
 }
 
-// 0x08096F00
-NAKED_FUNCTION
-void unk_96f00(void)
+/**
+ * @brief 96f00 | 8 | To document
+ * 
+ */
+void unk_96f00(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	movs r1, #0\n\
-	strb r1, [r0, #0x10]\n\
-	bx lr\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    pOam->type = 0;
 }
 
-// 0x08096F08
-NAKED_FUNCTION
-void EndingDialogueSetupOam(void)
+/**
+ * @brief 96f08 | 380 | Sets up an ending dialogue OAM
+ * 
+ */
+u8 EndingDialogueSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 descendingSearch)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, #4\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r5, r0, #0x18\n\
-	lsls r1, r1, #0x10\n\
-	lsrs r6, r1, #0x10\n\
-	lsls r2, r2, #0x10\n\
-	lsrs r2, r2, #0x10\n\
-	mov r8, r2\n\
-	lsls r3, r3, #0x18\n\
-	cmp r3, #0\n\
-	bne _08096F68\n\
-	movs r2, #0\n\
-	ldr r0, _08096F64 @ =gNonGameplayRam\n\
-	movs r3, #0x8b\n\
-	lsls r3, r3, #2\n\
-	adds r1, r0, r3\n\
-	ldrb r1, [r1]\n\
-	mov ip, r0\n\
-	cmp r1, #0\n\
-	beq _08096F58\n\
-	mov r4, ip\n\
-_08096F38:\n\
-	lsls r0, r2, #0x18\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #0x11\n\
-	adds r0, r0, r1\n\
-	lsrs r2, r0, #0x18\n\
-	asrs r1, r0, #0x18\n\
-	cmp r1, #0x13\n\
-	bgt _08096FA8\n\
-	lsls r0, r1, #3\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r4\n\
-	adds r0, r0, r3\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	bne _08096F38\n\
-_08096F58:\n\
-	lsls r0, r2, #0x18\n\
-	asrs r1, r0, #0x18\n\
-	adds r7, r0, #0\n\
-	cmp r1, #0x13\n\
-	ble _08096FB0\n\
-	b _08096FA8\n\
-	.align 2, 0\n\
-_08096F64: .4byte gNonGameplayRam\n\
-_08096F68:\n\
-	movs r2, #0x13\n\
-	ldr r0, _08096FAC @ =gNonGameplayRam\n\
-	movs r3, #0x9b\n\
-	lsls r3, r3, #3\n\
-	adds r1, r0, r3\n\
-	ldrb r1, [r1]\n\
-	mov ip, r0\n\
-	cmp r1, #0\n\
-	beq _08096FA0\n\
-	mov r4, ip\n\
-	movs r3, #0x8b\n\
-	lsls r3, r3, #2\n\
-_08096F80:\n\
-	lsls r0, r2, #0x18\n\
-	movs r1, #0xff\n\
-	lsls r1, r1, #0x18\n\
-	adds r0, r0, r1\n\
-	lsrs r2, r0, #0x18\n\
-	asrs r1, r0, #0x18\n\
-	cmp r1, #0\n\
-	blt _08096FA8\n\
-	lsls r0, r1, #3\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r4\n\
-	adds r0, r0, r3\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	bne _08096F80\n\
-_08096FA0:\n\
-	lsls r0, r2, #0x18\n\
-	adds r7, r0, #0\n\
-	cmp r7, #0\n\
-	bge _08096FB0\n\
-_08096FA8:\n\
-	movs r0, #0x14\n\
-	b _08097272\n\
-	.align 2, 0\n\
-_08096FAC: .4byte gNonGameplayRam\n\
-_08096FB0:\n\
-	movs r0, #0\n\
-	str r0, [sp]\n\
-	ldr r2, _08097014 @ =0x040000D4\n\
-	mov r3, sp\n\
-	str r3, [r2]\n\
-	asrs r1, r7, #0x18\n\
-	lsls r0, r1, #3\n\
-	adds r0, r0, r1\n\
-	lsls r4, r0, #2\n\
-	ldr r3, _08097018 @ =0x030016A0\n\
-	adds r0, r4, r3\n\
-	str r0, [r2, #4]\n\
-	ldr r0, _0809701C @ =0x85000009\n\
-	str r0, [r2, #8]\n\
-	ldr r0, [r2, #8]\n\
-	ldr r1, _08097020 @ =0xFFFFFDE4\n\
-	adds r0, r3, r1\n\
-	adds r2, r4, r0\n\
-	movs r1, #0x8a\n\
-	lsls r1, r1, #2\n\
-	adds r0, r2, r1\n\
-	strh r6, [r0]\n\
-	adds r1, #2\n\
-	adds r0, r2, r1\n\
-	mov r1, r8\n\
-	strh r1, [r0]\n\
-	movs r1, #0x8b\n\
-	lsls r1, r1, #2\n\
-	adds r0, r2, r1\n\
-	strb r5, [r0]\n\
-	movs r0, #0x8d\n\
-	lsls r0, r0, #2\n\
-	adds r6, r2, r0\n\
-	ldrb r1, [r6]\n\
-	movs r0, #1\n\
-	orrs r1, r0\n\
-	strb r1, [r6]\n\
-	cmp r5, #1\n\
-	bne _0809702C\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _08097024 @ =0x08633E64\n\
-	str r1, [r0]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _08097028 @ =EndingProcessMonologueCursor\n\
-	str r1, [r0]\n\
-	b _08097270\n\
-	.align 2, 0\n\
-_08097014: .4byte 0x040000D4\n\
-_08097018: .4byte 0x030016A0\n\
-_0809701C: .4byte 0x85000009\n\
-_08097020: .4byte 0xFFFFFDE4\n\
-_08097024: .4byte 0x08633E64\n\
-_08097028: .4byte EndingProcessMonologueCursor\n\
-_0809702C:\n\
-	cmp r5, #2\n\
-	bne _08097064\n\
-	ldr r1, _08097058 @ =0x00000236\n\
-	adds r2, r2, r1\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #8\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _0809705C @ =0x086338D4\n\
-	str r1, [r0]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _08097060 @ =unk_969e0\n\
-	str r1, [r0]\n\
-	b _08097270\n\
-	.align 2, 0\n\
-_08097058: .4byte 0x00000236\n\
-_0809705C: .4byte 0x086338D4\n\
-_08097060: .4byte unk_969e0\n\
-_08097064:\n\
-	cmp r5, #3\n\
-	bne _0809709C\n\
-	ldr r0, _08097090 @ =0x00000236\n\
-	adds r2, r2, r0\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #8\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _08097094 @ =0x086339D4\n\
-	str r1, [r0]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _08097098 @ =EndingProcessSr388RadarView\n\
-	str r1, [r0]\n\
-	b _08097270\n\
-	.align 2, 0\n\
-_08097090: .4byte 0x00000236\n\
-_08097094: .4byte 0x086339D4\n\
-_08097098: .4byte EndingProcessSr388RadarView\n\
-_0809709C:\n\
-	cmp r5, #4\n\
-	bne _080970D4\n\
-	ldr r1, _080970C8 @ =0x00000236\n\
-	adds r2, r2, r1\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #8\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _080970CC @ =0x08633C4C\n\
-	str r1, [r0]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _080970D0 @ =EndingProcessSamusViewRadarView\n\
-	str r1, [r0]\n\
-	b _08097270\n\
-	.align 2, 0\n\
-_080970C8: .4byte 0x00000236\n\
-_080970CC: .4byte 0x08633C4C\n\
-_080970D0: .4byte EndingProcessSamusViewRadarView\n\
-_080970D4:\n\
-	cmp r5, #5\n\
-	bne _0809710C\n\
-	ldr r0, _08097100 @ =0x00000236\n\
-	adds r2, r2, r0\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #8\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _08097104 @ =0x086331EC\n\
-	str r1, [r0]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _08097108 @ =unk_96a70\n\
-	str r1, [r0]\n\
-	b _08097270\n\
-	.align 2, 0\n\
-_08097100: .4byte 0x00000236\n\
-_08097104: .4byte 0x086331EC\n\
-_08097108: .4byte unk_96a70\n\
-_0809710C:\n\
-	cmp r5, #6\n\
-	bne _08097130\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _08097128 @ =0x08633E8C\n\
-	str r1, [r0]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _0809712C @ =EndingProcessAdamTextCursor\n\
-	str r1, [r0]\n\
-	b _08097270\n\
-	.align 2, 0\n\
-_08097128: .4byte 0x08633E8C\n\
-_0809712C: .4byte EndingProcessAdamTextCursor\n\
-_08097130:\n\
-	cmp r5, #7\n\
-	bne _08097158\n\
-	ldr r1, _08097150 @ =0x00000236\n\
-	adds r2, r2, r1\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _08097154 @ =0x08633294\n\
-	b _080971AE\n\
-	.align 2, 0\n\
-_08097150: .4byte 0x00000236\n\
-_08097154: .4byte 0x08633294\n\
-_08097158:\n\
-	cmp r5, #8\n\
-	bne _08097190\n\
-	ldr r0, _08097184 @ =0x00000236\n\
-	adds r2, r2, r0\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _08097188 @ =0x08633434\n\
-	str r1, [r0]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _0809718C @ =EndingProcessAdamIcon\n\
-	str r1, [r0]\n\
-	b _08097270\n\
-	.align 2, 0\n\
-_08097184: .4byte 0x00000236\n\
-_08097188: .4byte 0x08633434\n\
-_0809718C: .4byte EndingProcessAdamIcon\n\
-_08097190:\n\
-	cmp r5, #9\n\
-	bne _080971C8\n\
-	ldr r1, _080971BC @ =0x00000236\n\
-	adds r2, r2, r1\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x1c\n\
-	adds r0, r4, r0\n\
-	ldr r1, _080971C0 @ =0x08633364\n\
-_080971AE:\n\
-	str r1, [r0]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _080971C4 @ =EndingProcessAdamPanel\n\
-	str r1, [r0]\n\
-	b _08097270\n\
-	.align 2, 0\n\
-_080971BC: .4byte 0x00000236\n\
-_080971C0: .4byte 0x08633364\n\
-_080971C4: .4byte EndingProcessAdamPanel\n\
-_080971C8:\n\
-	cmp r5, #0x14\n\
-	bne _080971E4\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r1, r0\n\
-	strb r1, [r6]\n\
-	adds r0, r3, #0\n\
-	adds r0, #0x20\n\
-	adds r0, r4, r0\n\
-	ldr r1, _080971E0 @ =EndingProcessAnimalsScrolling\n\
-	str r1, [r0]\n\
-	b _08097270\n\
-	.align 2, 0\n\
-_080971E0: .4byte EndingProcessAnimalsScrolling\n\
-_080971E4:\n\
-	cmp r5, #0x1e\n\
-	bne _08097238\n\
-	ldr r0, _08097224 @ =0x0000012D\n\
-	bl SoundPlay\n\
-	ldr r4, _08097228 @ =gNonGameplayRam\n\
-	asrs r0, r7, #0x18\n\
-	lsls r2, r0, #3\n\
-	adds r2, r2, r0\n\
-	lsls r2, r2, #2\n\
-	adds r3, r2, r4\n\
-	ldr r0, _0809722C @ =0x00000236\n\
-	adds r3, r3, r0\n\
-	ldrb r1, [r3]\n\
-	movs r0, #0xd\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r1\n\
-	movs r1, #4\n\
-	orrs r0, r1\n\
-	strb r0, [r3]\n\
-	movs r1, #0x8e\n\
-	lsls r1, r1, #2\n\
-	adds r0, r4, r1\n\
-	adds r0, r2, r0\n\
-	ldr r1, _08097230 @ =0x08633F24\n\
-	str r1, [r0]\n\
-	movs r3, #0x8f\n\
-	lsls r3, r3, #2\n\
-	adds r4, r4, r3\n\
-	adds r2, r2, r4\n\
-	ldr r0, _08097234 @ =unk_97418\n\
-	b _0809726E\n\
-	.align 2, 0\n\
-_08097224: .4byte 0x0000012D\n\
-_08097228: .4byte gNonGameplayRam\n\
-_0809722C: .4byte 0x00000236\n\
-_08097230: .4byte 0x08633F24\n\
-_08097234: .4byte unk_97418\n\
-_08097238:\n\
-	cmp r5, #0xff\n\
-	bne _08097270\n\
-	asrs r0, r7, #0x18\n\
-	lsls r2, r0, #3\n\
-	adds r2, r2, r0\n\
-	lsls r2, r2, #2\n\
-	mov r0, ip\n\
-	adds r1, r2, r0\n\
-	movs r3, #0x8d\n\
-	lsls r3, r3, #2\n\
-	adds r1, r1, r3\n\
-	ldrb r3, [r1]\n\
-	movs r0, #2\n\
-	rsbs r0, r0, #0\n\
-	ands r0, r3\n\
-	strb r0, [r1]\n\
-	movs r0, #0x8e\n\
-	lsls r0, r0, #2\n\
-	add r0, ip\n\
-	adds r0, r2, r0\n\
-	ldr r1, _08097280 @ =0x086331EC\n\
-	str r1, [r0]\n\
-	movs r0, #0x8f\n\
-	lsls r0, r0, #2\n\
-	add r0, ip\n\
-	adds r2, r2, r0\n\
-	ldr r0, _08097284 @ =unk_96f00\n\
-_0809726E:\n\
-	str r0, [r2]\n\
-_08097270:\n\
-	lsrs r0, r7, #0x18\n\
-_08097272:\n\
-	add sp, #4\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_08097280: .4byte 0x086331EC\n\
-_08097284: .4byte unk_96f00\n\
-    .syntax divided\n");
+    s8 slot;
+
+    if (!descendingSearch)
+    {
+        for (slot = 0; slot < ARRAY_SIZE(INTRO_DATA.oam); slot++)
+        {
+            if (INTRO_DATA.oam[slot].type == 0)
+                break;
+        }
+        
+        if (slot > 19)
+            return 20;
+    }
+    else
+    {
+        for (slot = ARRAY_SIZE(INTRO_DATA.oam) - 1; slot >= 0; slot--)
+        {
+            if (INTRO_DATA.oam[slot].type == 0)
+                break;
+        }
+        
+        if (slot < 0)
+            return 20;
+    }
+    
+    DMA3_FILL_32(0, &INTRO_DATA.oam[slot], sizeof(struct SpecialCutsceneOam));
+
+    INTRO_DATA.oam[slot].xPosition = xPosition;
+    INTRO_DATA.oam[slot].yPosition = yPosition;
+    INTRO_DATA.oam[slot].type = type;
+    INTRO_DATA.oam[slot].unk_18_0 = 1;
+
+    if (type == 1)
+    {
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633e64;
+        INTRO_DATA.oam[slot].pFunction = EndingProcessMonologueCursor;
+    }
+    else if (type == 2)
+    {
+        INTRO_DATA.oam[slot].priority = 2;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86338d4;
+        INTRO_DATA.oam[slot].pFunction = unk_969e0;
+    }
+    else if (type == 3)
+    {
+        INTRO_DATA.oam[slot].priority = 2;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86339d4;
+        INTRO_DATA.oam[slot].pFunction = EndingProcessSr388RadarView;
+    }
+    else if (type == 4)
+    {
+        INTRO_DATA.oam[slot].priority = 2;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633c4c;
+        INTRO_DATA.oam[slot].pFunction = EndingProcessSamusViewRadarView;
+    }
+    else if (type == 5)
+    {
+        INTRO_DATA.oam[slot].priority = 2;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86331ec;
+        INTRO_DATA.oam[slot].pFunction = unk_96a70;
+    }
+    else if (type == 6)
+    {
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633e8c;
+        INTRO_DATA.oam[slot].pFunction = EndingProcessAdamTextCursor;
+    }
+    else if (type == 7)
+    {
+        INTRO_DATA.oam[slot].priority = 1;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633294;
+        INTRO_DATA.oam[slot].pFunction = EndingProcessAdamPanel;
+    }
+    else if (type == 8)
+    {
+        INTRO_DATA.oam[slot].priority = 1;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633434;
+        INTRO_DATA.oam[slot].pFunction = EndingProcessAdamIcon;
+    }
+    else if (type == 9)
+    {
+        INTRO_DATA.oam[slot].priority = 1;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633364;
+        INTRO_DATA.oam[slot].pFunction = EndingProcessAdamPanel;
+    }
+    else if (type == 20)
+    {
+        INTRO_DATA.oam[slot].unk_18_0 = 0;
+        INTRO_DATA.oam[slot].pFunction = EndingProcessAnimalsScrolling;
+    }
+    else if (type == 30)
+    {
+        SoundPlay(SOUND_12D);
+        INTRO_DATA.oam[slot].priority = 1;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633f24;
+        INTRO_DATA.oam[slot].pFunction = unk_97418;
+    }
+    else if (type == 255)
+    {
+        INTRO_DATA.oam[slot].unk_18_0 = 0;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86331ec;
+        INTRO_DATA.oam[slot].pFunction = unk_96f00;
+    }
+
+    return slot;
 }
 
-// 0x08097288
-NAKED_FUNCTION
+/**
+ * @brief 97288 | 9c | V-blank for the ending monologue
+ * 
+ */
 void EndingMonologueVblank(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	ldr r1, _080972EC @ =0x040000D4\n\
-	ldr r0, _080972F0 @ =gOamData\n\
-	str r0, [r1]\n\
-	movs r0, #0xe0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _080972F4 @ =0x84000100\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r2, _080972F8 @ =0x04000052\n\
-	ldr r0, _080972FC @ =gWrittenToBldalpha_Evb\n\
-	ldrh r0, [r0]\n\
-	lsls r0, r0, #8\n\
-	ldr r1, _08097300 @ =gWrittenToBldalpha_Eva\n\
-	ldrh r1, [r1]\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r1, _08097304 @ =0x04000054\n\
-	ldr r0, _08097308 @ =gWrittenToBldy\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	subs r1, #0x40\n\
-	ldr r0, _0809730C @ =gBg1XPosition\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r0, _08097310 @ =gBg1YPosition\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r0, _08097314 @ =0x0300122C\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r0, _08097318 @ =0x0300122E\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r0, _0809731C @ =0x03001230\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r0, _08097320 @ =0x03001232\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	bl unk_98158\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080972EC: .4byte 0x040000D4\n\
-_080972F0: .4byte gOamData\n\
-_080972F4: .4byte 0x84000100\n\
-_080972F8: .4byte 0x04000052\n\
-_080972FC: .4byte gWrittenToBldalpha_Evb\n\
-_08097300: .4byte gWrittenToBldalpha_Eva\n\
-_08097304: .4byte 0x04000054\n\
-_08097308: .4byte gWrittenToBldy\n\
-_0809730C: .4byte gBg1XPosition\n\
-_08097310: .4byte gBg1YPosition\n\
-_08097314: .4byte 0x0300122C\n\
-_08097318: .4byte 0x0300122E\n\
-_0809731C: .4byte 0x03001230\n\
-_08097320: .4byte 0x03001232\n\
-    .syntax divided\n");
+    DMA3_COPY_32(gOamData, OAM_BASE, OAM_SIZE / 4);
+
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_Evb, gWrittenToBldalpha_Eva));
+    WRITE_16(REG_BLDY, gWrittenToBldy);
+
+    WRITE_16(REG_BG1HOFS, gBg1XPosition);
+    WRITE_16(REG_BG1VOFS, gBg1YPosition);
+    WRITE_16(REG_BG2HOFS, gBg2XPosition);
+    WRITE_16(REG_BG2VOFS, gBg2YPosition);
+    WRITE_16(REG_BG3HOFS, gBg3XPosition);
+    WRITE_16(REG_BG3VOFS, gBg3YPosition);
+
+    unk_98158();
 }
 
-// 0x08097324
-NAKED_FUNCTION
+/**
+ * @brief 97324 | 94 | V-blank for the ending conversation and animals scenes
+ * 
+ */
 void EndingConversationAndAnimalsVblank(void)
 {
-    asm(" .syntax unified\n\
-	ldr r1, _08097380 @ =0x040000D4\n\
-	ldr r0, _08097384 @ =gOamData\n\
-	str r0, [r1]\n\
-	movs r0, #0xe0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08097388 @ =0x84000100\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r2, _0809738C @ =0x04000052\n\
-	ldr r0, _08097390 @ =gWrittenToBldalpha_Evb\n\
-	ldrh r0, [r0]\n\
-	lsls r0, r0, #8\n\
-	ldr r1, _08097394 @ =gWrittenToBldalpha_Eva\n\
-	ldrh r1, [r1]\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r1, _08097398 @ =0x04000054\n\
-	ldr r0, _0809739C @ =gWrittenToBldy\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	subs r1, #0x40\n\
-	ldr r0, _080973A0 @ =gBg1XPosition\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r0, _080973A4 @ =gBg1YPosition\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r0, _080973A8 @ =0x0300122C\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r0, _080973AC @ =0x0300122E\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r0, _080973B0 @ =0x03001230\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r0, _080973B4 @ =0x03001232\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	bx lr\n\
-	.align 2, 0\n\
-_08097380: .4byte 0x040000D4\n\
-_08097384: .4byte gOamData\n\
-_08097388: .4byte 0x84000100\n\
-_0809738C: .4byte 0x04000052\n\
-_08097390: .4byte gWrittenToBldalpha_Evb\n\
-_08097394: .4byte gWrittenToBldalpha_Eva\n\
-_08097398: .4byte 0x04000054\n\
-_0809739C: .4byte gWrittenToBldy\n\
-_080973A0: .4byte gBg1XPosition\n\
-_080973A4: .4byte gBg1YPosition\n\
-_080973A8: .4byte 0x0300122C\n\
-_080973AC: .4byte 0x0300122E\n\
-_080973B0: .4byte 0x03001230\n\
-_080973B4: .4byte 0x03001232\n\
-    .syntax divided\n");
+    DMA3_COPY_32(gOamData, OAM_BASE, OAM_SIZE / 4);
+
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_Evb, gWrittenToBldalpha_Eva));
+    WRITE_16(REG_BLDY, gWrittenToBldy);
+
+    WRITE_16(REG_BG1HOFS, gBg1XPosition);
+    WRITE_16(REG_BG1VOFS, gBg1YPosition);
+    WRITE_16(REG_BG2HOFS, gBg2XPosition);
+    WRITE_16(REG_BG2VOFS, gBg2YPosition);
+    WRITE_16(REG_BG3HOFS, gBg3XPosition);
+    WRITE_16(REG_BG3VOFS, gBg3YPosition);
 }
 
-// 0x080973B8
-NAKED_FUNCTION
-void EndingGetPositionAndSlotOfOamByType_2(void)
+/**
+ * @brief 973b8 | 60 | Gets the position and slot of an OAM by type
+ * 
+ */
+u8 EndingGetPositionAndSlotOfOamByType_2(u8 type, s16* pXPosition, s16* pYPosition)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	adds r4, r1, #0\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r5, r0, #0x18\n\
-	movs r1, #0\n\
-	ldr r7, _080973F0 @ =gNonGameplayRam\n\
-	movs r6, #0x8b\n\
-	lsls r6, r6, #2\n\
-_080973C8:\n\
-	lsls r0, r1, #3\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r3, r0, r7\n\
-	adds r0, r3, r6\n\
-	ldrb r0, [r0]\n\
-	cmp r0, r5\n\
-	bne _080973F8\n\
-	movs r5, #0x8a\n\
-	lsls r5, r5, #2\n\
-	adds r0, r3, r5\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r4]\n\
-	ldr r4, _080973F4 @ =0x0000022A\n\
-	adds r0, r3, r4\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r2]\n\
-	adds r0, r1, #0\n\
-	b _08097410\n\
-	.align 2, 0\n\
-_080973F0: .4byte gNonGameplayRam\n\
-_080973F4: .4byte 0x0000022A\n\
-_080973F8:\n\
-	adds r0, r1, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r1, r0, #0x18\n\
-	cmp r1, #0x13\n\
-	bls _080973C8\n\
-	movs r5, #0x96\n\
-	lsls r5, r5, #1\n\
-	adds r0, r5, #0\n\
-	strh r0, [r4]\n\
-	movs r0, #0xc8\n\
-	strh r0, [r2]\n\
-	movs r0, #0x14\n\
-_08097410:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    u8 slot;
+
+    for (slot = 0; slot < ARRAY_SIZE(INTRO_DATA.oam); slot++)
+    {
+        if (INTRO_DATA.oam[slot].type == type)
+        {
+            *pXPosition = INTRO_DATA.oam[slot].xPosition;
+            *pYPosition = INTRO_DATA.oam[slot].yPosition;
+        
+            return slot;
+        }
+    }
+
+    *pXPosition = 300;
+    *pYPosition = 200;
+        
+    return ARRAY_SIZE(INTRO_DATA.oam);
 }
 
-// 0x08097418
-NAKED_FUNCTION
-void unk_97418(void)
+/**
+ * @brief 97418 | 4 | Empty function
+ * 
+ */
+void unk_97418(struct SpecialCutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	bx lr\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    return;
 }

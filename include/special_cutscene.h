@@ -8,6 +8,8 @@
 boolu32 NewFileIntroCheckMonologueEnded(void);
 boolu32 EndingCheckMonologueEnded(void);
 void SpecialCutsceneProcessMonologue(void);
+void unk_98158(void);
+void EndingProcessAdamText(void);
 void IntroProcessText(void);
 void Dma3Transfer_Unused1(void* src, void* dst, u16 size, u16 count);
 void Dma3Transfer_Unused2(void* src, void* dst, u16 size, u16 count);
