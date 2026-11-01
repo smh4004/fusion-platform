@@ -27921,18 +27921,18 @@
     "size": 1
   },
   {
-    "path": "Blob_74dc48_74e620.bin",
-    "count": "0x9D8",
+    "path": "ending/digits_top.gfx",
+    "count": "0x280",
     "addr": {
-      "us": "0x74DC48"
+      "us": "0x74E650"
     },
     "size": 1
   },
   {
-    "path": "Blob_74e650_74eb50.bin",
-    "count": "0x500",
+    "path": "ending/digits_bottom.gfx",
+    "count": "0x280",
     "addr": {
-      "us": "0x74E650"
+      "us": "0x74E8D0"
     },
     "size": 1
   },
