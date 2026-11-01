@@ -2116,227 +2116,120 @@ _0809F92C: .4byte unk_a0424\n\
     .syntax divided\n");
 }
 
-// 0x0809F930
-NAKED_FUNCTION
+/**
+ * @brief 9f930 | 1a4 | TODO
+ * 
+ */
 void FileSelectProcessSamusHead(struct FileSelectOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	adds r4, r0, #0\n\
-	ldrb r0, [r4, #9]\n\
-	cmp r0, #0\n\
-	bne _0809FA2C\n\
-	ldr r0, _0809F958 @ =gChangedInput\n\
-	ldrh r1, [r0]\n\
-	movs r0, #0x40\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _0809F994\n\
-	ldr r1, _0809F95C @ =gNonGameplayRam\n\
-	ldrb r0, [r1, #0xd]\n\
-	cmp r0, #3\n\
-	beq _0809F974\n\
-	cmp r0, #3\n\
-	ble _0809F960\n\
-	cmp r0, #4\n\
-	beq _0809F984\n\
-	b _0809F9F6\n\
-	.align 2, 0\n\
-_0809F958: .4byte gChangedInput\n\
-_0809F95C: .4byte gNonGameplayRam\n\
-_0809F960:\n\
-	cmp r0, #1\n\
-	blt _0809F9F6\n\
-	movs r0, #0xf\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r4, #2]\n\
-	subs r0, #0x10\n\
-	strh r0, [r4, #2]\n\
-	ldrb r0, [r1, #0xd]\n\
-	subs r0, #1\n\
-	b _0809F9D0\n\
-_0809F974:\n\
-	movs r0, #0xf\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r4, #2]\n\
-	subs r0, #0x25\n\
-	strh r0, [r4, #2]\n\
-	ldrb r0, [r1, #0xd]\n\
-	subs r0, #1\n\
-	b _0809F9D0\n\
-_0809F984:\n\
-	movs r0, #0xf\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r4, #2]\n\
-	subs r0, #0x28\n\
-	strh r0, [r4, #2]\n\
-	ldrb r0, [r1, #0xd]\n\
-	subs r0, #1\n\
-	b _0809F9D0\n\
-_0809F994:\n\
-	movs r0, #0x80\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _0809F9F6\n\
-	ldr r1, _0809F9B0 @ =gNonGameplayRam\n\
-	ldrb r0, [r1, #0xd]\n\
-	cmp r0, #2\n\
-	beq _0809F9C2\n\
-	cmp r0, #2\n\
-	ble _0809F9B4\n\
-	cmp r0, #3\n\
-	beq _0809F9E0\n\
-	b _0809F9F6\n\
-	.align 2, 0\n\
-_0809F9B0: .4byte gNonGameplayRam\n\
-_0809F9B4:\n\
-	cmp r0, #0\n\
-	blt _0809F9F6\n\
-	movs r0, #0xf\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r4, #2]\n\
-	adds r0, #0x10\n\
-	b _0809F9CA\n\
-_0809F9C2:\n\
-	movs r0, #0xf\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r4, #2]\n\
-	adds r0, #0x25\n\
-_0809F9CA:\n\
-	strh r0, [r4, #2]\n\
-	ldrb r0, [r1, #0xd]\n\
-	adds r0, #1\n\
-_0809F9D0:\n\
-	strb r0, [r1, #0xd]\n\
-	ldr r0, _0809F9DC @ =0x000001F9\n\
-	bl SoundPlay\n\
-	b _0809F9F6\n\
-	.align 2, 0\n\
-_0809F9DC: .4byte 0x000001F9\n\
-_0809F9E0:\n\
-	movs r0, #0xf\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r4, #2]\n\
-	adds r0, #0x28\n\
-	strh r0, [r4, #2]\n\
-	ldrb r0, [r1, #0xd]\n\
-	adds r0, #1\n\
-	strb r0, [r1, #0xd]\n\
-	ldr r0, _0809FA1C @ =0x000001F9\n\
-	bl SoundPlay\n\
-_0809F9F6:\n\
-	ldr r0, _0809FA20 @ =gNonGameplayRam\n\
-	ldrb r0, [r0, #0xd]\n\
-	cmp r0, #3\n\
-	beq _0809FACC\n\
-	ldr r0, _0809FA24 @ =gChangedInput\n\
-	ldrh r1, [r0]\n\
-	movs r0, #9\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _0809FACC\n\
-	movs r0, #0\n\
-	strb r0, [r4, #7]\n\
-	strb r0, [r4, #6]\n\
-	movs r0, #0x64\n\
-	strb r0, [r4, #9]\n\
-	ldr r0, _0809FA28 @ =0x000001FB\n\
-	bl SoundPlay\n\
-	b _0809FACC\n\
-	.align 2, 0\n\
-_0809FA1C: .4byte 0x000001F9\n\
-_0809FA20: .4byte gNonGameplayRam\n\
-_0809FA24: .4byte gChangedInput\n\
-_0809FA28: .4byte 0x000001FB\n\
-_0809FA2C:\n\
-	cmp r0, #1\n\
-	bne _0809FA60\n\
-	ldrb r0, [r4, #6]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r4, #0x14]\n\
-	adds r1, r1, r0\n\
-	ldrb r0, [r1, #4]\n\
-	ldrb r2, [r4, #7]\n\
-	cmp r0, r2\n\
-	bne _0809FA4C\n\
-	ldrb r1, [r1, #0xc]\n\
-	cmp r1, #0\n\
-	bne _0809FA4C\n\
-	strb r1, [r4, #7]\n\
-	movs r0, #0x64\n\
-	strb r0, [r4, #9]\n\
-_0809FA4C:\n\
-	ldr r0, _0809FA5C @ =gNonGameplayRam\n\
-	ldrb r0, [r0, #0xc]\n\
-	cmp r0, #0xb\n\
-	bne _0809FACC\n\
-	movs r0, #0x64\n\
-	strb r0, [r4, #9]\n\
-	b _0809FACC\n\
-	.align 2, 0\n\
-_0809FA5C: .4byte gNonGameplayRam\n\
-_0809FA60:\n\
-	cmp r0, #0x64\n\
-	bne _0809FAB4\n\
-	ldrb r0, [r4, #6]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r4, #0x14]\n\
-	adds r1, r1, r0\n\
-	ldrb r0, [r1, #4]\n\
-	ldrb r1, [r4, #7]\n\
-	ldr r0, _0809FA88 @ =gNonGameplayRam\n\
-	movs r2, #0xa\n\
-	ldrsh r1, [r0, r2]\n\
-	cmp r1, #0\n\
-	bne _0809FA90\n\
-	strb r1, [r4, #7]\n\
-	strb r1, [r4, #6]\n\
-	ldr r0, _0809FA8C @ =0x08740A48\n\
-	str r0, [r4, #0x14]\n\
-	strb r1, [r4, #9]\n\
-	b _0809FACC\n\
-	.align 2, 0\n\
-_0809FA88: .4byte gNonGameplayRam\n\
-_0809FA8C: .4byte 0x08740A48\n\
-_0809FA90:\n\
-	cmp r1, #5\n\
-	beq _0809FAA0\n\
-	cmp r1, #7\n\
-	beq _0809FAA0\n\
-	cmp r1, #0xc\n\
-	beq _0809FAA0\n\
-	cmp r1, #0xd\n\
-	bne _0809FACC\n\
-_0809FAA0:\n\
-	movs r0, #0\n\
-	strb r0, [r4, #7]\n\
-	strb r0, [r4, #6]\n\
-	ldr r0, _0809FAB0 @ =0x08740A70\n\
-	str r0, [r4, #0x14]\n\
-	movs r0, #0xc8\n\
-	strb r0, [r4, #9]\n\
-	b _0809FACC\n\
-	.align 2, 0\n\
-_0809FAB0: .4byte 0x08740A70\n\
-_0809FAB4:\n\
-	ldrb r0, [r4, #6]\n\
-	lsls r0, r0, #3\n\
-	ldr r1, [r4, #0x14]\n\
-	adds r1, r1, r0\n\
-	ldrb r0, [r1, #4]\n\
-	ldrb r2, [r4, #7]\n\
-	cmp r0, r2\n\
-	bne _0809FACC\n\
-	ldrb r1, [r1, #0xc]\n\
-	cmp r1, #0\n\
-	bne _0809FACC\n\
-	strb r1, [r4, #7]\n\
-_0809FACC:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    const struct FrameData* pFrame;
+    s32 menuState;
+
+    if (pOam->action == 0)
+    {
+        if (gChangedInput & KEY_UP)
+        {
+            switch (FILE_SELECT_DATA.currentFile)
+            {
+                case 1:
+                case 2:
+                    pOam->xPosition = 15;
+                    pOam->yPosition -= 16;
+                    FILE_SELECT_DATA.currentFile--;
+                    SoundPlay(0x1F9);
+                    break;
+
+                case 3:
+                    pOam->xPosition = 15;
+                    pOam->yPosition -= 37;
+                    FILE_SELECT_DATA.currentFile--;
+                    SoundPlay(0x1F9);
+                    break;
+
+                case 4:
+                    pOam->xPosition = 15;
+                    pOam->yPosition -= 40;
+                    FILE_SELECT_DATA.currentFile--;
+                    SoundPlay(0x1F9);
+                    break;
+            }
+        }
+        else if (gChangedInput & KEY_DOWN)
+        {
+            switch (FILE_SELECT_DATA.currentFile)
+            {
+                case 0:
+                case 1:
+                    pOam->xPosition = 15;
+                    pOam->yPosition += 16;
+                    FILE_SELECT_DATA.currentFile++;
+                    SoundPlay(0x1F9);
+                    break;
+
+                case 2:
+                    pOam->xPosition = 15;
+                    pOam->yPosition += 37;
+                    FILE_SELECT_DATA.currentFile++;
+                    SoundPlay(0x1F9);
+                    break;
+
+                case 3:
+                    pOam->xPosition = 15;
+                    pOam->yPosition += 40;
+                    FILE_SELECT_DATA.currentFile++;
+                    SoundPlay(0x1F9);
+                    break;
+            }
+        }
+
+        if (FILE_SELECT_DATA.currentFile != 3 && gChangedInput & (KEY_A | KEY_START))
+        {
+            pOam->animationDurationCounter = 0;
+            pOam->currentAnimationFrame = 0;
+            pOam->action = 100;
+            SoundPlay(0x1FB);
+        }
+    }
+    else if (pOam->action == 1)
+    {
+        pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+        if (pFrame->timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+        {
+            pOam->animationDurationCounter = 0;
+            pOam->action = 100;
+        }
+
+        if (FILE_SELECT_DATA.stage == 11)
+            pOam->action = 100;
+    }
+    else if (pOam->action == 100)
+    {
+        pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+        if (pFrame->timer == pOam->animationDurationCounter)
+            menuState = FILE_SELECT_DATA.menuState;
+        else
+            menuState = FILE_SELECT_DATA.menuState;
+        if (menuState == 0)
+        {
+            pOam->animationDurationCounter = menuState;
+            pOam->currentAnimationFrame = menuState;
+            pOam->pOam = (const struct FrameData*)0x8740a48;
+            pOam->action = menuState;
+        }
+        else if (menuState == 5 || menuState == 7 || menuState == 12 || menuState == 13)
+        {
+            pOam->animationDurationCounter = 0;
+            pOam->currentAnimationFrame = 0;
+            pOam->pOam = (const struct FrameData*)0x8740a70;
+            pOam->action = 200;
+        }
+    }
+    else
+    {
+        pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+        if (pFrame->timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+            pOam->animationDurationCounter = 0;
+    }
 }
 
 // 0x0809FAD4
@@ -4940,192 +4833,47 @@ void FileSelectDestroyOamOfType(u8 type)
     }
 }
 
-// 0x080A103C
-NAKED_FUNCTION
+/**
+ * @brief a103c | 190 | TODO
+ * 
+ */
 void FileSelectSetUpAreaNameOam(u8 type, s16 xPosition, s16 yPosition, s16 area)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	adds r4, r3, #0\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	lsls r4, r4, #0x10\n\
-	lsrs r4, r4, #0x10\n\
-	lsls r1, r1, #0x10\n\
-	asrs r1, r1, #0x10\n\
-	lsls r2, r2, #0x10\n\
-	asrs r2, r2, #0x10\n\
-	movs r3, #1\n\
-	bl FileSelectSetupOam\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r2, r0, #0x18\n\
-	lsls r4, r4, #0x10\n\
-	asrs r0, r4, #0x10\n\
-	cmp r0, #6\n\
-	bls _080A1064\n\
-	b _080A1198\n\
-_080A1064:\n\
-	lsls r0, r0, #2\n\
-	ldr r1, _080A1070 @ =_080A1074\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_080A1070: .4byte _080A1074\n\
-_080A1074: @ jump table\n\
-	.4byte _080A1198 @ case 0\n\
-	.4byte _080A1090 @ case 1\n\
-	.4byte _080A10BC @ case 2\n\
-	.4byte _080A10E8 @ case 3\n\
-	.4byte _080A1114 @ case 4\n\
-	.4byte _080A1140 @ case 5\n\
-	.4byte _080A116C @ case 6\n\
-_080A1090:\n\
-	ldr r0, _080A10B0 @ =gNonGameplayRam\n\
-	lsls r1, r2, #3\n\
-	subs r1, r1, r2\n\
-	lsls r1, r1, #2\n\
-	adds r0, #0x2c\n\
-	adds r1, r1, r0\n\
-	ldr r3, _080A10B4 @ =0x0879E944\n\
-	ldr r0, _080A10B8 @ =0x03000011\n\
-	movs r2, #0\n\
-	ldrsb r2, [r0, r2]\n\
-	lsls r0, r2, #3\n\
-	subs r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r3, #4\n\
-	b _080A11B2\n\
-	.align 2, 0\n\
-_080A10B0: .4byte gNonGameplayRam\n\
-_080A10B4: .4byte 0x0879E944\n\
-_080A10B8: .4byte 0x03000011\n\
-_080A10BC:\n\
-	ldr r0, _080A10DC @ =gNonGameplayRam\n\
-	lsls r1, r2, #3\n\
-	subs r1, r1, r2\n\
-	lsls r1, r1, #2\n\
-	adds r0, #0x2c\n\
-	adds r1, r1, r0\n\
-	ldr r3, _080A10E0 @ =0x0879E944\n\
-	ldr r0, _080A10E4 @ =0x03000011\n\
-	movs r2, #0\n\
-	ldrsb r2, [r0, r2]\n\
-	lsls r0, r2, #3\n\
-	subs r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r3, #8\n\
-	b _080A11B2\n\
-	.align 2, 0\n\
-_080A10DC: .4byte gNonGameplayRam\n\
-_080A10E0: .4byte 0x0879E944\n\
-_080A10E4: .4byte 0x03000011\n\
-_080A10E8:\n\
-	ldr r0, _080A1108 @ =gNonGameplayRam\n\
-	lsls r1, r2, #3\n\
-	subs r1, r1, r2\n\
-	lsls r1, r1, #2\n\
-	adds r0, #0x2c\n\
-	adds r1, r1, r0\n\
-	ldr r3, _080A110C @ =0x0879E944\n\
-	ldr r0, _080A1110 @ =0x03000011\n\
-	movs r2, #0\n\
-	ldrsb r2, [r0, r2]\n\
-	lsls r0, r2, #3\n\
-	subs r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r3, #0xc\n\
-	b _080A11B2\n\
-	.align 2, 0\n\
-_080A1108: .4byte gNonGameplayRam\n\
-_080A110C: .4byte 0x0879E944\n\
-_080A1110: .4byte 0x03000011\n\
-_080A1114:\n\
-	ldr r0, _080A1134 @ =gNonGameplayRam\n\
-	lsls r1, r2, #3\n\
-	subs r1, r1, r2\n\
-	lsls r1, r1, #2\n\
-	adds r0, #0x2c\n\
-	adds r1, r1, r0\n\
-	ldr r3, _080A1138 @ =0x0879E944\n\
-	ldr r0, _080A113C @ =0x03000011\n\
-	movs r2, #0\n\
-	ldrsb r2, [r0, r2]\n\
-	lsls r0, r2, #3\n\
-	subs r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r3, #0x10\n\
-	b _080A11B2\n\
-	.align 2, 0\n\
-_080A1134: .4byte gNonGameplayRam\n\
-_080A1138: .4byte 0x0879E944\n\
-_080A113C: .4byte 0x03000011\n\
-_080A1140:\n\
-	ldr r0, _080A1160 @ =gNonGameplayRam\n\
-	lsls r1, r2, #3\n\
-	subs r1, r1, r2\n\
-	lsls r1, r1, #2\n\
-	adds r0, #0x2c\n\
-	adds r1, r1, r0\n\
-	ldr r3, _080A1164 @ =0x0879E944\n\
-	ldr r0, _080A1168 @ =0x03000011\n\
-	movs r2, #0\n\
-	ldrsb r2, [r0, r2]\n\
-	lsls r0, r2, #3\n\
-	subs r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r3, #0x14\n\
-	b _080A11B2\n\
-	.align 2, 0\n\
-_080A1160: .4byte gNonGameplayRam\n\
-_080A1164: .4byte 0x0879E944\n\
-_080A1168: .4byte 0x03000011\n\
-_080A116C:\n\
-	ldr r0, _080A118C @ =gNonGameplayRam\n\
-	lsls r1, r2, #3\n\
-	subs r1, r1, r2\n\
-	lsls r1, r1, #2\n\
-	adds r0, #0x2c\n\
-	adds r1, r1, r0\n\
-	ldr r3, _080A1190 @ =0x0879E944\n\
-	ldr r0, _080A1194 @ =0x03000011\n\
-	movs r2, #0\n\
-	ldrsb r2, [r0, r2]\n\
-	lsls r0, r2, #3\n\
-	subs r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r3, #0x18\n\
-	b _080A11B2\n\
-	.align 2, 0\n\
-_080A118C: .4byte gNonGameplayRam\n\
-_080A1190: .4byte 0x0879E944\n\
-_080A1194: .4byte 0x03000011\n\
-_080A1198:\n\
-	ldr r0, _080A11C0 @ =gNonGameplayRam\n\
-	lsls r1, r2, #3\n\
-	subs r1, r1, r2\n\
-	lsls r1, r1, #2\n\
-	adds r0, #0x2c\n\
-	adds r1, r1, r0\n\
-	ldr r3, _080A11C4 @ =0x0879E944\n\
-	ldr r0, _080A11C8 @ =0x03000011\n\
-	movs r2, #0\n\
-	ldrsb r2, [r0, r2]\n\
-	lsls r0, r2, #3\n\
-	subs r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-_080A11B2:\n\
-	adds r0, r0, r3\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080A11C0: .4byte gNonGameplayRam\n\
-_080A11C4: .4byte 0x0879E944\n\
-_080A11C8: .4byte 0x03000011\n\
-    .syntax divided\n");
+    u8 slot;
+
+    slot = FileSelectSetupOam(type, xPosition, yPosition, 1);
+
+    switch (area)
+    {
+        case 1:
+            FILE_SELECT_DATA.oam[slot].pOam = sFileSelectAreaNameOamPointers[gLanguage][1];
+            break;
+
+        case 2:
+            FILE_SELECT_DATA.oam[slot].pOam = sFileSelectAreaNameOamPointers[gLanguage][2];
+            break;
+
+        case 3:
+            FILE_SELECT_DATA.oam[slot].pOam = sFileSelectAreaNameOamPointers[gLanguage][3];
+            break;
+
+        case 4:
+            FILE_SELECT_DATA.oam[slot].pOam = sFileSelectAreaNameOamPointers[gLanguage][4];
+            break;
+
+        case 5:
+            FILE_SELECT_DATA.oam[slot].pOam = sFileSelectAreaNameOamPointers[gLanguage][5];
+            break;
+
+        case 6:
+            FILE_SELECT_DATA.oam[slot].pOam = sFileSelectAreaNameOamPointers[gLanguage][6];
+            break;
+
+        case 0:
+        default:
+            FILE_SELECT_DATA.oam[slot].pOam = sFileSelectAreaNameOamPointers[gLanguage][0];
+            break;
+    }
 }
 
 /**
