@@ -9,7 +9,7 @@ void FileSelectInit(void);
 void FileSelectVblank(void);
 void unk_9eaa4(void);
 u8 FileSelectInput(void);
-u8 FileSelectSetupOam();
+u8 FileSelectSetupOam(u32 type, u32 xPosition, u32 yPosition, u32 unused);
 void FileSelectProcessSamusHead(struct FileSelectOam* pOam);
 void FileSelectProcessCursor(struct FileSelectOam* pOam);
 void FileSelectProcessDeleteArrow(struct FileSelectOam* pOam);

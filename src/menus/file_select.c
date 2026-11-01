@@ -1598,8 +1598,7 @@ _0809F50A:\n\
 
 // 0x0809F518
 NAKED_FUNCTION
-u8 FileSelectSetupOam(type, xPosition, yPosition, unused)
-u8 type; u16 xPosition; u16 yPosition; u8 unused;
+u8 FileSelectSetupOam(u32 type, u32 xPosition, u32 yPosition, u32 unused)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
