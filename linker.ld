@@ -496,7 +496,20 @@ SECTIONS {
         src/new_file_intro.o(.text);
         src/title_intro.o(.text);
 
-        asm/disasm_0x080930C0.o(.text);
+        src/intro_space_view.o(.text);
+        src/ending_bsl_crashing.o(.text);
+        src/ending_in_ship.o(.text);
+        src/died_on_sr388_collision.o(.text);
+        src/special_cutscene.o(.text);
+        src/cutscenes/cutscene.o(.text);
+        src/cutscenes/elevator_monologue.o(.text);
+        src/cutscenes/internal_monologue.o(.text);
+        src/cutscenes/federation_monologue.o(.text);
+        src/cutscenes/secret_conversation.o(.text);
+        src/cutscenes/restricted_lab_detaching.o(.text);
+        src/cutscenes/bsl_exploding.o(.text);
+        src/cutscenes/cutscene_monologue.o(.text);
+        src/cutscenes/cutscene_utils.o(.text);
 
         src/sa_x_close_up.o(.text);
 

@@ -16,5 +16,6 @@ void unk_92d0c(struct SpecialCutsceneOam* pOam);
 void TitleIntroProcessDriftingShip(struct SpecialCutsceneOam* pOam);
 
 u8 TitleIntroSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 descendingSearch);
+void IntroSetupBigNumberOam(u8 type, s16 xPosition, s16 yPosition, u16 value);
 
 #endif /* TITLE_INTRO_H */
