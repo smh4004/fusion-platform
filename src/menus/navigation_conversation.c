@@ -6,6 +6,7 @@
 
 #include "data/event_data.h"
 #include "data/menus/pause_screen_misc_data.h"
+#include "data/sa_x_close_up.h"
 
 #include "constants/connection.h"
 #include "constants/event.h"
@@ -16,8 +17,21 @@
 #include "structs/event.h"
 #include "structs/menus/pause_screen.h"
 
+#include "audio_wrappers.h"
+#include "dma.h"
+#include "syscalls.h"
 #include "text.h"
 
+#include "constants/audio.h"
+
+
+static Func_T sNavConversationPopUpFunctions[3] = {
+    unk_7bde0,
+    NavigationConversationUpdateXParasitePopUp,
+    NavigationConversationClearPopUpGraphics
+};
+
+static u8 sBlob_79c17c_79c27c[] = INCBIN_U8("data/Blob_79c17c_79c27c.bin");
 
 // 0x08079AFC
 NAKED_FUNCTION
@@ -3180,102 +3194,73 @@ _0807B4BC:\n\
     .syntax divided\n");
 }
 
-// 0x0807B4C4
-NAKED_FUNCTION
+/**
+ * @brief 7b4c4 | a8 | Scrolls the map towards a destination, returns whether it reached it
+ * 
+ */
 u8 NavigationConversationScrollMapToDestination(u8 x, u8 y)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	lsls r1, r1, #0x18\n\
-	lsrs r1, r1, #0x18\n\
-	movs r2, #1\n\
-	mov ip, r2\n\
-	movs r2, #0xf\n\
-	subs r2, r2, r0\n\
-	lsls r2, r2, #3\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #2\n\
-	subs r5, r3, r2\n\
-	movs r0, #0xa\n\
-	subs r0, r0, r1\n\
-	lsls r0, r0, #3\n\
-	subs r6, r3, r0\n\
-	ldr r1, _0807B520 @ =gBackgroundPositions\n\
-	ldrh r4, [r1, #0xc]\n\
-	subs r2, r4, r5\n\
-	ldrh r0, [r1, #0xe]\n\
-	subs r3, r0, r6\n\
-	cmp r2, #0\n\
-	bge _0807B4F6\n\
-	rsbs r2, r2, #0\n\
-_0807B4F6:\n\
-	cmp r3, #0\n\
-	bge _0807B4FC\n\
-	rsbs r3, r3, #0\n\
-_0807B4FC:\n\
-	asrs r0, r2, #4\n\
-	adds r7, r0, #1\n\
-	asrs r0, r3, #4\n\
-	adds r3, r0, #1\n\
-	subs r2, r4, r5\n\
-	cmp r2, #0\n\
-	beq _0807B534\n\
-	movs r0, #0\n\
-	mov ip, r0\n\
-	cmp r2, #0\n\
-	ble _0807B524\n\
-	subs r0, r4, r7\n\
-	strh r0, [r1, #0xc]\n\
-	ldrh r0, [r1, #0xc]\n\
-	cmp r0, r5\n\
-	bge _0807B534\n\
-	b _0807B532\n\
-	.align 2, 0\n\
-_0807B520: .4byte gBackgroundPositions\n\
-_0807B524:\n\
-	cmp r2, #0\n\
-	bge _0807B534\n\
-	adds r0, r4, r7\n\
-	strh r0, [r1, #0xc]\n\
-	ldrh r0, [r1, #0xc]\n\
-	cmp r0, r5\n\
-	ble _0807B534\n\
-_0807B532:\n\
-	strh r5, [r1, #0xc]\n\
-_0807B534:\n\
-	adds r4, r1, #0\n\
-	ldrh r0, [r4, #0xe]\n\
-	subs r2, r0, r6\n\
-	cmp r2, #0\n\
-	beq _0807B564\n\
-	movs r5, #0\n\
-	mov ip, r5\n\
-	cmp r2, #0\n\
-	ble _0807B554\n\
-	subs r0, r0, r3\n\
-	strh r0, [r4, #0xe]\n\
-	ldrh r0, [r4, #0xe]\n\
-	cmp r0, r6\n\
-	bge _0807B564\n\
-	strh r6, [r4, #0xe]\n\
-	b _0807B564\n\
-_0807B554:\n\
-	cmp r2, #0\n\
-	bge _0807B564\n\
-	adds r0, r0, r3\n\
-	strh r0, [r1, #0xe]\n\
-	ldrh r0, [r1, #0xe]\n\
-	cmp r0, r6\n\
-	ble _0807B564\n\
-	strh r6, [r1, #0xe]\n\
-_0807B564:\n\
-	mov r0, ip\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-    .syntax divided\n");
+    s32 ended;
+    s32 targetX;
+    s32 targetY;
+    s32 diffX;
+    s32 diffY;
+    s32 speedX;
+
+    ended = TRUE;
+
+    targetX = BLOCK_SIZE * 8 - (15 - x) * 8;
+    targetY = BLOCK_SIZE * 8 - (10 - y) * 8;
+
+    diffX = gBackgroundPositions.bg[3].x - targetX;
+    diffY = gBackgroundPositions.bg[3].y - targetY;
+
+    if (diffX < 0)
+        diffX = -diffX;
+    if (diffY < 0)
+        diffY = -diffY;
+
+    // Scroll speed, diffY is reused for the vertical speed
+    speedX = (diffX >> 4) + 1;
+    diffY = (diffY >> 4) + 1;
+
+    diffX = gBackgroundPositions.bg[3].x - targetX;
+    if (diffX != 0)
+    {
+        ended = FALSE;
+        if (diffX > 0)
+        {
+            gBackgroundPositions.bg[3].x -= speedX;
+            if (gBackgroundPositions.bg[3].x < targetX)
+                gBackgroundPositions.bg[3].x = targetX;
+        }
+        else if (diffX < 0)
+        {
+            gBackgroundPositions.bg[3].x += speedX;
+            if (gBackgroundPositions.bg[3].x > targetX)
+                gBackgroundPositions.bg[3].x = targetX;
+        }
+    }
+
+    diffX = gBackgroundPositions.bg[3].y - targetY;
+    if (diffX != 0)
+    {
+        ended = FALSE;
+        if (diffX > 0)
+        {
+            gBackgroundPositions.bg[3].y -= diffY;
+            if (gBackgroundPositions.bg[3].y < targetY)
+                gBackgroundPositions.bg[3].y = targetY;
+        }
+        else if (diffX < 0)
+        {
+            gBackgroundPositions.bg[3].y += diffY;
+            if (gBackgroundPositions.bg[3].y > targetY)
+                gBackgroundPositions.bg[3].y = targetY;
+        }
+    }
+
+    return ended;
 }
 
 // 0x0807B56C
@@ -4354,47 +4339,20 @@ _0807BD8C: .4byte 0x85000008\n\
     .syntax divided\n");
 }
 
-// 0x0807BD90
-NAKED_FUNCTION
+/**
+ * @brief 7bd90 | 50 | Updates the navigation conversation pop-up
+ * 
+ */
 void NavigationConversationUpdatePopUp(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	ldr r4, _0807BDD0 @ =gNonGameplayRam\n\
-	movs r0, #0x86\n\
-	lsls r0, r0, #2\n\
-	adds r2, r4, r0\n\
-	ldrb r0, [r2]\n\
-	cmp r0, #0\n\
-	beq _0807BDC8\n\
-	ldr r0, _0807BDD4 @ =0x0000021B\n\
-	adds r1, r4, r0\n\
-	ldrb r0, [r1]\n\
-	adds r0, #1\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807BDD8 @ =0x0879C170\n\
-	ldrb r0, [r2]\n\
-	subs r0, #1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	bl _call_via_r0\n\
-	ldr r1, _0807BDDC @ =0x0000021D\n\
-	adds r0, r4, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	beq _0807BDC8\n\
-	bl NavigationConversationFadeInPopUpPalette\n\
-_0807BDC8:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807BDD0: .4byte gNonGameplayRam\n\
-_0807BDD4: .4byte 0x0000021B\n\
-_0807BDD8: .4byte 0x0879C170\n\
-_0807BDDC: .4byte 0x0000021D\n\
-    .syntax divided\n");
+    if (PAUSE_SCREEN_DATA.currentPopUp == 0)
+        return;
+
+    PAUSE_SCREEN_DATA.unk_21B++;
+    sNavConversationPopUpFunctions[PAUSE_SCREEN_DATA.currentPopUp - 1]();
+
+    if (PAUSE_SCREEN_DATA.unk_21D != 0)
+        NavigationConversationFadeInPopUpPalette();
 }
 
 // 0x0807BDE0
@@ -5078,82 +5036,34 @@ _0807C314: .4byte 0x80000040\n\
     .syntax divided\n");
 }
 
-// 0x0807C318
-NAKED_FUNCTION
+/**
+ * @brief 7c318 | 9c | Clears the navigation conversation pop-up graphics
+ * 
+ */
 void NavigationConversationClearPopUpGraphics(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	sub sp, #8\n\
-	movs r5, #5\n\
-	ldr r4, _0807C390 @ =0x06015700\n\
-	movs r6, #0x20\n\
-_0807C322:\n\
-	str r6, [sp]\n\
-	movs r0, #3\n\
-	movs r1, #1\n\
-	rsbs r1, r1, #0\n\
-	adds r2, r4, #0\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #1\n\
-	bl BitFill\n\
-	ldr r0, _0807C394 @ =0xFFFFFC00\n\
-	adds r4, r4, r0\n\
-	subs r5, #1\n\
-	cmp r5, #0\n\
-	bge _0807C322\n\
-	movs r5, #0\n\
-	str r5, [sp, #4]\n\
-	ldr r1, _0807C398 @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _0807C39C @ =0x050003E0\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0807C3A0 @ =0x85000008\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r4, _0807C3A4 @ =gNonGameplayRam\n\
-	ldr r1, _0807C3A8 @ =0x0000021A\n\
-	adds r0, r4, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #3\n\
-	bne _0807C364\n\
-	ldr r0, _0807C3AC @ =0x00000125\n\
-	bl SoundStop\n\
-_0807C364:\n\
-	movs r1, #0x86\n\
-	lsls r1, r1, #2\n\
-	adds r0, r4, r1\n\
-	strb r5, [r0]\n\
-	adds r1, #4\n\
-	adds r0, r4, r1\n\
-	strb r5, [r0]\n\
-	subs r1, #1\n\
-	adds r0, r4, r1\n\
-	strb r5, [r0]\n\
-	adds r1, #2\n\
-	adds r0, r4, r1\n\
-	strb r5, [r0]\n\
-	ldr r0, _0807C3B0 @ =0x00000219\n\
-	adds r1, r4, r0\n\
-	ldrb r0, [r1]\n\
-	adds r0, #1\n\
-	strb r0, [r1]\n\
-	add sp, #8\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807C390: .4byte 0x06015700\n\
-_0807C394: .4byte 0xFFFFFC00\n\
-_0807C398: .4byte 0x040000D4\n\
-_0807C39C: .4byte 0x050003E0\n\
-_0807C3A0: .4byte 0x85000008\n\
-_0807C3A4: .4byte gNonGameplayRam\n\
-_0807C3A8: .4byte 0x0000021A\n\
-_0807C3AC: .4byte 0x00000125\n\
-_0807C3B0: .4byte 0x00000219\n\
-    .syntax divided\n");
+    s32 i;
+    u8* dst;
+
+    i = 5;
+    dst = VRAM_OBJ + 0x5700;
+    do
+    {
+        BitFill(3, USHORT_MAX | (USHORT_MAX << 16), dst, 0x100, 32);
+        dst -= 0x400;
+        i--;
+    } while (i >= 0);
+
+    DMA3_FILL_32(0, PALRAM_OBJ + PAL_ROW_SIZE * 15, PAL_ROW_SIZE);
+
+    if (PAUSE_SCREEN_DATA.unk_21A == 3)
+        SoundStop(SOUND_125);
+
+    PAUSE_SCREEN_DATA.currentPopUp = 0;
+    PAUSE_SCREEN_DATA.unk_21C = 0;
+    PAUSE_SCREEN_DATA.unk_21B = 0;
+    PAUSE_SCREEN_DATA.unk_21D = 0;
+    PAUSE_SCREEN_DATA.unk_219++;
 }
 
 // 0x0807C3B4
@@ -5421,60 +5331,24 @@ _0807C5B0: .4byte 0x0857BDB4\n\
     .syntax divided\n");
 }
 
-// 0x0807C5B4
-NAKED_FUNCTION
+/**
+ * @brief 7c5b4 | 7c | Loads the graphics needed by special navigation conversations
+ * 
+ */
 void NavigationConversationLoadSpecialGraphics(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	ldr r0, _0807C5F0 @ =gNonGameplayRam\n\
-	movs r1, #0x88\n\
-	lsls r1, r1, #2\n\
-	adds r0, r0, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0x35\n\
-	bne _0807C618\n\
-	ldr r0, _0807C5F4 @ =0x0857C0C4\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #0x12\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0807C5F8 @ =0x0857FCA0\n\
-	ldr r1, _0807C5FC @ =0x02006000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0807C600 @ =0x08580238\n\
-	ldr r1, _0807C604 @ =0x02006800\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0807C608 @ =0x085807D0\n\
-	ldr r1, _0807C60C @ =0x02007000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0807C610 @ =0x08580D68\n\
-	ldr r1, _0807C614 @ =0x02007800\n\
-	bl LZ77UncompVram\n\
-	b _0807C626\n\
-	.align 2, 0\n\
-_0807C5F0: .4byte gNonGameplayRam\n\
-_0807C5F4: .4byte 0x0857C0C4\n\
-_0807C5F8: .4byte 0x0857FCA0\n\
-_0807C5FC: .4byte 0x02006000\n\
-_0807C600: .4byte 0x08580238\n\
-_0807C604: .4byte 0x02006800\n\
-_0807C608: .4byte 0x085807D0\n\
-_0807C60C: .4byte 0x02007000\n\
-_0807C610: .4byte 0x08580D68\n\
-_0807C614: .4byte 0x02007800\n\
-_0807C618:\n\
-	cmp r0, #0xe\n\
-	bne _0807C626\n\
-	ldr r0, _0807C62C @ =0x0872F2E0\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #0x12\n\
-	bl LZ77UncompVram\n\
-_0807C626:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807C62C: .4byte 0x0872F2E0\n\
-    .syntax divided\n");
+    if (PAUSE_SCREEN_DATA.conversationNumber == NAV_CONVO_GO_TO_OPERATIONS_ROOM)
+    {
+        LZ77UncompVram((const void*)0x857C0C4, EWRAM_BASE);
+        LZ77UncompVram((const void*)0x857FCA0, EWRAM_BASE + 0x6000);
+        LZ77UncompVram((const void*)0x8580238, EWRAM_BASE + 0x6800);
+        LZ77UncompVram((const void*)0x85807D0, EWRAM_BASE + 0x7000);
+        LZ77UncompVram((const void*)0x8580D68, EWRAM_BASE + 0x7800);
+    }
+    else if (PAUSE_SCREEN_DATA.conversationNumber == NAV_CONVO_FIND_SECURITY_ROOM_AND_DOWNLOAD_BOMBS)
+    {
+        LZ77UncompVram(sSaXCloseUpGfx, EWRAM_BASE);
+    }
 }
 
 // 0x0807C630

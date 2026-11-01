@@ -1098,6 +1098,7 @@ SECTIONS {
         src/minimap.o(.data);
         src/menus/pause_screen.o(.data);
         src/text.o(.data);
+        src/menus/navigation_conversation.o(.data);
         src/projectile.o(.data);
         src/new_file_intro.o(.data);
         src/ending.o(.data);

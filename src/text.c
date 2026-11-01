@@ -36,8 +36,6 @@ static u32 sArray_79c14c[9] = {
     [8] = UINT_MAX
 };
 
-static u8 sBlob_79c170_79c27c[] = INCBIN_U8("data/Blob_79c170_79c27c.bin");
-
  /**
  * @brief 79118 | 24 | Gets the width of a text character
  * 
