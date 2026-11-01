@@ -16,6 +16,7 @@
 #include "data/generic_data.h"
 #include "data/intro_data.h"
 #include "data/sprite_data.h"
+#include "data/haze_data.h"
 
 // The original called PlayCharacterAppearingSound without a prototype (its u8
 // argument is not narrowed), so music_wrappers.h is left out of this file
@@ -911,164 +912,61 @@ _08098A9A:\n\
     .syntax divided\n");
 }
 
-// 0x08098AA0
-NAKED_FUNCTION
+/**
+ * @brief 98aa0 | 12c | Sets up the window of the Samus getting cured cutscene
+ * 
+ */
 void NewFileIntroSamusGettingCuredSetupWindow(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	ldr r1, _08098AE4 @ =0x040000D4\n\
-	ldr r0, _08098AE8 @ =0x02001000\n\
-	str r0, [r1]\n\
-	ldr r0, _08098AEC @ =0x02002000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _08098AF0 @ =0x84000058\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	ldr r1, _08098AF4 @ =gNonGameplayRam\n\
-	ldr r2, _08098AF8 @ =0x000001F5\n\
-	adds r0, r1, r2\n\
-	ldrb r2, [r0]\n\
-	ldr r3, _08098AFC @ =0x000001F3\n\
-	adds r0, r1, r3\n\
-	ldrb r3, [r0]\n\
-	subs r0, r2, r3\n\
-	lsls r0, r0, #0x10\n\
-	adds r7, r2, r3\n\
-	lsrs r2, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #0\n\
-	bge _08098B00\n\
-	rsbs r0, r0, #0\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r5, r0, #0x10\n\
-	lsls r0, r3, #1\n\
-	movs r2, #0\n\
-	cmp r5, r0\n\
-	ble _08098B02\n\
-	movs r2, #0xa1\n\
-	b _08098B02\n\
-	.align 2, 0\n\
-_08098AE4: .4byte 0x040000D4\n\
-_08098AE8: .4byte 0x02001000\n\
-_08098AEC: .4byte 0x02002000\n\
-_08098AF0: .4byte 0x84000058\n\
-_08098AF4: .4byte gNonGameplayRam\n\
-_08098AF8: .4byte 0x000001F5\n\
-_08098AFC: .4byte 0x000001F3\n\
-_08098B00:\n\
-	movs r5, #0\n\
-_08098B02:\n\
-	cmp r7, #0x9f\n\
-	ble _08098B08\n\
-	movs r7, #0xa0\n\
-_08098B08:\n\
-	ldr r0, _08098BBC @ =0x083E3294\n\
-	ldr r6, _08098BC0 @ =0x000001F3\n\
-	adds r1, r1, r6\n\
-	ldrb r1, [r1]\n\
-	lsls r1, r1, #2\n\
-	adds r1, r1, r0\n\
-	ldr r1, [r1]\n\
-	mov ip, r1\n\
-	ldr r4, _08098BC4 @ =0x02001000\n\
-	movs r6, #0\n\
-	lsls r0, r2, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	lsls r1, r7, #0x10\n\
-	cmp r6, r0\n\
-	bge _08098B3E\n\
-	movs r2, #0\n\
-	adds r3, r0, #0\n\
-_08098B2A:\n\
-	strh r2, [r4]\n\
-	adds r4, #2\n\
-	lsls r0, r6, #0x10\n\
-	movs r6, #0x80\n\
-	lsls r6, r6, #9\n\
-	adds r0, r0, r6\n\
-	lsrs r6, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, r3\n\
-	blt _08098B2A\n\
-_08098B3E:\n\
-	lsls r0, r6, #0x10\n\
-	asrs r3, r1, #0x10\n\
-	cmp r0, r1\n\
-	bgt _08098B98\n\
-	ldr r0, _08098BC8 @ =0x03001678\n\
-	mov r8, r0\n\
-	adds r7, r3, #0\n\
-_08098B4C:\n\
-	mov r1, r8\n\
-	ldrb r2, [r1]\n\
-	lsls r0, r5, #2\n\
-	add r0, ip\n\
-	ldrh r1, [r0, #2]\n\
-	adds r1, r2, r1\n\
-	lsls r1, r1, #0x10\n\
-	ldrh r0, [r0]\n\
-	adds r2, r2, r0\n\
-	lsls r2, r2, #0x10\n\
-	lsrs r2, r2, #0x10\n\
-	lsrs r3, r1, #0x10\n\
-	cmp r1, #0\n\
-	bge _08098B6A\n\
-	movs r3, #0\n\
-_08098B6A:\n\
-	lsls r0, r2, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #0xf0\n\
-	ble _08098B74\n\
-	movs r2, #0xf0\n\
-_08098B74:\n\
-	lsls r1, r3, #0x10\n\
-	asrs r1, r1, #8\n\
-	lsls r0, r2, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	orrs r0, r1\n\
-	strh r0, [r4]\n\
-	adds r4, #2\n\
-	adds r0, r5, #1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r5, r0, #0x10\n\
-	lsls r0, r6, #0x10\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #9\n\
-	adds r0, r0, r2\n\
-	lsrs r6, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, r7\n\
-	ble _08098B4C\n\
-_08098B98:\n\
-	lsls r1, r6, #0x10\n\
-	asrs r0, r1, #0x10\n\
-	cmp r0, #0x9f\n\
-	bgt _08098BB2\n\
-	movs r2, #0\n\
-_08098BA2:\n\
-	strh r2, [r4]\n\
-	adds r4, #2\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #9\n\
-	adds r1, r1, r3\n\
-	asrs r0, r1, #0x10\n\
-	cmp r0, #0x9f\n\
-	ble _08098BA2\n\
-_08098BB2:\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08098BBC: .4byte 0x083E3294\n\
-_08098BC0: .4byte 0x000001F3\n\
-_08098BC4: .4byte 0x02001000\n\
-_08098BC8: .4byte 0x03001678\n\
-    .syntax divided\n");
+    s16 start;
+    s16 end;
+    u16 subSlice;
+    u16* dst;
+    s16 i;
+    const s16* src;
+    s16 left;
+    s16 right;
+
+    DMA3_COPY_32(EWRAM_BASE + 0x1000, EWRAM_BASE + 0x2000, 0x160 / 4);
+
+    start = INTRO_DATA.unk_1F5 - INTRO_DATA.unk_1F3;
+    end = INTRO_DATA.unk_1F5 + INTRO_DATA.unk_1F3;
+    if (start < 0)
+    {
+        subSlice = -start;
+        if (subSlice > INTRO_DATA.unk_1F3 * 2)
+            start = 161;
+        else
+            start = 0;
+    }
+    else
+    {
+        subSlice = 0;
+    }
+
+    if (end > 159)
+        end = 160;
+
+    src = sHaze_PowerBomb_WindowValuesPointers[INTRO_DATA.unk_1F3];
+    dst = EWRAM_BASE + 0x1000;
+
+    for (i = 0; i < start; i++)
+        *dst++ = 0;
+
+    for (; i <= end; i++)
+    {
+        right = INTRO_DATA.unk_1F4 + src[subSlice * 2 + 1];
+        left = INTRO_DATA.unk_1F4 + src[subSlice * 2 + 0];
+        if (right < 0)
+            right = 0;
+        if (left > 240)
+            left = 240;
+        *dst++ = left | right << 8;
+        subSlice++;
+    }
+
+    for (; i < 160; i++)
+        *dst++ = 0;
 }
 
 /**
