@@ -5066,7 +5066,10 @@ void NavigationConversationClearPopUpGraphics(void)
     PAUSE_SCREEN_DATA.unk_219++;
 }
 
-// 0x0807C3B4
+/**
+ * @brief 7c3b4 | 8c | Updates the flashing color of the navigation conversation pop-up
+ * 
+ */
 void unk_7c3b4(void)
 {
     const u16* pColor;
