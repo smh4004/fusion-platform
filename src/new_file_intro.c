@@ -94,7 +94,24 @@ static const u16* sPalPointers_79c354[16] = {
 	(const u16*)0x85f7110
 };
 
-static u8 sBlob_79c394_79c3c8[] = INCBIN_U8("data/Blob_79c394_79c3c8.bin");
+const struct FrameData* sIntroSpaceViewParticleOam[6] = {
+    sOam_60ac08,
+    sOam_60ac18,
+    sOam_60ac28,
+    sOam_60ac38,
+    sOam_60ac28,
+    sOam_60ac18
+};
+
+const u32* sEndingAdamPanelGfxPointers[7] = {
+    (const u32*)0x879ce10,
+    (const u32*)0x879d194,
+    (const u32*)0x879d50c,
+    (const u32*)0x879d890,
+    (const u32*)0x879dc14,
+    (const u32*)0x879df98,
+    (const u32*)0x879e31c
+};
 
 static const u32* sIntroSr388SurfaceBgGfxPointers[8] = {
     sIntroSr388SurfaceBgGfx0,
