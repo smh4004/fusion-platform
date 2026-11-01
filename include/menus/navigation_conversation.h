@@ -4,7 +4,7 @@
 #include "types.h"
 
 void NavigationConversationProcessText(void);
-u8 unk_7a0fc(u8 arg0);
+bools32 unk_7a0fc(u8 arg0);
 void NavigationConversationGetCurrentConversation(void);
 u8 NavigationConversationHandler(void);
 void NavigationConversationSetupOam(void);

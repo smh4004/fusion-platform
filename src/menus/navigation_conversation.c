@@ -924,8 +924,9 @@ _0807A0F8: .4byte gNonGameplayRam\n\
 
 // 0x0807A0FC
 
+
 NAKED_FUNCTION
-u8 unk_7a0fc(u8 arg0)
+bools32 unk_7a0fc(u8 arg0)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
