@@ -2569,168 +2569,56 @@ _0807AE50: .4byte 0x085766E0\n\
     .syntax divided\n");
 }
 
-// 0x0807AE54
-NAKED_FUNCTION
+/**
+ * @brief 7ae54 | 138 | Sets up the OAM of a navigation conversation
+ * 
+ */
 void NavigationConversationSetupOam(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	ldr r6, _0807AF60 @ =gNonGameplayRam\n\
-	adds r1, r6, #0\n\
-	adds r1, #0x5e\n\
-	movs r0, #0\n\
-	mov sb, r0\n\
-	movs r2, #0\n\
-	mov sl, r2\n\
-	movs r0, #0x7c\n\
-	strh r0, [r1]\n\
-	subs r1, #2\n\
-	movs r0, #0xcc\n\
-	strh r0, [r1]\n\
-	subs r1, #2\n\
-	movs r0, #0x4b\n\
-	strb r0, [r1]\n\
-	adds r0, r6, #0\n\
-	adds r0, #0x58\n\
-	mov r3, sb\n\
-	strb r3, [r0]\n\
-	adds r0, #1\n\
-	strb r3, [r0]\n\
-	movs r0, #1\n\
-	bl NavConversationSetBottomTextBoxOam\n\
-	movs r4, #0x73\n\
-	adds r4, r4, r6\n\
-	mov r8, r4\n\
-	ldrb r1, [r4]\n\
-	movs r2, #0xd\n\
-	rsbs r2, r2, #0\n\
-	adds r0, r2, #0\n\
-	ands r0, r1\n\
-	movs r5, #4\n\
-	orrs r0, r5\n\
-	strb r0, [r4]\n\
-	movs r0, #0x43\n\
-	adds r0, r0, r6\n\
-	mov ip, r0\n\
-	ldrb r1, [r0]\n\
-	movs r7, #4\n\
-	rsbs r7, r7, #0\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	ands r0, r2\n\
-	mov r1, ip\n\
-	strb r0, [r1]\n\
-	movs r3, #0x5b\n\
-	adds r3, r3, r6\n\
-	ldrb r1, [r3]\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	ands r0, r2\n\
-	strb r0, [r3]\n\
-	movs r4, #0x67\n\
-	adds r4, r4, r6\n\
-	ldrb r1, [r4]\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	ands r0, r2\n\
-	strb r0, [r4]\n\
-	movs r5, #0x85\n\
-	lsls r5, r5, #2\n\
-	adds r1, r6, r5\n\
-	ldr r0, _0807AF64 @ =0x085766D4\n\
-	ldm r0!, {r3, r4, r5}\n\
-	stm r1!, {r3, r4, r5}\n\
-	mov r0, sb\n\
-	strb r0, [r6, #0x1a]\n\
-	mov r1, sl\n\
-	strh r1, [r6, #4]\n\
-	adds r5, r6, #0\n\
-	adds r5, #0xa3\n\
-	ldrb r0, [r5]\n\
-	adds r4, r2, #0\n\
-	ands r4, r0\n\
-	movs r3, #4\n\
-	orrs r4, r3\n\
-	strb r4, [r5]\n\
-	adds r3, r6, #0\n\
-	adds r3, #0x4f\n\
-	ldrb r1, [r3]\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	ands r0, r2\n\
-	strb r0, [r3]\n\
-	adds r3, #0x48\n\
-	ldrb r1, [r3]\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	ands r0, r2\n\
-	strb r0, [r3]\n\
-	subs r3, #0xc\n\
-	ldrb r1, [r3]\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	ands r0, r2\n\
-	strb r0, [r3]\n\
-	subs r3, #0xc\n\
-	ldrb r1, [r3]\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	ands r0, r2\n\
-	strb r0, [r3]\n\
-	adds r0, r6, #0\n\
-	adds r0, #0x82\n\
-	movs r2, #0xd4\n\
-	strh r2, [r0]\n\
-	subs r0, #2\n\
-	movs r1, #0x44\n\
-	strh r1, [r0]\n\
-	subs r0, #0xa\n\
-	strh r2, [r0]\n\
-	subs r0, #2\n\
-	strh r1, [r0]\n\
-	ldrb r0, [r6]\n\
-	cmp r0, #0\n\
-	beq _0807AF68\n\
-	mov r1, r8\n\
-	ldrb r0, [r1]\n\
-	adds r1, r7, #0\n\
-	ands r1, r0\n\
-	movs r0, #1\n\
-	orrs r1, r0\n\
-	mov r2, r8\n\
-	strb r1, [r2]\n\
-	ands r4, r7\n\
-	orrs r4, r0\n\
-	strb r4, [r5]\n\
-	b _0807AF7C\n\
-	.align 2, 0\n\
-_0807AF60: .4byte gNonGameplayRam\n\
-_0807AF64: .4byte 0x085766D4\n\
-_0807AF68:\n\
-	ands r4, r7\n\
-	movs r2, #2\n\
-	orrs r4, r2\n\
-	strb r4, [r5]\n\
-	mov r3, r8\n\
-	ldrb r1, [r3]\n\
-	adds r0, r7, #0\n\
-	ands r0, r1\n\
-	orrs r0, r2\n\
-	strb r0, [r3]\n\
-_0807AF7C:\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_OUTLINE].xPosition = 124;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_OUTLINE].yPosition = 204;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_LIGHT].oamId = PAUSE_OAM_ID_ADAM_TEXT_BOX_LIGHT_OFF;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_LIGHT].animationDurationCounter = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_LIGHT].currentAnimationFrame = 0;
+    NavConversationSetBottomTextBoxOam(1);
+
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_BACKGROUND].objMode = 1;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_CURSOR].priority = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_CURSOR].objMode = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_LIGHT].priority = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_LIGHT].objMode = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_OUTLINE].priority = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_OUTLINE].objMode = 0;
+
+    PAUSE_SCREEN_DATA.popUp = sNavConversationPopUpDataInit;
+    PAUSE_SCREEN_DATA.unk_1A = 0;
+    PAUSE_SCREEN_DATA.typeFlags = 0;
+
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_TOP_TEXT_BOX_BACKGROUND].objMode = 1;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_TOP_TEXT_BOX_CURSOR].priority = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_TOP_TEXT_BOX_CURSOR].objMode = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_TOP_TEXT_BOX_OUTLINE].priority = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_TOP_TEXT_BOX_OUTLINE].objMode = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_PORTRAIT].priority = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_PORTRAIT].objMode = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_FED_PORTRAIT_FLICKERING].priority = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_FED_PORTRAIT_FLICKERING].objMode = 0;
+
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_PORTRAIT].xPosition = 212;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_PORTRAIT].yPosition = 68;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_FED_PORTRAIT_FLICKERING].xPosition = 212;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_FED_PORTRAIT_FLICKERING].yPosition = 68;
+
+    if (PAUSE_SCREEN_DATA.unk_0 != 0)
+    {
+        PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_BACKGROUND].priority = 1;
+        PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_TOP_TEXT_BOX_BACKGROUND].priority = 1;
+    }
+    else
+    {
+        PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_TOP_TEXT_BOX_BACKGROUND].priority = 2;
+        PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_ADAM_TEXT_BOX_BACKGROUND].priority = 2;
+    }
 }
 
 /**
