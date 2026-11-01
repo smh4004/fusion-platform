@@ -67,6 +67,8 @@ SECTIONS {
         . = 0x00000049; gLastElevatorUsed = .;
         . = 0x0000004a; gCurrentEventBasedEffect = .;
         . = 0x0000004b; gQueuedEventBasedEffect = .;
+        . = 0x0000004c; gNavConversationTargetLocation = .;
+        . = 0x0000004d; gFlashingSectorNumber = .;
         . = 0x0000004e; gScreenShakeXOffset = .;
         . = 0x0000004f; gScreenShakeYOffset = .;
         . = 0x00000050; gUnk_3000050 = .;

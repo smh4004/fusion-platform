@@ -1,6 +1,23 @@
+#include "menus/navigation_conversation.h"
+
+#include "gba.h"
 #include "globals.h"
 #include "macros.h"
-#include "menus/navigation_conversation.h"
+
+#include "data/event_data.h"
+#include "data/menus/pause_screen_misc_data.h"
+
+#include "constants/connection.h"
+#include "constants/event.h"
+#include "constants/menus/pause_screen.h"
+#include "constants/navigation.h"
+
+#include "structs/connection.h"
+#include "structs/event.h"
+#include "structs/menus/pause_screen.h"
+
+#include "text.h"
+
 
 // 0x08079AFC
 NAKED_FUNCTION
@@ -809,7 +826,7 @@ _0807A0F8: .4byte gNonGameplayRam\n\
 
 // 0x0807A0FC
 NAKED_FUNCTION
-void unk_7a0fc(void)
+u8 unk_7a0fc(u8 arg0)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -1067,110 +1084,43 @@ _0807A2D8: .4byte gNonGameplayRam\n\
     .syntax divided\n");
 }
 
-// 0x0807A2DC
-NAKED_FUNCTION
+/**
+ * @brief 7a2dc | c8 | Gets the current navigation conversation
+ * 
+ */
 void NavigationConversationGetCurrentConversation(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	ldr r0, _0807A330 @ =gEventCounter\n\
-	ldrb r2, [r0]\n\
-	ldr r3, _0807A334 @ =0x08575A60\n\
-	ldr r4, _0807A338 @ =gNonGameplayRam\n\
-	ldr r5, _0807A33C @ =gPreviousNavigationConversation\n\
-	cmp r2, #0\n\
-	ble _0807A310\n\
-	lsls r0, r2, #1\n\
-	adds r0, r0, r2\n\
-	lsls r1, r0, #2\n\
-	adds r0, r1, r3\n\
-	ldrb r0, [r0, #6]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	cmp r0, #0\n\
-	bne _0807A310\n\
-	adds r1, r1, r3\n\
-_0807A300:\n\
-	subs r1, #0xc\n\
-	subs r2, #1\n\
-	cmp r2, #0\n\
-	ble _0807A310\n\
-	movs r0, #6\n\
-	ldrsb r0, [r1, r0]\n\
-	cmp r0, #0\n\
-	beq _0807A300\n\
-_0807A310:\n\
-	lsls r0, r2, #1\n\
-	adds r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r3\n\
-	ldrb r1, [r0, #6]\n\
-	movs r2, #0x88\n\
-	lsls r2, r2, #2\n\
-	adds r0, r4, r2\n\
-	strb r1, [r0]\n\
-	ldrb r5, [r5]\n\
-	cmp r1, r5\n\
-	bne _0807A344\n\
-	ldr r3, _0807A340 @ =0x00000221\n\
-	adds r1, r4, r3\n\
-	movs r0, #1\n\
-	b _0807A34A\n\
-	.align 2, 0\n\
-_0807A330: .4byte gEventCounter\n\
-_0807A334: .4byte 0x08575A60\n\
-_0807A338: .4byte gNonGameplayRam\n\
-_0807A33C: .4byte gPreviousNavigationConversation\n\
-_0807A340: .4byte 0x00000221\n\
-_0807A344:\n\
-	ldr r0, _0807A394 @ =0x00000221\n\
-	adds r1, r4, r0\n\
-	movs r0, #0\n\
-_0807A34A:\n\
-	strb r0, [r1]\n\
-	movs r0, #0\n\
-	bl TextClearGraphics\n\
-	movs r0, #1\n\
-	bl NavigationConversationUpdateTarget\n\
-	bl NavigationConversationSetupOam\n\
-	ldr r0, _0807A398 @ =gNonGameplayRam\n\
-	movs r2, #0x8e\n\
-	lsls r2, r2, #2\n\
-	adds r1, r0, r2\n\
-	movs r2, #0\n\
-	strb r2, [r1]\n\
-	ldr r3, _0807A39C @ =0x00000239\n\
-	adds r1, r0, r3\n\
-	strb r2, [r1]\n\
-	adds r3, #3\n\
-	adds r1, r0, r3\n\
-	strb r2, [r1]\n\
-	adds r3, #1\n\
-	adds r1, r0, r3\n\
-	strb r2, [r1]\n\
-	adds r3, #0x13\n\
-	adds r1, r0, r3\n\
-	strb r2, [r1]\n\
-	adds r3, #1\n\
-	adds r1, r0, r3\n\
-	strb r2, [r1]\n\
-	ldr r1, _0807A3A0 @ =0x00000252\n\
-	adds r0, r0, r1\n\
-	strb r2, [r0]\n\
-	pop {r4, r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807A394: .4byte 0x00000221\n\
-_0807A398: .4byte gNonGameplayRam\n\
-_0807A39C: .4byte 0x00000239\n\
-_0807A3A0: .4byte 0x00000252\n\
-    .syntax divided\n");
+    s32 i;
+
+    for (i = gEventCounter; i > 0; i--)
+    {
+        if (sEventLocationAndNavigationInfo[i].navConversation != NAV_CONVO_NONE)
+            break;
+    }
+
+    PAUSE_SCREEN_DATA.conversationNumber = sEventLocationAndNavigationInfo[i].navConversation;
+
+    if (PAUSE_SCREEN_DATA.conversationNumber == gPreviousNavigationConversation)
+        PAUSE_SCREEN_DATA.conversationOnRepeat = TRUE;
+    else
+        PAUSE_SCREEN_DATA.conversationOnRepeat = FALSE;
+
+    TextClearGraphics(0);
+    NavigationConversationUpdateTarget(TRUE);
+    NavigationConversationSetupOam();
+
+    PAUSE_SCREEN_DATA.unk_238 = 0;
+    PAUSE_SCREEN_DATA.unk_239 = 0;
+    PAUSE_SCREEN_DATA.unk_23C = 0;
+    PAUSE_SCREEN_DATA.unk_23D = 0;
+    PAUSE_SCREEN_DATA.unk_250 = 0;
+    PAUSE_SCREEN_DATA.unk_251 = 0;
+    PAUSE_SCREEN_DATA.unk_252 = 0;
 }
 
 // 0x0807A3A4
 NAKED_FUNCTION
-void NavigationConversationHandler(void)
+u8 NavigationConversationHandler(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -2700,7 +2650,7 @@ _0807AF7C:\n\
 
 // 0x0807AF8C
 NAKED_FUNCTION
-void NavigationConversationUpdateTarget(void)
+void NavigationConversationUpdateTarget(u8 arg0)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -2762,7 +2712,7 @@ _0807AFF8: .4byte 0x00000212\n\
 
 // 0x0807AFFC
 NAKED_FUNCTION
-void NavigationConverstionFindTarget(void)
+u8 NavigationConverstionFindTarget(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -3373,7 +3323,7 @@ _0807B4BC:\n\
 
 // 0x0807B4C4
 NAKED_FUNCTION
-void NavigationConversationScrollMapToDestination(void)
+u8 NavigationConversationScrollMapToDestination(u8 x, u8 y)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -4330,7 +4280,7 @@ _0807BBE0:\n\
 
 // 0x0807BBF0
 NAKED_FUNCTION
-void GetFlashingSectorNumber(void)
+u8 GetFlashingSectorNumber(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
