@@ -2724,436 +2724,186 @@ bools32 NavigationConverstionFindTarget(void)
     return found;
 }
 
-// 0x0807B158
-NAKED_FUNCTION
+/**
+ * @brief 7b158 | 36c | Scrolls the map to the navigation target, switching areas through an elevator if needed
+ * 
+ */
 void NavigationConversionScrollToTarget(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	ldr r1, _0807B178 @ =gNonGameplayRam\n\
-	ldrb r0, [r1, #8]\n\
-	adds r0, #1\n\
-	strb r0, [r1, #8]\n\
-	ldrb r0, [r1, #9]\n\
-	adds r7, r1, #0\n\
-	cmp r0, #0xd\n\
-	bls _0807B16C\n\
-	b _0807B4BC\n\
-_0807B16C:\n\
-	lsls r0, r0, #2\n\
-	ldr r1, _0807B17C @ =_0807B180\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_0807B178: .4byte gNonGameplayRam\n\
-_0807B17C: .4byte _0807B180\n\
-_0807B180: @ jump table\n\
-	.4byte _0807B4BC @ case 0\n\
-	.4byte _0807B1B8 @ case 1\n\
-	.4byte _0807B226 @ case 2\n\
-	.4byte _0807B236 @ case 3\n\
-	.4byte _0807B46C @ case 4\n\
-	.4byte _0807B23E @ case 5\n\
-	.4byte _0807B300 @ case 6\n\
-	.4byte _0807B30A @ case 7\n\
-	.4byte _0807B32A @ case 8\n\
-	.4byte _0807B400 @ case 9\n\
-	.4byte _0807B420 @ case 10\n\
-	.4byte _0807B46C @ case 11\n\
-	.4byte _0807B488 @ case 12\n\
-	.4byte _0807B4BC @ case 13\n\
-_0807B1B8:\n\
-	movs r2, #0\n\
-	movs r1, #0x83\n\
-	lsls r1, r1, #2\n\
-	adds r0, r7, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0xff\n\
-	beq _0807B200\n\
-	ldr r3, _0807B204 @ =0x0000020D\n\
-	adds r0, r7, r3\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0xff\n\
-	beq _0807B200\n\
-	movs r4, #0xd5\n\
-	lsls r4, r4, #1\n\
-	adds r0, r7, r4\n\
-	ldr r1, _0807B208 @ =0x085767EC\n\
-	ldrb r0, [r0]\n\
-	ldrb r3, [r1]\n\
-	cmp r0, r3\n\
-	beq _0807B200\n\
-	ldrb r4, [r1, #1]\n\
-	cmp r0, r4\n\
-	beq _0807B200\n\
-	ldrb r3, [r1, #2]\n\
-	cmp r0, r3\n\
-	beq _0807B200\n\
-	ldrb r1, [r1, #3]\n\
-	cmp r0, r1\n\
-	beq _0807B200\n\
-	cmp r0, #0xe\n\
-	beq _0807B200\n\
-	cmp r0, #0xf\n\
-	bne _0807B1FC\n\
-	movs r2, #1\n\
-_0807B1FC:\n\
-	cmp r2, #0\n\
-	beq _0807B20C\n\
-_0807B200:\n\
-	movs r0, #0xc\n\
-	b _0807B4BA\n\
-	.align 2, 0\n\
-_0807B204: .4byte 0x0000020D\n\
-_0807B208: .4byte 0x085767EC\n\
-_0807B20C:\n\
-	movs r0, #2\n\
-	strb r0, [r7, #9]\n\
-	ldrh r1, [r7, #4]\n\
-	movs r4, #0x80\n\
-	lsls r4, r4, #1\n\
-	adds r0, r4, #0\n\
-	orrs r0, r1\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #2\n\
-	adds r1, r2, #0\n\
-	orrs r0, r1\n\
-	strh r0, [r7, #4]\n\
-	b _0807B4BC\n\
-_0807B226:\n\
-	ldrh r1, [r7, #4]\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #3\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	bne _0807B234\n\
-	b _0807B4BC\n\
-_0807B234:\n\
-	b _0807B4B2\n\
-_0807B236:\n\
-	movs r0, #0\n\
-	strb r0, [r7, #8]\n\
-	movs r0, #4\n\
-	b _0807B4BA\n\
-_0807B23E:\n\
-	movs r3, #0x83\n\
-	lsls r3, r3, #2\n\
-	adds r0, r7, r3\n\
-	ldrb r0, [r0]\n\
-	ldr r4, _0807B270 @ =0x0000020D\n\
-	adds r1, r7, r4\n\
-	ldrb r1, [r1]\n\
-	bl NavigationConversationScrollMapToDestination\n\
-	cmp r0, #0\n\
-	bne _0807B256\n\
-	b _0807B4BC\n\
-_0807B256:\n\
-	ldr r1, _0807B274 @ =0x0000020F\n\
-	adds r0, r7, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #1\n\
-	bne _0807B280\n\
-	ldr r1, _0807B278 @ =0x085767EC\n\
-	ldr r2, _0807B27C @ =0x00000213\n\
-	adds r0, r7, r2\n\
-	ldrb r0, [r0]\n\
-	adds r0, r0, r1\n\
-	ldrb r2, [r0]\n\
-	b _0807B28E\n\
-	.align 2, 0\n\
-_0807B270: .4byte 0x0000020D\n\
-_0807B274: .4byte 0x0000020F\n\
-_0807B278: .4byte 0x085767EC\n\
-_0807B27C: .4byte 0x00000213\n\
-_0807B280:\n\
-	ldr r3, _0807B2B8 @ =0x00000212\n\
-	adds r0, r7, r3\n\
-	ldrb r0, [r0]\n\
-	movs r2, #0xe\n\
-	cmp r0, #0\n\
-	bne _0807B28E\n\
-	movs r2, #0xf\n\
-_0807B28E:\n\
-	ldr r5, _0807B2BC @ =gNonGameplayRam\n\
-	movs r4, #0xd5\n\
-	lsls r4, r4, #1\n\
-	adds r0, r5, r4\n\
-	movs r1, #0\n\
-	strb r2, [r0]\n\
-	movs r2, #0xd4\n\
-	lsls r2, r2, #1\n\
-	adds r0, r5, r2\n\
-	strb r1, [r0]\n\
-	ldr r3, _0807B2C0 @ =0x000001A9\n\
-	adds r0, r5, r3\n\
-	strb r1, [r0]\n\
-	strb r1, [r5, #8]\n\
-	adds r4, #0x65\n\
-	adds r0, r5, r4\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #1\n\
-	bne _0807B2C4\n\
-	movs r0, #0xc\n\
-	b _0807B2C6\n\
-	.align 2, 0\n\
-_0807B2B8: .4byte 0x00000212\n\
-_0807B2BC: .4byte gNonGameplayRam\n\
-_0807B2C0: .4byte 0x000001A9\n\
-_0807B2C4:\n\
-	movs r0, #6\n\
-_0807B2C6:\n\
-	strb r0, [r5, #9]\n\
-	ldr r0, _0807B2F0 @ =0x00000119\n\
-	bl SoundStop\n\
-	ldr r1, _0807B2F4 @ =gNonGameplayRam\n\
-	movs r2, #0x83\n\
-	lsls r2, r2, #2\n\
-	adds r0, r1, r2\n\
-	ldrb r2, [r0]\n\
-	movs r3, #0x96\n\
-	lsls r3, r3, #2\n\
-	adds r0, r1, r3\n\
-	strb r2, [r0]\n\
-	ldr r4, _0807B2F8 @ =0x0000020D\n\
-	adds r0, r1, r4\n\
-	ldrb r0, [r0]\n\
-	ldr r2, _0807B2FC @ =0x00000259\n\
-	adds r1, r1, r2\n\
-	strb r0, [r1]\n\
-	b _0807B4BC\n\
-	.align 2, 0\n\
-_0807B2F0: .4byte 0x00000119\n\
-_0807B2F4: .4byte gNonGameplayRam\n\
-_0807B2F8: .4byte 0x0000020D\n\
-_0807B2FC: .4byte 0x00000259\n\
-_0807B300:\n\
-	ldrb r0, [r7, #8]\n\
-	cmp r0, #0x3c\n\
-	bhi _0807B308\n\
-	b _0807B4BC\n\
-_0807B308:\n\
-	b _0807B4B2\n\
-_0807B30A:\n\
-	movs r3, #0x94\n\
-	lsls r3, r3, #2\n\
-	adds r2, r7, r3\n\
-	movs r1, #0\n\
-	movs r0, #1\n\
-	strb r0, [r2]\n\
-	movs r4, #0xd5\n\
-	lsls r4, r4, #1\n\
-	adds r0, r7, r4\n\
-	strb r1, [r0]\n\
-	movs r2, #0xdb\n\
-	lsls r2, r2, #1\n\
-	adds r0, r7, r2\n\
-	strb r1, [r0]\n\
-	strb r1, [r7, #8]\n\
-	b _0807B4B6\n\
-_0807B32A:\n\
-	movs r3, #0x94\n\
-	lsls r3, r3, #2\n\
-	adds r0, r7, r3\n\
-	ldrb r1, [r0]\n\
-	movs r0, #4\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	bne _0807B33C\n\
-	b _0807B4BC\n\
-_0807B33C:\n\
-	ldr r4, _0807B36C @ =0x0000020F\n\
-	adds r0, r7, r4\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #3\n\
-	bne _0807B34E\n\
-	ldr r0, _0807B370 @ =0x0000020E\n\
-	adds r1, r7, r0\n\
-	movs r0, #0\n\
-	strb r0, [r1]\n\
-_0807B34E:\n\
-	ldr r1, _0807B370 @ =0x0000020E\n\
-	adds r3, r7, r1\n\
-	ldrb r0, [r3]\n\
-	cmp r0, #0\n\
-	bne _0807B37C\n\
-	ldr r2, _0807B374 @ =0x08576218\n\
-	ldr r4, _0807B378 @ =0x00000212\n\
-	adds r3, r7, r4\n\
-	ldrb r0, [r3]\n\
-	lsls r0, r0, #1\n\
-	adds r0, r0, r2\n\
-	ldrb r0, [r0]\n\
-	subs r0, #1\n\
-	subs r4, #2\n\
-	b _0807B38C\n\
-	.align 2, 0\n\
-_0807B36C: .4byte 0x0000020F\n\
-_0807B370: .4byte 0x0000020E\n\
-_0807B374: .4byte 0x08576218\n\
-_0807B378: .4byte 0x00000212\n\
-_0807B37C:\n\
-	ldr r2, _0807B3E0 @ =0x08576226\n\
-	ldrb r0, [r3]\n\
-	lsls r0, r0, #1\n\
-	adds r0, r0, r2\n\
-	ldrb r0, [r0]\n\
-	subs r0, #1\n\
-	movs r4, #0x84\n\
-	lsls r4, r4, #2\n\
-_0807B38C:\n\
-	adds r1, r7, r4\n\
-	strb r0, [r1]\n\
-	ldrb r0, [r3]\n\
-	lsls r0, r0, #1\n\
-	adds r2, #1\n\
-	adds r0, r0, r2\n\
-	ldrb r0, [r0]\n\
-	subs r0, #1\n\
-	ldr r2, _0807B3E4 @ =0x00000211\n\
-	adds r1, r7, r2\n\
-	strb r0, [r1]\n\
-	ldr r3, _0807B3E8 @ =0x0000020E\n\
-	adds r0, r7, r3\n\
-	ldrb r0, [r0]\n\
-	ldr r1, _0807B3EC @ =0x00000212\n\
-	adds r4, r7, r1\n\
-	movs r6, #0\n\
-	strb r0, [r4]\n\
-	ldrb r0, [r4]\n\
-	ldr r5, _0807B3F0 @ =0x02034000\n\
-	adds r1, r5, #0\n\
-	bl MinimapGetData\n\
-	ldrb r0, [r4]\n\
-	bl MinimapSetVisitedTilesAndCollectedItems\n\
-	ldr r1, _0807B3F4 @ =0x040000D4\n\
-	str r5, [r1]\n\
-	ldr r0, _0807B3F8 @ =0x0600E000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0807B3FC @ =0x80000400\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	movs r0, #1\n\
-	bl unk_75988\n\
-	movs r0, #0\n\
-	bl NavigationConversationUpdateTarget\n\
-	strb r6, [r7, #8]\n\
-	b _0807B4B6\n\
-	.align 2, 0\n\
-_0807B3E0: .4byte 0x08576226\n\
-_0807B3E4: .4byte 0x00000211\n\
-_0807B3E8: .4byte 0x0000020E\n\
-_0807B3EC: .4byte 0x00000212\n\
-_0807B3F0: .4byte 0x02034000\n\
-_0807B3F4: .4byte 0x040000D4\n\
-_0807B3F8: .4byte 0x0600E000\n\
-_0807B3FC: .4byte 0x80000400\n\
-_0807B400:\n\
-	ldrb r0, [r7, #8]\n\
-	cmp r0, #8\n\
-	bls _0807B4BC\n\
-	movs r0, #0\n\
-	strb r0, [r7, #8]\n\
-	ldrb r0, [r7, #9]\n\
-	adds r0, #1\n\
-	strb r0, [r7, #9]\n\
-	movs r3, #0x94\n\
-	lsls r3, r3, #2\n\
-	adds r2, r7, r3\n\
-	ldrb r1, [r2]\n\
-	movs r0, #8\n\
-	orrs r0, r1\n\
-	strb r0, [r2]\n\
-	b _0807B4BC\n\
-_0807B420:\n\
-	movs r4, #0x94\n\
-	lsls r4, r4, #2\n\
-	adds r0, r7, r4\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	bne _0807B4BC\n\
-	ldr r1, _0807B460 @ =0x0000020E\n\
-	adds r0, r7, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	beq _0807B442\n\
-	ldr r2, _0807B464 @ =0x00000212\n\
-	adds r0, r7, r2\n\
-	ldrb r0, [r0]\n\
-	movs r2, #0xf\n\
-	cmp r0, #0\n\
-	bne _0807B444\n\
-_0807B442:\n\
-	movs r2, #0xe\n\
-_0807B444:\n\
-	movs r3, #0xdb\n\
-	lsls r3, r3, #1\n\
-	adds r0, r7, r3\n\
-	movs r1, #0\n\
-	strb r2, [r0]\n\
-	movs r4, #0xda\n\
-	lsls r4, r4, #1\n\
-	adds r0, r7, r4\n\
-	strb r1, [r0]\n\
-	ldr r2, _0807B468 @ =0x000001B5\n\
-	adds r0, r7, r2\n\
-	strb r1, [r0]\n\
-	strb r1, [r7, #8]\n\
-	b _0807B4B6\n\
-	.align 2, 0\n\
-_0807B460: .4byte 0x0000020E\n\
-_0807B464: .4byte 0x00000212\n\
-_0807B468: .4byte 0x000001B5\n\
-_0807B46C:\n\
-	ldrb r0, [r7, #8]\n\
-	cmp r0, #0x1e\n\
-	bls _0807B4BC\n\
-	movs r0, #0\n\
-	strb r0, [r7, #8]\n\
-	movs r0, #5\n\
-	strb r0, [r7, #9]\n\
-	ldr r0, _0807B484 @ =0x00000119\n\
-	bl SoundPlay\n\
-	b _0807B4BC\n\
-	.align 2, 0\n\
-_0807B484: .4byte 0x00000119\n\
-_0807B488:\n\
-	adds r2, r7, #0\n\
-	ldrh r1, [r2, #4]\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #2\n\
-	adds r0, r3, #0\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _0807B49E\n\
-	adds r0, r3, #0\n\
-	eors r0, r1\n\
-	strh r0, [r2, #4]\n\
-_0807B49E:\n\
-	ldrh r1, [r2, #4]\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #3\n\
-	adds r0, r3, #0\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _0807B4B2\n\
-	adds r0, r3, #0\n\
-	eors r0, r1\n\
-	strh r0, [r2, #4]\n\
-_0807B4B2:\n\
-	movs r0, #0\n\
-	strb r0, [r7, #8]\n\
-_0807B4B6:\n\
-	ldrb r0, [r7, #9]\n\
-	adds r0, #1\n\
-_0807B4BA:\n\
-	strb r0, [r7, #9]\n\
-_0807B4BC:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    s32 isElevator;
+    u8 oamId;
+    u8 area;
+
+    PAUSE_SCREEN_DATA.unk_8++;
+
+    switch (PAUSE_SCREEN_DATA.unk_9)
+    {
+        case 0:
+            break;
+
+        case 1:
+            isElevator = FALSE;
+            if (PAUSE_SCREEN_DATA.navTargetX == UCHAR_MAX || PAUSE_SCREEN_DATA.navTargetY == UCHAR_MAX)
+                goto skip;
+
+            if (PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].oamId == sNavConversationTargetTextOamIds[0] ||
+                PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].oamId == sNavConversationTargetTextOamIds[1] ||
+                PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].oamId == sNavConversationTargetTextOamIds[2] ||
+                PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].oamId == sNavConversationTargetTextOamIds[3] ||
+                PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].oamId == PAUSE_OAM_ID_MAP_ELEVATOR_UP_ARROWS)
+                goto skip;
+
+            if (PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].oamId == PAUSE_OAM_ID_MAP_ELEVATOR_DOWN_ARROWS)
+                isElevator = TRUE;
+
+            if (isElevator)
+            {
+            skip:
+                PAUSE_SCREEN_DATA.unk_9 = 12;
+                break;
+            }
+
+            PAUSE_SCREEN_DATA.unk_9 = 2;
+            PAUSE_SCREEN_DATA.typeFlags |= 0x100;
+            PAUSE_SCREEN_DATA.typeFlags |= 0x200;
+            break;
+
+        case 2:
+            if (!(PAUSE_SCREEN_DATA.typeFlags & 0x400))
+                break;
+            PAUSE_SCREEN_DATA.unk_8 = 0;
+            PAUSE_SCREEN_DATA.unk_9++;
+            break;
+
+        case 3:
+            PAUSE_SCREEN_DATA.unk_8 = 0;
+            PAUSE_SCREEN_DATA.unk_9 = 4;
+            break;
+
+        case 5:
+            if (!NavigationConversationScrollMapToDestination(PAUSE_SCREEN_DATA.navTargetX, PAUSE_SCREEN_DATA.navTargetY))
+                break;
+
+            if (PAUSE_SCREEN_DATA.unk_20F == 1)
+            {
+                oamId = sNavConversationTargetTextOamIds[PAUSE_SCREEN_DATA.navTargetTextDirection];
+            }
+            else
+            {
+                area = PAUSE_SCREEN_DATA.currentArea;
+                oamId = PAUSE_OAM_ID_MAP_ELEVATOR_UP_ARROWS;
+                if (area == AREA_MAIN_DECK)
+                    oamId = PAUSE_OAM_ID_MAP_ELEVATOR_DOWN_ARROWS;
+            }
+
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].oamId = oamId;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].animationDurationCounter = 0;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].currentAnimationFrame = 0;
+            PAUSE_SCREEN_DATA.unk_8 = 0;
+
+            if (PAUSE_SCREEN_DATA.unk_20F == 1)
+                PAUSE_SCREEN_DATA.unk_9 = 12;
+            else
+                PAUSE_SCREEN_DATA.unk_9 = 6;
+
+            SoundStop(SOUND_119);
+            PAUSE_SCREEN_DATA.mapViewX = PAUSE_SCREEN_DATA.navTargetX;
+            PAUSE_SCREEN_DATA.mapViewY = PAUSE_SCREEN_DATA.navTargetY;
+            break;
+
+        case 6:
+            if (PAUSE_SCREEN_DATA.unk_8 <= 60)
+                break;
+            PAUSE_SCREEN_DATA.unk_8 = 0;
+            PAUSE_SCREEN_DATA.unk_9++;
+            break;
+
+        case 7:
+            PAUSE_SCREEN_DATA.unk_250 = 1;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].oamId = 0;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_BLINKING_SQUARE].oamId = 0;
+            PAUSE_SCREEN_DATA.unk_8 = 0;
+            PAUSE_SCREEN_DATA.unk_9++;
+            break;
+
+        case 8:
+            if (!(PAUSE_SCREEN_DATA.unk_250 & 4))
+                break;
+
+            if (PAUSE_SCREEN_DATA.unk_20F == 3)
+                PAUSE_SCREEN_DATA.navTargetArea = AREA_MAIN_DECK;
+
+            if (PAUSE_SCREEN_DATA.navTargetArea == AREA_MAIN_DECK)
+            {
+                PAUSE_SCREEN_DATA.mapX = sMainDeckElevatorMapPositions[PAUSE_SCREEN_DATA.currentArea][0] - 1;
+                PAUSE_SCREEN_DATA.mapY = sMainDeckElevatorMapPositions[PAUSE_SCREEN_DATA.currentArea][1] - 1;
+            }
+            else
+            {
+                PAUSE_SCREEN_DATA.mapX = sSectorElevatorMapPositions[PAUSE_SCREEN_DATA.navTargetArea][0] - 1;
+                PAUSE_SCREEN_DATA.mapY = sSectorElevatorMapPositions[PAUSE_SCREEN_DATA.navTargetArea][1] - 1;
+            }
+
+            PAUSE_SCREEN_DATA.currentArea = PAUSE_SCREEN_DATA.navTargetArea;
+            MinimapGetData(PAUSE_SCREEN_DATA.currentArea, gMinimapData_Visited);
+            MinimapSetVisitedTilesAndCollectedItems(PAUSE_SCREEN_DATA.currentArea);
+            DMA3_COPY_16(gMinimapData_Visited, VRAM_BASE + 0xE000, 0x400);
+            unk_75988(TRUE);
+            NavigationConversationUpdateTarget(FALSE);
+            PAUSE_SCREEN_DATA.unk_8 = 0;
+            PAUSE_SCREEN_DATA.unk_9++;
+            break;
+
+        case 9:
+            if (PAUSE_SCREEN_DATA.unk_8 <= 8)
+                break;
+            PAUSE_SCREEN_DATA.unk_8 = 0;
+            PAUSE_SCREEN_DATA.unk_9++;
+            PAUSE_SCREEN_DATA.unk_250 |= 8;
+            break;
+
+        case 10:
+            if (PAUSE_SCREEN_DATA.unk_250 != 0)
+                break;
+
+            if (PAUSE_SCREEN_DATA.navTargetArea != AREA_MAIN_DECK)
+            {
+                area = PAUSE_SCREEN_DATA.currentArea;
+                oamId = PAUSE_OAM_ID_MAP_ELEVATOR_DOWN_ARROWS;
+                if (area != AREA_MAIN_DECK)
+                    goto set_oam;
+            }
+            oamId = PAUSE_OAM_ID_MAP_ELEVATOR_UP_ARROWS;
+        set_oam:
+
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_BLINKING_SQUARE].oamId = oamId;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_BLINKING_SQUARE].animationDurationCounter = 0;
+            PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_BLINKING_SQUARE].currentAnimationFrame = 0;
+            PAUSE_SCREEN_DATA.unk_8 = 0;
+            PAUSE_SCREEN_DATA.unk_9++;
+            break;
+
+        case 4:
+        case 11:
+            if (PAUSE_SCREEN_DATA.unk_8 <= 30)
+                break;
+            PAUSE_SCREEN_DATA.unk_8 = 0;
+            PAUSE_SCREEN_DATA.unk_9 = 5;
+            SoundPlay(SOUND_119);
+            break;
+
+        case 12:
+            if (PAUSE_SCREEN_DATA.typeFlags & 0x200)
+                PAUSE_SCREEN_DATA.typeFlags ^= 0x200;
+            if (PAUSE_SCREEN_DATA.typeFlags & 0x400)
+                PAUSE_SCREEN_DATA.typeFlags ^= 0x400;
+            PAUSE_SCREEN_DATA.unk_8 = 0;
+            PAUSE_SCREEN_DATA.unk_9++;
+            break;
+
+        case 13:
+            break;
+    }
 }
 
 /**
