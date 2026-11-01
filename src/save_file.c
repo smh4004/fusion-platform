@@ -2,6 +2,16 @@
 #include "globals.h"
 #include "macros.h"
 #include "dma.h"
+#include "event.h"
+#include "minimap.h"
+#include "constants/connection.h"
+#include "constants/event.h"
+#include "structs/bg_clip.h"
+#include "structs/block.h"
+#include "structs/connection.h"
+#include "structs/event.h"
+#include "structs/menus/boot_debug.h"
+#include "structs/minimap.h"
 #include "callbacks.h"
 #include "audio/track_internal.h"
 #include "constants/samus.h"
@@ -14,6 +24,9 @@
 #include "data/menus/pause_screen_misc_data.h"
 
 #include "structs/save_file.h"
+
+// Defined in connection.c's data
+extern const struct Door* sAreaDoorPointers[AREA_END];
 
 /**
  * @brief 7eea4 | 18 | Reads all of flash sram into ewram and ram
@@ -1694,236 +1707,109 @@ void SramLoad_CurrentSave_Unused(void)
     SramRead_WorldData();
 }
 
-// 0x0807FEA4
-NAKED_FUNCTION
+/**
+ * @brief 7fea4 | d8 | Writes the world data (minimap, broken blocks and collected tanks) to the current save file
+ * 
+ */
 void SramWrite_WorldData(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, #4\n\
-	ldr r1, _0807FF5C @ =0x08582274\n\
-	ldr r0, _0807FF60 @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov r8, r0\n\
-	ldr r1, _0807FF64 @ =0x02037C00\n\
-	movs r4, #0xe0\n\
-	lsls r4, r4, #2\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	mov r2, r8\n\
-	adds r3, r4, #0\n\
-	bl DmaTransfer\n\
-	adds r7, r4, #0\n\
-	movs r5, #0\n\
-_0807FED2:\n\
-	ldr r0, _0807FF68 @ =0x03000033\n\
-	adds r0, r5, r0\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, #1\n\
-	adds r4, r0, r1\n\
-	movs r0, #3\n\
-	ands r0, r4\n\
-	cmp r0, #0\n\
-	beq _0807FEEA\n\
-	ldr r0, _0807FF6C @ =0x0000FFFC\n\
-	ands r4, r0\n\
-	adds r4, #4\n\
-_0807FEEA:\n\
-	cmp r4, #0\n\
-	beq _0807FF0E\n\
-	adds r1, r5, #0\n\
-	cmp r5, #0\n\
-	beq _0807FEF6\n\
-	adds r1, r5, #1\n\
-_0807FEF6:\n\
-	lsls r1, r1, #9\n\
-	ldr r0, _0807FF70 @ =0x02036000\n\
-	adds r1, r1, r0\n\
-	mov r0, r8\n\
-	adds r2, r0, r7\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	adds r3, r4, #0\n\
-	bl DmaTransfer\n\
-	adds r7, r7, r4\n\
-_0807FF0E:\n\
-	adds r5, #1\n\
-	cmp r5, #7\n\
-	ble _0807FED2\n\
-	movs r7, #0xc8\n\
-	lsls r7, r7, #4\n\
-	movs r5, #0\n\
-_0807FF1A:\n\
-	ldr r0, _0807FF74 @ =0x0300003B\n\
-	adds r0, r5, r0\n\
-	ldrb r0, [r0]\n\
-	lsls r4, r0, #2\n\
-	adds r6, r5, #1\n\
-	cmp r4, #0\n\
-	beq _0807FF48\n\
-	adds r1, r5, #0\n\
-	cmp r1, #0\n\
-	beq _0807FF30\n\
-	adds r1, r6, #0\n\
-_0807FF30:\n\
-	lsls r1, r1, #8\n\
-	ldr r0, _0807FF78 @ =0x02037200\n\
-	adds r1, r1, r0\n\
-	mov r0, r8\n\
-	adds r2, r0, r7\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	adds r3, r4, #0\n\
-	bl DmaTransfer\n\
-	adds r7, r7, r4\n\
-_0807FF48:\n\
-	adds r5, r6, #0\n\
-	cmp r5, #7\n\
-	ble _0807FF1A\n\
-	add sp, #4\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807FF5C: .4byte 0x08582274\n\
-_0807FF60: .4byte 0x03000B8D\n\
-_0807FF64: .4byte 0x02037C00\n\
-_0807FF68: .4byte 0x03000033\n\
-_0807FF6C: .4byte 0x0000FFFC\n\
-_0807FF70: .4byte 0x02036000\n\
-_0807FF74: .4byte 0x0300003B\n\
-_0807FF78: .4byte 0x02037200\n\
-    .syntax divided\n");
+    u8* dst;
+    s32 offset;
+    s32 i;
+    s32 size;
+    s32 area;
+
+    dst = (u8*)sUnk_582274[gMostRecentSaveFile];
+    DmaTransfer(3, gVisitedMinimapTiles, dst, AREA_NORMAL_COUNT * MINIMAP_SIZE / 8, 16);
+    offset = AREA_NORMAL_COUNT * MINIMAP_SIZE / 8;
+
+    for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
+    {
+        size = gNumberOfNeverReformBlocks[i] * 3;
+        if (size & 3)
+        {
+            size &= 0xFFFC;
+            size += 4;
+        }
+
+        if (size != 0)
+        {
+            area = i;
+            if (i != 0)
+                area = i + 1;
+
+            DmaTransfer(3, (u8*)gNeverReformBlocks + area * NEVER_REFORM_BLOCKS_SIZE, dst + offset, size, 16);
+            offset += size;
+        }
+    }
+
+    offset = 0xC80;
+    for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
+    {
+        size = gNumberOfCollectedTanks[i] * 4;
+        if (size != 0)
+        {
+            area = i;
+            if (area != 0)
+                area = i + 1;
+
+            DmaTransfer(3, (u8*)gCollectedTanks + area * COLLECTED_TANKS_SIZE, dst + offset, size, 16);
+            offset += size;
+        }
+    }
 }
 
-// 0x0807FF7C
-NAKED_FUNCTION
+/**
+ * @brief 7ff7c | ec | Reads the world data (minimap, broken blocks and collected tanks) from the current save file
+ * 
+ */
 void SramRead_WorldData(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, #4\n\
-	ldr r1, _08080044 @ =0x08582274\n\
-	ldr r0, _08080048 @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov r8, r0\n\
-	ldr r2, _0808004C @ =0x02037C00\n\
-	movs r5, #0xe0\n\
-	lsls r5, r5, #2\n\
-	movs r4, #0x10\n\
-	str r4, [sp]\n\
-	movs r0, #3\n\
-	mov r1, r8\n\
-	adds r3, r5, #0\n\
-	bl DmaTransfer\n\
-	ldr r1, _08080050 @ =0x0000FFFF\n\
-	ldr r2, _08080054 @ =0x02036000\n\
-	movs r3, #0xd8\n\
-	lsls r3, r3, #5\n\
-	str r4, [sp]\n\
-	movs r0, #3\n\
-	bl BitFill\n\
-	adds r7, r5, #0\n\
-	movs r5, #0\n\
-_0807FFBA:\n\
-	ldr r0, _08080058 @ =0x03000033\n\
-	adds r0, r5, r0\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, #1\n\
-	adds r4, r0, r1\n\
-	movs r0, #3\n\
-	ands r0, r4\n\
-	cmp r0, #0\n\
-	beq _0807FFD2\n\
-	ldr r0, _0808005C @ =0x0000FFFC\n\
-	ands r4, r0\n\
-	adds r4, #4\n\
-_0807FFD2:\n\
-	cmp r4, #0\n\
-	beq _0807FFF6\n\
-	adds r2, r5, #0\n\
-	cmp r5, #0\n\
-	beq _0807FFDE\n\
-	adds r2, r5, #1\n\
-_0807FFDE:\n\
-	mov r0, r8\n\
-	adds r1, r0, r7\n\
-	lsls r2, r2, #9\n\
-	ldr r0, _08080054 @ =0x02036000\n\
-	adds r2, r2, r0\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	adds r3, r4, #0\n\
-	bl DmaTransfer\n\
-	adds r7, r7, r4\n\
-_0807FFF6:\n\
-	adds r5, #1\n\
-	cmp r5, #7\n\
-	ble _0807FFBA\n\
-	movs r7, #0xc8\n\
-	lsls r7, r7, #4\n\
-	movs r5, #0\n\
-_08080002:\n\
-	ldr r0, _08080060 @ =0x0300003B\n\
-	adds r0, r5, r0\n\
-	ldrb r0, [r0]\n\
-	lsls r4, r0, #2\n\
-	adds r6, r5, #1\n\
-	cmp r4, #0\n\
-	beq _08080030\n\
-	adds r2, r5, #0\n\
-	cmp r2, #0\n\
-	beq _08080018\n\
-	adds r2, r6, #0\n\
-_08080018:\n\
-	mov r0, r8\n\
-	adds r1, r0, r7\n\
-	lsls r2, r2, #8\n\
-	ldr r0, _08080064 @ =0x02037200\n\
-	adds r2, r2, r0\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	adds r3, r4, #0\n\
-	bl DmaTransfer\n\
-	adds r7, r7, r4\n\
-_08080030:\n\
-	adds r5, r6, #0\n\
-	cmp r5, #7\n\
-	ble _08080002\n\
-	add sp, #4\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08080044: .4byte 0x08582274\n\
-_08080048: .4byte 0x03000B8D\n\
-_0808004C: .4byte 0x02037C00\n\
-_08080050: .4byte 0x0000FFFF\n\
-_08080054: .4byte 0x02036000\n\
-_08080058: .4byte 0x03000033\n\
-_0808005C: .4byte 0x0000FFFC\n\
-_08080060: .4byte 0x0300003B\n\
-_08080064: .4byte 0x02037200\n\
-    .syntax divided\n");
+    u8* src;
+    s32 offset;
+    s32 i;
+    s32 size;
+    s32 area;
+
+    src = (u8*)sUnk_582274[gMostRecentSaveFile];
+    DmaTransfer(3, src, gVisitedMinimapTiles, AREA_NORMAL_COUNT * MINIMAP_SIZE / 8, 16);
+    BitFill(3, USHORT_MAX, gNeverReformBlocks, 0x1B00, 16);
+    offset = AREA_NORMAL_COUNT * MINIMAP_SIZE / 8;
+
+    for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
+    {
+        size = gNumberOfNeverReformBlocks[i] * 3;
+        if (size & 3)
+        {
+            size &= 0xFFFC;
+            size += 4;
+        }
+
+        if (size != 0)
+        {
+            area = i;
+            if (i != 0)
+                area = i + 1;
+
+            DmaTransfer(3, src + offset, (u8*)gNeverReformBlocks + area * NEVER_REFORM_BLOCKS_SIZE, size, 16);
+            offset += size;
+        }
+    }
+
+    offset = 0xC80;
+    for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
+    {
+        size = gNumberOfCollectedTanks[i] * 4;
+        if (size != 0)
+        {
+            area = i;
+            if (area != 0)
+                area = i + 1;
+
+            DmaTransfer(3, src + offset, (u8*)gCollectedTanks + area * COLLECTED_TANKS_SIZE, size, 16);
+            offset += size;
+        }
+    }
 }
 
 // 0x08080068
@@ -2544,516 +2430,199 @@ _0808052C: .4byte gIsLoadingFile\n\
     .syntax divided\n");
 }
 
-// 0x08080530
-NAKED_FUNCTION
+/**
+ * @brief 80530 | 134 | Resets the save data before a demo
+ * 
+ */
 void Sram_ResetForDemo(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	sub sp, #4\n\
-	ldr r1, _080805F0 @ =gBootDebugOptions\n\
-	ldr r0, _080805F4 @ =0x085822E4\n\
-	ldm r0!, {r2, r3, r4}\n\
-	stm r1!, {r2, r3, r4}\n\
-	ldr r2, _080805F8 @ =gButtonAssignments\n\
-	ldr r0, _080805FC @ =0x085822C8\n\
-	ldr r1, [r0, #4]\n\
-	ldr r0, [r0]\n\
-	str r0, [r2]\n\
-	str r1, [r2, #4]\n\
-	ldr r5, _08080600 @ =0x0000FFFF\n\
-	ldr r2, _08080604 @ =0x02037C00\n\
-	movs r3, #0xe0\n\
-	lsls r3, r3, #2\n\
-	movs r4, #0x10\n\
-	str r4, [sp]\n\
-	movs r0, #3\n\
-	adds r1, r5, #0\n\
-	bl BitFill\n\
-	ldr r2, _08080608 @ =0x02036000\n\
-	movs r3, #0x90\n\
-	lsls r3, r3, #5\n\
-	str r4, [sp]\n\
-	movs r0, #3\n\
-	adds r1, r5, #0\n\
-	bl BitFill\n\
-	ldr r2, _0808060C @ =0x02037200\n\
-	movs r3, #0x90\n\
-	lsls r3, r3, #4\n\
-	str r4, [sp]\n\
-	movs r0, #3\n\
-	adds r1, r5, #0\n\
-	bl BitFill\n\
-	movs r1, #0\n\
-	ldr r4, _08080610 @ =0x03000033\n\
-	movs r2, #0\n\
-	ldr r3, _08080614 @ =0x0300003B\n\
-_08080584:\n\
-	adds r0, r1, r4\n\
-	strb r2, [r0]\n\
-	adds r0, r1, r3\n\
-	strb r2, [r0]\n\
-	adds r1, #1\n\
-	cmp r1, #7\n\
-	ble _08080584\n\
-	ldr r1, _08080618 @ =gInGameTimer\n\
-	ldr r0, _0808061C @ =0x085822D4\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-	ldr r0, _08080620 @ =gDisableDrawingSamusAndScrollingFlag\n\
-	movs r1, #0\n\
-	strb r1, [r0]\n\
-	ldr r2, _08080624 @ =gPreviousNavigationConversation\n\
-	movs r0, #0xff\n\
-	strb r0, [r2]\n\
-	ldr r2, _08080628 @ =gPreviousSoundEvent\n\
-	movs r0, #0xff\n\
-	strh r0, [r2]\n\
-	ldr r0, _0808062C @ =0x0300004C\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080630 @ =0x0300004D\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080634 @ =gIsLoadingFile\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080638 @ =gUnk_3000be3\n\
-	strb r1, [r0]\n\
-	ldr r0, _0808063C @ =0x03000018\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080640 @ =gDisableSoftReset\n\
-	strb r1, [r0]\n\
-	ldr r2, _08080644 @ =gMaxInGameTimeFlag\n\
-	movs r0, #1\n\
-	strb r0, [r2]\n\
-	ldr r0, _08080648 @ =0x03000022\n\
-	strb r1, [r0]\n\
-	ldr r0, _0808064C @ =gSkipDoorTransition\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080650 @ =gPauseScreenFlag\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080654 @ =0x03000B85\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080658 @ =0x0300002B\n\
-	strb r1, [r0]\n\
-	ldr r0, _0808065C @ =gSamusDoorPositionOffset\n\
-	movs r1, #0\n\
-	strh r1, [r0]\n\
-	ldr r0, _08080660 @ =gDebugFlag\n\
-	strb r1, [r0]\n\
-	add sp, #4\n\
-	pop {r4, r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080805F0: .4byte gBootDebugOptions\n\
-_080805F4: .4byte 0x085822E4\n\
-_080805F8: .4byte gButtonAssignments\n\
-_080805FC: .4byte 0x085822C8\n\
-_08080600: .4byte 0x0000FFFF\n\
-_08080604: .4byte 0x02037C00\n\
-_08080608: .4byte 0x02036000\n\
-_0808060C: .4byte 0x02037200\n\
-_08080610: .4byte 0x03000033\n\
-_08080614: .4byte 0x0300003B\n\
-_08080618: .4byte gInGameTimer\n\
-_0808061C: .4byte 0x085822D4\n\
-_08080620: .4byte gDisableDrawingSamusAndScrollingFlag\n\
-_08080624: .4byte gPreviousNavigationConversation\n\
-_08080628: .4byte gPreviousSoundEvent\n\
-_0808062C: .4byte 0x0300004C\n\
-_08080630: .4byte 0x0300004D\n\
-_08080634: .4byte gIsLoadingFile\n\
-_08080638: .4byte gUnk_3000be3\n\
-_0808063C: .4byte 0x03000018\n\
-_08080640: .4byte gDisableSoftReset\n\
-_08080644: .4byte gMaxInGameTimeFlag\n\
-_08080648: .4byte 0x03000022\n\
-_0808064C: .4byte gSkipDoorTransition\n\
-_08080650: .4byte gPauseScreenFlag\n\
-_08080654: .4byte 0x03000B85\n\
-_08080658: .4byte 0x0300002B\n\
-_0808065C: .4byte gSamusDoorPositionOffset\n\
-_08080660: .4byte gDebugFlag\n\
-    .syntax divided\n");
+    s32 i;
+
+    gBootDebugOptions = sBootDebugOptions_Default;
+    gButtonAssignments = sDefaultButtonAssignments;
+
+    BitFill(3, USHORT_MAX, gVisitedMinimapTiles, AREA_NORMAL_COUNT * MINIMAP_SIZE / 8, 16);
+    BitFill(3, USHORT_MAX, gNeverReformBlocks, 0x1200, 16);
+    BitFill(3, USHORT_MAX, gCollectedTanks, 0x900, 16);
+
+    for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
+    {
+        gNumberOfNeverReformBlocks[i] = 0;
+        gNumberOfCollectedTanks[i] = 0;
+    }
+
+    gInGameTimer = sInGameTimer_Empty;
+    gDisableDrawingSamusAndScrollingFlag = FALSE;
+    gPreviousNavigationConversation = UCHAR_MAX;
+    gPreviousSoundEvent = UCHAR_MAX;
+    gUnk_300004c = 0;
+    gUnk_300004d = 0;
+    gIsLoadingFile = FALSE;
+
+    gUnk_3000be3 = FALSE;
+    gMonochromeFading = 0;
+    gDisableSoftReset = FALSE;
+    gMaxInGameTimeFlag = TRUE;
+    gDisableMusicFlag = FALSE;
+    gSkipDoorTransition = FALSE;
+    gPauseScreenFlag = 0;
+    gUnk_3000b85 = 0;
+    gDisablePauseFlag = FALSE;
+    gSamusDoorPositionOffset = 0;
+    gDebugFlag = FALSE;
 }
 
-// 0x08080664
-NAKED_FUNCTION
+/**
+ * @brief 80664 | e0 | Checks if the current save file exists, and either loads it or initializes a new one
+ * 
+ */
 void Sram_CheckLoadSaveFile(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	ldr r2, _080806BC @ =gButtonAssignments\n\
-	ldr r0, _080806C0 @ =0x085822C8\n\
-	ldr r1, [r0, #4]\n\
-	ldr r0, [r0]\n\
-	str r0, [r2]\n\
-	str r1, [r2, #4]\n\
-	ldr r1, _080806C4 @ =gBootDebugOptions\n\
-	ldr r0, _080806C8 @ =0x085822E4\n\
-	ldm r0!, {r2, r3, r4}\n\
-	stm r1!, {r2, r3, r4}\n\
-	ldr r2, _080806CC @ =gIsLoadingFile\n\
-	ldr r6, _080806D0 @ =0x03000B94\n\
-	ldr r4, _080806D4 @ =0x03000B8D\n\
-	ldrb r1, [r4]\n\
-	lsls r0, r1, #2\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r6\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r2]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r5, r0, #0x18\n\
-	cmp r5, #0\n\
-	bne _080806DC\n\
-	bl Sram_InitSaveFile\n\
-	ldr r2, _080806D8 @ =0x03000014\n\
-	ldrb r1, [r4]\n\
-	lsls r0, r1, #2\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r6\n\
-	ldrb r0, [r0, #0x10]\n\
-	strb r0, [r2]\n\
-	ldrb r1, [r4]\n\
-	lsls r0, r1, #2\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r6\n\
-	ldrb r0, [r0, #0x11]\n\
-	strb r0, [r2, #1]\n\
-	strb r5, [r2, #2]\n\
-	b _080806E0\n\
-	.align 2, 0\n\
-_080806BC: .4byte gButtonAssignments\n\
-_080806C0: .4byte 0x085822C8\n\
-_080806C4: .4byte gBootDebugOptions\n\
-_080806C8: .4byte 0x085822E4\n\
-_080806CC: .4byte gIsLoadingFile\n\
-_080806D0: .4byte 0x03000B94\n\
-_080806D4: .4byte 0x03000B8D\n\
-_080806D8: .4byte 0x03000014\n\
-_080806DC:\n\
-	bl SramLoad_CurrentSave\n\
-_080806E0:\n\
-	ldr r0, _08080718 @ =gUnk_3000be3\n\
-	movs r1, #0\n\
-	strb r1, [r0]\n\
-	ldr r0, _0808071C @ =0x03000018\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080720 @ =gDisableSoftReset\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080724 @ =gMaxInGameTimeFlag\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080728 @ =0x03000022\n\
-	strb r1, [r0]\n\
-	ldr r0, _0808072C @ =gSkipDoorTransition\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080730 @ =gPauseScreenFlag\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080734 @ =0x03000B85\n\
-	strb r1, [r0]\n\
-	ldr r0, _08080738 @ =0x0300002B\n\
-	strb r1, [r0]\n\
-	ldr r0, _0808073C @ =gSamusDoorPositionOffset\n\
-	movs r1, #0\n\
-	strh r1, [r0]\n\
-	ldr r0, _08080740 @ =gDebugFlag\n\
-	strb r1, [r0]\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08080718: .4byte gUnk_3000be3\n\
-_0808071C: .4byte 0x03000018\n\
-_08080720: .4byte gDisableSoftReset\n\
-_08080724: .4byte gMaxInGameTimeFlag\n\
-_08080728: .4byte 0x03000022\n\
-_0808072C: .4byte gSkipDoorTransition\n\
-_08080730: .4byte gPauseScreenFlag\n\
-_08080734: .4byte 0x03000B85\n\
-_08080738: .4byte 0x0300002B\n\
-_0808073C: .4byte gSamusDoorPositionOffset\n\
-_08080740: .4byte gDebugFlag\n\
-    .syntax divided\n");
+    s32 loading;
+
+    gButtonAssignments = sDefaultButtonAssignments;
+    gBootDebugOptions = sBootDebugOptions_Default;
+
+    loading = gIsLoadingFile = gSaveFilesInfo[gMostRecentSaveFile].exists;
+    if (loading == FALSE)
+    {
+        Sram_InitSaveFile();
+        gGameCompletion.completedGame = gSaveFilesInfo[gMostRecentSaveFile].completedGame;
+        gGameCompletion.introPlayed = gSaveFilesInfo[gMostRecentSaveFile].introPlayed;
+        gGameCompletion.unk_2 = loading;
+    }
+    else
+    {
+        SramLoad_CurrentSave();
+    }
+
+    gUnk_3000be3 = FALSE;
+    gMonochromeFading = 0;
+    gDisableSoftReset = FALSE;
+    gMaxInGameTimeFlag = FALSE;
+    gDisableMusicFlag = FALSE;
+    gSkipDoorTransition = FALSE;
+    gPauseScreenFlag = 0;
+    gUnk_3000b85 = 0;
+    gDisablePauseFlag = FALSE;
+    gSamusDoorPositionOffset = 0;
+    gDebugFlag = FALSE;
 }
 
-// 0x08080744
-NAKED_FUNCTION
+/**
+ * @brief 80744 | a8 | Erases the current save file, split in several stages
+ * 
+ */
 void Sram_EraseFile(u8 stage)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	sub sp, #0x18\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	adds r5, r4, #0\n\
-	add r0, sp, #4\n\
-	movs r1, #0\n\
-	movs r2, #0x14\n\
-	bl memset\n\
-	cmp r4, #0\n\
-	bne _08080798\n\
-	ldr r1, _08080784 @ =gDisableSoftReset\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-	ldr r2, _08080788 @ =0x03000B94\n\
-	ldr r3, _0808078C @ =0x03000B8D\n\
-	ldrb r0, [r3]\n\
-	lsls r1, r0, #2\n\
-	adds r1, r1, r0\n\
-	lsls r1, r1, #2\n\
-	adds r1, r1, r2\n\
-	add r0, sp, #4\n\
-	ldm r0!, {r2, r4, r5}\n\
-	stm r1!, {r2, r4, r5}\n\
-	ldm r0!, {r2, r4}\n\
-	stm r1!, {r2, r4}\n\
-	ldr r1, _08080790 @ =0x0000FFFF\n\
-	ldr r2, _08080794 @ =0x0858225C\n\
-	ldrb r0, [r3]\n\
-	b _080807AE\n\
-	.align 2, 0\n\
-_08080784: .4byte gDisableSoftReset\n\
-_08080788: .4byte 0x03000B94\n\
-_0808078C: .4byte 0x03000B8D\n\
-_08080790: .4byte 0x0000FFFF\n\
-_08080794: .4byte 0x0858225C\n\
-_08080798:\n\
-	cmp r4, #1\n\
-	bne _080807A2\n\
-	bl WriteMostRecentFileToSram\n\
-	b _080807DE\n\
-_080807A2:\n\
-	cmp r4, #2\n\
-	bne _080807D0\n\
-	ldr r1, _080807C4 @ =0x0000FFFF\n\
-	ldr r2, _080807C8 @ =0x08582268\n\
-	ldr r0, _080807CC @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-_080807AE:\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r2\n\
-	ldr r2, [r0]\n\
-	movs r3, #0x90\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl BitFill\n\
-	b _080807DE\n\
-	.align 2, 0\n\
-_080807C4: .4byte 0x0000FFFF\n\
-_080807C8: .4byte 0x08582268\n\
-_080807CC: .4byte 0x03000B8D\n\
-_080807D0:\n\
-	cmp r5, #3\n\
-	bne _080807D8\n\
-	bl WriteMostRecentFileBackupToSram\n\
-_080807D8:\n\
-	ldr r1, _080807E8 @ =gDisableSoftReset\n\
-	movs r0, #0\n\
-	strb r0, [r1]\n\
-_080807DE:\n\
-	add sp, #0x18\n\
-	pop {r4, r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080807E8: .4byte gDisableSoftReset\n\
-    .syntax divided\n");
+    struct SaveFileInfo emptyInfo = { 0 };
+
+    if (stage == 0)
+    {
+        gDisableSoftReset = TRUE;
+        gSaveFilesInfo[gMostRecentSaveFile] = emptyInfo;
+        BitFill(3, USHORT_MAX, (void*)sSaveDataEwramPointers[gMostRecentSaveFile], sizeof(struct SaveFile), 16);
+    }
+    else if (stage == 1)
+    {
+        WriteMostRecentFileToSram();
+    }
+    else if (stage == 2)
+    {
+        BitFill(3, USHORT_MAX, (void*)sSaveDataEwramBackupPointers[gMostRecentSaveFile], sizeof(struct SaveFile), 16);
+    }
+    else
+    {
+        if (stage == 3)
+            WriteMostRecentFileBackupToSram();
+
+        gDisableSoftReset = FALSE;
+    }
 }
 
-// 0x080807EC
-NAKED_FUNCTION
+/**
+ * @brief 807ec | c8 | Copies the current save file to another file, split in several stages
+ * 
+ */
 void Sram_CopyFile(u8 dst, u8 stage)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	sub sp, #4\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r6, r0, #0x18\n\
-	adds r2, r6, #0\n\
-	lsls r1, r1, #0x18\n\
-	lsrs r1, r1, #0x18\n\
-	adds r0, r1, #0\n\
-	cmp r1, #0\n\
-	bne _08080844\n\
-	ldr r1, _08080834 @ =gDisableSoftReset\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-	ldr r4, _08080838 @ =0x03000B94\n\
-	lsls r3, r6, #2\n\
-	adds r1, r3, r6\n\
-	lsls r1, r1, #2\n\
-	ldr r5, _0808083C @ =0x03000B8D\n\
-	ldrb r2, [r5]\n\
-	lsls r0, r2, #2\n\
-	adds r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r1, r1, r4\n\
-	adds r0, r0, r4\n\
-	ldm r0!, {r2, r4, r6}\n\
-	stm r1!, {r2, r4, r6}\n\
-	ldm r0!, {r2, r4}\n\
-	stm r1!, {r2, r4}\n\
-	ldr r2, _08080840 @ =0x0858225C\n\
-	ldrb r0, [r5]\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r2\n\
-	ldr r1, [r0]\n\
-	adds r3, r3, r2\n\
-	ldr r2, [r3]\n\
-	b _08080872\n\
-	.align 2, 0\n\
-_08080834: .4byte gDisableSoftReset\n\
-_08080838: .4byte 0x03000B94\n\
-_0808083C: .4byte 0x03000B8D\n\
-_08080840: .4byte 0x0858225C\n\
-_08080844:\n\
-	cmp r1, #1\n\
-	bne _0808085C\n\
-	ldr r4, _08080858 @ =0x03000B8D\n\
-	ldrb r5, [r4]\n\
-	strb r6, [r4]\n\
-	bl WriteMostRecentFileToSram\n\
-	strb r5, [r4]\n\
-	b _080808A2\n\
-	.align 2, 0\n\
-_08080858: .4byte 0x03000B8D\n\
-_0808085C:\n\
-	cmp r1, #2\n\
-	bne _0808088C\n\
-	ldr r2, _08080884 @ =0x08582268\n\
-	ldr r0, _08080888 @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r2\n\
-	ldr r1, [r0]\n\
-	lsls r0, r6, #2\n\
-	adds r0, r0, r2\n\
-	ldr r2, [r0]\n\
-_08080872:\n\
-	movs r3, #0x90\n\
-	lsls r3, r3, #5\n\
-	movs r0, #0x10\n\
-	str r0, [sp]\n\
-	movs r0, #3\n\
-	bl DmaTransfer\n\
-	b _080808A2\n\
-	.align 2, 0\n\
-_08080884: .4byte 0x08582268\n\
-_08080888: .4byte 0x03000B8D\n\
-_0808088C:\n\
-	cmp r0, #3\n\
-	bne _0808089C\n\
-	ldr r4, _080808AC @ =0x03000B8D\n\
-	ldrb r5, [r4]\n\
-	strb r2, [r4]\n\
-	bl WriteMostRecentFileBackupToSram\n\
-	strb r5, [r4]\n\
-_0808089C:\n\
-	ldr r1, _080808B0 @ =gDisableSoftReset\n\
-	movs r0, #0\n\
-	strb r0, [r1]\n\
-_080808A2:\n\
-	add sp, #4\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080808AC: .4byte 0x03000B8D\n\
-_080808B0: .4byte gDisableSoftReset\n\
-    .syntax divided\n");
+    u8 currentFile;
+
+    if (stage == 0)
+    {
+        gDisableSoftReset = TRUE;
+        gSaveFilesInfo[dst] = gSaveFilesInfo[gMostRecentSaveFile];
+        DmaTransfer(3, sSaveDataEwramPointers[gMostRecentSaveFile], (void*)sSaveDataEwramPointers[dst],
+            sizeof(struct SaveFile), 16);
+    }
+    else if (stage == 1)
+    {
+        currentFile = gMostRecentSaveFile;
+        gMostRecentSaveFile = dst;
+        WriteMostRecentFileToSram();
+        gMostRecentSaveFile = currentFile;
+    }
+    else if (stage == 2)
+    {
+        DmaTransfer(3, sSaveDataEwramBackupPointers[gMostRecentSaveFile], (void*)sSaveDataEwramBackupPointers[dst],
+            sizeof(struct SaveFile), 16);
+    }
+    else
+    {
+        if (stage == 3)
+        {
+            currentFile = gMostRecentSaveFile;
+            gMostRecentSaveFile = dst;
+            WriteMostRecentFileBackupToSram();
+            gMostRecentSaveFile = currentFile;
+        }
+
+        gDisableSoftReset = FALSE;
+    }
 }
 
-// 0x080808B4
-NAKED_FUNCTION
+/**
+ * @brief 808b4 | 9c | Fills the file info of every save file
+ * 
+ */
 void Sram_WriteFileInfo(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	movs r4, #0\n\
-	movs r3, #0\n\
-	ldr r2, _08080948 @ =0x03000B94\n\
-_080808BC:\n\
-	lsls r1, r4, #2\n\
-	ldrb r0, [r2]\n\
-	cmp r0, #1\n\
-	bne _0808091A\n\
-	ldr r0, _0808094C @ =0x0858225C\n\
-	adds r0, r1, r0\n\
-	ldr r1, [r0]\n\
-	ldrb r0, [r1, #0x1d]\n\
-	strb r0, [r2, #2]\n\
-	adds r0, r1, #0\n\
-	adds r0, #0x21\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r2, #3]\n\
-	adds r0, r1, #0\n\
-	adds r0, #0xc4\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r2, #4]\n\
-	adds r0, r1, #0\n\
-	adds r0, #0xc6\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r2, #6]\n\
-	adds r0, r1, #0\n\
-	adds r0, #0xc8\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r2, #8]\n\
-	adds r0, r1, #0\n\
-	adds r0, #0xca\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r2, #0xa]\n\
-	adds r0, r1, #0\n\
-	adds r0, #0xcf\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r2, #0xc]\n\
-	adds r0, r1, #0\n\
-	adds r0, #0xe4\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r2, #0xd]\n\
-	adds r0, r1, #0\n\
-	adds r0, #0xe5\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r2, #0xe]\n\
-	ldrb r0, [r1, #0x1c]\n\
-	strb r0, [r2, #0xf]\n\
-	ldrb r0, [r1, #0x18]\n\
-	strb r0, [r2, #0x10]\n\
-	ldrb r0, [r1, #0x19]\n\
-	strb r0, [r2, #0x11]\n\
-_0808091A:\n\
-	ldrb r0, [r2]\n\
-	cmp r0, #0\n\
-	beq _08080926\n\
-	ldrb r0, [r2, #0xf]\n\
-	cmp r0, #0\n\
-	bne _0808093A\n\
-_08080926:\n\
-	strb r3, [r2]\n\
-	strb r3, [r2, #2]\n\
-	strb r3, [r2, #3]\n\
-	strh r3, [r2, #4]\n\
-	strh r3, [r2, #6]\n\
-	strh r3, [r2, #8]\n\
-	strh r3, [r2, #0xa]\n\
-	strb r3, [r2, #0xc]\n\
-	strb r3, [r2, #0xd]\n\
-	strb r3, [r2, #0xe]\n\
-_0808093A:\n\
-	adds r2, #0x14\n\
-	adds r4, #1\n\
-	cmp r4, #2\n\
-	ble _080808BC\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08080948: .4byte 0x03000B94\n\
-_0808094C: .4byte 0x0858225C\n\
-    .syntax divided\n");
+    s32 i;
+    struct SaveFile* pFile;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (gSaveFilesInfo[i].exists == TRUE)
+        {
+            pFile = (struct SaveFile*)sSaveDataEwramPointers[i];
+            gSaveFilesInfo[i].currentArea = pFile->currentArea;
+            gSaveFilesInfo[i].eventCounter = pFile->eventCounter;
+            gSaveFilesInfo[i].currentEnergy = pFile->equipment.currentEnergy;
+            gSaveFilesInfo[i].maxEnergy = pFile->equipment.maxEnergy;
+            gSaveFilesInfo[i].currentMissiles = pFile->equipment.currentMissiles;
+            gSaveFilesInfo[i].maxMissiles = pFile->equipment.maxMissiles;
+            gSaveFilesInfo[i].weaponsStatus = pFile->equipment.weaponsStatus;
+            gSaveFilesInfo[i].igtHours = pFile->inGameTimer.hours;
+            gSaveFilesInfo[i].igtMinutes = pFile->inGameTimer.minutes;
+            gSaveFilesInfo[i].hasSaved = pFile->hasSaved;
+            gSaveFilesInfo[i].completedGame = pFile->gameCompletion.completedGame;
+            gSaveFilesInfo[i].introPlayed = pFile->gameCompletion.introPlayed;
+        }
+
+        if (gSaveFilesInfo[i].exists == FALSE || gSaveFilesInfo[i].hasSaved == FALSE)
+        {
+            gSaveFilesInfo[i].exists = FALSE;
+            gSaveFilesInfo[i].currentArea = 0;
+            gSaveFilesInfo[i].eventCounter = 0;
+            gSaveFilesInfo[i].currentEnergy = 0;
+            gSaveFilesInfo[i].maxEnergy = 0;
+            gSaveFilesInfo[i].currentMissiles = 0;
+            gSaveFilesInfo[i].maxMissiles = 0;
+            gSaveFilesInfo[i].weaponsStatus = 0;
+            gSaveFilesInfo[i].igtHours = 0;
+            gSaveFilesInfo[i].igtMinutes = 0;
+        }
+    }
 }
 
 /**

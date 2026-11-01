@@ -30,7 +30,7 @@ struct SaveFileInfo {
     u16 maxEnergy;
     u16 currentMissiles;
     u16 maxMissiles;
-    u8 suitMiscStatus;
+    u8 weaponsStatus;
     u8 igtHours;
     u8 igtMinutes;
     u8 hasSaved;
