@@ -26,8 +26,10 @@
 #include "io.h"
 #include "menus/pause_screen.h"
 #include "menus/pause_screen_map.h"
+#include "music_wrappers.h"
 #include "new_file_intro.h"
 #include "oam_id.h"
+#include "sound_event.h"
 #include "syscalls.h"
 #include "text.h"
 
@@ -37,9 +39,12 @@
 #include "gba/keys.h"
 
 
-// sNavConversationTextPointers and sPauseScreenTextPointers are static in pause_screen.c
-#define sNavConversationTextPointers_ ((u16***)0x879C0F0)
-#define sPauseScreenTextPointers_ ((u16***)0x879C10C)
+// sNavConversationTextPointers and sPauseScreenTextPointers are static in pause_screen.c,
+// alias their addresses so they are still referenced as symbols
+asm(".set sNavConversationTextPointers_, 0x879C0F0");
+asm(".set sPauseScreenTextPointers_, 0x879C10C");
+extern u16** sNavConversationTextPointers_[LANGUAGE_COUNT];
+extern u16** sPauseScreenTextPointers_[LANGUAGE_COUNT];
 
 static Func_T sNavConversationPopUpFunctions[3] = {
     unk_7bde0,
@@ -113,6 +118,8 @@ static s8 sMainDeckDiagramTargetOffsets[8][3] = {
 static u8 sBlob_79c228_79c27c[] = INCBIN_U8("data/Blob_79c228_79c27c.bin");
 
 // 0x08079AFC
+#define gLanguage_ (*(vs8*)&gLanguage)
+#define gLanguage_ (*(vs8*)0x3000011)
 NAKED_FUNCTION
 void NavigationConversationProcessText(void)
 {
