@@ -11,6 +11,7 @@ extern const u32* sTitleIntroCollisionWarningBgGfxPointers[5];
 extern const u32* sTitleIntroCollisionWarningObjGfxPointers[6];
 extern const u16** sLocationTextPointers[LANGUAGE_COUNT];
 extern u16** sMessageTextPointers[LANGUAGE_COUNT];
+extern u16** sMonologueTextPointers[LANGUAGE_COUNT];
 extern const struct FrameData* sIntroSpaceViewParticleOam[6];
 extern const u16** sEndingTextPointers[LANGUAGE_COUNT];
 

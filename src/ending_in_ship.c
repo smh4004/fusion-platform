@@ -11,6 +11,7 @@
 #include "constants/audio.h"
 #include "constants/text.h"
 
+#include "data/audio.h"
 #include "data/generic_data.h"
 #include "data/intro_data.h"
 
@@ -211,626 +212,273 @@ void EndingAnimalsInit(void)
     CallbackSetVBlank(EndingConversationAndAnimalsVblank);
 }
 
-// 0x08096448
-NAKED_FUNCTION
+/**
+ * @brief 96448 | 4e0 | Processes the ending in ship cutscenes
+ * 
+ */
 boolu32 EndingInShipProcess(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	movs r6, #0\n\
-	ldr r2, _08096474 @ =gNonGameplayRam\n\
-	movs r1, #0x84\n\
-	lsls r1, r1, #2\n\
-	adds r0, r2, r1\n\
-	ldrh r1, [r0]\n\
-	adds r1, #1\n\
-	strh r1, [r0]\n\
-	movs r7, #0x85\n\
-	lsls r7, r7, #2\n\
-	adds r0, r2, r7\n\
-	ldrb r0, [r0]\n\
-	adds r5, r2, #0\n\
-	cmp r0, #0xf\n\
-	bls _0809646A\n\
-	b _08096920\n\
-_0809646A:\n\
-	lsls r0, r0, #2\n\
-	ldr r1, _08096478 @ =_0809647C\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_08096474: .4byte gNonGameplayRam\n\
-_08096478: .4byte _0809647C\n\
-_0809647C: @ jump table\n\
-	.4byte _080964BC @ case 0\n\
-	.4byte _080964F2 @ case 1\n\
-	.4byte _08096550 @ case 2\n\
-	.4byte _080965F4 @ case 3\n\
-	.4byte _0809663C @ case 4\n\
-	.4byte _08096698 @ case 5\n\
-	.4byte _080966E0 @ case 6\n\
-	.4byte _080966FC @ case 7\n\
-	.4byte _08096716 @ case 8\n\
-	.4byte _0809673C @ case 9\n\
-	.4byte _0809678A @ case 10\n\
-	.4byte _0809681C @ case 11\n\
-	.4byte _08096828 @ case 12\n\
-	.4byte _08096878 @ case 13\n\
-	.4byte _080968A0 @ case 14\n\
-	.4byte _080968E8 @ case 15\n\
-_080964BC:\n\
-	movs r0, #0x84\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #7\n\
-	beq _080964CA\n\
-	b _080968D8\n\
-_080964CA:\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	ldr r1, _080964DC @ =gWrittenToBldy\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0\n\
-	beq _080964E0\n\
-	subs r0, #1\n\
-	strh r0, [r1]\n\
-	b _080968D8\n\
-	.align 2, 0\n\
-_080964DC: .4byte gWrittenToBldy\n\
-_080964E0:\n\
-	movs r0, #0x56\n\
-	movs r1, #0xe\n\
-	bl PlayMusic\n\
-	movs r2, #0x85\n\
-	lsls r2, r2, #2\n\
-	adds r1, r5, r2\n\
-	movs r0, #1\n\
-	b _080968D6\n\
-_080964F2:\n\
-	movs r7, #0x84\n\
-	lsls r7, r7, #2\n\
-	adds r1, r5, r7\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0x46\n\
-	beq _08096500\n\
-	b _080968D8\n\
-_08096500:\n\
-	movs r4, #0\n\
-	movs r2, #0\n\
-	strh r2, [r1]\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #0x13\n\
-	ldrh r0, [r3]\n\
-	movs r7, #0x80\n\
-	lsls r7, r7, #1\n\
-	adds r1, r7, #0\n\
-	orrs r0, r1\n\
-	strh r0, [r3]\n\
-	strh r2, [r5, #0x12]\n\
-	strh r2, [r5, #0x10]\n\
-	strh r2, [r5, #0xe]\n\
-	strh r2, [r5, #0xc]\n\
-	ldr r1, _08096544 @ =0x00000212\n\
-	adds r0, r5, r1\n\
-	strb r4, [r0]\n\
-	ldr r1, _08096548 @ =0x0879C5A4\n\
-	ldr r0, _0809654C @ =0x03000011\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	ldr r0, [r0, #0x1c]\n\
-	str r0, [r5]\n\
-	movs r2, #0x85\n\
-	lsls r2, r2, #2\n\
-	adds r1, r5, r2\n\
-	movs r0, #2\n\
-	b _080968D6\n\
-	.align 2, 0\n\
-_08096544: .4byte 0x00000212\n\
-_08096548: .4byte 0x0879C5A4\n\
-_0809654C: .4byte 0x03000011\n\
-_08096550:\n\
-	ldr r0, [r5]\n\
-	ldrh r1, [r0]\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _08096578\n\
-	ldr r0, _08096598 @ =gChangedInput\n\
-	ldrh r1, [r0]\n\
-	movs r0, #1\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _08096578\n\
-	movs r7, #0x86\n\
-	lsls r7, r7, #2\n\
-	adds r1, r5, r7\n\
-	ldrb r0, [r1]\n\
-	cmp r0, #0\n\
-	bne _08096578\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-_08096578:\n\
-	ldr r3, _0809659C @ =gNonGameplayRam\n\
-	movs r0, #0x84\n\
-	lsls r0, r0, #2\n\
-	adds r1, r3, r0\n\
-	movs r4, #0\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	movs r1, #0x86\n\
-	lsls r1, r1, #2\n\
-	adds r0, r3, r1\n\
-	ldrb r2, [r0]\n\
-	cmp r2, #2\n\
-	bne _080965A0\n\
-	strb r4, [r0]\n\
-	b _080965AE\n\
-	.align 2, 0\n\
-_08096598: .4byte gChangedInput\n\
-_0809659C: .4byte gNonGameplayRam\n\
-_080965A0:\n\
-	cmp r2, #3\n\
-	bne _080965AE\n\
-	strb r4, [r0]\n\
-	movs r7, #0x85\n\
-	lsls r7, r7, #2\n\
-	adds r0, r3, r7\n\
-	strb r2, [r0]\n\
-_080965AE:\n\
-	bl EndingCheckMonologueEnded\n\
-	cmp r0, #0\n\
-	beq _080965CC\n\
-	ldr r3, _080965DC @ =gNonGameplayRam\n\
-	movs r0, #0x85\n\
-	lsls r0, r0, #2\n\
-	adds r1, r3, r0\n\
-	movs r2, #0\n\
-	movs r0, #3\n\
-	strb r0, [r1]\n\
-	movs r1, #0x86\n\
-	lsls r1, r1, #2\n\
-	adds r0, r3, r1\n\
-	strb r2, [r0]\n\
-_080965CC:\n\
-	ldr r0, _080965DC @ =gNonGameplayRam\n\
-	ldr r2, _080965E0 @ =0x00000213\n\
-	adds r1, r0, r2\n\
-	ldrb r0, [r1]\n\
-	cmp r0, #0\n\
-	bne _080965E4\n\
-	movs r0, #0x64\n\
-	b _080968D6\n\
-	.align 2, 0\n\
-_080965DC: .4byte gNonGameplayRam\n\
-_080965E0: .4byte 0x00000213\n\
-_080965E4:\n\
-	cmp r0, #1\n\
-	beq _080965EA\n\
-	b _080968D8\n\
-_080965EA:\n\
-	movs r0, #0x64\n\
-	strb r0, [r1]\n\
-	bl SpecialCutsceneProcessMonologue\n\
-	b _080968D8\n\
-_080965F4:\n\
-	movs r7, #0x84\n\
-	lsls r7, r7, #2\n\
-	adds r1, r5, r7\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #1\n\
-	bne _08096618\n\
-	ldr r1, _08096610 @ =gWrittenToBldalpha_Evb\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	ldr r1, _08096614 @ =gWrittenToBldalpha_Eva\n\
-_08096608:\n\
-	movs r0, #0x10\n\
-	strh r0, [r1]\n\
-	b _080968D8\n\
-	.align 2, 0\n\
-_08096610: .4byte gWrittenToBldalpha_Evb\n\
-_08096614: .4byte gWrittenToBldalpha_Eva\n\
-_08096618:\n\
-	cmp r0, #0x14\n\
-	beq _0809661E\n\
-	b _080968D8\n\
-_0809661E:\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	ldr r1, _08096634 @ =0x04000050\n\
-	ldr r2, _08096638 @ =0x00001841\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	movs r7, #0x85\n\
-	lsls r7, r7, #2\n\
-	adds r1, r5, r7\n\
-	movs r0, #4\n\
-	b _080968D6\n\
-	.align 2, 0\n\
-_08096634: .4byte 0x04000050\n\
-_08096638: .4byte 0x00001841\n\
-_0809663C:\n\
-	movs r0, #0x84\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #4\n\
-	beq _0809664A\n\
-	b _080968D8\n\
-_0809664A:\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	ldr r2, _0809668C @ =gWrittenToBldalpha_Evb\n\
-	ldrh r0, [r2]\n\
-	cmp r0, #0xf\n\
-	bhi _0809665A\n\
-	adds r0, #1\n\
-	strh r0, [r2]\n\
-_0809665A:\n\
-	ldr r1, _08096690 @ =gWrittenToBldalpha_Eva\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0\n\
-	beq _08096666\n\
-	subs r0, #1\n\
-	strh r0, [r1]\n\
-_08096666:\n\
-	ldrh r0, [r2]\n\
-	cmp r0, #0x10\n\
-	beq _0809666E\n\
-	b _080968D8\n\
-_0809666E:\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0\n\
-	beq _08096676\n\
-	b _080968D8\n\
-_08096676:\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #0x13\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _08096694 @ =0x0000FEFF\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	movs r2, #0x85\n\
-	lsls r2, r2, #2\n\
-	adds r1, r5, r2\n\
-	movs r0, #5\n\
-	b _080968D6\n\
-	.align 2, 0\n\
-_0809668C: .4byte gWrittenToBldalpha_Evb\n\
-_08096690: .4byte gWrittenToBldalpha_Eva\n\
-_08096694: .4byte 0x0000FEFF\n\
-_08096698:\n\
-	movs r7, #0x84\n\
-	lsls r7, r7, #2\n\
-	adds r2, r5, r7\n\
-	ldrh r0, [r2]\n\
-	cmp r0, #0xa\n\
-	bne _080966B2\n\
-	movs r0, #0x1e\n\
-	movs r1, #0x78\n\
-	movs r2, #0x50\n\
-	movs r3, #1\n\
-	bl EndingDialogueSetupOam\n\
-	b _080968D8\n\
-_080966B2:\n\
-	cmp r0, #0x27\n\
-	bne _080966C0\n\
-	ldr r1, _080966BC @ =gWrittenToBldy\n\
-	b _08096608\n\
-	.align 2, 0\n\
-_080966BC: .4byte gWrittenToBldy\n\
-_080966C0:\n\
-	cmp r0, #0x28\n\
-	beq _080966C6\n\
-	b _080968D8\n\
-_080966C6:\n\
-	ldr r1, _080966DC @ =0x04000050\n\
-	movs r0, #0xff\n\
-	strh r0, [r1]\n\
-	movs r0, #0\n\
-	strh r0, [r2]\n\
-	movs r0, #0x85\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	movs r0, #6\n\
-	b _080968D6\n\
-	.align 2, 0\n\
-_080966DC: .4byte 0x04000050\n\
-_080966E0:\n\
-	movs r2, #0x84\n\
-	lsls r2, r2, #2\n\
-	adds r1, r5, r2\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #1\n\
-	beq _080966EE\n\
-	b _080968D8\n\
-_080966EE:\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	movs r7, #0x85\n\
-	lsls r7, r7, #2\n\
-	adds r1, r5, r7\n\
-	movs r0, #7\n\
-	b _080968D6\n\
-_080966FC:\n\
-	movs r0, #0x84\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	bl EndingAdamConversationInit\n\
-	movs r2, #0x85\n\
-	lsls r2, r2, #2\n\
-	adds r1, r5, r2\n\
-	movs r0, #8\n\
-	strb r0, [r1]\n\
-	b _08096920\n\
-_08096716:\n\
-	ldr r1, _08096738 @ =gWrittenToBldy\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	movs r7, #0x84\n\
-	lsls r7, r7, #2\n\
-	adds r1, r5, r7\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	movs r0, #0x93\n\
-	lsls r0, r0, #2\n\
-	bl SoundPlay\n\
-	movs r0, #0x85\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	movs r0, #9\n\
-	b _080968D6\n\
-	.align 2, 0\n\
-_08096738: .4byte gWrittenToBldy\n\
-_0809673C:\n\
-	movs r1, #0x84\n\
-	lsls r1, r1, #2\n\
-	adds r4, r5, r1\n\
-	ldrh r0, [r4]\n\
-	cmp r0, #0xa\n\
-	beq _08096806\n\
-	cmp r0, #0x28\n\
-	bne _08096806\n\
-	movs r0, #0xff\n\
-	movs r1, #0\n\
-	movs r2, #0\n\
-	movs r3, #0\n\
-	bl EndingDialogueSetupOam\n\
-	movs r0, #6\n\
-	movs r1, #0x14\n\
-	movs r2, #0xc0\n\
-	movs r3, #0\n\
-	bl EndingDialogueSetupOam\n\
-	movs r0, #7\n\
-	movs r1, #0x80\n\
-	movs r2, #0xc0\n\
-	movs r3, #0\n\
-	bl EndingDialogueSetupOam\n\
-	movs r0, #9\n\
-	movs r1, #0x80\n\
-	movs r2, #0xc0\n\
-	movs r3, #0\n\
-	bl EndingDialogueSetupOam\n\
-	movs r0, #0\n\
-	strh r0, [r4]\n\
-	movs r2, #0x85\n\
-	lsls r2, r2, #2\n\
-	adds r1, r5, r2\n\
-	movs r0, #0xa\n\
-	b _08096804\n\
-_0809678A:\n\
-	movs r7, #0x84\n\
-	lsls r7, r7, #2\n\
-	adds r1, r5, r7\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, [r5]\n\
-	ldrh r1, [r0]\n\
-	movs r0, #0xfc\n\
-	lsls r0, r0, #8\n\
-	cmp r1, r0\n\
-	bne _080967BC\n\
-	ldr r0, _080967D4 @ =gChangedInput\n\
-	ldrh r1, [r0]\n\
-	movs r0, #1\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _080967BC\n\
-	movs r0, #0x86\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	ldrb r0, [r1]\n\
-	cmp r0, #0\n\
-	bne _080967BC\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-_080967BC:\n\
-	movs r1, #0x86\n\
-	lsls r1, r1, #2\n\
-	adds r3, r5, r1\n\
-	ldrb r0, [r3]\n\
-	cmp r0, #2\n\
-	bne _080967DC\n\
-	movs r0, #0\n\
-	strb r0, [r3]\n\
-	ldr r0, _080967D8 @ =0x00000203\n\
-	bl SoundPlay\n\
-	b _08096806\n\
-	.align 2, 0\n\
-_080967D4: .4byte gChangedInput\n\
-_080967D8: .4byte 0x00000203\n\
-_080967DC:\n\
-	cmp r0, #3\n\
-	bne _08096806\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #0x13\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _08096814 @ =0x0000FEFF\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #0\n\
-	strb r0, [r3]\n\
-	ldr r0, _08096818 @ =0x00000203\n\
-	bl SoundPlay\n\
-	movs r0, #0xa\n\
-	bl FadeMusic\n\
-	movs r2, #0x85\n\
-	lsls r2, r2, #2\n\
-	adds r1, r5, r2\n\
-	movs r0, #0xb\n\
-_08096804:\n\
-	strb r0, [r1]\n\
-_08096806:\n\
-	bl SpecialCutsceneProcessOam\n\
-	bl SpecialCutsceneDrawAllOam\n\
-	bl EndingProcessAdamText\n\
-	b _08096920\n\
-	.align 2, 0\n\
-_08096814: .4byte 0x0000FEFF\n\
-_08096818: .4byte 0x00000203\n\
-_0809681C:\n\
-	movs r7, #0x84\n\
-	lsls r7, r7, #2\n\
-	adds r1, r5, r7\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	b _080968D8\n\
-_08096828:\n\
-	movs r0, #0x84\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #1\n\
-	bne _0809685C\n\
-	ldr r2, _08096850 @ =0x080A8CDC\n\
-	ldr r0, _08096854 @ =0x080A8D3C\n\
-	ldr r1, _08096858 @ =0x00001264\n\
-	adds r0, r0, r1\n\
-	ldrh r1, [r0]\n\
-	lsls r0, r1, #1\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r2\n\
-	ldr r0, [r0]\n\
-	movs r1, #0\n\
-	bl ApplyMusicSoundFading\n\
-	b _080968D8\n\
-	.align 2, 0\n\
-_08096850: .4byte 0x080A8CDC\n\
-_08096854: .4byte 0x080A8D3C\n\
-_08096858: .4byte 0x00001264\n\
-_0809685C:\n\
-	cmp r0, #0xa\n\
-	bne _080968D8\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	ldr r1, _08096874 @ =gWrittenToBldy\n\
-	movs r0, #0x10\n\
-	strh r0, [r1]\n\
-	movs r2, #0x85\n\
-	lsls r2, r2, #2\n\
-	adds r1, r5, r2\n\
-	movs r0, #0xd\n\
-	b _080968D6\n\
-	.align 2, 0\n\
-_08096874: .4byte gWrittenToBldy\n\
-_08096878:\n\
-	bl EndingAnimalsInit\n\
-	ldr r2, _08096898 @ =gNonGameplayRam\n\
-	movs r7, #0x84\n\
-	lsls r7, r7, #2\n\
-	adds r0, r2, r7\n\
-	movs r1, #0\n\
-	strh r1, [r0]\n\
-	ldr r0, _0809689C @ =gWrittenToBldy\n\
-	strh r1, [r0]\n\
-	movs r0, #0x85\n\
-	lsls r0, r0, #2\n\
-	adds r1, r2, r0\n\
-	movs r0, #0xe\n\
-	strb r0, [r1]\n\
-	b _08096920\n\
-	.align 2, 0\n\
-_08096898: .4byte gNonGameplayRam\n\
-_0809689C: .4byte gWrittenToBldy\n\
-_080968A0:\n\
-	movs r1, #0x84\n\
-	lsls r1, r1, #2\n\
-	adds r2, r5, r1\n\
-	ldrh r1, [r2]\n\
-	cmp r1, #1\n\
-	bne _080968B6\n\
-	movs r0, #0x53\n\
-	movs r1, #0xe\n\
-	bl PlayMusic\n\
-	b _080968D8\n\
-_080968B6:\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #2\n\
-	cmp r1, r0\n\
-	bne _080968D8\n\
-	movs r0, #0\n\
-	strh r0, [r2]\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #0x13\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _080968E4 @ =0x0000FBFF\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	movs r2, #0x85\n\
-	lsls r2, r2, #2\n\
-	adds r1, r5, r2\n\
-	movs r0, #0xf\n\
-_080968D6:\n\
-	strb r0, [r1]\n\
-_080968D8:\n\
-	bl SpecialCutsceneProcessOam\n\
-	bl SpecialCutsceneDrawAllOam\n\
-	b _08096920\n\
-	.align 2, 0\n\
-_080968E4: .4byte 0x0000FBFF\n\
-_080968E8:\n\
-	movs r7, #0x84\n\
-	lsls r7, r7, #2\n\
-	adds r1, r5, r7\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #2\n\
-	bne _08096918\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	ldr r1, _08096908 @ =gWrittenToBldy\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0xf\n\
-	bhi _0809690C\n\
-	adds r0, #1\n\
-	strh r0, [r1]\n\
-	b _08096918\n\
-	.align 2, 0\n\
-_08096908: .4byte gWrittenToBldy\n\
-_0809690C:\n\
-	movs r0, #0x85\n\
-	lsls r0, r0, #2\n\
-	adds r1, r5, r0\n\
-	movs r0, #0\n\
-	strb r0, [r1]\n\
-	movs r6, #1\n\
-_08096918:\n\
-	bl SpecialCutsceneProcessOam\n\
-	bl SpecialCutsceneDrawAllOam\n\
-_08096920:\n\
-	adds r0, r6, #0\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-    .syntax divided\n");
+    boolu32 ended;
+
+    ended = FALSE;
+    INTRO_DATA.timer++;
+
+    switch (INTRO_DATA.subStage)
+    {
+        case 0:
+            if (INTRO_DATA.timer == 7)
+            {
+                INTRO_DATA.timer = 0;
+                if (gWrittenToBldy != 0)
+                {
+                    gWrittenToBldy--;
+                }
+                else
+                {
+                    PlayMusic(MUSIC_EPILOGUE, 14);
+                    INTRO_DATA.subStage = 1;
+                }
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 1:
+            if (INTRO_DATA.timer == 70)
+            {
+                INTRO_DATA.timer = 0;
+                WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) | DCNT_BG0);
+                INTRO_DATA.unk_12 = 0;
+                INTRO_DATA.unk_10 = 0;
+                INTRO_DATA.unk_E = 0;
+                INTRO_DATA.unk_C = 0;
+                INTRO_DATA.unk_212 = 0;
+                INTRO_DATA.pText = sMonologueTextPointers[gLanguage][7];
+                INTRO_DATA.subStage = 2;
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 2:
+            if (*INTRO_DATA.pText == CHAR_NEXT_PAGE_ARROW && gChangedInput & KEY_A && INTRO_DATA.unk_218 == 0)
+                INTRO_DATA.unk_218 = 1;
+
+            INTRO_DATA.timer = 0;
+
+            if (INTRO_DATA.unk_218 == 2)
+            {
+                INTRO_DATA.unk_218 = 0;
+            }
+            else if (INTRO_DATA.unk_218 == 3)
+            {
+                INTRO_DATA.unk_218 = 0;
+                INTRO_DATA.subStage = 3;
+            }
+
+            if (EndingCheckMonologueEnded())
+            {
+                INTRO_DATA.subStage = 3;
+                INTRO_DATA.unk_218 = 0;
+            }
+
+            if (INTRO_DATA.unk_213 == 0)
+            {
+                INTRO_DATA.unk_213 = 100;
+            }
+            else if (INTRO_DATA.unk_213 == 1)
+            {
+                INTRO_DATA.unk_213 = 100;
+                SpecialCutsceneProcessMonologue();
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 3:
+            if (INTRO_DATA.timer == 1)
+            {
+                gWrittenToBldalpha_Evb = 0;
+                gWrittenToBldalpha_Eva = BLDALPHA_MAX_VALUE;
+            }
+            else if (INTRO_DATA.timer == 20)
+            {
+                INTRO_DATA.timer = 0;
+                WRITE_16(REG_BLDCNT, BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT | BLDCNT_BG3_SECOND_TARGET_PIXEL | BLDCNT_OBJ_SECOND_TARGET_PIXEL);
+                INTRO_DATA.subStage = 4;
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 4:
+            if (INTRO_DATA.timer == 4)
+            {
+                INTRO_DATA.timer = 0;
+                if (gWrittenToBldalpha_Evb < BLDALPHA_MAX_VALUE)
+                    gWrittenToBldalpha_Evb++;
+
+                if (gWrittenToBldalpha_Eva != 0)
+                    gWrittenToBldalpha_Eva--;
+
+                if (gWrittenToBldalpha_Evb == BLDALPHA_MAX_VALUE && gWrittenToBldalpha_Eva == 0)
+                {
+                    WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~DCNT_BG0);
+                    INTRO_DATA.subStage = 5;
+                }
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 5:
+            if (INTRO_DATA.timer == 10)
+            {
+                EndingDialogueSetupOam(30, 120, 80, TRUE);
+            }
+            else if (INTRO_DATA.timer == 39)
+            {
+                gWrittenToBldy = BLDY_MAX_VALUE;
+            }
+            else if (INTRO_DATA.timer == 40)
+            {
+                WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+                INTRO_DATA.timer = 0;
+                INTRO_DATA.subStage = 6;
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 6:
+            if (INTRO_DATA.timer == 1)
+            {
+                INTRO_DATA.timer = 0;
+                INTRO_DATA.subStage = 7;
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 7:
+            INTRO_DATA.timer = 0;
+            EndingAdamConversationInit();
+            INTRO_DATA.subStage = 8;
+            break;
+
+        case 8:
+            gWrittenToBldy = 0;
+            INTRO_DATA.timer = 0;
+            SoundPlay(SOUND_24C);
+            INTRO_DATA.subStage = 9;
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 9:
+            if (INTRO_DATA.timer == 10)
+            {
+            }
+            else if (INTRO_DATA.timer == 40)
+            {
+                EndingDialogueSetupOam(255, 0, 0, FALSE);
+                EndingDialogueSetupOam(6, 20, 192, FALSE);
+                EndingDialogueSetupOam(7, 128, 192, FALSE);
+                EndingDialogueSetupOam(9, 128, 192, FALSE);
+                INTRO_DATA.timer = 0;
+                INTRO_DATA.subStage = 10;
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            EndingProcessAdamText();
+            break;
+
+        case 10:
+            INTRO_DATA.timer = 0;
+            if (*INTRO_DATA.pText == CHAR_NEXT_PAGE_ARROW && gChangedInput & KEY_A && INTRO_DATA.unk_218 == 0)
+                INTRO_DATA.unk_218 = 1;
+
+            if (INTRO_DATA.unk_218 == 2)
+            {
+                INTRO_DATA.unk_218 = 0;
+                SoundPlay(SOUND_203);
+            }
+            else if (INTRO_DATA.unk_218 == 3)
+            {
+                WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~DCNT_BG0);
+                INTRO_DATA.unk_218 = 0;
+                SoundPlay(SOUND_203);
+                FadeMusic(10);
+                INTRO_DATA.subStage = 11;
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            EndingProcessAdamText();
+            break;
+
+        case 11:
+            INTRO_DATA.timer = 0;
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 12:
+            if (INTRO_DATA.timer == 1)
+            {
+                ApplyMusicSoundFading(sMusicTrackDataRom[sSoundDataEntries[SOUND_24C].trackGroupNumber].pTrack, 0);
+            }
+            else if (INTRO_DATA.timer == 10)
+            {
+                INTRO_DATA.timer = 0;
+                gWrittenToBldy = BLDY_MAX_VALUE;
+                INTRO_DATA.subStage = 13;
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 13:
+            EndingAnimalsInit();
+            INTRO_DATA.timer = 0;
+            gWrittenToBldy = 0;
+            INTRO_DATA.subStage = 14;
+            break;
+
+        case 14:
+            if (INTRO_DATA.timer == 1)
+            {
+                PlayMusic(MUSIC_EPILOGUE_END, 14);
+            }
+            else if (INTRO_DATA.timer == 640)
+            {
+                INTRO_DATA.timer = 0;
+                WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~DCNT_BG2);
+                INTRO_DATA.subStage = 15;
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+
+        case 15:
+            if (INTRO_DATA.timer == 2)
+            {
+                INTRO_DATA.timer = 0;
+                if (gWrittenToBldy < BLDY_MAX_VALUE)
+                {
+                    gWrittenToBldy++;
+                }
+                else
+                {
+                    INTRO_DATA.subStage = 0;
+                    ended = TRUE;
+                }
+            }
+            SpecialCutsceneProcessOam();
+            SpecialCutsceneDrawAllOam();
+            break;
+    }
+
+    return ended;
 }
 
 /**

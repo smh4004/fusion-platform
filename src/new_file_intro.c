@@ -179,7 +179,7 @@ const u32* sTitleIntroCollisionWarningObjGfxPointers[6] = {
 
 static u8 sBlob_79c474_79c5a4[] = INCBIN_U8("data/Blob_79c474_79c5a4.bin");
 
-static u16** sMonologueTextPointers[LANGUAGE_COUNT] = {
+u16** sMonologueTextPointers[LANGUAGE_COUNT] = {
     sMonologueTextPointersJapanese,
     sMonologueTextPointersJapanese,
     sMonologueTextPointersEnglish,
