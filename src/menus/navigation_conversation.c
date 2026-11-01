@@ -5923,160 +5923,41 @@ _0807CE68: .4byte 0x0000026A\n\
     .syntax divided\n");
 }
 
-// 0x0807CE6C
-NAKED_FUNCTION
+/**
+ * @brief 7ce6c | 144 | Initializes the BSL diagram of the navigation room
+ * 
+ */
 void unk_7ce6c(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	sub sp, #4\n\
-	ldr r3, _0807CEBC @ =gCurrentArea\n\
-	ldrb r0, [r3]\n\
-	cmp r0, #6\n\
-	bls _0807CE7A\n\
-	b _0807CF8A\n\
-_0807CE7A:\n\
-	ldr r2, _0807CEC0 @ =gNonGameplayRam\n\
-	movs r0, #0x90\n\
-	lsls r0, r0, #2\n\
-	adds r1, r2, r0\n\
-	ldr r0, _0807CEC4 @ =0x08581500\n\
-	ldm r0!, {r4, r5, r6}\n\
-	stm r1!, {r4, r5, r6}\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-	ldrb r0, [r2]\n\
-	adds r6, r2, #0\n\
-	cmp r0, #0\n\
-	beq _0807CF8A\n\
-	ldr r0, _0807CEC8 @ =gPauseScreenFlag\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	cmp r0, #4\n\
-	beq _0807CF8A\n\
-	ldrb r0, [r3]\n\
-	cmp r0, #0\n\
-	beq _0807CED4\n\
-	ldr r2, _0807CECC @ =0x0857607D\n\
-	ldr r1, _0807CED0 @ =0x08576073\n\
-	adds r0, r0, r1\n\
-	ldrb r0, [r0]\n\
-	adds r0, r0, r2\n\
-	ldrb r1, [r0]\n\
-	movs r2, #0x91\n\
-	lsls r2, r2, #2\n\
-	adds r0, r6, r2\n\
-	b _0807CEDE\n\
-	.align 2, 0\n\
-_0807CEBC: .4byte gCurrentArea\n\
-_0807CEC0: .4byte gNonGameplayRam\n\
-_0807CEC4: .4byte 0x08581500\n\
-_0807CEC8: .4byte gPauseScreenFlag\n\
-_0807CECC: .4byte 0x0857607D\n\
-_0807CED0: .4byte 0x08576073\n\
-_0807CED4:\n\
-	ldr r0, _0807CF48 @ =0x0857607D\n\
-	ldrb r1, [r0, #7]\n\
-	movs r4, #0x91\n\
-	lsls r4, r4, #2\n\
-	adds r0, r6, r4\n\
-_0807CEDE:\n\
-	strb r1, [r0]\n\
-	ldr r1, _0807CF4C @ =0x0879C180\n\
-	movs r5, #0x91\n\
-	lsls r5, r5, #2\n\
-	adds r0, r6, r5\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	adds r0, r0, r1\n\
-	ldrb r0, [r0]\n\
-	adds r1, r6, #0\n\
-	adds r1, #0xc6\n\
-	strb r0, [r1]\n\
-	subs r1, #8\n\
-	movs r0, #0x1c\n\
-	strh r0, [r1]\n\
-	subs r1, #2\n\
-	movs r0, #0x32\n\
-	strh r0, [r1]\n\
-	adds r2, r6, #0\n\
-	adds r2, #0xc7\n\
-	ldrb r1, [r2]\n\
-	movs r4, #4\n\
-	rsbs r4, r4, #0\n\
-	adds r0, r4, #0\n\
-	ands r0, r1\n\
-	movs r5, #1\n\
-	orrs r0, r5\n\
-	movs r1, #0xd\n\
-	rsbs r1, r1, #0\n\
-	ands r0, r1\n\
-	strb r0, [r2]\n\
-	movs r0, #0xa\n\
-	movs r1, #0\n\
-	bl UpdateMenuOamDataId\n\
-	adds r1, r6, #0\n\
-	adds r1, #0xaf\n\
-	ldrb r0, [r1]\n\
-	ands r4, r0\n\
-	orrs r4, r5\n\
-	strb r4, [r1]\n\
-	ldr r2, _0807CF50 @ =gCurrentArea\n\
-	ldrb r0, [r2]\n\
-	cmp r0, #0\n\
-	beq _0807CF5C\n\
-	ldr r1, _0807CF54 @ =0x08576073\n\
-	adds r0, r0, r1\n\
-	ldrb r1, [r0]\n\
-	ldr r2, _0807CF58 @ =0x00000249\n\
-	adds r0, r6, r2\n\
-	b _0807CF6C\n\
-	.align 2, 0\n\
-_0807CF48: .4byte 0x0857607D\n\
-_0807CF4C: .4byte 0x0879C180\n\
-_0807CF50: .4byte gCurrentArea\n\
-_0807CF54: .4byte 0x08576073\n\
-_0807CF58: .4byte 0x00000249\n\
-_0807CF5C:\n\
-	ldr r1, _0807CF94 @ =0x085760E8\n\
-	ldr r0, _0807CF98 @ =gCurrentRoom\n\
-	ldrb r0, [r0]\n\
-	adds r0, #1\n\
-	adds r0, r0, r1\n\
-	ldrb r1, [r0]\n\
-	ldr r4, _0807CF9C @ =0x00000249\n\
-	adds r0, r6, r4\n\
-_0807CF6C:\n\
-	strb r1, [r0]\n\
-	bl unk_7d27c\n\
-	mov r1, sp\n\
-	ldr r5, _0807CFA0 @ =0x00007A73\n\
-	adds r0, r5, #0\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807CFA4 @ =0x040000D4\n\
-	mov r6, sp\n\
-	str r6, [r1]\n\
-	ldr r0, _0807CFA8 @ =0x05000342\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0807CFAC @ =0x8100000C\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-_0807CF8A:\n\
-	add sp, #4\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807CF94: .4byte 0x085760E8\n\
-_0807CF98: .4byte gCurrentRoom\n\
-_0807CF9C: .4byte 0x00000249\n\
-_0807CFA0: .4byte 0x00007A73\n\
-_0807CFA4: .4byte 0x040000D4\n\
-_0807CFA8: .4byte 0x05000342\n\
-_0807CFAC: .4byte 0x8100000C\n\
-    .syntax divided\n");
+    if (gCurrentArea > AREA_NORMAL_LAST)
+        return;
+
+    PAUSE_SCREEN_DATA.bslDiagram = sBslDiagramDataInit;
+
+    if (PAUSE_SCREEN_DATA.unk_0 == 0 || gPauseScreenFlag == 4)
+        return;
+
+    if (gCurrentArea != AREA_MAIN_DECK)
+        PAUSE_SCREEN_DATA.bslDiagram.rotation = sEvent_57607D[sEvent_576073[gCurrentArea]];
+    else
+        PAUSE_SCREEN_DATA.bslDiagram.rotation = sEvent_57607D[NAV_TARGET_LOC_SECTOR_1];
+
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_BSL_DIAGRAM].oamId = sBslDiagramOamIds[PAUSE_SCREEN_DATA.bslDiagram.rotation];
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_BSL_DIAGRAM].xPosition = 28;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_BSL_DIAGRAM].yPosition = 50;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_BSL_DIAGRAM].priority = 1;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_BSL_DIAGRAM].objMode = 0;
+    UpdateMenuOamDataId(PAUSE_OAM_IDX_BSL_DIAGRAM_TARGET, 0);
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_BSL_DIAGRAM_TARGET].priority = 1;
+
+    if (gCurrentArea != AREA_MAIN_DECK)
+        PAUSE_SCREEN_DATA.bslDiagram.paletteColor = sEvent_576073[gCurrentArea];
+    else
+        PAUSE_SCREEN_DATA.bslDiagram.paletteColor = sMainDeckRoomBslDiagramColors[gCurrentRoom + 1];
+
+    unk_7d27c();
+
+    DMA3_FILL_16(COLOR(19, 19, 30), PALRAM_BASE + 0x342, 12 * sizeof(u16));
 }
 
 // 0x0807CFB0
