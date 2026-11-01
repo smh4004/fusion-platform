@@ -4608,140 +4608,47 @@ _0807BFD0: .4byte 0x0000021B\n\
     .syntax divided\n");
 }
 
-// 0x0807BFD4
-NAKED_FUNCTION
+/**
+ * @brief 7bfd4 | fc | Fades in the navigation conversation pop-up palette
+ * 
+ */
 void NavigationConversationFadeInPopUpPalette(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	sub sp, #8\n\
-	ldr r2, _0807C068 @ =0x0857BC50\n\
-	ldr r3, _0807C06C @ =gNonGameplayRam\n\
-	ldr r1, _0807C070 @ =0x0000021A\n\
-	adds r0, r3, r1\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, #1\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #3\n\
-	adds r2, #8\n\
-	adds r0, r0, r2\n\
-	ldr r2, [r0]\n\
-	ldr r6, _0807C074 @ =0x050003E0\n\
-	movs r0, #0\n\
-	mov ip, r0\n\
-	mov sb, sp\n\
-	movs r1, #0xf8\n\
-	lsls r1, r1, #7\n\
-	mov sl, r1\n\
-	add r5, sp, #4\n\
-_0807C006:\n\
-	ldrb r1, [r2]\n\
-	movs r0, #0x1f\n\
-	ands r0, r1\n\
-	mov r1, sb\n\
-	strb r0, [r1]\n\
-	ldrh r1, [r2]\n\
-	movs r0, #0xf8\n\
-	lsls r0, r0, #2\n\
-	ands r0, r1\n\
-	lsrs r0, r0, #5\n\
-	mov r1, sb\n\
-	strb r0, [r1, #1]\n\
-	ldrh r1, [r2]\n\
-	mov r0, sl\n\
-	ands r0, r1\n\
-	lsrs r0, r0, #0xa\n\
-	mov r1, sb\n\
-	strb r0, [r1, #2]\n\
-	ldrb r1, [r6]\n\
-	movs r0, #0x1f\n\
-	ands r0, r1\n\
-	strb r0, [r5]\n\
-	ldrh r1, [r6]\n\
-	movs r0, #0xf8\n\
-	lsls r0, r0, #2\n\
-	ands r0, r1\n\
-	lsrs r0, r0, #5\n\
-	strb r0, [r5, #1]\n\
-	ldrh r1, [r6]\n\
-	mov r0, sl\n\
-	ands r0, r1\n\
-	lsrs r0, r0, #0xa\n\
-	strb r0, [r5, #2]\n\
-	movs r4, #0\n\
-	movs r0, #1\n\
-	add ip, r0\n\
-	adds r7, r2, #2\n\
-	adds r1, r6, #2\n\
-	mov r8, r1\n\
-	adds r3, r5, #0\n\
-_0807C056:\n\
-	mov r1, sp\n\
-	adds r0, r1, r4\n\
-	ldrb r2, [r3]\n\
-	ldrb r1, [r0]\n\
-	adds r0, r2, #0\n\
-	cmp r1, r0\n\
-	bls _0807C078\n\
-	adds r0, r2, #1\n\
-	b _0807C07E\n\
-	.align 2, 0\n\
-_0807C068: .4byte 0x0857BC50\n\
-_0807C06C: .4byte gNonGameplayRam\n\
-_0807C070: .4byte 0x0000021A\n\
-_0807C074: .4byte 0x050003E0\n\
-_0807C078:\n\
-	cmp r1, r0\n\
-	bhs _0807C080\n\
-	subs r0, r2, #1\n\
-_0807C07E:\n\
-	strb r0, [r3]\n\
-_0807C080:\n\
-	adds r3, #1\n\
-	adds r4, #1\n\
-	cmp r4, #2\n\
-	ble _0807C056\n\
-	ldrb r0, [r5]\n\
-	ldrb r1, [r5, #1]\n\
-	lsls r1, r1, #5\n\
-	orrs r0, r1\n\
-	ldrb r1, [r5, #2]\n\
-	lsls r1, r1, #0xa\n\
-	orrs r0, r1\n\
-	strh r0, [r6]\n\
-	adds r2, r7, #0\n\
-	mov r6, r8\n\
-	mov r0, ip\n\
-	cmp r0, #0xf\n\
-	ble _0807C006\n\
-	ldr r1, _0807C0B4 @ =gNonGameplayRam\n\
-	ldr r0, _0807C0B8 @ =0x0000021D\n\
-	adds r3, r1, r0\n\
-	ldrb r0, [r3]\n\
-	cmp r0, #0x20\n\
-	bls _0807C0BC\n\
-	movs r0, #0\n\
-	b _0807C0BE\n\
-	.align 2, 0\n\
-_0807C0B4: .4byte gNonGameplayRam\n\
-_0807C0B8: .4byte 0x0000021D\n\
-_0807C0BC:\n\
-	adds r0, #1\n\
-_0807C0BE:\n\
-	strb r0, [r3]\n\
-	add sp, #8\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    const u16* src;
+    u16* dst;
+    s32 i;
+    s32 j;
+    u8 target[3];
+    u8 current[3];
+
+    src = sNavConversationPopUps[PAUSE_SCREEN_DATA.unk_21A].pPalette;
+    dst = PALRAM_OBJ + PAL_ROW_SIZE * 15;
+
+    for (i = 0; i < PAL_ROW; i++, src++, dst++)
+    {
+        target[0] = RED(*src);
+        target[1] = GREEN(*src);
+        target[2] = BLUE(*src);
+
+        current[0] = RED(*dst);
+        current[1] = GREEN(*dst);
+        current[2] = BLUE(*dst);
+
+        for (j = 0; j < 3; j++)
+        {
+            if (target[j] > current[j])
+                current[j]++;
+            else if (target[j] < current[j])
+                current[j]--;
+        }
+
+        *dst = COLOR_GRAD(current[0], current[1], current[2]);
+    }
+
+    if (PAUSE_SCREEN_DATA.unk_21D > 32)
+        PAUSE_SCREEN_DATA.unk_21D = 0;
+    else
+        PAUSE_SCREEN_DATA.unk_21D++;
 }
 
 // 0x0807C0D0
