@@ -505,119 +505,57 @@ _0809E9DC: .4byte FileSelectVblank\n\
     .syntax divided\n");
 }
 
-// 0x0809E9E0
-NAKED_FUNCTION
+/**
+ * @brief 9e9e0 | c4 | TODO
+ * 
+ */
 void FileSelectVblank(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	ldr r1, _0809EA10 @ =0x040000D4\n\
-	ldr r0, _0809EA14 @ =gOamData\n\
-	str r0, [r1]\n\
-	movs r0, #0xe0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0809EA18 @ =0x84000100\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	subs r1, #0x80\n\
-	ldr r0, _0809EA1C @ =gWrittenToBldy\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0809EA20 @ =gNonGameplayRam\n\
-	ldrb r0, [r1, #0x11]\n\
-	adds r3, r1, #0\n\
-	cmp r0, #5\n\
-	bhi _0809EA98\n\
-	lsls r0, r0, #2\n\
-	ldr r1, _0809EA24 @ =_0809EA28\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_0809EA10: .4byte 0x040000D4\n\
-_0809EA14: .4byte gOamData\n\
-_0809EA18: .4byte 0x84000100\n\
-_0809EA1C: .4byte gWrittenToBldy\n\
-_0809EA20: .4byte gNonGameplayRam\n\
-_0809EA24: .4byte _0809EA28\n\
-_0809EA28: @ jump table\n\
-	.4byte _0809EA9C @ case 0\n\
-	.4byte _0809EA40 @ case 1\n\
-	.4byte _0809EA60 @ case 2\n\
-	.4byte _0809EA50 @ case 3\n\
-	.4byte _0809EA70 @ case 4\n\
-	.4byte _0809EA80 @ case 5\n\
-_0809EA40:\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #0x13\n\
-	ldrh r0, [r2]\n\
-	movs r4, #0x80\n\
-	lsls r4, r4, #1\n\
-	adds r1, r4, #0\n\
-	orrs r0, r1\n\
-	b _0809EA8A\n\
-_0809EA50:\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #0x13\n\
-	ldrh r0, [r2]\n\
-	movs r4, #0x80\n\
-	lsls r4, r4, #2\n\
-	adds r1, r4, #0\n\
-	orrs r0, r1\n\
-	b _0809EA8A\n\
-_0809EA60:\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #0x13\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _0809EA6C @ =0x0000FEFF\n\
-	b _0809EA88\n\
-	.align 2, 0\n\
-_0809EA6C: .4byte 0x0000FEFF\n\
-_0809EA70:\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #0x13\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _0809EA7C @ =0x0000FDFF\n\
-	b _0809EA88\n\
-	.align 2, 0\n\
-_0809EA7C: .4byte 0x0000FDFF\n\
-_0809EA80:\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #0x13\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _0809EA94 @ =0x0000FCFF\n\
-_0809EA88:\n\
-	ands r0, r1\n\
-_0809EA8A:\n\
-	strh r0, [r2]\n\
-	movs r0, #0\n\
-	strb r0, [r3, #0x11]\n\
-	b _0809EA9C\n\
-	.align 2, 0\n\
-_0809EA94: .4byte 0x0000FCFF\n\
-_0809EA98:\n\
-	movs r0, #0\n\
-	strb r0, [r1, #0x11]\n\
-_0809EA9C:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    DMA3_COPY_32(gOamData, OAM_BASE, OAM_SIZE / sizeof(u32));
+    WRITE_16(REG_BLDY, gWrittenToBldy);
+
+    switch (FILE_SELECT_DATA.bgToggle)
+    {
+        case 0:
+            break;
+
+        case 1:
+            WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) | DCNT_BG0);
+            FILE_SELECT_DATA.bgToggle = 0;
+            break;
+
+        case 3:
+            WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) | DCNT_BG1);
+            FILE_SELECT_DATA.bgToggle = 0;
+            break;
+
+        case 2:
+            WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~DCNT_BG0);
+            FILE_SELECT_DATA.bgToggle = 0;
+            break;
+
+        case 4:
+            WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~DCNT_BG1);
+            FILE_SELECT_DATA.bgToggle = 0;
+            break;
+
+        case 5:
+            WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) & ~(DCNT_BG0 | DCNT_BG1));
+            FILE_SELECT_DATA.bgToggle = 0;
+            break;
+
+        default:
+            FILE_SELECT_DATA.bgToggle = 0;
+    }
 }
 
-// 0x0809EAA4
-NAKED_FUNCTION
+/**
+ * @brief 9eaa4 | c | TODO
+ * 
+ */
 void unk_9eaa4(void)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	bl UpdateAudio\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    UpdateAudio();
 }
 
 // 0x0809EAB0
@@ -3513,87 +3451,48 @@ _080A00E0: .4byte 0x087407F0\n\
     .syntax divided\n");
 }
 
-// 0x080A00E4
-NAKED_FUNCTION
+/**
+ * @brief a00e4 | 60 | TODO
+ * 
+ */
 void FileSelectProcessAudioSelect(struct FileSelectOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldr r0, _080A0110 @ =gNonGameplayRam\n\
-	ldrb r0, [r0, #0xd]\n\
-	cmp r0, #3\n\
-	bne _080A0138\n\
-	movs r3, #1\n\
-	strb r3, [r2, #5]\n\
-	ldrb r0, [r2, #9]\n\
-	cmp r0, #0\n\
-	bne _080A0118\n\
-	ldr r0, _080A0114 @ =gChangedInput\n\
-	ldrh r1, [r0]\n\
-	movs r0, #0x10\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _080A0140\n\
-	strb r3, [r2, #9]\n\
-	movs r0, #0xaa\n\
-	strh r0, [r2]\n\
-	b _080A0140\n\
-	.align 2, 0\n\
-_080A0110: .4byte gNonGameplayRam\n\
-_080A0114: .4byte gChangedInput\n\
-_080A0118:\n\
-	cmp r0, #1\n\
-	bne _080A0140\n\
-	ldr r0, _080A0134 @ =gChangedInput\n\
-	ldrh r1, [r0]\n\
-	movs r0, #0x20\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _080A0140\n\
-	movs r0, #0\n\
-	strb r0, [r2, #9]\n\
-	movs r0, #0x66\n\
-	strh r0, [r2]\n\
-	b _080A0140\n\
-	.align 2, 0\n\
-_080A0134: .4byte gChangedInput\n\
-_080A0138:\n\
-	movs r0, #0\n\
-	strb r0, [r2, #7]\n\
-	strb r0, [r2, #6]\n\
-	strb r0, [r2, #5]\n\
-_080A0140:\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    if (FILE_SELECT_DATA.currentFile == 3)
+    {
+        pOam->isDrawn = TRUE;
+        if (pOam->action == 0)
+        {
+            if (gChangedInput & KEY_RIGHT)
+            {
+                pOam->action = 1;
+                pOam->xPosition = 170;
+            }
+        }
+        else if (pOam->action == 1)
+        {
+            if (gChangedInput & KEY_LEFT)
+            {
+                pOam->action = 0;
+                pOam->xPosition = 102;
+            }
+        }
+    }
+    else
+    {
+        pOam->animationDurationCounter = 0;
+        pOam->currentAnimationFrame = 0;
+        pOam->isDrawn = FALSE;
+    }
 }
 
-// 0x080A0144
-NAKED_FUNCTION
+/**
+ * @brief a0144 | 28 | TODO
+ * 
+ */
 void FileSelectProcessFileOverlay(struct FileSelectOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r2, r0, #0\n\
-	ldr r1, _080A0164 @ =gNonGameplayRam\n\
-	movs r3, #0xa\n\
-	ldrsh r0, [r1, r3]\n\
-	cmp r0, #0\n\
-	bne _080A015E\n\
-	ldr r0, _080A0168 @ =0x0879E890\n\
-	ldrb r1, [r1, #0xd]\n\
-	lsls r1, r1, #2\n\
-	adds r1, r1, r0\n\
-	ldr r0, [r1]\n\
-	str r0, [r2, #0x14]\n\
-_080A015E:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080A0164: .4byte gNonGameplayRam\n\
-_080A0168: .4byte 0x0879E890\n\
-    .syntax divided\n");
+    if (FILE_SELECT_DATA.menuState == 0)
+        pOam->pOam = sFileSelectFileOverlayOamPointers[FILE_SELECT_DATA.currentFile];
 }
 
 // 0x080A016C
@@ -3655,14 +3554,13 @@ _080A01C6:\n\
     .syntax divided\n");
 }
 
-// 0x080A01CC
-NAKED_FUNCTION
+/**
+ * @brief a01cc | 4 | TODO
+ * 
+ */
 void unk_a01cc(struct FileSelectOam* pOam)
 {
-    asm(" .syntax unified\n\
-	bx lr\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    return;
 }
 
 // 0x080A01D0
@@ -4128,14 +4026,13 @@ _080A0510:\n\
     .syntax divided\n");
 }
 
-// 0x080A0518
-NAKED_FUNCTION
+/**
+ * @brief a0518 | 4 | TODO
+ * 
+ */
 void unk_a0518(struct FileSelectOam* pOam)
 {
-    asm(" .syntax unified\n\
-	bx lr\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    return;
 }
 
 // 0x080A051C
@@ -5553,41 +5450,23 @@ _080A1004: .4byte gNonGameplayRam\n\
     .syntax divided\n");
 }
 
-// 0x080A1008
-NAKED_FUNCTION
+/**
+ * @brief a1008 | 34 | TODO
+ * 
+ */
 void FileSelectDestroyOamOfType(u8 type)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	movs r2, #0\n\
-	ldr r5, _080A1028 @ =gNonGameplayRam\n\
-	movs r3, #0\n\
-_080A1014:\n\
-	lsls r0, r2, #3\n\
-	subs r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r1, r0, r5\n\
-	ldrb r0, [r1, #0x1c]\n\
-	cmp r0, r4\n\
-	bne _080A102C\n\
-	strb r3, [r1, #0x1c]\n\
-	strb r3, [r1, #0x1d]\n\
-	b _080A1036\n\
-	.align 2, 0\n\
-_080A1028: .4byte gNonGameplayRam\n\
-_080A102C:\n\
-	adds r0, r2, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r2, r0, #0x18\n\
-	cmp r2, #0x16\n\
-	bls _080A1014\n\
-_080A1036:\n\
-	pop {r4, r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < ARRAY_SIZE(FILE_SELECT_DATA.oam); i++)
+    {
+        if (FILE_SELECT_DATA.oam[i].type == type)
+        {
+            FILE_SELECT_DATA.oam[i].type = 0;
+            FILE_SELECT_DATA.oam[i].isDrawn = FALSE;
+            return;
+        }
+    }
 }
 
 // 0x080A103C
@@ -5778,81 +5657,37 @@ _080A11C8: .4byte 0x03000011\n\
     .syntax divided\n");
 }
 
-// 0x080A11CC
-NAKED_FUNCTION
+/**
+ * @brief a11cc | 3c | TODO
+ * 
+ */
 void FileSelectProcessOam(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	movs r4, #0\n\
-	ldr r5, _080A1204 @ =gNonGameplayRam\n\
-	adds r6, r5, #0\n\
-	adds r6, #0x18\n\
-_080A11D6:\n\
-	lsls r0, r4, #3\n\
-	subs r0, r0, r4\n\
-	lsls r2, r0, #2\n\
-	adds r0, r2, r5\n\
-	ldrb r0, [r0, #0x1c]\n\
-	cmp r0, #0\n\
-	beq _080A11F2\n\
-	adds r1, r5, #0\n\
-	adds r1, #0x30\n\
-	adds r1, r2, r1\n\
-	adds r0, r2, r6\n\
-	ldr r1, [r1]\n\
-	bl _call_via_r1\n\
-_080A11F2:\n\
-	adds r0, r4, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	cmp r4, #0x16\n\
-	bls _080A11D6\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080A1204: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < ARRAY_SIZE(FILE_SELECT_DATA.oam); i++)
+    {
+        if (FILE_SELECT_DATA.oam[i].type != 0)
+            FILE_SELECT_DATA.oam[i].pHandler(&FILE_SELECT_DATA.oam[i]);
+    }
 }
 
-// 0x080A1208
-NAKED_FUNCTION
+/**
+ * @brief a1208 | 40 | TODO
+ * 
+ */
 void FileSelectDrawAllOam(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	movs r4, #0\n\
-	ldr r5, _080A1240 @ =gNonGameplayRam\n\
-	adds r6, r5, #0\n\
-	adds r6, #0x18\n\
-_080A1212:\n\
-	lsls r0, r4, #3\n\
-	subs r0, r0, r4\n\
-	lsls r1, r0, #2\n\
-	adds r0, r1, r5\n\
-	ldrb r0, [r0, #0x1d]\n\
-	cmp r0, #0\n\
-	beq _080A1226\n\
-	adds r0, r1, r6\n\
-	bl FileSelectDrawOam\n\
-_080A1226:\n\
-	adds r0, r4, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	cmp r4, #0x16\n\
-	bls _080A1212\n\
-	bl ResetFreeOam\n\
-	ldr r1, _080A1244 @ =gNextOamSlot\n\
-	movs r0, #0\n\
-	strb r0, [r1]\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080A1240: .4byte gNonGameplayRam\n\
-_080A1244: .4byte gNextOamSlot\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < ARRAY_SIZE(FILE_SELECT_DATA.oam); i++)
+    {
+        if (FILE_SELECT_DATA.oam[i].isDrawn)
+            FileSelectDrawOam(&FILE_SELECT_DATA.oam[i]);
+    }
+
+    ResetFreeOam();
+    gNextOamSlot = 0;
 }
 
 // 0x080A1248
@@ -6057,112 +5892,64 @@ _080A13CC: .4byte gNextOamSlot\n\
     .syntax divided\n");
 }
 
-// 0x080A13D0
-NAKED_FUNCTION
+/**
+ * @brief a13d0 | 10 | TODO
+ * 
+ */
 boolu32 SetLanguage(u8 unused)
 {
-    asm(" .syntax unified\n\
-	ldr r1, _080A13DC @ =0x03000011\n\
-	movs r0, #2\n\
-	strb r0, [r1]\n\
-	movs r0, #1\n\
-	bx lr\n\
-	.align 2, 0\n\
-_080A13DC: .4byte 0x03000011\n\
-    .syntax divided\n");
+    gLanguage = LANGUAGE_ENGLISH;
+    return TRUE;
 }
 
-// 0x080A13E0
-NAKED_FUNCTION
+/**
+ * @brief a13e0 | 98 | TODO
+ * 
+ */
 void unk_a13e0(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	ldr r4, _080A1454 @ =0x04000208\n\
-	movs r1, #0\n\
-	strh r1, [r4]\n\
-	ldr r3, _080A1458 @ =0x04000004\n\
-	ldrh r2, [r3]\n\
-	ldr r0, _080A145C @ =0x0000FFEF\n\
-	ands r0, r2\n\
-	strh r0, [r3]\n\
-	ldr r3, _080A1460 @ =0x04000200\n\
-	ldrh r2, [r3]\n\
-	ldr r0, _080A1464 @ =0x0000FFFD\n\
-	ands r0, r2\n\
-	strh r0, [r3]\n\
-	movs r0, #1\n\
-	strh r0, [r4]\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #0x13\n\
-	strh r1, [r3]\n\
-	ldr r2, _080A1468 @ =0x04000050\n\
-	movs r0, #0xff\n\
-	strh r0, [r2]\n\
-	ldr r0, _080A146C @ =gWrittenToBldy\n\
-	movs r2, #0x10\n\
-	strh r2, [r0]\n\
-	ldr r0, _080A1470 @ =0x04000054\n\
-	strh r2, [r0]\n\
-	subs r0, #0x46\n\
-	strh r1, [r0]\n\
-	subs r0, #2\n\
-	strh r1, [r0]\n\
-	subs r0, #2\n\
-	strh r1, [r0]\n\
-	subs r0, #2\n\
-	strh r1, [r0]\n\
-	adds r0, #8\n\
-	strh r1, [r0]\n\
-	adds r0, #2\n\
-	strh r1, [r0]\n\
-	adds r0, #2\n\
-	strh r1, [r0]\n\
-	adds r0, #2\n\
-	strh r1, [r0]\n\
-	adds r0, #2\n\
-	strh r1, [r0]\n\
-	adds r0, #2\n\
-	strh r1, [r0]\n\
-	adds r0, #2\n\
-	strh r1, [r0]\n\
-	adds r0, #2\n\
-	strh r1, [r0]\n\
-	strh r1, [r3]\n\
-	ldr r0, _080A1474 @ =unk_a1478\n\
-	bl CallbackSetVBlank\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080A1454: .4byte 0x04000208\n\
-_080A1458: .4byte 0x04000004\n\
-_080A145C: .4byte 0x0000FFEF\n\
-_080A1460: .4byte 0x04000200\n\
-_080A1464: .4byte 0x0000FFFD\n\
-_080A1468: .4byte 0x04000050\n\
-_080A146C: .4byte gWrittenToBldy\n\
-_080A1470: .4byte 0x04000054\n\
-_080A1474: .4byte unk_a1478\n\
-    .syntax divided\n");
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
+
+    WRITE_16(REG_DISPCNT, 0);
+    WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+    gWrittenToBldy = BLDY_MAX_VALUE;
+    WRITE_16(REG_BLDY, BLDY_MAX_VALUE);
+
+    WRITE_16(REG_BG3CNT, 0);
+    WRITE_16(REG_BG2CNT, 0);
+    WRITE_16(REG_BG1CNT, 0);
+    WRITE_16(REG_BG0CNT, 0);
+
+    WRITE_16(REG_BG0HOFS, 0);
+    WRITE_16(REG_BG0VOFS, 0);
+    WRITE_16(REG_BG1HOFS, 0);
+    WRITE_16(REG_BG1VOFS, 0);
+    WRITE_16(REG_BG2HOFS, 0);
+    WRITE_16(REG_BG2VOFS, 0);
+    WRITE_16(REG_BG3HOFS, 0);
+    WRITE_16(REG_BG3VOFS, 0);
+
+    WRITE_16(REG_DISPCNT, 0);
+    CallbackSetVBlank(unk_a1478);
 }
 
-// 0x080A1478
-NAKED_FUNCTION
+/**
+ * @brief a1478 | 4 | TODO
+ * 
+ */
 void unk_a1478(void)
 {
-    asm(" .syntax unified\n\
-	bx lr\n\
-	.align 2, 0\n\
-    .syntax divided\n");
+    return;
 }
 
-// 0x080A147C
-NAKED_FUNCTION
+/**
+ * @brief a147c | 4 | TODO
+ * 
+ */
 boolu32 unk_a147c(void)
 {
-    asm(" .syntax unified\n\
-	movs r0, #1\n\
-	bx lr\n\
-    .syntax divided\n");
+    return TRUE;
 }
