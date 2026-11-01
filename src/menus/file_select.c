@@ -4024,281 +4024,101 @@ _080A0E00: .4byte gNonGameplayRam\n\
     .syntax divided\n");
 }
 
-// 0x080A0E04
-NAKED_FUNCTION
+/**
+ * @brief a0e04 | 114 | TODO
+ * 
+ */
 void FileSelectDrawFileCorruptedText(u8 file)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sb\n\
-	mov r6, r8\n\
-	push {r6, r7}\n\
-	sub sp, #8\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #0\n\
-	bne _080A0E20\n\
-	ldr r6, _080A0E1C @ =0x060088C0\n\
-	b _080A0E2E\n\
-	.align 2, 0\n\
-_080A0E1C: .4byte 0x060088C0\n\
-_080A0E20:\n\
-	cmp r0, #1\n\
-	bne _080A0E2C\n\
-	ldr r6, _080A0E28 @ =0x060090C0\n\
-	b _080A0E2E\n\
-	.align 2, 0\n\
-_080A0E28: .4byte 0x060090C0\n\
-_080A0E2C:\n\
-	ldr r6, _080A0E90 @ =0x060098C0\n\
-_080A0E2E:\n\
-	mov r8, r6\n\
-	ldr r4, _080A0E94 @ =gNonGameplayRam\n\
-	movs r0, #0\n\
-	movs r1, #0\n\
-	strh r1, [r4]\n\
-	strb r0, [r4, #0x13]\n\
-	str r1, [sp, #4]\n\
-	ldr r0, _080A0E98 @ =0x040000D4\n\
-	add r2, sp, #4\n\
-	str r2, [r0]\n\
-	str r6, [r0, #4]\n\
-	ldr r2, _080A0E9C @ =0x850000C0\n\
-	str r2, [r0, #8]\n\
-	ldr r3, [r0, #8]\n\
-	str r1, [sp, #4]\n\
-	add r3, sp, #4\n\
-	str r3, [r0]\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #3\n\
-	adds r1, r6, r3\n\
-	str r1, [r0, #4]\n\
-	str r2, [r0, #8]\n\
-	ldr r0, [r0, #8]\n\
-	ldr r1, _080A0EA0 @ =0x0879EC84\n\
-	ldr r0, _080A0EA4 @ =0x03000011\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	ldr r5, [r0]\n\
-	movs r0, #8\n\
-	strh r0, [r4]\n\
-	ldrh r0, [r5]\n\
-	movs r1, #0xff\n\
-	lsls r1, r1, #8\n\
-	cmp r0, r1\n\
-	beq _080A0F04\n\
-	adds r7, r4, #0\n\
-	mov sb, r1\n\
-_080A0E80:\n\
-	cmp r0, #0x5a\n\
-	bne _080A0EA8\n\
-	ldrh r0, [r5]\n\
-	bl TextGetCharacterWidth\n\
-	adds r4, r0, #3\n\
-	b _080A0EB6\n\
-	.align 2, 0\n\
-_080A0E90: .4byte 0x060098C0\n\
-_080A0E94: .4byte gNonGameplayRam\n\
-_080A0E98: .4byte 0x040000D4\n\
-_080A0E9C: .4byte 0x850000C0\n\
-_080A0EA0: .4byte 0x0879EC84\n\
-_080A0EA4: .4byte 0x03000011\n\
-_080A0EA8:\n\
-	cmp r0, #0x40\n\
-	bne _080A0EB4\n\
-	ldrb r1, [r7, #0x13]\n\
-	movs r0, #8\n\
-	subs r4, r0, r1\n\
-	b _080A0EB6\n\
-_080A0EB4:\n\
-	movs r4, #8\n\
-_080A0EB6:\n\
-	ldrh r0, [r7]\n\
-	lsls r0, r0, #5\n\
-	mov r1, r8\n\
-	adds r6, r0, r1\n\
-	ldrh r0, [r5]\n\
-	lsls r2, r4, #0x18\n\
-	lsrs r2, r2, #0x18\n\
-	ldrb r3, [r7, #0x13]\n\
-	movs r1, #0\n\
-	str r1, [sp]\n\
-	adds r1, r6, #0\n\
-	bl TextDrawCharacter\n\
-	ldrb r0, [r7, #0x13]\n\
-	adds r0, r0, r4\n\
-	strb r0, [r7, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	adds r6, r5, #2\n\
-	cmp r0, #7\n\
-	bls _080A0EFC\n\
-	ldr r5, _080A0F14 @ =gNonGameplayRam\n\
-	ldrb r4, [r5, #0x13]\n\
-	ldrh r3, [r5]\n\
-_080A0EE6:\n\
-	adds r2, r4, #0\n\
-	subs r2, #8\n\
-	adds r4, r2, #0\n\
-	adds r1, r3, #1\n\
-	adds r3, r1, #0\n\
-	lsls r0, r2, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bhi _080A0EE6\n\
-	strh r1, [r5]\n\
-	strb r2, [r5, #0x13]\n\
-_080A0EFC:\n\
-	adds r5, r6, #0\n\
-	ldrh r0, [r5]\n\
-	cmp r0, sb\n\
-	bne _080A0E80\n\
-_080A0F04:\n\
-	add sp, #8\n\
-	pop {r3, r4}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080A0F14: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    u32 vram;
+    u32 base;
+    const u16* pText;
+    s32 width;
+
+    if (file == 0)
+        base = vram = 0x60088C0;
+    else if (file == 1)
+        base = vram = 0x60090C0;
+    else
+        base = vram = 0x60098C0;
+
+    FILE_SELECT_DATA.textX = 0;
+    FILE_SELECT_DATA.textIndent = 0;
+
+    DMA3_FILL_32(0, vram, 0x300);
+    DMA3_FILL_32(0, vram + 0x400, 0x300);
+
+    pText = sFileSelectCorruptedTextPointersByLanguage[gLanguage][0];
+    FILE_SELECT_DATA.textX = 8;
+
+    while (*pText != 0xFF00)
+    {
+        if (*pText == 0x5A)
+            width = TextGetCharacterWidth(*pText) + 3;
+        else if (*pText == 0x40)
+            width = 8 - FILE_SELECT_DATA.textIndent;
+        else
+            width = 8;
+
+        vram = FILE_SELECT_DATA.textX * 32 + base;
+        TextDrawCharacter(*pText, (u32*)vram, width, FILE_SELECT_DATA.textIndent, 0);
+
+        FILE_SELECT_DATA.textIndent += width;
+        while (FILE_SELECT_DATA.textIndent >= 8)
+        {
+            FILE_SELECT_DATA.textIndent -= 8;
+            FILE_SELECT_DATA.textX++;
+        }
+
+        pText++;
+    }
 }
 
-// 0x080A0F18
-NAKED_FUNCTION
+/**
+ * @brief a0f18 | f0 | TODO
+ * 
+ */
 void FileSelectDrawCorruptionText(u8 textId)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	sub sp, #4\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r3, r0, #0x18\n\
-	adds r4, r3, #0\n\
-	ldr r0, _080A0F40 @ =gNonGameplayRam\n\
-	movs r2, #0\n\
-	movs r1, #0\n\
-	strh r1, [r0, #2]\n\
-	strh r1, [r0]\n\
-	strb r2, [r0, #0x13]\n\
-	cmp r3, #1\n\
-	bne _080A0F48\n\
-	ldr r7, _080A0F44 @ =0x06008000\n\
-	b _080A0F5A\n\
-	.align 2, 0\n\
-_080A0F40: .4byte gNonGameplayRam\n\
-_080A0F44: .4byte 0x06008000\n\
-_080A0F48:\n\
-	cmp r3, #2\n\
-	bne _080A0F54\n\
-	ldr r7, _080A0F50 @ =0x0600B000\n\
-	b _080A0F5A\n\
-	.align 2, 0\n\
-_080A0F50: .4byte 0x0600B000\n\
-_080A0F54:\n\
-	cmp r4, #3\n\
-	bne _080A0F5A\n\
-	ldr r7, _080A0F8C @ =0x0600C800\n\
-_080A0F5A:\n\
-	adds r6, r0, #0\n\
-	ldr r0, [r6, #4]\n\
-	ldrh r0, [r0]\n\
-	movs r1, #0xff\n\
-	lsls r1, r1, #8\n\
-	cmp r0, r1\n\
-	beq _080A0FF2\n\
-	movs r0, #0xfe\n\
-	lsls r0, r0, #8\n\
-	mov sl, r0\n\
-	movs r0, #0\n\
-	mov sb, r0\n\
-	mov r8, r1\n\
-_080A0F74:\n\
-	ldr r1, [r6, #4]\n\
-	ldrh r0, [r1]\n\
-	cmp r0, sl\n\
-	bne _080A0F90\n\
-	movs r0, #0\n\
-	strh r0, [r6]\n\
-	ldrh r0, [r6, #2]\n\
-	adds r0, #2\n\
-	strh r0, [r6, #2]\n\
-	mov r0, sb\n\
-	strb r0, [r6, #0x13]\n\
-	b _080A0FE2\n\
-	.align 2, 0\n\
-_080A0F8C: .4byte 0x0600C800\n\
-_080A0F90:\n\
-	ldrh r4, [r6]\n\
-	lsls r4, r4, #5\n\
-	ldrh r0, [r6, #2]\n\
-	lsls r0, r0, #0xa\n\
-	adds r4, r4, r0\n\
-	adds r4, r4, r7\n\
-	ldrh r0, [r1]\n\
-	bl TextGetCharacterWidth\n\
-	adds r5, r0, #0\n\
-	ldr r0, [r6, #4]\n\
-	ldrh r0, [r0]\n\
-	lsls r2, r5, #0x18\n\
-	lsrs r2, r2, #0x18\n\
-	ldrb r3, [r6, #0x13]\n\
-	movs r1, #0\n\
-	str r1, [sp]\n\
-	adds r1, r4, #0\n\
-	bl TextDrawCharacter\n\
-	ldrb r0, [r6, #0x13]\n\
-	adds r0, r0, r5\n\
-	strb r0, [r6, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bls _080A0FE2\n\
-	ldr r5, _080A1004 @ =gNonGameplayRam\n\
-	ldrb r4, [r5, #0x13]\n\
-	ldrh r3, [r5]\n\
-_080A0FCC:\n\
-	adds r2, r4, #0\n\
-	subs r2, #8\n\
-	adds r4, r2, #0\n\
-	adds r1, r3, #1\n\
-	adds r3, r1, #0\n\
-	lsls r0, r2, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bhi _080A0FCC\n\
-	strh r1, [r5]\n\
-	strb r2, [r5, #0x13]\n\
-_080A0FE2:\n\
-	ldr r1, _080A1004 @ =gNonGameplayRam\n\
-	ldr r2, [r1, #4]\n\
-	adds r0, r2, #2\n\
-	str r0, [r1, #4]\n\
-	adds r6, r1, #0\n\
-	ldrh r0, [r2, #2]\n\
-	cmp r0, r8\n\
-	bne _080A0F74\n\
-_080A0FF2:\n\
-	add sp, #4\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080A1004: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    u32* dst;
+    u8* vram;
+    s32 width;
+
+    FILE_SELECT_DATA.textY = 0;
+    FILE_SELECT_DATA.textX = 0;
+    FILE_SELECT_DATA.textIndent = 0;
+
+    if (textId == 1)
+        vram = VRAM_BASE + 0x8000;
+    else if (textId == 2)
+        vram = VRAM_BASE + 0xB000;
+    else if (textId == 3)
+        vram = VRAM_BASE + 0xC800;
+
+    while (*FILE_SELECT_DATA.pText != 0xFF00)
+    {
+        if (*FILE_SELECT_DATA.pText == 0xFE00)
+        {
+            FILE_SELECT_DATA.textX = 0;
+            FILE_SELECT_DATA.textY += 2;
+            FILE_SELECT_DATA.textIndent = 0;
+        }
+        else
+        {
+            dst = (u32*)((u32)(FILE_SELECT_DATA.textX * 32 + FILE_SELECT_DATA.textY * 1024) + (u32)vram);
+            width = TextGetCharacterWidth(*FILE_SELECT_DATA.pText);
+            TextDrawCharacter(*FILE_SELECT_DATA.pText, dst, width, FILE_SELECT_DATA.textIndent, 0);
+
+            FILE_SELECT_DATA.textIndent += width;
+            while (FILE_SELECT_DATA.textIndent >= 8)
+            {
+                FILE_SELECT_DATA.textIndent -= 8;
+                FILE_SELECT_DATA.textX++;
+            }
+        }
+
+        FILE_SELECT_DATA.pText++;
+    }
 }
 
 /**
