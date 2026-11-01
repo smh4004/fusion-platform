@@ -1,0 +1,6 @@
+#ifndef NAVIGATION_CONVERSATION_H
+#define NAVIGATION_CONVERSATION_H
+
+#include "types.h"
+
+#endif /* NAVIGATION_CONVERSATION_H */
