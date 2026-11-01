@@ -50,6 +50,9 @@ extern const void* const sMapScreenTimeTankVramAddresses[MAP_SCREEN_TANK_TIME_CO
 
 extern const u8 sMaintainedInputDelays[7];
 
+extern const u8 sNavConversationSectorElevatorPositions[AREA_NORMAL_COUNT][2];
+extern const u8 sNavConversationMainDeckElevatorPositions[AREA_NORMAL_COUNT][2];
+
 // ...
 
 extern const u8 sCharacterWidths[1184];
@@ -57,6 +60,18 @@ extern const u8 sCharacterWidths[1184];
 // ...
 
 extern const u8 sNavConversationTextBoxCursorYPositions[NAV_TEXT_BOX_COUNT][2];
+
+struct NavConversationTarget {
+    s8 conversation;
+    u8 location;
+    u8 x;
+    u8 y;
+    u8 textDirection;
+    u8 pad_5[3];
+};
+
+extern const struct NavConversationTarget sNavConversationTargets[33];
+extern const u8 sNavConversationTargetTextOamIds[4];
 
 // ...
 

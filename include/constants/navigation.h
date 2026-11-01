@@ -14,4 +14,11 @@ enum NavSpeaker {
     NAV_SPEAKER_FEDERATION
 };
 
+enum NavTargetTextDirection {
+    NAV_TARGET_TEXT_ABOVE,
+    NAV_TARGET_TEXT_BELOW,
+    NAV_TARGET_TEXT_LEFT,
+    NAV_TARGET_TEXT_RIGHT
+};
+
 #endif /* NAVIGATION_CONSTANTS_H */
