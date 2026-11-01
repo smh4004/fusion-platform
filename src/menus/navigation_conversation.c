@@ -4214,129 +4214,44 @@ _0807BC94: .4byte 0x08576066\n\
     .syntax divided\n");
 }
 
-// 0x0807BC98
-NAKED_FUNCTION
+/**
+ * @brief 7bc98 | f8 | Loads the graphics of the pop-ups used by the current navigation conversation
+ * 
+ */
 void NavigationConversationLoadPopUpGraphics(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	sub sp, #8\n\
-	movs r4, #3\n\
-	ldr r0, _0807BD68 @ =gNonGameplayRam\n\
-	movs r1, #0x88\n\
-	lsls r1, r1, #2\n\
-	adds r0, r0, r1\n\
-	ldrb r2, [r0]\n\
-	ldr r0, _0807BD6C @ =0x0857BCC8\n\
-	movs r1, #8\n\
-	ldrsb r1, [r0, r1]\n\
-	adds r3, r0, #0\n\
-	cmp r2, r1\n\
-	beq _0807BCC8\n\
-	adds r1, r3, #0\n\
-	adds r1, #8\n\
-_0807BCB8:\n\
-	subs r1, #4\n\
-	subs r4, #1\n\
-	cmp r4, #0\n\
-	ble _0807BCC8\n\
-	movs r0, #0\n\
-	ldrsb r0, [r1, r0]\n\
-	cmp r2, r0\n\
-	bne _0807BCB8\n\
-_0807BCC8:\n\
-	cmp r4, #0\n\
-	beq _0807BD5E\n\
-	subs r4, #1\n\
-	lsls r0, r4, #2\n\
-	adds r4, r0, r3\n\
-	ldrb r0, [r4, #1]\n\
-	cmp r0, #0\n\
-	beq _0807BCF0\n\
-	ldr r2, _0807BD70 @ =0x0857BC50\n\
-	adds r1, r0, #0\n\
-	lsls r0, r1, #1\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #3\n\
-	adds r2, #0x14\n\
-	adds r0, r0, r2\n\
-	ldr r0, [r0]\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #0x12\n\
-	bl LZ77UncompVram\n\
-_0807BCF0:\n\
-	ldrb r0, [r4, #2]\n\
-	cmp r0, #0\n\
-	beq _0807BD0C\n\
-	ldr r2, _0807BD70 @ =0x0857BC50\n\
-	adds r1, r0, #0\n\
-	lsls r0, r1, #1\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #3\n\
-	adds r2, #0x14\n\
-	adds r0, r0, r2\n\
-	ldr r0, [r0]\n\
-	ldr r1, _0807BD74 @ =0x02004000\n\
-	bl LZ77UncompVram\n\
-_0807BD0C:\n\
-	ldrb r0, [r4, #3]\n\
-	cmp r0, #0\n\
-	beq _0807BD28\n\
-	ldr r2, _0807BD70 @ =0x0857BC50\n\
-	adds r1, r0, #0\n\
-	lsls r0, r1, #1\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #3\n\
-	adds r2, #0x14\n\
-	adds r0, r0, r2\n\
-	ldr r0, [r0]\n\
-	ldr r1, _0807BD78 @ =0x02008000\n\
-	bl LZ77UncompVram\n\
-_0807BD28:\n\
-	movs r4, #5\n\
-	ldr r5, _0807BD7C @ =0x06015700\n\
-	movs r6, #0x20\n\
-_0807BD2E:\n\
-	str r6, [sp]\n\
-	movs r0, #3\n\
-	movs r1, #1\n\
-	rsbs r1, r1, #0\n\
-	adds r2, r5, #0\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #1\n\
-	bl BitFill\n\
-	ldr r0, _0807BD80 @ =0xFFFFFC00\n\
-	adds r5, r5, r0\n\
-	subs r4, #1\n\
-	cmp r4, #0\n\
-	bge _0807BD2E\n\
-	movs r0, #0\n\
-	str r0, [sp, #4]\n\
-	ldr r1, _0807BD84 @ =0x040000D4\n\
-	add r0, sp, #4\n\
-	str r0, [r1]\n\
-	ldr r0, _0807BD88 @ =0x050003E0\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0807BD8C @ =0x85000008\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-_0807BD5E:\n\
-	add sp, #8\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807BD68: .4byte gNonGameplayRam\n\
-_0807BD6C: .4byte 0x0857BCC8\n\
-_0807BD70: .4byte 0x0857BC50\n\
-_0807BD74: .4byte 0x02004000\n\
-_0807BD78: .4byte 0x02008000\n\
-_0807BD7C: .4byte 0x06015700\n\
-_0807BD80: .4byte 0xFFFFFC00\n\
-_0807BD84: .4byte 0x040000D4\n\
-_0807BD88: .4byte 0x050003E0\n\
-_0807BD8C: .4byte 0x85000008\n\
-    .syntax divided\n");
+    s32 i;
+    const struct NavConversationPopUpSet* pSet;
+    u8* dst;
+
+    for (i = ARRAY_SIZE(sNavConversationPopUpSets); i > 0; i--)
+    {
+        if (PAUSE_SCREEN_DATA.conversationNumber == sNavConversationPopUpSets[i - 1].conversation)
+            break;
+    }
+
+    if (i == 0)
+        return;
+
+    i--;
+    pSet = &sNavConversationPopUpSets[i];
+    if (pSet->popUps[0] != 0)
+        LZ77UncompVram(sNavConversationPopUps[pSet->popUps[0]].pGraphics, EWRAM_BASE);
+    if (pSet->popUps[1] != 0)
+        LZ77UncompVram(sNavConversationPopUps[pSet->popUps[1]].pGraphics, EWRAM_BASE + 0x4000);
+    if (pSet->popUps[2] != 0)
+        LZ77UncompVram(sNavConversationPopUps[pSet->popUps[2]].pGraphics, EWRAM_BASE + 0x8000);
+
+    i = 5;
+    dst = VRAM_OBJ + 0x5700;
+    do
+    {
+        BitFill(3, USHORT_MAX | (USHORT_MAX << 16), dst, 0x100, 32);
+        dst -= 0x400;
+        i--;
+    } while (i >= 0);
+
+    DMA3_FILL_32(0, PALRAM_OBJ + PAL_ROW_SIZE * 15, PAL_ROW_SIZE);
 }
 
 /**

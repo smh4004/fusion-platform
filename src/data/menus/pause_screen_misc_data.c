@@ -473,10 +473,10 @@ const struct NavConversationPopUp sNavConversationPopUps[5] = {
     }
 };
 
-const u8 sNavConversationPopUpsPerConversation[3][4] = {
-    [0] = { NAV_CONVO_UNLOCKED_LEVEL_0_HATCHES, 2, 1, 0 },
-    [1] = { NAV_CONVO_GO_DOWNLOAD_VARIA_SUIT, 4, 0, 0 },
-    [2] = { NAV_CONVO_REACTIVATE_THE_AUXILIARY_POWER_SYSTEM, 3, 0, 0 }
+const struct NavConversationPopUpSet sNavConversationPopUpSets[3] = {
+    [0] = { NAV_CONVO_UNLOCKED_LEVEL_0_HATCHES, { 2, 1, 0 } },
+    [1] = { NAV_CONVO_GO_DOWNLOAD_VARIA_SUIT, { 4, 0, 0 } },
+    [2] = { NAV_CONVO_REACTIVATE_THE_AUXILIARY_POWER_SYSTEM, { 3, 0, 0 } }
 };
 
 const u16 sNavConversationPal_57bcd4[16] = {

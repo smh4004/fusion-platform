@@ -90,7 +90,12 @@ extern const u8 sNavConversationPopUpAnim_57bbc4[6 * 2];
 extern const u8 sNavConversationPopUpAnim_57bbd0[16 * 2];
 extern const u8 sNavConversationPopUpAnim_57bbf0[48 * 2];
 extern const struct NavConversationPopUp sNavConversationPopUps[5];
-extern const u8 sNavConversationPopUpsPerConversation[3][4];
+struct NavConversationPopUpSet {
+    s8 conversation;
+    u8 popUps[3];
+};
+
+extern const struct NavConversationPopUpSet sNavConversationPopUpSets[3];
 extern const u16 sNavConversationPal_57bcd4[16];
 extern const u16 sNavConversationPal_57bcf4[2][16];
 extern const u16 sNavConversationPal_57bd34[4][16];
