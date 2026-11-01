@@ -1242,478 +1242,231 @@ void SramRead_WorldData(void)
     }
 }
 
-// 0x08080068
-NAKED_FUNCTION
+/**
+ * @brief 80068 | 8c | Writes the most recent save file number to flash sram
+ * 
+ */
 void SramWrite_MostRecentSaveFile(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	ldr r5, _080800E4 @ =0x0203F000\n\
-	adds r3, r5, #0\n\
-	movs r1, #0\n\
-	movs r0, #0x1e\n\
-	strb r0, [r5]\n\
-	ldrb r0, [r5, #1]\n\
-	adds r0, #1\n\
-	strb r0, [r5, #1]\n\
-	strh r1, [r5, #2]\n\
-	ldr r0, _080800E8 @ =0x0000FFFF\n\
-	strh r0, [r5, #4]\n\
-	ldr r0, _080800EC @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r5, #0x16]\n\
-	ldr r2, _080800F0 @ =0x08582288\n\
-	adds r1, r5, #6\n\
-	movs r4, #0xf\n\
-_0808008C:\n\
-	ldrb r0, [r2]\n\
-	strb r0, [r1]\n\
-	ldrb r0, [r2, #0x10]\n\
-	strb r0, [r1, #0x11]\n\
-	adds r2, #1\n\
-	adds r1, #1\n\
-	subs r4, #1\n\
-	cmp r4, #0\n\
-	bge _0808008C\n\
-	movs r1, #0\n\
-	movs r4, #7\n\
-_080800A2:\n\
-	ldrh r0, [r3]\n\
-	adds r0, r1, r0\n\
-	lsls r0, r0, #0x10\n\
-	adds r3, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r1, [r3]\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #0x10\n\
-	adds r3, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r2, [r3]\n\
-	adds r0, r0, r2\n\
-	lsls r0, r0, #0x10\n\
-	adds r3, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r1, [r3]\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r1, r0, #0x10\n\
-	adds r3, #2\n\
-	subs r4, #1\n\
-	cmp r4, #0\n\
-	bge _080800A2\n\
-	strh r1, [r5, #2]\n\
-	ldr r2, _080800E8 @ =0x0000FFFF\n\
-	adds r0, r2, #0\n\
-	subs r0, r0, r1\n\
-	strh r0, [r5, #4]\n\
-	bl unk_dd4\n\
-	pop {r4, r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080800E4: .4byte 0x0203F000\n\
-_080800E8: .4byte 0x0000FFFF\n\
-_080800EC: .4byte 0x03000B8D\n\
-_080800F0: .4byte 0x08582288\n\
-    .syntax divided\n");
+    struct SaveValue* pSave;
+    s32 i;
+    u16 checksum;
+    u16* ptr;
+
+    pSave = &gSram.mostRecentFileSave;
+    ptr = (u16*)pSave;
+
+    pSave->magicNumber = 0x1E;
+    pSave->counter++;
+    pSave->checksum = 0;
+    pSave->notChecksum = USHORT_MAX;
+    pSave->value = gMostRecentSaveFile;
+
+    for (i = 0; i < SRAM_TEXT_SIZE; i++)
+    {
+        pSave->startText[i] = sMostRecentFileSave_Text[0][i];
+        pSave->endText[i] = sMostRecentFileSave_Text[1][i];
+    }
+
+    checksum = 0;
+    for (i = SRAM_GET_CHECKSUM_SIZE(struct SaveValue, 4, u16) - 1; i >= 0; i--)
+    {
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+    }
+
+    pSave->checksum = checksum;
+    pSave->notChecksum = USHORT_MAX - checksum;
+
+    unk_dd4();
 }
 
-// 0x080800F4
-NAKED_FUNCTION
+/**
+ * @brief 800f4 | e0 | Reads the most recent save file number from flash sram
+ * 
+ */
 void SramRead_MostRecentSaveFile(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	sub sp, #4\n\
-	ldr r0, _08080194 @ =0x0203F000\n\
-	mov ip, r0\n\
-	ldrb r0, [r0]\n\
-	movs r1, #0x1e\n\
-	eors r0, r1\n\
-	rsbs r1, r0, #0\n\
-	orrs r1, r0\n\
-	lsrs r4, r1, #0x1f\n\
-	ldr r6, _08080198 @ =0x03000B8D\n\
-	cmp r4, #0\n\
-	bne _080801A0\n\
-	mov r1, ip\n\
-	movs r3, #0\n\
-	ldrh r5, [r1, #2]\n\
-	movs r2, #7\n\
-_08080116:\n\
-	ldrh r0, [r1]\n\
-	adds r0, r3, r0\n\
-	lsls r0, r0, #0x10\n\
-	adds r1, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r3, [r1]\n\
-	adds r0, r0, r3\n\
-	lsls r0, r0, #0x10\n\
-	adds r1, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r3, [r1]\n\
-	adds r0, r0, r3\n\
-	lsls r0, r0, #0x10\n\
-	adds r1, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r3, [r1]\n\
-	adds r0, r0, r3\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r3, r0, #0x10\n\
-	adds r1, #2\n\
-	subs r2, #1\n\
-	cmp r2, #0\n\
-	bge _08080116\n\
-	cmp r5, r3\n\
-	beq _0808014A\n\
-	movs r4, #2\n\
-_0808014A:\n\
-	cmp r4, #0\n\
-	bne _080801A0\n\
-	movs r2, #0\n\
-	ldr r0, _0808019C @ =0x08582288\n\
-	mov r3, ip\n\
-	ldrb r1, [r3, #6]\n\
-	adds r3, r0, #0\n\
-	ldrb r0, [r3]\n\
-	cmp r1, r0\n\
-	bne _080801A0\n\
-_0808015E:\n\
-	mov r0, ip\n\
-	adds r0, #0x17\n\
-	adds r0, r0, r2\n\
-	adds r1, r3, #0\n\
-	adds r1, #0x10\n\
-	adds r1, r2, r1\n\
-	ldrb r0, [r0]\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	bne _080801A0\n\
-	adds r2, #1\n\
-	cmp r2, #0xf\n\
-	bgt _0808018A\n\
-	mov r0, ip\n\
-	adds r0, #6\n\
-	adds r0, r0, r2\n\
-	adds r1, r2, r3\n\
-	ldrb r0, [r0]\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	beq _0808015E\n\
-	movs r4, #3\n\
-_0808018A:\n\
-	cmp r4, #0\n\
-	bne _080801A0\n\
-	mov r1, ip\n\
-	ldrb r0, [r1, #0x16]\n\
-	b _080801BA\n\
-	.align 2, 0\n\
-_08080194: .4byte 0x0203F000\n\
-_08080198: .4byte 0x03000B8D\n\
-_0808019C: .4byte 0x08582288\n\
-_080801A0:\n\
-	mov r1, sp\n\
-	ldr r2, _080801C4 @ =0x0000FFFF\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	ldr r1, _080801C8 @ =0x040000D4\n\
-	mov r3, sp\n\
-	str r3, [r1]\n\
-	ldr r0, _080801CC @ =0x0203F000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _080801D0 @ =0x81000020\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	movs r0, #0\n\
-_080801BA:\n\
-	strb r0, [r6]\n\
-	add sp, #4\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080801C4: .4byte 0x0000FFFF\n\
-_080801C8: .4byte 0x040000D4\n\
-_080801CC: .4byte 0x0203F000\n\
-_080801D0: .4byte 0x81000020\n\
-    .syntax divided\n");
+    u32 error;
+    s32 i;
+    u16 checksum;
+    u16 actualChecksum;
+    u16* ptr;
+    struct SaveValue* pSave;
+
+    pSave = &gSram.mostRecentFileSave;
+    error = pSave->magicNumber != 0x1E;
+
+    if (error == 0)
+    {
+        ptr = (u16*)pSave;
+        checksum = 0;
+        actualChecksum = pSave->checksum;
+        for (i = SRAM_GET_CHECKSUM_SIZE(struct SaveValue, 4, u16) - 1; i >= 0; i--)
+        {
+            checksum += *ptr++;
+            checksum += *ptr++;
+            checksum += *ptr++;
+            checksum += *ptr++;
+        }
+
+        if (actualChecksum != checksum)
+            error = 2;
+
+        if (error == 0)
+        {
+            for (i = 0; i < SRAM_TEXT_SIZE; i++)
+            {
+                if (pSave->startText[i] != sMostRecentFileSave_Text[0][i])
+                {
+                    error = 3;
+                    break;
+                }
+
+                if (pSave->endText[i] != sMostRecentFileSave_Text[1][i])
+                {
+                    error = 3;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (error == 0)
+    {
+        gMostRecentSaveFile = pSave->value;
+        return;
+    }
+
+    DMA3_FILL_16(USHORT_MAX, &gSram.mostRecentFileSave, sizeof(gSram.mostRecentFileSave));
+    gMostRecentSaveFile = 0;
 }
 
-// 0x080801D4
-NAKED_FUNCTION
+/**
+ * @brief 801d4 | 90 | Writes the language to flash sram
+ * 
+ */
 void SramWrite_Language(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	ldr r5, _08080254 @ =0x0203F040\n\
-	adds r3, r5, #0\n\
-	movs r1, #0\n\
-	movs r0, #0x1f\n\
-	strb r0, [r5]\n\
-	ldrb r0, [r5, #1]\n\
-	adds r0, #1\n\
-	strb r0, [r5, #1]\n\
-	strh r1, [r5, #2]\n\
-	ldr r0, _08080258 @ =0x0000FFFF\n\
-	strh r0, [r5, #4]\n\
-	ldr r0, _0808025C @ =0x03000011\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r5, #0x16]\n\
-	ldr r2, _08080260 @ =0x085822A8\n\
-	adds r1, r5, #6\n\
-	movs r4, #0xf\n\
-_080801F8:\n\
-	ldrb r0, [r2]\n\
-	strb r0, [r1]\n\
-	ldrb r0, [r2, #0x10]\n\
-	strb r0, [r1, #0x11]\n\
-	adds r2, #1\n\
-	adds r1, #1\n\
-	subs r4, #1\n\
-	cmp r4, #0\n\
-	bge _080801F8\n\
-	movs r1, #0\n\
-	movs r4, #7\n\
-_0808020E:\n\
-	ldrh r0, [r3]\n\
-	adds r0, r1, r0\n\
-	lsls r0, r0, #0x10\n\
-	adds r3, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r1, [r3]\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #0x10\n\
-	adds r3, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r2, [r3]\n\
-	adds r0, r0, r2\n\
-	lsls r0, r0, #0x10\n\
-	adds r3, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r1, [r3]\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r1, r0, #0x10\n\
-	adds r3, #2\n\
-	subs r4, #1\n\
-	cmp r4, #0\n\
-	bge _0808020E\n\
-	strh r1, [r5, #2]\n\
-	ldr r2, _08080258 @ =0x0000FFFF\n\
-	adds r0, r2, #0\n\
-	subs r0, r0, r1\n\
-	strh r0, [r5, #4]\n\
-	movs r0, #0\n\
-	bl unk_dec\n\
-	pop {r4, r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08080254: .4byte 0x0203F040\n\
-_08080258: .4byte 0x0000FFFF\n\
-_0808025C: .4byte 0x03000011\n\
-_08080260: .4byte 0x085822A8\n\
-    .syntax divided\n");
+    struct SaveValue* pSave;
+    s32 i;
+    u16 checksum;
+    u16* ptr;
+
+    pSave = &gSram.languageSaves[0];
+    ptr = (u16*)pSave;
+
+    pSave->magicNumber = 0x1F;
+    pSave->counter++;
+    pSave->checksum = 0;
+    pSave->notChecksum = USHORT_MAX;
+    pSave->value = gLanguage;
+
+    for (i = 0; i < SRAM_TEXT_SIZE; i++)
+    {
+        pSave->startText[i] = sLanguageSave_Text[0][i];
+        pSave->endText[i] = sLanguageSave_Text[1][i];
+    }
+
+    checksum = 0;
+    for (i = SRAM_GET_CHECKSUM_SIZE(struct SaveValue, 4, u16) - 1; i >= 0; i--)
+    {
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+    }
+
+    pSave->checksum = checksum;
+    pSave->notChecksum = USHORT_MAX - checksum;
+
+    unk_dec(0);
 }
 
-// 0x08080264
-NAKED_FUNCTION
+/**
+ * @brief 80264 | 180 | Reads the language from flash sram
+ * 
+ */
 void SramRead_Language(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	sub sp, #4\n\
-	movs r0, #0\n\
-	mov r8, r0\n\
-	ldr r1, _080802E8 @ =0x08582280\n\
-	mov sb, r1\n\
-	ldr r6, _080802EC @ =0x040000D4\n\
-	ldr r2, _080802F0 @ =0x81000020\n\
-	mov sl, r2\n\
-_0808027E:\n\
-	mov r1, r8\n\
-	lsls r0, r1, #2\n\
-	add r0, sb\n\
-	ldr r5, [r0]\n\
-	adds r2, r5, #0\n\
-	ldrb r1, [r5]\n\
-	movs r0, #0x1f\n\
-	eors r1, r0\n\
-	rsbs r0, r1, #0\n\
-	orrs r0, r1\n\
-	lsrs r4, r0, #0x1f\n\
-	cmp r4, #0\n\
-	bne _08080326\n\
-	movs r1, #0\n\
-	ldrh r7, [r5, #2]\n\
-	movs r3, #7\n\
-_0808029E:\n\
-	ldrh r0, [r2]\n\
-	adds r0, r1, r0\n\
-	lsls r0, r0, #0x10\n\
-	adds r2, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r1, [r2]\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #0x10\n\
-	adds r2, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r1, [r2]\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #0x10\n\
-	adds r2, #2\n\
-	lsrs r0, r0, #0x10\n\
-	ldrh r1, [r2]\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r1, r0, #0x10\n\
-	adds r2, #2\n\
-	subs r3, #1\n\
-	cmp r3, #0\n\
-	bge _0808029E\n\
-	cmp r7, r1\n\
-	beq _080802D2\n\
-	movs r4, #2\n\
-_080802D2:\n\
-	cmp r4, #0\n\
-	bne _08080326\n\
-	movs r3, #0\n\
-	ldr r0, _080802F4 @ =0x085822A8\n\
-	ldrb r1, [r5, #6]\n\
-	adds r2, r0, #0\n\
-	ldrb r0, [r2]\n\
-	cmp r1, r0\n\
-	beq _080802FC\n\
-	b _08080324\n\
-	.align 2, 0\n\
-_080802E8: .4byte 0x08582280\n\
-_080802EC: .4byte 0x040000D4\n\
-_080802F0: .4byte 0x81000020\n\
-_080802F4: .4byte 0x085822A8\n\
-_080802F8:\n\
-	movs r4, #4\n\
-	b _08080326\n\
-_080802FC:\n\
-	adds r0, r5, #0\n\
-	adds r0, #0x17\n\
-	adds r0, r0, r3\n\
-	adds r1, r2, #0\n\
-	adds r1, #0x10\n\
-	adds r1, r3, r1\n\
-	ldrb r0, [r0]\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	bne _080802F8\n\
-	adds r3, #1\n\
-	cmp r3, #0xf\n\
-	bgt _08080326\n\
-	adds r0, r5, #6\n\
-	adds r0, r0, r3\n\
-	adds r1, r3, r2\n\
-	ldrb r0, [r0]\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	beq _080802FC\n\
-_08080324:\n\
-	movs r4, #3\n\
-_08080326:\n\
-	mov r1, r8\n\
-	cmp r1, #0\n\
-	bne _0808034C\n\
-	cmp r4, #0\n\
-	bne _08080384\n\
-	mov r2, sb\n\
-	ldr r0, [r2]\n\
-	str r0, [r6]\n\
-	ldr r0, [r2, #4]\n\
-	str r0, [r6, #4]\n\
-	ldr r0, _08080348 @ =0x80000020\n\
-	str r0, [r6, #8]\n\
-	ldr r0, [r6, #8]\n\
-	movs r0, #1\n\
-	bl unk_dec\n\
-	b _08080390\n\
-	.align 2, 0\n\
-_08080348: .4byte 0x80000020\n\
-_0808034C:\n\
-	cmp r4, #0\n\
-	beq _080803A0\n\
-	mov r0, sp\n\
-	movs r1, #0\n\
-	strh r1, [r0]\n\
-	str r0, [r6]\n\
-	mov r2, sb\n\
-	ldr r0, [r2]\n\
-	str r0, [r6, #4]\n\
-	mov r0, sl\n\
-	str r0, [r6, #8]\n\
-	ldr r0, [r6, #8]\n\
-	movs r0, #0\n\
-	bl unk_dec\n\
-	mov r0, sp\n\
-	movs r1, #0\n\
-	strh r1, [r0]\n\
-	str r0, [r6]\n\
-	mov r2, sb\n\
-	ldr r0, [r2, #4]\n\
-	str r0, [r6, #4]\n\
-	mov r0, sl\n\
-	str r0, [r6, #8]\n\
-	ldr r0, [r6, #8]\n\
-	movs r0, #1\n\
-	bl unk_dec\n\
-_08080384:\n\
-	movs r1, #1\n\
-	add r8, r1\n\
-	mov r2, r8\n\
-	cmp r2, #1\n\
-	bgt _08080390\n\
-	b _0808027E\n\
-_08080390:\n\
-	cmp r4, #0\n\
-	bne _080803C8\n\
-	ldr r1, _0808039C @ =0x03000011\n\
-	ldrb r0, [r5, #0x16]\n\
-	b _080803CC\n\
-	.align 2, 0\n\
-_0808039C: .4byte 0x03000011\n\
-_080803A0:\n\
-	ldr r1, _080803BC @ =0x040000D4\n\
-	ldr r2, _080803C0 @ =0x08582280\n\
-	ldr r0, [r2, #4]\n\
-	str r0, [r1]\n\
-	ldr r0, [r2]\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _080803C4 @ =0x80000020\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	movs r0, #0\n\
-	bl unk_dec\n\
-	b _08080390\n\
-	.align 2, 0\n\
-_080803BC: .4byte 0x040000D4\n\
-_080803C0: .4byte 0x08582280\n\
-_080803C4: .4byte 0x80000020\n\
-_080803C8:\n\
-	ldr r1, _080803E0 @ =0x03000011\n\
-	movs r0, #0\n\
-_080803CC:\n\
-	strb r0, [r1]\n\
-	add sp, #4\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080803E0: .4byte 0x03000011\n\
-    .syntax divided\n");
+    u32 error;
+    s32 i;
+    u16 checksum;
+    u16 actualChecksum;
+    u16* ptr;
+    struct SaveValue* pSave;
+    s32 j;
+
+    for (j = 0; j < 2; j++)
+    {
+        pSave = (struct SaveValue*)sUnk_582280[j];
+        ptr = (u16*)pSave;
+        error = pSave->magicNumber != 0x1F;
+
+        if (error == 0)
+        {
+            checksum = 0;
+            actualChecksum = pSave->checksum;
+            for (i = SRAM_GET_CHECKSUM_SIZE(struct SaveValue, 4, u16) - 1; i >= 0; i--)
+            {
+                checksum += *ptr++;
+                checksum += *ptr++;
+                checksum += *ptr++;
+                checksum += *ptr++;
+            }
+
+            if (actualChecksum != checksum)
+                error = 2;
+
+            if (error == 0)
+            {
+                for (i = 0; i < SRAM_TEXT_SIZE; i++)
+                {
+                    if (pSave->startText[i] != sLanguageSave_Text[0][i])
+                    {
+                        error = 3;
+                        break;
+                    }
+
+                    if (pSave->endText[i] != sLanguageSave_Text[1][i])
+                    {
+                        error = 4;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (j == 0)
+        {
+            if (error == 0)
+            {
+                DMA3_COPY_16(sUnk_582280[0], sUnk_582280[1], sizeof(struct SaveValue) / 2);
+                unk_dec(1);
+                break;
+            }
+        }
+        else if (error == 0)
+        {
+            DMA3_COPY_16(sUnk_582280[1], sUnk_582280[0], sizeof(struct SaveValue) / 2);
+            unk_dec(0);
+            break;
+        }
+        else
+        {
+            DMA3_FILL_16(0, sUnk_582280[0], sizeof(struct SaveValue));
+            unk_dec(0);
+            DMA3_FILL_16(0, sUnk_582280[1], sizeof(struct SaveValue));
+            unk_dec(1);
+        }
+    }
+
+    if (error == 0)
+        gLanguage = pSave->value;
+    else
+        gLanguage = 0;
 }
 
 // 0x080803E4
