@@ -45,7 +45,7 @@ struct SaveMusicInfo {
     u16 unk_2;
     u8 unk_4;
     u8 priority;
-    u16 musicTrackOnTransition;
+    u16 unk_6;
 };
 
 struct SaveFile {

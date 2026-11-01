@@ -6,7 +6,10 @@
 #include "minimap.h"
 #include "constants/connection.h"
 #include "constants/event.h"
+#include "structs/audio.h"
 #include "structs/bg_clip.h"
+#include "structs/sprite.h"
+#include "structs/scroll.h"
 #include "structs/block.h"
 #include "structs/connection.h"
 #include "structs/event.h"
@@ -503,742 +506,169 @@ void Sram_QuickSave(u8 stage)
     }
 }
 
-// 0x0807F450
-NAKED_FUNCTION
+/**
+ * @brief 7f450 | 370 | Writes the current game state to the current save file in ewram
+ * 
+ */
 void SramWrite_ToEwram(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	sub sp, #0x38\n\
-	ldr r4, _0807F6F8 @ =gMusicInfo\n\
-	ldrh r1, [r4, #0x1c]\n\
-	ldr r0, _0807F6FC @ =0xFFFF0000\n\
-	ands r0, r5\n\
-	orrs r0, r1\n\
-	ldrh r1, [r4, #0x1e]\n\
-	lsls r1, r1, #0x10\n\
-	ldr r3, _0807F700 @ =0x0000FFFF\n\
-	ands r0, r3\n\
-	adds r5, r0, #0\n\
-	orrs r5, r1\n\
-	adds r0, r4, #0\n\
-	adds r0, #0x20\n\
-	ldrb r0, [r0]\n\
-	ldr r2, _0807F704 @ =0xFFFFFF00\n\
-	ands r2, r6\n\
-	orrs r2, r0\n\
-	adds r0, r4, #0\n\
-	adds r0, #0x21\n\
-	ldrb r1, [r0]\n\
-	lsls r1, r1, #8\n\
-	ldr r0, _0807F708 @ =0xFFFF00FF\n\
-	ands r0, r2\n\
-	orrs r0, r1\n\
-	ldrh r1, [r4, #2]\n\
-	lsls r1, r1, #0x10\n\
-	ands r0, r3\n\
-	adds r6, r0, #0\n\
-	orrs r6, r1\n\
-	ldr r1, _0807F70C @ =0x0858225C\n\
-	ldr r0, _0807F710 @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r4, [r0]\n\
-	ldr r1, _0807F714 @ =0x08582200\n\
-	adds r0, r4, #0\n\
-	bl Sram_StringCopy_MetroidEpisode4A\n\
-	movs r0, #0\n\
-	str r0, [r4, #0x10]\n\
-	subs r0, #1\n\
-	str r0, [r4, #0x14]\n\
-	ldr r0, _0807F718 @ =0x03000014\n\
-	ldr r0, [r0]\n\
-	str r0, [r4, #0x18]\n\
-	ldr r0, _0807F71C @ =0x03000B90\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r4, #0x1c]\n\
-	ldr r0, _0807F720 @ =gCurrentArea\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r4, #0x1d]\n\
-	ldr r0, _0807F724 @ =gCurrentRoom\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r4, #0x1e]\n\
-	ldr r0, _0807F728 @ =gLastDoorUsed\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r4, #0x1f]\n\
-	ldr r0, _0807F72C @ =gAbilityCount\n\
-	ldrb r1, [r0]\n\
-	adds r0, r4, #0\n\
-	adds r0, #0x20\n\
-	strb r1, [r0]\n\
-	ldr r0, _0807F730 @ =gEventCounter\n\
-	ldrb r0, [r0]\n\
-	adds r1, r4, #0\n\
-	adds r1, #0x21\n\
-	strb r0, [r1]\n\
-	ldr r0, _0807F734 @ =gPreviousNavigationConversation\n\
-	ldrb r0, [r0]\n\
-	adds r1, #1\n\
-	strb r0, [r1]\n\
-	ldr r0, _0807F738 @ =gPreviousCutscene\n\
-	ldrb r0, [r0]\n\
-	adds r1, #1\n\
-	strb r0, [r1]\n\
-	ldr r0, _0807F73C @ =0x03000031\n\
-	ldrb r1, [r0]\n\
-	adds r0, r4, #0\n\
-	adds r0, #0x24\n\
-	strb r1, [r0]\n\
-	ldr r0, _0807F740 @ =0x03000032\n\
-	ldrb r0, [r0]\n\
-	adds r1, r4, #0\n\
-	adds r1, #0x25\n\
-	strb r0, [r1]\n\
-	ldr r0, _0807F744 @ =gSoundEventCounter\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r4, #0x26]\n\
-	ldr r0, _0807F748 @ =gPreviousSoundEvent\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r4, #0x28]\n\
-	ldr r0, _0807F74C @ =0x0300004D\n\
-	ldrb r0, [r0]\n\
-	adds r1, #5\n\
-	strb r0, [r1]\n\
-	ldr r0, _0807F750 @ =gSecurityHatchLevelBackup\n\
-	ldrb r0, [r0]\n\
-	adds r1, #1\n\
-	strb r0, [r1]\n\
-	adds r1, #1\n\
-	ldr r0, _0807F754 @ =0x03000124\n\
-	ldm r0!, {r2, r3, r7}\n\
-	stm r1!, {r2, r3, r7}\n\
-	ldm r0!, {r2, r3}\n\
-	stm r1!, {r2, r3}\n\
-	ldr r0, _0807F758 @ =0x03001224\n\
-	ldrh r1, [r0]\n\
-	adds r0, r4, #0\n\
-	adds r0, #0x40\n\
-	strh r1, [r0]\n\
-	ldr r0, _0807F75C @ =0x03001226\n\
-	ldrh r0, [r0]\n\
-	adds r1, r4, #0\n\
-	adds r1, #0x42\n\
-	strh r0, [r1]\n\
-	ldr r0, _0807F760 @ =gBg1XPosition\n\
-	ldrh r1, [r0]\n\
-	adds r0, r4, #0\n\
-	adds r0, #0x44\n\
-	strh r1, [r0]\n\
-	ldr r0, _0807F764 @ =gBg1YPosition\n\
-	ldrh r0, [r0]\n\
-	adds r1, r4, #0\n\
-	adds r1, #0x46\n\
-	strh r0, [r1]\n\
-	ldr r0, _0807F768 @ =0x0300122C\n\
-	ldrh r1, [r0]\n\
-	adds r0, r4, #0\n\
-	adds r0, #0x48\n\
-	strh r1, [r0]\n\
-	ldr r0, _0807F76C @ =0x0300122E\n\
-	ldrh r0, [r0]\n\
-	adds r1, r4, #0\n\
-	adds r1, #0x4a\n\
-	strh r0, [r1]\n\
-	ldr r0, _0807F770 @ =0x03001230\n\
-	ldrh r1, [r0]\n\
-	adds r0, r4, #0\n\
-	adds r0, #0x4c\n\
-	strh r1, [r0]\n\
-	ldr r0, _0807F774 @ =0x03001232\n\
-	ldrh r0, [r0]\n\
-	adds r1, r4, #0\n\
-	adds r1, #0x4e\n\
-	strh r0, [r1]\n\
-	movs r3, #0\n\
-	adds r2, r4, #0\n\
-	adds r2, #0x50\n\
-	ldr r7, _0807F778 @ =0x03000033\n\
-_0807F588:\n\
-	adds r0, r2, r3\n\
-	adds r1, r3, r7\n\
-	ldrb r1, [r1]\n\
-	strb r1, [r0]\n\
-	adds r3, #1\n\
-	cmp r3, #7\n\
-	ble _0807F588\n\
-	movs r3, #0\n\
-	movs r7, #0x60\n\
-	adds r7, r7, r4\n\
-	mov ip, r7\n\
-	movs r0, #0x8c\n\
-	adds r0, r0, r4\n\
-	mov r8, r0\n\
-	movs r1, #0x98\n\
-	adds r1, r1, r4\n\
-	mov sb, r1\n\
-	movs r2, #0xa4\n\
-	adds r2, r2, r4\n\
-	mov sl, r2\n\
-	adds r7, r4, #0\n\
-	adds r7, #0xb4\n\
-	str r7, [sp]\n\
-	adds r0, r4, #0\n\
-	adds r0, #0xc4\n\
-	str r0, [sp, #4]\n\
-	adds r1, r4, #0\n\
-	adds r1, #0xd4\n\
-	str r1, [sp, #8]\n\
-	adds r2, r4, #0\n\
-	adds r2, #0xd6\n\
-	str r2, [sp, #0xc]\n\
-	adds r7, #0x24\n\
-	str r7, [sp, #0x10]\n\
-	adds r0, #0x16\n\
-	str r0, [sp, #0x14]\n\
-	adds r1, #8\n\
-	str r1, [sp, #0x18]\n\
-	adds r2, #8\n\
-	str r2, [sp, #0x1c]\n\
-	adds r7, #8\n\
-	str r7, [sp, #0x20]\n\
-	adds r0, #8\n\
-	str r0, [sp, #0x24]\n\
-	adds r1, #7\n\
-	str r1, [sp, #0x28]\n\
-	adds r2, #6\n\
-	str r2, [sp, #0x2c]\n\
-	adds r7, #8\n\
-	str r7, [sp, #0x30]\n\
-	adds r0, #0xe\n\
-	str r0, [sp, #0x34]\n\
-	subs r2, #0x8c\n\
-	ldr r7, _0807F77C @ =0x0300003B\n\
-_0807F5F4:\n\
-	adds r0, r2, r3\n\
-	adds r1, r3, r7\n\
-	ldrb r1, [r1]\n\
-	strb r1, [r0]\n\
-	adds r3, #1\n\
-	cmp r3, #7\n\
-	ble _0807F5F4\n\
-	mov r1, ip\n\
-	ldr r0, _0807F780 @ =gSamusData\n\
-	ldm r0!, {r2, r3, r7}\n\
-	stm r1!, {r2, r3, r7}\n\
-	ldm r0!, {r2, r3, r7}\n\
-	stm r1!, {r2, r3, r7}\n\
-	ldm r0!, {r2, r3, r7}\n\
-	stm r1!, {r2, r3, r7}\n\
-	ldm r0!, {r2, r3}\n\
-	stm r1!, {r2, r3}\n\
-	mov r1, r8\n\
-	ldr r0, _0807F784 @ =gSamusAnimationInfo\n\
-	ldm r0!, {r2, r3, r7}\n\
-	stm r1!, {r2, r3, r7}\n\
-	mov r1, sb\n\
-	ldr r0, _0807F788 @ =0x030012E4\n\
-	ldm r0!, {r2, r3, r7}\n\
-	stm r1!, {r2, r3, r7}\n\
-	mov r1, sl\n\
-	ldr r0, _0807F78C @ =0x030012F0\n\
-	ldm r0!, {r2, r3, r7}\n\
-	stm r1!, {r2, r3, r7}\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-	ldr r1, [sp]\n\
-	ldr r0, _0807F78C @ =0x030012F0\n\
-	adds r0, #0x10\n\
-	ldm r0!, {r2, r3, r7}\n\
-	stm r1!, {r2, r3, r7}\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-	ldr r1, [sp, #4]\n\
-	ldr r0, _0807F790 @ =gEquipment\n\
-	ldm r0!, {r2, r3, r7}\n\
-	stm r1!, {r2, r3, r7}\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-	ldr r7, _0807F794 @ =gPreventMovementTimer\n\
-	ldrh r0, [r7]\n\
-	ldr r1, [sp, #8]\n\
-	strh r0, [r1]\n\
-	ldr r2, _0807F798 @ =gDisableDrawingSamusAndScrollingFlag\n\
-	ldrb r0, [r2]\n\
-	ldr r3, [sp, #0xc]\n\
-	strb r0, [r3]\n\
-	ldr r7, _0807F79C @ =gAtmosphericStabilizersOnline\n\
-	ldrh r0, [r7]\n\
-	ldr r1, [sp, #0x10]\n\
-	strh r0, [r1]\n\
-	ldr r2, _0807F7A0 @ =gMissileGeronsDestroyed\n\
-	ldrh r0, [r2]\n\
-	ldr r3, [sp, #0x14]\n\
-	strh r0, [r3]\n\
-	ldr r7, _0807F7A4 @ =gSuperMissileGeronsDestroyed\n\
-	ldrh r0, [r7]\n\
-	ldr r1, [sp, #0x18]\n\
-	strh r0, [r1]\n\
-	ldr r2, _0807F7A8 @ =gPowerBombGeronsDestroyed\n\
-	ldrh r0, [r2]\n\
-	ldr r3, [sp, #0x1c]\n\
-	strh r0, [r3]\n\
-	ldr r7, _0807F7AC @ =gGadorasDestroyed\n\
-	ldrh r0, [r7]\n\
-	ldr r1, [sp, #0x20]\n\
-	strh r0, [r1]\n\
-	ldr r2, _0807F7B0 @ =gMissileHatchDestroyed\n\
-	ldrb r0, [r2]\n\
-	ldr r3, [sp, #0x24]\n\
-	strb r0, [r3]\n\
-	ldr r7, _0807F7B4 @ =gWaterLowered\n\
-	ldrb r0, [r7]\n\
-	ldr r1, [sp, #0x28]\n\
-	strb r0, [r1]\n\
-	ldr r2, _0807F7B8 @ =gInGameTimer\n\
-	ldr r0, [r2]\n\
-	ldr r3, [sp, #0x2c]\n\
-	str r0, [r3]\n\
-	ldr r7, [sp, #0x30]\n\
-	str r5, [r7]\n\
-	str r6, [r7, #4]\n\
-	ldr r0, [sp, #0x34]\n\
-	ldr r1, _0807F7BC @ =0x085821F8\n\
-	bl Sram_StringCopy_SAVE_END\n\
-	ldr r1, _0807F70C @ =0x0858225C\n\
-	ldr r0, _0807F710 @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r2, [r0]\n\
-	movs r1, #0\n\
-	movs r3, #0x8f\n\
-_0807F6BA:\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	ldm r2!, {r0}\n\
-	adds r1, r1, r0\n\
-	subs r3, #1\n\
-	cmp r3, #0\n\
-	bge _0807F6BA\n\
-	str r1, [r4, #0x10]\n\
-	mvns r0, r1\n\
-	str r0, [r4, #0x14]\n\
-	add sp, #0x38\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807F6F8: .4byte gMusicInfo\n\
-_0807F6FC: .4byte 0xFFFF0000\n\
-_0807F700: .4byte 0x0000FFFF\n\
-_0807F704: .4byte 0xFFFFFF00\n\
-_0807F708: .4byte 0xFFFF00FF\n\
-_0807F70C: .4byte 0x0858225C\n\
-_0807F710: .4byte 0x03000B8D\n\
-_0807F714: .4byte 0x08582200\n\
-_0807F718: .4byte 0x03000014\n\
-_0807F71C: .4byte 0x03000B90\n\
-_0807F720: .4byte gCurrentArea\n\
-_0807F724: .4byte gCurrentRoom\n\
-_0807F728: .4byte gLastDoorUsed\n\
-_0807F72C: .4byte gAbilityCount\n\
-_0807F730: .4byte gEventCounter\n\
-_0807F734: .4byte gPreviousNavigationConversation\n\
-_0807F738: .4byte gPreviousCutscene\n\
-_0807F73C: .4byte 0x03000031\n\
-_0807F740: .4byte 0x03000032\n\
-_0807F744: .4byte gSoundEventCounter\n\
-_0807F748: .4byte gPreviousSoundEvent\n\
-_0807F74C: .4byte 0x0300004D\n\
-_0807F750: .4byte gSecurityHatchLevelBackup\n\
-_0807F754: .4byte 0x03000124\n\
-_0807F758: .4byte 0x03001224\n\
-_0807F75C: .4byte 0x03001226\n\
-_0807F760: .4byte gBg1XPosition\n\
-_0807F764: .4byte gBg1YPosition\n\
-_0807F768: .4byte 0x0300122C\n\
-_0807F76C: .4byte 0x0300122E\n\
-_0807F770: .4byte 0x03001230\n\
-_0807F774: .4byte 0x03001232\n\
-_0807F778: .4byte 0x03000033\n\
-_0807F77C: .4byte 0x0300003B\n\
-_0807F780: .4byte gSamusData\n\
-_0807F784: .4byte gSamusAnimationInfo\n\
-_0807F788: .4byte 0x030012E4\n\
-_0807F78C: .4byte 0x030012F0\n\
-_0807F790: .4byte gEquipment\n\
-_0807F794: .4byte gPreventMovementTimer\n\
-_0807F798: .4byte gDisableDrawingSamusAndScrollingFlag\n\
-_0807F79C: .4byte gAtmosphericStabilizersOnline\n\
-_0807F7A0: .4byte gMissileGeronsDestroyed\n\
-_0807F7A4: .4byte gSuperMissileGeronsDestroyed\n\
-_0807F7A8: .4byte gPowerBombGeronsDestroyed\n\
-_0807F7AC: .4byte gGadorasDestroyed\n\
-_0807F7B0: .4byte gMissileHatchDestroyed\n\
-_0807F7B4: .4byte gWaterLowered\n\
-_0807F7B8: .4byte gInGameTimer\n\
-_0807F7BC: .4byte 0x085821F8\n\
-    .syntax divided\n");
+    s32 i;
+    u32* ptr;
+    s32 checksum;
+    struct SaveFile* pFile;
+    struct SaveMusicInfo musicInfo;
+
+    musicInfo.musicTrack = gMusicInfo.musicTrack;
+    musicInfo.unk_2 = gMusicInfo.unk_1E;
+    musicInfo.unk_4 = gMusicInfo.unk_20;
+    musicInfo.priority = gMusicInfo.priority;
+    musicInfo.unk_6 = gMusicInfo.unk_2;
+
+    pFile = (struct SaveFile*)sSaveDataEwramPointers[gMostRecentSaveFile];
+    Sram_StringCopy_MetroidEpisode4A(pFile->MetroidEpisode4A_Text, sSramMetroidEpisodeText);
+
+    pFile->checksum = 0;
+    pFile->notChecksum = -1;
+
+    pFile->gameCompletion = gGameCompletion;
+    pFile->hasSaved = gHasSaved;
+    pFile->currentArea = gCurrentArea;
+    pFile->currentRoom = gCurrentRoom;
+    pFile->lastDoorUsed = gLastDoorUsed;
+    pFile->abilityCount = gAbilityCount;
+    pFile->eventCounter = gEventCounter;
+    pFile->previousNavigationConversation = gPreviousNavigationConversation;
+    pFile->previousCutscene = gPreviousCutscene;
+    pFile->mapX = gMinimapX;
+    pFile->mapY = gMinimapY;
+    pFile->soundEventCounter = gSoundEventCounter;
+    pFile->previousSoundEvent = gPreviousSoundEvent;
+    pFile->unk_2A = gUnk_300004d;
+    pFile->securityHatchLevelBackup = gSecurityHatchLevelBackup;
+
+    pFile->camera = gCamera;
+    pFile->bg0XPosition = gBg0XPosition;
+    pFile->bg0YPosition = gBg0YPosition;
+    pFile->bg1XPosition = gBg1XPosition;
+    pFile->bg1YPosition = gBg1YPosition;
+    pFile->bg2XPosition = gBg2XPosition;
+    pFile->bg2YPosition = gBg2YPosition;
+    pFile->bg3XPosition = gBg3XPosition;
+    pFile->bg3YPosition = gBg3YPosition;
+
+    for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
+        pFile->numberOfNeverReformBlocksBroken[i] = gNumberOfNeverReformBlocks[i];
+
+    for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
+        pFile->numberOfItemsCollected[i] = gNumberOfCollectedTanks[i];
+
+    pFile->samusData = gSamusData;
+    pFile->samusAnimationInfo = gSamusAnimationInfo;
+    pFile->samusEcho = gSamusEcho;
+    pFile->environmentalEffects[0] = gSamusEnvironmentalEffects[0];
+    pFile->environmentalEffects[1] = gSamusEnvironmentalEffects[1];
+    pFile->equipment = gEquipment;
+    pFile->preventMovementTimer = gPreventMovementTimer;
+    pFile->disableDrawingSamusAndScrolling = gDisableDrawingSamusAndScrollingFlag;
+
+    pFile->atmosphericStabilizersOnline = gAtmosphericStabilizersOnline;
+    pFile->missileGeronsDestroyed = gMissileGeronsDestroyed;
+    pFile->superMissileGeronsDestroyed = gSuperMissileGeronsDestroyed;
+    pFile->powerBombGeronsDestroyed = gPowerBombGeronsDestroyed;
+    pFile->gadorasDestroyed = gGadorasDestroyed;
+    pFile->missileHatchDestroyed = gMissileHatchDestroyed;
+    pFile->waterLowered = gWaterLowered;
+    pFile->inGameTimer = gInGameTimer;
+    pFile->musicInfo = musicInfo;
+
+    Sram_StringCopy_SAVE_END(pFile->SAVE_END_Text, sSramSaveEndText);
+
+    ptr = (u32*)sSaveDataEwramPointers[gMostRecentSaveFile];
+    checksum = 0;
+    for (i = SRAM_GET_CHECKSUM_SIZE(struct SaveFile, 8, u32) - 1; i >= 0; i--)
+    {
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+        checksum += *ptr++;
+    }
+
+    pFile->checksum = checksum;
+    pFile->notChecksum = ~checksum;
 }
 
-// 0x0807F7C0
-NAKED_FUNCTION
+/**
+ * @brief 7f7c0 | 2e8 | Loads the current save file in ewram into the game state
+ * 
+ */
 void SramRead_FromEwram(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	sub sp, #0x2c\n\
-	ldr r1, _0807F9F8 @ =0x0858225C\n\
-	ldr r0, _0807F9FC @ =0x03000B8D\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r2, [r0]\n\
-	ldr r1, _0807FA00 @ =0x03000014\n\
-	ldr r0, [r2, #0x18]\n\
-	str r0, [r1]\n\
-	ldr r1, _0807FA04 @ =0x03000B90\n\
-	ldrb r0, [r2, #0x1c]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA08 @ =gCurrentArea\n\
-	ldrb r0, [r2, #0x1d]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA0C @ =gCurrentRoom\n\
-	ldrb r0, [r2, #0x1e]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA10 @ =gLastDoorUsed\n\
-	ldrb r0, [r2, #0x1f]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA14 @ =gAbilityCount\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x20\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA18 @ =gEventCounter\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x21\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA1C @ =gPreviousNavigationConversation\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x22\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA20 @ =gPreviousCutscene\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x23\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA24 @ =0x03000031\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x24\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA28 @ =0x03000032\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x25\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA2C @ =gSoundEventCounter\n\
-	ldrh r0, [r2, #0x26]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807FA30 @ =gPreviousSoundEvent\n\
-	ldrh r0, [r2, #0x28]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807FA34 @ =0x0300004D\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x2a\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA38 @ =gSecurityHatchLevelBackup\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x2b\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807FA3C @ =0x03000124\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x2c\n\
-	ldm r0!, {r3, r4, r5}\n\
-	stm r1!, {r3, r4, r5}\n\
-	ldm r0!, {r3, r4}\n\
-	stm r1!, {r3, r4}\n\
-	ldr r1, _0807FA40 @ =0x03001224\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x40\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807FA44 @ =0x03001226\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x42\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807FA48 @ =gBg1XPosition\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x44\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807FA4C @ =gBg1YPosition\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x46\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807FA50 @ =0x0300122C\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x48\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807FA54 @ =0x0300122E\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x4a\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807FA58 @ =0x03001230\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x4c\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	ldr r1, _0807FA5C @ =0x03001232\n\
-	adds r0, r2, #0\n\
-	adds r0, #0x4e\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	movs r3, #0\n\
-	ldr r5, _0807FA60 @ =gMusicInfo\n\
-	mov ip, r5\n\
-	ldr r5, _0807FA64 @ =0x03000033\n\
-	adds r4, r2, #0\n\
-	adds r4, #0x50\n\
-_0807F8BC:\n\
-	adds r0, r3, r5\n\
-	adds r1, r4, r3\n\
-	ldrb r1, [r1]\n\
-	strb r1, [r0]\n\
-	adds r3, #1\n\
-	cmp r3, #7\n\
-	ble _0807F8BC\n\
-	movs r3, #0\n\
-	adds r5, r2, #0\n\
-	adds r5, #0x60\n\
-	adds r6, r2, #0\n\
-	adds r6, #0x8c\n\
-	adds r7, r2, #0\n\
-	adds r7, #0x98\n\
-	movs r0, #0xa4\n\
-	adds r0, r0, r2\n\
-	mov r8, r0\n\
-	movs r1, #0xb4\n\
-	adds r1, r1, r2\n\
-	mov sb, r1\n\
-	movs r4, #0xc4\n\
-	adds r4, r4, r2\n\
-	mov sl, r4\n\
-	adds r0, r2, #0\n\
-	adds r0, #0xd4\n\
-	str r0, [sp]\n\
-	adds r1, r2, #0\n\
-	adds r1, #0xd6\n\
-	str r1, [sp, #4]\n\
-	adds r4, r2, #0\n\
-	adds r4, #0xd8\n\
-	str r4, [sp, #8]\n\
-	adds r0, #6\n\
-	str r0, [sp, #0xc]\n\
-	adds r1, #6\n\
-	str r1, [sp, #0x10]\n\
-	adds r4, #6\n\
-	str r4, [sp, #0x14]\n\
-	adds r0, #6\n\
-	str r0, [sp, #0x18]\n\
-	adds r1, #6\n\
-	str r1, [sp, #0x1c]\n\
-	adds r4, #5\n\
-	str r4, [sp, #0x20]\n\
-	adds r0, #4\n\
-	str r0, [sp, #0x24]\n\
-	adds r1, #6\n\
-	str r1, [sp, #0x28]\n\
-	ldr r4, _0807FA68 @ =0x0300003B\n\
-	adds r2, #0x58\n\
-_0807F920:\n\
-	adds r0, r3, r4\n\
-	adds r1, r2, r3\n\
-	ldrb r1, [r1]\n\
-	strb r1, [r0]\n\
-	adds r3, #1\n\
-	cmp r3, #7\n\
-	ble _0807F920\n\
-	ldr r1, _0807FA6C @ =gSamusData\n\
-	adds r0, r5, #0\n\
-	ldm r0!, {r2, r3, r4}\n\
-	stm r1!, {r2, r3, r4}\n\
-	ldm r0!, {r2, r3, r5}\n\
-	stm r1!, {r2, r3, r5}\n\
-	ldm r0!, {r2, r4, r5}\n\
-	stm r1!, {r2, r4, r5}\n\
-	ldm r0!, {r3, r4}\n\
-	stm r1!, {r3, r4}\n\
-	ldr r1, _0807FA70 @ =gSamusAnimationInfo\n\
-	adds r0, r6, #0\n\
-	ldm r0!, {r2, r3, r5}\n\
-	stm r1!, {r2, r3, r5}\n\
-	ldr r1, _0807FA74 @ =0x030012E4\n\
-	adds r0, r7, #0\n\
-	ldm r0!, {r2, r4, r5}\n\
-	stm r1!, {r2, r4, r5}\n\
-	ldr r1, _0807FA78 @ =0x030012F0\n\
-	mov r0, r8\n\
-	ldm r0!, {r3, r4, r5}\n\
-	stm r1!, {r3, r4, r5}\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-	ldr r1, _0807FA78 @ =0x030012F0\n\
-	adds r1, #0x10\n\
-	mov r0, sb\n\
-	ldm r0!, {r2, r3, r4}\n\
-	stm r1!, {r2, r3, r4}\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-	ldr r1, _0807FA7C @ =gEquipment\n\
-	mov r0, sl\n\
-	ldm r0!, {r2, r3, r5}\n\
-	stm r1!, {r2, r3, r5}\n\
-	ldr r0, [r0]\n\
-	str r0, [r1]\n\
-	ldr r4, [sp]\n\
-	ldrh r0, [r4]\n\
-	ldr r5, _0807FA80 @ =gPreventMovementTimer\n\
-	strh r0, [r5]\n\
-	ldr r1, [sp, #4]\n\
-	ldrb r0, [r1]\n\
-	ldr r2, _0807FA84 @ =gDisableDrawingSamusAndScrollingFlag\n\
-	strb r0, [r2]\n\
-	ldr r3, [sp, #8]\n\
-	ldrh r0, [r3]\n\
-	ldr r4, _0807FA88 @ =gAtmosphericStabilizersOnline\n\
-	strh r0, [r4]\n\
-	ldr r5, [sp, #0xc]\n\
-	ldrh r0, [r5]\n\
-	ldr r1, _0807FA8C @ =gMissileGeronsDestroyed\n\
-	strh r0, [r1]\n\
-	ldr r2, [sp, #0x10]\n\
-	ldrh r0, [r2]\n\
-	ldr r3, _0807FA90 @ =gSuperMissileGeronsDestroyed\n\
-	strh r0, [r3]\n\
-	ldr r4, [sp, #0x14]\n\
-	ldrh r0, [r4]\n\
-	ldr r5, _0807FA94 @ =gPowerBombGeronsDestroyed\n\
-	strh r0, [r5]\n\
-	ldr r1, [sp, #0x18]\n\
-	ldrh r0, [r1]\n\
-	ldr r2, _0807FA98 @ =gGadorasDestroyed\n\
-	strh r0, [r2]\n\
-	ldr r3, [sp, #0x1c]\n\
-	ldrb r0, [r3]\n\
-	ldr r4, _0807FA9C @ =gMissileHatchDestroyed\n\
-	strb r0, [r4]\n\
-	ldr r5, [sp, #0x20]\n\
-	ldrb r0, [r5]\n\
-	ldr r1, _0807FAA0 @ =gWaterLowered\n\
-	strb r0, [r1]\n\
-	ldr r2, [sp, #0x24]\n\
-	ldr r0, [r2]\n\
-	ldr r3, _0807FAA4 @ =gInGameTimer\n\
-	str r0, [r3]\n\
-	ldr r4, [sp, #0x28]\n\
-	ldr r0, [r4]\n\
-	ldr r1, [r4, #4]\n\
-	mov r5, ip\n\
-	strh r0, [r5, #0x1c]\n\
-	lsrs r2, r0, #0x10\n\
-	strh r2, [r5, #0x1e]\n\
-	mov r2, ip\n\
-	adds r2, #0x20\n\
-	strb r1, [r2]\n\
-	lsrs r2, r1, #8\n\
-	mov r3, ip\n\
-	adds r3, #0x21\n\
-	strb r2, [r3]\n\
-	lsrs r0, r1, #0x10\n\
-	strh r0, [r5, #2]\n\
-	add sp, #0x2c\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807F9F8: .4byte 0x0858225C\n\
-_0807F9FC: .4byte 0x03000B8D\n\
-_0807FA00: .4byte 0x03000014\n\
-_0807FA04: .4byte 0x03000B90\n\
-_0807FA08: .4byte gCurrentArea\n\
-_0807FA0C: .4byte gCurrentRoom\n\
-_0807FA10: .4byte gLastDoorUsed\n\
-_0807FA14: .4byte gAbilityCount\n\
-_0807FA18: .4byte gEventCounter\n\
-_0807FA1C: .4byte gPreviousNavigationConversation\n\
-_0807FA20: .4byte gPreviousCutscene\n\
-_0807FA24: .4byte 0x03000031\n\
-_0807FA28: .4byte 0x03000032\n\
-_0807FA2C: .4byte gSoundEventCounter\n\
-_0807FA30: .4byte gPreviousSoundEvent\n\
-_0807FA34: .4byte 0x0300004D\n\
-_0807FA38: .4byte gSecurityHatchLevelBackup\n\
-_0807FA3C: .4byte 0x03000124\n\
-_0807FA40: .4byte 0x03001224\n\
-_0807FA44: .4byte 0x03001226\n\
-_0807FA48: .4byte gBg1XPosition\n\
-_0807FA4C: .4byte gBg1YPosition\n\
-_0807FA50: .4byte 0x0300122C\n\
-_0807FA54: .4byte 0x0300122E\n\
-_0807FA58: .4byte 0x03001230\n\
-_0807FA5C: .4byte 0x03001232\n\
-_0807FA60: .4byte gMusicInfo\n\
-_0807FA64: .4byte 0x03000033\n\
-_0807FA68: .4byte 0x0300003B\n\
-_0807FA6C: .4byte gSamusData\n\
-_0807FA70: .4byte gSamusAnimationInfo\n\
-_0807FA74: .4byte 0x030012E4\n\
-_0807FA78: .4byte 0x030012F0\n\
-_0807FA7C: .4byte gEquipment\n\
-_0807FA80: .4byte gPreventMovementTimer\n\
-_0807FA84: .4byte gDisableDrawingSamusAndScrollingFlag\n\
-_0807FA88: .4byte gAtmosphericStabilizersOnline\n\
-_0807FA8C: .4byte gMissileGeronsDestroyed\n\
-_0807FA90: .4byte gSuperMissileGeronsDestroyed\n\
-_0807FA94: .4byte gPowerBombGeronsDestroyed\n\
-_0807FA98: .4byte gGadorasDestroyed\n\
-_0807FA9C: .4byte gMissileHatchDestroyed\n\
-_0807FAA0: .4byte gWaterLowered\n\
-_0807FAA4: .4byte gInGameTimer\n\
-    .syntax divided\n");
+    s32 i;
+    struct SaveFile* pFile;
+    struct SaveMusicInfo musicInfo;
+
+    pFile = (struct SaveFile*)sSaveDataEwramPointers[gMostRecentSaveFile];
+
+    gGameCompletion = pFile->gameCompletion;
+    gHasSaved = pFile->hasSaved;
+    gCurrentArea = pFile->currentArea;
+    gCurrentRoom = pFile->currentRoom;
+    gLastDoorUsed = pFile->lastDoorUsed;
+    gAbilityCount = pFile->abilityCount;
+    gEventCounter = pFile->eventCounter;
+    gPreviousNavigationConversation = pFile->previousNavigationConversation;
+    gPreviousCutscene = pFile->previousCutscene;
+    gMinimapX = pFile->mapX;
+    gMinimapY = pFile->mapY;
+    gSoundEventCounter = pFile->soundEventCounter;
+    gPreviousSoundEvent = pFile->previousSoundEvent;
+    gUnk_300004d = pFile->unk_2A;
+    gSecurityHatchLevelBackup = pFile->securityHatchLevelBackup;
+
+    gCamera = pFile->camera;
+    gBg0XPosition = pFile->bg0XPosition;
+    gBg0YPosition = pFile->bg0YPosition;
+    gBg1XPosition = pFile->bg1XPosition;
+    gBg1YPosition = pFile->bg1YPosition;
+    gBg2XPosition = pFile->bg2XPosition;
+    gBg2YPosition = pFile->bg2YPosition;
+    gBg3XPosition = pFile->bg3XPosition;
+    gBg3YPosition = pFile->bg3YPosition;
+
+    for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
+        gNumberOfNeverReformBlocks[i] = pFile->numberOfNeverReformBlocksBroken[i];
+
+    for (i = 0; i < MAX_AMOUNT_OF_AREAS; i++)
+        gNumberOfCollectedTanks[i] = pFile->numberOfItemsCollected[i];
+
+    gSamusData = pFile->samusData;
+    gSamusAnimationInfo = pFile->samusAnimationInfo;
+    gSamusEcho = pFile->samusEcho;
+    gSamusEnvironmentalEffects[0] = pFile->environmentalEffects[0];
+    gSamusEnvironmentalEffects[1] = pFile->environmentalEffects[1];
+    gEquipment = pFile->equipment;
+    gPreventMovementTimer = pFile->preventMovementTimer;
+    gDisableDrawingSamusAndScrollingFlag = pFile->disableDrawingSamusAndScrolling;
+
+    gAtmosphericStabilizersOnline = pFile->atmosphericStabilizersOnline;
+    gMissileGeronsDestroyed = pFile->missileGeronsDestroyed;
+    gSuperMissileGeronsDestroyed = pFile->superMissileGeronsDestroyed;
+    gPowerBombGeronsDestroyed = pFile->powerBombGeronsDestroyed;
+    gGadorasDestroyed = pFile->gadorasDestroyed;
+    gMissileHatchDestroyed = pFile->missileHatchDestroyed;
+    gWaterLowered = pFile->waterLowered;
+    gInGameTimer = pFile->inGameTimer;
+    musicInfo = pFile->musicInfo;
+
+    gMusicInfo.musicTrack = musicInfo.musicTrack;
+    gMusicInfo.unk_1E = musicInfo.unk_2;
+    gMusicInfo.unk_20 = musicInfo.unk_4;
+    gMusicInfo.priority = musicInfo.priority;
+    gMusicInfo.unk_2 = musicInfo.unk_6;
 }
 
 /**
