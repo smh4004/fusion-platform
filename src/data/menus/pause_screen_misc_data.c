@@ -566,7 +566,9 @@ const u8 sNavConversationPalTimers_57beb8[4] = { 7, 7, 7, 7 };
 
 const u8 sNavConversationPalTimers_57bebc[8] = { 8, 8, 8, 8, 8, 8, 8, 8 };
 
-static const u8 sBlob_57bec4_581300[] = INCBIN_U8("data/Blob_57bec4_581300.bin");
+const u16 sNavConversationSpecialPal[16 * 16] = INCBIN_U16("data/menus/pause_screen/nav_conversation_ship_room.pal");
+
+static const u8 sBlob_57c0c4_581300[] = INCBIN_U8("data/Blob_57c0c4_581300.bin");
 const u16 sNavConversationFlashingPal_581300[16][16] = {
     [0] = {
         0x0000, 0x7A73, 0x76F8, 0x4E38, 0x3704, 0x2A25, 0x02B5, 0x1FFF,

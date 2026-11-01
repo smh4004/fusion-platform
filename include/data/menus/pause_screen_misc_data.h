@@ -110,6 +110,8 @@ extern const u8 sNavConversationPalTimers_57beb4[4];
 extern const u8 sNavConversationPalTimers_57beb8[4];
 extern const u8 sNavConversationPalTimers_57bebc[8];
 
+extern const u16 sNavConversationSpecialPal[16 * 16];
+
 extern const u16 sNavConversationFlashingPal_581300[16][16];
 
 #include "structs/menus/pause_screen.h"
