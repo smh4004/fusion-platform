@@ -1,9 +1,25 @@
+#include "menus/file_select.h"
+#include "gba.h"
 #include "globals.h"
 #include "macros.h"
+#include "callbacks.h"
+#include "init_helpers.h"
+#include "music_wrappers.h"
+#include "audio_wrappers.h"
+#include "syscalls.h"
+
+#include "audio/track_internal.h"
+
+#include "data/menus/file_select_data.h"
+
+#include "constants/audio.h"
+#include "constants/game_state.h"
+
+#include "structs/save_file.h"
 
 // 0x0809E598
 NAKED_FUNCTION
-void FileSelectHandler(void)
+s8 FileSelectHandler(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, lr}\n\
@@ -606,7 +622,7 @@ void unk_9eaa4(void)
 
 // 0x0809EAB0
 NAKED_FUNCTION
-void FileSelectInput(void)
+u8 FileSelectInput(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -1952,7 +1968,7 @@ _0809F50A:\n\
 
 // 0x0809F518
 NAKED_FUNCTION
-void FileSelectSetupOam(void)
+u8 FileSelectSetupOam(u8 type, u16 xPosition, u16 yPosition, u8 unused)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -2472,7 +2488,7 @@ _0809F92C: .4byte unk_a0424\n\
 
 // 0x0809F930
 NAKED_FUNCTION
-void FileSelectProcessSamusHead(void)
+void FileSelectProcessSamusHead(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -2695,7 +2711,7 @@ _0809FACC:\n\
 
 // 0x0809FAD4
 NAKED_FUNCTION
-void FileSelectProcessCursor(void)
+void FileSelectProcessCursor(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -2920,7 +2936,7 @@ _0809FC8C: .4byte 0x08740B48\n\
 
 // 0x0809FC90
 NAKED_FUNCTION
-void FileSelectProcessDeleteArrow(void)
+void FileSelectProcessDeleteArrow(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -3100,7 +3116,7 @@ _0809FDD8: .4byte 0x00000207\n\
 
 // 0x0809FDDC
 NAKED_FUNCTION
-void unk_9fddc(void)
+void unk_9fddc(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -3252,7 +3268,7 @@ _0809FEF8:\n\
 
 // 0x0809FF00
 NAKED_FUNCTION
-void unk_9ff00(void)
+void unk_9ff00(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -3404,7 +3420,7 @@ _080A001C:\n\
 
 // 0x080A0024
 NAKED_FUNCTION
-void FileSelectProcessAudioLogos(void)
+void FileSelectProcessAudioLogos(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -3499,7 +3515,7 @@ _080A00E0: .4byte 0x087407F0\n\
 
 // 0x080A00E4
 NAKED_FUNCTION
-void FileSelectProcessAudioSelect(void)
+void FileSelectProcessAudioSelect(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -3555,7 +3571,7 @@ _080A0140:\n\
 
 // 0x080A0144
 NAKED_FUNCTION
-void FileSelectProcessFileOverlay(void)
+void FileSelectProcessFileOverlay(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -3582,7 +3598,7 @@ _080A0168: .4byte 0x0879E890\n\
 
 // 0x080A016C
 NAKED_FUNCTION
-void unk_a016c(void)
+void unk_a016c(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {lr}\n\
@@ -3641,7 +3657,7 @@ _080A01C6:\n\
 
 // 0x080A01CC
 NAKED_FUNCTION
-void unk_a01cc(void)
+void unk_a01cc(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	bx lr\n\
@@ -3651,7 +3667,7 @@ void unk_a01cc(void)
 
 // 0x080A01D0
 NAKED_FUNCTION
-void FileSelectProcessFileActionPanel(void)
+void FileSelectProcessFileActionPanel(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -3738,7 +3754,7 @@ _080A0266:\n\
 
 // 0x080A026C
 NAKED_FUNCTION
-void FileSelectProcessCopyFilePanel(void)
+void FileSelectProcessCopyFilePanel(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -3823,7 +3839,7 @@ _080A02FE:\n\
 
 // 0x080A0304
 NAKED_FUNCTION
-void FileSelectProcessEraseFilePanel(void)
+void FileSelectProcessEraseFilePanel(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -3908,7 +3924,7 @@ _080A0396:\n\
 
 // 0x080A039C
 NAKED_FUNCTION
-void unk_a039c(void)
+void unk_a039c(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -3983,7 +3999,7 @@ _080A041E:\n\
 
 // 0x080A0424
 NAKED_FUNCTION
-void unk_a0424(void)
+void unk_a0424(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -4114,7 +4130,7 @@ _080A0510:\n\
 
 // 0x080A0518
 NAKED_FUNCTION
-void unk_a0518(void)
+void unk_a0518(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	bx lr\n\
@@ -4124,7 +4140,7 @@ void unk_a0518(void)
 
 // 0x080A051C
 NAKED_FUNCTION
-void FileSelectDrawFileInfo(void)
+void FileSelectDrawFileInfo(u8 file)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -4772,7 +4788,7 @@ _080A0A38: .4byte 0x03000B94\n\
 
 // 0x080A0A3C
 NAKED_FUNCTION
-void FileSelectDrawText(void)
+void FileSelectDrawText(u8 textId)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -4948,7 +4964,7 @@ _080A0B80: .4byte gNonGameplayRam\n\
 
 // 0x080A0B84
 NAKED_FUNCTION
-void FileSelectProcessCorruptedFile(void)
+u8 FileSelectProcessCorruptedFile(void)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, lr}\n\
@@ -5262,7 +5278,7 @@ _080A0E00: .4byte gNonGameplayRam\n\
 
 // 0x080A0E04
 NAKED_FUNCTION
-void FileSelectDrawFileCorruptedText(void)
+void FileSelectDrawFileCorruptedText(u8 file)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -5408,7 +5424,7 @@ _080A0F14: .4byte gNonGameplayRam\n\
 
 // 0x080A0F18
 NAKED_FUNCTION
-void FileSelectDrawCorruptionText(void)
+void FileSelectDrawCorruptionText(u8 textId)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -5539,7 +5555,7 @@ _080A1004: .4byte gNonGameplayRam\n\
 
 // 0x080A1008
 NAKED_FUNCTION
-void FileSelectDestroyOamOfType(void)
+void FileSelectDestroyOamOfType(u8 type)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, lr}\n\
@@ -5576,7 +5592,7 @@ _080A1036:\n\
 
 // 0x080A103C
 NAKED_FUNCTION
-void FileSelectSetUpAreaNameOam(void)
+void FileSelectSetUpAreaNameOam(u8 type, s16 xPosition, s16 yPosition, s16 area)
 {
     asm(" .syntax unified\n\
 	push {r4, lr}\n\
@@ -5841,7 +5857,7 @@ _080A1244: .4byte gNextOamSlot\n\
 
 // 0x080A1248
 NAKED_FUNCTION
-void FileSelectDrawOam(void)
+void FileSelectDrawOam(struct FileSelectOam* pOam)
 {
     asm(" .syntax unified\n\
 	push {r4, r5, r6, r7, lr}\n\
@@ -6043,7 +6059,7 @@ _080A13CC: .4byte gNextOamSlot\n\
 
 // 0x080A13D0
 NAKED_FUNCTION
-void SetLanguage(void)
+boolu32 SetLanguage(u8 unused)
 {
     asm(" .syntax unified\n\
 	ldr r1, _080A13DC @ =0x03000011\n\
@@ -6143,7 +6159,7 @@ void unk_a1478(void)
 
 // 0x080A147C
 NAKED_FUNCTION
-void unk_a147c(void)
+boolu32 unk_a147c(void)
 {
     asm(" .syntax unified\n\
 	movs r0, #1\n\

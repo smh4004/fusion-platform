@@ -6,6 +6,7 @@
 #include "structs/menus/pause_screen.h"
 #include "structs/menus/title_screen.h"
 #include "structs/menus/game_over.h"
+#include "structs/menus/file_select.h"
 #include "structs/sa_x_close_up.h"
 #include "structs/ending.h"
 #include "structs/intro.h"
@@ -23,6 +24,7 @@ union NonGameplayRam {
     struct IntroData intro;
     struct EndingData ending;
     struct GameOverData gameOver;
+    struct FileSelectData fileSelect;
     u8 size[1344];
 };
 

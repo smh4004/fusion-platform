@@ -18,6 +18,7 @@
 #include "data/projectile_data.h"
 #include "data/audio.h"
 #include "data/menus/game_over_data.h"
+#include "data/menus/file_select_data.h"
 
 void unk_99940(void); // For V-blank callback
 u8 SpecialCutsceneGetRandomNumber(void);
@@ -345,7 +346,336 @@ const u32* sGameOverTextGfxPointers[LANGUAGE_COUNT] = {
     (const u32*)0x873baac
 };
 
-static u8 sBlob_79e890_79eca0[] = INCBIN_U8("data/Blob_79e890_79eca0.bin");
+const struct FrameData* sFileSelectFileOverlayOamPointers[5] = {
+    (const struct FrameData*)0x8740ab8,
+    (const struct FrameData*)0x8740ac8,
+    (const struct FrameData*)0x8740ad8,
+    (const struct FrameData*)0x87408c0,
+    (const struct FrameData*)0x87408c0
+};
+
+const struct FrameData* sFileSelectCursorOamPointers[3][3] = {
+    [0] = {
+        (const struct FrameData*)0x8740800,
+        (const struct FrameData*)0x8740800,
+        (const struct FrameData*)0x8740820
+    },
+    [1] = {
+        (const struct FrameData*)0x8740840,
+        (const struct FrameData*)0x8740840,
+        (const struct FrameData*)0x8740ae8
+    },
+    [2] = {
+        (const struct FrameData*)0x8740b08,
+        (const struct FrameData*)0x8740b28,
+        (const struct FrameData*)0x8740b28
+    }
+};
+
+const u16* sFileSelectAreaNameFrames_Default[6] = {
+    (const u16*)0x873dbcc,
+    (const u16*)0x873dbd8,
+    (const u16*)0x873dbde,
+    (const u16*)0x873dbde,
+    (const u16*)0x873dbde,
+    (const u16*)0x873dbe4
+};
+
+const u16* sFileSelectAreaNameFrames_German[6] = {
+    (const u16*)0x873dbea,
+    (const u16*)0x873dbf6,
+    (const u16*)0x873dbfc,
+    (const u16*)0x873dbfc,
+    (const u16*)0x873dbfc,
+    (const u16*)0x873dc02
+};
+
+const u16* sFileSelectAreaNameFrames_French[6] = {
+    (const u16*)0x873dc08,
+    (const u16*)0x873dbf6,
+    (const u16*)0x873dbfc,
+    (const u16*)0x873dbfc,
+    (const u16*)0x873dbfc,
+    (const u16*)0x873dc02
+};
+
+const u16* sFileSelectAreaNameFrames_Spanish[6] = {
+    (const u16*)0x873dc14,
+    (const u16*)0x873dbf6,
+    (const u16*)0x873dbfc,
+    (const u16*)0x873dbfc,
+    (const u16*)0x873dbfc,
+    (const u16*)0x873dc02
+};
+
+const u16* const* sFileSelectAreaNameFramesPointers[LANGUAGE_COUNT] = {
+    sFileSelectAreaNameFrames_Default,
+    sFileSelectAreaNameFrames_Default,
+    sFileSelectAreaNameFrames_German,
+    sFileSelectAreaNameFrames_German,
+    sFileSelectAreaNameFrames_French,
+    sFileSelectAreaNameFrames_German,
+    sFileSelectAreaNameFrames_Spanish
+};
+
+const struct FrameData* sFileSelectAreaNameOamPointers[LANGUAGE_COUNT][7] = {
+    [0] = {
+        (const struct FrameData*)0x8740a38,
+        (const struct FrameData*)0x87409d8,
+        (const struct FrameData*)0x87409e8,
+        (const struct FrameData*)0x87409f8,
+        (const struct FrameData*)0x8740a08,
+        (const struct FrameData*)0x8740a18,
+        (const struct FrameData*)0x8740a28
+    },
+    [1] = {
+        (const struct FrameData*)0x8740a38,
+        (const struct FrameData*)0x87409d8,
+        (const struct FrameData*)0x87409e8,
+        (const struct FrameData*)0x87409f8,
+        (const struct FrameData*)0x8740a08,
+        (const struct FrameData*)0x8740a18,
+        (const struct FrameData*)0x8740a28
+    },
+    [2] = {
+        (const struct FrameData*)0x8740a38,
+        (const struct FrameData*)0x87409d8,
+        (const struct FrameData*)0x87409e8,
+        (const struct FrameData*)0x87409f8,
+        (const struct FrameData*)0x8740a08,
+        (const struct FrameData*)0x8740a18,
+        (const struct FrameData*)0x8740a28
+    },
+    [3] = {
+        (const struct FrameData*)0x8740c08,
+        (const struct FrameData*)0x8740ba8,
+        (const struct FrameData*)0x8740bb8,
+        (const struct FrameData*)0x8740bc8,
+        (const struct FrameData*)0x8740bd8,
+        (const struct FrameData*)0x8740be8,
+        (const struct FrameData*)0x8740bf8
+    },
+    [4] = {
+        (const struct FrameData*)0x8740c78,
+        (const struct FrameData*)0x8740c18,
+        (const struct FrameData*)0x8740c28,
+        (const struct FrameData*)0x8740c38,
+        (const struct FrameData*)0x8740c48,
+        (const struct FrameData*)0x8740c58,
+        (const struct FrameData*)0x8740c68
+    },
+    [5] = {
+        (const struct FrameData*)0x8740ce8,
+        (const struct FrameData*)0x8740c88,
+        (const struct FrameData*)0x8740c98,
+        (const struct FrameData*)0x8740ca8,
+        (const struct FrameData*)0x8740cb8,
+        (const struct FrameData*)0x8740cc8,
+        (const struct FrameData*)0x8740cd8
+    },
+    [6] = {
+        (const struct FrameData*)0x8740cf8,
+        (const struct FrameData*)0x87409d8,
+        (const struct FrameData*)0x87409e8,
+        (const struct FrameData*)0x87409f8,
+        (const struct FrameData*)0x8740a08,
+        (const struct FrameData*)0x8740a18,
+        (const struct FrameData*)0x8740a28
+    }
+};
+
+const u16* sFileSelectTextPointers_Japanese[25] = {
+    (const u16*)0x8740f08,
+    (const u16*)0x8740f3a,
+    (const u16*)0x8740f64,
+    (const u16*)0x8740f82,
+    (const u16*)0x8740fc4,
+    (const u16*)0x8740ff4,
+    (const u16*)0x8741036,
+    (const u16*)0x8741078,
+    (const u16*)0x87410ba,
+    (const u16*)0x87410fc,
+    (const u16*)0x874113e,
+    (const u16*)0x8741180,
+    (const u16*)0x8741196,
+    (const u16*)0x874119e,
+    (const u16*)0x87411b2,
+    (const u16*)0x87411da,
+    (const u16*)0x87411fa,
+    (const u16*)0x874120e,
+    (const u16*)0x8741258,
+    (const u16*)0x8741280,
+    (const u16*)0x87412ce,
+    (const u16*)0x87412ec,
+    (const u16*)0x874130e,
+    (const u16*)0x8741334,
+    (const u16*)0x874134c
+};
+
+const u16* sFileSelectTextPointers_English[25] = {
+    (const u16*)0x8741364,
+    (const u16*)0x8741398,
+    (const u16*)0x87413ce,
+    (const u16*)0x8741410,
+    (const u16*)0x8741466,
+    (const u16*)0x874149c,
+    (const u16*)0x87414f6,
+    (const u16*)0x8741550,
+    (const u16*)0x87415aa,
+    (const u16*)0x874160e,
+    (const u16*)0x8741672,
+    (const u16*)0x87416d6,
+    (const u16*)0x87416ec,
+    (const u16*)0x874170a,
+    (const u16*)0x874171e,
+    (const u16*)0x8741746,
+    (const u16*)0x8741766,
+    (const u16*)0x874177a,
+    (const u16*)0x87417c4,
+    (const u16*)0x87417ee,
+    (const u16*)0x8741814,
+    (const u16*)0x8741830,
+    (const u16*)0x874185a,
+    (const u16*)0x8741884,
+    (const u16*)0x87418b4
+};
+
+const u16* sFileSelectTextPointers_German[25] = {
+    (const u16*)0x87418dc,
+    (const u16*)0x8741918,
+    (const u16*)0x8741946,
+    (const u16*)0x874197e,
+    (const u16*)0x87419d4,
+    (const u16*)0x8741a14,
+    (const u16*)0x8741a76,
+    (const u16*)0x8741ad8,
+    (const u16*)0x8741b3a,
+    (const u16*)0x8741b98,
+    (const u16*)0x8741bf6,
+    (const u16*)0x8741c54,
+    (const u16*)0x8741c6e,
+    (const u16*)0x8741c90,
+    (const u16*)0x8741cb2,
+    (const u16*)0x8741cdc,
+    (const u16*)0x8741d0a,
+    (const u16*)0x8741d28,
+    (const u16*)0x8741d50,
+    (const u16*)0x8741d82,
+    (const u16*)0x8741db2,
+    (const u16*)0x8741dd6,
+    (const u16*)0x8741df2,
+    (const u16*)0x8741e24,
+    (const u16*)0x8741e48
+};
+
+const u16* sFileSelectTextPointers_French[25] = {
+    (const u16*)0x8741e82,
+    (const u16*)0x8741ec4,
+    (const u16*)0x8741eee,
+    (const u16*)0x8741f32,
+    (const u16*)0x8741f80,
+    (const u16*)0x8741fbe,
+    (const u16*)0x874202a,
+    (const u16*)0x8742096,
+    (const u16*)0x8742102,
+    (const u16*)0x8742162,
+    (const u16*)0x87421c2,
+    (const u16*)0x8742222,
+    (const u16*)0x8742244,
+    (const u16*)0x8742270,
+    (const u16*)0x874229c,
+    (const u16*)0x87422c0,
+    (const u16*)0x87422f2,
+    (const u16*)0x8742318,
+    (const u16*)0x874234e,
+    (const u16*)0x8742362,
+    (const u16*)0x8742386,
+    (const u16*)0x87423aa,
+    (const u16*)0x87423d4,
+    (const u16*)0x87423f6,
+    (const u16*)0x8742420
+};
+
+const u16* sFileSelectTextPointers_Italian[25] = {
+    (const u16*)0x874244c,
+    (const u16*)0x8742486,
+    (const u16*)0x87424c0,
+    (const u16*)0x87424fe,
+    (const u16*)0x874254e,
+    (const u16*)0x8742586,
+    (const u16*)0x87425f2,
+    (const u16*)0x874265e,
+    (const u16*)0x87426ca,
+    (const u16*)0x874272e,
+    (const u16*)0x8742792,
+    (const u16*)0x87427f6,
+    (const u16*)0x874280c,
+    (const u16*)0x874282c,
+    (const u16*)0x8742840,
+    (const u16*)0x874286a,
+    (const u16*)0x874289e,
+    (const u16*)0x87428c4,
+    (const u16*)0x874290a,
+    (const u16*)0x8742938,
+    (const u16*)0x8742964,
+    (const u16*)0x8742982,
+    (const u16*)0x87429ac,
+    (const u16*)0x87429dc,
+    (const u16*)0x8742a00
+};
+
+const u16* sFileSelectTextPointers_Spanish[25] = {
+    (const u16*)0x8742a28,
+    (const u16*)0x8742a66,
+    (const u16*)0x8742a8e,
+    (const u16*)0x8742ac0,
+    (const u16*)0x8742b18,
+    (const u16*)0x8742b50,
+    (const u16*)0x8742baa,
+    (const u16*)0x8742c04,
+    (const u16*)0x8742c5e,
+    (const u16*)0x8742cba,
+    (const u16*)0x8742d16,
+    (const u16*)0x8742d74,
+    (const u16*)0x8742d8a,
+    (const u16*)0x8742da2,
+    (const u16*)0x8742dc8,
+    (const u16*)0x8742de4,
+    (const u16*)0x8742df8,
+    (const u16*)0x8742e18,
+    (const u16*)0x8742e4c,
+    (const u16*)0x8742e7c,
+    (const u16*)0x8742e9c,
+    (const u16*)0x8742ec6,
+    (const u16*)0x8742eee,
+    (const u16*)0x8742f14,
+    (const u16*)0x8742f42
+};
+
+const u16* sFileSelectCorruptedTextPointers[2] = {
+    (const u16*)0x8742f66,
+    (const u16*)0x8742f7a
+};
+
+const u16** sFileSelectTextPointers[LANGUAGE_COUNT] = {
+    sFileSelectTextPointers_Japanese,
+    sFileSelectTextPointers_Japanese,
+    sFileSelectTextPointers_English,
+    sFileSelectTextPointers_German,
+    sFileSelectTextPointers_French,
+    sFileSelectTextPointers_Italian,
+    sFileSelectTextPointers_Spanish
+};
+
+const u16** sFileSelectCorruptedTextPointersByLanguage[LANGUAGE_COUNT] = {
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers
+};
 
 /**
  * @brief 87610 | f8 | Handler for the title intro
