@@ -93,7 +93,7 @@ static u8 sPauseScreenTankCheckMarkOamInfo[TANK_NUM_COUNT][PAUSE_OAM_INFO_COUNT]
     }
 };
 
-static const u8* sPauseDebugItemFlagsPointers[5] = {
+const u8* sPauseDebugItemFlagsPointers[5] = {
     sPauseDebugBeamFlags,
     sPauseDebugMissileFlags,
     sPauseDebugBombFlags,

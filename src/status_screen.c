@@ -9,6 +9,13 @@
 
 #include "structs/samus.h"
 
+#include "data/menus/pause_screen_misc_data.h"
+
+#define STATUS_SCREEN_TILEMAP ((u16*)(VRAM_BASE + 0xC800))
+
+// Defined in pause_screen.c
+extern const u8* sPauseDebugItemFlagsPointers[5];
+
 /**
  * @brief 7e678 | 34 | Handler for the status screen
  * 
