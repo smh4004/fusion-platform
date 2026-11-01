@@ -2343,184 +2343,106 @@ void FileSelectProcessCursor(struct FileSelectOam* pOam)
     }
 }
 
-// 0x0809FC90
-NAKED_FUNCTION
+/**
+ * @brief 9fc90 | 14c | TODO
+ * 
+ */
 void FileSelectProcessDeleteArrow(struct FileSelectOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	adds r4, r0, #0\n\
-	movs r7, #0\n\
-	movs r6, #0\n\
-	ldrb r0, [r4, #9]\n\
-	cmp r0, #0\n\
-	bne _0809FD7C\n\
-	movs r0, #1\n\
-	strb r0, [r4, #5]\n\
-	ldr r1, _0809FCD0 @ =gChangedInput\n\
-	ldrh r2, [r1]\n\
-	movs r0, #0x40\n\
-	ands r0, r2\n\
-	mov ip, r1\n\
-	cmp r0, #0\n\
-	beq _0809FCDC\n\
-	ldr r0, _0809FCD4 @ =gNonGameplayRam\n\
-	ldrb r1, [r0, #0xf]\n\
-	adds r5, r0, #0\n\
-	cmp r1, #0\n\
-	beq _0809FCC0\n\
-	subs r0, r1, #1\n\
-	strb r0, [r5, #0xf]\n\
-	movs r6, #1\n\
-_0809FCC0:\n\
-	ldrb r0, [r5, #0xf]\n\
-	ldrb r1, [r5, #0xd]\n\
-	cmp r1, r0\n\
-	bne _0809FD12\n\
-	cmp r1, #0\n\
-	bne _0809FCD8\n\
-	adds r0, #1\n\
-	b _0809FD00\n\
-	.align 2, 0\n\
-_0809FCD0: .4byte gChangedInput\n\
-_0809FCD4: .4byte gNonGameplayRam\n\
-_0809FCD8:\n\
-	subs r0, #1\n\
-	b _0809FD0E\n\
-_0809FCDC:\n\
-	movs r0, #0x80\n\
-	ands r0, r2\n\
-	ldr r5, _0809FD08 @ =gNonGameplayRam\n\
-	cmp r0, #0\n\
-	beq _0809FD12\n\
-	ldrb r0, [r5, #0xf]\n\
-	cmp r0, #1\n\
-	bhi _0809FCF2\n\
-	adds r0, #1\n\
-	strb r0, [r5, #0xf]\n\
-	movs r6, #1\n\
-_0809FCF2:\n\
-	ldrb r0, [r5, #0xf]\n\
-	ldrb r1, [r5, #0xd]\n\
-	cmp r1, r0\n\
-	bne _0809FD12\n\
-	cmp r1, #2\n\
-	bne _0809FD0C\n\
-	subs r0, #1\n\
-_0809FD00:\n\
-	strb r0, [r5, #0xf]\n\
-	movs r6, #0\n\
-	b _0809FD12\n\
-	.align 2, 0\n\
-_0809FD08: .4byte gNonGameplayRam\n\
-_0809FD0C:\n\
-	adds r0, #1\n\
-_0809FD0E:\n\
-	strb r0, [r5, #0xf]\n\
-	movs r6, #1\n\
-_0809FD12:\n\
-	ldr r3, _0809FD70 @ =0x0879E8A4\n\
-	adds r2, r5, #0\n\
-	ldrb r1, [r2, #0xd]\n\
-	lsls r0, r1, #1\n\
-	adds r0, r0, r1\n\
-	ldrb r2, [r2, #0xf]\n\
-	adds r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r3\n\
-	ldr r0, [r0]\n\
-	str r0, [r4, #0x14]\n\
-	mov r0, ip\n\
-	ldrh r1, [r0]\n\
-	movs r0, #2\n\
-	ands r0, r1\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r2, r0, #0x10\n\
-	cmp r2, #0\n\
-	bne _0809FD88\n\
-	movs r0, #9\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _0809FDA4\n\
-	strb r2, [r4, #7]\n\
-	strb r2, [r4, #6]\n\
-	movs r0, #1\n\
-	strb r0, [r4, #9]\n\
-	ldr r2, _0809FD74 @ =0x03000B94\n\
-	ldrb r1, [r5, #0xf]\n\
-	lsls r0, r1, #2\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r2, r0, r2\n\
-	movs r0, #0x10\n\
-	ldrsb r0, [r2, r0]\n\
-	cmp r0, #1\n\
-	beq _0809FD6A\n\
-	movs r0, #0x11\n\
-	ldrsb r0, [r2, r0]\n\
-	cmp r0, #1\n\
-	beq _0809FD6A\n\
-	ldrb r0, [r2]\n\
-	cmp r0, #1\n\
-	bne _0809FD78\n\
-_0809FD6A:\n\
-	movs r7, #1\n\
-	b _0809FDA4\n\
-	.align 2, 0\n\
-_0809FD70: .4byte 0x0879E8A4\n\
-_0809FD74: .4byte 0x03000B94\n\
-_0809FD78:\n\
-	movs r7, #2\n\
-	b _0809FDA4\n\
-_0809FD7C:\n\
-	cmp r0, #1\n\
-	bne _0809FD94\n\
-	ldr r0, _0809FD90 @ =gNonGameplayRam\n\
-	ldrb r0, [r0, #0xc]\n\
-	cmp r0, #0xb\n\
-	bne _0809FDA4\n\
-_0809FD88:\n\
-	movs r0, #0x64\n\
-	strb r0, [r4, #9]\n\
-	b _0809FDA4\n\
-	.align 2, 0\n\
-_0809FD90: .4byte gNonGameplayRam\n\
-_0809FD94:\n\
-	ldr r0, _0809FDBC @ =gNonGameplayRam\n\
-	movs r1, #0xa\n\
-	ldrsh r0, [r0, r1]\n\
-	cmp r0, #0x11\n\
-	bne _0809FDA4\n\
-	strb r7, [r4, #7]\n\
-	strb r7, [r4, #6]\n\
-	strb r7, [r4, #9]\n\
-_0809FDA4:\n\
-	cmp r6, #0\n\
-	beq _0809FDAE\n\
-	ldr r0, _0809FDC0 @ =0x000001F9\n\
-	bl SoundPlay\n\
-_0809FDAE:\n\
-	cmp r7, #1\n\
-	bne _0809FDC8\n\
-	ldr r0, _0809FDC4 @ =0x000001FB\n\
-	bl SoundPlay\n\
-	b _0809FDD2\n\
-	.align 2, 0\n\
-_0809FDBC: .4byte gNonGameplayRam\n\
-_0809FDC0: .4byte 0x000001F9\n\
-_0809FDC4: .4byte 0x000001FB\n\
-_0809FDC8:\n\
-	cmp r7, #2\n\
-	bne _0809FDD2\n\
-	ldr r0, _0809FDD8 @ =0x00000207\n\
-	bl SoundPlay\n\
-_0809FDD2:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809FDD8: .4byte 0x00000207\n\
-    .syntax divided\n");
+    s32 moved;
+    s32 playSound;
+    u16 cancel;
+
+    playSound = 0;
+    moved = FALSE;
+
+    if (pOam->action == 0)
+    {
+        pOam->isDrawn = TRUE;
+        if (gChangedInput & KEY_UP)
+        {
+            if (FILE_SELECT_DATA.unk_F != 0)
+            {
+                FILE_SELECT_DATA.unk_F--;
+                moved = TRUE;
+            }
+
+            if (FILE_SELECT_DATA.currentFile == FILE_SELECT_DATA.unk_F)
+            {
+                if (FILE_SELECT_DATA.currentFile == 0)
+                {
+                    FILE_SELECT_DATA.unk_F++;
+                    moved = FALSE;
+                }
+                else
+                {
+                    FILE_SELECT_DATA.unk_F--;
+                    moved = TRUE;
+                }
+            }
+        }
+        else if (gChangedInput & KEY_DOWN)
+        {
+            if (FILE_SELECT_DATA.unk_F <= 1)
+            {
+                FILE_SELECT_DATA.unk_F++;
+                moved = TRUE;
+            }
+
+            if (FILE_SELECT_DATA.currentFile == FILE_SELECT_DATA.unk_F)
+            {
+                if (FILE_SELECT_DATA.currentFile == 2)
+                {
+                    FILE_SELECT_DATA.unk_F--;
+                    moved = FALSE;
+                }
+                else
+                {
+                    FILE_SELECT_DATA.unk_F++;
+                    moved = TRUE;
+                }
+            }
+        }
+
+        pOam->pOam = sFileSelectCursorOamPointers[FILE_SELECT_DATA.currentFile][FILE_SELECT_DATA.unk_F];
+
+        if ((cancel = gChangedInput & KEY_B))
+        {
+            pOam->action = 100;
+        }
+        else if (gChangedInput & (KEY_A | KEY_START))
+        {
+            pOam->animationDurationCounter = cancel;
+            pOam->currentAnimationFrame = cancel;
+            pOam->action = 1;
+
+            if (gSaveFilesInfo[FILE_SELECT_DATA.unk_F].completedGame == TRUE ||
+                gSaveFilesInfo[FILE_SELECT_DATA.unk_F].introPlayed == TRUE ||
+                gSaveFilesInfo[FILE_SELECT_DATA.unk_F].exists == TRUE)
+                playSound = 1;
+            else
+                playSound = 2;
+        }
+    }
+    else if (pOam->action == 1)
+    {
+        if (FILE_SELECT_DATA.stage == 11)
+            pOam->action = 100;
+    }
+    else if (FILE_SELECT_DATA.menuState == 0x11)
+    {
+        pOam->animationDurationCounter = playSound;
+        pOam->currentAnimationFrame = playSound;
+        pOam->action = playSound;
+    }
+
+    if (moved)
+        SoundPlay(0x1F9);
+
+    if (playSound == 1)
+        SoundPlay(0x1FB);
+    else if (playSound == 2)
+        SoundPlay(0x207);
 }
 
 /**
