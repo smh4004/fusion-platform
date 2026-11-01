@@ -118,8 +118,6 @@ static s8 sMainDeckDiagramTargetOffsets[8][3] = {
 static u8 sBlob_79c228_79c27c[] = INCBIN_U8("data/Blob_79c228_79c27c.bin");
 
 // 0x08079AFC
-#define gLanguage_ (*(vs8*)&gLanguage)
-#define gLanguage_ (*(vs8*)0x3000011)
 NAKED_FUNCTION
 void NavigationConversationProcessText(void)
 {
@@ -925,8 +923,6 @@ _0807A0F8: .4byte gNonGameplayRam\n\
 }
 
 // 0x0807A0FC
-#define gLanguage_ (*(vs8*)0x3000011)
-#define gLanguage_ (*(vs8*)0x3000011)
 NAKED_FUNCTION
 u8 unk_7a0fc(u8 arg0)
 {
