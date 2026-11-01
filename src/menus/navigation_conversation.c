@@ -17,10 +17,13 @@
 #include "structs/display.h"
 #include "structs/event.h"
 #include "structs/menus/pause_screen.h"
+#include "structs/minimap.h"
 
 #include "audio_wrappers.h"
 #include "dma.h"
 #include "io.h"
+#include "menus/pause_screen.h"
+#include "menus/pause_screen_map.h"
 #include "oam_id.h"
 #include "syscalls.h"
 #include "text.h"
@@ -3157,7 +3160,7 @@ _0807B4BC:\n\
  * @brief 7b4c4 | a8 | Scrolls the map towards a destination, returns whether it reached it
  * 
  */
-u8 NavigationConversationScrollMapToDestination(u8 x, u8 y)
+bools32 NavigationConversationScrollMapToDestination(u8 x, u8 y)
 {
     s32 ended;
     s32 targetX;

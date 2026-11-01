@@ -11,7 +11,7 @@ void NavigationConversationSetupOam(void);
 void NavigationConversationUpdateTarget(u8 updateOam);
 bools32 NavigationConverstionFindTarget(void);
 void NavigationConversionScrollToTarget(void);
-u8 NavigationConversationScrollMapToDestination(u8 x, u8 y);
+bools32 NavigationConversationScrollMapToDestination(u8 x, u8 y);
 void unk_7b56c(void);
 void unk_7b674(void);
 void ProcessPauseScreenText(void);
