@@ -923,6 +923,7 @@ _0807A0F8: .4byte gNonGameplayRam\n\
 }
 
 // 0x0807A0FC
+
 NAKED_FUNCTION
 u8 unk_7a0fc(u8 arg0)
 {
