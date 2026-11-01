@@ -20,6 +20,7 @@
 
 // TODO move to the save file header once that code is decompiled
 void Sram_WriteFileInfo(void);
+void Sram_SetCurrentFile(u8 file);
 
 /**
  * @brief 9e598 | 1b8 | TODO
@@ -3710,318 +3711,132 @@ void FileSelectDrawText(u8 textId)
     }
 }
 
-// 0x080A0B84
-NAKED_FUNCTION
+/**
+ * @brief a0b84 | 280 | TODO
+ * 
+ */
 boolu32 FileSelectProcessCorruptedFile(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	sub sp, #4\n\
-	movs r5, #0\n\
-	bl FileSelectProcessOam\n\
-	ldr r0, _080A0BA4 @ =gNonGameplayRam\n\
-	ldrb r0, [r0, #0x14]\n\
-	cmp r0, #7\n\
-	bls _080A0B98\n\
-	b _080A0DF0\n\
-_080A0B98:\n\
-	lsls r0, r0, #2\n\
-	ldr r1, _080A0BA8 @ =_080A0BAC\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_080A0BA4: .4byte gNonGameplayRam\n\
-_080A0BA8: .4byte _080A0BAC\n\
-_080A0BAC: @ jump table\n\
-	.4byte _080A0BCC @ case 0\n\
-	.4byte _080A0C64 @ case 1\n\
-	.4byte _080A0C8A @ case 2\n\
-	.4byte _080A0CCC @ case 3\n\
-	.4byte _080A0CF8 @ case 4\n\
-	.4byte _080A0D60 @ case 5\n\
-	.4byte _080A0DA4 @ case 6\n\
-	.4byte _080A0DE8 @ case 7\n\
-_080A0BCC:\n\
-	ldr r1, _080A0BE4 @ =gNonGameplayRam\n\
-	ldrb r0, [r1, #0xc]\n\
-	adds r0, #1\n\
-	strb r0, [r1, #0xc]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #1\n\
-	bne _080A0BE8\n\
-	movs r0, #1\n\
-	bl FileSelectDrawText\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0BE4: .4byte gNonGameplayRam\n\
-_080A0BE8:\n\
-	cmp r0, #2\n\
-	bne _080A0C08\n\
-	ldr r0, _080A0BFC @ =0x03000B94\n\
-	ldrb r0, [r0, #1]\n\
-	cmp r0, #0\n\
-	bne _080A0C00\n\
-	movs r0, #0\n\
-	bl FileSelectDrawFileInfo\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0BFC: .4byte 0x03000B94\n\
-_080A0C00:\n\
-	movs r0, #0\n\
-	bl FileSelectDrawFileCorruptedText\n\
-	b _080A0DF0\n\
-_080A0C08:\n\
-	cmp r0, #3\n\
-	bne _080A0C28\n\
-	ldr r0, _080A0C1C @ =0x03000B94\n\
-	ldrb r0, [r0, #0x15]\n\
-	cmp r0, #0\n\
-	bne _080A0C20\n\
-	movs r0, #1\n\
-	bl FileSelectDrawFileInfo\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0C1C: .4byte 0x03000B94\n\
-_080A0C20:\n\
-	movs r0, #1\n\
-	bl FileSelectDrawFileCorruptedText\n\
-	b _080A0DF0\n\
-_080A0C28:\n\
-	cmp r0, #4\n\
-	beq _080A0C2E\n\
-	b _080A0DF0\n\
-_080A0C2E:\n\
-	ldr r0, _080A0C40 @ =0x03000B94\n\
-	adds r0, #0x29\n\
-	ldrb r0, [r0]\n\
-	cmp r0, #0\n\
-	bne _080A0C44\n\
-	movs r0, #2\n\
-	bl FileSelectDrawFileInfo\n\
-	b _080A0C4A\n\
-	.align 2, 0\n\
-_080A0C40: .4byte 0x03000B94\n\
-_080A0C44:\n\
-	movs r0, #2\n\
-	bl FileSelectDrawFileCorruptedText\n\
-_080A0C4A:\n\
-	ldr r2, _080A0C5C @ =gNonGameplayRam\n\
-	movs r0, #0\n\
-	strb r0, [r2, #0xc]\n\
-	ldr r1, _080A0C60 @ =gWrittenToBldy\n\
-	movs r0, #0xe\n\
-	strh r0, [r1]\n\
-	movs r0, #1\n\
-	strb r0, [r2, #0x14]\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0C5C: .4byte gNonGameplayRam\n\
-_080A0C60: .4byte gWrittenToBldy\n\
-_080A0C64:\n\
-	ldr r1, _080A0C74 @ =gWrittenToBldy\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0\n\
-	beq _080A0C78\n\
-	subs r0, #1\n\
-	strh r0, [r1]\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0C74: .4byte gWrittenToBldy\n\
-_080A0C78:\n\
-	ldr r1, _080A0C80 @ =gNonGameplayRam\n\
-	movs r0, #2\n\
-	strb r0, [r1, #0x14]\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0C80: .4byte gNonGameplayRam\n\
-_080A0C84:\n\
-	movs r0, #3\n\
-	strb r0, [r4, #0x14]\n\
-	b _080A0CB4\n\
-_080A0C8A:\n\
-	ldr r0, _080A0CC4 @ =gNonGameplayRam\n\
-	ldrb r1, [r0, #0x15]\n\
-	adds r4, r0, #0\n\
-	cmp r1, #2\n\
-	bhi _080A0CB4\n\
-	ldr r3, _080A0CC8 @ =0x03000B94\n\
-	adds r2, r4, #0\n\
-_080A0C98:\n\
-	ldrb r1, [r2, #0x15]\n\
-	lsls r0, r1, #2\n\
-	adds r0, r0, r1\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r3\n\
-	ldrb r0, [r0, #1]\n\
-	cmp r0, #0\n\
-	bne _080A0C84\n\
-	adds r0, r1, #1\n\
-	strb r0, [r4, #0x15]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #2\n\
-	bls _080A0C98\n\
-_080A0CB4:\n\
-	ldrb r0, [r4, #0x15]\n\
-	cmp r0, #3\n\
-	beq _080A0CBC\n\
-	b _080A0DF0\n\
-_080A0CBC:\n\
-	movs r0, #7\n\
-	strb r0, [r4, #0x14]\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0CC4: .4byte gNonGameplayRam\n\
-_080A0CC8: .4byte 0x03000B94\n\
-_080A0CCC:\n\
-	ldr r1, _080A0CF4 @ =gNonGameplayRam\n\
-	ldrb r0, [r1, #0xc]\n\
-	adds r0, #1\n\
-	strb r0, [r1, #0xc]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #0xa\n\
-	beq _080A0CDE\n\
-	b _080A0DF0\n\
-_080A0CDE:\n\
-	movs r0, #4\n\
-	strb r0, [r1, #0x14]\n\
-	movs r0, #0\n\
-	strb r0, [r1, #0xc]\n\
-	movs r0, #0x11\n\
-	movs r1, #0x7a\n\
-	movs r2, #0x44\n\
-	movs r3, #0\n\
-	bl FileSelectSetupOam\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0CF4: .4byte gNonGameplayRam\n\
-_080A0CF8:\n\
-	ldr r2, _080A0D14 @ =0x03000B94\n\
-	ldr r1, _080A0D18 @ =gNonGameplayRam\n\
-	ldrb r3, [r1, #0x15]\n\
-	lsls r0, r3, #2\n\
-	adds r0, r0, r3\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r2\n\
-	ldrb r0, [r0, #1]\n\
-	adds r4, r1, #0\n\
-	cmp r0, #1\n\
-	bne _080A0D1C\n\
-	adds r0, r3, #5\n\
-	b _080A0D20\n\
-	.align 2, 0\n\
-_080A0D14: .4byte 0x03000B94\n\
-_080A0D18: .4byte gNonGameplayRam\n\
-_080A0D1C:\n\
-	adds r0, r3, #0\n\
-	adds r0, #8\n\
-_080A0D20:\n\
-	strh r0, [r4, #8]\n\
-	ldr r1, _080A0D58 @ =0x0879EC68\n\
-	ldr r0, _080A0D5C @ =0x03000011\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldrh r1, [r4, #8]\n\
-	ldr r0, [r0]\n\
-	lsls r1, r1, #2\n\
-	adds r1, r1, r0\n\
-	ldr r0, [r1]\n\
-	str r0, [r4, #4]\n\
-	movs r0, #2\n\
-	bl FileSelectDrawCorruptionText\n\
-	movs r0, #0xa\n\
-	movs r1, #0x78\n\
-	movs r2, #0x64\n\
-	movs r3, #0\n\
-	bl FileSelectSetupOam\n\
-	movs r0, #3\n\
-	strb r0, [r4, #0x11]\n\
-	movs r0, #5\n\
-	strb r0, [r4, #0x14]\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0D58: .4byte 0x0879EC68\n\
-_080A0D5C: .4byte 0x03000011\n\
-_080A0D60:\n\
-	ldr r0, _080A0D98 @ =gChangedInput\n\
-	ldrh r1, [r0]\n\
-	movs r0, #3\n\
-	ands r0, r1\n\
-	cmp r0, #0\n\
-	beq _080A0DF0\n\
-	movs r0, #0xa\n\
-	bl FileSelectDestroyOamOfType\n\
-	movs r0, #0x11\n\
-	bl FileSelectDestroyOamOfType\n\
-	ldr r0, _080A0D9C @ =0x000001FB\n\
-	bl SoundPlay\n\
-	ldr r4, _080A0DA0 @ =gNonGameplayRam\n\
-	movs r0, #4\n\
-	strb r0, [r4, #0x11]\n\
-	ldrb r0, [r4, #0x15]\n\
-	bl Sram_SetCurrentFile\n\
-	ldrb r0, [r4, #0x15]\n\
-	bl FileSelectDrawFileInfo\n\
-	movs r0, #6\n\
-	strb r0, [r4, #0x14]\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0D98: .4byte gChangedInput\n\
-_080A0D9C: .4byte 0x000001FB\n\
-_080A0DA0: .4byte gNonGameplayRam\n\
-_080A0DA4:\n\
-	ldr r1, _080A0DCC @ =gNonGameplayRam\n\
-	ldrb r0, [r1, #0xc]\n\
-	adds r0, #1\n\
-	movs r2, #0\n\
-	strb r0, [r1, #0xc]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #1\n\
-	bne _080A0DDC\n\
-	str r2, [sp]\n\
-	ldr r1, _080A0DD0 @ =0x040000D4\n\
-	mov r0, sp\n\
-	str r0, [r1]\n\
-	ldr r0, _080A0DD4 @ =0x0600B000\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _080A0DD8 @ =0x85000600\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	b _080A0DF0\n\
-	.align 2, 0\n\
-_080A0DCC: .4byte gNonGameplayRam\n\
-_080A0DD0: .4byte 0x040000D4\n\
-_080A0DD4: .4byte 0x0600B000\n\
-_080A0DD8: .4byte 0x85000600\n\
-_080A0DDC:\n\
-	cmp r0, #0xa\n\
-	bne _080A0DF0\n\
-	movs r0, #2\n\
-	strb r0, [r1, #0x14]\n\
-	strb r2, [r1, #0xc]\n\
-	b _080A0DF0\n\
-_080A0DE8:\n\
-	ldr r1, _080A0E00 @ =gNonGameplayRam\n\
-	movs r0, #0\n\
-	strb r0, [r1, #0xc]\n\
-	movs r5, #1\n\
-_080A0DF0:\n\
-	bl FileSelectDrawAllOam\n\
-	adds r0, r5, #0\n\
-	add sp, #4\n\
-	pop {r4, r5}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_080A0E00: .4byte gNonGameplayRam\n\
-    .syntax divided\n");
+    boolu32 ended;
+
+    ended = FALSE;
+    FileSelectProcessOam();
+
+    switch (FILE_SELECT_DATA.corruptedStage)
+    {
+        case 0:
+            FILE_SELECT_DATA.stage++;
+            if (FILE_SELECT_DATA.stage == 1)
+            {
+                FileSelectDrawText(1);
+            }
+            else if (FILE_SELECT_DATA.stage == 2)
+            {
+                if (gSaveFilesInfo[0].corruptionFlag == 0)
+                    FileSelectDrawFileInfo(0);
+                else
+                    FileSelectDrawFileCorruptedText(0);
+            }
+            else if (FILE_SELECT_DATA.stage == 3)
+            {
+                if (gSaveFilesInfo[1].corruptionFlag == 0)
+                    FileSelectDrawFileInfo(1);
+                else
+                    FileSelectDrawFileCorruptedText(1);
+            }
+            else if (FILE_SELECT_DATA.stage == 4)
+            {
+                if (gSaveFilesInfo[2].corruptionFlag == 0)
+                    FileSelectDrawFileInfo(2);
+                else
+                    FileSelectDrawFileCorruptedText(2);
+
+                FILE_SELECT_DATA.stage = 0;
+                gWrittenToBldy = 14;
+                FILE_SELECT_DATA.corruptedStage = 1;
+            }
+            break;
+
+        case 1:
+            if (gWrittenToBldy != 0)
+                gWrittenToBldy--;
+            else
+                FILE_SELECT_DATA.corruptedStage = 2;
+            break;
+
+        case 2:
+            while (FILE_SELECT_DATA.corruptedFile <= 2)
+            {
+                if (gSaveFilesInfo[FILE_SELECT_DATA.corruptedFile].corruptionFlag != 0)
+                {
+                    FILE_SELECT_DATA.corruptedStage = 3;
+                    break;
+                }
+
+                FILE_SELECT_DATA.corruptedFile++;
+            }
+
+            if (FILE_SELECT_DATA.corruptedFile == 3)
+                FILE_SELECT_DATA.corruptedStage = 7;
+            break;
+
+        case 3:
+            FILE_SELECT_DATA.stage++;
+            if (FILE_SELECT_DATA.stage == 10)
+            {
+                FILE_SELECT_DATA.corruptedStage = 4;
+                FILE_SELECT_DATA.stage = 0;
+                FileSelectSetupOam(17, 122, 68, 0);
+            }
+            break;
+
+        case 4:
+            if (gSaveFilesInfo[FILE_SELECT_DATA.corruptedFile].corruptionFlag == 1)
+                FILE_SELECT_DATA.textId = FILE_SELECT_DATA.corruptedFile + 5;
+            else
+                FILE_SELECT_DATA.textId = FILE_SELECT_DATA.corruptedFile + 8;
+
+            FILE_SELECT_DATA.pText = sFileSelectTextPointers[gLanguage][FILE_SELECT_DATA.textId];
+            FileSelectDrawCorruptionText(2);
+            FileSelectSetupOam(10, 120, 100, 0);
+            FILE_SELECT_DATA.bgToggle = 3;
+            FILE_SELECT_DATA.corruptedStage = 5;
+            break;
+
+        case 5:
+            if (gChangedInput & (KEY_A | KEY_B))
+            {
+                FileSelectDestroyOamOfType(10);
+                FileSelectDestroyOamOfType(17);
+                SoundPlay(0x1FB);
+                FILE_SELECT_DATA.bgToggle = 4;
+                Sram_SetCurrentFile(FILE_SELECT_DATA.corruptedFile);
+                FileSelectDrawFileInfo(FILE_SELECT_DATA.corruptedFile);
+                FILE_SELECT_DATA.corruptedStage = 6;
+            }
+            break;
+
+        case 6:
+            FILE_SELECT_DATA.stage++;
+            if (FILE_SELECT_DATA.stage == 1)
+            {
+                DMA3_FILL_32(0, VRAM_BASE + 0xB000, 0x1800);
+            }
+            else if (FILE_SELECT_DATA.stage == 10)
+            {
+                FILE_SELECT_DATA.corruptedStage = 2;
+                FILE_SELECT_DATA.stage = 0;
+            }
+            break;
+
+        case 7:
+            FILE_SELECT_DATA.stage = 0;
+            ended = TRUE;
+            break;
+    }
+
+    FileSelectDrawAllOam();
+    return ended;
 }
 
 /**

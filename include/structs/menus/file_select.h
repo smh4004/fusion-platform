@@ -61,8 +61,8 @@ struct FileSelectData {
     u8 bgToggle;
     s8 result;
     u8 textIndent;
-    u8 unk_14;
-    u8 unk_15;
+    u8 corruptedStage;
+    u8 corruptedFile;
     u8 padding_16[2];
     struct FileSelectOam oam[23];
     struct SaveFileInfo emptyFileInfo;
