@@ -17,6 +17,7 @@
 #include "data/sprites/x_parasite.h"
 #include "data/projectile_data.h"
 #include "data/audio.h"
+#include "data/menus/game_over_data.h"
 
 void unk_99940(void); // For V-blank callback
 u8 SpecialCutsceneGetRandomNumber(void);
@@ -328,7 +329,23 @@ static u16* sMonologueTextPointersSpanish[19] = {
 	(u16*)0x872ee1c
 };
 
-static u8 sBlob_79e868_79eca0[] = INCBIN_U8("data/Blob_79e868_79eca0.bin");
+const struct FrameData* sGameOverCursorOamPointers[3] = {
+    (const struct FrameData*)0x873c274,
+    (const struct FrameData*)0x873c29c,
+    (const struct FrameData*)0x873c29c
+};
+
+const u32* sGameOverTextGfxPointers[LANGUAGE_COUNT] = {
+    (const u32*)0x8739d58,
+    (const u32*)0x8739d58,
+    (const u32*)0x8739d58,
+    (const u32*)0x873a430,
+    (const u32*)0x873ab28,
+    (const u32*)0x873b308,
+    (const u32*)0x873baac
+};
+
+static u8 sBlob_79e890_79eca0[] = INCBIN_U8("data/Blob_79e890_79eca0.bin");
 
 /**
  * @brief 87610 | f8 | Handler for the title intro

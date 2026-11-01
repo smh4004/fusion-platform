@@ -9,4 +9,18 @@ const u32 sSaXCloseUpTileTable2[305] = INCBIN_U32("data/sa_x_close_up/second.tt.
 
 const u8 sSaXCloseUpDurations[2] = { 25, 60 };
 
-static const u8 sBlob_73421e_7478a0[] = INCBIN_U8("data/Blob_73421e_7478a0.bin");
+static const u8 sBlob_73421e_734220[] = INCBIN_U8("data/Blob_73421e_734220.bin");
+
+const u8 sGameOverOamXFlipOffsets[3][4] = {
+    [0] = {
+        1, 2, 4, 8
+    },
+    [1] = {
+        2, 4, 4, 8
+    },
+    [2] = {
+        1, 1, 2, 4
+    }
+};
+
+static const u8 sBlob_73422c_7478a0[] = INCBIN_U8("data/Blob_73422c_7478a0.bin");

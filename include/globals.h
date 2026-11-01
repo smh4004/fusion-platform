@@ -5,6 +5,7 @@
 #include "gba.h"
 #include "structs/menus/pause_screen.h"
 #include "structs/menus/title_screen.h"
+#include "structs/menus/game_over.h"
 #include "structs/sa_x_close_up.h"
 #include "structs/ending.h"
 #include "structs/intro.h"
@@ -21,6 +22,7 @@ union NonGameplayRam {
     struct SaXCloseUpData saXCloseUp;
     struct IntroData intro;
     struct EndingData ending;
+    struct GameOverData gameOver;
     u8 size[1344];
 };
 
