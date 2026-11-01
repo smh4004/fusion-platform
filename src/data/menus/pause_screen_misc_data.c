@@ -3,9 +3,15 @@
 #include "macros.h"
 #include "constants/menus/pause_screen.h"
 
-// TODO: The start of this file needs to be 4-byte aligned, but sPauseScreenAreaNameOamIds is not.
-// When this blob is removed, sPauseScreenAreaNameOamIds cannot be the first item
-static const u8 sBlob_5760e8_576142[] = INCBIN_U8("data/Blob_5760e8_576142.bin");
+// Index is the main deck room + 1
+const u8 sMainDeckRoomBslDiagramColors[90] = {
+    4, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 1, 4, 1, 4,
+    3, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4,
+    4, 1, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 1, 4, 4,
+    4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 4, 6,
+    6, 6, 6, 6, 6, 5, 3, 4, 4, 4, 4, 1, 4, 3, 6, 6,
+    6, 6, 4, 1, 4, 4, 4, 4, 4, 4
+};
 
 const u8 sPauseScreenAreaNameOamIds[AREA_NORMAL_COUNT][2] = {
     [AREA_MAIN_DECK] = { PAUSE_OAM_ID_MAIN_DECK_TEXT, PAUSE_OAM_ID_MAIN_DECK_TEXT_APPEARING },

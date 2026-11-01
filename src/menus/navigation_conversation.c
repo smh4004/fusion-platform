@@ -21,6 +21,7 @@
 #include "audio_wrappers.h"
 #include "dma.h"
 #include "io.h"
+#include "oam_id.h"
 #include "syscalls.h"
 #include "text.h"
 

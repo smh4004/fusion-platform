@@ -26121,14 +26121,6 @@
     "size": 4
   },
   {
-    "path": "Blob_5760e8_576142.bin",
-    "count": "0x5A",
-    "addr": {
-      "us": "0x5760E8"
-    },
-    "size": 1
-  },
-  {
     "path": "Blob_5766D4_5766e0.bin",
     "count": "0xC",
     "addr": {

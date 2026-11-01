@@ -18,6 +18,8 @@
 #define PAUSE_DEBUG_SECTION_INFO_SECTION(section) (sDebugSectionInfo[(section)][4])
 #define PAUSE_DEBUG_SECTION_INFO_HSIZE(section) (PAUSE_DEBUG_SECTION_INFO_RIGHT((section)) - PAUSE_DEBUG_SECTION_INFO_LEFT((section)))
 
+extern const u8 sMainDeckRoomBslDiagramColors[90];
+
 extern const u8 sPauseScreenAreaNameOamIds[AREA_NORMAL_COUNT][2];
 extern const u8 sPauseScreenSecurityLevelOamInfo[SECURITY_LEVEL_COUNT - 1][2];
 
