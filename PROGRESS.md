@@ -2,6 +2,40 @@
 
 Resume from here. Newest status first.
 
+## PAUSED 2026-10-31: resume here
+
+Decompilation was running as four parallel agents, one per remaining asm file, each on its own branch in its own git worktree. They were stopped cleanly; every `decomp-*` branch builds a matching ROM (`make check` OK, verified at pause). Nothing here is merged into `platform` yet.
+
+| Branch | Asm file it replaces | Matched | Still naked asm |
+|---|---|---|---|
+| `decomp-nav` | disasm_0x08079afc.s (navigation conversations) | 17 | 10 |
+| `decomp-sram` | disasm_0x0807e678.s (save file, erase menu, status screen) | 33 | 21 |
+| `decomp-fileselect` | disasm_0x0809deb4.s (file select, game over, ending text) | 50 | 3 |
+| `decomp-cutscene` | disasm_0x080930C0.s (intro, cutscenes, ending) | 172 | 17 |
+| **total** | | **272 of 323** | **51** |
+
+All four branch from `decomp-gunship-end`. With everything merged: about 3557/3607 functions.
+
+`wip-decomp-sram`, `wip-decomp-fileselect` and `wip-decomp-cutscene` hold each agent's uncommitted, NOT matching, in-progress edits at the moment of pause (stash-style commits). Restore with `git stash apply wip-decomp-<name>` inside that worktree, or just ignore them.
+
+Functions still naked asm (see NONMATCHING_*.md on the fileselect and cutscene branches for notes):
+- nav: NavigationConversationProcessText, NavigationConversationHandler, unk_7b674, ProcessPauseScreenText, ProcessEasySleepText, GetFlashingSectorNumber, unk_7bde0, NavigationConversationUpdateXParasitePopUp, unk_7cfb0 (+1)
+- sram: all 10 of src/menus/erase_sram.c; Sram_ReadHeader, Sram_VerifyHeader, unk_7fb84, unk_7fd10, unk_7fdb0, Sram_InitSaveFile; StatusScreenDrawNumber, StatusScreenDrawBeamOrSuit, StatusScreenDrawMissileOrBomb, StatusScreenDrawMisc, StatusScreenRemoveAmmoHeader
+- fileselect: FileSelectInput, FileSelectSetupOam, FileSelectDrawFileInfo
+- cutscene: CutsceneBslExplodingInit, unk_9cc4c, CutsceneMnologueDrawOam, unk_9d1c4, CutsceneDrawOam, CutsceneProcessElevatorScrolling, unk_9a1a8, CutsceneRestrictedLabDetachingInit, unk_9bb30, unk_9bc04, unk_9bd24, unk_9be8c, unk_98158, unk_98a04, SpecialCutsceneDrawOam, SpecialCutsceneGetRandomNumber
+
+### To resume the agents
+1. Recreate a worktree per branch (if the old ones are gone):
+   `git worktree add ../wt-<name> decomp-<name>`, then in it: copy `tools/agbcc` from a working checkout, copy `mf_us_baserom.gba`, `make -C tools/preproc`, `python3 tools/extractor.py`, `make && make check` (must be OK).
+2. m2c: `git clone https://github.com/matt-kempster/m2c` next to the repo; `pip install pycparser`.
+3. Give each agent `docs/decomp_brief.md` plus its worktree, branch and the functions above. Agents commit locally; push from one place afterwards (the git proxy allows only 2 concurrent transfers).
+
+### To merge into platform when done
+1. Merge the four branches into one integration branch off `decomp-gunship-end` (they touch different files; expect README/database.json/linker.ld conflicts only), `make check`.
+2. Merge that into `platform`. Platform rewrote raw addresses inside the four asm files (relocate_pointers literals); the decomp branches delete those files, so resolve modify/delete conflicts by taking the deletion. Then run
+   `python3 tools/relocate_pointers.py literals src/<new files>.c` and `python3 tools/fix_undeclared.py ...` for raw addresses in the new C/naked code, `make check`, `make smoke`, `python3 tools/smoketest/diff_test.py`.
+3. `python3 tools/unsize_incbins.py --keep <sizeof users>` again for any new INCBIN arrays (see the --keep list method in the Phase notes above).
+
 ## Branches
 
 | Branch | Purpose | Base |
