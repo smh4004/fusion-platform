@@ -228,272 +228,137 @@ _0809C3E0: .4byte CutsceneBslExplodingVblank\n\
     .syntax divided\n");
 }
 
-// 0x0809C3E4
-NAKED_FUNCTION
+/**
+ * @brief 9c3e4 | 214 | Processes the BSL exploding cutscene
+ * 
+ */
 boolu32 CutsceneBslExplodingProcess(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, lr}\n\
-	movs r5, #0\n\
-	ldr r1, _0809C404 @ =gNonGameplayRam\n\
-	ldrh r0, [r1, #8]\n\
-	adds r0, #1\n\
-	strh r0, [r1, #8]\n\
-	ldrb r0, [r1, #0x10]\n\
-	adds r4, r1, #0\n\
-	cmp r0, #6\n\
-	bls _0809C3FA\n\
-	b _0809C5E2\n\
-_0809C3FA:\n\
-	lsls r0, r0, #2\n\
-	ldr r1, _0809C408 @ =_0809C40C\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_0809C404: .4byte gNonGameplayRam\n\
-_0809C408: .4byte _0809C40C\n\
-_0809C40C: @ jump table\n\
-	.4byte _0809C428 @ case 0\n\
-	.4byte _0809C432 @ case 1\n\
-	.4byte _0809C464 @ case 2\n\
-	.4byte _0809C4CC @ case 3\n\
-	.4byte _0809C4FC @ case 4\n\
-	.4byte _0809C52C @ case 5\n\
-	.4byte _0809C5B4 @ case 6\n\
-_0809C428:\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	movs r0, #1\n\
-	strb r0, [r4, #0x10]\n\
-	b _0809C5E2\n\
-_0809C432:\n\
-	ldrh r0, [r4, #8]\n\
-	cmp r0, #0xf\n\
-	beq _0809C43A\n\
-	b _0809C5E2\n\
-_0809C43A:\n\
-	ldr r1, _0809C45C @ =0x04000050\n\
-	ldr r2, _0809C460 @ =0x00001C44\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #0x13\n\
-	ldrh r0, [r2]\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #3\n\
-	adds r1, r3, #0\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	movs r0, #2\n\
-	strb r0, [r4, #0x10]\n\
-	b _0809C5E2\n\
-	.align 2, 0\n\
-_0809C45C: .4byte 0x04000050\n\
-_0809C460: .4byte 0x00001C44\n\
-_0809C464:\n\
-	ldr r2, _0809C484 @ =gWrittenToBldalpha_Eva\n\
-	ldrh r1, [r2]\n\
-	cmp r1, #0xf\n\
-	bhi _0809C48C\n\
-	ldrh r0, [r4, #8]\n\
-	cmp r0, #1\n\
-	bne _0809C47A\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	adds r0, r1, #2\n\
-	strh r0, [r2]\n\
-_0809C47A:\n\
-	ldr r1, _0809C488 @ =gWrittenToBldy\n\
-	movs r0, #0x10\n\
-	strh r0, [r1]\n\
-	b _0809C5E2\n\
-	.align 2, 0\n\
-_0809C484: .4byte gWrittenToBldalpha_Eva\n\
-_0809C488: .4byte gWrittenToBldy\n\
-_0809C48C:\n\
-	ldrh r0, [r4, #8]\n\
-	cmp r0, #0x28\n\
-	beq _0809C494\n\
-	b _0809C5E2\n\
-_0809C494:\n\
-	ldr r1, _0809C4C8 @ =0x04000050\n\
-	movs r0, #0xff\n\
-	strh r0, [r1]\n\
-	subs r1, #0x50\n\
-	movs r2, #0x90\n\
-	lsls r2, r2, #5\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	movs r0, #1\n\
-	bl CutsceneDestroyOamOfType\n\
-	movs r0, #0x14\n\
-	bl CutsceneDestroyOamOfType\n\
-	movs r0, #0x15\n\
-	movs r1, #0x78\n\
-	movs r2, #0x5a\n\
-	movs r3, #1\n\
-	bl CutsceneBslExplodingSetupOam\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	movs r0, #3\n\
-	strb r0, [r4, #0x10]\n\
-	b _0809C5E2\n\
-	.align 2, 0\n\
-_0809C4C8: .4byte 0x04000050\n\
-_0809C4CC:\n\
-	ldrh r0, [r4, #8]\n\
-	cmp r0, #1\n\
-	beq _0809C4D4\n\
-	b _0809C5E2\n\
-_0809C4D4:\n\
-	ldr r1, _0809C4F0 @ =gWrittenToBldy\n\
-	movs r0, #0\n\
-	strh r0, [r1]\n\
-	ldr r0, _0809C4F4 @ =gWrittenToBldalpha_Eva\n\
-	movs r1, #0xa\n\
-	strh r1, [r0]\n\
-	ldr r0, _0809C4F8 @ =gWrittenToBldalpha_Evb\n\
-	strh r1, [r0]\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	movs r0, #4\n\
-	strb r0, [r4, #0x10]\n\
-	b _0809C5E2\n\
-	.align 2, 0\n\
-_0809C4F0: .4byte gWrittenToBldy\n\
-_0809C4F4: .4byte gWrittenToBldalpha_Eva\n\
-_0809C4F8: .4byte gWrittenToBldalpha_Evb\n\
-_0809C4FC:\n\
-	ldrh r0, [r4, #8]\n\
-	cmp r0, #0x3c\n\
-	bne _0809C5E2\n\
-	ldr r1, _0809C524 @ =0x04000050\n\
-	ldr r3, _0809C528 @ =0x00001E41\n\
-	adds r0, r3, #0\n\
-	strh r0, [r1]\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #0x13\n\
-	ldrh r0, [r2]\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #1\n\
-	adds r1, r3, #0\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	movs r0, #5\n\
-	strb r0, [r4, #0x10]\n\
-	b _0809C5E2\n\
-	.align 2, 0\n\
-_0809C524: .4byte 0x04000050\n\
-_0809C528: .4byte 0x00001E41\n\
-_0809C52C:\n\
-	ldrh r1, [r4, #0xc]\n\
-	movs r2, #0xc\n\
-	ldrsh r0, [r4, r2]\n\
-	cmp r0, #0xe\n\
-	bgt _0809C59A\n\
-	ldrh r0, [r4, #8]\n\
-	cmp r0, #4\n\
-	bne _0809C5E2\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	movs r0, #1\n\
-	strh r0, [r4, #0xa]\n\
-	adds r0, r1, #1\n\
-	strh r0, [r4, #0xc]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #1\n\
-	bne _0809C570\n\
-	movs r0, #0x16\n\
-	movs r1, #0x78\n\
-	movs r2, #0x60\n\
-	movs r3, #0\n\
-	bl CutsceneBslExplodingSetupOam\n\
-	movs r0, #0x16\n\
-	movs r1, #0x5f\n\
-	movs r2, #0x50\n\
-	movs r3, #0\n\
-	bl CutsceneBslExplodingSetupOam\n\
-	movs r0, #0x16\n\
-	movs r1, #0x8c\n\
-	movs r2, #0x69\n\
-	b _0809C592\n\
-_0809C570:\n\
-	cmp r0, #2\n\
-	bne _0809C588\n\
-	movs r0, #0x16\n\
-	movs r1, #0x78\n\
-	movs r2, #0x54\n\
-	movs r3, #0\n\
-	bl CutsceneBslExplodingSetupOam\n\
-	movs r0, #0x16\n\
-	movs r1, #0x91\n\
-	movs r2, #0x55\n\
-	b _0809C592\n\
-_0809C588:\n\
-	cmp r0, #3\n\
-	bne _0809C5E2\n\
-	movs r0, #0x16\n\
-	movs r1, #0x60\n\
-	movs r2, #0x6a\n\
-_0809C592:\n\
-	movs r3, #0\n\
-	bl CutsceneBslExplodingSetupOam\n\
-	b _0809C5E2\n\
-_0809C59A:\n\
-	ldrh r0, [r4, #8]\n\
-	cmp r0, #0xf\n\
-	bne _0809C5E2\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	ldr r1, _0809C5B0 @ =gWrittenToBldy\n\
-	movs r0, #0x10\n\
-	strh r0, [r1]\n\
-	movs r0, #6\n\
-	strb r0, [r4, #0x10]\n\
-	b _0809C5E2\n\
-	.align 2, 0\n\
-_0809C5B0: .4byte gWrittenToBldy\n\
-_0809C5B4:\n\
-	ldr r2, _0809C5CC @ =gWrittenToBldalpha_Eva\n\
-	ldrh r1, [r2]\n\
-	cmp r1, #0xf\n\
-	bhi _0809C5D0\n\
-	ldrh r0, [r4, #8]\n\
-	cmp r0, #6\n\
-	bne _0809C5E2\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	adds r0, r1, #1\n\
-	strh r0, [r2]\n\
-	b _0809C5E2\n\
-	.align 2, 0\n\
-_0809C5CC: .4byte gWrittenToBldalpha_Eva\n\
-_0809C5D0:\n\
-	ldr r0, _0809C5F4 @ =0x04000050\n\
-	movs r1, #0xbf\n\
-	strh r1, [r0]\n\
-	ldrh r0, [r4, #8]\n\
-	cmp r0, #0x10\n\
-	bne _0809C5E2\n\
-	movs r0, #0\n\
-	strh r0, [r4, #8]\n\
-	movs r5, #1\n\
-_0809C5E2:\n\
-	bl CutsceneProcessOam\n\
-	bl CutsceneDrawAllOam\n\
-	adds r0, r5, #0\n\
-	pop {r4, r5}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_0809C5F4: .4byte 0x04000050\n\
-    .syntax divided\n");
+    boolu32 ended;
+
+    ended = FALSE;
+    CUTSCENE_OAM_DATA.timer++;
+
+    switch (CUTSCENE_OAM_DATA.subStage)
+    {
+        case 0:
+            CUTSCENE_OAM_DATA.timer = 0;
+            CUTSCENE_OAM_DATA.subStage = 1;
+            break;
+
+        case 1:
+            if (CUTSCENE_OAM_DATA.timer == 15)
+            {
+                WRITE_16(REG_BLDCNT, BLDCNT_BG2_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT |
+                    BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL | BLDCNT_OBJ_SECOND_TARGET_PIXEL);
+                WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) | DCNT_BG2);
+                CUTSCENE_OAM_DATA.timer = 0;
+                CUTSCENE_OAM_DATA.subStage = 2;
+            }
+            break;
+
+        case 2:
+            if (gWrittenToBldalpha_Eva < BLDALPHA_MAX_VALUE)
+            {
+                if (CUTSCENE_OAM_DATA.timer == 1)
+                {
+                    CUTSCENE_OAM_DATA.timer = 0;
+                    gWrittenToBldalpha_Eva += 2;
+                }
+                gWrittenToBldy = BLDY_MAX_VALUE;
+            }
+            else if (CUTSCENE_OAM_DATA.timer == 40)
+            {
+                WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_DECREASE_EFFECT);
+                WRITE_16(REG_DISPCNT, DCNT_BG1 | DCNT_OBJ);
+                CutsceneDestroyOamOfType(1);
+                CutsceneDestroyOamOfType(20);
+                CutsceneBslExplodingSetupOam(21, 120, 90, TRUE);
+                CUTSCENE_OAM_DATA.timer = 0;
+                CUTSCENE_OAM_DATA.subStage = 3;
+            }
+            break;
+
+        case 3:
+            if (CUTSCENE_OAM_DATA.timer == 1)
+            {
+                gWrittenToBldy = 0;
+                gWrittenToBldalpha_Eva = 10;
+                gWrittenToBldalpha_Evb = 10;
+                CUTSCENE_OAM_DATA.timer = 0;
+                CUTSCENE_OAM_DATA.subStage = 4;
+            }
+            break;
+
+        case 4:
+            if (CUTSCENE_OAM_DATA.timer == 60)
+            {
+                WRITE_16(REG_BLDCNT, BLDCNT_BG0_FIRST_TARGET_PIXEL | BLDCNT_ALPHA_BLENDING_EFFECT |
+                    BLDCNT_BG1_SECOND_TARGET_PIXEL | BLDCNT_BG2_SECOND_TARGET_PIXEL | BLDCNT_BG3_SECOND_TARGET_PIXEL | BLDCNT_OBJ_SECOND_TARGET_PIXEL);
+                WRITE_16(REG_DISPCNT, READ_16(REG_DISPCNT) | DCNT_BG0);
+                CUTSCENE_OAM_DATA.timer = 0;
+                CUTSCENE_OAM_DATA.subStage = 5;
+            }
+            break;
+
+        case 5:
+            if (CUTSCENE_OAM_DATA.unk_C < 15)
+            {
+                if (CUTSCENE_OAM_DATA.timer == 4)
+                {
+                    CUTSCENE_OAM_DATA.timer = 0;
+                    CUTSCENE_OAM_DATA.unk_A = 1;
+                    CUTSCENE_OAM_DATA.unk_C++;
+
+                    if (CUTSCENE_OAM_DATA.unk_C == 1)
+                    {
+                        CutsceneBslExplodingSetupOam(22, 120, 96, FALSE);
+                        CutsceneBslExplodingSetupOam(22, 95, 80, FALSE);
+                        CutsceneBslExplodingSetupOam(22, 140, 105, FALSE);
+                    }
+                    else if (CUTSCENE_OAM_DATA.unk_C == 2)
+                    {
+                        CutsceneBslExplodingSetupOam(22, 120, 84, FALSE);
+                        CutsceneBslExplodingSetupOam(22, 145, 85, FALSE);
+                    }
+                    else if (CUTSCENE_OAM_DATA.unk_C == 3)
+                    {
+                        CutsceneBslExplodingSetupOam(22, 96, 106, FALSE);
+                    }
+                }
+            }
+            else if (CUTSCENE_OAM_DATA.timer == 15)
+            {
+                CUTSCENE_OAM_DATA.timer = 0;
+                gWrittenToBldy = BLDY_MAX_VALUE;
+                CUTSCENE_OAM_DATA.subStage = 6;
+            }
+            break;
+
+        case 6:
+            if (gWrittenToBldalpha_Eva < BLDALPHA_MAX_VALUE)
+            {
+                if (CUTSCENE_OAM_DATA.timer == 6)
+                {
+                    CUTSCENE_OAM_DATA.timer = 0;
+                    gWrittenToBldalpha_Eva++;
+                }
+            }
+            else
+            {
+                WRITE_16(REG_BLDCNT, BLDCNT_SCREEN_FIRST_TARGET | BLDCNT_BRIGHTNESS_INCREASE_EFFECT);
+                if (CUTSCENE_OAM_DATA.timer == 16)
+                {
+                    CUTSCENE_OAM_DATA.timer = 0;
+                    ended = TRUE;
+                }
+            }
+            break;
+    }
+
+    CutsceneProcessOam();
+    CutsceneDrawAllOam();
+    return ended;
 }
 
 /**
