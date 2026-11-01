@@ -28353,14 +28353,6 @@
     "size": 1
   },
   {
-    "path": "Blob_79c394_79c3c8.bin",
-    "count": "0x34",
-    "addr": {
-      "us": "0x79C394"
-    },
-    "size": 1
-  },
-  {
     "path": "Blob_79c474_79c5a4.bin",
     "count": "0x130",
     "addr": {
