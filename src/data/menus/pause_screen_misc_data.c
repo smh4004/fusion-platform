@@ -149,7 +149,7 @@ const u8 sMaintainedInputDelays[7] = {
 
 static const u8 sPadding_576217[1] = { 0 };
 
-const u8 sNavConversationSectorElevatorPositions[AREA_NORMAL_COUNT][2] = {
+const u8 sMainDeckElevatorMapPositions[AREA_NORMAL_COUNT][2] = {
     [AREA_MAIN_DECK] = { 0, 0 },
     [AREA_SECTOR_1] = { 5, 16 },
     [AREA_SECTOR_2] = { 9, 16 },
@@ -159,7 +159,7 @@ const u8 sNavConversationSectorElevatorPositions[AREA_NORMAL_COUNT][2] = {
     [AREA_SECTOR_6] = { 11, 16 }
 };
 
-const u8 sNavConversationMainDeckElevatorPositions[AREA_NORMAL_COUNT][2] = {
+const u8 sSectorElevatorMapPositions[AREA_NORMAL_COUNT][2] = {
     [AREA_MAIN_DECK] = { 0, 0 },
     [AREA_SECTOR_1] = { 2, 1 },
     [AREA_SECTOR_2] = { 3, 2 },

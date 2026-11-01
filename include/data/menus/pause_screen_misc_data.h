@@ -50,8 +50,8 @@ extern const void* const sMapScreenTimeTankVramAddresses[MAP_SCREEN_TANK_TIME_CO
 
 extern const u8 sMaintainedInputDelays[7];
 
-extern const u8 sNavConversationSectorElevatorPositions[AREA_NORMAL_COUNT][2];
-extern const u8 sNavConversationMainDeckElevatorPositions[AREA_NORMAL_COUNT][2];
+extern const u8 sMainDeckElevatorMapPositions[AREA_NORMAL_COUNT][2];
+extern const u8 sSectorElevatorMapPositions[AREA_NORMAL_COUNT][2];
 
 // ...
 

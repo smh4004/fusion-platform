@@ -2648,245 +2648,104 @@ _0807AF7C:\n\
     .syntax divided\n");
 }
 
-// 0x0807AF8C
-NAKED_FUNCTION
-void NavigationConversationUpdateTarget(u8 arg0)
+/**
+ * @brief 7af8c | 70 | Updates the navigation target and its map marker
+ * 
+ */
+void NavigationConversationUpdateTarget(u8 updateOam)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	bl NavigationConverstionFindTarget\n\
-	cmp r0, #0\n\
-	beq _0807AFF2\n\
-	cmp r4, #0\n\
-	beq _0807AFF2\n\
-	ldr r1, _0807AFCC @ =gNonGameplayRam\n\
-	movs r2, #0xd4\n\
-	lsls r2, r2, #1\n\
-	adds r0, r1, r2\n\
-	movs r2, #0\n\
-	strb r2, [r0]\n\
-	ldr r3, _0807AFD0 @ =0x000001A9\n\
-	adds r0, r1, r3\n\
-	strb r2, [r0]\n\
-	ldr r2, _0807AFD4 @ =0x0000020F\n\
-	adds r0, r1, r2\n\
-	ldrb r0, [r0]\n\
-	adds r2, r1, #0\n\
-	cmp r0, #1\n\
-	bne _0807AFDC\n\
-	ldr r1, _0807AFD8 @ =0x085767EC\n\
-	adds r3, #0x6a\n\
-	adds r0, r2, r3\n\
-	ldrb r0, [r0]\n\
-	adds r0, r0, r1\n\
-	ldrb r1, [r0]\n\
-	b _0807AFEA\n\
-	.align 2, 0\n\
-_0807AFCC: .4byte gNonGameplayRam\n\
-_0807AFD0: .4byte 0x000001A9\n\
-_0807AFD4: .4byte 0x0000020F\n\
-_0807AFD8: .4byte 0x085767EC\n\
-_0807AFDC:\n\
-	ldr r1, _0807AFF8 @ =0x00000212\n\
-	adds r0, r2, r1\n\
-	ldrb r0, [r0]\n\
-	movs r1, #0xe\n\
-	cmp r0, #0\n\
-	bne _0807AFEA\n\
-	movs r1, #0xf\n\
-_0807AFEA:\n\
-	movs r3, #0xd5\n\
-	lsls r3, r3, #1\n\
-	adds r0, r2, r3\n\
-	strb r1, [r0]\n\
-_0807AFF2:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0807AFF8: .4byte 0x00000212\n\
-    .syntax divided\n");
+    u8 oamId;
+
+    if (!NavigationConverstionFindTarget() || !updateOam)
+        return;
+
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].animationDurationCounter = 0;
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].currentAnimationFrame = 0;
+
+    if (PAUSE_SCREEN_DATA.unk_20F == 1)
+        oamId = sNavConversationTargetTextOamIds[PAUSE_SCREEN_DATA.navTargetTextDirection];
+    else
+    {
+        u8 area = PAUSE_SCREEN_DATA.currentArea;
+        oamId = PAUSE_OAM_ID_MAP_ELEVATOR_UP_ARROWS;
+        if (area == AREA_MAIN_DECK)
+            oamId = PAUSE_OAM_ID_MAP_ELEVATOR_DOWN_ARROWS;
+    }
+
+    PAUSE_SCREEN_DATA.oam[PAUSE_OAM_IDX_MAP_TARGET].oamId = oamId;
 }
 
-// 0x0807AFFC
-NAKED_FUNCTION
-u8 NavigationConverstionFindTarget(void)
+/**
+ * @brief 7affc | 15c | Finds the map target of the current navigation conversation
+ * 
+ */
+bools32 NavigationConverstionFindTarget(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	ldr r2, _0807B03C @ =gNonGameplayRam\n\
-	ldr r1, _0807B040 @ =0x0000020F\n\
-	adds r0, r2, r1\n\
-	movs r3, #0\n\
-	strb r3, [r0]\n\
-	movs r0, #0x83\n\
-	lsls r0, r0, #2\n\
-	adds r1, r2, r0\n\
-	movs r0, #0xff\n\
-	strb r0, [r1]\n\
-	ldr r0, _0807B044 @ =0x0000020D\n\
-	adds r1, r2, r0\n\
-	movs r0, #1\n\
-	rsbs r0, r0, #0\n\
-	strb r0, [r1]\n\
-	ldr r1, _0807B048 @ =0x0000020E\n\
-	adds r0, r2, r1\n\
-	strb r3, [r0]\n\
-	adds r1, #5\n\
-	adds r0, r2, r1\n\
-	strb r3, [r0]\n\
-	ldr r0, _0807B04C @ =gPauseScreenFlag\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	adds r5, r2, #0\n\
-	cmp r0, #4\n\
-	bne _0807B060\n\
-_0807B036:\n\
-	movs r0, #0\n\
-	b _0807B146\n\
-	.align 2, 0\n\
-_0807B03C: .4byte gNonGameplayRam\n\
-_0807B040: .4byte 0x0000020F\n\
-_0807B044: .4byte 0x0000020D\n\
-_0807B048: .4byte 0x0000020E\n\
-_0807B04C: .4byte gPauseScreenFlag\n\
-_0807B050:\n\
-	movs r4, #1\n\
-	ldrb r1, [r1, #4]\n\
-	ldr r3, _0807B05C @ =0x00000213\n\
-	adds r0, r5, r3\n\
-	strb r1, [r0]\n\
-	b _0807B086\n\
-	.align 2, 0\n\
-_0807B05C: .4byte 0x00000213\n\
-_0807B060:\n\
-	ldr r0, _0807B0B8 @ =0x0300004C\n\
-	strb r3, [r0]\n\
-	movs r4, #0\n\
-	movs r2, #0\n\
-	adds r7, r0, #0\n\
-	ldr r6, _0807B0BC @ =0x085766E4\n\
-	movs r1, #0x88\n\
-	lsls r1, r1, #2\n\
-	adds r0, r5, r1\n\
-	ldrb r3, [r0]\n\
-	adds r1, r6, #0\n\
-_0807B076:\n\
-	movs r0, #0\n\
-	ldrsb r0, [r1, r0]\n\
-	cmp r3, r0\n\
-	beq _0807B050\n\
-	adds r1, #8\n\
-	adds r2, #1\n\
-	cmp r2, #0x20\n\
-	bls _0807B076\n\
-_0807B086:\n\
-	cmp r4, #0\n\
-	beq _0807B036\n\
-	lsls r0, r2, #3\n\
-	adds r2, r0, r6\n\
-	ldrb r0, [r2, #1]\n\
-	strb r0, [r7]\n\
-	ldr r1, _0807B0C0 @ =0x08576066\n\
-	ldrb r0, [r7]\n\
-	adds r0, r0, r1\n\
-	ldrb r0, [r0]\n\
-	ldr r3, _0807B0C4 @ =0x0000020E\n\
-	adds r6, r5, r3\n\
-	strb r0, [r6]\n\
-	ldr r1, _0807B0C8 @ =0x00000212\n\
-	adds r3, r5, r1\n\
-	ldrb r1, [r3]\n\
-	adds r4, r0, #0\n\
-	cmp r1, r4\n\
-	bne _0807B0D0\n\
-	ldrb r3, [r2, #2]\n\
-	ldrb r2, [r2, #3]\n\
-	ldr r0, _0807B0CC @ =0x0000020F\n\
-	adds r1, r5, r0\n\
-	movs r0, #1\n\
-	b _0807B11E\n\
-	.align 2, 0\n\
-_0807B0B8: .4byte 0x0300004C\n\
-_0807B0BC: .4byte 0x085766E4\n\
-_0807B0C0: .4byte 0x08576066\n\
-_0807B0C4: .4byte 0x0000020E\n\
-_0807B0C8: .4byte 0x00000212\n\
-_0807B0CC: .4byte 0x0000020F\n\
-_0807B0D0:\n\
-	cmp r1, #0\n\
-	bne _0807B0F4\n\
-	ldr r2, _0807B0EC @ =0x08576218\n\
-	ldrb r0, [r6]\n\
-	lsls r0, r0, #1\n\
-	adds r1, r0, r2\n\
-	ldrb r3, [r1]\n\
-	adds r2, #1\n\
-	adds r0, r0, r2\n\
-	ldrb r2, [r0]\n\
-	ldr r0, _0807B0F0 @ =0x0000020F\n\
-	adds r1, r5, r0\n\
-	movs r0, #2\n\
-	b _0807B11E\n\
-	.align 2, 0\n\
-_0807B0EC: .4byte 0x08576218\n\
-_0807B0F0: .4byte 0x0000020F\n\
-_0807B0F4:\n\
-	ldr r0, _0807B110 @ =0x08576226\n\
-	ldrb r1, [r3]\n\
-	lsls r1, r1, #1\n\
-	adds r2, r1, r0\n\
-	ldrb r3, [r2]\n\
-	adds r0, #1\n\
-	adds r1, r1, r0\n\
-	ldrb r2, [r1]\n\
-	cmp r4, #0\n\
-	bne _0807B118\n\
-	ldr r0, _0807B114 @ =0x0000020F\n\
-	adds r1, r5, r0\n\
-	movs r0, #2\n\
-	b _0807B11E\n\
-	.align 2, 0\n\
-_0807B110: .4byte 0x08576226\n\
-_0807B114: .4byte 0x0000020F\n\
-_0807B118:\n\
-	ldr r0, _0807B14C @ =0x0000020F\n\
-	adds r1, r5, r0\n\
-	movs r0, #3\n\
-_0807B11E:\n\
-	strb r0, [r1]\n\
-	subs r1, r3, #1\n\
-	movs r3, #0x83\n\
-	lsls r3, r3, #2\n\
-	adds r0, r5, r3\n\
-	strb r1, [r0]\n\
-	subs r1, r2, #1\n\
-	ldr r2, _0807B150 @ =0x0000020D\n\
-	adds r0, r5, r2\n\
-	strb r1, [r0]\n\
-	movs r4, #0\n\
-	ldr r0, _0807B154 @ =gPreviousNavigationConversation\n\
-	adds r3, #0x14\n\
-	adds r1, r5, r3\n\
-	ldrb r0, [r0]\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	bne _0807B144\n\
-	movs r4, #1\n\
-_0807B144:\n\
-	adds r0, r4, #0\n\
-_0807B146:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_0807B14C: .4byte 0x0000020F\n\
-_0807B150: .4byte 0x0000020D\n\
-_0807B154: .4byte gPreviousNavigationConversation\n\
-    .syntax divided\n");
+    s32 found;
+    u32 i;
+    u8 x;
+    u8 y;
+
+    PAUSE_SCREEN_DATA.unk_20F = 0;
+    PAUSE_SCREEN_DATA.navTargetX = UCHAR_MAX;
+    PAUSE_SCREEN_DATA.navTargetY = UCHAR_MAX;
+    PAUSE_SCREEN_DATA.navTargetArea = AREA_MAIN_DECK;
+    PAUSE_SCREEN_DATA.navTargetTextDirection = NAV_TARGET_TEXT_ABOVE;
+
+    if (gPauseScreenFlag == 4)
+        return FALSE;
+
+    gNavConversationTargetLocation = NAV_TARGET_LOC_NONE;
+    found = FALSE;
+    for (i = 0; i < ARRAY_SIZE(sNavConversationTargets); i++)
+    {
+        if (PAUSE_SCREEN_DATA.conversationNumber == sNavConversationTargets[i].conversation)
+        {
+            found = TRUE;
+            PAUSE_SCREEN_DATA.navTargetTextDirection = sNavConversationTargets[i].textDirection;
+            break;
+        }
+    }
+
+    if (!found)
+        return FALSE;
+
+    gNavConversationTargetLocation = sNavConversationTargets[i].location;
+    PAUSE_SCREEN_DATA.navTargetArea = sNavigationTargetLocationAreas[gNavConversationTargetLocation];
+
+    if (PAUSE_SCREEN_DATA.currentArea == PAUSE_SCREEN_DATA.navTargetArea)
+    {
+        // Target is in the current area
+        x = sNavConversationTargets[i].x;
+        y = sNavConversationTargets[i].y;
+        PAUSE_SCREEN_DATA.unk_20F = 1;
+    }
+    else if (PAUSE_SCREEN_DATA.currentArea == AREA_MAIN_DECK)
+    {
+        // Point to the elevator leading to the target's sector
+        x = sMainDeckElevatorMapPositions[PAUSE_SCREEN_DATA.navTargetArea][0];
+        y = sMainDeckElevatorMapPositions[PAUSE_SCREEN_DATA.navTargetArea][1];
+        PAUSE_SCREEN_DATA.unk_20F = 2;
+    }
+    else
+    {
+        // Point to the elevator leading out of the current sector
+        x = sSectorElevatorMapPositions[PAUSE_SCREEN_DATA.currentArea][0];
+        y = sSectorElevatorMapPositions[PAUSE_SCREEN_DATA.currentArea][1];
+        if (PAUSE_SCREEN_DATA.navTargetArea == AREA_MAIN_DECK)
+            PAUSE_SCREEN_DATA.unk_20F = 2;
+        else
+            PAUSE_SCREEN_DATA.unk_20F = 3;
+    }
+
+    PAUSE_SCREEN_DATA.navTargetX = x - 1;
+    PAUSE_SCREEN_DATA.navTargetY = y - 1;
+
+    found = FALSE;
+    if (gPreviousNavigationConversation == PAUSE_SCREEN_DATA.conversationNumber)
+        found = TRUE;
+
+    return found;
 }
 
 // 0x0807B158
