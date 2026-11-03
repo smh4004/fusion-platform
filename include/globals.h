@@ -5,6 +5,7 @@
 #include "gba.h"
 #include "structs/menus/pause_screen.h"
 #include "structs/menus/title_screen.h"
+#include "structs/menus/erase_sram.h"
 #include "structs/sa_x_close_up.h"
 #include "structs/ending.h"
 #include "structs/intro.h"
@@ -21,6 +22,7 @@ union NonGameplayRam {
     struct SaXCloseUpData saXCloseUp;
     struct IntroData intro;
     struct EndingData ending;
+    struct EraseSramData eraseSram;
     u8 size[1344];
 };
 
@@ -31,6 +33,7 @@ extern union NonGameplayRam gNonGameplayRam;
 #define TITLE_SCREEN_DATA gNonGameplayRam.titleScreen
 #define SA_X_CLOSE_UP_DATA gNonGameplayRam.saXCloseUp
 #define ENDING_DATA gNonGameplayRam.ending
+#define ERASE_SRAM_DATA gNonGameplayRam.eraseSram
 
 extern u8 gSpriteGfxBackup[0x8000];
 
