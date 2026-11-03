@@ -202,22 +202,22 @@ _0809C368: .4byte 0x0000FFEF\n\
 _0809C36C: .4byte 0x04000200\n\
 _0809C370: .4byte 0x0000FFFD\n\
 _0809C374: .4byte unk_9c92c\n\
-_0809C378: .4byte 0x0867D7CC\n\
+_0809C378: .4byte sAddr_6793b0 + 0x441c\n\
 _0809C37C: .4byte 0x06010000\n\
 _0809C380: .4byte 0x040000D4\n\
-_0809C384: .4byte 0x0868121C\n\
+_0809C384: .4byte sAddr_68101c + 0x200\n\
 _0809C388: .4byte 0x05000200\n\
 _0809C38C: .4byte 0x84000080\n\
-_0809C390: .4byte 0x08679420\n\
-_0809C394: .4byte 0x08681A1C\n\
+_0809C390: .4byte sAddr_6793b0 + 0x70\n\
+_0809C394: .4byte sAddr_68101c + 0xa00\n\
 _0809C398: .4byte 0x0600E000\n\
-_0809C39C: .4byte 0x086820A4\n\
+_0809C39C: .4byte sAddr_68101c + 0x1088\n\
 _0809C3A0: .4byte 0x0600E800\n\
-_0809C3A4: .4byte 0x086827A8\n\
+_0809C3A4: .4byte sAddr_68101c + 0x178c\n\
 _0809C3A8: .4byte 0x0600F000\n\
-_0809C3AC: .4byte 0x08682BFC\n\
+_0809C3AC: .4byte sAddr_68101c + 0x1be0\n\
 _0809C3B0: .4byte 0x0600F800\n\
-_0809C3B4: .4byte 0x0868259C\n\
+_0809C3B4: .4byte sAddr_68101c + 0x1580\n\
 _0809C3B8: .4byte 0x04000008\n\
 _0809C3BC: .4byte 0x00001D03\n\
 _0809C3C0: .4byte 0x00001F03\n\
@@ -225,7 +225,7 @@ _0809C3C4: .4byte gWrittenToBldy\n\
 _0809C3C8: .4byte gWrittenToBldalpha_Eva\n\
 _0809C3CC: .4byte gWrittenToBldalpha_Evb\n\
 _0809C3D0: .4byte gNonGameplayRam\n\
-_0809C3D4: .4byte 0x0868101C\n\
+_0809C3D4: .4byte sAddr_68101c\n\
 _0809C3D8: .4byte 0x05000120\n\
 _0809C3DC: .4byte 0x84000008\n\
 _0809C3E0: .4byte CutsceneBslExplodingVblank\n\

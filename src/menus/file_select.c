@@ -399,7 +399,7 @@ _0809EBB0:\n\
 	b _0809F2FC\n\
 	.align 2, 0\n\
 _0809EBE8: .4byte gNonGameplayRam\n\
-_0809EBEC: .4byte 0x0879EC68\n\
+_0809EBEC: .4byte sFileSelectTextPointers\n\
 _0809EBF0: .4byte 0x03000011\n\
 _0809EBF4:\n\
 	cmp r0, #0xc\n\
@@ -675,7 +675,7 @@ _0809EDFE:\n\
 	str r0, [r4, #4]\n\
 	b _0809F32C\n\
 	.align 2, 0\n\
-_0809EE1C: .4byte 0x0879EC68\n\
+_0809EE1C: .4byte sFileSelectTextPointers\n\
 _0809EE20: .4byte 0x03000011\n\
 _0809EE24:\n\
 	cmp r0, #0xc\n\
@@ -873,7 +873,7 @@ _0809EF7A:\n\
 	str r0, [r2, #4]\n\
 	b _0809F32C\n\
 	.align 2, 0\n\
-_0809EF98: .4byte 0x0879EC68\n\
+_0809EF98: .4byte sFileSelectTextPointers\n\
 _0809EF9C: .4byte 0x03000011\n\
 _0809EFA0:\n\
 	cmp r0, #0xc\n\
@@ -1014,7 +1014,7 @@ _0809F088:\n\
 	str r0, [r2, #4]\n\
 	b _0809F32C\n\
 	.align 2, 0\n\
-_0809F0A8: .4byte 0x0879EC68\n\
+_0809F0A8: .4byte sFileSelectTextPointers\n\
 _0809F0AC: .4byte 0x03000011\n\
 _0809F0B0:\n\
 	cmp r0, #4\n\
@@ -1040,7 +1040,7 @@ _0809F0B6:\n\
 	movs r2, #0x91\n\
 	b _0809F2FC\n\
 	.align 2, 0\n\
-_0809F0DC: .4byte 0x0873DBB0\n\
+_0809F0DC: .4byte sFileSelectCopyArrowXPositions\n\
 _0809F0E0: .4byte 0x03000011\n\
 _0809F0E4:\n\
 	ldr r2, _0809F120 @ =gNonGameplayRam\n\
@@ -1183,7 +1183,7 @@ _0809F1C6:\n\
 	str r0, [r4, #4]\n\
 	b _0809F32C\n\
 	.align 2, 0\n\
-_0809F1E4: .4byte 0x0879EC68\n\
+_0809F1E4: .4byte sFileSelectTextPointers\n\
 _0809F1E8: .4byte 0x03000011\n\
 _0809F1EC:\n\
 	ldr r4, _0809F200 @ =gNonGameplayRam\n\
@@ -1221,7 +1221,7 @@ _0809F20E:\n\
 	str r0, [r4, #4]\n\
 	b _0809F32C\n\
 	.align 2, 0\n\
-_0809F22C: .4byte 0x0879EC68\n\
+_0809F22C: .4byte sFileSelectTextPointers\n\
 _0809F230: .4byte 0x03000011\n\
 _0809F234:\n\
 	cmp r0, #0xc\n\
@@ -1364,7 +1364,7 @@ _0809F32C:\n\
 	bl FileSelectDrawText\n\
 	b _0809F50A\n\
 	.align 2, 0\n\
-_0809F334: .4byte 0x0879EC68\n\
+_0809F334: .4byte sFileSelectTextPointers\n\
 _0809F338: .4byte 0x03000011\n\
 _0809F33C:\n\
 	cmp r0, #0xc\n\
@@ -1392,7 +1392,7 @@ _0809F342:\n\
 	strh r0, [r5, #0xa]\n\
 	b _0809F50A\n\
 	.align 2, 0\n\
-_0809F36C: .4byte 0x0873DBBE\n\
+_0809F36C: .4byte sFileSelectEraseArrowXPositions\n\
 _0809F370: .4byte 0x03000011\n\
 _0809F374:\n\
 	ldr r0, _0809F388 @ =gChangedInput\n\
@@ -1719,7 +1719,7 @@ _0809F578:\n\
 _0809F5C4: .4byte 0x040000D4\n\
 _0809F5C8: .4byte 0x0300149C\n\
 _0809F5CC: .4byte 0x85000007\n\
-_0809F5D0: .4byte 0x08740A48\n\
+_0809F5D0: .4byte sAddr_740a48\n\
 _0809F5D4: .4byte FileSelectProcessSamusHead\n\
 _0809F5D8:\n\
 	cmp r3, #2\n\
@@ -1735,7 +1735,7 @@ _0809F5D8:\n\
 	ldr r1, _0809F5F4 @ =FileSelectProcessCursor\n\
 	b _0809F916\n\
 	.align 2, 0\n\
-_0809F5F0: .4byte 0x08740B48\n\
+_0809F5F0: .4byte sAddr_740b48\n\
 _0809F5F4: .4byte FileSelectProcessCursor\n\
 _0809F5F8:\n\
 	cmp r3, #3\n\
@@ -1755,7 +1755,7 @@ _0809F5F8:\n\
 	ldr r1, _0809F61C @ =FileSelectProcessDeleteArrow\n\
 	b _0809F916\n\
 	.align 2, 0\n\
-_0809F618: .4byte 0x08740AB8\n\
+_0809F618: .4byte sAddr_740ab8\n\
 _0809F61C: .4byte FileSelectProcessDeleteArrow\n\
 _0809F620:\n\
 	cmp r3, #4\n\
@@ -1771,7 +1771,7 @@ _0809F620:\n\
 	ldr r1, _0809F63C @ =unk_9fddc\n\
 	b _0809F916\n\
 	.align 2, 0\n\
-_0809F638: .4byte 0x08740B48\n\
+_0809F638: .4byte sAddr_740b48\n\
 _0809F63C: .4byte unk_9fddc\n\
 _0809F640:\n\
 	cmp r3, #5\n\
@@ -1787,7 +1787,7 @@ _0809F640:\n\
 	ldr r1, _0809F65C @ =unk_9ff00\n\
 	b _0809F916\n\
 	.align 2, 0\n\
-_0809F658: .4byte 0x08740B48\n\
+_0809F658: .4byte sAddr_740b48\n\
 _0809F65C: .4byte unk_9ff00\n\
 _0809F660:\n\
 	cmp r3, #6\n\
@@ -1806,7 +1806,7 @@ _0809F660:\n\
 	ldr r1, _0809F684 @ =FileSelectProcessAudioLogos\n\
 	b _0809F916\n\
 	.align 2, 0\n\
-_0809F680: .4byte 0x087407E0\n\
+_0809F680: .4byte sAddr_7407e0\n\
 _0809F684: .4byte FileSelectProcessAudioLogos\n\
 _0809F688:\n\
 	cmp r3, #7\n\
@@ -1830,7 +1830,7 @@ _0809F688:\n\
 	ldr r1, _0809F6B8 @ =FileSelectProcessFileOverlay\n\
 	b _0809F916\n\
 	.align 2, 0\n\
-_0809F6B0: .4byte 0x0879E890\n\
+_0809F6B0: .4byte sFileSelectFileOverlayOamPointers\n\
 _0809F6B4: .4byte 0x03000B8D\n\
 _0809F6B8: .4byte FileSelectProcessFileOverlay\n\
 _0809F6BC:\n\
@@ -1850,7 +1850,7 @@ _0809F6BC:\n\
 	ldr r1, _0809F6E0 @ =unk_a016c\n\
 	b _0809F916\n\
 	.align 2, 0\n\
-_0809F6DC: .4byte 0x087408E0\n\
+_0809F6DC: .4byte sAddr_7408e0\n\
 _0809F6E0: .4byte unk_a016c\n\
 _0809F6E4:\n\
 	cmp r3, #9\n\
@@ -1870,7 +1870,7 @@ _0809F6E4:\n\
 	ldr r1, _0809F708 @ =FileSelectProcessAudioSelect\n\
 	b _0809F916\n\
 	.align 2, 0\n\
-_0809F704: .4byte 0x087408F0\n\
+_0809F704: .4byte sAddr_7408e0 + 0x10\n\
 _0809F708: .4byte FileSelectProcessAudioSelect\n\
 _0809F70C:\n\
 	cmp r3, #0xa\n\
@@ -1886,7 +1886,7 @@ _0809F70C:\n\
 	ldr r1, _0809F728 @ =unk_a01cc\n\
 	b _0809F916\n\
 	.align 2, 0\n\
-_0809F724: .4byte 0x08740880\n\
+_0809F724: .4byte sAddr_740840 + 0x40\n\
 _0809F728: .4byte unk_a01cc\n\
 _0809F72C:\n\
 	cmp r3, #0xb\n\
@@ -1915,7 +1915,7 @@ _0809F72C:\n\
 	b _0809F918\n\
 	.align 2, 0\n\
 _0809F760: .4byte gNonGameplayRam\n\
-_0809F764: .4byte 0x08740918\n\
+_0809F764: .4byte sAddr_7408e0 + 0x38\n\
 _0809F768: .4byte FileSelectProcessFileActionPanel\n\
 _0809F76C:\n\
 	cmp r3, #0xc\n\
@@ -1944,7 +1944,7 @@ _0809F76C:\n\
 	b _0809F918\n\
 	.align 2, 0\n\
 _0809F7A0: .4byte gNonGameplayRam\n\
-_0809F7A4: .4byte 0x08740978\n\
+_0809F7A4: .4byte sAddr_740950 + 0x28\n\
 _0809F7A8: .4byte FileSelectProcessCopyFilePanel\n\
 _0809F7AC:\n\
 	cmp r3, #0xd\n\
@@ -1973,7 +1973,7 @@ _0809F7AC:\n\
 	b _0809F918\n\
 	.align 2, 0\n\
 _0809F7E0: .4byte gNonGameplayRam\n\
-_0809F7E4: .4byte 0x08740978\n\
+_0809F7E4: .4byte sAddr_740950 + 0x28\n\
 _0809F7E8: .4byte FileSelectProcessEraseFilePanel\n\
 _0809F7EC:\n\
 	cmp r3, #0xe\n\
@@ -2046,7 +2046,7 @@ _0809F858:\n\
 	ldr r2, _0809F878 @ =0x087409A0\n\
 	b _0809F8A0\n\
 	.align 2, 0\n\
-_0809F878: .4byte 0x087409A0\n\
+_0809F878: .4byte sAddr_7409a0\n\
 _0809F87C:\n\
 	cmp r3, #0x14\n\
 	beq _0809F888\n\
@@ -2076,7 +2076,7 @@ _0809F8A0:\n\
 	str r0, [r1]\n\
 	b _0809F918\n\
 	.align 2, 0\n\
-_0809F8B0: .4byte 0x08740B98\n\
+_0809F8B0: .4byte sAddr_740b70 + 0x28\n\
 _0809F8B4: .4byte unk_a0518\n\
 _0809F8B8:\n\
 	cmp r3, #0x17\n\
@@ -2105,7 +2105,7 @@ _0809F8B8:\n\
 	b _0809F918\n\
 	.align 2, 0\n\
 _0809F8EC: .4byte gNonGameplayRam\n\
-_0809F8F0: .4byte 0x08740978\n\
+_0809F8F0: .4byte sAddr_740950 + 0x28\n\
 _0809F8F4: .4byte unk_a039c\n\
 _0809F8F8:\n\
 	cmp r3, #0x18\n\
@@ -2136,7 +2136,7 @@ _0809F91A:\n\
 	pop {r1}\n\
 	bx r1\n\
 	.align 2, 0\n\
-_0809F928: .4byte 0x08740B48\n\
+_0809F928: .4byte sAddr_740b48\n\
 _0809F92C: .4byte unk_a0424\n\
     .syntax divided\n");
 }
@@ -3158,7 +3158,7 @@ _080A060E:\n\
 	.align 2, 0\n\
 _080A061C: .4byte 0x040000D4\n\
 _080A0620: .4byte 0x850000C0\n\
-_080A0624: .4byte 0x0879EC84\n\
+_080A0624: .4byte sFileSelectCorruptedTextPointersByLanguage\n\
 _080A0628: .4byte 0x03000011\n\
 _080A062C:\n\
 	cmp r0, #0x40\n\
@@ -3391,11 +3391,11 @@ _080A07E2:\n\
 _080A07F4: .4byte 0x03000011\n\
 _080A07F8: .4byte 0x040000D4\n\
 _080A07FC: .4byte 0x84000008\n\
-_080A0800: .4byte 0x08682FAC\n\
+_080A0800: .4byte sCharactersGfx\n\
 _080A0804: .4byte 0x85000080\n\
-_080A0808: .4byte 0x0873DB64\n\
+_080A0808: .4byte sBlob_73dad0_73dba4 + 0x94\n\
 _080A080C: .4byte 0xFFFFFB60\n\
-_080A0810: .4byte 0x0873DB04\n\
+_080A0810: .4byte sBlob_73dad0_73dba4 + 0x34\n\
 _080A0814:\n\
 	ldr r1, _080A0A18 @ =0x040000D4\n\
 	ldr r0, _080A0A1C @ =0x0873DB44\n\
@@ -3658,12 +3658,12 @@ _080A0A08:\n\
 	bx r0\n\
 	.align 2, 0\n\
 _080A0A18: .4byte 0x040000D4\n\
-_080A0A1C: .4byte 0x0873DB44\n\
+_080A0A1C: .4byte sBlob_73dad0_73dba4 + 0x74\n\
 _080A0A20: .4byte 0x84000008\n\
 _080A0A24: .4byte 0xFFFFFB60\n\
-_080A0A28: .4byte 0x0873DB24\n\
-_080A0A2C: .4byte 0x0873DAE4\n\
-_080A0A30: .4byte 0x08682FAC\n\
+_080A0A28: .4byte sBlob_73dad0_73dba4 + 0x54\n\
+_080A0A2C: .4byte sBlob_73dad0_73dba4 + 0x14\n\
+_080A0A30: .4byte sCharactersGfx\n\
 _080A0A34: .4byte gNonGameplayRam\n\
 _080A0A38: .4byte 0x03000B94\n\
     .syntax divided\n");

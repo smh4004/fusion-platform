@@ -130,9 +130,9 @@ _0807E7AC:\n\
 	beq _0807E7E4\n\
 	b _0807E7F6\n\
 	.align 2, 0\n\
-_0807E7D0: .4byte 0x0858217C\n\
+_0807E7D0: .4byte sStatusScreenSectionInfo\n\
 _0807E7D4: .4byte 0x0600C800\n\
-_0807E7D8: .4byte 0x08576180\n\
+_0807E7D8: .4byte sPauseDebugNumbersIncrementValues\n\
 _0807E7DC:\n\
 	movs r2, #0x80\n\
 	b _0807E7E8\n\
@@ -352,11 +352,11 @@ _0807E954:\n\
 	pop {r0}\n\
 	bx r0\n\
 	.align 2, 0\n\
-_0807E964: .4byte 0x0857617A\n\
-_0807E968: .4byte 0x0858217C\n\
-_0807E96C: .4byte 0x085821B3\n\
-_0807E970: .4byte 0x0879BEA8\n\
-_0807E974: .4byte 0x0858217F\n\
+_0807E964: .4byte sStatusScreenSectionSizes\n\
+_0807E968: .4byte sStatusScreenSectionInfo\n\
+_0807E96C: .4byte sStatusScreenItemsSourceInfo\n\
+_0807E970: .4byte sPauseDebugItemFlagsPointers\n\
+_0807E974: .4byte sStatusScreenSectionInfo + 0x3\n\
 _0807E978: .4byte 0x0600C800\n\
     .syntax divided\n");
 }
@@ -459,11 +459,11 @@ _0807EA20:\n\
 	bne _0807EA20\n\
 	b _0807EA4C\n\
 	.align 2, 0\n\
-_0807EA30: .4byte 0x0857617A\n\
-_0807EA34: .4byte 0x0858217C\n\
-_0807EA38: .4byte 0x085821B3\n\
-_0807EA3C: .4byte 0x0879BEA8\n\
-_0807EA40: .4byte 0x0858217F\n\
+_0807EA30: .4byte sStatusScreenSectionSizes\n\
+_0807EA34: .4byte sStatusScreenSectionInfo\n\
+_0807EA38: .4byte sStatusScreenItemsSourceInfo\n\
+_0807EA3C: .4byte sPauseDebugItemFlagsPointers\n\
+_0807EA40: .4byte sStatusScreenSectionInfo + 0x3\n\
 _0807EA44: .4byte 0x0600C800\n\
 _0807EA48:\n\
 	cmp r2, #0\n\
@@ -535,9 +535,9 @@ _0807EAB8:\n\
 	pop {r0}\n\
 	bx r0\n\
 	.align 2, 0\n\
-_0807EAC8: .4byte 0x0857617A\n\
-_0807EACC: .4byte 0x0858217C\n\
-_0807EAD0: .4byte 0x085821B3\n\
+_0807EAC8: .4byte sStatusScreenSectionSizes\n\
+_0807EACC: .4byte sStatusScreenSectionInfo\n\
+_0807EAD0: .4byte sStatusScreenItemsSourceInfo\n\
 _0807EAD4: .4byte 0x0600C800\n\
     .syntax divided\n");
 }
@@ -696,11 +696,11 @@ _0807EBD0:\n\
 	adds r3, r0, r1\n\
 	b _0807EC2A\n\
 	.align 2, 0\n\
-_0807EBF8: .4byte 0x0857617A\n\
-_0807EBFC: .4byte 0x0858217C\n\
-_0807EC00: .4byte 0x085821B3\n\
-_0807EC04: .4byte 0x0879BEA8\n\
-_0807EC08: .4byte 0x0858217F\n\
+_0807EBF8: .4byte sStatusScreenSectionSizes\n\
+_0807EBFC: .4byte sStatusScreenSectionInfo\n\
+_0807EC00: .4byte sStatusScreenItemsSourceInfo\n\
+_0807EC04: .4byte sPauseDebugItemFlagsPointers\n\
+_0807EC08: .4byte sStatusScreenSectionInfo + 0x3\n\
 _0807EC0C: .4byte 0x0600C800\n\
 _0807EC10:\n\
 	mov r2, sb\n\
@@ -762,9 +762,9 @@ _0807EC6C:\n\
 	pop {r0}\n\
 	bx r0\n\
 	.align 2, 0\n\
-_0807EC7C: .4byte 0x085821B3\n\
-_0807EC80: .4byte 0x0858217F\n\
-_0807EC84: .4byte 0x0858217E\n\
+_0807EC7C: .4byte sStatusScreenItemsSourceInfo\n\
+_0807EC80: .4byte sStatusScreenSectionInfo + 0x3\n\
+_0807EC84: .4byte sStatusScreenSectionInfo + 0x2\n\
 _0807EC88: .4byte 0x0600C800\n\
     .syntax divided\n");
 }
@@ -852,6 +852,6 @@ _0807ED0A:\n\
 	bx r0\n\
 	.align 2, 0\n\
 _0807ED18: .4byte 0x0600C800\n\
-_0807ED1C: .4byte 0x085821D6\n\
+_0807ED1C: .4byte sStatusScreenAmmoHeaderInfo\n\
     .syntax divided\n");
 }

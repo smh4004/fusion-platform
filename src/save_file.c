@@ -307,7 +307,7 @@ _0807F0E2:\n\
 	.align 2, 0\n\
 _0807F0EC: .4byte 0x0203F100\n\
 _0807F0F0: .4byte 0x02038000\n\
-_0807F0F4: .4byte 0x08582248\n\
+_0807F0F4: .4byte sSramHeaderVersionText\n\
     .syntax divided\n");
 }
 
@@ -815,9 +815,9 @@ _0807FC1C: .4byte 0x03000B94\n\
 _0807FC20: .4byte 0x03000B8D\n\
 _0807FC24: .4byte gIsLoadingFile\n\
 _0807FC28: .4byte 0x03000B8E\n\
-_0807FC2C: .4byte 0x0858225C\n\
+_0807FC2C: .4byte sSaveDataEwramPointers\n\
 _0807FC30: .4byte 0x0000FFFF\n\
-_0807FC34: .4byte 0x08582268\n\
+_0807FC34: .4byte sSaveDataEwramBackupPointers\n\
 _0807FC38:\n\
 	cmp r4, #1\n\
 	bne _0807FC60\n\
@@ -836,7 +836,7 @@ _0807FC38:\n\
 	strb r4, [r0]\n\
 	b _0807FCE6\n\
 	.align 2, 0\n\
-_0807FC5C: .4byte 0x08582268\n\
+_0807FC5C: .4byte sSaveDataEwramBackupPointers\n\
 _0807FC60:\n\
 	cmp r4, #2\n\
 	bne _0807FC94\n\
@@ -860,7 +860,7 @@ _0807FC60:\n\
 	bl BitFill\n\
 	b _0807FCE6\n\
 	.align 2, 0\n\
-_0807FC90: .4byte 0x08582268\n\
+_0807FC90: .4byte sSaveDataEwramBackupPointers\n\
 _0807FC94:\n\
 	cmp r4, #3\n\
 	bne _0807FCE4\n\
@@ -894,7 +894,7 @@ _0807FC94:\n\
 	strb r1, [r0, #1]\n\
 	b _0807FCE6\n\
 	.align 2, 0\n\
-_0807FCDC: .4byte 0x08582268\n\
+_0807FCDC: .4byte sSaveDataEwramBackupPointers\n\
 _0807FCE0: .4byte 0x03000B94\n\
 _0807FCE4:\n\
 	b _0807FCE4\n\
@@ -1027,7 +1027,7 @@ u32 unk_7fdb0(u8 useBackup)
 	ldr r1, _0807FDC4 @ =0x0858225C\n\
 	b _0807FDCA\n\
 	.align 2, 0\n\
-_0807FDC4: .4byte 0x0858225C\n\
+_0807FDC4: .4byte sSaveDataEwramPointers\n\
 _0807FDC8:\n\
 	ldr r1, _0807FE50 @ =0x08582268\n\
 _0807FDCA:\n\
@@ -1104,9 +1104,9 @@ _0807FE46:\n\
 	pop {r1}\n\
 	bx r1\n\
 	.align 2, 0\n\
-_0807FE50: .4byte 0x08582268\n\
+_0807FE50: .4byte sSaveDataEwramBackupPointers\n\
 _0807FE54: .4byte 0x03000B8D\n\
-_0807FE58: .4byte 0x08582200\n\
+_0807FE58: .4byte sSramMetroidEpisodeText\n\
 _0807FE5C: .4byte 0x0000FFFF\n\
     .syntax divided\n");
 }
@@ -1591,7 +1591,7 @@ _080804D4: .4byte 0x02037200\n\
 _080804D8: .4byte 0x03000033\n\
 _080804DC: .4byte 0x0300003B\n\
 _080804E0: .4byte gInGameTimer\n\
-_080804E4: .4byte 0x085822D4\n\
+_080804E4: .4byte sInGameTimer_Empty\n\
 _080804E8: .4byte gDisableDrawingSamusAndScrollingFlag\n\
 _080804EC: .4byte gPreviousNavigationConversation\n\
 _080804F0: .4byte gPreviousSoundEvent\n\
@@ -1605,7 +1605,7 @@ _0808050C: .4byte gCurrentRoom\n\
 _08080510: .4byte gLastDoorUsed\n\
 _08080514: .4byte 0x0300004C\n\
 _08080518: .4byte 0x0300004D\n\
-_0808051C: .4byte 0x0879B894\n\
+_0808051C: .4byte sAreaDoorPointers\n\
 _08080520: .4byte gPreviousXPosition\n\
 _08080524: .4byte gSamusData\n\
 _08080528: .4byte gPreviousYPosition\n\

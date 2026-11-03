@@ -232,7 +232,7 @@ _08080B92:\n\
 	ldr r0, _08080B98 @ =0x0858B3B0\n\
 	b _08080B9E\n\
 	.align 2, 0\n\
-_08080B98: .4byte 0x0858B3B0\n\
+_08080B98: .4byte sBlob_5822f0_58b3cc + 0x90c0\n\
 _08080B9C:\n\
 	ldr r0, _08080BB0 @ =0x0858B3B1\n\
 _08080B9E:\n\
@@ -245,12 +245,12 @@ _08080B9E:\n\
 	strb r3, [r0]\n\
 	b _08080BC6\n\
 	.align 2, 0\n\
-_08080BB0: .4byte 0x0858B3B1\n\
+_08080BB0: .4byte sBlob_5822f0_58b3cc + 0x90c1\n\
 _08080BB4:\n\
 	ldr r0, _08080BB8 @ =0x0858B3B2\n\
 	b _08080BBE\n\
 	.align 2, 0\n\
-_08080BB8: .4byte 0x0858B3B2\n\
+_08080BB8: .4byte sBlob_5822f0_58b3cc + 0x90c2\n\
 _08080BBC:\n\
 	ldr r0, _08080BE8 @ =0x0858B3B3\n\
 _08080BBE:\n\
@@ -277,7 +277,7 @@ _08080BE2:\n\
 	pop {r0}\n\
 	bx r0\n\
 	.align 2, 0\n\
-_08080BE8: .4byte 0x0858B3B3\n\
+_08080BE8: .4byte sBlob_5822f0_58b3cc + 0x90c3\n\
     .syntax divided\n");
 }
 
@@ -428,7 +428,7 @@ _08080CEA:\n\
 	pop {r1}\n\
 	bx r1\n\
 	.align 2, 0\n\
-_08080CF4: .4byte 0x0858B3B4\n\
+_08080CF4: .4byte sBlob_5822f0_58b3cc + 0x90c4\n\
     .syntax divided\n");
 }
 
@@ -613,21 +613,21 @@ _08080E78: .4byte 0x85000150\n\
 _08080E7C: .4byte gNextOamSlot\n\
 _08080E80: .4byte 0x03000011\n\
 _08080E84: .4byte 0x04000006\n\
-_08080E88: .4byte 0x085823D0\n\
-_08080E8C: .4byte 0x085822F0\n\
-_08080E90: .4byte 0x0858340C\n\
+_08080E88: .4byte sBlob_5822f0_58b3cc + 0xe0\n\
+_08080E8C: .4byte sBlob_5822f0_58b3cc\n\
+_08080E90: .4byte sBlob_5822f0_58b3cc + 0x111c\n\
 _08080E94: .4byte 0x80000100\n\
 _08080E98: .4byte 0x05000200\n\
 _08080E9C: .4byte 0x80000070\n\
 _08080EA0: .4byte 0x06001000\n\
-_08080EA4: .4byte 0x08582BBC\n\
+_08080EA4: .4byte sBlob_5822f0_58b3cc + 0x8cc\n\
 _08080EA8: .4byte 0x06012000\n\
-_08080EAC: .4byte 0x0879C228\n\
+_08080EAC: .4byte sBlob_79c228_79c27c\n\
 _08080EB0: .4byte 0x06011000\n\
 _08080EB4: .4byte 0x06010000\n\
-_08080EB8: .4byte 0x0858ABE4\n\
+_08080EB8: .4byte sBlob_5822f0_58b3cc + 0x88f4\n\
 _08080EBC: .4byte 0x0600D000\n\
-_08080EC0: .4byte 0x0858ADF0\n\
+_08080EC0: .4byte sBlob_5822f0_58b3cc + 0x8b00\n\
 _08080EC4: .4byte 0x0600F000\n\
 _08080EC8: .4byte 0x04000008\n\
 _08080ECC: .4byte 0x0400000A\n\
@@ -690,8 +690,8 @@ void EraseSramResetOam(void)
 	bx r0\n\
 	.align 2, 0\n\
 _08080F48: .4byte gNonGameplayRam\n\
-_08080F4C: .4byte 0x0858B3B0\n\
-_08080F50: .4byte 0x0858B3BE\n\
+_08080F4C: .4byte sBlob_5822f0_58b3cc + 0x90c0\n\
+_08080F50: .4byte sBlob_5822f0_58b3cc + 0x90ce\n\
     .syntax divided\n");
 }
 
@@ -734,8 +734,8 @@ void EraseSramUpdateCursorPosition(void)
 	bx r0\n\
 	.align 2, 0\n\
 _08080F94: .4byte gNonGameplayRam\n\
-_08080F98: .4byte 0x0858B3BE\n\
-_08080F9C: .4byte 0x0858B3C2\n\
+_08080F98: .4byte sBlob_5822f0_58b3cc + 0x90ce\n\
+_08080F9C: .4byte sBlob_5822f0_58b3cc + 0x90d2\n\
     .syntax divided\n");
 }
 
@@ -972,7 +972,7 @@ _0808112C:\n\
 _0808114C: .4byte gNextOamSlot\n\
 _08081150: .4byte gOamData\n\
 _08081154: .4byte gNonGameplayRam\n\
-_08081158: .4byte 0x0879C260\n\
+_08081158: .4byte sBlob_79c228_79c27c + 0x38\n\
 _0808115C: .4byte gBg1YPosition\n\
 _08081160: .4byte gBg1XPosition\n\
 _08081164: .4byte 0x000001FF\n\

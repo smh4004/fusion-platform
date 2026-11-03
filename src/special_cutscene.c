@@ -1232,7 +1232,7 @@ _08098E18:\n\
 _08098E9C: .4byte gNextOamSlot\n\
 _08098EA0: .4byte gOamData\n\
 _08098EA4: .4byte 0x000001FF\n\
-_08098EA8: .4byte 0x0863A184\n\
+_08098EA8: .4byte sAddr_639bc4 + 0x5c0\n\
 _08098EAC:\n\
 	mov r4, sb\n\
 	ldrh r0, [r4, #0xe]\n\
@@ -1487,8 +1487,8 @@ _08098FDC:\n\
 	.align 2, 0\n\
 _08099098: .4byte gNextOamSlot\n\
 _0809909C: .4byte gOamData\n\
-_080990A0: .4byte 0x0863A184\n\
-_080990A4: .4byte 0x0863A190\n\
+_080990A0: .4byte sAddr_639bc4 + 0x5c0\n\
+_080990A4: .4byte sAddr_639bc4 + 0x5cc\n\
 _080990A8: .4byte 0x000001FF\n\
 _080990AC:\n\
 	movs r5, #0\n\
@@ -1896,7 +1896,7 @@ _08099328:\n\
 	b _0809975A\n\
 	.align 2, 0\n\
 _080993E4: .4byte gOamData\n\
-_080993E8: .4byte 0x080A4FA4\n\
+_080993E8: .4byte sSineTable\n\
 _080993EC: .4byte 0x000001FF\n\
 _080993F0: .4byte 0xFFFFFE00\n\
 _080993F4: .4byte 0x03001238\n\
@@ -2356,10 +2356,10 @@ _0809975A:\n\
 	.align 2, 0\n\
 _0809977C: .4byte gNextOamSlot\n\
 _08099780: .4byte gOamData\n\
-_08099784: .4byte 0x0863A184\n\
-_08099788: .4byte 0x0863A190\n\
+_08099784: .4byte sAddr_639bc4 + 0x5c0\n\
+_08099788: .4byte sAddr_639bc4 + 0x5cc\n\
 _0809978C: .4byte 0x000001FF\n\
-_08099790: .4byte 0x080A4FA4\n\
+_08099790: .4byte sSineTable\n\
 _08099794: .4byte 0xFFFFFE00\n\
 _08099798: .4byte 0x03001238\n\
 _0809979C: .4byte 0x000003FF\n\

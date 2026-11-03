@@ -202,22 +202,22 @@ _0809AFA4: .4byte 0x0000FFEF\n\
 _0809AFA8: .4byte 0x04000200\n\
 _0809AFAC: .4byte 0x0000FFFD\n\
 _0809AFB0: .4byte unk_9c1bc\n\
-_0809AFB4: .4byte 0x0867D7CC\n\
+_0809AFB4: .4byte sAddr_6793b0 + 0x441c\n\
 _0809AFB8: .4byte 0x06010000\n\
 _0809AFBC: .4byte 0x040000D4\n\
-_0809AFC0: .4byte 0x0868121C\n\
+_0809AFC0: .4byte sAddr_68101c + 0x200\n\
 _0809AFC4: .4byte 0x05000200\n\
 _0809AFC8: .4byte 0x84000080\n\
-_0809AFCC: .4byte 0x08679420\n\
-_0809AFD0: .4byte 0x086820A4\n\
+_0809AFCC: .4byte sAddr_6793b0 + 0x70\n\
+_0809AFD0: .4byte sAddr_68101c + 0x1088\n\
 _0809AFD4: .4byte 0x0600E000\n\
-_0809AFD8: .4byte 0x08681A1C\n\
+_0809AFD8: .4byte sAddr_68101c + 0xa00\n\
 _0809AFDC: .4byte 0x0600E800\n\
-_0809AFE0: .4byte 0x0868259C\n\
+_0809AFE0: .4byte sAddr_68101c + 0x1580\n\
 _0809AFE4: .4byte 0x0400000A\n\
 _0809AFE8: .4byte gWrittenToBldy\n\
 _0809AFEC: .4byte gNonGameplayRam\n\
-_0809AFF0: .4byte 0x0868101C\n\
+_0809AFF0: .4byte sAddr_68101c\n\
 _0809AFF4: .4byte 0x05000120\n\
 _0809AFF8: .4byte 0x84000008\n\
 _0809AFFC: .4byte CutsceneRestrictedLabDetachingVblank\n\
@@ -1148,7 +1148,7 @@ _0809BBF0:\n\
 	bx r0\n\
 	.align 2, 0\n\
 _0809BBF4: .4byte 0x040000D4\n\
-_0809BBF8: .4byte 0x0868161C\n\
+_0809BBF8: .4byte sAddr_68101c + 0x600\n\
 _0809BBFC: .4byte 0x05000220\n\
 _0809BC00: .4byte 0x84000008\n\
     .syntax divided\n");
@@ -1268,7 +1268,7 @@ _0809BCC8:\n\
 	bx r0\n\
 	.align 2, 0\n\
 _0809BCCC: .4byte 0x040000D4\n\
-_0809BCD0: .4byte 0x0868141C\n\
+_0809BCD0: .4byte sAddr_68101c + 0x400\n\
 _0809BCD4: .4byte 0x05000200\n\
 _0809BCD8: .4byte 0x84000008\n\
     .syntax divided\n");
@@ -1405,7 +1405,7 @@ _0809BDE2:\n\
 	bx r0\n\
 	.align 2, 0\n\
 _0809BDE8: .4byte 0x040000D4\n\
-_0809BDEC: .4byte 0x0868181C\n\
+_0809BDEC: .4byte sAddr_68101c + 0x800\n\
 _0809BDF0: .4byte 0x05000260\n\
 _0809BDF4: .4byte 0x84000008\n\
     .syntax divided\n");
@@ -1469,7 +1469,7 @@ void unk_9be8c(struct CutsceneOam* pOam)
 	b _0809BF46\n\
 	.align 2, 0\n\
 _0809BEAC: .4byte 0x040000D4\n\
-_0809BEB0: .4byte 0x0868101C\n\
+_0809BEB0: .4byte sAddr_68101c\n\
 _0809BEB4: .4byte 0x05000120\n\
 _0809BEB8: .4byte 0x84000008\n\
 _0809BEBC:\n\
@@ -1511,7 +1511,7 @@ _0809BEE8:\n\
 	b _0809BF46\n\
 	.align 2, 0\n\
 _0809BF04: .4byte 0x040000D4\n\
-_0809BF08: .4byte 0x0868101C\n\
+_0809BF08: .4byte sAddr_68101c\n\
 _0809BF0C: .4byte 0x05000120\n\
 _0809BF10: .4byte 0x84000008\n\
 _0809BF14:\n\

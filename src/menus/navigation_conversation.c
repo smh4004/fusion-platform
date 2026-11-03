@@ -995,7 +995,7 @@ _0807A13A:\n\
 	mov r2, ip\n\
 	b _0807A1D2\n\
 	.align 2, 0\n\
-_0807A174: .4byte 0x0879CDF4\n\
+_0807A174: .4byte sMessageTextPointers\n\
 _0807A178: .4byte 0x03000011\n\
 _0807A17C: .4byte 0x06007000\n\
 _0807A180:\n\
@@ -1523,7 +1523,7 @@ _0807A5F2:\n\
 	bl _0807AE42\n\
 	.align 2, 0\n\
 _0807A628: .4byte gNonGameplayRam\n\
-_0807A62C: .4byte 0x085766E0\n\
+_0807A62C: .4byte sNavConversationTextBoxCursorYPositions\n\
 _0807A630:\n\
 	movs r2, #0\n\
 	strh r2, [r1, #0x2e]\n\
@@ -1568,7 +1568,7 @@ _0807A630:\n\
 	bl _0807AE42\n\
 	.align 2, 0\n\
 _0807A684: .4byte 0x0000FF28\n\
-_0807A688: .4byte 0x085766E0\n\
+_0807A688: .4byte sNavConversationTextBoxCursorYPositions\n\
 _0807A68C:\n\
 	ldrb r1, [r3, #0x19]\n\
 	lsls r0, r1, #1\n\
@@ -1595,7 +1595,7 @@ _0807A68C:\n\
 	strh r0, [r2, #0x2c]\n\
 	b _0807AE42\n\
 	.align 2, 0\n\
-_0807A6BC: .4byte 0x085766E0\n\
+_0807A6BC: .4byte sNavConversationTextBoxCursorYPositions\n\
 _0807A6C0:\n\
 	ldr r1, _0807A6F4 @ =gNonGameplayRam\n\
 	movs r0, #0\n\
@@ -2238,7 +2238,7 @@ _0807AB4A:\n\
 	b _0807AE42\n\
 	.align 2, 0\n\
 _0807ABAC: .4byte gNonGameplayRam\n\
-_0807ABB0: .4byte 0x085766E0\n\
+_0807ABB0: .4byte sNavConversationTextBoxCursorYPositions\n\
 _0807ABB4:\n\
 	ldr r5, _0807AC24 @ =gNonGameplayRam\n\
 	movs r3, #0x9a\n\
@@ -2585,7 +2585,7 @@ _0807AE44:\n\
 	bx r1\n\
 	.align 2, 0\n\
 _0807AE4C: .4byte gNonGameplayRam\n\
-_0807AE50: .4byte 0x085766E0\n\
+_0807AE50: .4byte sNavConversationTextBoxCursorYPositions\n\
     .syntax divided\n");
 }
 
@@ -3198,7 +3198,7 @@ _0807B752:\n\
 	.align 2, 0\n\
 _0807B770: .4byte 0x00000252\n\
 _0807B774: .4byte gWrittenToMosaic_L\n\
-_0807B778: .4byte 0x08576802\n\
+_0807B778: .4byte sNavConversationMosaicTarget\n\
 _0807B77C: .4byte 0x00000251\n\
 _0807B780:\n\
 	ldr r0, _0807B7B0 @ =0x00000252\n\
@@ -3608,7 +3608,7 @@ _0807BA66:\n\
 _0807BA80: .4byte 0x0200D000\n\
 _0807BA84: .4byte 0x0200E000\n\
 _0807BA88: .4byte 0x0200F000\n\
-_0807BA8C: .4byte 0x0879CDF4\n\
+_0807BA8C: .4byte sMessageTextPointers\n\
 _0807BA90: .4byte 0x03000011\n\
 _0807BA94:\n\
 	movs r0, #0x83\n\
@@ -3722,7 +3722,7 @@ _0807BB24:\n\
 	.align 2, 0\n\
 _0807BB60: .4byte 0x000001BF\n\
 _0807BB64: .4byte 0x0200F000\n\
-_0807BB68: .4byte 0x0879CDF4\n\
+_0807BB68: .4byte sMessageTextPointers\n\
 _0807BB6C: .4byte 0x03000011\n\
 _0807BB70:\n\
 	ldrh r1, [r6]\n\
@@ -3878,10 +3878,10 @@ _0807BC76:\n\
 	.align 2, 0\n\
 _0807BC80: .4byte 0x0300004D\n\
 _0807BC84: .4byte gEventCounter\n\
-_0807BC88: .4byte 0x08575A60\n\
+_0807BC88: .4byte sEventLocationAndNavigationInfo\n\
 _0807BC8C: .4byte gPreviousNavigationConversation\n\
-_0807BC90: .4byte 0x085766E4\n\
-_0807BC94: .4byte 0x08576066\n\
+_0807BC90: .4byte sNavConversationTargets\n\
+_0807BC94: .4byte sNavigationTargetLocationAreas\n\
     .syntax divided\n");
 }
 
@@ -3988,7 +3988,7 @@ _0807BE18:\n\
 	.align 2, 0\n\
 _0807BE2C: .4byte gNonGameplayRam\n\
 _0807BE30: .4byte 0x0000021A\n\
-_0807BE34: .4byte 0x0857BCC8\n\
+_0807BE34: .4byte sNavConversationPopUpSets\n\
 _0807BE38:\n\
 	ldr r1, _0807BE4C @ =0x00000219\n\
 	adds r0, r6, r1\n\
@@ -4114,7 +4114,7 @@ _0807BF08:\n\
 	bgt _0807BF08\n\
 	b _0807BF82\n\
 	.align 2, 0\n\
-_0807BF28: .4byte 0x0857BC50\n\
+_0807BF28: .4byte sNavConversationPopUps\n\
 _0807BF2C: .4byte 0x0000021A\n\
 _0807BF30: .4byte 0x040000D4\n\
 _0807BF34: .4byte 0xFFFFFC00\n\
@@ -4305,7 +4305,7 @@ _0807C134:\n\
 	ldr r0, _0807C15C @ =0x02004000\n\
 	b _0807C17E\n\
 	.align 2, 0\n\
-_0807C148: .4byte 0x0857BC50\n\
+_0807C148: .4byte sNavConversationPopUps\n\
 _0807C14C: .4byte gNonGameplayRam\n\
 _0807C150: .4byte 0x0000021A\n\
 _0807C154: .4byte 0x0000021B\n\
@@ -4388,7 +4388,7 @@ _0807C1DC:\n\
 	bgt _0807C1DC\n\
 	b _0807C2F4\n\
 	.align 2, 0\n\
-_0807C1F0: .4byte 0x0857BC50\n\
+_0807C1F0: .4byte sNavConversationPopUps\n\
 _0807C1F4: .4byte gNonGameplayRam\n\
 _0807C1F8: .4byte 0x0000021A\n\
 _0807C1FC: .4byte 0x040000D4\n\
@@ -4519,7 +4519,7 @@ _0807C2F4:\n\
 	pop {r0}\n\
 	bx r0\n\
 	.align 2, 0\n\
-_0807C2FC: .4byte 0x0857BC50\n\
+_0807C2FC: .4byte sNavConversationPopUps\n\
 _0807C300: .4byte gNonGameplayRam\n\
 _0807C304: .4byte 0x0000021A\n\
 _0807C308: .4byte 0x040000D4\n\
@@ -5053,7 +5053,7 @@ _0807D038: .4byte gPauseScreenFlag\n\
 _0807D03C: .4byte 0x00000247\n\
 _0807D040: .4byte 0x00000249\n\
 _0807D044: .4byte 0x05000340\n\
-_0807D048: .4byte 0x08581300\n\
+_0807D048: .4byte sNavConversationFlashingPal_581300\n\
 _0807D04C: .4byte 0x0000024A\n\
 _0807D050:\n\
 	cmp r0, #3\n\
@@ -5090,7 +5090,7 @@ _0807D078:\n\
 	adds r0, r0, r1\n\
 	b _0807D0B2\n\
 	.align 2, 0\n\
-_0807D090: .4byte 0x0857608A\n\
+_0807D090: .4byte sEvent_57608A\n\
 _0807D094: .4byte 0x0300004C\n\
 _0807D098: .4byte 0x0879C1A4\n\
 _0807D09C:\n\
@@ -5222,7 +5222,7 @@ _0807D18A:\n\
 	b _0807D266\n\
 	.align 2, 0\n\
 _0807D194: .4byte 0x00000242\n\
-_0807D198: .4byte 0x0879C180\n\
+_0807D198: .4byte sBslDiagramOamIds\n\
 _0807D19C:\n\
 	mov r0, ip\n\
 	ldrh r1, [r0, #4]\n\
@@ -5338,7 +5338,7 @@ _0807D270:\n\
 	pop {r0}\n\
 	bx r0\n\
 	.align 2, 0\n\
-_0807D278: .4byte 0x0879C180\n\
+_0807D278: .4byte sBslDiagramOamIds\n\
     .syntax divided\n");
 }
 

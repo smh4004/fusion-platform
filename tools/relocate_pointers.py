@@ -293,6 +293,7 @@ ASM_LIT = re.compile(r"(\.4byte\s+)0x0?(8[0-9A-Fa-f]{6})\b")
 
 
 labels_needed = {}   # blob symbol -> {offset: label}
+naked_syms_used = {}  # file -> symbols referenced from naked asm (no C declaration needed)
 externs_needed = {}  # file -> {label}
 
 
@@ -427,6 +428,22 @@ def cmd_literals(files):
                     return f"(u32){lbl}"
                 return f"(u32)&{name}" + (f" + 0x{off:x}" if off else "")
             text = BARE_LIT.sub(bare, text)
+
+            # naked functions: .4byte literals inside asm("...") strings
+            def naked(m):
+                nonlocal n
+                addr = int(m.group(2), 16) & 0xFFFFFF
+                t = target(addr)
+                if not t:
+                    return m.group(0)
+                name, off, kind = t
+                if kind not in "Tt" and not ensure_global(name, kind):
+                    return m.group(0)
+                n += 1
+                if kind not in "Tt" and name not in naked_syms_used.setdefault(str(p), set()):
+                    naked_syms_used[str(p)].add(name)
+                return f"{m.group(1)}{name}" + (f" + 0x{off:x}" if off else "")
+            text = ASM_LIT.sub(naked, text)
         else:
             def sub(m):
                 nonlocal n

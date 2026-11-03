@@ -336,7 +336,7 @@ _0809D3B6:\n\
 _0809D438: .4byte gNextOamSlot\n\
 _0809D43C: .4byte gOamData\n\
 _0809D440: .4byte 0x000001FF\n\
-_0809D444: .4byte 0x0863A184\n\
+_0809D444: .4byte sAddr_639bc4 + 0x5c0\n\
 _0809D448:\n\
 	mov r4, r8\n\
 	ldrh r0, [r4, #2]\n\
@@ -786,10 +786,10 @@ _0809D78C:\n\
 	.align 2, 0\n\
 _0809D7AC: .4byte gNextOamSlot\n\
 _0809D7B0: .4byte gOamData\n\
-_0809D7B4: .4byte 0x0863A184\n\
-_0809D7B8: .4byte 0x0863A190\n\
+_0809D7B4: .4byte sAddr_639bc4 + 0x5c0\n\
+_0809D7B8: .4byte sAddr_639bc4 + 0x5cc\n\
 _0809D7BC: .4byte 0x000001FF\n\
-_0809D7C0: .4byte 0x080A4FA4\n\
+_0809D7C0: .4byte sSineTable\n\
 _0809D7C4: .4byte 0xFFFFFE00\n\
 _0809D7C8: .4byte 0x03001238\n\
 _0809D7CC: .4byte 0x000003FF\n\
@@ -1245,10 +1245,10 @@ _0809DB26:\n\
 	.align 2, 0\n\
 _0809DB48: .4byte gNextOamSlot\n\
 _0809DB4C: .4byte gOamData\n\
-_0809DB50: .4byte 0x0863A184\n\
-_0809DB54: .4byte 0x0863A190\n\
+_0809DB50: .4byte sAddr_639bc4 + 0x5c0\n\
+_0809DB54: .4byte sAddr_639bc4 + 0x5cc\n\
 _0809DB58: .4byte 0x000001FF\n\
-_0809DB5C: .4byte 0x080A4FA4\n\
+_0809DB5C: .4byte sSineTable\n\
 _0809DB60: .4byte 0xFFFFFE00\n\
 _0809DB64: .4byte 0x03001238\n\
 _0809DB68: .4byte 0x000003FF\n\

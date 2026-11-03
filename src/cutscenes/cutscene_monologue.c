@@ -580,7 +580,7 @@ _0809CF10:\n\
 	.align 2, 0\n\
 _0809CF80: .4byte gNextOamSlot\n\
 _0809CF84: .4byte gOamData\n\
-_0809CF88: .4byte 0x0868279C\n\
+_0809CF88: .4byte sAddr_68101c + 0x1780\n\
 _0809CF8C: .4byte 0x000001FF\n\
 _0809CF90:\n\
 	ldrh r0, [r5, #2]\n\
