@@ -509,7 +509,9 @@ SECTIONS {
 
         src/sa_x_close_up.o(.text);
 
-        asm/disasm_0x0809deb4.o(.text);
+        src/menus/game_over.o(.text);
+        src/menus/file_select.o(.text);
+        src/ending_text.o(.text);
 
         src/ending.o(.text);
 

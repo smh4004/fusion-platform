@@ -1323,7 +1323,266 @@ const struct CreditsEntry sCredits[310] = {
 	},
 };
 
-static const u8 sBlob_74dc48_74e620[] = INCBIN_U8("data/Blob_74dc48_74e620.bin");
+const struct EndingTextLetter sEndingTextLetters_PermanentDefault[6] = {
+    [0] = { 2, 0, 0, 120, 40, (const u16*)0x874a812 },
+    [1] = { 2, 0, 0, 120, 60, (const u16*)0x874a7d8 },
+    [2] = { 2, 0, 0, 120, 92, (const u16*)0x874a86e },
+    [3] = { 2, 0, 0, 120, 108, (const u16*)0x874a8e0 },
+    [4] = { 2, 0, 0, 124, 128, (const u16*)0x874a7f8 },
+    [5] = { 2, 0, 0, 120, 158, (const u16*)0x874a988 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Default0[9] = {
+    [0] = { 1, 1, 0, 120, 40, (const u16*)0x874a826 },
+    [1] = { 1, 5, 0, 120, 40, (const u16*)0x874a82e },
+    [2] = { 1, 9, 0, 120, 40, (const u16*)0x874a836 },
+    [3] = { 1, 13, 0, 120, 40, (const u16*)0x874a83e },
+    [4] = { 1, 17, 0, 120, 40, (const u16*)0x874a846 },
+    [5] = { 1, 21, 0, 120, 40, (const u16*)0x874a84e },
+    [6] = { 1, 25, 0, 120, 40, (const u16*)0x874a856 },
+    [7] = { 1, 29, 0, 120, 40, (const u16*)0x874a85e },
+    [8] = { 1, 33, 0, 120, 40, (const u16*)0x874a866 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Default1[11] = {
+    [0] = { 1, 1, 0, 120, 92, (const u16*)0x874a888 },
+    [1] = { 1, 5, 0, 120, 92, (const u16*)0x874a890 },
+    [2] = { 1, 9, 0, 120, 92, (const u16*)0x874a898 },
+    [3] = { 1, 13, 0, 120, 92, (const u16*)0x874a8a0 },
+    [4] = { 1, 17, 0, 120, 92, (const u16*)0x874a8a8 },
+    [5] = { 1, 21, 0, 120, 92, (const u16*)0x874a8b0 },
+    [6] = { 1, 25, 0, 120, 92, (const u16*)0x874a8b8 },
+    [7] = { 1, 29, 0, 120, 92, (const u16*)0x874a8c0 },
+    [8] = { 1, 33, 0, 120, 92, (const u16*)0x874a8c8 },
+    [9] = { 1, 37, 0, 120, 92, (const u16*)0x874a8d0 },
+    [10] = { 1, 41, 0, 120, 92, (const u16*)0x874a8d8 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Default2[17] = {
+    [0] = { 1, 1, 0, 120, 108, (const u16*)0x874a900 },
+    [1] = { 1, 5, 0, 120, 108, (const u16*)0x874a908 },
+    [2] = { 1, 9, 0, 120, 108, (const u16*)0x874a910 },
+    [3] = { 1, 13, 0, 120, 108, (const u16*)0x874a918 },
+    [4] = { 1, 17, 0, 120, 108, (const u16*)0x874a920 },
+    [5] = { 1, 21, 0, 120, 108, (const u16*)0x874a928 },
+    [6] = { 1, 25, 0, 120, 108, (const u16*)0x874a930 },
+    [7] = { 1, 29, 0, 120, 108, (const u16*)0x874a938 },
+    [8] = { 1, 33, 0, 120, 108, (const u16*)0x874a940 },
+    [9] = { 1, 37, 0, 120, 108, (const u16*)0x874a948 },
+    [10] = { 1, 41, 0, 120, 108, (const u16*)0x874a950 },
+    [11] = { 1, 45, 0, 120, 108, (const u16*)0x874a958 },
+    [12] = { 1, 49, 0, 120, 108, (const u16*)0x874a960 },
+    [13] = { 1, 53, 0, 120, 108, (const u16*)0x874a968 },
+    [14] = { 1, 57, 0, 120, 108, (const u16*)0x874a970 },
+    [15] = { 1, 61, 0, 120, 108, (const u16*)0x874a978 },
+    [16] = { 1, 65, 0, 120, 108, (const u16*)0x874a980 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_PermanentGerman[6] = {
+    [0] = { 2, 0, 0, 120, 40, (const u16*)0x874af7c },
+    [1] = { 2, 0, 0, 120, 60, (const u16*)0x874af42 },
+    [2] = { 2, 0, 0, 120, 108, (const u16*)0x874b08e },
+    [3] = { 2, 0, 0, 120, 108, (const u16*)0x874affe },
+    [4] = { 2, 0, 0, 124, 128, (const u16*)0x874af62 },
+    [5] = { 2, 0, 0, 120, 158, (const u16*)0x874b08e },
+};
+
+const struct EndingTextLetter sEndingTextLetters_German0[13] = {
+    [0] = { 1, 1, 0, 120, 40, (const u16*)0x874af96 },
+    [1] = { 1, 5, 0, 120, 40, (const u16*)0x874af9e },
+    [2] = { 1, 9, 0, 120, 40, (const u16*)0x874afa6 },
+    [3] = { 1, 13, 0, 120, 40, (const u16*)0x874afae },
+    [4] = { 1, 17, 0, 120, 40, (const u16*)0x874afb6 },
+    [5] = { 1, 21, 0, 120, 40, (const u16*)0x874afbe },
+    [6] = { 1, 25, 0, 120, 40, (const u16*)0x874afc6 },
+    [7] = { 1, 29, 0, 120, 40, (const u16*)0x874afce },
+    [8] = { 1, 33, 0, 120, 40, (const u16*)0x874afd6 },
+    [9] = { 1, 37, 0, 120, 40, (const u16*)0x874afde },
+    [10] = { 1, 41, 0, 120, 40, (const u16*)0x874afe6 },
+    [11] = { 1, 45, 0, 120, 40, (const u16*)0x874afee },
+    [12] = { 1, 49, 0, 120, 40, (const u16*)0x874aff6 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_German1[14] = {
+    [0] = { 1, 1, 0, 120, 108, (const u16*)0x874b01e },
+    [1] = { 1, 5, 0, 120, 108, (const u16*)0x874b026 },
+    [2] = { 1, 9, 0, 120, 108, (const u16*)0x874b02e },
+    [3] = { 1, 13, 0, 120, 108, (const u16*)0x874b036 },
+    [4] = { 1, 17, 0, 120, 108, (const u16*)0x874b03e },
+    [5] = { 1, 21, 0, 120, 108, (const u16*)0x874b046 },
+    [6] = { 1, 25, 0, 120, 108, (const u16*)0x874b04e },
+    [7] = { 1, 29, 0, 120, 108, (const u16*)0x874b056 },
+    [8] = { 1, 33, 0, 120, 108, (const u16*)0x874b05e },
+    [9] = { 1, 37, 0, 120, 108, (const u16*)0x874b066 },
+    [10] = { 1, 41, 0, 120, 108, (const u16*)0x874b06e },
+    [11] = { 1, 45, 0, 120, 108, (const u16*)0x874b076 },
+    [12] = { 1, 49, 0, 120, 108, (const u16*)0x874b07e },
+    [13] = { 1, 53, 0, 120, 108, (const u16*)0x874b086 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_PermanentFrench[6] = {
+    [0] = { 2, 0, 0, 120, 40, (const u16*)0x874a9e2 },
+    [1] = { 2, 0, 0, 120, 60, (const u16*)0x874a9a8 },
+    [2] = { 2, 0, 0, 120, 108, (const u16*)0x874ab4e },
+    [3] = { 2, 0, 0, 120, 108, (const u16*)0x874aa82 },
+    [4] = { 2, 0, 0, 124, 128, (const u16*)0x874a9c8 },
+    [5] = { 2, 0, 0, 120, 158, (const u16*)0x874ab4e },
+};
+
+const struct EndingTextLetter sEndingTextLetters_French0[16] = {
+    [0] = { 1, 1, 0, 120, 40, (const u16*)0x874aa02 },
+    [1] = { 1, 5, 0, 120, 40, (const u16*)0x874aa0a },
+    [2] = { 1, 9, 0, 120, 40, (const u16*)0x874aa12 },
+    [3] = { 1, 13, 0, 120, 40, (const u16*)0x874aa1a },
+    [4] = { 1, 17, 0, 120, 40, (const u16*)0x874aa22 },
+    [5] = { 1, 21, 0, 120, 40, (const u16*)0x874aa2a },
+    [6] = { 1, 25, 0, 120, 40, (const u16*)0x874aa32 },
+    [7] = { 1, 29, 0, 120, 40, (const u16*)0x874aa3a },
+    [8] = { 1, 33, 0, 120, 40, (const u16*)0x874aa42 },
+    [9] = { 1, 37, 0, 120, 40, (const u16*)0x874aa4a },
+    [10] = { 1, 41, 0, 120, 40, (const u16*)0x874aa52 },
+    [11] = { 1, 45, 0, 120, 40, (const u16*)0x874aa5a },
+    [12] = { 1, 49, 0, 120, 40, (const u16*)0x874aa62 },
+    [13] = { 1, 53, 0, 120, 40, (const u16*)0x874aa6a },
+    [14] = { 1, 57, 0, 120, 40, (const u16*)0x874aa72 },
+    [15] = { 1, 61, 0, 120, 40, (const u16*)0x874aa7a },
+};
+
+const struct EndingTextLetter sEndingTextLetters_French1[20] = {
+    [0] = { 1, 1, 0, 120, 108, (const u16*)0x874aaae },
+    [1] = { 1, 5, 0, 120, 108, (const u16*)0x874aab6 },
+    [2] = { 1, 9, 0, 120, 108, (const u16*)0x874aabe },
+    [3] = { 1, 13, 0, 120, 108, (const u16*)0x874aac6 },
+    [4] = { 1, 17, 0, 120, 108, (const u16*)0x874aace },
+    [5] = { 1, 21, 0, 120, 108, (const u16*)0x874aad6 },
+    [6] = { 1, 25, 0, 120, 108, (const u16*)0x874aade },
+    [7] = { 1, 29, 0, 120, 108, (const u16*)0x874aae6 },
+    [8] = { 1, 33, 0, 120, 108, (const u16*)0x874aaee },
+    [9] = { 1, 37, 0, 120, 108, (const u16*)0x874aaf6 },
+    [10] = { 1, 41, 0, 120, 108, (const u16*)0x874aafe },
+    [11] = { 1, 45, 0, 120, 108, (const u16*)0x874ab06 },
+    [12] = { 1, 49, 0, 120, 108, (const u16*)0x874ab0e },
+    [13] = { 1, 53, 0, 120, 108, (const u16*)0x874ab16 },
+    [14] = { 1, 57, 0, 120, 108, (const u16*)0x874ab1e },
+    [15] = { 1, 61, 0, 120, 108, (const u16*)0x874ab26 },
+    [16] = { 1, 65, 0, 120, 108, (const u16*)0x874ab2e },
+    [17] = { 1, 69, 0, 120, 108, (const u16*)0x874ab36 },
+    [18] = { 1, 73, 0, 120, 108, (const u16*)0x874ab3e },
+    [19] = { 1, 77, 0, 120, 108, (const u16*)0x874ab46 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_PermanentItalian[6] = {
+    [0] = { 2, 0, 0, 120, 40, (const u16*)0x874ab9c },
+    [1] = { 2, 0, 0, 120, 60, (const u16*)0x874ab62 },
+    [2] = { 2, 0, 0, 120, 92, (const u16*)0x874ac52 },
+    [3] = { 2, 0, 0, 120, 108, (const u16*)0x874acc4 },
+    [4] = { 2, 0, 0, 124, 128, (const u16*)0x874ab82 },
+    [5] = { 2, 0, 0, 120, 158, (const u16*)0x874ad6c },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Italian0[18] = {
+    [0] = { 1, 1, 0, 120, 40, (const u16*)0x874abc2 },
+    [1] = { 1, 5, 0, 120, 40, (const u16*)0x874abca },
+    [2] = { 1, 9, 0, 120, 40, (const u16*)0x874abd2 },
+    [3] = { 1, 13, 0, 120, 40, (const u16*)0x874abda },
+    [4] = { 1, 17, 0, 120, 40, (const u16*)0x874abe2 },
+    [5] = { 1, 21, 0, 120, 40, (const u16*)0x874abea },
+    [6] = { 1, 25, 0, 120, 40, (const u16*)0x874abf2 },
+    [7] = { 1, 29, 0, 120, 40, (const u16*)0x874abfa },
+    [8] = { 1, 33, 0, 120, 40, (const u16*)0x874ac02 },
+    [9] = { 1, 37, 0, 120, 40, (const u16*)0x874ac0a },
+    [10] = { 1, 41, 0, 120, 40, (const u16*)0x874ac12 },
+    [11] = { 1, 45, 0, 120, 40, (const u16*)0x874ac1a },
+    [12] = { 1, 49, 0, 120, 40, (const u16*)0x874ac22 },
+    [13] = { 1, 53, 0, 120, 40, (const u16*)0x874ac2a },
+    [14] = { 1, 57, 0, 120, 40, (const u16*)0x874ac32 },
+    [15] = { 1, 61, 0, 120, 40, (const u16*)0x874ac3a },
+    [16] = { 1, 65, 0, 120, 40, (const u16*)0x874ac42 },
+    [17] = { 1, 69, 0, 120, 40, (const u16*)0x874ac4a },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Italian1[11] = {
+    [0] = { 1, 1, 0, 120, 92, (const u16*)0x874ac6c },
+    [1] = { 1, 5, 0, 120, 92, (const u16*)0x874ac74 },
+    [2] = { 1, 9, 0, 120, 92, (const u16*)0x874ac7c },
+    [3] = { 1, 13, 0, 120, 92, (const u16*)0x874ac84 },
+    [4] = { 1, 17, 0, 120, 92, (const u16*)0x874ac8c },
+    [5] = { 1, 21, 0, 120, 92, (const u16*)0x874ac94 },
+    [6] = { 1, 25, 0, 120, 92, (const u16*)0x874ac9c },
+    [7] = { 1, 29, 0, 120, 92, (const u16*)0x874aca4 },
+    [8] = { 1, 33, 0, 120, 92, (const u16*)0x874acac },
+    [9] = { 1, 37, 0, 120, 92, (const u16*)0x874acb4 },
+    [10] = { 1, 41, 0, 120, 92, (const u16*)0x874acbc },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Italian2[17] = {
+    [0] = { 1, 1, 0, 120, 108, (const u16*)0x874ace4 },
+    [1] = { 1, 5, 0, 120, 108, (const u16*)0x874acec },
+    [2] = { 1, 9, 0, 120, 108, (const u16*)0x874acf4 },
+    [3] = { 1, 13, 0, 120, 108, (const u16*)0x874acfc },
+    [4] = { 1, 17, 0, 120, 108, (const u16*)0x874ad04 },
+    [5] = { 1, 21, 0, 120, 108, (const u16*)0x874ad0c },
+    [6] = { 1, 25, 0, 120, 108, (const u16*)0x874ad14 },
+    [7] = { 1, 29, 0, 120, 108, (const u16*)0x874ad1c },
+    [8] = { 1, 33, 0, 120, 108, (const u16*)0x874ad24 },
+    [9] = { 1, 37, 0, 120, 108, (const u16*)0x874ad2c },
+    [10] = { 1, 41, 0, 120, 108, (const u16*)0x874ad34 },
+    [11] = { 1, 45, 0, 120, 108, (const u16*)0x874ad3c },
+    [12] = { 1, 49, 0, 120, 108, (const u16*)0x874ad44 },
+    [13] = { 1, 53, 0, 120, 108, (const u16*)0x874ad4c },
+    [14] = { 1, 57, 0, 120, 108, (const u16*)0x874ad54 },
+    [15] = { 1, 61, 0, 120, 108, (const u16*)0x874ad5c },
+    [16] = { 1, 65, 0, 120, 108, (const u16*)0x874ad64 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_PermanentSpanish[6] = {
+    [0] = { 2, 0, 0, 120, 40, (const u16*)0x874adc6 },
+    [1] = { 2, 0, 0, 120, 60, (const u16*)0x874ad8c },
+    [2] = { 2, 0, 0, 120, 108, (const u16*)0x874af1c },
+    [3] = { 2, 0, 0, 120, 108, (const u16*)0x874ae5e },
+    [4] = { 2, 0, 0, 124, 128, (const u16*)0x874adac },
+    [5] = { 2, 0, 0, 120, 158, (const u16*)0x874af1c },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Spanish0[15] = {
+    [0] = { 1, 1, 0, 120, 40, (const u16*)0x874ade6 },
+    [1] = { 1, 5, 0, 120, 40, (const u16*)0x874adee },
+    [2] = { 1, 9, 0, 120, 40, (const u16*)0x874adf6 },
+    [3] = { 1, 13, 0, 120, 40, (const u16*)0x874adfe },
+    [4] = { 1, 17, 0, 120, 40, (const u16*)0x874ae06 },
+    [5] = { 1, 21, 0, 120, 40, (const u16*)0x874ae0e },
+    [6] = { 1, 25, 0, 120, 40, (const u16*)0x874ae16 },
+    [7] = { 1, 29, 0, 120, 40, (const u16*)0x874ae1e },
+    [8] = { 1, 33, 0, 120, 40, (const u16*)0x874ae26 },
+    [9] = { 1, 37, 0, 120, 40, (const u16*)0x874ae2e },
+    [10] = { 1, 41, 0, 120, 40, (const u16*)0x874ae36 },
+    [11] = { 1, 45, 0, 120, 40, (const u16*)0x874ae3e },
+    [12] = { 1, 49, 0, 120, 40, (const u16*)0x874ae46 },
+    [13] = { 1, 53, 0, 120, 40, (const u16*)0x874ae4e },
+    [14] = { 1, 57, 0, 120, 40, (const u16*)0x874ae56 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Spanish1[19] = {
+    [0] = { 1, 1, 0, 120, 108, (const u16*)0x874ae84 },
+    [1] = { 1, 5, 0, 120, 108, (const u16*)0x874ae8c },
+    [2] = { 1, 9, 0, 120, 108, (const u16*)0x874ae94 },
+    [3] = { 1, 13, 0, 120, 108, (const u16*)0x874ae9c },
+    [4] = { 1, 17, 0, 120, 108, (const u16*)0x874aea4 },
+    [5] = { 1, 21, 0, 120, 108, (const u16*)0x874aeac },
+    [6] = { 1, 25, 0, 120, 108, (const u16*)0x874aeb4 },
+    [7] = { 1, 29, 0, 120, 108, (const u16*)0x874aebc },
+    [8] = { 1, 33, 0, 120, 108, (const u16*)0x874aec4 },
+    [9] = { 1, 37, 0, 120, 108, (const u16*)0x874aecc },
+    [10] = { 1, 41, 0, 120, 108, (const u16*)0x874aed4 },
+    [11] = { 1, 45, 0, 120, 108, (const u16*)0x874aedc },
+    [12] = { 1, 49, 0, 120, 108, (const u16*)0x874aee4 },
+    [13] = { 1, 53, 0, 120, 108, (const u16*)0x874aeec },
+    [14] = { 1, 57, 0, 120, 108, (const u16*)0x874aef4 },
+    [15] = { 1, 61, 0, 120, 108, (const u16*)0x874aefc },
+    [16] = { 1, 65, 0, 120, 108, (const u16*)0x874af04 },
+    [17] = { 1, 69, 0, 120, 108, (const u16*)0x874af0c },
+    [18] = { 1, 73, 0, 120, 108, (const u16*)0x874af14 },
+};
 
 const u32* const sPreResultsSamusBgGfxPointers1[4] = {
     sPreResultsSamusSuitedGfx3,
@@ -1346,7 +1605,8 @@ const u8* const sPreResultsSamusBgTilemapPointers[4] = {
     sTilemap_75e6fc
 };
 
-static const u8 sBlob_74e650_74eb50[] = INCBIN_U8("data/Blob_74e650_74eb50.bin");
+const u8 sEndingDigitsTopGfx[10 * 64] = INCBIN_U8("data/ending/digits_top.gfx");
+const u8 sEndingDigitsBottomGfx[10 * 64] = INCBIN_U8("data/ending/digits_bottom.gfx");
 
 const u32 sPreResultsSpaceBgGfx[4772] = INCBIN_U32("data/ending/space_bg.gfx.lz");
 

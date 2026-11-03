@@ -33,9 +33,30 @@ extern const u16 sResultsTextPal[PAL_ROW * 4];
 
 extern const struct CreditsEntry sCredits[310];
 
+extern const struct EndingTextLetter sEndingTextLetters_PermanentDefault[6];
+extern const struct EndingTextLetter sEndingTextLetters_Default0[9];
+extern const struct EndingTextLetter sEndingTextLetters_Default1[11];
+extern const struct EndingTextLetter sEndingTextLetters_Default2[17];
+extern const struct EndingTextLetter sEndingTextLetters_PermanentGerman[6];
+extern const struct EndingTextLetter sEndingTextLetters_German0[13];
+extern const struct EndingTextLetter sEndingTextLetters_German1[14];
+extern const struct EndingTextLetter sEndingTextLetters_PermanentFrench[6];
+extern const struct EndingTextLetter sEndingTextLetters_French0[16];
+extern const struct EndingTextLetter sEndingTextLetters_French1[20];
+extern const struct EndingTextLetter sEndingTextLetters_PermanentItalian[6];
+extern const struct EndingTextLetter sEndingTextLetters_Italian0[18];
+extern const struct EndingTextLetter sEndingTextLetters_Italian1[11];
+extern const struct EndingTextLetter sEndingTextLetters_Italian2[17];
+extern const struct EndingTextLetter sEndingTextLetters_PermanentSpanish[6];
+extern const struct EndingTextLetter sEndingTextLetters_Spanish0[15];
+extern const struct EndingTextLetter sEndingTextLetters_Spanish1[19];
+
 extern const u32* const sPreResultsSamusBgGfxPointers1[4];
 extern const u32* const sPreResultsSamusBgGfxPointers2[4];
 extern const u8* const sPreResultsSamusBgTilemapPointers[4];
+
+extern const u8 sEndingDigitsTopGfx[10 * 64];
+extern const u8 sEndingDigitsBottomGfx[10 * 64];
 
 extern const u32 sPreResultsSpaceBgGfx[4772];
 
