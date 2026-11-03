@@ -10,6 +10,7 @@
 #include "constants/minimap.h"
 #include "constants/navigation.h"
 #include "constants/samus.h"
+#include "constants/status_screen.h"
 
 #define PAUSE_DEBUG_SECTION_INFO_TOP(section) (sDebugSectionInfo[(section)][0])
 #define PAUSE_DEBUG_SECTION_INFO_BOTTOM(section) (sDebugSectionInfo[(section)][1])
@@ -129,5 +130,17 @@ extern const u8 sPauseDebugEventNames[EVENT_END][EVENT_NAME_SIZE];
 
 extern const u8 sDebugLocationSectionInfo[2][2];
 extern const u8 sDebugSectionInfo[PAUSE_DEBUG_SECTION_END][5];
+
+extern const u8 sStatusScreenSectionInfo[STATUS_SECTION_END][5];
+extern const u8 sStatusScreenItemsSourceInfo[7][5];
+extern const u8 sStatusScreenAmmoHeaderInfo[3][4];
+
+extern const u8 sSramTestFlashText[16];
+extern const u8 sSramSaveEndText[8];
+extern const u8 sSramMetroidEpisodeText[16];
+extern const u8 sSramMetroidEpisodeText_Unused[16];
+extern const u8 sSramHeaderVersionText_JP[20];
+extern const u8 sSramHeaderVersionText_US[20];
+extern const u8 sSramHeaderVersionText[20];
 
 #endif /* PAUSE_SCREEN_MISC_DATA_H */

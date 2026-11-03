@@ -2,6 +2,7 @@
 
 #include "macros.h"
 #include "constants/menus/pause_screen.h"
+#include "constants/status_screen.h"
 
 // Index is the main deck room + 1
 const u8 sMainDeckRoomBslDiagramColors[90] = {
@@ -900,4 +901,42 @@ const u8 sDebugSectionInfo[PAUSE_DEBUG_SECTION_END][5] = {
     },
 };
 
-static const u8 sBlob_58217b_58225c[] = INCBIN_U8("data/Blob_58217b_58225c.bin");
+const u8 sUnk_58217b[1] = { 0 };
+
+const u8 sStatusScreenSectionInfo[STATUS_SECTION_END][5] = {
+    [STATUS_SECTION_BEAM] = { 5, 5, 1, 8, STATUS_SECTION_BEAM },
+    [STATUS_SECTION_MISSILE] = { 13, 13, 1, 8, STATUS_SECTION_MISSILE },
+    [STATUS_SECTION_BOMB] = { 5, 5, 19, 28, STATUS_SECTION_BOMB },
+    [STATUS_SECTION_SUIT] = { 8, 8, 19, 28, STATUS_SECTION_SUIT },
+    [STATUS_SECTION_MISC] = { 12, 12, 19, 28, STATUS_SECTION_MISC },
+    [STATUS_SECTION_ENERGY_CURRENT] = { 3, 3, 2, 5, STATUS_SECTION_ENERGY_CURRENT },
+    [STATUS_SECTION_ENERGY_MAX] = { 3, 3, 7, 10, STATUS_SECTION_ENERGY_MAX },
+    [STATUS_SECTION_MISSILES_CURRENT] = { 3, 3, 13, 15, STATUS_SECTION_MISSILES_CURRENT },
+    [STATUS_SECTION_MISSILES_MAX] = { 3, 3, 17, 19, STATUS_SECTION_MISSILES_MAX },
+    [STATUS_SECTION_POWER_BOMBS_CURRENT] = { 3, 3, 22, 24, STATUS_SECTION_POWER_BOMBS_CURRENT },
+    [STATUS_SECTION_POWER_BOMBS_MAX] = { 3, 3, 26, 28, STATUS_SECTION_POWER_BOMBS_MAX },
+};
+
+const u8 sStatusScreenItemsSourceInfo[7][5] = {
+    [STATUS_SECTION_BEAM] = { 21, 27, 1, 8, STATUS_SECTION_BEAM },
+    [STATUS_SECTION_MISSILE] = { 21, 25, 9, 16, STATUS_SECTION_MISSILE },
+    [STATUS_SECTION_BOMB] = { 28, 30, 1, 10, STATUS_SECTION_BOMB },
+    [STATUS_SECTION_SUIT] = { 21, 24, 19, 28, STATUS_SECTION_SUIT },
+    [STATUS_SECTION_MISC] = { 25, 31, 19, 28, STATUS_SECTION_MISC },
+};
+
+const u8 sStatusScreenAmmoHeaderInfo[3][4] = {
+    [0] = { 28, 29, 11, 18 },
+    [1] = { 2, 3, 12, 19 },
+    [2] = { 2, 3, 21, 28 },
+};
+
+const u8 sUnk_5821e2[6] = { 0 };
+
+const u8 sSramTestFlashText[16] = "Met4AGB_BackUp01";
+const u8 sSramSaveEndText[8] = "SAVE_END";
+const u8 sSramMetroidEpisodeText[16] = "MetroidEpisode4A";
+const u8 sSramMetroidEpisodeText_Unused[16] = "MetroidEpisode4A";
+const u8 sSramHeaderVersionText_JP[20] = "MetroidNIPPONVerE004";
+const u8 sSramHeaderVersionText_US[20] = "AGBMetroid_USVerE004";
+const u8 sSramHeaderVersionText[20] = "MetroidAGB-EUVerE004";
