@@ -9,6 +9,10 @@ gUnk_Audio0x64 = 0x64;
 gUnk_Audio0x193F600 = 0x193F600;
 gUnk_Audio0x50 = 0x50;
 
+/* Aliases with a different declared type in navigation_conversation.c */
+sNavConversationTextPointers_ = sNavConversationTextPointers;
+sPauseScreenTextPointers_ = sPauseScreenTextPointers;
+
 SECTIONS {
     ewram (NOLOAD) : ALIGN(4) {
         . = 0x0001c000; gSpriteGfxBackup = .;

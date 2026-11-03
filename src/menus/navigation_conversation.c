@@ -44,10 +44,9 @@ extern const u8 sAddr_5807d0[];
 extern const u8 sAddr_580d68[];
 
 
-// sNavConversationTextPointers and sPauseScreenTextPointers are static in pause_screen.c,
-// alias their addresses so they are still referenced as symbols
-asm(".set sNavConversationTextPointers_, 0x879C0F0");
-asm(".set sPauseScreenTextPointers_, 0x879C10C");
+// sNavConversationTextPointers_ and sPauseScreenTextPointers_ are aliases of
+// sNavConversationTextPointers / sPauseScreenTextPointers, defined in linker.ld
+// so they move with them (they exist only so the declared types can differ).
 extern u16** sNavConversationTextPointers_[LANGUAGE_COUNT];
 extern u16** sPauseScreenTextPointers_[LANGUAGE_COUNT];
 
@@ -416,7 +415,7 @@ _08079D1A:\n\
 	mov pc, r0\n\
 	.align 2, 0\n\
 _08079D24: .4byte gPreviousNavigationConversation\n\
-_08079D28: .4byte 0x0879C0F0\n\
+_08079D28: .4byte sNavConversationTextPointers\n\
 _08079D2C: .4byte 0x03000011\n\
 _08079D30: .4byte _08079D34\n\
 _08079D34: @ jump table\n\
@@ -1355,7 +1354,7 @@ _0807A4A6:\n\
 	.align 2, 0\n\
 _0807A4D4: .4byte gNonGameplayRam\n\
 _0807A4D8: .4byte 0x00000221\n\
-_0807A4DC: .4byte 0x0879C0F0\n\
+_0807A4DC: .4byte sNavConversationTextPointers\n\
 _0807A4E0: .4byte 0x03000011\n\
 _0807A4E4: .4byte 0x0000E201\n\
 _0807A4E8:\n\
@@ -3433,7 +3432,7 @@ _0807B926:\n\
 	b _0807B9C2\n\
 	.align 2, 0\n\
 _0807B93C: .4byte 0x0200C000\n\
-_0807B940: .4byte 0x0879C10C\n\
+_0807B940: .4byte sPauseScreenTextPointers\n\
 _0807B944: .4byte 0x03000011\n\
 _0807B948: .4byte gEventCounter\n\
 _0807B94C:\n\
@@ -5092,7 +5091,7 @@ _0807D078:\n\
 	.align 2, 0\n\
 _0807D090: .4byte sEvent_57608A\n\
 _0807D094: .4byte 0x0300004C\n\
-_0807D098: .4byte 0x0879C1A4\n\
+_0807D098: .4byte sBslDiagramTargetOffsets\n\
 _0807D09C:\n\
 	mov r4, ip\n\
 	adds r4, #0xbe\n\
@@ -5152,7 +5151,7 @@ _0807D0FC:\n\
 	ldr r0, [r0]\n\
 	mov pc, r0\n\
 	.align 2, 0\n\
-_0807D108: .4byte 0x0879C210\n\
+_0807D108: .4byte sMainDeckDiagramTargetOffsets\n\
 _0807D10C: .4byte 0x00000242\n\
 _0807D110: .4byte _0807D114\n\
 _0807D114: @ jump table\n\

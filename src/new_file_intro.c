@@ -557,7 +557,21 @@ const u32* sTitleIntroCollisionWarningObjGfxPointers[6] = {
     sTitleIntroCollisionWarningObjGfx5
 };
 
-u8 sBlob_79c474_79c4a8[] = INCBIN_U8("data/Blob_79c474_79c4a8.bin");
+u32 sPointerTable_79c474[13] = {
+    (u32)&sTitleIntroGfx_652bd4,
+    (u32)&sTitleIntroGfx_653980,
+    (u32)&sTitleIntroGfx_6546f4,
+    (u32)&sTitleIntroGfx_6552a0,
+    (u32)&sTitleIntroGfx_655f3c,
+    (u32)&sTitleIntroGfx_656cd0,
+    (u32)&sTitleIntroGfx_657408,
+    (u32)&sTitleIntroGfx_6579c4,
+    (u32)&sTitleIntroGfx_657d2c,
+    (u32)&sTitleIntroGfx_657f60,
+    (u32)&sTitleIntroGfx_658150,
+    (u32)&sTitleIntroGfx_658468,
+    (u32)&sTitleIntroGfx_658848
+};
 
 const u16* sCutsceneMonologueBgPalPointers[9] = {
     (const u16*)sAddr_6638c0,
