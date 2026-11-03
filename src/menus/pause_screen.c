@@ -23,7 +23,7 @@
 #include "structs/menus/pause_screen.h"
 #include "structs/minimap.h"
 #include "structs/samus.h"
-extern const u8 sPointerTable_79ce10[];
+extern const u8 sBlob_79ce10_79e6a0[];
 
 static const u32* sMinimapData[MINIMAP_COUNT] = {
     [MINIMAP_MAIN_DECK] = sMainDeckMinimap,
@@ -253,23 +253,23 @@ static const struct FrameData* sPauseScreenOamPointers[PAUSE_OAM_ID_COUNT] = {
 };
 
 u16** sNavConversationTextPointers[LANGUAGE_COUNT] = {
-    [LANGUAGE_JAPANESE] = (u16**)(&sPointerTable_79ce10),
-    [LANGUAGE_HIRAGANA] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x384),
-    [LANGUAGE_ENGLISH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x6fc),
-    [LANGUAGE_GERMAN] = (u16**)((const u8*)&sPointerTable_79ce10 + 0xa80),
-    [LANGUAGE_FRENCH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0xe04),
-    [LANGUAGE_ITALIAN] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x1188),
-    [LANGUAGE_SPANISH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x150c)
+    [LANGUAGE_JAPANESE] = (u16**)(&sBlob_79ce10_79e6a0),
+    [LANGUAGE_HIRAGANA] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0x384),
+    [LANGUAGE_ENGLISH] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0x6fc),
+    [LANGUAGE_GERMAN] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0xa80),
+    [LANGUAGE_FRENCH] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0xe04),
+    [LANGUAGE_ITALIAN] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0x1188),
+    [LANGUAGE_SPANISH] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0x150c)
 };
 
 u16** sPauseScreenTextPointers[LANGUAGE_COUNT] = {
-    [LANGUAGE_JAPANESE] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x1c8),
-    [LANGUAGE_HIRAGANA] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x54c),
-    [LANGUAGE_ENGLISH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x8c4),
-    [LANGUAGE_GERMAN] = (u16**)((const u8*)&sPointerTable_79ce10 + 0xc48),
-    [LANGUAGE_FRENCH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0xfcc),
-    [LANGUAGE_ITALIAN] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x1350),
-    [LANGUAGE_SPANISH] = (u16**)((const u8*)&sPointerTable_79ce10 + 0x16d4)
+    [LANGUAGE_JAPANESE] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0x1c8),
+    [LANGUAGE_HIRAGANA] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0x54c),
+    [LANGUAGE_ENGLISH] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0x8c4),
+    [LANGUAGE_GERMAN] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0xc48),
+    [LANGUAGE_FRENCH] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0xfcc),
+    [LANGUAGE_ITALIAN] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0x1350),
+    [LANGUAGE_SPANISH] = (u16**)((const u8*)&sBlob_79ce10_79e6a0 + 0x16d4)
 };
 
 /**

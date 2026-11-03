@@ -12,6 +12,15 @@ extern const u32* sTitleIntroCollisionWarningObjGfxPointers[6];
 extern u32 sPointerTable_79c4a8[];
 extern const u16** sLocationTextPointers[LANGUAGE_COUNT];
 extern u16** sMessageTextPointers[LANGUAGE_COUNT];
+extern u16** sMonologueTextPointers[LANGUAGE_COUNT];
+extern const struct FrameData* sIntroSpaceViewParticleOam[6];
+extern const u16** sEndingTextPointers[LANGUAGE_COUNT];
+extern const u16* sCutsceneMonologueBgPalPointers[9];
+extern const u16* sCutsceneMonologueObjPalPointers[9];
+extern const u32* sCutsceneMonologueBgGfxPointers[9];
+extern const u32* sCutsceneMonologueObjGfxPointers[9];
+extern const u32* sCutsceneMonologueBgTilemapPointers[9];
+extern const struct FrameData* sCutsceneMonologueOamPointers[9][2];
 
 boolu32 TitleIntroHandler(void);
 boolu32 NewFileIntroHandler(void);

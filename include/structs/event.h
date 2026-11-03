@@ -56,5 +56,7 @@ extern u16 gPreviousSoundEvent;
 
 extern s8 gDoorUnlockTimer;
 extern s8 gUnk_3000047;
+extern u8 gNavConversationTargetLocation;
+extern u8 gFlashingSectorNumber;
 
 #endif /* EVENT_STRUCTS_H */

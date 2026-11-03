@@ -1,5 +1,6 @@
 #include "data/sa_x_close_up.h"
 #include "macros.h"
+#include "constants/game_state.h"
 
 const u16 sSaXCloseUpPal[16 * 16] = INCBIN_U16("data/sa_x_close_up/palette.pal");
 const u16 sSaXCloseUpPalGrayscale[] = INCBIN_U16("data/sa_x_close_up/palette_grayscale.pal");
@@ -9,282 +10,58 @@ const u32 sSaXCloseUpTileTable2[] = INCBIN_U32("data/sa_x_close_up/second.tt.lz"
 
 const u8 sSaXCloseUpDurations[2] = { 25, 60 };
 
-// Bytes come from the extracted file; pointers are relocated by the linker.
-extern const u8 sBlob_73421e_7478a0[];
-asm("\n\
-    .pushsection .rodata\n\
-    .global sBlob_73421e_7478a0\n\
-sBlob_73421e_7478a0:\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x0, 0x8056\n\
-    .4byte sBlob_73421e_7478a0 + 0x7ffa\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x805a, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0x8044\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x8062, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0x804c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x806a, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0x8044\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x8072, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0x7ffa\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x8082, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0x8002\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x808a, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0x800a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x8092, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0x8012\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x809a, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0x801a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x80a2, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0x8028\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x80aa, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0x8036\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x80b2, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0x8012\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0x80ba, 0x4420\n\
-    .4byte sBlob_73421e_7478a0 + 0xb016\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc4de, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb054\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc4ee, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb092\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc4fe, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb0d0\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc50e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb10e\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc51e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb14c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc52e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb4b2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc536, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb15a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc546, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb4b2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc54e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb168\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc55e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb4b2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc566, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb176\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc576, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb4b2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc57e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb184\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc58e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb4b2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc596, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb1ac\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc5a6, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb1d2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc5b6, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb1ec\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc5c6, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb212\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc5d6, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb7c2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc5e6, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb866\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc5ee, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb90a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc5f6, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb9ae\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc606, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xba52\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc60e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xbaf6\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc616, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xbb9a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc626, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xbc3e\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc62e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xbce2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc636, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb256\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc646, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb26a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc656, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb27e\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc666, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb286\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc66e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb28e\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc676, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb286\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc67e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb296\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc68e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb29e\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc696, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb2a6\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc6a6, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb344\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc6b6, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb370\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc6c6, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb192\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc6d6, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb766\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc6de, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb780\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc6e6, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb766\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc6ee, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb39c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc6fe, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb3aa\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc706, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb3b8\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc70e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb3d2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc716, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb3f8\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc726, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb3d2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc736, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb3b8\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc73e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb3aa\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc746, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb39c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc74e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb412\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc75e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb42c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc766, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb43a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc76e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb454\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc776, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb47a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc786, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb454\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc796, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb43a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc79e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb42c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc7a6, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb412\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc7ae, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb4ba\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc7be, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb4c8\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc7ce, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb4d6\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc7de, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb4e4\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc7ee, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb4f2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc7fe, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb500\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc80e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb50e\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc81e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb51c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc82e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xc4c8\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc836, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xc4d0\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc83e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xc4c8\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc846, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb51c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc856, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb524\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc85e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb52c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc866, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb534\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc86e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb53c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc876, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb54a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc87e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb558\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc886, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb534\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc88e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb574\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc89e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb612\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc8ae, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb6b0\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc8be, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xbd86\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc8ce, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xbe2a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc8d6, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xbece\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc8de, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xbf72\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc8ee, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xc016\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc8f6, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xc0ba\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc8fe, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc15e\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc90e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xc202\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc916, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xc2a6\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc91e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb79a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc92e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb7a2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc936, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb7aa\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc93e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb7a2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc946, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xb7b2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc956, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb7ba\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc95e, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb7b2\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc966, 0x4\n\
-    .4byte sBlob_73421e_7478a0 + 0xb7ba\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc96e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc34a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc97e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc352\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc98e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc360\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc99e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc36e\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc9ae, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc37c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc9be, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc38a\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc9ce, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc398\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc9de, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc3a6\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc9ee, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc3b4\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xc9fe, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc3c8\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xca0e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc3dc\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xca1e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc3f0\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xca2e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc404\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xca3e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc418\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xca4e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc42c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xca5e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc434\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xca6e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc448\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xca7e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc45c\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xca8e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc470\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xca9e, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc484\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xcaae, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc498\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xcabe, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc4ac\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xcace, 0xc\n\
-    .4byte sBlob_73421e_7478a0 + 0xc4ba\n\
-    .incbin \"data/Blob_73421e_7478a0.bin\", 0xcade, 0x6ba4\n\
-    .popsection\n\
-");
+static const u8 sBlob_73421e_734220[] = INCBIN_U8("data/Blob_73421e_734220.bin");
+
+const u8 sGameOverOamXFlipOffsets[3][4] = {
+    [0] = {
+        1, 2, 4, 8
+    },
+    [1] = {
+        2, 4, 4, 8
+    },
+    [2] = {
+        1, 1, 2, 4
+    }
+};
+
+static const u8 sBlob_73422c_73dac4[] = INCBIN_U8("data/Blob_73422c_73dac4.bin");
+
+const u16 sFileSelectBackdropColors[6] = {
+    0x5AC0, 0x0000, 0x7FFF, 0x39CE, 0x03DF, 0x20CC
+};
+
+static const u8 sBlob_73dad0_73dba4[] = INCBIN_U8("data/Blob_73dad0_73dba4.bin");
+
+const u8 sFileSelectOamXFlipOffsets[3][4] = {
+    [0] = {
+        1, 2, 4, 8
+    },
+    [1] = {
+        2, 4, 4, 8
+    },
+    [2] = {
+        1, 1, 2, 4
+    }
+};
+
+const u8 sFileSelectCopyArrowXPositions[LANGUAGE_COUNT][2] = {
+    [0] = { 120, 160 },
+    [1] = { 120, 160 },
+    [2] = { 119, 166 },
+    [3] = { 119, 164 },
+    [4] = { 119, 164 },
+    [5] = { 119, 159 },
+    [6] = { 119, 159 }
+};
+
+const u8 sFileSelectEraseArrowXPositions[LANGUAGE_COUNT][2] = {
+    [0] = { 120, 160 },
+    [1] = { 120, 160 },
+    [2] = { 119, 166 },
+    [3] = { 119, 164 },
+    [4] = { 119, 164 },
+    [5] = { 119, 159 },
+    [6] = { 119, 159 }
+};
+
+static const u8 sBlob_73dbcc_7478a0[] = INCBIN_U8("data/Blob_73dbcc_7478a0.bin");

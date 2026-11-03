@@ -2,10 +2,17 @@
 
 #include "macros.h"
 #include "constants/menus/pause_screen.h"
+#include "constants/status_screen.h"
 
-// TODO: The start of this file needs to be 4-byte aligned, but sPauseScreenAreaNameOamIds is not.
-// When this blob is removed, sPauseScreenAreaNameOamIds cannot be the first item
-const u8 sBlob_5760e8_576142[] = INCBIN_U8("data/Blob_5760e8_576142.bin");
+// Index is the main deck room + 1
+const u8 sMainDeckRoomBslDiagramColors[90] = {
+    4, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4, 1, 4, 1, 4,
+    3, 4, 4, 4, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 4, 4,
+    4, 1, 4, 4, 4, 4, 4, 4, 1, 4, 4, 4, 4, 1, 4, 4,
+    4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 4, 6,
+    6, 6, 6, 6, 6, 5, 3, 4, 4, 4, 4, 1, 4, 3, 6, 6,
+    6, 6, 4, 1, 4, 4, 4, 4, 4, 4
+};
 
 const u8 sPauseScreenAreaNameOamIds[AREA_NORMAL_COUNT][2] = {
     [AREA_MAIN_DECK] = { PAUSE_OAM_ID_MAIN_DECK_TEXT, PAUSE_OAM_ID_MAIN_DECK_TEXT_APPEARING },
@@ -147,7 +154,27 @@ const u8 sMaintainedInputDelays[7] = {
     15, 10, 6, 4, 4, 4, 2,
 };
 
-const u8 sBlob_576217_576234[] = INCBIN_U8("data/Blob_576217_576234.bin");
+static const u8 sPadding_576217[1] = { 0 };
+
+const u8 sMainDeckElevatorMapPositions[AREA_NORMAL_COUNT][2] = {
+    [AREA_MAIN_DECK] = { 0, 0 },
+    [AREA_SECTOR_1] = { 5, 16 },
+    [AREA_SECTOR_2] = { 9, 16 },
+    [AREA_SECTOR_3] = { 4, 16 },
+    [AREA_SECTOR_4] = { 10, 16 },
+    [AREA_SECTOR_5] = { 3, 16 },
+    [AREA_SECTOR_6] = { 11, 16 }
+};
+
+const u8 sSectorElevatorMapPositions[AREA_NORMAL_COUNT][2] = {
+    [AREA_MAIN_DECK] = { 0, 0 },
+    [AREA_SECTOR_1] = { 2, 1 },
+    [AREA_SECTOR_2] = { 3, 2 },
+    [AREA_SECTOR_3] = { 5, 2 },
+    [AREA_SECTOR_4] = { 21, 4 },
+    [AREA_SECTOR_5] = { 1, 2 },
+    [AREA_SECTOR_6] = { 1, 2 }
+};
 
 const u8 sCharacterWidths[1184] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
@@ -226,14 +253,57 @@ const u8 sCharacterWidths[1184] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
 };
 
-const u8 sBlob_5766D4_5766e0[] = INCBIN_U8("data/Blob_5766D4_5766e0.bin");
+const struct NavConversationPopUpData sNavConversationPopUpDataInit = {
+    .pGraphics = NULL
+};
 
 const u8 sNavConversationTextBoxCursorYPositions[NAV_TEXT_BOX_COUNT][2] = {
     [NAV_TEXT_BOX_BOTTOM] = { 128, 150 },
     [NAV_TEXT_BOX_TOP] = { 25, 47 }
 };
 
-const u8 sBlob_5766e4_5767f0[] = INCBIN_U8("data/Blob_5766e4_5767f0.bin");
+const struct NavConversationTarget sNavConversationTargets[33] = {
+    [0] = { NAV_CONVO_GO_TO_QUARANTINE_BAY, NAV_TARGET_LOC_MAIN_DECK, 9, 10, NAV_TARGET_TEXT_LEFT },
+    [1] = { NAV_CONVO_QUARANTINE_BAY_IS_AHEAD, NAV_TARGET_LOC_MAIN_DECK, 9, 10, NAV_TARGET_TEXT_LEFT },
+    [2] = { NAV_CONVO_3, NAV_TARGET_LOC_NONE, 9, 10, NAV_TARGET_TEXT_ABOVE },
+    [3] = { NAV_CONVO_UNLOCKED_LEVEL_0_HATCHES, NAV_TARGET_LOC_MAIN_DECK, 25, 9, NAV_TARGET_TEXT_BELOW },
+    [4] = { NAV_CONVO_GO_TO_MISSILES_DATA_ROOM, NAV_TARGET_LOC_OPERATIONS_DECK, 16, 2, NAV_TARGET_TEXT_LEFT },
+    [5] = { NAV_CONVO_MISSILES_DATA_ROOM_JUST_AHEAD, NAV_TARGET_LOC_OPERATIONS_DECK, 16, 2, NAV_TARGET_TEXT_LEFT },
+    [6] = { NAV_CONVO_FIND_WAY_TO_ARACHNUS, NAV_TARGET_LOC_MAIN_DECK, 25, 9, NAV_TARGET_TEXT_BELOW },
+    [7] = { NAV_CONVO_GO_TO_SRX1, NAV_TARGET_LOC_SECTOR_1, 3, 2, NAV_TARGET_TEXT_RIGHT },
+    [8] = { NAV_CONVO_GO_TO_TRO1, NAV_TARGET_LOC_SECTOR_2, 4, 3, NAV_TARGET_TEXT_BELOW },
+    [9] = { NAV_CONVO_FIND_SECURITY_ROOM_AND_DOWNLOAD_BOMBS, NAV_TARGET_LOC_SECTOR_2, 2, 5, NAV_TARGET_TEXT_LEFT },
+    [10] = { NAV_CONVO_LEVEL_1_UNLOCKED_GO_DOWNLOAD_BOMBS, NAV_TARGET_LOC_SECTOR_2, 2, 5, NAV_TARGET_TEXT_LEFT },
+    [11] = { NAV_CONVO_GO_TO_AQA1, NAV_TARGET_LOC_SECTOR_4, 20, 5, NAV_TARGET_TEXT_LEFT },
+    [12] = { NAV_CONVO_GO_DEFEAT_SERRIS, NAV_TARGET_LOC_SECTOR_4, 8, 3, NAV_TARGET_TEXT_ABOVE },
+    [13] = { NAV_CONVO_GO_TO_PYR1, NAV_TARGET_LOC_SECTOR_3, 6, 3, NAV_TARGET_TEXT_BELOW },
+    [14] = { NAV_CONVO_FIND_SECURITY_ROOM_AND_DOWNLOAD_SUPER_MISSILES, NAV_TARGET_LOC_SECTOR_3, 19, 4, NAV_TARGET_TEXT_BELOW },
+    [15] = { NAV_CONVO_LEVEL_2_UNLOCKED_GO_DOWNLOAD_SUPER_MISSILES, NAV_TARGET_LOC_SECTOR_3, 19, 4, NAV_TARGET_TEXT_BELOW },
+    [16] = { NAV_CONVO_GO_TO_NOC1, NAV_TARGET_LOC_SECTOR_6, 2, 3, NAV_TARGET_TEXT_BELOW },
+    [17] = { NAV_CONVO_FEDERATION_MONITOR_SAMUS, NAV_TARGET_LOC_SECTOR_6, 2, 3, NAV_TARGET_TEXT_BELOW },
+    [18] = { NAV_CONVO_GO_TO_NOC1_AFTER_FEDERATION, NAV_TARGET_LOC_SECTOR_6, 2, 3, NAV_TARGET_TEXT_BELOW },
+    [19] = { NAV_CONVO_GO_DOWNLOAD_VARIA_SUIT, NAV_TARGET_LOC_SECTOR_6, 10, 12, NAV_TARGET_TEXT_BELOW },
+    [20] = { NAV_CONVO_GO_TO_ARC1, NAV_TARGET_LOC_SECTOR_5, 2, 3, NAV_TARGET_TEXT_BELOW },
+    [21] = { NAV_CONVO_FIND_SECURITY_ROOM_AND_DOWNLOAD_ICE_MISSILES, NAV_TARGET_LOC_SECTOR_5, 13, 6, NAV_TARGET_TEXT_BELOW },
+    [22] = { NAV_CONVO_LEVEL_3_UNLOCKED_GO_DOWNLOAD_ICE_MISSILES, NAV_TARGET_LOC_SECTOR_5, 13, 6, NAV_TARGET_TEXT_RIGHT },
+    [23] = { NAV_CONVO_GO_TO_THE_MAIN_BOILER, NAV_TARGET_LOC_SECTOR_3, 4, 9, NAV_TARGET_TEXT_BELOW },
+    [24] = { NAV_CONVO_GO_TO_THE_HABITATION_DECK, NAV_TARGET_LOC_HABITATION_DECK, 10, 3, NAV_TARGET_TEXT_ABOVE },
+    [25] = { NAV_CONVO_GO_TO_ARC2, NAV_TARGET_LOC_SECTOR_5, 13, 6, NAV_TARGET_TEXT_RIGHT },
+    [26] = { NAV_CONVO_GO_DOWNLOAD_POWER_BOMBS, NAV_TARGET_LOC_SECTOR_5, 13, 6, NAV_TARGET_TEXT_RIGHT },
+    [27] = { NAV_CONVO_RETURN_TO_YOUR_SHIP, NAV_TARGET_LOC_DOCKING_BAYS, 21, 14, NAV_TARGET_TEXT_BELOW },
+    [28] = { NAV_CONVO_REACTIVATE_THE_AUXILIARY_POWER_SYSTEM, NAV_TARGET_LOC_REACTOR_SILO, 21, 20, NAV_TARGET_TEXT_ABOVE },
+    [29] = { NAV_CONVO_GO_TO_ARC3, NAV_TARGET_LOC_SECTOR_5, 2, 3, NAV_TARGET_TEXT_BELOW },
+    [30] = { NAV_CONVO_GO_TO_NOC2, NAV_TARGET_LOC_SECTOR_6, 2, 3, NAV_TARGET_TEXT_BELOW },
+    [31] = { NAV_CONVO_GO_TO_OPERATIONS_ROOM, NAV_TARGET_LOC_OPERATIONS_DECK, 16, 1, NAV_TARGET_TEXT_LEFT },
+    [32] = { NAV_CONVO_GO_TO_OPERATIONS_ROOM_2, NAV_TARGET_LOC_OPERATIONS_DECK, 16, 1, NAV_TARGET_TEXT_LEFT }
+};
+
+const u8 sNavConversationTargetTextOamIds[4] = {
+    [NAV_TARGET_TEXT_ABOVE] = PAUSE_OAM_ID_MAP_TARGET_ABOVE,
+    [NAV_TARGET_TEXT_BELOW] = PAUSE_OAM_ID_MAP_TARGET_BELOW,
+    [NAV_TARGET_TEXT_LEFT] = PAUSE_OAM_ID_MAP_TARGET_LEFT,
+    [NAV_TARGET_TEXT_RIGHT] = PAUSE_OAM_ID_MAP_TARGET_RIGHT
+};
 
 const u8 sNavConversationPortraitOamIds[6][3] = {
     [0] = {
@@ -268,7 +338,308 @@ const u8 sNavConversationPortraitOamIds[6][3] = {
     }
 };
 
-const u8 sBlob_576802_581510[] = INCBIN_U8("data/Blob_576802_581510.bin");
+const u8 sNavConversationMosaicTarget = 0xEE;
+static const u8 sPadding_576803 = 0;
+
+static const u8 sBlob_576804_57bbc4[] = INCBIN_U8("data/Blob_576804_57bbc4.bin");
+
+const u8 sNavConversationPopUpAnim_57bbc4[6 * 2] = {
+    0, 20,
+    1, 10,
+    2, 10,
+    3, 13,
+    2, 13,
+    1, 13
+};
+
+const u8 sNavConversationPopUpAnim_57bbd0[16 * 2] = {
+    0, 3,
+    1, 3,
+    2, 3,
+    3, 3,
+    4, 3,
+    5, 3,
+    6, 3,
+    7, 3,
+    8, 3,
+    9, 3,
+    10, 3,
+    11, 3,
+    12, 3,
+    13, 3,
+    14, 3,
+    15, 3
+};
+
+const u8 sNavConversationPopUpAnim_57bbf0[48 * 2] = {
+    0, 8,
+    1, 8,
+    2, 8,
+    1, 8,
+    0, 8,
+    1, 8,
+    2, 8,
+    1, 8,
+    0, 8,
+    3, 8,
+    4, 8,
+    3, 8,
+    0, 8,
+    3, 8,
+    4, 8,
+    5, 8,
+    6, 8,
+    9, 8,
+    10, 8,
+    9, 8,
+    6, 8,
+    7, 8,
+    8, 8,
+    7, 8,
+    6, 8,
+    11, 8,
+    12, 8,
+    11, 8,
+    6, 8,
+    7, 8,
+    8, 8,
+    7, 8,
+    6, 8,
+    5, 8,
+    4, 8,
+    3, 8,
+    0, 8,
+    13, 8,
+    14, 8,
+    15, 8,
+    16, 8,
+    17, 8,
+    18, 8,
+    17, 8,
+    16, 8,
+    15, 8,
+    14, 8,
+    13, 8
+};
+
+const struct NavConversationPopUp sNavConversationPopUps[5] = {
+    [0] = {
+        .pAnimation = sNavConversationPopUpAnim_57bbc4,
+        .animationLength = 6,
+        .pPalette = (const u16*)0x8576804,
+        .pFlashingPalette = (const u16*)0x8576824,
+        .flashingPaletteDelay = 0,
+        .rows = 6,
+        .vramRow = 0,
+        .size = 8,
+        .unk_12_4 = 0,
+        .pGraphics = (const u32*)0x8576904
+    },
+    [1] = {
+        .pAnimation = sNavConversationPopUpAnim_57bbc4,
+        .animationLength = 6,
+        .pPalette = (const u16*)0x8576804,
+        .pFlashingPalette = (const u16*)0x8576824,
+        .flashingPaletteDelay = 0,
+        .rows = 6,
+        .vramRow = 0,
+        .size = 8,
+        .unk_12_4 = 0,
+        .pGraphics = (const u32*)0x8576904
+    },
+    [2] = {
+        .pAnimation = sNavConversationPopUpAnim_57bbd0,
+        .animationLength = 16,
+        .pPalette = (const u16*)0x8576844,
+        .pFlashingPalette = (const u16*)0x8576864,
+        .flashingPaletteDelay = 0,
+        .rows = 4,
+        .vramRow = 1,
+        .size = 4,
+        .unk_12_4 = 2,
+        .pGraphics = (const u32*)0x8577024
+    },
+    [3] = {
+        .pAnimation = sNavConversationPopUpAnim_57bbf0,
+        .animationLength = 48,
+        .pPalette = (const u16*)0x8576884,
+        .pFlashingPalette = (const u16*)0x85768A4,
+        .flashingPaletteDelay = 0,
+        .rows = 6,
+        .vramRow = 0,
+        .size = 8,
+        .unk_12_4 = 0,
+        .pGraphics = (const u32*)0x8578750
+    },
+    [4] = {
+        .pAnimation = sNavConversationPopUpAnim_57bbd0,
+        .animationLength = 16,
+        .pPalette = (const u16*)0x85768C4,
+        .pFlashingPalette = (const u16*)0x85768E4,
+        .flashingPaletteDelay = 0,
+        .rows = 4,
+        .vramRow = 1,
+        .size = 4,
+        .unk_12_4 = 2,
+        .pGraphics = (const u32*)0x8577024
+    }
+};
+
+const struct NavConversationPopUpSet sNavConversationPopUpSets[3] = {
+    [0] = { NAV_CONVO_UNLOCKED_LEVEL_0_HATCHES, { 2, 1, 0 } },
+    [1] = { NAV_CONVO_GO_DOWNLOAD_VARIA_SUIT, { 4, 0, 0 } },
+    [2] = { NAV_CONVO_REACTIVATE_THE_AUXILIARY_POWER_SYSTEM, { 3, 0, 0 } }
+};
+
+const u16 sNavConversationPal_57bcd4[16] = {
+    0x7C1F, 0x701B, 0x6017, 0x701B, 0x7C1F, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+};
+
+const u16 sNavConversationPal_57bcf4[2][16] = {
+    [0] = {
+        0x3704, 0x32A4, 0x2A25, 0x32A4, 0x3704, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [1] = {
+        0x108F, 0x14B3, 0x18D7, 0x14B3, 0x108F, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    }
+};
+
+const u16 sNavConversationPal_57bd34[4][16] = {
+    [0] = {
+        0x0000, 0x0000, 0x0080, 0x04C0, 0x1545, 0x29CA, 0x362D, 0x46B1,
+        0x1752, 0x5314, 0x0000, 0x0000, 0x6BFF, 0x47BD, 0x2BB7, 0x1B93
+    },
+    [1] = {
+        0x0000, 0x0000, 0x0080, 0x04C0, 0x1545, 0x29CA, 0x362D, 0x46B1,
+        0x1752, 0x5314, 0x0000, 0x0000, 0x47BD, 0x2BB7, 0x1B93, 0x6BFF
+    },
+    [2] = {
+        0x0000, 0x0000, 0x0080, 0x04C0, 0x1545, 0x29CA, 0x362D, 0x46B1,
+        0x1752, 0x5314, 0x0000, 0x0000, 0x2BB7, 0x1B93, 0x6BFF, 0x47BD
+    },
+    [3] = {
+        0x0000, 0x0000, 0x0080, 0x04C0, 0x1545, 0x29CA, 0x362D, 0x46B1,
+        0x1752, 0x5314, 0x0000, 0x0000, 0x1B93, 0x6BFF, 0x47BD, 0x2BB7
+    }
+};
+
+const u16 sNavConversationPal_57bdb4[8][16] = {
+    [0] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x0252, 0x0172, 0x0052, 0x43E2, 0x3704, 0x34C3
+    },
+    [1] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x06B5, 0x05D5, 0x04B5, 0x3BA1, 0x2AC3, 0x38E4
+    },
+    [2] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x0F39, 0x0E59, 0x0D19, 0x2F41, 0x2262, 0x3D05
+    },
+    [3] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x179C, 0x16BC, 0x159C, 0x2700, 0x1621, 0x4526
+    },
+    [4] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x1FFF, 0x1F3F, 0x1DFF, 0x1AA0, 0x0DC0, 0x4968
+    },
+    [5] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x179C, 0x16BC, 0x159C, 0x2700, 0x1621, 0x4526
+    },
+    [6] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x0F39, 0x0E59, 0x0D19, 0x2F41, 0x2262, 0x3D05
+    },
+    [7] = {
+        0x0000, 0x7FFF, 0x66D5, 0x4DEE, 0x3969, 0x2CE6, 0x24A4, 0x1841,
+        0x7FF6, 0x7FE0, 0x06B5, 0x05D5, 0x04B5, 0x3BA1, 0x2AC3, 0x38E4
+    }
+};
+
+const u8 sNavConversationPalTimers_57beb4[4] = { 32, 16, 16, 16 };
+
+const u8 sNavConversationPalTimers_57beb8[4] = { 7, 7, 7, 7 };
+
+const u8 sNavConversationPalTimers_57bebc[8] = { 8, 8, 8, 8, 8, 8, 8, 8 };
+
+const u16 sNavConversationSpecialPal[16 * 16] = INCBIN_U16("data/menus/pause_screen/nav_conversation_ship_room.pal");
+
+static const u8 sBlob_57c0c4_581300[] = INCBIN_U8("data/Blob_57c0c4_581300.bin");
+const u16 sNavConversationFlashingPal_581300[16][16] = {
+    [0] = {
+        0x0000, 0x7A73, 0x76F8, 0x4E38, 0x3704, 0x2A25, 0x02B5, 0x1FFF,
+        0x43E2, 0x2CDF, 0x6985, 0x7F09, 0x6D3F, 0x39CE, 0x0000, 0x7FFF
+    },
+    [1] = {
+        0x0000, 0x7EF7, 0x7B5B, 0x5EDB, 0x4B68, 0x3EC9, 0x1339, 0x2FFF,
+        0x57E6, 0x415F, 0x7229, 0x7F6E, 0x75DF, 0x39CE, 0x0000, 0x7FFF
+    },
+    [2] = {
+        0x0000, 0x7F7B, 0x7FBD, 0x6F7D, 0x5FAD, 0x536E, 0x279C, 0x43FF,
+        0x6BEB, 0x51FF, 0x7AAE, 0x7FB2, 0x7A5F, 0x39CE, 0x0000, 0x7FFF
+    },
+    [3] = {
+        0x0000, 0x7FFF, 0x7FFF, 0x7FFF, 0x6FF2, 0x63F3, 0x3BFF, 0x57FF,
+        0x7FF0, 0x669F, 0x7F53, 0x7FF7, 0x7EFF, 0x39CE, 0x0000, 0x7FFF
+    },
+    [4] = {
+        0x0000, 0x7F7B, 0x7FBD, 0x6F7D, 0x5FAD, 0x536E, 0x279C, 0x43FF,
+        0x6BEB, 0x51FF, 0x7AAE, 0x7FB2, 0x7A5F, 0x39CE, 0x0000, 0x7FFF
+    },
+    [5] = {
+        0x0000, 0x7EF7, 0x7B5B, 0x5EDB, 0x4B68, 0x3EC9, 0x1339, 0x2FFF,
+        0x57E6, 0x415F, 0x7229, 0x7F6E, 0x75DF, 0x39CE, 0x0000, 0x7FFF
+    },
+    [6] = {
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [7] = {
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [8] = {
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [9] = {
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [10] = {
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [11] = {
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [12] = {
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [13] = {
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [14] = {
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    },
+    [15] = {
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+        0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+    }
+};
+
+const struct BslDiagramData sBslDiagramDataInit = {
+    .stage = 0
+};
 
 const u8 sPauseDebugEventNames[EVENT_END][EVENT_NAME_SIZE] = {
     [EVENT_NONE] = SHIFT_JIS("TOHOKANKO   トクベツホカンコヘ ムカエ  "),
@@ -530,4 +901,42 @@ const u8 sDebugSectionInfo[PAUSE_DEBUG_SECTION_END][5] = {
     },
 };
 
-const u8 sBlob_58217b_58225c[] = INCBIN_U8("data/Blob_58217b_58225c.bin");
+const u8 sUnk_58217b[1] = { 0 };
+
+const u8 sStatusScreenSectionInfo[STATUS_SECTION_END][5] = {
+    [STATUS_SECTION_BEAM] = { 5, 5, 1, 8, STATUS_SECTION_BEAM },
+    [STATUS_SECTION_MISSILE] = { 13, 13, 1, 8, STATUS_SECTION_MISSILE },
+    [STATUS_SECTION_BOMB] = { 5, 5, 19, 28, STATUS_SECTION_BOMB },
+    [STATUS_SECTION_SUIT] = { 8, 8, 19, 28, STATUS_SECTION_SUIT },
+    [STATUS_SECTION_MISC] = { 12, 12, 19, 28, STATUS_SECTION_MISC },
+    [STATUS_SECTION_ENERGY_CURRENT] = { 3, 3, 2, 5, STATUS_SECTION_ENERGY_CURRENT },
+    [STATUS_SECTION_ENERGY_MAX] = { 3, 3, 7, 10, STATUS_SECTION_ENERGY_MAX },
+    [STATUS_SECTION_MISSILES_CURRENT] = { 3, 3, 13, 15, STATUS_SECTION_MISSILES_CURRENT },
+    [STATUS_SECTION_MISSILES_MAX] = { 3, 3, 17, 19, STATUS_SECTION_MISSILES_MAX },
+    [STATUS_SECTION_POWER_BOMBS_CURRENT] = { 3, 3, 22, 24, STATUS_SECTION_POWER_BOMBS_CURRENT },
+    [STATUS_SECTION_POWER_BOMBS_MAX] = { 3, 3, 26, 28, STATUS_SECTION_POWER_BOMBS_MAX },
+};
+
+const u8 sStatusScreenItemsSourceInfo[7][5] = {
+    [STATUS_SECTION_BEAM] = { 21, 27, 1, 8, STATUS_SECTION_BEAM },
+    [STATUS_SECTION_MISSILE] = { 21, 25, 9, 16, STATUS_SECTION_MISSILE },
+    [STATUS_SECTION_BOMB] = { 28, 30, 1, 10, STATUS_SECTION_BOMB },
+    [STATUS_SECTION_SUIT] = { 21, 24, 19, 28, STATUS_SECTION_SUIT },
+    [STATUS_SECTION_MISC] = { 25, 31, 19, 28, STATUS_SECTION_MISC },
+};
+
+const u8 sStatusScreenAmmoHeaderInfo[3][4] = {
+    [0] = { 28, 29, 11, 18 },
+    [1] = { 2, 3, 12, 19 },
+    [2] = { 2, 3, 21, 28 },
+};
+
+const u8 sUnk_5821e2[6] = { 0 };
+
+const u8 sSramTestFlashText[16] = "Met4AGB_BackUp01";
+const u8 sSramSaveEndText[8] = "SAVE_END";
+const u8 sSramMetroidEpisodeText[16] = "MetroidEpisode4A";
+const u8 sSramMetroidEpisodeText_Unused[16] = "MetroidEpisode4A";
+const u8 sSramHeaderVersionText_JP[20] = "MetroidNIPPONVerE004";
+const u8 sSramHeaderVersionText_US[20] = "AGBMetroid_USVerE004";
+const u8 sSramHeaderVersionText[20] = "MetroidAGB-EUVerE004";

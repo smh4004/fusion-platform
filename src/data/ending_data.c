@@ -1323,434 +1323,266 @@ const struct CreditsEntry sCredits[310] = {
 	},
 };
 
-// Bytes come from the extracted file; pointers are relocated by the linker.
-extern const u8 sBlob_74dc48_74e620[];
-asm("\n\
-    .pushsection .rodata\n\
-    .global sBlob_74dc48_74e620\n\
-sBlob_74dc48_74e620:\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x3a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0xc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x18, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x96\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x24, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x108\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x30, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x20\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x3c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x1b0\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x48, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x54, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x56\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x60, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x5e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x6c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x66\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x78, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x84, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x76\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x90, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x9c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x86\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0xa8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x8e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0xb4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0xb0\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0xc0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0xb8\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0xcc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0xc0\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0xd8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0xc8\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0xe4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0xd0\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0xf0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0xd8\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0xfc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0xe0\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x108, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0xe8\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x114, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0xf0\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x120, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0xf8\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x12c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x100\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x138, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x128\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x144, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x130\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x150, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x138\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x15c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x140\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x168, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x148\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x174, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x150\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x180, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x158\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x18c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x160\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x198, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x168\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x1a4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x170\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x1b0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x178\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x1bc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x180\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x1c8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x188\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x1d4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x190\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x1e0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x198\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x1ec, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x1a0\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x1f8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x1a8\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x204, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7a4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x210, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x76a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x21c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x8b6\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x228, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x826\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x234, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x78a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x240, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x8b6\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x24c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7be\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x258, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7c6\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x264, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7ce\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x270, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7d6\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x27c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7de\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x288, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7e6\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x294, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7ee\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x2a0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7f6\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x2ac, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x7fe\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x2b8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x806\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x2c4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x80e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x2d0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x816\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x2dc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x81e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x2e8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x846\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x2f4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x84e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x300, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x856\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x30c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x85e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x318, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x866\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x324, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x86e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x330, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x876\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x33c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x87e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x348, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x886\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x354, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x88e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x360, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x896\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x36c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x89e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x378, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x8a6\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x384, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x8ae\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x390, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x20a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x39c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x1d0\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x3a8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x376\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x3b4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x2aa\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x3c0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x1f0\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x3cc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x376\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x3d8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x22a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x3e4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x232\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x3f0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x23a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x3fc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x242\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x408, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x24a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x414, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x252\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x420, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x25a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x42c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x262\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x438, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x26a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x444, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x272\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x450, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x27a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x45c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x282\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x468, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x28a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x474, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x292\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x480, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x29a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x48c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x2a2\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x498, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x2d6\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x4a4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x2de\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x4b0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x2e6\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x4bc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x2ee\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x4c8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x2f6\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x4d4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x2fe\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x4e0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x306\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x4ec, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x30e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x4f8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x316\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x504, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x31e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x510, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x326\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x51c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x32e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x528, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x336\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x534, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x33e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x540, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x346\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x54c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x34e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x558, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x356\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x564, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x35e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x570, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x366\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x57c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x36e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x588, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x3c4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x594, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x38a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x5a0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x47a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x5ac, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4ec\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x5b8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x3aa\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x5c4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x594\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x5d0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x3ea\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x5dc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x3f2\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x5e8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x3fa\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x5f4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x402\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x600, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x40a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x60c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x412\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x618, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x41a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x624, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x422\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x630, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x42a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x63c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x432\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x648, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x43a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x654, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x442\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x660, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x44a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x66c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x452\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x678, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x45a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x684, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x462\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x690, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x46a\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x69c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x472\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x6a8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x494\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x6b4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x49c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x6c0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4a4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x6cc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4ac\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x6d8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4b4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x6e4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4bc\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x6f0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4c4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x6fc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4cc\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x708, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4d4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x714, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4dc\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x720, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x4e4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x72c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x50c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x738, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x514\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x744, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x51c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x750, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x524\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x75c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x52c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x768, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x534\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x774, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x53c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x780, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x544\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x78c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x54c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x798, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x554\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x7a4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x55c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x7b0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x564\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x7bc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x56c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x7c8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x574\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x7d4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x57c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x7e0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x584\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x7ec, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x58c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x7f8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x5ee\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x804, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x5b4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x810, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x744\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x81c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x686\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x828, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x5d4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x834, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x744\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x840, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x60e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x84c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x616\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x858, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x61e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x864, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x626\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x870, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x62e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x87c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x636\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x888, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x63e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x894, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x646\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x8a0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x64e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x8ac, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x656\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x8b8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x65e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x8c4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x666\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x8d0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x66e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x8dc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x676\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x8e8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x67e\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x8f4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6ac\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x900, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6b4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x90c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6bc\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x918, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6c4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x924, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6cc\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x930, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6d4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x93c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6dc\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x948, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6e4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x954, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6ec\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x960, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6f4\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x96c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x6fc\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x978, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x704\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x984, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x70c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x990, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x714\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x99c, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x71c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x9a8, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x724\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x9b4, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x72c\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x9c0, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x734\n\
-    .incbin \"data/Blob_74dc48_74e620.bin\", 0x9cc, 0x8\n\
-    .4byte sBlob_74a7d8_74b0b0 + 0x73c\n\
-    .popsection\n\
-");
+const struct EndingTextLetter sEndingTextLetters_PermanentDefault[6] = {
+    [0] = { 2, 0, 0, 120, 40, (const u16*)0x874a812 },
+    [1] = { 2, 0, 0, 120, 60, (const u16*)0x874a7d8 },
+    [2] = { 2, 0, 0, 120, 92, (const u16*)0x874a86e },
+    [3] = { 2, 0, 0, 120, 108, (const u16*)0x874a8e0 },
+    [4] = { 2, 0, 0, 124, 128, (const u16*)0x874a7f8 },
+    [5] = { 2, 0, 0, 120, 158, (const u16*)0x874a988 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Default0[9] = {
+    [0] = { 1, 1, 0, 120, 40, (const u16*)0x874a826 },
+    [1] = { 1, 5, 0, 120, 40, (const u16*)0x874a82e },
+    [2] = { 1, 9, 0, 120, 40, (const u16*)0x874a836 },
+    [3] = { 1, 13, 0, 120, 40, (const u16*)0x874a83e },
+    [4] = { 1, 17, 0, 120, 40, (const u16*)0x874a846 },
+    [5] = { 1, 21, 0, 120, 40, (const u16*)0x874a84e },
+    [6] = { 1, 25, 0, 120, 40, (const u16*)0x874a856 },
+    [7] = { 1, 29, 0, 120, 40, (const u16*)0x874a85e },
+    [8] = { 1, 33, 0, 120, 40, (const u16*)0x874a866 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Default1[11] = {
+    [0] = { 1, 1, 0, 120, 92, (const u16*)0x874a888 },
+    [1] = { 1, 5, 0, 120, 92, (const u16*)0x874a890 },
+    [2] = { 1, 9, 0, 120, 92, (const u16*)0x874a898 },
+    [3] = { 1, 13, 0, 120, 92, (const u16*)0x874a8a0 },
+    [4] = { 1, 17, 0, 120, 92, (const u16*)0x874a8a8 },
+    [5] = { 1, 21, 0, 120, 92, (const u16*)0x874a8b0 },
+    [6] = { 1, 25, 0, 120, 92, (const u16*)0x874a8b8 },
+    [7] = { 1, 29, 0, 120, 92, (const u16*)0x874a8c0 },
+    [8] = { 1, 33, 0, 120, 92, (const u16*)0x874a8c8 },
+    [9] = { 1, 37, 0, 120, 92, (const u16*)0x874a8d0 },
+    [10] = { 1, 41, 0, 120, 92, (const u16*)0x874a8d8 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Default2[17] = {
+    [0] = { 1, 1, 0, 120, 108, (const u16*)0x874a900 },
+    [1] = { 1, 5, 0, 120, 108, (const u16*)0x874a908 },
+    [2] = { 1, 9, 0, 120, 108, (const u16*)0x874a910 },
+    [3] = { 1, 13, 0, 120, 108, (const u16*)0x874a918 },
+    [4] = { 1, 17, 0, 120, 108, (const u16*)0x874a920 },
+    [5] = { 1, 21, 0, 120, 108, (const u16*)0x874a928 },
+    [6] = { 1, 25, 0, 120, 108, (const u16*)0x874a930 },
+    [7] = { 1, 29, 0, 120, 108, (const u16*)0x874a938 },
+    [8] = { 1, 33, 0, 120, 108, (const u16*)0x874a940 },
+    [9] = { 1, 37, 0, 120, 108, (const u16*)0x874a948 },
+    [10] = { 1, 41, 0, 120, 108, (const u16*)0x874a950 },
+    [11] = { 1, 45, 0, 120, 108, (const u16*)0x874a958 },
+    [12] = { 1, 49, 0, 120, 108, (const u16*)0x874a960 },
+    [13] = { 1, 53, 0, 120, 108, (const u16*)0x874a968 },
+    [14] = { 1, 57, 0, 120, 108, (const u16*)0x874a970 },
+    [15] = { 1, 61, 0, 120, 108, (const u16*)0x874a978 },
+    [16] = { 1, 65, 0, 120, 108, (const u16*)0x874a980 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_PermanentGerman[6] = {
+    [0] = { 2, 0, 0, 120, 40, (const u16*)0x874af7c },
+    [1] = { 2, 0, 0, 120, 60, (const u16*)0x874af42 },
+    [2] = { 2, 0, 0, 120, 108, (const u16*)0x874b08e },
+    [3] = { 2, 0, 0, 120, 108, (const u16*)0x874affe },
+    [4] = { 2, 0, 0, 124, 128, (const u16*)0x874af62 },
+    [5] = { 2, 0, 0, 120, 158, (const u16*)0x874b08e },
+};
+
+const struct EndingTextLetter sEndingTextLetters_German0[13] = {
+    [0] = { 1, 1, 0, 120, 40, (const u16*)0x874af96 },
+    [1] = { 1, 5, 0, 120, 40, (const u16*)0x874af9e },
+    [2] = { 1, 9, 0, 120, 40, (const u16*)0x874afa6 },
+    [3] = { 1, 13, 0, 120, 40, (const u16*)0x874afae },
+    [4] = { 1, 17, 0, 120, 40, (const u16*)0x874afb6 },
+    [5] = { 1, 21, 0, 120, 40, (const u16*)0x874afbe },
+    [6] = { 1, 25, 0, 120, 40, (const u16*)0x874afc6 },
+    [7] = { 1, 29, 0, 120, 40, (const u16*)0x874afce },
+    [8] = { 1, 33, 0, 120, 40, (const u16*)0x874afd6 },
+    [9] = { 1, 37, 0, 120, 40, (const u16*)0x874afde },
+    [10] = { 1, 41, 0, 120, 40, (const u16*)0x874afe6 },
+    [11] = { 1, 45, 0, 120, 40, (const u16*)0x874afee },
+    [12] = { 1, 49, 0, 120, 40, (const u16*)0x874aff6 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_German1[14] = {
+    [0] = { 1, 1, 0, 120, 108, (const u16*)0x874b01e },
+    [1] = { 1, 5, 0, 120, 108, (const u16*)0x874b026 },
+    [2] = { 1, 9, 0, 120, 108, (const u16*)0x874b02e },
+    [3] = { 1, 13, 0, 120, 108, (const u16*)0x874b036 },
+    [4] = { 1, 17, 0, 120, 108, (const u16*)0x874b03e },
+    [5] = { 1, 21, 0, 120, 108, (const u16*)0x874b046 },
+    [6] = { 1, 25, 0, 120, 108, (const u16*)0x874b04e },
+    [7] = { 1, 29, 0, 120, 108, (const u16*)0x874b056 },
+    [8] = { 1, 33, 0, 120, 108, (const u16*)0x874b05e },
+    [9] = { 1, 37, 0, 120, 108, (const u16*)0x874b066 },
+    [10] = { 1, 41, 0, 120, 108, (const u16*)0x874b06e },
+    [11] = { 1, 45, 0, 120, 108, (const u16*)0x874b076 },
+    [12] = { 1, 49, 0, 120, 108, (const u16*)0x874b07e },
+    [13] = { 1, 53, 0, 120, 108, (const u16*)0x874b086 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_PermanentFrench[6] = {
+    [0] = { 2, 0, 0, 120, 40, (const u16*)0x874a9e2 },
+    [1] = { 2, 0, 0, 120, 60, (const u16*)0x874a9a8 },
+    [2] = { 2, 0, 0, 120, 108, (const u16*)0x874ab4e },
+    [3] = { 2, 0, 0, 120, 108, (const u16*)0x874aa82 },
+    [4] = { 2, 0, 0, 124, 128, (const u16*)0x874a9c8 },
+    [5] = { 2, 0, 0, 120, 158, (const u16*)0x874ab4e },
+};
+
+const struct EndingTextLetter sEndingTextLetters_French0[16] = {
+    [0] = { 1, 1, 0, 120, 40, (const u16*)0x874aa02 },
+    [1] = { 1, 5, 0, 120, 40, (const u16*)0x874aa0a },
+    [2] = { 1, 9, 0, 120, 40, (const u16*)0x874aa12 },
+    [3] = { 1, 13, 0, 120, 40, (const u16*)0x874aa1a },
+    [4] = { 1, 17, 0, 120, 40, (const u16*)0x874aa22 },
+    [5] = { 1, 21, 0, 120, 40, (const u16*)0x874aa2a },
+    [6] = { 1, 25, 0, 120, 40, (const u16*)0x874aa32 },
+    [7] = { 1, 29, 0, 120, 40, (const u16*)0x874aa3a },
+    [8] = { 1, 33, 0, 120, 40, (const u16*)0x874aa42 },
+    [9] = { 1, 37, 0, 120, 40, (const u16*)0x874aa4a },
+    [10] = { 1, 41, 0, 120, 40, (const u16*)0x874aa52 },
+    [11] = { 1, 45, 0, 120, 40, (const u16*)0x874aa5a },
+    [12] = { 1, 49, 0, 120, 40, (const u16*)0x874aa62 },
+    [13] = { 1, 53, 0, 120, 40, (const u16*)0x874aa6a },
+    [14] = { 1, 57, 0, 120, 40, (const u16*)0x874aa72 },
+    [15] = { 1, 61, 0, 120, 40, (const u16*)0x874aa7a },
+};
+
+const struct EndingTextLetter sEndingTextLetters_French1[20] = {
+    [0] = { 1, 1, 0, 120, 108, (const u16*)0x874aaae },
+    [1] = { 1, 5, 0, 120, 108, (const u16*)0x874aab6 },
+    [2] = { 1, 9, 0, 120, 108, (const u16*)0x874aabe },
+    [3] = { 1, 13, 0, 120, 108, (const u16*)0x874aac6 },
+    [4] = { 1, 17, 0, 120, 108, (const u16*)0x874aace },
+    [5] = { 1, 21, 0, 120, 108, (const u16*)0x874aad6 },
+    [6] = { 1, 25, 0, 120, 108, (const u16*)0x874aade },
+    [7] = { 1, 29, 0, 120, 108, (const u16*)0x874aae6 },
+    [8] = { 1, 33, 0, 120, 108, (const u16*)0x874aaee },
+    [9] = { 1, 37, 0, 120, 108, (const u16*)0x874aaf6 },
+    [10] = { 1, 41, 0, 120, 108, (const u16*)0x874aafe },
+    [11] = { 1, 45, 0, 120, 108, (const u16*)0x874ab06 },
+    [12] = { 1, 49, 0, 120, 108, (const u16*)0x874ab0e },
+    [13] = { 1, 53, 0, 120, 108, (const u16*)0x874ab16 },
+    [14] = { 1, 57, 0, 120, 108, (const u16*)0x874ab1e },
+    [15] = { 1, 61, 0, 120, 108, (const u16*)0x874ab26 },
+    [16] = { 1, 65, 0, 120, 108, (const u16*)0x874ab2e },
+    [17] = { 1, 69, 0, 120, 108, (const u16*)0x874ab36 },
+    [18] = { 1, 73, 0, 120, 108, (const u16*)0x874ab3e },
+    [19] = { 1, 77, 0, 120, 108, (const u16*)0x874ab46 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_PermanentItalian[6] = {
+    [0] = { 2, 0, 0, 120, 40, (const u16*)0x874ab9c },
+    [1] = { 2, 0, 0, 120, 60, (const u16*)0x874ab62 },
+    [2] = { 2, 0, 0, 120, 92, (const u16*)0x874ac52 },
+    [3] = { 2, 0, 0, 120, 108, (const u16*)0x874acc4 },
+    [4] = { 2, 0, 0, 124, 128, (const u16*)0x874ab82 },
+    [5] = { 2, 0, 0, 120, 158, (const u16*)0x874ad6c },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Italian0[18] = {
+    [0] = { 1, 1, 0, 120, 40, (const u16*)0x874abc2 },
+    [1] = { 1, 5, 0, 120, 40, (const u16*)0x874abca },
+    [2] = { 1, 9, 0, 120, 40, (const u16*)0x874abd2 },
+    [3] = { 1, 13, 0, 120, 40, (const u16*)0x874abda },
+    [4] = { 1, 17, 0, 120, 40, (const u16*)0x874abe2 },
+    [5] = { 1, 21, 0, 120, 40, (const u16*)0x874abea },
+    [6] = { 1, 25, 0, 120, 40, (const u16*)0x874abf2 },
+    [7] = { 1, 29, 0, 120, 40, (const u16*)0x874abfa },
+    [8] = { 1, 33, 0, 120, 40, (const u16*)0x874ac02 },
+    [9] = { 1, 37, 0, 120, 40, (const u16*)0x874ac0a },
+    [10] = { 1, 41, 0, 120, 40, (const u16*)0x874ac12 },
+    [11] = { 1, 45, 0, 120, 40, (const u16*)0x874ac1a },
+    [12] = { 1, 49, 0, 120, 40, (const u16*)0x874ac22 },
+    [13] = { 1, 53, 0, 120, 40, (const u16*)0x874ac2a },
+    [14] = { 1, 57, 0, 120, 40, (const u16*)0x874ac32 },
+    [15] = { 1, 61, 0, 120, 40, (const u16*)0x874ac3a },
+    [16] = { 1, 65, 0, 120, 40, (const u16*)0x874ac42 },
+    [17] = { 1, 69, 0, 120, 40, (const u16*)0x874ac4a },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Italian1[11] = {
+    [0] = { 1, 1, 0, 120, 92, (const u16*)0x874ac6c },
+    [1] = { 1, 5, 0, 120, 92, (const u16*)0x874ac74 },
+    [2] = { 1, 9, 0, 120, 92, (const u16*)0x874ac7c },
+    [3] = { 1, 13, 0, 120, 92, (const u16*)0x874ac84 },
+    [4] = { 1, 17, 0, 120, 92, (const u16*)0x874ac8c },
+    [5] = { 1, 21, 0, 120, 92, (const u16*)0x874ac94 },
+    [6] = { 1, 25, 0, 120, 92, (const u16*)0x874ac9c },
+    [7] = { 1, 29, 0, 120, 92, (const u16*)0x874aca4 },
+    [8] = { 1, 33, 0, 120, 92, (const u16*)0x874acac },
+    [9] = { 1, 37, 0, 120, 92, (const u16*)0x874acb4 },
+    [10] = { 1, 41, 0, 120, 92, (const u16*)0x874acbc },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Italian2[17] = {
+    [0] = { 1, 1, 0, 120, 108, (const u16*)0x874ace4 },
+    [1] = { 1, 5, 0, 120, 108, (const u16*)0x874acec },
+    [2] = { 1, 9, 0, 120, 108, (const u16*)0x874acf4 },
+    [3] = { 1, 13, 0, 120, 108, (const u16*)0x874acfc },
+    [4] = { 1, 17, 0, 120, 108, (const u16*)0x874ad04 },
+    [5] = { 1, 21, 0, 120, 108, (const u16*)0x874ad0c },
+    [6] = { 1, 25, 0, 120, 108, (const u16*)0x874ad14 },
+    [7] = { 1, 29, 0, 120, 108, (const u16*)0x874ad1c },
+    [8] = { 1, 33, 0, 120, 108, (const u16*)0x874ad24 },
+    [9] = { 1, 37, 0, 120, 108, (const u16*)0x874ad2c },
+    [10] = { 1, 41, 0, 120, 108, (const u16*)0x874ad34 },
+    [11] = { 1, 45, 0, 120, 108, (const u16*)0x874ad3c },
+    [12] = { 1, 49, 0, 120, 108, (const u16*)0x874ad44 },
+    [13] = { 1, 53, 0, 120, 108, (const u16*)0x874ad4c },
+    [14] = { 1, 57, 0, 120, 108, (const u16*)0x874ad54 },
+    [15] = { 1, 61, 0, 120, 108, (const u16*)0x874ad5c },
+    [16] = { 1, 65, 0, 120, 108, (const u16*)0x874ad64 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_PermanentSpanish[6] = {
+    [0] = { 2, 0, 0, 120, 40, (const u16*)0x874adc6 },
+    [1] = { 2, 0, 0, 120, 60, (const u16*)0x874ad8c },
+    [2] = { 2, 0, 0, 120, 108, (const u16*)0x874af1c },
+    [3] = { 2, 0, 0, 120, 108, (const u16*)0x874ae5e },
+    [4] = { 2, 0, 0, 124, 128, (const u16*)0x874adac },
+    [5] = { 2, 0, 0, 120, 158, (const u16*)0x874af1c },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Spanish0[15] = {
+    [0] = { 1, 1, 0, 120, 40, (const u16*)0x874ade6 },
+    [1] = { 1, 5, 0, 120, 40, (const u16*)0x874adee },
+    [2] = { 1, 9, 0, 120, 40, (const u16*)0x874adf6 },
+    [3] = { 1, 13, 0, 120, 40, (const u16*)0x874adfe },
+    [4] = { 1, 17, 0, 120, 40, (const u16*)0x874ae06 },
+    [5] = { 1, 21, 0, 120, 40, (const u16*)0x874ae0e },
+    [6] = { 1, 25, 0, 120, 40, (const u16*)0x874ae16 },
+    [7] = { 1, 29, 0, 120, 40, (const u16*)0x874ae1e },
+    [8] = { 1, 33, 0, 120, 40, (const u16*)0x874ae26 },
+    [9] = { 1, 37, 0, 120, 40, (const u16*)0x874ae2e },
+    [10] = { 1, 41, 0, 120, 40, (const u16*)0x874ae36 },
+    [11] = { 1, 45, 0, 120, 40, (const u16*)0x874ae3e },
+    [12] = { 1, 49, 0, 120, 40, (const u16*)0x874ae46 },
+    [13] = { 1, 53, 0, 120, 40, (const u16*)0x874ae4e },
+    [14] = { 1, 57, 0, 120, 40, (const u16*)0x874ae56 },
+};
+
+const struct EndingTextLetter sEndingTextLetters_Spanish1[19] = {
+    [0] = { 1, 1, 0, 120, 108, (const u16*)0x874ae84 },
+    [1] = { 1, 5, 0, 120, 108, (const u16*)0x874ae8c },
+    [2] = { 1, 9, 0, 120, 108, (const u16*)0x874ae94 },
+    [3] = { 1, 13, 0, 120, 108, (const u16*)0x874ae9c },
+    [4] = { 1, 17, 0, 120, 108, (const u16*)0x874aea4 },
+    [5] = { 1, 21, 0, 120, 108, (const u16*)0x874aeac },
+    [6] = { 1, 25, 0, 120, 108, (const u16*)0x874aeb4 },
+    [7] = { 1, 29, 0, 120, 108, (const u16*)0x874aebc },
+    [8] = { 1, 33, 0, 120, 108, (const u16*)0x874aec4 },
+    [9] = { 1, 37, 0, 120, 108, (const u16*)0x874aecc },
+    [10] = { 1, 41, 0, 120, 108, (const u16*)0x874aed4 },
+    [11] = { 1, 45, 0, 120, 108, (const u16*)0x874aedc },
+    [12] = { 1, 49, 0, 120, 108, (const u16*)0x874aee4 },
+    [13] = { 1, 53, 0, 120, 108, (const u16*)0x874aeec },
+    [14] = { 1, 57, 0, 120, 108, (const u16*)0x874aef4 },
+    [15] = { 1, 61, 0, 120, 108, (const u16*)0x874aefc },
+    [16] = { 1, 65, 0, 120, 108, (const u16*)0x874af04 },
+    [17] = { 1, 69, 0, 120, 108, (const u16*)0x874af0c },
+    [18] = { 1, 73, 0, 120, 108, (const u16*)0x874af14 },
+};
 
 const u32* const sPreResultsSamusBgGfxPointers1[4] = {
     sPreResultsSamusSuitedGfx3,
@@ -1773,7 +1605,8 @@ const u8* const sPreResultsSamusBgTilemapPointers[4] = {
     sTilemap_75e6fc
 };
 
-const u8 sBlob_74e650_74eb50[] = INCBIN_U8("data/Blob_74e650_74eb50.bin");
+const u8 sEndingDigitsTopGfx[10 * 64] = INCBIN_U8("data/ending/digits_top.gfx");
+const u8 sEndingDigitsBottomGfx[10 * 64] = INCBIN_U8("data/ending/digits_bottom.gfx");
 
 const u32 sPreResultsSpaceBgGfx[] = INCBIN_U32("data/ending/space_bg.gfx.lz");
 
