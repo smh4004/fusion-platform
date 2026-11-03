@@ -17,17 +17,384 @@
 #include "data/sprites/x_parasite.h"
 #include "data/projectile_data.h"
 #include "data/audio.h"
+#include "data/menus/game_over_data.h"
+#include "data/menus/file_select_data.h"
 extern const u8 sBlob_5dfd6c_5e116c[];
 extern const u8 sBlob_5f6990_5f7190[];
-
 extern const u8 sBlob_65c468_662804[];
 extern const u8 sBlob_662cfc_663820[];
-extern const u8 sBlob_6638a0_682fac[];
-
+extern const u8 sBlob_73dbcc_7478a0[];
 extern u32 sPointerTable_79ce10[];
-
-extern const u8 sBlob_73421e_7478a0[];
-extern u32 sPointerTable_79e868[];
+extern const u8 sAddr_5dfeac[];
+extern const u8 sAddr_5dffec[];
+extern const u8 sAddr_5e012c[];
+extern const u8 sAddr_5e026c[];
+extern const u8 sAddr_5e03ac[];
+extern const u8 sAddr_5e04ec[];
+extern const u8 sAddr_5e062c[];
+extern const u8 sAddr_5e076c[];
+extern const u8 sAddr_5e08ac[];
+extern const u8 sAddr_5e09ec[];
+extern const u8 sAddr_5e0b2c[];
+extern const u8 sAddr_5e0c6c[];
+extern const u8 sAddr_5e0dac[];
+extern const u8 sAddr_5e0eec[];
+extern const u8 sAddr_5e102c[];
+extern const u8 sAddr_5f6a10[];
+extern const u8 sAddr_5f6a90[];
+extern const u8 sAddr_5f6b10[];
+extern const u8 sAddr_5f6b90[];
+extern const u8 sAddr_5f6c10[];
+extern const u8 sAddr_5f6c90[];
+extern const u8 sAddr_5f6d10[];
+extern const u8 sAddr_5f6d90[];
+extern const u8 sAddr_5f6e10[];
+extern const u8 sAddr_5f6e90[];
+extern const u8 sAddr_5f6f10[];
+extern const u8 sAddr_5f6f90[];
+extern const u8 sAddr_5f7010[];
+extern const u8 sAddr_5f7090[];
+extern const u8 sAddr_5f7110[];
+extern const u8 sAddr_65fc24[];
+extern const u8 sAddr_6638c0[];
+extern const u8 sAddr_663a20[];
+extern const u8 sAddr_663dd0[];
+extern const u8 sAddr_663df8[];
+extern const u8 sAddr_663eac[];
+extern const u8 sAddr_667c18[];
+extern const u8 sAddr_66aa30[];
+extern const u8 sAddr_66aa58[];
+extern const u8 sAddr_66aa68[];
+extern const u8 sAddr_66abc8[];
+extern const u8 sAddr_66ac88[];
+extern const u8 sAddr_66b524[];
+extern const u8 sAddr_66ec18[];
+extern const u8 sAddr_6719cc[];
+extern const u8 sAddr_6719f4[];
+extern const u8 sAddr_671a04[];
+extern const u8 sAddr_671b64[];
+extern const u8 sAddr_671c24[];
+extern const u8 sAddr_71e20c[];
+extern const u8 sAddr_71e4e4[];
+extern const u8 sAddr_71e67e[];
+extern const u8 sAddr_71e814[];
+extern const u8 sAddr_71e9b6[];
+extern const u8 sAddr_71eb34[];
+extern const u8 sAddr_71ecac[];
+extern const u8 sAddr_71efc2[];
+extern const u8 sAddr_71f498[];
+extern const u8 sAddr_71f52c[];
+extern const u8 sAddr_71f56c[];
+extern const u8 sAddr_71f5fc[];
+extern const u8 sAddr_71f656[];
+extern const u8 sAddr_71f71a[];
+extern const u8 sAddr_71f7cc[];
+extern const u8 sAddr_71f896[];
+extern const u8 sAddr_71f98a[];
+extern const u8 sAddr_71fa32[];
+extern const u8 sAddr_71fa92[];
+extern const u8 sAddr_71fad4[];
+extern const u8 sAddr_7200ee[];
+extern const u8 sAddr_720310[];
+extern const u8 sAddr_720528[];
+extern const u8 sAddr_720748[];
+extern const u8 sAddr_72094a[];
+extern const u8 sAddr_720b4a[];
+extern const u8 sAddr_721116[];
+extern const u8 sAddr_72192e[];
+extern const u8 sAddr_721a12[];
+extern const u8 sAddr_721ab6[];
+extern const u8 sAddr_721c28[];
+extern const u8 sAddr_721d12[];
+extern const u8 sAddr_721f20[];
+extern const u8 sAddr_722068[];
+extern const u8 sAddr_722238[];
+extern const u8 sAddr_722438[];
+extern const u8 sAddr_722550[];
+extern const u8 sAddr_7225f8[];
+extern const u8 sAddr_7226a0[];
+extern const u8 sAddr_723016[];
+extern const u8 sAddr_723324[];
+extern const u8 sAddr_723624[];
+extern const u8 sAddr_723958[];
+extern const u8 sAddr_723be2[];
+extern const u8 sAddr_723e44[];
+extern const u8 sAddr_72475e[];
+extern const u8 sAddr_7252c6[];
+extern const u8 sAddr_725412[];
+extern const u8 sAddr_7254ea[];
+extern const u8 sAddr_7256d8[];
+extern const u8 sAddr_72581e[];
+extern const u8 sAddr_725a60[];
+extern const u8 sAddr_725b94[];
+extern const u8 sAddr_725dac[];
+extern const u8 sAddr_72603c[];
+extern const u8 sAddr_7261c6[];
+extern const u8 sAddr_7262aa[];
+extern const u8 sAddr_72638c[];
+extern const u8 sAddr_726aa6[];
+extern const u8 sAddr_726cfe[];
+extern const u8 sAddr_726f04[];
+extern const u8 sAddr_727106[];
+extern const u8 sAddr_727314[];
+extern const u8 sAddr_727522[];
+extern const u8 sAddr_727b08[];
+extern const u8 sAddr_7282bc[];
+extern const u8 sAddr_7283a6[];
+extern const u8 sAddr_728466[];
+extern const u8 sAddr_728608[];
+extern const u8 sAddr_7286e8[];
+extern const u8 sAddr_7288ba[];
+extern const u8 sAddr_728a12[];
+extern const u8 sAddr_728bfc[];
+extern const u8 sAddr_728e4a[];
+extern const u8 sAddr_728f96[];
+extern const u8 sAddr_72904e[];
+extern const u8 sAddr_7290fc[];
+extern const u8 sAddr_729792[];
+extern const u8 sAddr_729a6e[];
+extern const u8 sAddr_729c84[];
+extern const u8 sAddr_729f24[];
+extern const u8 sAddr_72a124[];
+extern const u8 sAddr_72a330[];
+extern const u8 sAddr_72a8f6[];
+extern const u8 sAddr_72b142[];
+extern const u8 sAddr_72b254[];
+extern const u8 sAddr_72b2c8[];
+extern const u8 sAddr_72b446[];
+extern const u8 sAddr_72b56e[];
+extern const u8 sAddr_72b7a6[];
+extern const u8 sAddr_72b8e6[];
+extern const u8 sAddr_72bab4[];
+extern const u8 sAddr_72bcc2[];
+extern const u8 sAddr_72bdb8[];
+extern const u8 sAddr_72be4a[];
+extern const u8 sAddr_72bef8[];
+extern const u8 sAddr_72c69c[];
+extern const u8 sAddr_72c8f2[];
+extern const u8 sAddr_72cb02[];
+extern const u8 sAddr_72cd92[];
+extern const u8 sAddr_72d002[];
+extern const u8 sAddr_72d212[];
+extern const u8 sAddr_72d81e[];
+extern const u8 sAddr_72e0b8[];
+extern const u8 sAddr_72e1b6[];
+extern const u8 sAddr_72e220[];
+extern const u8 sAddr_72e3d2[];
+extern const u8 sAddr_72e4ea[];
+extern const u8 sAddr_72e70a[];
+extern const u8 sAddr_72e848[];
+extern const u8 sAddr_72ea20[];
+extern const u8 sAddr_72ebf6[];
+extern const u8 sAddr_72ed50[];
+extern const u8 sAddr_72ee1c[];
+extern const u8 sAddr_739d58[];
+extern const u8 sAddr_73a430[];
+extern const u8 sAddr_73ab28[];
+extern const u8 sAddr_73b308[];
+extern const u8 sAddr_73baac[];
+extern const u8 sAddr_73c274[];
+extern const u8 sAddr_73c29c[];
+extern const u8 sAddr_73dbd8[];
+extern const u8 sAddr_73dbde[];
+extern const u8 sAddr_73dbe4[];
+extern const u8 sAddr_73dbea[];
+extern const u8 sAddr_73dbf6[];
+extern const u8 sAddr_73dbfc[];
+extern const u8 sAddr_73dc02[];
+extern const u8 sAddr_73dc08[];
+extern const u8 sAddr_73dc14[];
+extern const u8 sAddr_740800[];
+extern const u8 sAddr_740820[];
+extern const u8 sAddr_740840[];
+extern const u8 sAddr_7408c0[];
+extern const u8 sAddr_7409d8[];
+extern const u8 sAddr_7409e8[];
+extern const u8 sAddr_7409f8[];
+extern const u8 sAddr_740a08[];
+extern const u8 sAddr_740a18[];
+extern const u8 sAddr_740a28[];
+extern const u8 sAddr_740a38[];
+extern const u8 sAddr_740ab8[];
+extern const u8 sAddr_740ac8[];
+extern const u8 sAddr_740ad8[];
+extern const u8 sAddr_740ae8[];
+extern const u8 sAddr_740b08[];
+extern const u8 sAddr_740b28[];
+extern const u8 sAddr_740ba8[];
+extern const u8 sAddr_740bb8[];
+extern const u8 sAddr_740bc8[];
+extern const u8 sAddr_740bd8[];
+extern const u8 sAddr_740be8[];
+extern const u8 sAddr_740bf8[];
+extern const u8 sAddr_740c08[];
+extern const u8 sAddr_740c18[];
+extern const u8 sAddr_740c28[];
+extern const u8 sAddr_740c38[];
+extern const u8 sAddr_740c48[];
+extern const u8 sAddr_740c58[];
+extern const u8 sAddr_740c68[];
+extern const u8 sAddr_740c78[];
+extern const u8 sAddr_740c88[];
+extern const u8 sAddr_740c98[];
+extern const u8 sAddr_740ca8[];
+extern const u8 sAddr_740cb8[];
+extern const u8 sAddr_740cc8[];
+extern const u8 sAddr_740cd8[];
+extern const u8 sAddr_740ce8[];
+extern const u8 sAddr_740cf8[];
+extern const u8 sAddr_740f08[];
+extern const u8 sAddr_740f3a[];
+extern const u8 sAddr_740f64[];
+extern const u8 sAddr_740f82[];
+extern const u8 sAddr_740fc4[];
+extern const u8 sAddr_740ff4[];
+extern const u8 sAddr_741036[];
+extern const u8 sAddr_741078[];
+extern const u8 sAddr_7410ba[];
+extern const u8 sAddr_7410fc[];
+extern const u8 sAddr_74113e[];
+extern const u8 sAddr_741180[];
+extern const u8 sAddr_741196[];
+extern const u8 sAddr_74119e[];
+extern const u8 sAddr_7411b2[];
+extern const u8 sAddr_7411da[];
+extern const u8 sAddr_7411fa[];
+extern const u8 sAddr_74120e[];
+extern const u8 sAddr_741258[];
+extern const u8 sAddr_741280[];
+extern const u8 sAddr_7412ce[];
+extern const u8 sAddr_7412ec[];
+extern const u8 sAddr_74130e[];
+extern const u8 sAddr_741334[];
+extern const u8 sAddr_74134c[];
+extern const u8 sAddr_741364[];
+extern const u8 sAddr_741398[];
+extern const u8 sAddr_7413ce[];
+extern const u8 sAddr_741410[];
+extern const u8 sAddr_741466[];
+extern const u8 sAddr_74149c[];
+extern const u8 sAddr_7414f6[];
+extern const u8 sAddr_741550[];
+extern const u8 sAddr_7415aa[];
+extern const u8 sAddr_74160e[];
+extern const u8 sAddr_741672[];
+extern const u8 sAddr_7416d6[];
+extern const u8 sAddr_7416ec[];
+extern const u8 sAddr_74170a[];
+extern const u8 sAddr_74171e[];
+extern const u8 sAddr_741746[];
+extern const u8 sAddr_741766[];
+extern const u8 sAddr_74177a[];
+extern const u8 sAddr_7417c4[];
+extern const u8 sAddr_7417ee[];
+extern const u8 sAddr_741814[];
+extern const u8 sAddr_741830[];
+extern const u8 sAddr_74185a[];
+extern const u8 sAddr_741884[];
+extern const u8 sAddr_7418b4[];
+extern const u8 sAddr_7418dc[];
+extern const u8 sAddr_741918[];
+extern const u8 sAddr_741946[];
+extern const u8 sAddr_74197e[];
+extern const u8 sAddr_7419d4[];
+extern const u8 sAddr_741a14[];
+extern const u8 sAddr_741a76[];
+extern const u8 sAddr_741ad8[];
+extern const u8 sAddr_741b3a[];
+extern const u8 sAddr_741b98[];
+extern const u8 sAddr_741bf6[];
+extern const u8 sAddr_741c54[];
+extern const u8 sAddr_741c6e[];
+extern const u8 sAddr_741c90[];
+extern const u8 sAddr_741cb2[];
+extern const u8 sAddr_741cdc[];
+extern const u8 sAddr_741d0a[];
+extern const u8 sAddr_741d28[];
+extern const u8 sAddr_741d50[];
+extern const u8 sAddr_741d82[];
+extern const u8 sAddr_741db2[];
+extern const u8 sAddr_741dd6[];
+extern const u8 sAddr_741df2[];
+extern const u8 sAddr_741e24[];
+extern const u8 sAddr_741e48[];
+extern const u8 sAddr_741e82[];
+extern const u8 sAddr_741ec4[];
+extern const u8 sAddr_741eee[];
+extern const u8 sAddr_741f32[];
+extern const u8 sAddr_741f80[];
+extern const u8 sAddr_741fbe[];
+extern const u8 sAddr_74202a[];
+extern const u8 sAddr_742096[];
+extern const u8 sAddr_742102[];
+extern const u8 sAddr_742162[];
+extern const u8 sAddr_7421c2[];
+extern const u8 sAddr_742222[];
+extern const u8 sAddr_742244[];
+extern const u8 sAddr_742270[];
+extern const u8 sAddr_74229c[];
+extern const u8 sAddr_7422c0[];
+extern const u8 sAddr_7422f2[];
+extern const u8 sAddr_742318[];
+extern const u8 sAddr_74234e[];
+extern const u8 sAddr_742362[];
+extern const u8 sAddr_742386[];
+extern const u8 sAddr_7423aa[];
+extern const u8 sAddr_7423d4[];
+extern const u8 sAddr_7423f6[];
+extern const u8 sAddr_742420[];
+extern const u8 sAddr_74244c[];
+extern const u8 sAddr_742486[];
+extern const u8 sAddr_7424c0[];
+extern const u8 sAddr_7424fe[];
+extern const u8 sAddr_74254e[];
+extern const u8 sAddr_742586[];
+extern const u8 sAddr_7425f2[];
+extern const u8 sAddr_74265e[];
+extern const u8 sAddr_7426ca[];
+extern const u8 sAddr_74272e[];
+extern const u8 sAddr_742792[];
+extern const u8 sAddr_7427f6[];
+extern const u8 sAddr_74280c[];
+extern const u8 sAddr_74282c[];
+extern const u8 sAddr_742840[];
+extern const u8 sAddr_74286a[];
+extern const u8 sAddr_74289e[];
+extern const u8 sAddr_7428c4[];
+extern const u8 sAddr_74290a[];
+extern const u8 sAddr_742938[];
+extern const u8 sAddr_742964[];
+extern const u8 sAddr_742982[];
+extern const u8 sAddr_7429ac[];
+extern const u8 sAddr_7429dc[];
+extern const u8 sAddr_742a00[];
+extern const u8 sAddr_742a28[];
+extern const u8 sAddr_742a66[];
+extern const u8 sAddr_742a8e[];
+extern const u8 sAddr_742ac0[];
+extern const u8 sAddr_742b18[];
+extern const u8 sAddr_742b50[];
+extern const u8 sAddr_742baa[];
+extern const u8 sAddr_742c04[];
+extern const u8 sAddr_742c5e[];
+extern const u8 sAddr_742cba[];
+extern const u8 sAddr_742d16[];
+extern const u8 sAddr_742d74[];
+extern const u8 sAddr_742d8a[];
+extern const u8 sAddr_742da2[];
+extern const u8 sAddr_742dc8[];
+extern const u8 sAddr_742de4[];
+extern const u8 sAddr_742df8[];
+extern const u8 sAddr_742e18[];
+extern const u8 sAddr_742e4c[];
+extern const u8 sAddr_742e7c[];
+extern const u8 sAddr_742e9c[];
+extern const u8 sAddr_742ec6[];
+extern const u8 sAddr_742eee[];
+extern const u8 sAddr_742f14[];
+extern const u8 sAddr_742f42[];
+extern const u8 sAddr_742f66[];
+extern const u8 sAddr_742f7a[];
 
 extern const u8 sBlob_6b2fac_72eee0[];
 
@@ -71,56 +438,59 @@ static const u16* sArray_79c2e4[12] = {
 
 static const u16* sPalPointers_79c314[16] = {
 	(const u16*)(&sBlob_5dfd6c_5e116c),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0x140),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0x12c0),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0x280),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0x3c0),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0x500),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0x640),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0x780),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0x8c0),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0xa00),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0xb40),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0xc80),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0xdc0),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0xf00),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0x1040),
-	(const u16*)((const u8*)&sBlob_5dfd6c_5e116c + 0x1180)
+	(const u16*)sAddr_5dfeac,
+	(const u16*)sAddr_5e102c,
+	(const u16*)sAddr_5dffec,
+	(const u16*)sAddr_5e012c,
+	(const u16*)sAddr_5e026c,
+	(const u16*)sAddr_5e03ac,
+	(const u16*)sAddr_5e04ec,
+	(const u16*)sAddr_5e062c,
+	(const u16*)sAddr_5e076c,
+	(const u16*)sAddr_5e08ac,
+	(const u16*)sAddr_5e09ec,
+	(const u16*)sAddr_5e0b2c,
+	(const u16*)sAddr_5e0c6c,
+	(const u16*)sAddr_5e0dac,
+	(const u16*)sAddr_5e0eec
 };
 
 static const u16* sPalPointers_79c354[16] = {
 	(const u16*)(&sBlob_5f6990_5f7190),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x80),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x100),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x180),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x200),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x280),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x300),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x380),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x400),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x480),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x500),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x580),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x600),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x680),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x700),
-	(const u16*)((const u8*)&sBlob_5f6990_5f7190 + 0x780)
+	(const u16*)sAddr_5f6a10,
+	(const u16*)sAddr_5f6a90,
+	(const u16*)sAddr_5f6b10,
+	(const u16*)sAddr_5f6b90,
+	(const u16*)sAddr_5f6c10,
+	(const u16*)sAddr_5f6c90,
+	(const u16*)sAddr_5f6d10,
+	(const u16*)sAddr_5f6d90,
+	(const u16*)sAddr_5f6e10,
+	(const u16*)sAddr_5f6e90,
+	(const u16*)sAddr_5f6f10,
+	(const u16*)sAddr_5f6f90,
+	(const u16*)sAddr_5f7010,
+	(const u16*)sAddr_5f7090,
+	(const u16*)sAddr_5f7110
 };
 
-u32 sPointerTable_79c394[13] = {
-    (u32)&sOam_60ac08,
-    (u32)&sOam_60ac18,
-    (u32)&sOam_60ac28,
-    (u32)&sOam_60ac38,
-    (u32)&sOam_60ac28,
-    (u32)&sOam_60ac18,
-    (u32)&sPointerTable_79ce10,
-    (u32)&sPointerTable_79ce10 + 0x384,
-    (u32)&sPointerTable_79ce10 + 0x6fc,
-    (u32)&sPointerTable_79ce10 + 0xa80,
-    (u32)&sPointerTable_79ce10 + 0xe04,
-    (u32)&sPointerTable_79ce10 + 0x1188,
-    (u32)&sPointerTable_79ce10 + 0x150c
+const struct FrameData* sIntroSpaceViewParticleOam[6] = {
+    sOam_60ac08,
+    sOam_60ac18,
+    sOam_60ac28,
+    sOam_60ac38,
+    sOam_60ac28,
+    sOam_60ac18
+};
+
+const u16** sEndingTextPointers[LANGUAGE_COUNT] = {
+    (const u16**)(&sPointerTable_79ce10),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0x384),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0x6fc),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0xa80),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0xe04),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0x1188),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0x150c)
 };
 
 static const u32* sIntroSr388SurfaceBgGfxPointers[8] = {
@@ -187,86 +557,92 @@ const u32* sTitleIntroCollisionWarningObjGfxPointers[6] = {
     sTitleIntroCollisionWarningObjGfx5
 };
 
-static const u32* sTitleIntroGfxPointers_79c474[13] = {
-    sTitleIntroGfx_652bd4,
-    sTitleIntroGfx_653980,
-    sTitleIntroGfx_6546f4,
-    sTitleIntroGfx_6552a0,
-    sTitleIntroGfx_655f3c,
-    sTitleIntroGfx_656cd0,
-    sTitleIntroGfx_657408,
-    sTitleIntroGfx_6579c4,
-    sTitleIntroGfx_657d2c,
-    sTitleIntroGfx_657f60,
-    sTitleIntroGfx_658150,
-    sTitleIntroGfx_658468,
-    sTitleIntroGfx_658848
+u32 sPointerTable_79c474[13] = {
+    (u32)&sTitleIntroGfx_652bd4,
+    (u32)&sTitleIntroGfx_653980,
+    (u32)&sTitleIntroGfx_6546f4,
+    (u32)&sTitleIntroGfx_6552a0,
+    (u32)&sTitleIntroGfx_655f3c,
+    (u32)&sTitleIntroGfx_656cd0,
+    (u32)&sTitleIntroGfx_657408,
+    (u32)&sTitleIntroGfx_6579c4,
+    (u32)&sTitleIntroGfx_657d2c,
+    (u32)&sTitleIntroGfx_657f60,
+    (u32)&sTitleIntroGfx_658150,
+    (u32)&sTitleIntroGfx_658468,
+    (u32)&sTitleIntroGfx_658848
 };
 
-u32 sPointerTable_79c4a8[63] = {
-    (u32)&sBlob_6638a0_682fac + 0x20,
-    (u32)&sBlob_6638a0_682fac + 0x71c8,
-    (u32)&sBlob_6638a0_682fac + 0x20,
-    (u32)&sBlob_6638a0_682fac + 0x20,
-    (u32)&sBlob_6638a0_682fac + 0x71c8,
-    (u32)&sBlob_6638a0_682fac + 0xe164,
-    (u32)&sBlob_6638a0_682fac + 0x20,
-    (u32)&sBlob_6638a0_682fac + 0x20,
-    (u32)&sBlob_6638a0_682fac + 0x20,
-    (u32)&sBlob_6638a0_682fac + 0x180,
-    (u32)&sBlob_6638a0_682fac + 0x180,
-    (u32)&sBlob_6638a0_682fac + 0x180,
-    (u32)&sBlob_6638a0_682fac + 0x180,
-    (u32)&sBlob_6638a0_682fac + 0x7328,
-    (u32)&sBlob_6638a0_682fac + 0xe2c4,
-    (u32)&sBlob_6638a0_682fac + 0x180,
-    (u32)&sBlob_6638a0_682fac + 0x180,
-    (u32)&sBlob_6638a0_682fac + 0x180,
-    (u32)&sBlob_65c468_662804,
-    (u32)&sBlob_6638a0_682fac + 0x60c,
-    (u32)&sBlob_65c468_662804,
-    (u32)&sBlob_65c468_662804,
-    (u32)&sBlob_6638a0_682fac + 0x60c,
-    (u32)&sBlob_6638a0_682fac + 0x7c84,
-    (u32)&sBlob_65c468_662804,
-    (u32)&sBlob_65c468_662804,
-    (u32)&sBlob_65c468_662804,
-    (u32)&sBlob_65c468_662804 + 0x37bc,
-    (u32)&sBlob_65c468_662804 + 0x37bc,
-    (u32)&sBlob_65c468_662804 + 0x37bc,
-    (u32)&sBlob_65c468_662804 + 0x37bc,
-    (u32)&sBlob_6638a0_682fac + 0x4378,
-    (u32)&sBlob_6638a0_682fac + 0xb378,
-    (u32)&sBlob_65c468_662804 + 0x37bc,
-    (u32)&sBlob_65c468_662804 + 0x37bc,
-    (u32)&sBlob_65c468_662804 + 0x37bc,
-    (u32)&sBlob_662cfc_663820,
-    (u32)&sBlob_6638a0_682fac + 0x73e8,
-    (u32)&sBlob_662cfc_663820,
-    (u32)&sBlob_662cfc_663820,
-    (u32)&sBlob_6638a0_682fac + 0x73e8,
-    (u32)&sBlob_6638a0_682fac + 0xe384,
-    (u32)&sBlob_662cfc_663820,
-    (u32)&sBlob_662cfc_663820,
-    (u32)&sBlob_662cfc_663820,
-    (u32)&sBlob_6638a0_682fac + 0x530,
-    (u32)&sBlob_6638a0_682fac + 0x558,
-    (u32)&sBlob_6638a0_682fac + 0x530,
-    (u32)&sBlob_6638a0_682fac + 0x558,
-    (u32)&sBlob_6638a0_682fac + 0x530,
-    (u32)&sBlob_6638a0_682fac + 0x558,
-    (u32)&sBlob_6638a0_682fac + 0x530,
-    (u32)&sBlob_6638a0_682fac + 0x558,
-    (u32)&sBlob_6638a0_682fac + 0x7190,
-    (u32)&sBlob_6638a0_682fac + 0x71b8,
-    (u32)&sBlob_6638a0_682fac + 0xe12c,
-    (u32)&sBlob_6638a0_682fac + 0xe154,
-    (u32)&sBlob_6638a0_682fac + 0x530,
-    (u32)&sBlob_6638a0_682fac + 0x558,
-    (u32)&sBlob_6638a0_682fac + 0x530,
-    (u32)&sBlob_6638a0_682fac + 0x558,
-    (u32)&sBlob_6638a0_682fac + 0x530,
-    (u32)&sBlob_6638a0_682fac + 0x558
+const u16* sCutsceneMonologueBgPalPointers[9] = {
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_66aa68,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_66aa68,
+    (const u16*)sAddr_671a04,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_6638c0
+};
+
+const u16* sCutsceneMonologueObjPalPointers[9] = {
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_66abc8,
+    (const u16*)sAddr_671b64,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20
+};
+
+const u32* sCutsceneMonologueBgGfxPointers[9] = {
+    (const u32*)(&sBlob_65c468_662804),
+    (const u32*)sAddr_663eac,
+    (const u32*)(&sBlob_65c468_662804),
+    (const u32*)(&sBlob_65c468_662804),
+    (const u32*)sAddr_663eac,
+    (const u32*)sAddr_66b524,
+    (const u32*)(&sBlob_65c468_662804),
+    (const u32*)(&sBlob_65c468_662804),
+    (const u32*)(&sBlob_65c468_662804)
+};
+
+const u32* sCutsceneMonologueObjGfxPointers[9] = {
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_667c18,
+    (const u32*)sAddr_66ec18,
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_65fc24
+};
+
+const u32* sCutsceneMonologueBgTilemapPointers[9] = {
+    (const u32*)(&sBlob_662cfc_663820),
+    (const u32*)sAddr_66ac88,
+    (const u32*)(&sBlob_662cfc_663820),
+    (const u32*)(&sBlob_662cfc_663820),
+    (const u32*)sAddr_66ac88,
+    (const u32*)sAddr_671c24,
+    (const u32*)(&sBlob_662cfc_663820),
+    (const u32*)(&sBlob_662cfc_663820),
+    (const u32*)(&sBlob_662cfc_663820)
+};
+
+const struct FrameData* sCutsceneMonologueOamPointers[9][2] = {
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_66aa30, (const struct FrameData*)sAddr_66aa58 },
+    { (const struct FrameData*)sAddr_6719cc, (const struct FrameData*)sAddr_6719f4 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 }
 };
 
 u16** sMonologueTextPointers[LANGUAGE_COUNT] = {
@@ -2396,408 +2772,482 @@ u32 sPointerTable_79ce10[1572] = {
 };
 
 static u16* sMonologueTextPointersJapanese[19] = {
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6b260),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6b538),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6b6d2),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6b868),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6ba0a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6bb88),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6bd00),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6c016),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6c4ec),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6c580),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6c5c0),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6c650),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6c6aa),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6c76e),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6c820),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6c8ea),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6c9de),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6ca86),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6cae6)
+	(u16*)sAddr_71e20c,
+	(u16*)sAddr_71e4e4,
+	(u16*)sAddr_71e67e,
+	(u16*)sAddr_71e814,
+	(u16*)sAddr_71e9b6,
+	(u16*)sAddr_71eb34,
+	(u16*)sAddr_71ecac,
+	(u16*)sAddr_71efc2,
+	(u16*)sAddr_71f498,
+	(u16*)sAddr_71f52c,
+	(u16*)sAddr_71f56c,
+	(u16*)sAddr_71f5fc,
+	(u16*)sAddr_71f656,
+	(u16*)sAddr_71f71a,
+	(u16*)sAddr_71f7cc,
+	(u16*)sAddr_71f896,
+	(u16*)sAddr_71f98a,
+	(u16*)sAddr_71fa32,
+	(u16*)sAddr_71fa92
 };
 
 static u16* sMonologueTextPointersEnglish[19] = {
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6cb28),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6d142),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6d364),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6d57c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6d79c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6d99e),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6db9e),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6e16a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6e982),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6ea66),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6eb0a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6ec7c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6ed66),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6ef74),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6f0bc),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6f28c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6f48c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6f5a4),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6f64c)
+	(u16*)sAddr_71fad4,
+	(u16*)sAddr_7200ee,
+	(u16*)sAddr_720310,
+	(u16*)sAddr_720528,
+	(u16*)sAddr_720748,
+	(u16*)sAddr_72094a,
+	(u16*)sAddr_720b4a,
+	(u16*)sAddr_721116,
+	(u16*)sAddr_72192e,
+	(u16*)sAddr_721a12,
+	(u16*)sAddr_721ab6,
+	(u16*)sAddr_721c28,
+	(u16*)sAddr_721d12,
+	(u16*)sAddr_721f20,
+	(u16*)sAddr_722068,
+	(u16*)sAddr_722238,
+	(u16*)sAddr_722438,
+	(u16*)sAddr_722550,
+	(u16*)sAddr_7225f8
 };
 
 static u16* sMonologueTextPointersGerman[19] = {
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x6f6f4),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7006a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x70378),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x70678),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x709ac),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x70c36),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x70e98),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x717b2),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7231a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x72466),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7253e),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7272c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x72872),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x72ab4),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x72be8),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x72e00),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x73090),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7321a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x732fe)
+	(u16*)sAddr_7226a0,
+	(u16*)sAddr_723016,
+	(u16*)sAddr_723324,
+	(u16*)sAddr_723624,
+	(u16*)sAddr_723958,
+	(u16*)sAddr_723be2,
+	(u16*)sAddr_723e44,
+	(u16*)sAddr_72475e,
+	(u16*)sAddr_7252c6,
+	(u16*)sAddr_725412,
+	(u16*)sAddr_7254ea,
+	(u16*)sAddr_7256d8,
+	(u16*)sAddr_72581e,
+	(u16*)sAddr_725a60,
+	(u16*)sAddr_725b94,
+	(u16*)sAddr_725dac,
+	(u16*)sAddr_72603c,
+	(u16*)sAddr_7261c6,
+	(u16*)sAddr_7262aa
 };
 
 static u16* sMonologueTextPointersFrench[19] = {
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x733e0),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x73afa),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x73d52),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x73f58),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7415a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x74368),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x74576),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x74b5c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x75310),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x753fa),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x754ba),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7565c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7573c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7590e),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x75a66),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x75c50),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x75e9e),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x75fea),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x760a2)
+	(u16*)sAddr_72638c,
+	(u16*)sAddr_726aa6,
+	(u16*)sAddr_726cfe,
+	(u16*)sAddr_726f04,
+	(u16*)sAddr_727106,
+	(u16*)sAddr_727314,
+	(u16*)sAddr_727522,
+	(u16*)sAddr_727b08,
+	(u16*)sAddr_7282bc,
+	(u16*)sAddr_7283a6,
+	(u16*)sAddr_728466,
+	(u16*)sAddr_728608,
+	(u16*)sAddr_7286e8,
+	(u16*)sAddr_7288ba,
+	(u16*)sAddr_728a12,
+	(u16*)sAddr_728bfc,
+	(u16*)sAddr_728e4a,
+	(u16*)sAddr_728f96,
+	(u16*)sAddr_72904e
 };
 
 static u16* sMonologueTextPointersItalian[19] = {
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x76150),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x767e6),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x76ac2),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x76cd8),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x76f78),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x77178),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x77384),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7794a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x78196),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x782a8),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7831c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7849a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x785c2),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x787fa),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7893a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x78b08),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x78d16),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x78e0c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x78e9e)
+	(u16*)sAddr_7290fc,
+	(u16*)sAddr_729792,
+	(u16*)sAddr_729a6e,
+	(u16*)sAddr_729c84,
+	(u16*)sAddr_729f24,
+	(u16*)sAddr_72a124,
+	(u16*)sAddr_72a330,
+	(u16*)sAddr_72a8f6,
+	(u16*)sAddr_72b142,
+	(u16*)sAddr_72b254,
+	(u16*)sAddr_72b2c8,
+	(u16*)sAddr_72b446,
+	(u16*)sAddr_72b56e,
+	(u16*)sAddr_72b7a6,
+	(u16*)sAddr_72b8e6,
+	(u16*)sAddr_72bab4,
+	(u16*)sAddr_72bcc2,
+	(u16*)sAddr_72bdb8,
+	(u16*)sAddr_72be4a
 };
 
 static u16* sMonologueTextPointersSpanish[19] = {
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x78f4c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x796f0),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x79946),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x79b56),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x79de6),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7a056),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7a266),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7a872),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7b10c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7b20a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7b274),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7b426),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7b53e),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7b75e),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7b89c),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7ba74),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7bc4a),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7bda4),
-	(u16*)((const u8*)&sBlob_6b2fac_72eee0 + 0x7be70)
+	(u16*)sAddr_72bef8,
+	(u16*)sAddr_72c69c,
+	(u16*)sAddr_72c8f2,
+	(u16*)sAddr_72cb02,
+	(u16*)sAddr_72cd92,
+	(u16*)sAddr_72d002,
+	(u16*)sAddr_72d212,
+	(u16*)sAddr_72d81e,
+	(u16*)sAddr_72e0b8,
+	(u16*)sAddr_72e1b6,
+	(u16*)sAddr_72e220,
+	(u16*)sAddr_72e3d2,
+	(u16*)sAddr_72e4ea,
+	(u16*)sAddr_72e70a,
+	(u16*)sAddr_72e848,
+	(u16*)sAddr_72ea20,
+	(u16*)sAddr_72ebf6,
+	(u16*)sAddr_72ed50,
+	(u16*)sAddr_72ee1c
 };
 
-u32 sPointerTable_79e868[270] = {
-    (u32)&sBlob_73421e_7478a0 + 0x8056,
-    (u32)&sBlob_73421e_7478a0 + 0x807e,
-    (u32)&sBlob_73421e_7478a0 + 0x807e,
-    (u32)&sBlob_73421e_7478a0 + 0x5b3a,
-    (u32)&sBlob_73421e_7478a0 + 0x5b3a,
-    (u32)&sBlob_73421e_7478a0 + 0x5b3a,
-    (u32)&sBlob_73421e_7478a0 + 0x6212,
-    (u32)&sBlob_73421e_7478a0 + 0x690a,
-    (u32)&sBlob_73421e_7478a0 + 0x70ea,
-    (u32)&sBlob_73421e_7478a0 + 0x788e,
-    (u32)&sBlob_73421e_7478a0 + 0xc89a,
-    (u32)&sBlob_73421e_7478a0 + 0xc8aa,
-    (u32)&sBlob_73421e_7478a0 + 0xc8ba,
-    (u32)&sBlob_73421e_7478a0 + 0xc6a2,
-    (u32)&sBlob_73421e_7478a0 + 0xc6a2,
-    (u32)&sBlob_73421e_7478a0 + 0xc5e2,
-    (u32)&sBlob_73421e_7478a0 + 0xc5e2,
-    (u32)&sBlob_73421e_7478a0 + 0xc602,
-    (u32)&sBlob_73421e_7478a0 + 0xc622,
-    (u32)&sBlob_73421e_7478a0 + 0xc622,
-    (u32)&sBlob_73421e_7478a0 + 0xc8ca,
-    (u32)&sBlob_73421e_7478a0 + 0xc8ea,
-    (u32)&sBlob_73421e_7478a0 + 0xc90a,
-    (u32)&sBlob_73421e_7478a0 + 0xc90a,
-    (u32)&sBlob_73421e_7478a0 + 0x99ae,
-    (u32)&sBlob_73421e_7478a0 + 0x99ba,
-    (u32)&sBlob_73421e_7478a0 + 0x99c0,
-    (u32)&sBlob_73421e_7478a0 + 0x99c0,
-    (u32)&sBlob_73421e_7478a0 + 0x99c0,
-    (u32)&sBlob_73421e_7478a0 + 0x99c6,
-    (u32)&sBlob_73421e_7478a0 + 0x99cc,
-    (u32)&sBlob_73421e_7478a0 + 0x99d8,
-    (u32)&sBlob_73421e_7478a0 + 0x99de,
-    (u32)&sBlob_73421e_7478a0 + 0x99de,
-    (u32)&sBlob_73421e_7478a0 + 0x99de,
-    (u32)&sBlob_73421e_7478a0 + 0x99e4,
-    (u32)&sBlob_73421e_7478a0 + 0x99ea,
-    (u32)&sBlob_73421e_7478a0 + 0x99d8,
-    (u32)&sBlob_73421e_7478a0 + 0x99de,
-    (u32)&sBlob_73421e_7478a0 + 0x99de,
-    (u32)&sBlob_73421e_7478a0 + 0x99de,
-    (u32)&sBlob_73421e_7478a0 + 0x99e4,
-    (u32)&sBlob_73421e_7478a0 + 0x99f6,
-    (u32)&sBlob_73421e_7478a0 + 0x99d8,
-    (u32)&sBlob_73421e_7478a0 + 0x99de,
-    (u32)&sBlob_73421e_7478a0 + 0x99de,
-    (u32)&sBlob_73421e_7478a0 + 0x99de,
-    (u32)&sBlob_73421e_7478a0 + 0x99e4,
-    (u32)&sPointerTable_79e868 + 0x60,
-    (u32)&sPointerTable_79e868 + 0x60,
-    (u32)&sPointerTable_79e868 + 0x78,
-    (u32)&sPointerTable_79e868 + 0x78,
-    (u32)&sPointerTable_79e868 + 0x90,
-    (u32)&sPointerTable_79e868 + 0x78,
-    (u32)&sPointerTable_79e868 + 0xa8,
-    (u32)&sBlob_73421e_7478a0 + 0xc81a,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ba,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ca,
-    (u32)&sBlob_73421e_7478a0 + 0xc7da,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ea,
-    (u32)&sBlob_73421e_7478a0 + 0xc7fa,
-    (u32)&sBlob_73421e_7478a0 + 0xc80a,
-    (u32)&sBlob_73421e_7478a0 + 0xc81a,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ba,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ca,
-    (u32)&sBlob_73421e_7478a0 + 0xc7da,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ea,
-    (u32)&sBlob_73421e_7478a0 + 0xc7fa,
-    (u32)&sBlob_73421e_7478a0 + 0xc80a,
-    (u32)&sBlob_73421e_7478a0 + 0xc81a,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ba,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ca,
-    (u32)&sBlob_73421e_7478a0 + 0xc7da,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ea,
-    (u32)&sBlob_73421e_7478a0 + 0xc7fa,
-    (u32)&sBlob_73421e_7478a0 + 0xc80a,
-    (u32)&sBlob_73421e_7478a0 + 0xc9ea,
-    (u32)&sBlob_73421e_7478a0 + 0xc98a,
-    (u32)&sBlob_73421e_7478a0 + 0xc99a,
-    (u32)&sBlob_73421e_7478a0 + 0xc9aa,
-    (u32)&sBlob_73421e_7478a0 + 0xc9ba,
-    (u32)&sBlob_73421e_7478a0 + 0xc9ca,
-    (u32)&sBlob_73421e_7478a0 + 0xc9da,
-    (u32)&sBlob_73421e_7478a0 + 0xca5a,
-    (u32)&sBlob_73421e_7478a0 + 0xc9fa,
-    (u32)&sBlob_73421e_7478a0 + 0xca0a,
-    (u32)&sBlob_73421e_7478a0 + 0xca1a,
-    (u32)&sBlob_73421e_7478a0 + 0xca2a,
-    (u32)&sBlob_73421e_7478a0 + 0xca3a,
-    (u32)&sBlob_73421e_7478a0 + 0xca4a,
-    (u32)&sBlob_73421e_7478a0 + 0xcaca,
-    (u32)&sBlob_73421e_7478a0 + 0xca6a,
-    (u32)&sBlob_73421e_7478a0 + 0xca7a,
-    (u32)&sBlob_73421e_7478a0 + 0xca8a,
-    (u32)&sBlob_73421e_7478a0 + 0xca9a,
-    (u32)&sBlob_73421e_7478a0 + 0xcaaa,
-    (u32)&sBlob_73421e_7478a0 + 0xcaba,
-    (u32)&sBlob_73421e_7478a0 + 0xcada,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ba,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ca,
-    (u32)&sBlob_73421e_7478a0 + 0xc7da,
-    (u32)&sBlob_73421e_7478a0 + 0xc7ea,
-    (u32)&sBlob_73421e_7478a0 + 0xc7fa,
-    (u32)&sBlob_73421e_7478a0 + 0xc80a,
-    (u32)&sBlob_73421e_7478a0 + 0xccea,
-    (u32)&sBlob_73421e_7478a0 + 0xcd1c,
-    (u32)&sBlob_73421e_7478a0 + 0xcd46,
-    (u32)&sBlob_73421e_7478a0 + 0xcd64,
-    (u32)&sBlob_73421e_7478a0 + 0xcda6,
-    (u32)&sBlob_73421e_7478a0 + 0xcdd6,
-    (u32)&sBlob_73421e_7478a0 + 0xce18,
-    (u32)&sBlob_73421e_7478a0 + 0xce5a,
-    (u32)&sBlob_73421e_7478a0 + 0xce9c,
-    (u32)&sBlob_73421e_7478a0 + 0xcede,
-    (u32)&sBlob_73421e_7478a0 + 0xcf20,
-    (u32)&sBlob_73421e_7478a0 + 0xcf62,
-    (u32)&sBlob_73421e_7478a0 + 0xcf78,
-    (u32)&sBlob_73421e_7478a0 + 0xcf80,
-    (u32)&sBlob_73421e_7478a0 + 0xcf94,
-    (u32)&sBlob_73421e_7478a0 + 0xcfbc,
-    (u32)&sBlob_73421e_7478a0 + 0xcfdc,
-    (u32)&sBlob_73421e_7478a0 + 0xcff0,
-    (u32)&sBlob_73421e_7478a0 + 0xd03a,
-    (u32)&sBlob_73421e_7478a0 + 0xd062,
-    (u32)&sBlob_73421e_7478a0 + 0xd0b0,
-    (u32)&sBlob_73421e_7478a0 + 0xd0ce,
-    (u32)&sBlob_73421e_7478a0 + 0xd0f0,
-    (u32)&sBlob_73421e_7478a0 + 0xd116,
-    (u32)&sBlob_73421e_7478a0 + 0xd12e,
-    (u32)&sBlob_73421e_7478a0 + 0xd146,
-    (u32)&sBlob_73421e_7478a0 + 0xd17a,
-    (u32)&sBlob_73421e_7478a0 + 0xd1b0,
-    (u32)&sBlob_73421e_7478a0 + 0xd1f2,
-    (u32)&sBlob_73421e_7478a0 + 0xd248,
-    (u32)&sBlob_73421e_7478a0 + 0xd27e,
-    (u32)&sBlob_73421e_7478a0 + 0xd2d8,
-    (u32)&sBlob_73421e_7478a0 + 0xd332,
-    (u32)&sBlob_73421e_7478a0 + 0xd38c,
-    (u32)&sBlob_73421e_7478a0 + 0xd3f0,
-    (u32)&sBlob_73421e_7478a0 + 0xd454,
-    (u32)&sBlob_73421e_7478a0 + 0xd4b8,
-    (u32)&sBlob_73421e_7478a0 + 0xd4ce,
-    (u32)&sBlob_73421e_7478a0 + 0xd4ec,
-    (u32)&sBlob_73421e_7478a0 + 0xd500,
-    (u32)&sBlob_73421e_7478a0 + 0xd528,
-    (u32)&sBlob_73421e_7478a0 + 0xd548,
-    (u32)&sBlob_73421e_7478a0 + 0xd55c,
-    (u32)&sBlob_73421e_7478a0 + 0xd5a6,
-    (u32)&sBlob_73421e_7478a0 + 0xd5d0,
-    (u32)&sBlob_73421e_7478a0 + 0xd5f6,
-    (u32)&sBlob_73421e_7478a0 + 0xd612,
-    (u32)&sBlob_73421e_7478a0 + 0xd63c,
-    (u32)&sBlob_73421e_7478a0 + 0xd666,
-    (u32)&sBlob_73421e_7478a0 + 0xd696,
-    (u32)&sBlob_73421e_7478a0 + 0xd6be,
-    (u32)&sBlob_73421e_7478a0 + 0xd6fa,
-    (u32)&sBlob_73421e_7478a0 + 0xd728,
-    (u32)&sBlob_73421e_7478a0 + 0xd760,
-    (u32)&sBlob_73421e_7478a0 + 0xd7b6,
-    (u32)&sBlob_73421e_7478a0 + 0xd7f6,
-    (u32)&sBlob_73421e_7478a0 + 0xd858,
-    (u32)&sBlob_73421e_7478a0 + 0xd8ba,
-    (u32)&sBlob_73421e_7478a0 + 0xd91c,
-    (u32)&sBlob_73421e_7478a0 + 0xd97a,
-    (u32)&sBlob_73421e_7478a0 + 0xd9d8,
-    (u32)&sBlob_73421e_7478a0 + 0xda36,
-    (u32)&sBlob_73421e_7478a0 + 0xda50,
-    (u32)&sBlob_73421e_7478a0 + 0xda72,
-    (u32)&sBlob_73421e_7478a0 + 0xda94,
-    (u32)&sBlob_73421e_7478a0 + 0xdabe,
-    (u32)&sBlob_73421e_7478a0 + 0xdaec,
-    (u32)&sBlob_73421e_7478a0 + 0xdb0a,
-    (u32)&sBlob_73421e_7478a0 + 0xdb32,
-    (u32)&sBlob_73421e_7478a0 + 0xdb64,
-    (u32)&sBlob_73421e_7478a0 + 0xdb94,
-    (u32)&sBlob_73421e_7478a0 + 0xdbb8,
-    (u32)&sBlob_73421e_7478a0 + 0xdbd4,
-    (u32)&sBlob_73421e_7478a0 + 0xdc06,
-    (u32)&sBlob_73421e_7478a0 + 0xdc2a,
-    (u32)&sBlob_73421e_7478a0 + 0xdc64,
-    (u32)&sBlob_73421e_7478a0 + 0xdca6,
-    (u32)&sBlob_73421e_7478a0 + 0xdcd0,
-    (u32)&sBlob_73421e_7478a0 + 0xdd14,
-    (u32)&sBlob_73421e_7478a0 + 0xdd62,
-    (u32)&sBlob_73421e_7478a0 + 0xdda0,
-    (u32)&sBlob_73421e_7478a0 + 0xde0c,
-    (u32)&sBlob_73421e_7478a0 + 0xde78,
-    (u32)&sBlob_73421e_7478a0 + 0xdee4,
-    (u32)&sBlob_73421e_7478a0 + 0xdf44,
-    (u32)&sBlob_73421e_7478a0 + 0xdfa4,
-    (u32)&sBlob_73421e_7478a0 + 0xe004,
-    (u32)&sBlob_73421e_7478a0 + 0xe026,
-    (u32)&sBlob_73421e_7478a0 + 0xe052,
-    (u32)&sBlob_73421e_7478a0 + 0xe07e,
-    (u32)&sBlob_73421e_7478a0 + 0xe0a2,
-    (u32)&sBlob_73421e_7478a0 + 0xe0d4,
-    (u32)&sBlob_73421e_7478a0 + 0xe0fa,
-    (u32)&sBlob_73421e_7478a0 + 0xe130,
-    (u32)&sBlob_73421e_7478a0 + 0xe144,
-    (u32)&sBlob_73421e_7478a0 + 0xe168,
-    (u32)&sBlob_73421e_7478a0 + 0xe18c,
-    (u32)&sBlob_73421e_7478a0 + 0xe1b6,
-    (u32)&sBlob_73421e_7478a0 + 0xe1d8,
-    (u32)&sBlob_73421e_7478a0 + 0xe202,
-    (u32)&sBlob_73421e_7478a0 + 0xe22e,
-    (u32)&sBlob_73421e_7478a0 + 0xe268,
-    (u32)&sBlob_73421e_7478a0 + 0xe2a2,
-    (u32)&sBlob_73421e_7478a0 + 0xe2e0,
-    (u32)&sBlob_73421e_7478a0 + 0xe330,
-    (u32)&sBlob_73421e_7478a0 + 0xe368,
-    (u32)&sBlob_73421e_7478a0 + 0xe3d4,
-    (u32)&sBlob_73421e_7478a0 + 0xe440,
-    (u32)&sBlob_73421e_7478a0 + 0xe4ac,
-    (u32)&sBlob_73421e_7478a0 + 0xe510,
-    (u32)&sBlob_73421e_7478a0 + 0xe574,
-    (u32)&sBlob_73421e_7478a0 + 0xe5d8,
-    (u32)&sBlob_73421e_7478a0 + 0xe5ee,
-    (u32)&sBlob_73421e_7478a0 + 0xe60e,
-    (u32)&sBlob_73421e_7478a0 + 0xe622,
-    (u32)&sBlob_73421e_7478a0 + 0xe64c,
-    (u32)&sBlob_73421e_7478a0 + 0xe680,
-    (u32)&sBlob_73421e_7478a0 + 0xe6a6,
-    (u32)&sBlob_73421e_7478a0 + 0xe6ec,
-    (u32)&sBlob_73421e_7478a0 + 0xe71a,
-    (u32)&sBlob_73421e_7478a0 + 0xe746,
-    (u32)&sBlob_73421e_7478a0 + 0xe764,
-    (u32)&sBlob_73421e_7478a0 + 0xe78e,
-    (u32)&sBlob_73421e_7478a0 + 0xe7be,
-    (u32)&sBlob_73421e_7478a0 + 0xe7e2,
-    (u32)&sBlob_73421e_7478a0 + 0xe80a,
-    (u32)&sBlob_73421e_7478a0 + 0xe848,
-    (u32)&sBlob_73421e_7478a0 + 0xe870,
-    (u32)&sBlob_73421e_7478a0 + 0xe8a2,
-    (u32)&sBlob_73421e_7478a0 + 0xe8fa,
-    (u32)&sBlob_73421e_7478a0 + 0xe932,
-    (u32)&sBlob_73421e_7478a0 + 0xe98c,
-    (u32)&sBlob_73421e_7478a0 + 0xe9e6,
-    (u32)&sBlob_73421e_7478a0 + 0xea40,
-    (u32)&sBlob_73421e_7478a0 + 0xea9c,
-    (u32)&sBlob_73421e_7478a0 + 0xeaf8,
-    (u32)&sBlob_73421e_7478a0 + 0xeb56,
-    (u32)&sBlob_73421e_7478a0 + 0xeb6c,
-    (u32)&sBlob_73421e_7478a0 + 0xeb84,
-    (u32)&sBlob_73421e_7478a0 + 0xebaa,
-    (u32)&sBlob_73421e_7478a0 + 0xebc6,
-    (u32)&sBlob_73421e_7478a0 + 0xebda,
-    (u32)&sBlob_73421e_7478a0 + 0xebfa,
-    (u32)&sBlob_73421e_7478a0 + 0xec2e,
-    (u32)&sBlob_73421e_7478a0 + 0xec5e,
-    (u32)&sBlob_73421e_7478a0 + 0xec7e,
-    (u32)&sBlob_73421e_7478a0 + 0xeca8,
-    (u32)&sBlob_73421e_7478a0 + 0xecd0,
-    (u32)&sBlob_73421e_7478a0 + 0xecf6,
-    (u32)&sBlob_73421e_7478a0 + 0xed24,
-    (u32)&sBlob_73421e_7478a0 + 0xed48,
-    (u32)&sBlob_73421e_7478a0 + 0xed5c,
-    (u32)&sPointerTable_79e868 + 0x1a0,
-    (u32)&sPointerTable_79e868 + 0x1a0,
-    (u32)&sPointerTable_79e868 + 0x204,
-    (u32)&sPointerTable_79e868 + 0x268,
-    (u32)&sPointerTable_79e868 + 0x2cc,
-    (u32)&sPointerTable_79e868 + 0x330,
-    (u32)&sPointerTable_79e868 + 0x394,
-    (u32)&sPointerTable_79e868 + 0x3f8,
-    (u32)&sPointerTable_79e868 + 0x3f8,
-    (u32)&sPointerTable_79e868 + 0x3f8,
-    (u32)&sPointerTable_79e868 + 0x3f8,
-    (u32)&sPointerTable_79e868 + 0x3f8,
-    (u32)&sPointerTable_79e868 + 0x3f8,
-    (u32)&sPointerTable_79e868 + 0x3f8
+const struct FrameData* sGameOverCursorOamPointers[3] = {
+    (const struct FrameData*)sAddr_73c274,
+    (const struct FrameData*)sAddr_73c29c,
+    (const struct FrameData*)sAddr_73c29c
+};
+
+const u32* sGameOverTextGfxPointers[LANGUAGE_COUNT] = {
+    (const u32*)sAddr_739d58,
+    (const u32*)sAddr_739d58,
+    (const u32*)sAddr_739d58,
+    (const u32*)sAddr_73a430,
+    (const u32*)sAddr_73ab28,
+    (const u32*)sAddr_73b308,
+    (const u32*)sAddr_73baac
+};
+
+const struct FrameData* sFileSelectFileOverlayOamPointers[5] = {
+    (const struct FrameData*)sAddr_740ab8,
+    (const struct FrameData*)sAddr_740ac8,
+    (const struct FrameData*)sAddr_740ad8,
+    (const struct FrameData*)sAddr_7408c0,
+    (const struct FrameData*)sAddr_7408c0
+};
+
+const struct FrameData* sFileSelectCursorOamPointers[3][3] = {
+    [0] = {
+        (const struct FrameData*)sAddr_740800,
+        (const struct FrameData*)sAddr_740800,
+        (const struct FrameData*)sAddr_740820
+    },
+    [1] = {
+        (const struct FrameData*)sAddr_740840,
+        (const struct FrameData*)sAddr_740840,
+        (const struct FrameData*)sAddr_740ae8
+    },
+    [2] = {
+        (const struct FrameData*)sAddr_740b08,
+        (const struct FrameData*)sAddr_740b28,
+        (const struct FrameData*)sAddr_740b28
+    }
+};
+
+const u16* sFileSelectTextPositions_Default[6] = {
+    (const u16*)(&sBlob_73dbcc_7478a0),
+    (const u16*)sAddr_73dbd8,
+    (const u16*)sAddr_73dbde,
+    (const u16*)sAddr_73dbde,
+    (const u16*)sAddr_73dbde,
+    (const u16*)sAddr_73dbe4
+};
+
+const u16* sFileSelectTextPositions_German[6] = {
+    (const u16*)sAddr_73dbea,
+    (const u16*)sAddr_73dbf6,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dc02
+};
+
+const u16* sFileSelectTextPositions_French[6] = {
+    (const u16*)sAddr_73dc08,
+    (const u16*)sAddr_73dbf6,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dc02
+};
+
+const u16* sFileSelectTextPositions_Spanish[6] = {
+    (const u16*)sAddr_73dc14,
+    (const u16*)sAddr_73dbf6,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dc02
+};
+
+const u16* const* sFileSelectTextPositionsPointers[LANGUAGE_COUNT] = {
+    sFileSelectTextPositions_Default,
+    sFileSelectTextPositions_Default,
+    sFileSelectTextPositions_German,
+    sFileSelectTextPositions_German,
+    sFileSelectTextPositions_French,
+    sFileSelectTextPositions_German,
+    sFileSelectTextPositions_Spanish
+};
+
+const struct FrameData* sFileSelectAreaNameOamPointers[LANGUAGE_COUNT][7] = {
+    [0] = {
+        (const struct FrameData*)sAddr_740a38,
+        (const struct FrameData*)sAddr_7409d8,
+        (const struct FrameData*)sAddr_7409e8,
+        (const struct FrameData*)sAddr_7409f8,
+        (const struct FrameData*)sAddr_740a08,
+        (const struct FrameData*)sAddr_740a18,
+        (const struct FrameData*)sAddr_740a28
+    },
+    [1] = {
+        (const struct FrameData*)sAddr_740a38,
+        (const struct FrameData*)sAddr_7409d8,
+        (const struct FrameData*)sAddr_7409e8,
+        (const struct FrameData*)sAddr_7409f8,
+        (const struct FrameData*)sAddr_740a08,
+        (const struct FrameData*)sAddr_740a18,
+        (const struct FrameData*)sAddr_740a28
+    },
+    [2] = {
+        (const struct FrameData*)sAddr_740a38,
+        (const struct FrameData*)sAddr_7409d8,
+        (const struct FrameData*)sAddr_7409e8,
+        (const struct FrameData*)sAddr_7409f8,
+        (const struct FrameData*)sAddr_740a08,
+        (const struct FrameData*)sAddr_740a18,
+        (const struct FrameData*)sAddr_740a28
+    },
+    [3] = {
+        (const struct FrameData*)sAddr_740c08,
+        (const struct FrameData*)sAddr_740ba8,
+        (const struct FrameData*)sAddr_740bb8,
+        (const struct FrameData*)sAddr_740bc8,
+        (const struct FrameData*)sAddr_740bd8,
+        (const struct FrameData*)sAddr_740be8,
+        (const struct FrameData*)sAddr_740bf8
+    },
+    [4] = {
+        (const struct FrameData*)sAddr_740c78,
+        (const struct FrameData*)sAddr_740c18,
+        (const struct FrameData*)sAddr_740c28,
+        (const struct FrameData*)sAddr_740c38,
+        (const struct FrameData*)sAddr_740c48,
+        (const struct FrameData*)sAddr_740c58,
+        (const struct FrameData*)sAddr_740c68
+    },
+    [5] = {
+        (const struct FrameData*)sAddr_740ce8,
+        (const struct FrameData*)sAddr_740c88,
+        (const struct FrameData*)sAddr_740c98,
+        (const struct FrameData*)sAddr_740ca8,
+        (const struct FrameData*)sAddr_740cb8,
+        (const struct FrameData*)sAddr_740cc8,
+        (const struct FrameData*)sAddr_740cd8
+    },
+    [6] = {
+        (const struct FrameData*)sAddr_740cf8,
+        (const struct FrameData*)sAddr_7409d8,
+        (const struct FrameData*)sAddr_7409e8,
+        (const struct FrameData*)sAddr_7409f8,
+        (const struct FrameData*)sAddr_740a08,
+        (const struct FrameData*)sAddr_740a18,
+        (const struct FrameData*)sAddr_740a28
+    }
+};
+
+const u16* sFileSelectTextPointers_Japanese[25] = {
+    (const u16*)sAddr_740f08,
+    (const u16*)sAddr_740f3a,
+    (const u16*)sAddr_740f64,
+    (const u16*)sAddr_740f82,
+    (const u16*)sAddr_740fc4,
+    (const u16*)sAddr_740ff4,
+    (const u16*)sAddr_741036,
+    (const u16*)sAddr_741078,
+    (const u16*)sAddr_7410ba,
+    (const u16*)sAddr_7410fc,
+    (const u16*)sAddr_74113e,
+    (const u16*)sAddr_741180,
+    (const u16*)sAddr_741196,
+    (const u16*)sAddr_74119e,
+    (const u16*)sAddr_7411b2,
+    (const u16*)sAddr_7411da,
+    (const u16*)sAddr_7411fa,
+    (const u16*)sAddr_74120e,
+    (const u16*)sAddr_741258,
+    (const u16*)sAddr_741280,
+    (const u16*)sAddr_7412ce,
+    (const u16*)sAddr_7412ec,
+    (const u16*)sAddr_74130e,
+    (const u16*)sAddr_741334,
+    (const u16*)sAddr_74134c
+};
+
+const u16* sFileSelectTextPointers_English[25] = {
+    (const u16*)sAddr_741364,
+    (const u16*)sAddr_741398,
+    (const u16*)sAddr_7413ce,
+    (const u16*)sAddr_741410,
+    (const u16*)sAddr_741466,
+    (const u16*)sAddr_74149c,
+    (const u16*)sAddr_7414f6,
+    (const u16*)sAddr_741550,
+    (const u16*)sAddr_7415aa,
+    (const u16*)sAddr_74160e,
+    (const u16*)sAddr_741672,
+    (const u16*)sAddr_7416d6,
+    (const u16*)sAddr_7416ec,
+    (const u16*)sAddr_74170a,
+    (const u16*)sAddr_74171e,
+    (const u16*)sAddr_741746,
+    (const u16*)sAddr_741766,
+    (const u16*)sAddr_74177a,
+    (const u16*)sAddr_7417c4,
+    (const u16*)sAddr_7417ee,
+    (const u16*)sAddr_741814,
+    (const u16*)sAddr_741830,
+    (const u16*)sAddr_74185a,
+    (const u16*)sAddr_741884,
+    (const u16*)sAddr_7418b4
+};
+
+const u16* sFileSelectTextPointers_German[25] = {
+    (const u16*)sAddr_7418dc,
+    (const u16*)sAddr_741918,
+    (const u16*)sAddr_741946,
+    (const u16*)sAddr_74197e,
+    (const u16*)sAddr_7419d4,
+    (const u16*)sAddr_741a14,
+    (const u16*)sAddr_741a76,
+    (const u16*)sAddr_741ad8,
+    (const u16*)sAddr_741b3a,
+    (const u16*)sAddr_741b98,
+    (const u16*)sAddr_741bf6,
+    (const u16*)sAddr_741c54,
+    (const u16*)sAddr_741c6e,
+    (const u16*)sAddr_741c90,
+    (const u16*)sAddr_741cb2,
+    (const u16*)sAddr_741cdc,
+    (const u16*)sAddr_741d0a,
+    (const u16*)sAddr_741d28,
+    (const u16*)sAddr_741d50,
+    (const u16*)sAddr_741d82,
+    (const u16*)sAddr_741db2,
+    (const u16*)sAddr_741dd6,
+    (const u16*)sAddr_741df2,
+    (const u16*)sAddr_741e24,
+    (const u16*)sAddr_741e48
+};
+
+const u16* sFileSelectTextPointers_French[25] = {
+    (const u16*)sAddr_741e82,
+    (const u16*)sAddr_741ec4,
+    (const u16*)sAddr_741eee,
+    (const u16*)sAddr_741f32,
+    (const u16*)sAddr_741f80,
+    (const u16*)sAddr_741fbe,
+    (const u16*)sAddr_74202a,
+    (const u16*)sAddr_742096,
+    (const u16*)sAddr_742102,
+    (const u16*)sAddr_742162,
+    (const u16*)sAddr_7421c2,
+    (const u16*)sAddr_742222,
+    (const u16*)sAddr_742244,
+    (const u16*)sAddr_742270,
+    (const u16*)sAddr_74229c,
+    (const u16*)sAddr_7422c0,
+    (const u16*)sAddr_7422f2,
+    (const u16*)sAddr_742318,
+    (const u16*)sAddr_74234e,
+    (const u16*)sAddr_742362,
+    (const u16*)sAddr_742386,
+    (const u16*)sAddr_7423aa,
+    (const u16*)sAddr_7423d4,
+    (const u16*)sAddr_7423f6,
+    (const u16*)sAddr_742420
+};
+
+const u16* sFileSelectTextPointers_Italian[25] = {
+    (const u16*)sAddr_74244c,
+    (const u16*)sAddr_742486,
+    (const u16*)sAddr_7424c0,
+    (const u16*)sAddr_7424fe,
+    (const u16*)sAddr_74254e,
+    (const u16*)sAddr_742586,
+    (const u16*)sAddr_7425f2,
+    (const u16*)sAddr_74265e,
+    (const u16*)sAddr_7426ca,
+    (const u16*)sAddr_74272e,
+    (const u16*)sAddr_742792,
+    (const u16*)sAddr_7427f6,
+    (const u16*)sAddr_74280c,
+    (const u16*)sAddr_74282c,
+    (const u16*)sAddr_742840,
+    (const u16*)sAddr_74286a,
+    (const u16*)sAddr_74289e,
+    (const u16*)sAddr_7428c4,
+    (const u16*)sAddr_74290a,
+    (const u16*)sAddr_742938,
+    (const u16*)sAddr_742964,
+    (const u16*)sAddr_742982,
+    (const u16*)sAddr_7429ac,
+    (const u16*)sAddr_7429dc,
+    (const u16*)sAddr_742a00
+};
+
+const u16* sFileSelectTextPointers_Spanish[25] = {
+    (const u16*)sAddr_742a28,
+    (const u16*)sAddr_742a66,
+    (const u16*)sAddr_742a8e,
+    (const u16*)sAddr_742ac0,
+    (const u16*)sAddr_742b18,
+    (const u16*)sAddr_742b50,
+    (const u16*)sAddr_742baa,
+    (const u16*)sAddr_742c04,
+    (const u16*)sAddr_742c5e,
+    (const u16*)sAddr_742cba,
+    (const u16*)sAddr_742d16,
+    (const u16*)sAddr_742d74,
+    (const u16*)sAddr_742d8a,
+    (const u16*)sAddr_742da2,
+    (const u16*)sAddr_742dc8,
+    (const u16*)sAddr_742de4,
+    (const u16*)sAddr_742df8,
+    (const u16*)sAddr_742e18,
+    (const u16*)sAddr_742e4c,
+    (const u16*)sAddr_742e7c,
+    (const u16*)sAddr_742e9c,
+    (const u16*)sAddr_742ec6,
+    (const u16*)sAddr_742eee,
+    (const u16*)sAddr_742f14,
+    (const u16*)sAddr_742f42
+};
+
+const u16* sFileSelectCorruptedTextPointers[2] = {
+    (const u16*)sAddr_742f66,
+    (const u16*)sAddr_742f7a
+};
+
+const u16** sFileSelectTextPointers[LANGUAGE_COUNT] = {
+    sFileSelectTextPointers_Japanese,
+    sFileSelectTextPointers_Japanese,
+    sFileSelectTextPointers_English,
+    sFileSelectTextPointers_German,
+    sFileSelectTextPointers_French,
+    sFileSelectTextPointers_Italian,
+    sFileSelectTextPointers_Spanish
+};
+
+const u16** sFileSelectCorruptedTextPointersByLanguage[LANGUAGE_COUNT] = {
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers,
+    sFileSelectCorruptedTextPointers
 };
 
 /**

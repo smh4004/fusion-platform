@@ -65,6 +65,7 @@ struct Camera {
     s8 ladderFrontWideDirection;
     s8 frontWideXVelocity;
     u16 frontWideTargetXPosition;
+    u8 unk_10[4];
 };
 
 struct LockScreen {

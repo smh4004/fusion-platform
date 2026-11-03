@@ -9,6 +9,10 @@ gUnk_Audio0x64 = 0x64;
 gUnk_Audio0x193F600 = 0x193F600;
 gUnk_Audio0x50 = 0x50;
 
+/* Aliases with a different declared type in navigation_conversation.c */
+sNavConversationTextPointers_ = sNavConversationTextPointers;
+sPauseScreenTextPointers_ = sPauseScreenTextPointers;
+
 SECTIONS {
     ewram (NOLOAD) : ALIGN(4) {
         . = 0x0001c000; gSpriteGfxBackup = .;
@@ -30,6 +34,7 @@ SECTIONS {
         . = 0x0000000c; gWrittenToWinin_H = .;
         . = 0x0000000d; gWrittenToWinout_L = .;
         . = 0x0000000e; gBackdropColor = .;
+        . = 0x00000010; gSramHeaderUnk_3000010 = .;
         . = 0x00000011; gLanguage = .;
         . = 0x00000014; gGameCompletion = .;
         . = 0x00000018; gMonochromeFading = .;
@@ -67,6 +72,8 @@ SECTIONS {
         . = 0x00000049; gLastElevatorUsed = .;
         . = 0x0000004a; gCurrentEventBasedEffect = .;
         . = 0x0000004b; gQueuedEventBasedEffect = .;
+        . = 0x0000004c; gNavConversationTargetLocation = .;
+        . = 0x0000004d; gFlashingSectorNumber = .;
         . = 0x0000004e; gScreenShakeXOffset = .;
         . = 0x0000004f; gScreenShakeYOffset = .;
         . = 0x00000050; gUnk_3000050 = .;
@@ -156,7 +163,10 @@ SECTIONS {
         . = 0x00000b8a; gRoomEventTrigger = .;
         . = 0x00000b8b; gIsLoadingFile = .;
         . = 0x00000b8d; gMostRecentSaveFile = .;
+        . = 0x00000b8e; gSramCorruptFlag = .;
         . = 0x00000b8f; gUnk_3000b8f = .;
+        . = 0x00000b90; gHasSaved = .;
+        . = 0x00000b94; gSaveFilesInfo = .;
         . = 0x00000bd0; gBootDebugOptions = .;
         . = 0x00000bdc; gCurrentCutscene = .;
         . = 0x00000bde; gMainGameMode = .;
@@ -188,6 +198,7 @@ SECTIONS {
         . = 0x00001232; gBg3YPosition = .;
         . = 0x00001234; gUnk_3001234 = .;
         . = 0x00001236; gUnk_3001236 = .;
+        . = 0x00001238; gUnk_3001238 = .;
         . = 0x00001242; gDemoState = .;
         . = 0x00001243; gPoseLock = .;
         . = 0x00001244; gSamusData = .;
@@ -296,6 +307,7 @@ SECTIONS {
         . = 0x000053f9; gUnk_30053f9 = .;
         . = 0x000053fc; gHazeProcessCodePointer = .;
         . = 0x00005400; gMaintainedInput = .;
+        . = 0x00005404; gUnk_3005404 = .;
 
         . = 0x00005408; *libgcc.a:dp-bit.o(.bss);
         . = 0x00005420; *libgcc.a:fp-bit.o(.bss);
@@ -485,22 +497,40 @@ SECTIONS {
         src/menus/pause_screen.o(.text);
         src/text.o(.text);
 
-        asm/disasm_0x08079afc.o(.text);
+        src/menus/navigation_conversation.o(.text);
 
         src/menus/pause_debug.o(.text);
 
-        asm/disasm_0x0807e678.o(.text);
+        src/status_screen.o(.text);
+        src/menus/easy_sleep_menu.o(.text);
+        src/save_file.o(.text);
+        src/menus/erase_sram.o(.text);
 
         src/projectile.o(.text);
         src/menus/title_screen.o(.text);
         src/new_file_intro.o(.text);
         src/title_intro.o(.text);
 
-        asm/disasm_0x080930C0.o(.text);
+        src/intro_space_view.o(.text);
+        src/ending_bsl_crashing.o(.text);
+        src/ending_in_ship.o(.text);
+        src/died_on_sr388_collision.o(.text);
+        src/special_cutscene.o(.text);
+        src/cutscenes/cutscene.o(.text);
+        src/cutscenes/elevator_monologue.o(.text);
+        src/cutscenes/internal_monologue.o(.text);
+        src/cutscenes/federation_monologue.o(.text);
+        src/cutscenes/secret_conversation.o(.text);
+        src/cutscenes/restricted_lab_detaching.o(.text);
+        src/cutscenes/bsl_exploding.o(.text);
+        src/cutscenes/cutscene_monologue.o(.text);
+        src/cutscenes/cutscene_utils.o(.text);
 
         src/sa_x_close_up.o(.text);
 
-        asm/disasm_0x0809deb4.o(.text);
+        src/menus/game_over.o(.text);
+        src/menus/file_select.o(.text);
+        src/ending_text.o(.text);
 
         src/ending.o(.text);
 
@@ -1097,6 +1127,7 @@ SECTIONS {
         src/minimap.o(.data);
         src/menus/pause_screen.o(.data);
         src/text.o(.data);
+        src/menus/navigation_conversation.o(.data);
         src/projectile.o(.data);
         src/new_file_intro.o(.data);
         src/ending.o(.data);

@@ -29,6 +29,37 @@ struct PSD_28 {
     u8 unk_3;
 };
 
+struct NavConversationPopUpData {
+    const u8* pGraphics;
+    u8 stage;
+    u8 setIndex;
+    u8 id;
+    u8 timer;
+    u8 animationFrame;
+    u8 fadeTimer;
+    u8 unk_E;
+    u8 unk_F;
+};
+
+struct BslDiagramData {
+    u8 stage;
+    u8 unk_1;
+    u8 timer;
+    u8 unk_3;
+    s8 rotation;
+    s8 targetRotation;
+    s8 rotationDirection;
+    u8 paletteFrame;
+    u8 paletteTimer;
+    u8 paletteColor;
+    u8 targetStage;
+    u8 unk_B;
+    u8 unk_C;
+    u8 unk_D;
+    u8 unk_E;
+    u8 unk_F;
+};
+
 struct PauseScreenData {
     u8 unk_0;
     u8 unk_1;
@@ -69,15 +100,7 @@ struct PauseScreenData {
     u8 mapY;
     u8 currentArea;
     u8 navTargetTextDirection;
-    const u32* pNavConvPopUpGraphicsPointer;
-    u8 currentPopUp;
-    u8 unk_219;
-    u8 unk_21A;
-    u8 unk_21B;
-    u8 unk_21C;
-    u8 unk_21D;
-    u8 unk_21E;
-    u8 unk_21F;
+    struct NavConversationPopUpData popUp;
     u8 conversationNumber;
     u8 conversationOnRepeat;
     u8 unk_222;
@@ -110,22 +133,7 @@ struct PauseScreenData {
     u8 unk_23D;
     u8 unk_23E;
     u8 unk_23F;
-    u8 unk_240;
-    u8 unk_241;
-    u8 unk_242;
-    u8 unk_243;
-    u8 unk_244;
-    u8 unk_245;
-    u8 unk_246;
-    u8 unk_247;
-    u8 unk_248;
-    u8 unk_249;
-    u8 unk_24A;
-    u8 unk_24B;
-    u8 unk_24C;
-    u8 unk_24D;
-    u8 unk_24E;
-    u8 unk_24F;
+    struct BslDiagramData bslDiagram;
     u8 unk_250;
     u8 unk_251;
     u8 unk_252;

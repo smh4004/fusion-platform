@@ -15918,7 +15918,60 @@ const u16 sIntroSamusRebornBgPal[] = INCBIN_U16("data/new_file_intro/samus_rebor
 const u32 sIntroSamusRebornBgTopTilemap[] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_top.tm.lz");
 const u32 sIntroSamusRebornBgBottomTilemap[] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_bottom.tm.lz");
 
-const u8 sBlob_5dfd6c_5e116c[] = INCBIN_U8("data/Blob_5dfd6c_5e116c.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_5dfd6c_5e116c[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_5dfd6c_5e116c\n\
+sBlob_5dfd6c_5e116c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x0, 0x140\n\
+    .global sAddr_5dfeac\n\
+sAddr_5dfeac:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x140, 0x140\n\
+    .global sAddr_5dffec\n\
+sAddr_5dffec:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x280, 0x140\n\
+    .global sAddr_5e012c\n\
+sAddr_5e012c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x3c0, 0x140\n\
+    .global sAddr_5e026c\n\
+sAddr_5e026c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x500, 0x140\n\
+    .global sAddr_5e03ac\n\
+sAddr_5e03ac:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x640, 0x140\n\
+    .global sAddr_5e04ec\n\
+sAddr_5e04ec:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x780, 0x140\n\
+    .global sAddr_5e062c\n\
+sAddr_5e062c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x8c0, 0x140\n\
+    .global sAddr_5e076c\n\
+sAddr_5e076c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0xa00, 0x140\n\
+    .global sAddr_5e08ac\n\
+sAddr_5e08ac:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0xb40, 0x140\n\
+    .global sAddr_5e09ec\n\
+sAddr_5e09ec:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0xc80, 0x140\n\
+    .global sAddr_5e0b2c\n\
+sAddr_5e0b2c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0xdc0, 0x140\n\
+    .global sAddr_5e0c6c\n\
+sAddr_5e0c6c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0xf00, 0x140\n\
+    .global sAddr_5e0dac\n\
+sAddr_5e0dac:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x1040, 0x140\n\
+    .global sAddr_5e0eec\n\
+sAddr_5e0eec:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x1180, 0x140\n\
+    .global sAddr_5e102c\n\
+sAddr_5e102c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x12c0, 0x140\n\
+    .popsection\n\
+");
 
 const u32 sIntroApproachingBslObjGfx[] = INCBIN_U32("data/new_file_intro/approaching_bsl_obj.gfx.lz");
 
@@ -21099,7 +21152,7 @@ const struct FrameData sIntroArrivingAtBslThrustersOam[4] = {
 	[3] = FRAME_DATA_TERMINATOR
 };
 
-static const u8 sBlob_5f4e54_5f4ed4[] = INCBIN_U8("data/Blob_5f4e54_5f4ed4.bin");
+const u8 sBlob_5f4e54_5f4ed4[] = INCBIN_U8("data/Blob_5f4e54_5f4ed4.bin");
 
 const u16 sPal_5f4ed4[] = INCBIN_U16("data/new_file_intro/5f4ed4.pal");
 const u16 sIntroArrivingAtBslSpaceMapPal[] = INCBIN_U16("data/new_file_intro/space_map.pal");
@@ -21110,7 +21163,60 @@ const u32 sIntroArrivingAtBslSpaceMapTilemap[] = INCBIN_U32("data/new_file_intro
 const u32 sIntroSamusMonologueBgTilemap[] = INCBIN_U32("data/new_file_intro/samus_monologue_bg.tm.lz");
 const u32 sIntroTilemap_5f65d8[] = INCBIN_U32("data/new_file_intro/5f65d8.tm.lz");
 
-const u8 sBlob_5f6990_5f7190[] = INCBIN_U8("data/Blob_5f6990_5f7190.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_5f6990_5f7190[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_5f6990_5f7190\n\
+sBlob_5f6990_5f7190:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x0, 0x80\n\
+    .global sAddr_5f6a10\n\
+sAddr_5f6a10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x80, 0x80\n\
+    .global sAddr_5f6a90\n\
+sAddr_5f6a90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x100, 0x80\n\
+    .global sAddr_5f6b10\n\
+sAddr_5f6b10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x180, 0x80\n\
+    .global sAddr_5f6b90\n\
+sAddr_5f6b90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x200, 0x80\n\
+    .global sAddr_5f6c10\n\
+sAddr_5f6c10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x280, 0x80\n\
+    .global sAddr_5f6c90\n\
+sAddr_5f6c90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x300, 0x80\n\
+    .global sAddr_5f6d10\n\
+sAddr_5f6d10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x380, 0x80\n\
+    .global sAddr_5f6d90\n\
+sAddr_5f6d90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x400, 0x80\n\
+    .global sAddr_5f6e10\n\
+sAddr_5f6e10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x480, 0x80\n\
+    .global sAddr_5f6e90\n\
+sAddr_5f6e90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x500, 0x80\n\
+    .global sAddr_5f6f10\n\
+sAddr_5f6f10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x580, 0x80\n\
+    .global sAddr_5f6f90\n\
+sAddr_5f6f90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x600, 0x80\n\
+    .global sAddr_5f7010\n\
+sAddr_5f7010:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x680, 0x80\n\
+    .global sAddr_5f7090\n\
+sAddr_5f7090:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x700, 0x80\n\
+    .global sAddr_5f7110\n\
+sAddr_5f7110:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x780, 0x80\n\
+    .popsection\n\
+");
 
 const u32 sIntroLandingOnBslBgGfx[] = INCBIN_U32("data/new_file_intro/landing_on_bsl_bg.gfx.lz");
 const u32 sIntroLandingOnBslObjGfx[] = INCBIN_U32("data/new_file_intro/landing_on_bsl_obj.gfx.lz");
@@ -24573,1019 +24679,148 @@ asm("\n\
     .pushsection .rodata\n\
     .global sBlob_6131c8_63a19c\n\
 sBlob_6131c8_63a19c:\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x0, 0x20024\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20028, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cd58\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20030, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cd72\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20038, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cd8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20040, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cdb8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20048, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cdde\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20050, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ce04\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20058, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ce48\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20060, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ce8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20068, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ced0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20070, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ced0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20080, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ce8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20088, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ce48\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20090, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ce04\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20098, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cdde\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200a0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cdb8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200a8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cd8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200b0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cd72\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200b8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cd58\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200c0, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cf26\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200d0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cf5e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200d8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cfa8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200e0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cff2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200e8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d048\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200f0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d098\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200f8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d100\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20100, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d168\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20108, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d1dc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20110, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d24a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20118, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d2c4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20120, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d33e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20128, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d33e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20138, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d2c4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20140, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d24a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20148, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d1dc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20150, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d168\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20158, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d100\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20160, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d098\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20168, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d048\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20170, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cff2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20178, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cfa8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20180, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cf5e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20188, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1cf26\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20190, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d3c4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201a0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d3ea\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201a8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d428\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201b0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d46c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201b8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d4a4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201c0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d506\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201c8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d568\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201d0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d5d0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201d8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d644\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201e0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d6be\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201e8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d744\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201f0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d7d0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x201f8, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d7d0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20208, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d744\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20210, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d6be\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20218, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d644\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20220, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d5d0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20228, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d568\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20230, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d506\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20238, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d4a4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20240, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d46c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20248, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d428\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20250, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d3ea\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20258, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d3c4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20260, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d808\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20270, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d81c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20278, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d830\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20280, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d844\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20288, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d844\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20298, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d830\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x202a0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d81c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x202a8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d808\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x202b0, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d858\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x202c0, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d86e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x202d0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d876\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x202d8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d87e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x202e0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d886\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x202e8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d89a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x202f0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d8ba\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x202f8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d8e6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20300, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d954\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20308, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d9c2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20310, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1da3c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20318, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1da3c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20328, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d9c2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20330, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d954\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20338, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d8e6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20340, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d8ba\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20348, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d89a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20350, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d886\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20358, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d87e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20360, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d876\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20368, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d86e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20370, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20380, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20388, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20390, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20398, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203a0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203a8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dd10\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203b0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dd3c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203b8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dd68\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203c0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ddbe\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203c8, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ddbe\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203d8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dd68\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203e0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dd3c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203e8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dd10\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203f0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x203f8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20400, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20408, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20410, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20418, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20420, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20430, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20438, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20440, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20448, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20450, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20458, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1de14\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20460, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1de40\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20468, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1de6c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20470, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dec2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20478, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dec2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20488, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1de6c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20490, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1de40\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20498, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1de14\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204a0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204a8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204b0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204b8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204c0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204c8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d866\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204d0, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dab6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204e0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dabe\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204e8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dac6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204f0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dad4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x204f8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dae8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20500, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1db08\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20508, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1db34\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20510, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dba2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20518, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dc10\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20520, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dc8a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20528, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dc8a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20538, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dc10\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20540, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dba2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20548, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1db34\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20550, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1db08\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20558, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dae8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20560, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dad4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20568, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dac6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20570, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dabe\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20578, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dab6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20580, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1df18\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20590, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1df18\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x205a0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1df5c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x205a8, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dfa6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x205b8, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dfa6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x205c8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1dfea\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x205d0, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e034\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x205e0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e03c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x205e8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e044\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x205f0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e04c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x205f8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e05a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20600, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e086\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20608, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e0c4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20610, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e0c4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20620, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e086\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20628, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e05a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20630, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e04c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20638, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e044\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20640, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e03c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20648, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e034\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20650, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e108\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20660, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e110\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20668, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e118\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20670, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e120\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20678, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e12e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20680, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e15a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20688, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e198\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20690, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e198\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206a0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e15a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206a8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e12e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206b0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e120\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206b8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e118\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206c0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e110\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206c8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e108\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206d0, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1d844\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206e0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e1dc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206e8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e1f0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206f0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e204\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206f8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e1dc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20700, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fa84\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20710, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fa8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20718, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fa94\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20720, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fa9c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20728, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1faa4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20730, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1faac\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20738, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fab4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20740, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fabc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20748, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fac4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20750, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1facc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20758, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fad4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20760, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fadc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20768, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fae4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20770, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1faec\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20778, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1faf4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20780, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fb14\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20788, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fb34\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20790, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fb5a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20798, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fb7a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207a0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fba0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207a8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fbc6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207b0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fbf2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207b8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fc18\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207c0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fc44\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207c8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fc82\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207d0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fcc6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207d8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fd04\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207e0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fd48\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207e8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fd8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207f0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fd8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x207f8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fd8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20800, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e218\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20810, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e27a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20818, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e2dc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20820, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e33e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20828, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e3a0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20830, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e402\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20838, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e464\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20840, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e4c6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20848, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e528\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20850, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e27a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20858, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e2dc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20860, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e33e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20868, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e3a0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20870, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e402\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20878, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e464\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20880, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e4c6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20888, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e528\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20890, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e596\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20898, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e5f8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208a0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e65a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208a8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e6bc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208b0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e71e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208b8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e780\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208c0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e7e2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208c8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e844\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208d0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e8a6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208d8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e914\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208e0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e976\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208e8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e9d8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208f0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ea3a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x208f8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ea9c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20900, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1eafe\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20908, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1eb60\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20910, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ebc2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20918, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ec24\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20920, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ec92\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20928, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ecf4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20930, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ed56\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20938, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1edb8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20940, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ee1a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20948, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ee7c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20950, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1eede\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20958, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ef40\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20960, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1efa2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20968, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f010\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20970, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f072\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20978, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f0d4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20980, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f136\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20988, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f198\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20990, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f1fa\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20998, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f25c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209a0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f2be\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209a8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f320\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209b0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f38e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209b8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f3f0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209c0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f452\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209c8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f4b4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209d0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f516\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209d8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f578\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209e0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f5da\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209e8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f63c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209f0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f69e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x209f8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f70c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a00, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f76e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a08, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f7d0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a10, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f832\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a18, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f894\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a20, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f8f6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a28, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f958\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a30, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f9ba\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a38, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f70c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a40, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f76e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a48, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f7d0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a50, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f832\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a58, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f894\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a60, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f8f6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a68, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f958\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a70, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f9ba\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a78, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fde2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a88, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fdf0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a90, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe68\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a98, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe04\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20aa0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe70\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20aa8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe18\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ab0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe78\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ab8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe2c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ac0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe80\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ac8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe40\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ad0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe88\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ad8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe54\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ae0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe88\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ae8, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e218\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20af8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e27a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b00, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e2dc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b08, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e33e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b10, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e3a0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b18, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e402\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b20, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e464\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b28, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e4c6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b30, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e528\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b38, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e596\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b40, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e5f8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b48, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e65a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b50, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e6bc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b58, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e71e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b60, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e780\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b68, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e7e2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b70, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e844\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b78, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1e8a6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b80, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ec92\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b88, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ecf4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b90, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ed56\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20b98, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1edb8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ba0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ee1a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ba8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ee7c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20bb0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1eede\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20bb8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ef40\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20bc0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1efa2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20bc8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f38e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20bd0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f3f0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20bd8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f452\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20be0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f4b4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20be8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f516\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20bf0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f578\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20bf8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f5da\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c00, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f63c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c08, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f69e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c10, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f70c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c18, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f76e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c20, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f7d0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c28, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f832\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c30, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f894\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c38, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f8f6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c40, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f958\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c48, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f9ba\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c50, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f70c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c58, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f76e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c60, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f7d0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c68, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f832\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c70, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f894\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c78, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f8f6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c80, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f958\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c88, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f9ba\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c90, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe98\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ca0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fea0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ca8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fea8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20cb0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fea0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20cb8, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe90\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20cc8, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1feb0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20cd8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1feb8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ce0, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fec0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20ce8, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1feb8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20cf0, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f70c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d00, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f76e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d08, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f7d0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d10, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f832\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d18, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f894\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d20, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f8f6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d28, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f958\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d30, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1f9ba\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d38, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe88\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d48, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fe54\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d50, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1fec8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d60, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2001c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d68, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ced0\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d78, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x1ffc6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d80, 0x20d8\n\
-    .4byte sBlob_6131c8_63a19c + 0x22858\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e5c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22860\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e64, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x20d8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e74, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2286e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e7c, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x20d8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e8c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22844\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e94, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22830\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e9c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2281c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22ea4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22808\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22eac, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x227ee\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22eb4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x227ce\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22ebc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x227a8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22ec4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22782\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22ecc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22756\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22ed4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22724\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22edc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x226ec\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22ee4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x226a8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22eec, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2265e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22ef4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2260e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22efc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x225be\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f04, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22562\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f0c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x224fa\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f14, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22498\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f1c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22430\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f24, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x223ce\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f2c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22360\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f34, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x222f2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f3c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22284\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f44, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2220a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f4c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2219c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f54, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22128\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f5c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x220a8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f64, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22034\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f6c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21fba\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f74, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21f46\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f7c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21ecc\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f84, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21e58\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f8c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21dd8\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f94, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21d52\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22f9c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21cd2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22fa4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21c40\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22fac, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21bae\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22fb4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21b22\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22fbc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21a96\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22fc4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21a0a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22fcc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2197e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22fd4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x218e6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22fdc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2184e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22fe4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x217b6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22fec, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21730\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22ff4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x216aa\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22ffc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2162a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23004, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x215b6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2300c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21548\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23014, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x214da\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2301c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2146c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23024, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21404\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2302c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21396\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23034, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21322\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2303c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x212ae\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23044, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21252\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2304c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x211e4\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23054, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2117c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2305c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21114\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23064, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x210b2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2306c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x21056\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23074, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x20ffa\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2307c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x20f98\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23084, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x20f3c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2308c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x20ee6\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23094, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x20e96\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2309c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x20e40\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230a4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x20dea\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230ac, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x20d94\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230b4, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22876\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230c4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22884\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230cc, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22892\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230dc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x2296c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230e4, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22a34\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230f4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22a3c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230fc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22a5c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23104, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22a94\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2310c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22ade\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23114, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22b2e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2311c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22b84\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23124, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22bce\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2312c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22c06\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23134, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22c20\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2313c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22c34\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23144, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22cd2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23154, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22cda\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2315c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22ce2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23164, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22cea\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2316c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22cf2\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23174, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22cfa\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2317c, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22d02\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2318c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22d0a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23194, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22d12\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2319c, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22d1a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231a4, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22d22\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231b4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22d2a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231bc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22d32\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231c4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22d3a\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231cc, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22d42\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231dc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22d9e\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231e4, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22dfa\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231f4, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x20d8c\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231fc, 0x4\n\
-    .4byte sBlob_6131c8_63a19c + 0x22e02\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23204, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22e10\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23214, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22e18\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23224, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22e20\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23234, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22e28\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23244, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22e30\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23254, 0xc\n\
-    .4byte sBlob_6131c8_63a19c + 0x22e44\n\
-    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23264, 0x3d70\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x0, 0x1f20\n\
+    .global sAddr_6150e8\n\
+sAddr_6150e8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x1f20, 0x35bc\n\
+    .global sAddr_6186a4\n\
+sAddr_6186a4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x54dc, 0x31f8\n\
+    .global sAddr_61b89c\n\
+sAddr_61b89c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x86d4, 0x5f0c\n\
+    .global sAddr_6217a8\n\
+sAddr_6217a8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0xe5e0, 0x214c\n\
+    .global sAddr_6238f4\n\
+sAddr_6238f4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x1072c, 0x2e44\n\
+    .global sAddr_626738\n\
+sAddr_626738:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x13570, 0x4ebc\n\
+    .global sAddr_62b5f4\n\
+sAddr_62b5f4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x1842c, 0x7bf8\n\
+    .global sAddr_6331ec\n\
+sAddr_6331ec:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20024, 0x58\n\
+    .global sAddr_633244\n\
+sAddr_633244:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2007c, 0x50\n\
+    .global sAddr_633294\n\
+sAddr_633294:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200cc, 0x68\n\
+    .global sAddr_6332fc\n\
+sAddr_6332fc:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20134, 0x68\n\
+    .global sAddr_633364\n\
+sAddr_633364:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2019c, 0x68\n\
+    .global sAddr_6333cc\n\
+sAddr_6333cc:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20204, 0x68\n\
+    .global sAddr_633434\n\
+sAddr_633434:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2026c, 0x28\n\
+    .global sAddr_63345c\n\
+sAddr_63345c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20294, 0x448\n\
+    .global sAddr_6338a4\n\
+sAddr_6338a4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206dc, 0x30\n\
+    .global sAddr_6338d4\n\
+sAddr_6338d4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2070c, 0x100\n\
+    .global sAddr_6339d4\n\
+sAddr_6339d4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2080c, 0x278\n\
+    .global sAddr_633c4c\n\
+sAddr_633c4c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a84, 0x218\n\
+    .global sAddr_633e64\n\
+sAddr_633e64:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c9c, 0x28\n\
+    .global sAddr_633e8c\n\
+sAddr_633e8c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20cc4, 0x38\n\
+    .global sAddr_633ec4\n\
+sAddr_633ec4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20cfc, 0x48\n\
+    .global sAddr_633f0c\n\
+sAddr_633f0c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d44, 0x18\n\
+    .global sAddr_633f24\n\
+sAddr_633f24:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d5c, 0x20fc\n\
+    .global sAddr_636020\n\
+sAddr_636020:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e58, 0x18\n\
+    .global sAddr_636038\n\
+sAddr_636038:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e70, 0x18\n\
+    .global sAddr_636050\n\
+sAddr_636050:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e88, 0x238\n\
+    .global sAddr_636288\n\
+sAddr_636288:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230c0, 0x18\n\
+    .global sAddr_6362a0\n\
+sAddr_6362a0:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230d8, 0x18\n\
+    .global sAddr_6362b8\n\
+sAddr_6362b8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230f0, 0xe8\n\
+    .global sAddr_6363a0\n\
+sAddr_6363a0:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231d8, 0x18\n\
+    .global sAddr_6363b8\n\
+sAddr_6363b8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231f0, 0x80\n\
+    .global sAddr_636438\n\
+sAddr_636438:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23270, 0x200\n\
+    .global sAddr_636638\n\
+sAddr_636638:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23470, 0x200\n\
+    .global sAddr_636838\n\
+sAddr_636838:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23670, 0x200\n\
+    .global sAddr_636a38\n\
+sAddr_636a38:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23870, 0x200\n\
+    .global sAddr_636c38\n\
+sAddr_636c38:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23a70, 0x200\n\
+    .global sAddr_636e38\n\
+sAddr_636e38:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23c70, 0x200\n\
+    .global sAddr_637038\n\
+sAddr_637038:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23e70, 0x200\n\
+    .global sAddr_637238\n\
+sAddr_637238:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x24070, 0x5c0\n\
+    .global sAddr_6377f8\n\
+sAddr_6377f8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x24630, 0x5c0\n\
+    .global sAddr_637db8\n\
+sAddr_637db8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x24bf0, 0x89c\n\
+    .global sAddr_638654\n\
+sAddr_638654:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2548c, 0x5c0\n\
+    .global sAddr_638c14\n\
+sAddr_638c14:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x25a4c, 0x688\n\
+    .global sAddr_63929c\n\
+sAddr_63929c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x260d4, 0x31c\n\
+    .global sAddr_6395b8\n\
+sAddr_6395b8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x263f0, 0x60c\n\
+    .global sAddr_639bc4\n\
+sAddr_639bc4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x269fc, 0x5d8\n\
     .popsection\n\
 ");
 
@@ -25667,454 +24902,77 @@ asm("\n\
     .global sBlob_659ba4_65c268\n\
 sBlob_659ba4_65c268:\n\
     .incbin \"data/Blob_659ba4_65c268.bin\", 0x0, 0x1f94\n\
-    .4byte sBlob_659ba4_65c268 + 0x1f8a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1f98, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x630\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1fa0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x644\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1fa8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x65e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1fb0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x678\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1fb8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x698\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1fc0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x6b8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1fc8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x6d8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1fd0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x6f8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1fd8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x718\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1fe0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x738\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1fe8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x758\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1ff0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x784\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1ff8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x7b0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2000, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x7dc\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2008, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x808\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2010, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x834\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2018, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x860\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2020, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x88c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2028, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x8be\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2030, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x8f6\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2038, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x92e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2040, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x966\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2048, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x99e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2050, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x9d6\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2058, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xa0e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2060, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xa4c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2068, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xa90\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2070, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xad4\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2078, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xb18\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2080, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xb5c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2088, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xba0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2090, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xbe4\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2098, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xc28\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20a0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xc72\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20a8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xcc2\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20b0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xd12\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20b8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xd62\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20c0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xdb2\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20c8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1f8a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20d0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xdb2\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20d8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1f8a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20e0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xdb2\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20e8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1f8a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20f0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xe02\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x20f8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xe58\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2100, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xeb4\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2108, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xf16\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2110, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xf7e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2118, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xfec\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2120, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x104e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2128, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x10bc\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2130, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1142\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2138, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1142\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2140, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1142\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2148, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1142\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2150, 0xc\n\
-    .4byte sBlob_659ba4_65c268 + 0x4c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2160, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x90\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2168, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0xce\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2170, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x112\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2178, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x156\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2180, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x194\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2188, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1d2\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2190, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x204\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2198, 0xc\n\
-    .4byte sBlob_659ba4_65c268\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21a8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x2c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21b0, 0xc\n\
-    .4byte sBlob_659ba4_65c268 + 0x1f8a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21c0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x23c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21c8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x244\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21d0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x24c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21d8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x254\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21e0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x25c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21e8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x264\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21f0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x26c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21f8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x274\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2200, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x28e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2208, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x2ba\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2210, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x2ec\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2218, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x324\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2220, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x37a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2228, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x3e2\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2230, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x450\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2238, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x450\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2240, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x450\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2248, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x450\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2250, 0xc\n\
-    .4byte sBlob_659ba4_65c268 + 0x1f8a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2260, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1f6a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2268, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1f4a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2270, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1f24\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2278, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1f04\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2280, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1ee4\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2288, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1eb8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2290, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1e8c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2298, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1e60\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22a0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1e34\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22a8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1e08\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22b0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1de2\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22b8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1dbc\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22c0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1d90\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22c8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1d64\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22d0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1d38\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22d8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1d0c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22e0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1ce0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22e8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1cba\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22f0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1c8e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x22f8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1c68\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2300, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1c48\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2308, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1c1c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2310, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1bf0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2318, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1bc4\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2320, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1b98\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2328, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1b6c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2330, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1b46\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2338, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1b20\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2340, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1b00\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2348, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1ae0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2350, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1ab4\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2358, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1a88\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2360, 0xc\n\
-    .4byte sBlob_659ba4_65c268 + 0x1a5c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2370, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1a30\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2378, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1a04\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2380, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x19d8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2388, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x19b2\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2390, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x198c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2398, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x196c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23a0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x194c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23a8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x191a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23b0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x18e8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23b8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x18b6\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23c0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1884\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23c8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x185e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23d0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1832\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23d8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x180c\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23e0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x17e6\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23e8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x17c6\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23f0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x17a6\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x23f8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x177a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2400, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x174e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2408, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1722\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2410, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x16f6\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2418, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x16ca\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2420, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x16a4\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2428, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x167e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2430, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x165e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2438, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x163e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2440, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1618\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2448, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x15f2\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2450, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x15cc\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2458, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x15a6\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2460, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1580\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2468, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1560\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2470, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1540\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2478, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x150e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2480, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x14dc\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2488, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x14aa\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2490, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1478\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2498, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1452\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24a0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1426\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24a8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1400\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24b0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x13da\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24b8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x13ba\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24c0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x139a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24c8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x136e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24d0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1342\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24d8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1316\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24e0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x12ea\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24e8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x12be\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24f0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1298\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x24f8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1272\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2500, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1252\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2508, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1232\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2510, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x1206\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2518, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x11da\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2520, 0xc\n\
-    .4byte sBlob_659ba4_65c268 + 0x4dc\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2530, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x4f6\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2538, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x510\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2540, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x52a\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2548, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x544\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2550, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x55e\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2558, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x578\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2560, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x592\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2568, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5ac\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2570, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5c6\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2578, 0xc\n\
-    .4byte sBlob_659ba4_65c268 + 0x608\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2588, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x600\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2590, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5f8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2598, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5f0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25a0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5e8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25a8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5e0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25b0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x628\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25b8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x620\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25c0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x618\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25c8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x610\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25d0, 0xc\n\
-    .4byte sBlob_659ba4_65c268 + 0x628\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25e0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x620\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25e8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x618\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25f0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x610\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25f8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x608\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2600, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x600\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2608, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5f8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2610, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5f0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2618, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5e8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2620, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5e0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2628, 0xc\n\
-    .4byte sBlob_659ba4_65c268 + 0x610\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2638, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x608\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2640, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x600\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2648, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5f8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2650, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5f0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2658, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5e8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2660, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5e0\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2668, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x628\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2670, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x620\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2678, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x618\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2680, 0xc\n\
-    .4byte sBlob_659ba4_65c268 + 0x600\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2690, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x600\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2698, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x600\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x26a0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5f8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x26a8, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5f8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x26b0, 0x4\n\
-    .4byte sBlob_659ba4_65c268 + 0x5f8\n\
-    .incbin \"data/Blob_659ba4_65c268.bin\", 0x26b8, 0xc\n\
+    .global sAddr_65bb38\n\
+sAddr_65bb38:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1f94, 0x1c8\n\
+    .global sAddr_65bd00\n\
+sAddr_65bd00:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x215c, 0x48\n\
+    .global sAddr_65bd48\n\
+sAddr_65bd48:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21a4, 0x18\n\
+    .global sAddr_65bd60\n\
+sAddr_65bd60:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21bc, 0xa0\n\
+    .global sAddr_65be00\n\
+sAddr_65be00:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x225c, 0x110\n\
+    .global sAddr_65bf10\n\
+sAddr_65bf10:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x236c, 0x1c0\n\
+    .global sAddr_65c0d0\n\
+sAddr_65c0d0:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x252c, 0x58\n\
+    .global sAddr_65c128\n\
+sAddr_65c128:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2584, 0x58\n\
+    .global sAddr_65c180\n\
+sAddr_65c180:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25dc, 0x58\n\
+    .global sAddr_65c1d8\n\
+sAddr_65c1d8:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2634, 0x58\n\
+    .global sAddr_65c230\n\
+sAddr_65c230:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x268c, 0x38\n\
     .popsection\n\
 ");
 
 const u16 sTitleIntroCollisionWarningObjPal[] = INCBIN_U16("data/title_intro/collision_warning_obj.pal");
 
-const u8 sBlob_65c468_662804[] = INCBIN_U8("data/Blob_65c468_662804.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_65c468_662804[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_65c468_662804\n\
+sBlob_65c468_662804:\n\
+    .incbin \"data/Blob_65c468_662804.bin\", 0x0, 0x36f4\n\
+    .global sAddr_65fb5c\n\
+sAddr_65fb5c:\n\
+    .incbin \"data/Blob_65c468_662804.bin\", 0x36f4, 0xc8\n\
+    .global sAddr_65fc24\n\
+sAddr_65fc24:\n\
+    .incbin \"data/Blob_65c468_662804.bin\", 0x37bc, 0x2be0\n\
+    .popsection\n\
+");
 
 const u32 sIntroTilemap_662804[] = INCBIN_U32("data/new_file_intro/662804.tm.lz");
 
-const u8 sBlob_662cfc_663820[] = INCBIN_U8("data/Blob_662cfc_663820.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_662cfc_663820[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_662cfc_663820\n\
+sBlob_662cfc_663820:\n\
+    .incbin \"data/Blob_662cfc_663820.bin\", 0x0, 0x89c\n\
+    .global sAddr_663598\n\
+sAddr_663598:\n\
+    .incbin \"data/Blob_662cfc_663820.bin\", 0x89c, 0x108\n\
+    .global sAddr_6636a0\n\
+sAddr_6636a0:\n\
+    .incbin \"data/Blob_662cfc_663820.bin\", 0x9a4, 0x180\n\
+    .popsection\n\
+");
 
 const u16 sIntroPal_663820[] = INCBIN_U16("data/new_file_intro/663820.pal");
 
@@ -26124,258 +24982,177 @@ asm("\n\
     .pushsection .rodata\n\
     .global sBlob_6638a0_682fac\n\
 sBlob_6638a0_682fac:\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x0, 0x530\n\
-    .4byte sBlob_6638a0_682fac + 0x240\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x534, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x392\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x53c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x240\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x544, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x392\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x54c, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x4e4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x55c, 0x60\n\
-    .4byte sBlob_6638a0_682fac + 0x568\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5c0, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x576\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5c8, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x584\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5d8, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x592\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5e0, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x5a0\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5e8, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x5ae\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5f0, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x5a0\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5f8, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x592\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x600, 0x6b90\n\
-    .4byte sBlob_6638a0_682fac + 0x6ec4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x7194, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x7004\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x719c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x6ec4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x71a4, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x7004\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x71ac, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x7144\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x71bc, 0x6f70\n\
-    .4byte sBlob_6638a0_682fac + 0xdec0\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe130, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0xdfd0\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe138, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0xdec0\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe140, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0xdfd0\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe148, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0xe0e0\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe158, 0x7888\n\
-    .4byte sBlob_6638a0_682fac + 0x152e8\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x159e4, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15302\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x159ec, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1531c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x159f4, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15302\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x159fc, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1529a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a0c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x152b4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a14, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x152ce\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a1c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x152b4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a24, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x153ca\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a34, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15414\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a3c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15470\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a44, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x154c6\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a4c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15528\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a54, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x155a2\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a5c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1564c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a64, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1564c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a74, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x155a2\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a7c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15528\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a84, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x154c6\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a8c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15470\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a94, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15414\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a9c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x153ca\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15aa4, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x15726\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15ab4, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1579a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15abc, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1580e\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15ac4, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15882\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15acc, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x158f6\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15ad4, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1596a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15adc, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x15336\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15aec, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15380\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15af4, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x15048\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b04, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1506e\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b14, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x15232\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b24, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x150e2\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b34, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15156\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b3c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x151ca\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b44, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15232\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b4c, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x15232\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b5c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x151ca\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b64, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x15156\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b6c, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x150e2\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b74, 0x7940\n\
-    .4byte sBlob_6638a0_682fac + 0x1d24e\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4b8, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d268\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4c8, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d27c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4d8, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d284\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4e8, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d28c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4f8, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d294\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d508, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d29c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d510, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2a4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d518, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2ac\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d520, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d324\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d530, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d334\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d538, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d33c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d540, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d344\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d548, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d34c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d550, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2dc\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d560, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2e4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d568, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2ec\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d570, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2f4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d578, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2fc\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d580, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2b4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d590, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2bc\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d5a0, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2c4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d5b0, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2cc\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d5c0, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d2d4\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d5d0, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d304\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d5e0, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d30c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d5f0, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d314\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d600, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d31c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d610, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d32c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d620, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d014\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d630, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d01c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d638, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d03c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d640, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d074\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d648, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d0be\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d650, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d10e\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d658, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d164\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d660, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d1ae\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d668, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d1e6\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d670, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d200\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d678, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d214\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d680, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d00c\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d690, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d3f2\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6a0, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d3fa\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6a8, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d402\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6b0, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d40a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6b8, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d412\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6c0, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d41a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6c8, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d422\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6d8, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d42a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6e0, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d432\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6e8, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d43a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6f0, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d442\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d700, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d44a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d708, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d452\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d710, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d45a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d718, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d462\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d728, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d46a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d730, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d472\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d738, 0x4\n\
-    .4byte sBlob_6638a0_682fac + 0x1d47a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d740, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d482\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d750, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d492\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d760, 0xc\n\
-    .4byte sBlob_6638a0_682fac + 0x1d48a\n\
-    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d770, 0x1f9c\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x0, 0x20\n\
+    .global sAddr_6638c0\n\
+sAddr_6638c0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x20, 0x160\n\
+    .global sAddr_663a20\n\
+sAddr_663a20:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x180, 0x3b0\n\
+    .global sAddr_663dd0\n\
+sAddr_663dd0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x530, 0x28\n\
+    .global sAddr_663df8\n\
+sAddr_663df8:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x558, 0x64\n\
+    .global sAddr_663e5c\n\
+sAddr_663e5c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5bc, 0x18\n\
+    .global sAddr_663e74\n\
+sAddr_663e74:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5d4, 0x38\n\
+    .global sAddr_663eac\n\
+sAddr_663eac:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x60c, 0x3d6c\n\
+    .global sAddr_667c18\n\
+sAddr_667c18:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x4378, 0x2e18\n\
+    .global sAddr_66aa30\n\
+sAddr_66aa30:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x7190, 0x28\n\
+    .global sAddr_66aa58\n\
+sAddr_66aa58:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x71b8, 0x10\n\
+    .global sAddr_66aa68\n\
+sAddr_66aa68:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x71c8, 0x160\n\
+    .global sAddr_66abc8\n\
+sAddr_66abc8:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x7328, 0xc0\n\
+    .global sAddr_66ac88\n\
+sAddr_66ac88:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x73e8, 0x89c\n\
+    .global sAddr_66b524\n\
+sAddr_66b524:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x7c84, 0x36f4\n\
+    .global sAddr_66ec18\n\
+sAddr_66ec18:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xb378, 0x2db4\n\
+    .global sAddr_6719cc\n\
+sAddr_6719cc:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe12c, 0x28\n\
+    .global sAddr_6719f4\n\
+sAddr_6719f4:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe154, 0x10\n\
+    .global sAddr_671a04\n\
+sAddr_671a04:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe164, 0x160\n\
+    .global sAddr_671b64\n\
+sAddr_671b64:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe2c4, 0xc0\n\
+    .global sAddr_671c24\n\
+sAddr_671c24:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe384, 0x89c\n\
+    .global sAddr_6724c0\n\
+sAddr_6724c0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xec20, 0x2498\n\
+    .global sAddr_674958\n\
+sAddr_674958:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x110b8, 0x180\n\
+    .global sAddr_674ad8\n\
+sAddr_674ad8:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x11238, 0x5c0\n\
+    .global sAddr_675098\n\
+sAddr_675098:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x117f8, 0x27dc\n\
+    .global sAddr_677874\n\
+sAddr_677874:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x13fd4, 0xa0\n\
+    .global sAddr_677914\n\
+sAddr_677914:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x14074, 0x2fc\n\
+    .global sAddr_677c10\n\
+sAddr_677c10:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x14370, 0x20\n\
+    .global sAddr_677c30\n\
+sAddr_677c30:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x14390, 0x20\n\
+    .global sAddr_677c50\n\
+sAddr_677c50:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x143b0, 0x20\n\
+    .global sAddr_677c70\n\
+sAddr_677c70:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x143d0, 0x20\n\
+    .global sAddr_677c90\n\
+sAddr_677c90:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x143f0, 0x4cc\n\
+    .global sAddr_67815c\n\
+sAddr_67815c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x148bc, 0x74c\n\
+    .global sAddr_6788a8\n\
+sAddr_6788a8:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15008, 0x9d8\n\
+    .global sAddr_679280\n\
+sAddr_679280:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x159e0, 0x28\n\
+    .global sAddr_6792a8\n\
+sAddr_6792a8:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a08, 0x28\n\
+    .global sAddr_6792d0\n\
+sAddr_6792d0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a30, 0x80\n\
+    .global sAddr_679350\n\
+sAddr_679350:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15ab0, 0x50\n\
+    .global sAddr_6793a0\n\
+sAddr_6793a0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b00, 0x10\n\
+    .global sAddr_6793b0\n\
+sAddr_6793b0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b10, 0x79a4\n\
+    .global sAddr_680d54\n\
+sAddr_680d54:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4b4, 0x10\n\
+    .global sAddr_680d64\n\
+sAddr_680d64:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4c4, 0x10\n\
+    .global sAddr_680d74\n\
+sAddr_680d74:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4d4, 0x10\n\
+    .global sAddr_680d84\n\
+sAddr_680d84:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4e4, 0x10\n\
+    .global sAddr_680d94\n\
+sAddr_680d94:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4f4, 0x10\n\
+    .global sAddr_680da4\n\
+sAddr_680da4:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d504, 0x28\n\
+    .global sAddr_680dcc\n\
+sAddr_680dcc:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d52c, 0x60\n\
+    .global sAddr_680e2c\n\
+sAddr_680e2c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d58c, 0x10\n\
+    .global sAddr_680e3c\n\
+sAddr_680e3c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d59c, 0x90\n\
+    .global sAddr_680ecc\n\
+sAddr_680ecc:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d62c, 0x60\n\
+    .global sAddr_680f2c\n\
+sAddr_680f2c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d68c, 0x48\n\
+    .global sAddr_680f74\n\
+sAddr_680f74:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6d4, 0x28\n\
+    .global sAddr_680f9c\n\
+sAddr_680f9c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6fc, 0x28\n\
+    .global sAddr_680fc4\n\
+sAddr_680fc4:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d724, 0x28\n\
+    .global sAddr_680fec\n\
+sAddr_680fec:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d74c, 0x10\n\
+    .global sAddr_680ffc\n\
+sAddr_680ffc:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d75c, 0x10\n\
+    .global sAddr_68100c\n\
+sAddr_68100c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d76c, 0x10\n\
+    .global sAddr_68101c\n\
+sAddr_68101c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d77c, 0x1f90\n\
     .popsection\n\
 ");

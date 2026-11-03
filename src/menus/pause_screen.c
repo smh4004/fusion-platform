@@ -23,7 +23,7 @@
 #include "structs/menus/pause_screen.h"
 #include "structs/minimap.h"
 #include "structs/samus.h"
-extern const u8 sPointerTable_79ce10[];
+extern u32 sPointerTable_79ce10[];
 
 static const u32* sMinimapData[MINIMAP_COUNT] = {
     [MINIMAP_MAIN_DECK] = sMainDeckMinimap,
