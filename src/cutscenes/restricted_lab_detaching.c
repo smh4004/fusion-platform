@@ -19,6 +19,26 @@
 #include "data/intro_data.h"
 #include "data/sprite_data.h"
 #include "data/haze_data.h"
+extern const u8 sBlob_68121c_68141c[];
+extern const u8 sBlob_681a1c_682fac[];
+extern const u8 sAddr_679420[];
+extern const u8 sAddr_67d7cc[];
+extern const u8 sAddr_680d54[];
+extern const u8 sAddr_680d64[];
+extern const u8 sAddr_680d74[];
+extern const u8 sAddr_680d84[];
+extern const u8 sAddr_680d94[];
+extern const u8 sAddr_680da4[];
+extern const u8 sAddr_680dcc[];
+extern const u8 sAddr_680e2c[];
+extern const u8 sAddr_680e3c[];
+extern const u8 sAddr_680f2c[];
+extern const u8 sAddr_680f74[];
+extern const u8 sAddr_680f9c[];
+extern const u8 sAddr_680fc4[];
+extern const u8 sAddr_680fec[];
+extern const u8 sAddr_6820a4[];
+extern const u8 sAddr_68259c[];
 
 /**
  * @brief 9ae18 | 8c | Main handler for the restricted lab detaching cutscene
@@ -80,13 +100,13 @@ void CutsceneRestrictedLabDetachingInit(void)
 
     WRITE_16(REG_DISPCNT, 0);
 
-    LZ77UncompVram((const u32*)0x867d7cc, VRAM_OBJ);
-    DMA3_COPY_32((const u16*)0x868121c, PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_67d7cc, VRAM_OBJ);
+    DMA3_COPY_32((const u16*)(&sBlob_68121c_68141c), PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
 
-    LZ77UncompVram((const u32*)0x8679420, VRAM_BASE);
-    LZ77UncompVram((const u32*)0x86820a4, VRAM_BASE + 0xE000);
-    LZ77UncompVram((const u32*)0x8681a1c, VRAM_BASE + 0xE800);
-    DMA3_COPY_32((const u16*)0x868259c, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_679420, VRAM_BASE);
+    LZ77UncompVram((const u32*)sAddr_6820a4, VRAM_BASE + 0xE000);
+    LZ77UncompVram((const u32*)(&sBlob_681a1c_682fac), VRAM_BASE + 0xE800);
+    DMA3_COPY_32((const u16*)sAddr_68259c, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
     WRITE_16(PALRAM_BASE, 0);
 
     WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 29, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
@@ -624,7 +644,7 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
         CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1.5f);
         CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_DOUBLE_SIZED;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680d54;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680d54;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneRestrictedLabDetachingProcessBslPart;
     }
     else if (type == 2)
@@ -632,7 +652,7 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
         CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1.5f);
         CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_DOUBLE_SIZED;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680d64;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680d64;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneRestrictedLabDetachingProcessBslPart;
     }
     else if (type == 3)
@@ -640,7 +660,7 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
         CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1.5f);
         CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_DOUBLE_SIZED;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680d74;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680d74;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneRestrictedLabDetachingProcessBslPart;
     }
     else if (type == 4)
@@ -650,25 +670,25 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
     }
     else if (type == 5)
     {
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680e2c;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680e2c;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9ba50;
     }
     else if (type == 6)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680e3c;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680e3c;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9ba50;
     }
     else if (type == 7)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680da4;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680da4;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bac0;
     }
     else if (type == 8)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680d94;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680d94;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bb30;
     }
     else if (type == 9)
@@ -676,7 +696,7 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
         CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1);
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
         CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680d84;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680d84;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bc04;
     }
     else if (type == 10)
@@ -686,7 +706,7 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
     }
     else if (type == 11)
     {
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680dcc;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680dcc;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bac0;
     }
     else if (type == 12)
@@ -694,7 +714,7 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
         CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1);
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
         CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680fec;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680fec;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bd24;
     }
     else if (type == 13)
@@ -702,7 +722,7 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
         CUTSCENE_OAM_DATA.oam[slot].scaling = Q_8_8(1);
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
         CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680fc4;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680fc4;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bdf8;
     }
     else if (type == 14)
@@ -719,12 +739,12 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
     {
         CUTSCENE_OAM_DATA.oam[slot].unk_16_3 = 1;
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680f9c;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680f9c;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bfb8;
     }
     else if (type == 17)
     {
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680f74;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680f74;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9bfb8;
     }
     else if (type == 18)
@@ -737,7 +757,7 @@ u8 CutsceneRestrictedLabDetachingSetupOam(u8 type, s16 xPosition, s16 yPosition)
         CUTSCENE_OAM_DATA.oam[slot].scaling = 0x1A0;
         CUTSCENE_OAM_DATA.oam[slot].priority = 1;
         CUTSCENE_OAM_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_DOUBLE_SIZED;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680f2c;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680f2c;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneRestrictedLabDetachingProcessFallingLab;
     }
 

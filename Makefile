@@ -105,6 +105,9 @@ CSRC = $(wildcard src/**.c) $(wildcard src/**/**.c) $(wildcard src/**/**/**.c) $
 .SECONDARY: $(CSRC:.c=.s)
 .DELETE_ON_ERROR:
 DEPS = $(CSRC:.c=.d)
+# hand-written assembly that .include/.incbin other files (e.g. sound/track_data.s)
+ASM_HAND = $(wildcard asm/*.s) $(wildcard sound/*.s)
+ASM_DEPS = $(ASM_HAND:.s=.sd)
 ASMSRC = $(CSRC:.c=.s) $(wildcard asm/*.s) $(wildcard sound/*.s) $(wildcard sound/**/*.s)
 OBJ = $(ASMSRC:.s=.o) 
 
@@ -201,7 +204,7 @@ tidy:
 	$(MSG) RM src/\*\*/\*.s
 	$Q$(RM) $(CSRC:.c=.s)
 	$(MSG) RM src/\*\*/\*.d
-	$Q$(RM) $(DEPS)
+	$Q$(RM) $(DEPS) $(ASM_DEPS)
 	$(MSG) RM $(GBAFIX)
 	$Q$(RM) $(GBAFIX)
 ifeq ($(DATA),1)
@@ -256,8 +259,12 @@ $(LD_SCRIPT): linker.ld
 %.d: %.c
 	$Q$(PYTHON) $(TOOLS_DIR)/scandeps.py $< $*.s $@ -Iinclude/
 
+%.sd: %.s
+	$Q$(PYTHON) $(TOOLS_DIR)/scandeps.py $< $*.o $@
+
 ifeq ($(SETUP_PREREQS),1)
 -include $(DEPS)
+-include $(ASM_DEPS)
 endif
 
 %.s: %.c

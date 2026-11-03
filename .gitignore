@@ -30,3 +30,5 @@ __pycache__/
 /smoke_out/
 linker.ld.shift-backup
 /tools/smoketest/smoke
+/asm/*.sd
+/sound/*.sd

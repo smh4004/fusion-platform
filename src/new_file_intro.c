@@ -19,6 +19,24 @@
 #include "data/audio.h"
 #include "data/menus/game_over_data.h"
 #include "data/menus/file_select_data.h"
+extern const u8 sAddr_6638c0[];
+extern const u8 sAddr_663a20[];
+extern const u8 sAddr_663dd0[];
+extern const u8 sAddr_663df8[];
+extern const u8 sAddr_663eac[];
+extern const u8 sAddr_667c18[];
+extern const u8 sAddr_66aa30[];
+extern const u8 sAddr_66aa58[];
+extern const u8 sAddr_66aa68[];
+extern const u8 sAddr_66abc8[];
+extern const u8 sAddr_66ac88[];
+extern const u8 sAddr_66b524[];
+extern const u8 sAddr_66ec18[];
+extern const u8 sAddr_6719cc[];
+extern const u8 sAddr_6719f4[];
+extern const u8 sAddr_671a04[];
+extern const u8 sAddr_671b64[];
+extern const u8 sAddr_671c24[];
 extern const u8 sBlob_5dfd6c_5e116c[];
 extern const u8 sBlob_5f6990_5f7190[];
 extern const u8 sBlob_65c468_662804[];
@@ -556,36 +574,36 @@ u32 sPointerTable_79c474[13] = {
 };
 
 const u16* sCutsceneMonologueBgPalPointers[9] = {
-    (const u16*)0x86638c0,
-    (const u16*)0x866aa68,
-    (const u16*)0x86638c0,
-    (const u16*)0x86638c0,
-    (const u16*)0x866aa68,
-    (const u16*)0x8671a04,
-    (const u16*)0x86638c0,
-    (const u16*)0x86638c0,
-    (const u16*)0x86638c0
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_66aa68,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_66aa68,
+    (const u16*)sAddr_671a04,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_6638c0
 };
 
 const u16* sCutsceneMonologueObjPalPointers[9] = {
-    (const u16*)0x8663a20,
-    (const u16*)0x8663a20,
-    (const u16*)0x8663a20,
-    (const u16*)0x8663a20,
-    (const u16*)0x866abc8,
-    (const u16*)0x8671b64,
-    (const u16*)0x8663a20,
-    (const u16*)0x8663a20,
-    (const u16*)0x8663a20
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_66abc8,
+    (const u16*)sAddr_671b64,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20
 };
 
 const u32* sCutsceneMonologueBgGfxPointers[9] = {
     (const u32*)(&sBlob_65c468_662804),
-    (const u32*)0x8663eac,
+    (const u32*)sAddr_663eac,
     (const u32*)(&sBlob_65c468_662804),
     (const u32*)(&sBlob_65c468_662804),
-    (const u32*)0x8663eac,
-    (const u32*)0x866b524,
+    (const u32*)sAddr_663eac,
+    (const u32*)sAddr_66b524,
     (const u32*)(&sBlob_65c468_662804),
     (const u32*)(&sBlob_65c468_662804),
     (const u32*)(&sBlob_65c468_662804)
@@ -596,8 +614,8 @@ const u32* sCutsceneMonologueObjGfxPointers[9] = {
     (const u32*)sAddr_65fc24,
     (const u32*)sAddr_65fc24,
     (const u32*)sAddr_65fc24,
-    (const u32*)0x8667c18,
-    (const u32*)0x866ec18,
+    (const u32*)sAddr_667c18,
+    (const u32*)sAddr_66ec18,
     (const u32*)sAddr_65fc24,
     (const u32*)sAddr_65fc24,
     (const u32*)sAddr_65fc24
@@ -605,26 +623,26 @@ const u32* sCutsceneMonologueObjGfxPointers[9] = {
 
 const u32* sCutsceneMonologueBgTilemapPointers[9] = {
     (const u32*)(&sBlob_662cfc_663820),
-    (const u32*)0x866ac88,
+    (const u32*)sAddr_66ac88,
     (const u32*)(&sBlob_662cfc_663820),
     (const u32*)(&sBlob_662cfc_663820),
-    (const u32*)0x866ac88,
-    (const u32*)0x8671c24,
+    (const u32*)sAddr_66ac88,
+    (const u32*)sAddr_671c24,
     (const u32*)(&sBlob_662cfc_663820),
     (const u32*)(&sBlob_662cfc_663820),
     (const u32*)(&sBlob_662cfc_663820)
 };
 
 const struct FrameData* sCutsceneMonologueOamPointers[9][2] = {
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x866aa30, (const struct FrameData*)0x866aa58 },
-    { (const struct FrameData*)0x86719cc, (const struct FrameData*)0x86719f4 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 }
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_66aa30, (const struct FrameData*)sAddr_66aa58 },
+    { (const struct FrameData*)sAddr_6719cc, (const struct FrameData*)sAddr_6719f4 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 }
 };
 
 u16** sMonologueTextPointers[LANGUAGE_COUNT] = {

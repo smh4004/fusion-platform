@@ -19,6 +19,17 @@
 #include "data/intro_data.h"
 #include "data/sprite_data.h"
 #include "data/haze_data.h"
+extern const u8 sBlob_68121c_68141c[];
+extern const u8 sBlob_681a1c_682fac[];
+extern const u8 sAddr_679420[];
+extern const u8 sAddr_67d7cc[];
+extern const u8 sAddr_680ecc[];
+extern const u8 sAddr_680ffc[];
+extern const u8 sAddr_68100c[];
+extern const u8 sAddr_6820a4[];
+extern const u8 sAddr_68259c[];
+extern const u8 sAddr_6827a8[];
+extern const u8 sAddr_682bfc[];
 
 /**
  * @brief 9c1c8 | 8c | Main handler for the BSL exploding cutscene
@@ -79,15 +90,15 @@ void CutsceneBslExplodingInit(void)
 
     WRITE_16(REG_DISPCNT, 0);
 
-    LZ77UncompVram((const u32*)0x867d7cc, VRAM_OBJ);
-    DMA3_COPY_32((const u16*)0x868121c, PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_67d7cc, VRAM_OBJ);
+    DMA3_COPY_32((const u16*)(&sBlob_68121c_68141c), PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
 
-    LZ77UncompVram((const u32*)0x8679420, VRAM_BASE);
-    LZ77UncompVram((const u32*)0x8681a1c, VRAM_BASE + 0xE000);
-    LZ77UncompVram((const u32*)0x86820a4, VRAM_BASE + 0xE800);
-    LZ77UncompVram((const u32*)0x86827a8, VRAM_BASE + 0xF000);
-    LZ77UncompVram((const u32*)0x8682bfc, VRAM_BASE + 0xF800);
-    DMA3_COPY_32((const u16*)0x868259c, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_679420, VRAM_BASE);
+    LZ77UncompVram((const u32*)(&sBlob_681a1c_682fac), VRAM_BASE + 0xE000);
+    LZ77UncompVram((const u32*)sAddr_6820a4, VRAM_BASE + 0xE800);
+    LZ77UncompVram((const u32*)sAddr_6827a8, VRAM_BASE + 0xF000);
+    LZ77UncompVram((const u32*)sAddr_682bfc, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const u16*)sAddr_68259c, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
     WRITE_16(PALRAM_BASE, 0);
 
     WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
@@ -274,7 +285,7 @@ void CutsceneBslExplodingProcessBslFar(struct CutsceneOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x8680ecc;
+            pOam->pOam = (const struct FrameData*)sAddr_680ecc;
             pOam->stage = 1;
         }
     }
@@ -351,19 +362,19 @@ u8 CutsceneBslExplodingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 de
     else if (type == 20)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 2;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680ffc;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680ffc;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9db70;
     }
     else if (type == 21)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 2;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x868100c;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_68100c;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneBslExplodingProcessBslFar;
     }
     else if (type == 22)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 2;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680ecc;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680ecc;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneBslExplodingProcessExplosions;
     }
 
