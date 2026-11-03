@@ -819,97 +819,44 @@ void Dma3Clear_Unused(void* dst, u32 size, u16 count)
     }
 }
 
-// 0x08098A04
-NAKED_FUNCTION
+/**
+ * @brief 98a04 | 9c | Updates the animated palettes timers
+ * 
+ */
 void unk_98a04(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	movs r3, #0\n\
-	ldr r0, _08098A48 @ =gNonGameplayRam\n\
-	mov ip, r0\n\
-	movs r7, #0x88\n\
-	lsls r7, r7, #1\n\
-	add r7, ip\n\
-	movs r6, #0x96\n\
-	lsls r6, r6, #1\n\
-	add r6, ip\n\
-	movs r5, #0xb2\n\
-	lsls r5, r5, #1\n\
-	add r5, ip\n\
-	movs r4, #0xa4\n\
-	lsls r4, r4, #1\n\
-	add r4, ip\n\
-_08098A24:\n\
-	adds r0, r3, r7\n\
-	adds r1, r3, r6\n\
-	ldrb r2, [r1]\n\
-	ldrb r0, [r0]\n\
-	cmp r0, r2\n\
-	bhi _08098A50\n\
-	movs r2, #0\n\
-	strb r2, [r1]\n\
-	adds r1, r3, r5\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-	adds r1, r3, r4\n\
-	ldrb r0, [r1]\n\
-	cmp r0, #0x25\n\
-	bhi _08098A4C\n\
-	adds r0, #1\n\
-	b _08098A52\n\
-	.align 2, 0\n\
-_08098A48: .4byte gNonGameplayRam\n\
-_08098A4C:\n\
-	strb r2, [r1]\n\
-	b _08098A54\n\
-_08098A50:\n\
-	adds r0, r2, #1\n\
-_08098A52:\n\
-	strb r0, [r1]\n\
-_08098A54:\n\
-	adds r0, r3, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r3, r0, #0x18\n\
-	cmp r3, #3\n\
-	bls _08098A24\n\
-	movs r0, #0x8d\n\
-	lsls r0, r0, #1\n\
-	add r0, ip\n\
-	movs r2, #0x9b\n\
-	lsls r2, r2, #1\n\
-	add r2, ip\n\
-	ldrb r1, [r2]\n\
-	ldrb r0, [r0]\n\
-	cmp r0, r1\n\
-	bhi _08098A96\n\
-	movs r3, #0\n\
-	strb r3, [r2]\n\
-	movs r1, #0xb7\n\
-	lsls r1, r1, #1\n\
-	add r1, ip\n\
-	movs r0, #1\n\
-	strb r0, [r1]\n\
-	movs r1, #0xa9\n\
-	lsls r1, r1, #1\n\
-	add r1, ip\n\
-	ldrb r0, [r1]\n\
-	cmp r0, #0xe\n\
-	bhi _08098A92\n\
-	adds r0, #1\n\
-	strb r0, [r1]\n\
-	b _08098A9A\n\
-_08098A92:\n\
-	strb r3, [r1]\n\
-	b _08098A9A\n\
-_08098A96:\n\
-	adds r0, r1, #1\n\
-	strb r0, [r2]\n\
-_08098A9A:\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (((u8(*)[28])&INTRO_DATA.unk_110)[0][i] <= ((u8(*)[28])&INTRO_DATA.unk_110)[1][i])
+        {
+            ((u8(*)[28])&INTRO_DATA.unk_110)[1][i] = 0;
+            ((u8(*)[28])&INTRO_DATA.unk_110)[3][i] = 1;
+            if (((u8(*)[28])&INTRO_DATA.unk_110)[2][i] < 38)
+                ((u8(*)[28])&INTRO_DATA.unk_110)[2][i]++;
+            else
+                ((u8(*)[28])&INTRO_DATA.unk_110)[2][i] = 0;
+        }
+        else
+        {
+            ((u8(*)[28])&INTRO_DATA.unk_110)[1][i]++;
+        }
+    }
+
+    if (((u8(*)[28])&INTRO_DATA.unk_110)[0][10] <= ((u8(*)[28])&INTRO_DATA.unk_110)[1][10])
+    {
+        ((u8(*)[28])&INTRO_DATA.unk_110)[1][10] = 0;
+        ((u8(*)[28])&INTRO_DATA.unk_110)[3][10] = 1;
+        if (((u8(*)[28])&INTRO_DATA.unk_110)[2][10] < 15)
+            ((u8(*)[28])&INTRO_DATA.unk_110)[2][10]++;
+        else
+            ((u8(*)[28])&INTRO_DATA.unk_110)[2][10] = 0;
+    }
+    else
+    {
+        ((u8(*)[28])&INTRO_DATA.unk_110)[1][10]++;
+    }
 }
 
 /**
