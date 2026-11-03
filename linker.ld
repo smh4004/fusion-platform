@@ -194,6 +194,7 @@ SECTIONS {
         . = 0x00001232; gBg3YPosition = .;
         . = 0x00001234; gUnk_3001234 = .;
         . = 0x00001236; gUnk_3001236 = .;
+        . = 0x00001238; gUnk_3001238 = .;
         . = 0x00001242; gDemoState = .;
         . = 0x00001243; gPoseLock = .;
         . = 0x00001244; gSamusData = .;
@@ -302,6 +303,7 @@ SECTIONS {
         . = 0x000053f9; gUnk_30053f9 = .;
         . = 0x000053fc; gHazeProcessCodePointer = .;
         . = 0x00005400; gMaintainedInput = .;
+        . = 0x00005404; gUnk_3005404 = .;
 
         . = 0x00005408; *libgcc.a:dp-bit.o(.bss);
         . = 0x00005420; *libgcc.a:fp-bit.o(.bss);
@@ -505,7 +507,20 @@ SECTIONS {
         src/new_file_intro.o(.text);
         src/title_intro.o(.text);
 
-        asm/disasm_0x080930C0.o(.text);
+        src/intro_space_view.o(.text);
+        src/ending_bsl_crashing.o(.text);
+        src/ending_in_ship.o(.text);
+        src/died_on_sr388_collision.o(.text);
+        src/special_cutscene.o(.text);
+        src/cutscenes/cutscene.o(.text);
+        src/cutscenes/elevator_monologue.o(.text);
+        src/cutscenes/internal_monologue.o(.text);
+        src/cutscenes/federation_monologue.o(.text);
+        src/cutscenes/secret_conversation.o(.text);
+        src/cutscenes/restricted_lab_detaching.o(.text);
+        src/cutscenes/bsl_exploding.o(.text);
+        src/cutscenes/cutscene_monologue.o(.text);
+        src/cutscenes/cutscene_utils.o(.text);
 
         src/sa_x_close_up.o(.text);
 

@@ -8,9 +8,7 @@
 #include "data/sprite_data.h"
 
 // V-blank callbacks
-void unk_93884(void);
 void unk_99940(void);
-void TitleIntroShipAlertAndDraftingVblank(void);
 
 u8 SpecialCutsceneGetRandomNumber(void);
 
@@ -922,3 +920,416 @@ void TitleIntroProcessDriftingShip(struct SpecialCutsceneOam* pOam)
     }
 }
 
+/**
+ * @brief 930c0 | 64 | Spawns the parts of the BSL ship
+ * 
+ */
+void IntroProcessBslShipSpawning(struct SpecialCutsceneOam* pOam)
+{
+    if (pOam->stage == 0)
+    {
+        TitleIntroSetupOam(12, pOam->xPosition + 122, pOam->yPosition, FALSE);
+        TitleIntroSetupOam(13, pOam->xPosition + 50, pOam->yPosition + 1, FALSE);
+        TitleIntroSetupOam(14, pOam->xPosition + 36, pOam->yPosition, FALSE);
+        TitleIntroSetupOam(15, pOam->xPosition, pOam->yPosition, FALSE);
+        pOam->type = 0;
+    }
+}
+
+/**
+ * @brief 93124 | d4 | Processes a part of the BSL ship
+ * 
+ */
+void IntroProcessBslShipBack(struct SpecialCutsceneOam* pOam)
+{
+    if (pOam->stage == 0)
+    {
+        pOam->timer++;
+        if (pOam->timer == 20)
+        {
+            pOam->spawnX++;
+            pOam->timer = 0;
+
+            if (pOam->unk_A == 4)
+                pOam->unk_A = 0;
+
+            if (pOam->unk_A < 2)
+                pOam->yPosition++;
+            else if (pOam->unk_A < 4)
+                pOam->yPosition--;
+
+            if (pOam->spawnX == 30)
+            {
+                pOam->stage = 1;
+                pOam->timer = 0;
+            }
+
+            pOam->unk_A++;
+        }
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->spawnX = pOam->xPosition;
+        pOam->spawnY = pOam->yPosition;
+        pOam->unk_A = 0;
+        pOam->stage = 2;
+    }
+    else if (pOam->stage == 2)
+    {
+        pOam->timer++;
+        if (pOam->timer == 2)
+        {
+            pOam->unk_A++;
+            pOam->timer = 0;
+        }
+
+        pOam->xPosition = (((900 - pOam->spawnX) * pOam->unk_A) >> 12) + pOam->spawnX;
+        pOam->yPosition = (((pOam->unk_4 - pOam->spawnY) * pOam->unk_A) >> 11) + pOam->spawnY;
+
+        if (pOam->xPosition > 320)
+        {
+            pOam->unk_A = 0;
+            pOam->spawnX = pOam->xPosition;
+            pOam->spawnY = pOam->yPosition;
+            pOam->stage = 3;
+        }
+    }
+}
+
+/**
+ * @brief 931f8 | c4 | Processes a depth particle
+ * 
+ */
+void IntroProcessDepthParticle(struct SpecialCutsceneOam* pOam)
+{
+    s32 x;
+    s32 y;
+    s32 divisor;
+    
+    pOam->unk_4 = pOam->unk_A;
+
+    if (pOam->stage == 0)
+    {
+        pOam->spawnX = (pOam->xPosition - SCREEN_X_MIDDLE) * 100;
+        pOam->spawnY = (pOam->yPosition - SCREEN_Y_MIDDLE) * 100;
+        pOam->stage = 1;
+    }
+    else
+    {
+        if ((s16)pOam->unk_A < 100)
+        {
+            if ((s16)pOam->unk_A == 25)
+                pOam->pOam = sOam_60ac18;
+            else if ((s16)pOam->unk_A == 50)
+                pOam->pOam = sOam_60ac28;
+            else if ((s16)pOam->unk_A == 70)
+                pOam->pOam = sOam_60ac38;
+
+            divisor = -pOam->unk_4 + 100;
+            x = pOam->spawnX / divisor;
+            pOam->xPosition = x + SCREEN_X_MIDDLE;
+            y = pOam->spawnY / divisor + SCREEN_Y_MIDDLE;
+            pOam->yPosition = y;
+
+            if ((u16)(x + 128) > 256 || (s16)y > 168 || (s16)y < -8)
+            {
+                pOam->type = 0;
+                pOam->unk_18_0 = 0;
+            }
+        }
+        else
+        {
+            pOam->type = 0;
+            pOam->unk_18_0 = 0;
+        }
+    }
+    
+    pOam->unk_A++;
+}
+
+/**
+ * @brief 932bc | 20 | Processes the time and distance OAM
+ * 
+ */
+void IntroProcessTimeAndDistanceOam(struct SpecialCutsceneOam* pOam)
+{
+    if (pOam->stage == 0 && pOam->currentAnimationFrame == 1)
+    {
+        SoundPlay(SOUND_1EE);
+        pOam->stage = 1;
+    }
+}
+
+/**
+ * @brief 932dc | 24 | Processes the asteroids pop up OAM
+ * 
+ */
+void IntroProcessAsteroidsPopUp(struct SpecialCutsceneOam* pOam)
+{
+    if (pOam->stage == 0 && pOam->currentAnimationFrame == 1)
+    {
+        SoundPlay(SOUND_1EF);
+        pOam->stage = 1;
+    }
+}
+
+/**
+ * @brief 93300 | 34 | To document
+ * 
+ */
+void unk_93300(struct SpecialCutsceneOam* pOam)
+{
+    if (pOam->stage == 0)
+    {
+        pOam->unk_A++;
+        if (pOam->unk_A == pOam->unk_8)
+        {
+            pOam->unk_18_0 = 1;
+            pOam->stage = 1;
+            SoundPlay(SOUND_1F1);
+        }
+    }
+}
+
+/**
+ * @brief 93334 | 48 | To document
+ * 
+ */
+void unk_93334(struct SpecialCutsceneOam* pOam)
+{
+    const struct FrameData* pFrame;
+
+    if (pOam->currentAnimationFrame == 1 && pOam->animationDurationCounter == 1)
+        SoundPlay(SOUND_1F0);
+
+    pFrame = &pOam->pOam[pOam->currentAnimationFrame];
+    if (pFrame[0].timer == pOam->animationDurationCounter && pFrame[1].timer == 0)
+    {
+        pOam->type = 0;
+        pOam->unk_18_0 = 0;
+    }
+}
+
+/**
+ * @brief 9337c | 2c | Processes a big changing number OAM
+ * 
+ */
+void IntroOamProcessBigChangingNumber(struct SpecialCutsceneOam* pOam)
+{
+    if (pOam->stage == 0)
+    {
+        pOam->unk_A++;
+        if (pOam->unk_A == pOam->unk_8)
+        {
+            pOam->unk_18_0 = 1;
+            pOam->stage = 1;
+        }
+    }
+}
+
+/**
+ * @brief 933a8 | 4a0 | Sets up a title intro OAM
+ * 
+ */
+u8 TitleIntroSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 descendingSearch)
+{
+    s8 slot;
+
+    if (!descendingSearch)
+    {
+        for (slot = 0; slot < ARRAY_SIZE(INTRO_DATA.oam); slot++)
+        {
+            if (INTRO_DATA.oam[slot].type == 0)
+                break;
+        }
+        
+        if (slot > 19)
+            return 20;
+    }
+    else
+    {
+        for (slot = ARRAY_SIZE(INTRO_DATA.oam) - 1; slot >= 0; slot--)
+        {
+            if (INTRO_DATA.oam[slot].type == 0)
+                break;
+        }
+        
+        if (slot < 0)
+            return 20;
+    }
+    
+    DMA3_FILL_32(0, &INTRO_DATA.oam[slot], sizeof(struct SpecialCutsceneOam));
+
+    INTRO_DATA.oam[slot].xPosition = xPosition;
+    INTRO_DATA.oam[slot].yPosition = yPosition;
+    INTRO_DATA.oam[slot].type = type;
+    INTRO_DATA.oam[slot].unk_18_0 = 1;
+
+    if (type == 1)
+    {
+        INTRO_DATA.oam[slot].unk_18_0 = 0;
+        INTRO_DATA.oam[slot].pFunction = unk_92d0c;
+    }
+    else if (type == 10)
+    {
+        INTRO_DATA.oam[slot].spawnX = xPosition;
+        INTRO_DATA.oam[slot].spawnY = yPosition;
+        INTRO_DATA.oam[slot].scaling = Q_8_8(1);
+        INTRO_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
+        INTRO_DATA.oam[slot].pOam = sOam_60acd0;
+        INTRO_DATA.oam[slot].pFunction = TitleIntroProcessDriftingShip;
+    }
+    else if (type == 11)
+    {
+        INTRO_DATA.oam[slot].unk_18_0 = 0;
+        INTRO_DATA.oam[slot].pOam = sOam_60acd0;
+        INTRO_DATA.oam[slot].pFunction = IntroProcessBslShipSpawning;
+    }
+    else if (type == 12)
+    {
+        INTRO_DATA.oam[slot].unk_4 = -40;
+        INTRO_DATA.oam[slot].pOam = sOam_60ad28;
+        INTRO_DATA.oam[slot].pFunction = IntroProcessBslShipBack;
+    }
+    else if (type == 13)
+    {
+        INTRO_DATA.oam[slot].unk_4 = -30;
+        INTRO_DATA.oam[slot].pOam = sOam_60ad18;
+        INTRO_DATA.oam[slot].pFunction = IntroProcessBslShipBack;
+    }
+    else if (type == 14)
+    {
+        INTRO_DATA.oam[slot].unk_4 = -20;
+        INTRO_DATA.oam[slot].pOam = sOam_60ad08;
+        INTRO_DATA.oam[slot].pFunction = IntroProcessBslShipBack;
+    }
+    else if (type == 15)
+    {
+        INTRO_DATA.oam[slot].unk_4 = -10;
+        INTRO_DATA.oam[slot].pOam = sOam_60acf8;
+        INTRO_DATA.oam[slot].pFunction = IntroProcessBslShipBack;
+    }
+    else if (type == 16)
+    {
+        INTRO_DATA.oam[slot].pOam = sOam_60ac08;
+        INTRO_DATA.oam[slot].pFunction = IntroProcessDepthParticle;
+    }
+    else if (type == 19)
+    {
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865bb38;
+        INTRO_DATA.oam[slot].pFunction = IntroProcessTimeAndDistanceOam;
+    }
+    else if (type == 20)
+    {
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865bd00;
+        INTRO_DATA.oam[slot].pFunction = unk_9397c;
+    }
+    else if (type == 21)
+    {
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865bd48;
+        INTRO_DATA.oam[slot].pFunction = unk_9397c;
+    }
+    else if (type == 22)
+    {
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865bd60;
+        INTRO_DATA.oam[slot].pFunction = IntroProcessAsteroidsPopUp;
+    }
+    else if (type == 23)
+    {
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865be00;
+        INTRO_DATA.oam[slot].pFunction = unk_93334;
+    }
+    else if (type == 24)
+    {
+        INTRO_DATA.oam[slot].unk_18_0 = 0;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865bf10;
+        INTRO_DATA.oam[slot].pFunction = IntroOamProcessBigChangingNumber;
+    }
+    else if (type == 25)
+    {
+        INTRO_DATA.oam[slot].unk_18_0 = 0;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865c0d0;
+        INTRO_DATA.oam[slot].pFunction = unk_93300;
+    }
+    else if (type == 26)
+    {
+        INTRO_DATA.oam[slot].unk_18_0 = 0;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865c128;
+        INTRO_DATA.oam[slot].pFunction = IntroOamProcessBigChangingNumber;
+    }
+    else if (type == 27)
+    {
+        INTRO_DATA.oam[slot].unk_18_0 = 0;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865c180;
+        INTRO_DATA.oam[slot].pFunction = IntroOamProcessBigChangingNumber;
+    }
+    else if (type == 28)
+    {
+        INTRO_DATA.oam[slot].unk_18_0 = 0;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865c1d8;
+        INTRO_DATA.oam[slot].pFunction = IntroOamProcessBigChangingNumber;
+    }
+    else if (type == 29)
+    {
+        INTRO_DATA.oam[slot].unk_18_0 = 0;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x0865c230;
+        INTRO_DATA.oam[slot].pFunction = IntroOamProcessBigChangingNumber;
+    }
+
+    return slot;
+}
+
+/**
+ * @brief 93848 | 3c | Sets up a big number OAM
+ * 
+ */
+void IntroSetupBigNumberOam(u8 type, s16 xPosition, s16 yPosition, u16 value)
+{
+    u8 slot;
+
+    slot = TitleIntroSetupOam(type, xPosition, yPosition, FALSE);
+    INTRO_DATA.oam[slot].unk_8 = value;
+}
+
+/**
+ * @brief 93884 | 7c | V-blank for the unused title intro setup
+ * 
+ */
+void unk_93884(void)
+{
+    DMA3_COPY_32(gOamData, OAM_BASE, OAM_SIZE / 4);
+
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_Evb, gWrittenToBldalpha_Eva));
+    WRITE_16(REG_BLDY, gWrittenToBldy);
+
+    WRITE_16(REG_BG2HOFS, gBg2XPosition);
+    WRITE_16(REG_BG2VOFS, gBg2YPosition);
+    WRITE_16(REG_BG3HOFS, gBg3XPosition);
+    WRITE_16(REG_BG3VOFS, gBg3YPosition);
+}
+
+/**
+ * @brief 93900 | 7c | V-blank for the title intro ship alert and drifting cutscenes
+ * 
+ */
+void TitleIntroShipAlertAndDraftingVblank(void)
+{
+    DMA3_COPY_32(gOamData, OAM_BASE, OAM_SIZE / 4);
+
+    WRITE_16(REG_BLDALPHA, C_16_2_8(gWrittenToBldalpha_Evb, gWrittenToBldalpha_Eva));
+    WRITE_16(REG_BLDY, gWrittenToBldy);
+
+    WRITE_16(REG_BG2HOFS, gBg2XPosition);
+    WRITE_16(REG_BG2VOFS, gBg2YPosition);
+    WRITE_16(REG_BG3HOFS, gBg3XPosition);
+    WRITE_16(REG_BG3VOFS, gBg3YPosition);
+}
+
+/**
+ * @brief 9397c | 4 | Empty function
+ * 
+ */
+void unk_9397c(struct SpecialCutsceneOam* pOam)
+{
+    return;
+}

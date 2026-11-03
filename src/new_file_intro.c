@@ -96,7 +96,24 @@ static const u16* sPalPointers_79c354[16] = {
 	(const u16*)0x85f7110
 };
 
-static u8 sBlob_79c394_79c3c8[] = INCBIN_U8("data/Blob_79c394_79c3c8.bin");
+const struct FrameData* sIntroSpaceViewParticleOam[6] = {
+    sOam_60ac08,
+    sOam_60ac18,
+    sOam_60ac28,
+    sOam_60ac38,
+    sOam_60ac28,
+    sOam_60ac18
+};
+
+const u16** sEndingTextPointers[LANGUAGE_COUNT] = {
+    (const u16**)0x879ce10,
+    (const u16**)0x879d194,
+    (const u16**)0x879d50c,
+    (const u16**)0x879d890,
+    (const u16**)0x879dc14,
+    (const u16**)0x879df98,
+    (const u16**)0x879e31c
+};
 
 static const u32* sIntroSr388SurfaceBgGfxPointers[8] = {
     sIntroSr388SurfaceBgGfx0,
@@ -162,9 +179,81 @@ const u32* sTitleIntroCollisionWarningObjGfxPointers[6] = {
     (const u32*)0x08652994
 };
 
-static u8 sBlob_79c474_79c5a4[] = INCBIN_U8("data/Blob_79c474_79c5a4.bin");
+static u8 sBlob_79c474_79c4a8[] = INCBIN_U8("data/Blob_79c474_79c4a8.bin");
 
-static u16** sMonologueTextPointers[LANGUAGE_COUNT] = {
+const u16* sCutsceneMonologueBgPalPointers[9] = {
+    (const u16*)0x86638c0,
+    (const u16*)0x866aa68,
+    (const u16*)0x86638c0,
+    (const u16*)0x86638c0,
+    (const u16*)0x866aa68,
+    (const u16*)0x8671a04,
+    (const u16*)0x86638c0,
+    (const u16*)0x86638c0,
+    (const u16*)0x86638c0
+};
+
+const u16* sCutsceneMonologueObjPalPointers[9] = {
+    (const u16*)0x8663a20,
+    (const u16*)0x8663a20,
+    (const u16*)0x8663a20,
+    (const u16*)0x8663a20,
+    (const u16*)0x866abc8,
+    (const u16*)0x8671b64,
+    (const u16*)0x8663a20,
+    (const u16*)0x8663a20,
+    (const u16*)0x8663a20
+};
+
+const u32* sCutsceneMonologueBgGfxPointers[9] = {
+    (const u32*)0x865c468,
+    (const u32*)0x8663eac,
+    (const u32*)0x865c468,
+    (const u32*)0x865c468,
+    (const u32*)0x8663eac,
+    (const u32*)0x866b524,
+    (const u32*)0x865c468,
+    (const u32*)0x865c468,
+    (const u32*)0x865c468
+};
+
+const u32* sCutsceneMonologueObjGfxPointers[9] = {
+    (const u32*)0x865fc24,
+    (const u32*)0x865fc24,
+    (const u32*)0x865fc24,
+    (const u32*)0x865fc24,
+    (const u32*)0x8667c18,
+    (const u32*)0x866ec18,
+    (const u32*)0x865fc24,
+    (const u32*)0x865fc24,
+    (const u32*)0x865fc24
+};
+
+const u32* sCutsceneMonologueBgTilemapPointers[9] = {
+    (const u32*)0x8662cfc,
+    (const u32*)0x866ac88,
+    (const u32*)0x8662cfc,
+    (const u32*)0x8662cfc,
+    (const u32*)0x866ac88,
+    (const u32*)0x8671c24,
+    (const u32*)0x8662cfc,
+    (const u32*)0x8662cfc,
+    (const u32*)0x8662cfc
+};
+
+const struct FrameData* sCutsceneMonologueOamPointers[9][2] = {
+    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
+    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
+    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
+    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
+    { (const struct FrameData*)0x866aa30, (const struct FrameData*)0x866aa58 },
+    { (const struct FrameData*)0x86719cc, (const struct FrameData*)0x86719f4 },
+    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
+    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
+    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 }
+};
+
+u16** sMonologueTextPointers[LANGUAGE_COUNT] = {
     sMonologueTextPointersJapanese,
     sMonologueTextPointersJapanese,
     sMonologueTextPointersEnglish,
