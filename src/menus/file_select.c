@@ -12,6 +12,7 @@
 #include "text.h"
 
 #include "data/menus/file_select_data.h"
+#include "data/text_data.h"
 
 #include "constants/audio.h"
 #include "constants/game_state.h"
@@ -2998,652 +2999,205 @@ void unk_a0518(struct FileSelectOam* pOam)
     return;
 }
 
-// 0x080A051C
-NAKED_FUNCTION
+/**
+ * @brief a051c | 520 | TODO
+ * 
+ */
 void FileSelectDrawFileInfo(u8 file)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	sub sp, #0x50\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	mov sl, r0\n\
-	lsls r0, r0, #2\n\
-	add r0, sl\n\
-	lsls r0, r0, #2\n\
-	ldr r1, _080A0548 @ =0x03000B94\n\
-	adds r0, r0, r1\n\
-	mov sb, r0\n\
-	adds r2, r1, #0\n\
-	mov r0, sl\n\
-	cmp r0, #0\n\
-	bne _080A0550\n\
-	ldr r7, _080A054C @ =0x060088C0\n\
-	b _080A0562\n\
-	.align 2, 0\n\
-_080A0548: .4byte 0x03000B94\n\
-_080A054C: .4byte 0x060088C0\n\
-_080A0550:\n\
-	mov r1, sl\n\
-	cmp r1, #1\n\
-	bne _080A0560\n\
-	ldr r7, _080A055C @ =0x060090C0\n\
-	b _080A0562\n\
-	.align 2, 0\n\
-_080A055C: .4byte 0x060090C0\n\
-_080A0560:\n\
-	ldr r7, _080A05A8 @ =0x060098C0\n\
-_080A0562:\n\
-	str r7, [sp, #0x38]\n\
-	ldr r5, _080A05AC @ =gNonGameplayRam\n\
-	movs r1, #0\n\
-	movs r0, #0\n\
-	strh r0, [r5]\n\
-	strb r1, [r5, #0x13]\n\
-	mov r3, sb\n\
-	ldrb r4, [r3]\n\
-	mov r0, sl\n\
-	lsls r0, r0, #2\n\
-	str r0, [sp, #0x40]\n\
-	cmp r4, #0\n\
-	beq _080A057E\n\
-	b _080A0694\n\
-_080A057E:\n\
-	add r0, sl\n\
-	lsls r0, r0, #2\n\
-	adds r1, r0, r2\n\
-	movs r0, #0x10\n\
-	ldrsb r0, [r1, r0]\n\
-	cmp r0, #1\n\
-	beq _080A0594\n\
-	movs r0, #0x11\n\
-	ldrsb r0, [r1, r0]\n\
-	cmp r0, #1\n\
-	bne _080A05B0\n\
-_080A0594:\n\
-	movs r2, #0xa8\n\
-	lsls r2, r2, #2\n\
-	adds r1, r5, r2\n\
-	movs r0, #0x63\n\
-	strh r0, [r1]\n\
-	movs r3, #0xa7\n\
-	lsls r3, r3, #2\n\
-	adds r3, r3, r5\n\
-	mov sb, r3\n\
-	b _080A0694\n\
-	.align 2, 0\n\
-_080A05A8: .4byte 0x060098C0\n\
-_080A05AC: .4byte gNonGameplayRam\n\
-_080A05B0:\n\
-	mov r0, sl\n\
-	adds r0, #0xe\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	bl FileSelectDestroyOamOfType\n\
-	mov r0, sl\n\
-	adds r0, #0x14\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	bl FileSelectDestroyOamOfType\n\
-	str r4, [sp, #0x34]\n\
-	ldr r0, _080A061C @ =0x040000D4\n\
-	add r1, sp, #0x34\n\
-	str r1, [r0]\n\
-	str r7, [r0, #4]\n\
-	ldr r2, _080A0620 @ =0x850000C0\n\
-	str r2, [r0, #8]\n\
-	ldr r3, [r0, #8]\n\
-	str r4, [sp, #0x34]\n\
-	str r1, [r0]\n\
-	movs r3, #0x80\n\
-	lsls r3, r3, #3\n\
-	adds r1, r7, r3\n\
-	str r1, [r0, #4]\n\
-	str r2, [r0, #8]\n\
-	ldr r0, [r0, #8]\n\
-	ldr r1, _080A0624 @ =0x0879EC84\n\
-	ldr r0, _080A0628 @ =0x03000011\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldr r0, [r0]\n\
-	ldr r4, [r0]\n\
-	movs r0, #8\n\
-	strh r0, [r5]\n\
-	ldrh r0, [r4]\n\
-	movs r1, #0xff\n\
-	lsls r1, r1, #8\n\
-	cmp r0, r1\n\
-	bne _080A060A\n\
-	b _080A0A08\n\
-_080A060A:\n\
-	mov r8, r5\n\
-	mov sb, r1\n\
-_080A060E:\n\
-	cmp r0, #0x5a\n\
-	bne _080A062C\n\
-	ldrh r0, [r4]\n\
-	bl TextGetCharacterWidth\n\
-	adds r5, r0, #2\n\
-	b _080A063C\n\
-	.align 2, 0\n\
-_080A061C: .4byte 0x040000D4\n\
-_080A0620: .4byte 0x850000C0\n\
-_080A0624: .4byte 0x0879EC84\n\
-_080A0628: .4byte 0x03000011\n\
-_080A062C:\n\
-	cmp r0, #0x40\n\
-	bne _080A063A\n\
-	mov r0, r8\n\
-	ldrb r1, [r0, #0x13]\n\
-	movs r0, #8\n\
-	subs r5, r0, r1\n\
-	b _080A063C\n\
-_080A063A:\n\
-	movs r5, #8\n\
-_080A063C:\n\
-	mov r1, r8\n\
-	ldrh r0, [r1]\n\
-	lsls r0, r0, #5\n\
-	ldr r2, [sp, #0x38]\n\
-	adds r7, r0, r2\n\
-	ldrh r0, [r4]\n\
-	lsls r2, r5, #0x18\n\
-	lsrs r2, r2, #0x18\n\
-	ldrb r3, [r1, #0x13]\n\
-	movs r1, #0\n\
-	str r1, [sp]\n\
-	adds r1, r7, #0\n\
-	bl TextDrawCharacter\n\
-	mov r3, r8\n\
-	ldrb r0, [r3, #0x13]\n\
-	adds r0, r0, r5\n\
-	strb r0, [r3, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	adds r6, r4, #2\n\
-	cmp r0, #7\n\
-	bls _080A0686\n\
-	ldr r5, _080A0690 @ =gNonGameplayRam\n\
-	ldrb r4, [r5, #0x13]\n\
-	ldrh r3, [r5]\n\
-_080A0670:\n\
-	adds r2, r4, #0\n\
-	subs r2, #8\n\
-	adds r4, r2, #0\n\
-	adds r1, r3, #1\n\
-	adds r3, r1, #0\n\
-	lsls r0, r2, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bhi _080A0670\n\
-	strh r1, [r5]\n\
-	strb r2, [r5, #0x13]\n\
-_080A0686:\n\
-	adds r4, r6, #0\n\
-	ldrh r0, [r4]\n\
-	cmp r0, sb\n\
-	bne _080A060E\n\
-	b _080A0A08\n\
-	.align 2, 0\n\
-_080A0690: .4byte gNonGameplayRam\n\
-_080A0694:\n\
-	ldr r0, _080A07F4 @ =0x03000011\n\
-	ldrb r0, [r0]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	movs r0, #0xfa\n\
-	lsls r0, r0, #2\n\
-	mov r2, sb\n\
-	ldrh r1, [r2, #4]\n\
-	bl DivArmDiv\n\
-	add r4, sp, #0x14\n\
-	str r0, [sp, #0x14]\n\
-	mov r3, sb\n\
-	ldrh r1, [r3, #4]\n\
-	movs r0, #0x64\n\
-	bl DivArmDiv\n\
-	add r5, sp, #0x24\n\
-	str r0, [r4, #4]\n\
-	str r0, [sp, #0x24]\n\
-	ldr r1, [r4, #4]\n\
-	movs r0, #0xa\n\
-	bl DivArmMod\n\
-	str r0, [r4, #4]\n\
-	str r0, [r5, #4]\n\
-	mov r0, sb\n\
-	ldrh r1, [r0, #4]\n\
-	movs r0, #0xa\n\
-	bl DivArmDiv\n\
-	adds r1, r0, #0\n\
-	str r1, [r4, #8]\n\
-	movs r0, #0xa\n\
-	bl DivArmMod\n\
-	str r0, [r4, #8]\n\
-	mov r2, sb\n\
-	ldrh r1, [r2, #4]\n\
-	str r1, [r4, #0xc]\n\
-	movs r0, #0xa\n\
-	bl DivArmMod\n\
-	str r0, [r4, #0xc]\n\
-	movs r6, #2\n\
-	mov r3, sl\n\
-	adds r3, #0xe\n\
-	str r3, [sp, #0x44]\n\
-	mov r0, sl\n\
-	adds r0, #0x14\n\
-	str r0, [sp, #0x4c]\n\
-	add r1, sp, #0x34\n\
-	mov ip, r1\n\
-	mov r8, r5\n\
-	mov r2, sl\n\
-	lsls r2, r2, #4\n\
-	str r2, [sp, #0x48]\n\
-	ldr r1, _080A07F8 @ =0x040000D4\n\
-	ldr r4, _080A07FC @ =0x84000008\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #3\n\
-	ldr r5, _080A0800 @ =0x08682FAC\n\
-_080A0710:\n\
-	lsls r0, r6, #2\n\
-	add r0, sp\n\
-	adds r0, #0x14\n\
-	ldr r0, [r0]\n\
-	adds r0, #0x50\n\
-	lsls r0, r0, #5\n\
-	adds r3, r0, r5\n\
-	str r3, [r1]\n\
-	str r7, [r1, #4]\n\
-	str r4, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	adds r0, r3, r2\n\
-	str r0, [r1]\n\
-	adds r0, r7, r2\n\
-	str r0, [r1, #4]\n\
-	str r4, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	adds r7, #0x20\n\
-	adds r0, r6, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r6, r0, #0x18\n\
-	cmp r6, #3\n\
-	bls _080A0710\n\
-	movs r1, #0\n\
-	str r1, [sp, #0x34]\n\
-	ldr r5, _080A07F8 @ =0x040000D4\n\
-	mov r3, ip\n\
-	str r3, [r5]\n\
-	str r7, [r5, #4]\n\
-	ldr r0, _080A0804 @ =0x85000080\n\
-	str r0, [r5, #8]\n\
-	ldr r2, [r5, #8]\n\
-	str r1, [sp, #0x34]\n\
-	str r3, [r5]\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #3\n\
-	adds r4, r7, r1\n\
-	str r4, [r5, #4]\n\
-	str r0, [r5, #8]\n\
-	ldr r0, [r5, #8]\n\
-	mov r2, r8\n\
-	ldr r1, [r2, #4]\n\
-	movs r0, #2\n\
-	bl DivArmMod\n\
-	mov r3, r8\n\
-	str r0, [r3, #4]\n\
-	mov r0, sb\n\
-	ldrh r1, [r0, #6]\n\
-	movs r0, #0x64\n\
-	bl DivArmDiv\n\
-	adds r1, r0, #0\n\
-	mov r2, r8\n\
-	str r1, [r2, #8]\n\
-	movs r0, #0xa\n\
-	bl DivArmMod\n\
-	adds r1, r0, #0\n\
-	mov r3, r8\n\
-	str r1, [r3, #0xc]\n\
-	movs r0, #2\n\
-	bl DivArmMod\n\
-	mov r1, r8\n\
-	str r0, [r1, #0xc]\n\
-	adds r3, r7, #0\n\
-	adds r7, r4, #0\n\
-	movs r6, #0\n\
-	ldr r0, [sp, #0x24]\n\
-	ldr r1, [r1, #4]\n\
-	subs r0, r0, r1\n\
-	cmp r6, r0\n\
-	bge _080A07D2\n\
-	adds r2, r5, #0\n\
-	mov r4, r8\n\
-	ldr r0, _080A0808 @ =0x0873DB64\n\
-	mov ip, r0\n\
-	ldr r5, _080A07FC @ =0x84000008\n\
-_080A07AE:\n\
-	cmp r6, #0xa\n\
-	bne _080A07B6\n\
-	ldr r1, _080A080C @ =0xFFFFFB60\n\
-	adds r7, r7, r1\n\
-_080A07B6:\n\
-	mov r0, ip\n\
-	str r0, [r2]\n\
-	str r7, [r2, #4]\n\
-	str r5, [r2, #8]\n\
-	ldr r0, [r2, #8]\n\
-	adds r7, #0x20\n\
-	adds r0, r6, #2\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r6, r0, #0x18\n\
-	ldr r0, [sp, #0x24]\n\
-	ldr r1, [r4, #4]\n\
-	subs r0, r0, r1\n\
-	cmp r6, r0\n\
-	blt _080A07AE\n\
-_080A07D2:\n\
-	mov r1, r8\n\
-	ldr r0, [r1, #4]\n\
-	cmp r0, #1\n\
-	bne _080A082A\n\
-	cmp r6, #0xa\n\
-	bne _080A07E2\n\
-	ldr r2, _080A080C @ =0xFFFFFB60\n\
-	adds r7, r7, r2\n\
-_080A07E2:\n\
-	mov r0, r8\n\
-	ldr r1, [r0, #8]\n\
-	ldr r0, [sp, #0x24]\n\
-	cmp r1, r0\n\
-	bne _080A0814\n\
-	ldr r1, _080A07F8 @ =0x040000D4\n\
-	ldr r0, _080A0810 @ =0x0873DB04\n\
-	b _080A0818\n\
-	.align 2, 0\n\
-_080A07F4: .4byte 0x03000011\n\
-_080A07F8: .4byte 0x040000D4\n\
-_080A07FC: .4byte 0x84000008\n\
-_080A0800: .4byte 0x08682FAC\n\
-_080A0804: .4byte 0x85000080\n\
-_080A0808: .4byte 0x0873DB64\n\
-_080A080C: .4byte 0xFFFFFB60\n\
-_080A0810: .4byte 0x0873DB04\n\
-_080A0814:\n\
-	ldr r1, _080A0A18 @ =0x040000D4\n\
-	ldr r0, _080A0A1C @ =0x0873DB44\n\
-_080A0818:\n\
-	str r0, [r1]\n\
-	str r7, [r1, #4]\n\
-	ldr r0, _080A0A20 @ =0x84000008\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	adds r0, r6, #2\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r6, r0, #0x18\n\
-	adds r7, #0x20\n\
-_080A082A:\n\
-	mov r1, r8\n\
-	ldr r0, [r1, #8]\n\
-	ldr r1, [r1, #0xc]\n\
-	subs r0, r0, r1\n\
-	adds r3, #0xc0\n\
-	str r3, [sp, #0x3c]\n\
-	cmp r6, r0\n\
-	bge _080A0866\n\
-	ldr r2, _080A0A24 @ =0xFFFFFB60\n\
-	mov ip, r2\n\
-	ldr r2, _080A0A18 @ =0x040000D4\n\
-	mov r3, r8\n\
-	ldr r5, _080A0A28 @ =0x0873DB24\n\
-	ldr r4, _080A0A20 @ =0x84000008\n\
-_080A0846:\n\
-	cmp r6, #0xa\n\
-	bne _080A084C\n\
-	add r7, ip\n\
-_080A084C:\n\
-	str r5, [r2]\n\
-	str r7, [r2, #4]\n\
-	str r4, [r2, #8]\n\
-	ldr r0, [r2, #8]\n\
-	adds r7, #0x20\n\
-	adds r0, r6, #2\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r6, r0, #0x18\n\
-	ldr r0, [r3, #8]\n\
-	ldr r1, [r3, #0xc]\n\
-	subs r0, r0, r1\n\
-	cmp r6, r0\n\
-	blt _080A0846\n\
-_080A0866:\n\
-	mov r3, r8\n\
-	ldr r0, [r3, #0xc]\n\
-	cmp r0, #1\n\
-	bne _080A088A\n\
-	ldr r0, [r3, #8]\n\
-	cmp r6, r0\n\
-	bge _080A088A\n\
-	cmp r6, #0xa\n\
-	bne _080A087C\n\
-	ldr r0, _080A0A24 @ =0xFFFFFB60\n\
-	adds r7, r7, r0\n\
-_080A087C:\n\
-	ldr r1, _080A0A18 @ =0x040000D4\n\
-	ldr r0, _080A0A2C @ =0x0873DAE4\n\
-	str r0, [r1]\n\
-	str r7, [r1, #4]\n\
-	ldr r0, _080A0A20 @ =0x84000008\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-_080A088A:\n\
-	ldr r7, [sp, #0x3c]\n\
-	mov r2, sb\n\
-	ldrb r1, [r2, #0xd]\n\
-	movs r0, #0xa\n\
-	bl DivArmDiv\n\
-	adds r1, r0, #0\n\
-	str r1, [sp, #4]\n\
-	movs r0, #0xa\n\
-	bl DivArmMod\n\
-	str r0, [sp, #4]\n\
-	mov r3, sb\n\
-	ldrb r1, [r3, #0xd]\n\
-	str r1, [sp, #8]\n\
-	movs r0, #0xa\n\
-	bl DivArmMod\n\
-	str r0, [sp, #8]\n\
-	movs r6, #0\n\
-	ldr r5, _080A0A30 @ =0x08682FAC\n\
-	ldr r1, _080A0A18 @ =0x040000D4\n\
-	ldr r4, _080A0A20 @ =0x84000008\n\
-	movs r2, #0x80\n\
-	lsls r2, r2, #3\n\
-_080A08BC:\n\
-	lsls r0, r6, #2\n\
-	add r0, sp\n\
-	adds r0, #4\n\
-	ldr r0, [r0]\n\
-	adds r0, #0x50\n\
-	lsls r0, r0, #5\n\
-	adds r3, r0, r5\n\
-	str r3, [r1]\n\
-	str r7, [r1, #4]\n\
-	str r4, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	adds r0, r3, r2\n\
-	str r0, [r1]\n\
-	adds r0, r7, r2\n\
-	str r0, [r1, #4]\n\
-	str r4, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	adds r7, #0x20\n\
-	adds r0, r6, #1\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r6, r0, #0x18\n\
-	cmp r6, #1\n\
-	bls _080A08BC\n\
-	ldr r6, _080A0A34 @ =gNonGameplayRam\n\
-	movs r4, #0\n\
-	movs r0, #0xa\n\
-	strh r0, [r6]\n\
-	lsls r0, r0, #5\n\
-	ldr r1, [sp, #0x38]\n\
-	adds r7, r1, r0\n\
-	movs r0, #0x5a\n\
-	bl TextGetCharacterWidth\n\
-	adds r5, r0, #3\n\
-	lsls r2, r5, #0x18\n\
-	lsrs r2, r2, #0x18\n\
-	ldrb r3, [r6, #0x13]\n\
-	str r4, [sp]\n\
-	movs r0, #0x5a\n\
-	adds r1, r7, #0\n\
-	bl TextDrawCharacter\n\
-	ldrb r0, [r6, #0x13]\n\
-	adds r2, r0, r5\n\
-	strb r2, [r6, #0x13]\n\
-	lsls r0, r2, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bls _080A0938\n\
-	adds r5, r6, #0\n\
-	ldrh r4, [r5]\n\
-_080A0922:\n\
-	adds r3, r2, #0\n\
-	subs r3, #8\n\
-	adds r2, r3, #0\n\
-	adds r1, r4, #1\n\
-	adds r4, r1, #0\n\
-	lsls r0, r3, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bhi _080A0922\n\
-	strh r1, [r5]\n\
-	strb r3, [r5, #0x13]\n\
-_080A0938:\n\
-	mov r2, sb\n\
-	ldrb r1, [r2, #0xe]\n\
-	movs r0, #0xa\n\
-	bl DivArmDiv\n\
-	adds r1, r0, #0\n\
-	str r1, [sp, #4]\n\
-	movs r0, #0xa\n\
-	bl DivArmMod\n\
-	str r0, [sp, #4]\n\
-	mov r3, sb\n\
-	ldrb r1, [r3, #0xe]\n\
-	str r1, [sp, #8]\n\
-	movs r0, #0xa\n\
-	bl DivArmMod\n\
-	str r0, [sp, #8]\n\
-	movs r6, #0\n\
-	ldr r0, _080A0A34 @ =gNonGameplayRam\n\
-	mov r8, r0\n\
-_080A0962:\n\
-	mov r1, r8\n\
-	ldrh r0, [r1]\n\
-	lsls r0, r0, #5\n\
-	ldr r2, [sp, #0x38]\n\
-	adds r7, r0, r2\n\
-	lsls r0, r6, #2\n\
-	add r0, sp\n\
-	adds r0, #4\n\
-	ldr r0, [r0]\n\
-	adds r0, #0x50\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	ldrb r3, [r1, #0x13]\n\
-	movs r1, #0\n\
-	str r1, [sp]\n\
-	adds r1, r7, #0\n\
-	movs r2, #8\n\
-	bl TextDrawCharacter\n\
-	mov r3, r8\n\
-	ldrb r0, [r3, #0x13]\n\
-	adds r0, #8\n\
-	strb r0, [r3, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	adds r6, #1\n\
-	cmp r0, #7\n\
-	bls _080A09B6\n\
-	ldr r5, _080A0A34 @ =gNonGameplayRam\n\
-	ldrb r4, [r5, #0x13]\n\
-	ldrh r3, [r5]\n\
-_080A09A0:\n\
-	adds r2, r4, #0\n\
-	subs r2, #8\n\
-	adds r4, r2, #0\n\
-	adds r1, r3, #1\n\
-	adds r3, r1, #0\n\
-	lsls r0, r2, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #7\n\
-	bhi _080A09A0\n\
-	strh r1, [r5]\n\
-	strb r2, [r5, #0x13]\n\
-_080A09B6:\n\
-	lsls r0, r6, #0x18\n\
-	lsrs r6, r0, #0x18\n\
-	cmp r6, #1\n\
-	bls _080A0962\n\
-	ldr r0, [sp, #0x44]\n\
-	lsls r4, r0, #0x18\n\
-	lsrs r4, r4, #0x18\n\
-	adds r0, r4, #0\n\
-	bl FileSelectDestroyOamOfType\n\
-	ldr r2, [sp, #0x48]\n\
-	adds r2, #0x20\n\
-	mov r1, sb\n\
-	ldrb r3, [r1, #2]\n\
-	adds r0, r4, #0\n\
-	movs r1, #0x9d\n\
-	bl FileSelectSetUpAreaNameOam\n\
-	ldr r2, [sp, #0x4c]\n\
-	lsls r0, r2, #0x18\n\
-	lsrs r4, r0, #0x18\n\
-	adds r0, r4, #0\n\
-	bl FileSelectDestroyOamOfType\n\
-	ldr r1, _080A0A38 @ =0x03000B94\n\
-	ldr r0, [sp, #0x40]\n\
-	add r0, sl\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	ldrb r0, [r0, #0x10]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	cmp r0, #1\n\
-	bne _080A0A08\n\
-	ldr r2, [sp, #0x48]\n\
-	adds r2, #0x28\n\
-	adds r0, r4, #0\n\
-	movs r1, #0xdc\n\
-	movs r3, #1\n\
-	bl FileSelectSetupOam\n\
-_080A0A08:\n\
-	add sp, #0x50\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080A0A18: .4byte 0x040000D4\n\
-_080A0A1C: .4byte 0x0873DB44\n\
-_080A0A20: .4byte 0x84000008\n\
-_080A0A24: .4byte 0xFFFFFB60\n\
-_080A0A28: .4byte 0x0873DB24\n\
-_080A0A2C: .4byte 0x0873DAE4\n\
-_080A0A30: .4byte 0x08682FAC\n\
-_080A0A34: .4byte gNonGameplayRam\n\
-_080A0A38: .4byte 0x03000B94\n\
-    .syntax divided\n");
+    struct SaveFileInfo* pFile;
+    u32 base;
+    u32 timeVram;
+    u32 timeDst;
+    u32 vram;
+    const u16* pText;
+    u32 src;
+    s32 width;
+    u8 i;
+    u8 exists;
+    s32 timeDigits[4];
+    s32 energyDigits[4];
+    s32 tanks[4];
+    u32 zero;
+
+    pFile = &gSaveFilesInfo[file];
+
+    if (file == 0)
+        base = vram = 0x60088C0;
+    else if (file == 1)
+        base = vram = 0x60090C0;
+    else
+        base = vram = 0x60098C0;
+
+    FILE_SELECT_DATA.textX = 0;
+    FILE_SELECT_DATA.textIndent = 0;
+
+    exists = pFile->exists;
+    if (!exists)
+    {
+        if (gSaveFilesInfo[file].completedGame == TRUE || gSaveFilesInfo[file].introPlayed == TRUE)
+        {
+            FILE_SELECT_DATA.emptyFileInfo.currentEnergy = 99;
+            pFile = &FILE_SELECT_DATA.emptyFileInfo;
+        }
+        else
+        {
+            FileSelectDestroyOamOfType(file + 14);
+            FileSelectDestroyOamOfType(file + 20);
+
+            zero = exists;
+            DMA_SET(3, &zero, vram, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, 0x300 / sizeof(u32)));
+            zero = exists;
+            DMA_SET(3, &zero, vram + 0x400, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, 0x300 / sizeof(u32)));
+
+            pText = (&sFileSelectCorruptedTextPointersByLanguage[2])[gLanguage][0];
+            FILE_SELECT_DATA.textX = 8;
+
+            while (*pText != 0xFF00)
+            {
+                if (*pText == 0x5A)
+                    width = TextGetCharacterWidth(*pText) + 2;
+                else if (*pText == 0x40)
+                    width = 8 - FILE_SELECT_DATA.textIndent;
+                else
+                    width = 8;
+
+                vram = FILE_SELECT_DATA.textX * 32 + base;
+                TextDrawCharacter(*pText, (u32*)vram, width, FILE_SELECT_DATA.textIndent, 0);
+
+                FILE_SELECT_DATA.textIndent += width;
+                while (FILE_SELECT_DATA.textIndent >= 8)
+                {
+                    FILE_SELECT_DATA.textIndent -= 8;
+                    FILE_SELECT_DATA.textX++;
+                }
+
+                pText++;
+            }
+            return;
+        }
+    }
+
+    { register s32 lang asm("r0") = gLanguage; asm("" :: "r"(lang)); }
+    energyDigits[0] = DivArmDiv(1000, pFile->currentEnergy);
+    tanks[0] = energyDigits[1] = DivArmDiv(100, pFile->currentEnergy);
+    tanks[1] = energyDigits[1] = DivArmMod(10, energyDigits[1]);
+    energyDigits[2] = DivArmDiv(10, pFile->currentEnergy);
+    energyDigits[2] = DivArmMod(10, energyDigits[2]);
+    energyDigits[3] = pFile->currentEnergy;
+    energyDigits[3] = DivArmMod(10, energyDigits[3]);
+
+    for (i = 2; i < 4; i++)
+    {
+        src = (u32)&sCharactersGfx[(energyDigits[i] + 0x50) * 32];
+        DMA3_COPY_32(src, vram, 32 / sizeof(u32));
+        DMA3_COPY_32(src + 0x400, vram + 0x400, 32 / sizeof(u32));
+        vram += 32;
+    }
+
+    zero = 0;
+    DMA_SET(3, &zero, vram, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, 0x200 / sizeof(u32)));
+    zero = 0;
+    DMA_SET(3, &zero, vram + 0x400, C_32_2_16(DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED, 0x200 / sizeof(u32)));
+
+    tanks[1] = DivArmMod(2, tanks[1]);
+    tanks[2] = DivArmDiv(100, pFile->maxEnergy);
+    tanks[3] = DivArmMod(10, tanks[2]);
+    tanks[3] = DivArmMod(2, tanks[3]);
+
+    timeVram = vram;
+    vram = vram + 0x400;
+
+    for (i = 0; i < tanks[0] - tanks[1]; i += 2)
+    {
+        if (i == 10)
+            vram -= 0x4A0;
+        DMA3_COPY_32((const u32*)0x873db64, vram, 32 / sizeof(u32));
+        vram += 32;
+    }
+
+    if (tanks[1] == 1)
+    {
+        if (i == 10)
+            vram -= 0x4A0;
+
+        if (tanks[2] == tanks[0])
+        {
+            DMA3_COPY_32((const u32*)0x873db04, vram, 32 / sizeof(u32));
+        }
+        else
+        {
+            DMA3_COPY_32((const u32*)0x873db44, vram, 32 / sizeof(u32));
+        }
+
+        i += 2;
+        vram += 32;
+    }
+
+    timeDst = timeVram + 0xC0;
+    for (; i < tanks[2] - tanks[3]; i += 2)
+    {
+        if (i == 10)
+            vram -= 0x4A0;
+        DMA3_COPY_32((const u32*)0x873db24, vram, 32 / sizeof(u32));
+        vram += 32;
+    }
+
+    if (tanks[3] == 1 && i < tanks[2])
+    {
+        if (i == 10)
+            vram -= 0x4A0;
+        DMA3_COPY_32((const u32*)0x873dae4, vram, 32 / sizeof(u32));
+    }
+
+    vram = timeDst;
+    timeDigits[0] = DivArmDiv(10, pFile->igtHours);
+    timeDigits[0] = DivArmMod(10, timeDigits[0]);
+    timeDigits[1] = pFile->igtHours;
+    timeDigits[1] = DivArmMod(10, timeDigits[1]);
+
+    for (i = 0; i < 2; i++)
+    {
+        src = (u32)&sCharactersGfx[(timeDigits[i] + 0x50) * 32];
+        DMA3_COPY_32(src, vram, 32 / sizeof(u32));
+        DMA3_COPY_32(src + 0x400, vram + 0x400, 32 / sizeof(u32));
+        vram += 32;
+    }
+
+    FILE_SELECT_DATA.textX = 10;
+    vram = FILE_SELECT_DATA.textX * 32 + base;
+    width = TextGetCharacterWidth(0x5A) + 3;
+    TextDrawCharacter(0x5A, (u32*)vram, width, FILE_SELECT_DATA.textIndent, 0);
+    FILE_SELECT_DATA.textIndent += width;
+    while (FILE_SELECT_DATA.textIndent >= 8)
+    {
+        FILE_SELECT_DATA.textIndent -= 8;
+        FILE_SELECT_DATA.textX++;
+    }
+
+    timeDigits[0] = DivArmDiv(10, pFile->igtMinutes);
+    timeDigits[0] = DivArmMod(10, timeDigits[0]);
+    timeDigits[1] = pFile->igtMinutes;
+    timeDigits[1] = DivArmMod(10, timeDigits[1]);
+
+    for (i = 0; i < 2; i++)
+    {
+        vram = FILE_SELECT_DATA.textX * 32 + base;
+        TextDrawCharacter(timeDigits[i] + 0x50, (u32*)vram, 8, FILE_SELECT_DATA.textIndent, 0);
+        FILE_SELECT_DATA.textIndent += 8;
+        while (FILE_SELECT_DATA.textIndent >= 8)
+        {
+            FILE_SELECT_DATA.textIndent -= 8;
+            FILE_SELECT_DATA.textX++;
+        }
+    }
+
+    FileSelectDestroyOamOfType(file + 14);
+    FileSelectSetUpAreaNameOam(file + 14, 157, file * 16 + 32, pFile->currentArea);
+
+    FileSelectDestroyOamOfType(file + 20);
+    if (gSaveFilesInfo[file].completedGame == TRUE)
+        FileSelectSetupOam(file + 20, 220, file * 16 + 40, 1);
 }
 
 /**
