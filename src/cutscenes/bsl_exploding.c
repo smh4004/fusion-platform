@@ -19,14 +19,10 @@
 #include "data/intro_data.h"
 #include "data/sprite_data.h"
 #include "data/haze_data.h"
-extern const u8 sAddr_680ecc[];
-extern const u8 sAddr_680ffc[];
-extern const u8 sAddr_68100c[];
-extern const u8 sAddr_68101c[];
 
 /**
  * @brief 9c1c8 | 8c | Main handler for the BSL exploding cutscene
- * 
+ *
  */
 boolu32 CutsceneBslExploding(void)
 {
@@ -68,173 +64,56 @@ boolu32 CutsceneBslExploding(void)
     return ended;
 }
 
-// 0x0809C254
-NAKED_FUNCTION
+/**
+ * @brief 9c254 | 190 | Setup for the BSL exploding cutscene
+ *
+ */
 void CutsceneBslExplodingInit(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, lr}\n\
-	mov r6, r8\n\
-	push {r6}\n\
-	ldr r3, _0809C360 @ =0x04000208\n\
-	movs r5, #0\n\
-	strh r5, [r3]\n\
-	ldr r2, _0809C364 @ =0x04000004\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _0809C368 @ =0x0000FFEF\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r2, _0809C36C @ =0x04000200\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _0809C370 @ =0x0000FFFD\n\
-	ands r0, r1\n\
-	strh r0, [r2]\n\
-	movs r0, #1\n\
-	strh r0, [r3]\n\
-	ldr r0, _0809C374 @ =unk_9c92c\n\
-	bl CallbackSetVBlank\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #0x13\n\
-	mov r8, r0\n\
-	strh r5, [r0]\n\
-	ldr r0, _0809C378 @ =0x0867D7CC\n\
-	ldr r1, _0809C37C @ =0x06010000\n\
-	bl LZ77UncompVram\n\
-	ldr r4, _0809C380 @ =0x040000D4\n\
-	ldr r0, _0809C384 @ =0x0868121C\n\
-	str r0, [r4]\n\
-	ldr r0, _0809C388 @ =0x05000200\n\
-	str r0, [r4, #4]\n\
-	ldr r6, _0809C38C @ =0x84000080\n\
-	str r6, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	ldr r0, _0809C390 @ =0x08679420\n\
-	movs r1, #0xc0\n\
-	lsls r1, r1, #0x13\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0809C394 @ =0x08681A1C\n\
-	ldr r1, _0809C398 @ =0x0600E000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0809C39C @ =0x086820A4\n\
-	ldr r1, _0809C3A0 @ =0x0600E800\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0809C3A4 @ =0x086827A8\n\
-	ldr r1, _0809C3A8 @ =0x0600F000\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0809C3AC @ =0x08682BFC\n\
-	ldr r1, _0809C3B0 @ =0x0600F800\n\
-	bl LZ77UncompVram\n\
-	ldr r0, _0809C3B4 @ =0x0868259C\n\
-	str r0, [r4]\n\
-	movs r0, #0xa0\n\
-	lsls r0, r0, #0x13\n\
-	str r0, [r4, #4]\n\
-	str r6, [r4, #8]\n\
-	ldr r1, [r4, #8]\n\
-	strh r5, [r0]\n\
-	ldr r1, _0809C3B8 @ =0x04000008\n\
-	movs r2, #0xe0\n\
-	lsls r2, r2, #5\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r2, _0809C3BC @ =0x00001D03\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	adds r2, #0xfd\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	adds r1, #2\n\
-	ldr r2, _0809C3C0 @ =0x00001F03\n\
-	adds r0, r2, #0\n\
-	strh r0, [r1]\n\
-	movs r1, #0xc0\n\
-	lsls r1, r1, #5\n\
-	adds r0, r1, #0\n\
-	mov r2, r8\n\
-	strh r0, [r2]\n\
-	ldr r0, _0809C3C4 @ =gWrittenToBldy\n\
-	movs r2, #0x10\n\
-	strh r2, [r0]\n\
-	ldr r1, _0809C3C8 @ =gWrittenToBldalpha_Eva\n\
-	movs r0, #8\n\
-	strh r0, [r1]\n\
-	ldr r0, _0809C3CC @ =gWrittenToBldalpha_Evb\n\
-	strh r2, [r0]\n\
-	movs r0, #1\n\
-	movs r1, #0\n\
-	movs r2, #0\n\
-	movs r3, #0\n\
-	bl CutsceneBslExplodingSetupOam\n\
-	movs r0, #0x14\n\
-	movs r1, #0x70\n\
-	movs r2, #0x58\n\
-	movs r3, #0\n\
-	bl CutsceneBslExplodingSetupOam\n\
-	ldr r0, _0809C3D0 @ =gNonGameplayRam\n\
-	movs r1, #0\n\
-	strh r1, [r0, #0xa]\n\
-	strh r1, [r0, #0xc]\n\
-	movs r1, #0xc\n\
-	ldrsh r0, [r0, r1]\n\
-	lsls r0, r0, #5\n\
-	ldr r1, _0809C3D4 @ =0x0868101C\n\
-	adds r0, r0, r1\n\
-	str r0, [r4]\n\
-	ldr r0, _0809C3D8 @ =0x05000120\n\
-	str r0, [r4, #4]\n\
-	ldr r0, _0809C3DC @ =0x84000008\n\
-	str r0, [r4, #8]\n\
-	ldr r0, [r4, #8]\n\
-	bl CutsceneDrawAllOam\n\
-	ldr r0, _0809C3E0 @ =CutsceneBslExplodingVblank\n\
-	bl CallbackSetVBlank\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4, r5, r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809C360: .4byte 0x04000208\n\
-_0809C364: .4byte 0x04000004\n\
-_0809C368: .4byte 0x0000FFEF\n\
-_0809C36C: .4byte 0x04000200\n\
-_0809C370: .4byte 0x0000FFFD\n\
-_0809C374: .4byte unk_9c92c\n\
-_0809C378: .4byte sAddr_6793b0 + 0x441c\n\
-_0809C37C: .4byte 0x06010000\n\
-_0809C380: .4byte 0x040000D4\n\
-_0809C384: .4byte sAddr_68101c + 0x200\n\
-_0809C388: .4byte 0x05000200\n\
-_0809C38C: .4byte 0x84000080\n\
-_0809C390: .4byte sAddr_6793b0 + 0x70\n\
-_0809C394: .4byte sAddr_68101c + 0xa00\n\
-_0809C398: .4byte 0x0600E000\n\
-_0809C39C: .4byte sAddr_68101c + 0x1088\n\
-_0809C3A0: .4byte 0x0600E800\n\
-_0809C3A4: .4byte sAddr_68101c + 0x178c\n\
-_0809C3A8: .4byte 0x0600F000\n\
-_0809C3AC: .4byte sAddr_68101c + 0x1be0\n\
-_0809C3B0: .4byte 0x0600F800\n\
-_0809C3B4: .4byte sAddr_68101c + 0x1580\n\
-_0809C3B8: .4byte 0x04000008\n\
-_0809C3BC: .4byte 0x00001D03\n\
-_0809C3C0: .4byte 0x00001F03\n\
-_0809C3C4: .4byte gWrittenToBldy\n\
-_0809C3C8: .4byte gWrittenToBldalpha_Eva\n\
-_0809C3CC: .4byte gWrittenToBldalpha_Evb\n\
-_0809C3D0: .4byte gNonGameplayRam\n\
-_0809C3D4: .4byte sAddr_68101c\n\
-_0809C3D8: .4byte 0x05000120\n\
-_0809C3DC: .4byte 0x84000008\n\
-_0809C3E0: .4byte CutsceneBslExplodingVblank\n\
-    .syntax divided\n");
+    WRITE_16(REG_IME, FALSE);
+    WRITE_16(REG_DISPSTAT, READ_16(REG_DISPSTAT) & ~DSTAT_IF_HBLANK);
+    WRITE_16(REG_IE, READ_16(REG_IE) & ~IF_HBLANK);
+    WRITE_16(REG_IME, TRUE);
+
+    CallbackSetVBlank(unk_9c92c);
+
+    WRITE_16(REG_DISPCNT, 0);
+
+    LZ77UncompVram((const u32*)0x867d7cc, VRAM_OBJ);
+    DMA3_COPY_32((const u16*)0x868121c, PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
+
+    LZ77UncompVram((const u32*)0x8679420, VRAM_BASE);
+    LZ77UncompVram((const u32*)0x8681a1c, VRAM_BASE + 0xE000);
+    LZ77UncompVram((const u32*)0x86820a4, VRAM_BASE + 0xE800);
+    LZ77UncompVram((const u32*)0x86827a8, VRAM_BASE + 0xF000);
+    LZ77UncompVram((const u32*)0x8682bfc, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const u16*)0x868259c, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    WRITE_16(PALRAM_BASE, 0);
+
+    WRITE_16(REG_BG0CNT, CREATE_BGCNT(0, 28, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 29, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG2CNT, CREATE_BGCNT(0, 30, BGCNT_HIGH_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_BG3CNT, CREATE_BGCNT(0, 31, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
+    WRITE_16(REG_DISPCNT, DCNT_BG3 | DCNT_OBJ);
+
+    gWrittenToBldy = BLDY_MAX_VALUE;
+    gWrittenToBldalpha_Eva = 8;
+    gWrittenToBldalpha_Evb = BLDALPHA_MAX_VALUE;
+
+    CutsceneBslExplodingSetupOam(1, 0, 0, FALSE);
+    CutsceneBslExplodingSetupOam(20, 112, 88, FALSE);
+
+    CUTSCENE_OAM_DATA.unk_A = 0;
+    CUTSCENE_OAM_DATA.unk_C = 0;
+    DMA3_COPY_32(&sCutsceneBslFirePal[CUTSCENE_OAM_DATA.unk_C * 16], PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
+
+    CutsceneDrawAllOam();
+    CallbackSetVBlank(CutsceneBslExplodingVblank);
 }
 
 /**
  * @brief 9c3e4 | 214 | Processes the BSL exploding cutscene
- * 
+ *
  */
 boolu32 CutsceneBslExplodingProcess(void)
 {
@@ -367,7 +246,7 @@ boolu32 CutsceneBslExplodingProcess(void)
 
 /**
  * @brief 9c5f8 | 2c | Processes the scrolling of the BSL exploding cutscene
- * 
+ *
  */
 void CutsceneBslExplodingProcessScrolling(struct CutsceneOam* pOam)
 {
@@ -383,7 +262,7 @@ void CutsceneBslExplodingProcessScrolling(struct CutsceneOam* pOam)
 
 /**
  * @brief 9c624 | 5c | Processes the far BSL
- * 
+ *
  */
 void CutsceneBslExplodingProcessBslFar(struct CutsceneOam* pOam)
 {
@@ -395,7 +274,7 @@ void CutsceneBslExplodingProcessBslFar(struct CutsceneOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)sAddr_680ecc;
+            pOam->pOam = (const struct FrameData*)0x8680ecc;
             pOam->stage = 1;
         }
     }
@@ -412,7 +291,7 @@ void CutsceneBslExplodingProcessBslFar(struct CutsceneOam* pOam)
 
 /**
  * @brief 9c680 | 2c | Processes the explosions
- * 
+ *
  */
 void CutsceneBslExplodingProcessExplosions(struct CutsceneOam* pOam)
 {
@@ -428,7 +307,7 @@ void CutsceneBslExplodingProcessExplosions(struct CutsceneOam* pOam)
 
 /**
  * @brief 9c6ac | 1a4 | Sets up a BSL exploding OAM
- * 
+ *
  */
 u8 CutsceneBslExplodingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 descendingSearch)
 {
@@ -472,19 +351,19 @@ u8 CutsceneBslExplodingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 de
     else if (type == 20)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 2;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680ffc;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680ffc;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9db70;
     }
     else if (type == 21)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 2;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_68100c;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x868100c;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneBslExplodingProcessBslFar;
     }
     else if (type == 22)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 2;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680ecc;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680ecc;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneBslExplodingProcessExplosions;
     }
 
@@ -493,7 +372,7 @@ u8 CutsceneBslExplodingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 de
 
 /**
  * @brief 9c850 | 58 | Gets the position and scaling of a BSL exploding OAM by type
- * 
+ *
  */
 u8 CutsceneBslExplodingGetOamInfoByType(u8 type, s16* pXPosition, s16* pYPosition, s16* pScaling)
 {
@@ -518,7 +397,7 @@ u8 CutsceneBslExplodingGetOamInfoByType(u8 type, s16* pXPosition, s16* pYPositio
 
 /**
  * @brief 9c8a8 | 84 | V-blank for the BSL exploding cutscene
- * 
+ *
  */
 void CutsceneBslExplodingVblank(void)
 {
@@ -529,13 +408,13 @@ void CutsceneBslExplodingVblank(void)
     if (CUTSCENE_OAM_DATA.unk_A == 1)
     {
         CUTSCENE_OAM_DATA.unk_A = 0;
-        DMA3_COPY_32(&((const u16*)sAddr_68101c)[CUTSCENE_OAM_DATA.unk_C * 16], PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
+        DMA3_COPY_32(&sCutsceneBslFirePal[CUTSCENE_OAM_DATA.unk_C * 16], PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
     }
 }
 
 /**
  * @brief 9c92c | c | V-blank that only updates the audio
- * 
+ *
  */
 void unk_9c92c(void)
 {

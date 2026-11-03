@@ -19,22 +19,6 @@
 #include "data/intro_data.h"
 #include "data/sprite_data.h"
 #include "data/haze_data.h"
-extern const u8 sAddr_675098[];
-extern const u8 sAddr_677874[];
-extern const u8 sAddr_677914[];
-extern const u8 sAddr_677c10[];
-extern const u8 sAddr_677c30[];
-extern const u8 sAddr_677c50[];
-extern const u8 sAddr_677c70[];
-extern const u8 sAddr_677c90[];
-extern const u8 sAddr_67815c[];
-extern const u8 sAddr_6788a8[];
-extern const u8 sAddr_679280[];
-extern const u8 sAddr_6792a8[];
-extern const u8 sAddr_6792d0[];
-extern const u8 sAddr_679350[];
-extern const u8 sAddr_6793a0[];
-extern const u8 sAddr_6793b0[];
 
 /**
  * @brief 9a9a8 | 84 | Main handler for the secret conversation cutscene
@@ -94,14 +78,14 @@ void CutsceneSecretConversationInit(void)
 
     WRITE_16(REG_DISPCNT, 0);
 
-    LZ77UncompVram((const u32*)sAddr_67815c, VRAM_OBJ + 0x4000);
-    DMA3_COPY_32((const u16*)sAddr_6788a8, PALRAM_OBJ + 0x100, 2 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)0x867815c, VRAM_OBJ + 0x4000);
+    DMA3_COPY_32((const u16*)0x86788a8, PALRAM_OBJ + 0x100, 2 * PAL_ROW_SIZE / 4);
 
-    LZ77UncompVram((const u32*)sAddr_675098, VRAM_BASE + 0x800);
-    LZ77UncompVram((const u32*)sAddr_677914, VRAM_BASE + 0xC000);
-    LZ77UncompVram((const u32*)sAddr_677c90, VRAM_BASE + 0xC800);
-    DMA3_COPY_32((const u16*)sAddr_677874, PALRAM_BASE, 5 * PAL_ROW_SIZE / 4);
-    DMA3_COPY_32((const u16*)sAddr_677c10, PALRAM_BASE + 0x1E0, PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)0x8675098, VRAM_BASE + 0x800);
+    LZ77UncompVram((const u32*)0x8677914, VRAM_BASE + 0xC000);
+    LZ77UncompVram((const u32*)0x8677c90, VRAM_BASE + 0xC800);
+    DMA3_COPY_32((const u16*)0x8677874, PALRAM_BASE, 5 * PAL_ROW_SIZE / 4);
+    DMA3_COPY_32((const u16*)0x8677c10, PALRAM_BASE + 0x1E0, PAL_ROW_SIZE / 4);
 
     CutsceneSecretConversationSetupOam(1, 120, 128);
     CutsceneSecretConversationSetupOam(2, 120, 128);
@@ -182,22 +166,22 @@ u8 CutsceneSecretConversationSetupOam(u8 type, s16 xPosition, s16 yPosition)
 
     if (type == 1)
     {
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6793b0;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x86793b0;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9db70;
     }
     else if (type == 2)
     {
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_679280;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8679280;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneSecretConversationProcessNavigationPanel;
     }
     else if (type == 3)
     {
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6793a0;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x86793a0;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9db70;
     }
     else if (type == 4)
     {
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6792d0;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x86792d0;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneSecretConversationProcessIncomingDispatch;
     }
 
@@ -215,7 +199,7 @@ void CutsceneSecretConversationProcessNavigationPanel(struct CutsceneOam* pOam)
         pOam->stage = 1;
         pOam->animationDurationCounter = 0;
         pOam->currentAnimationFrame = 0;
-        pOam->pOam = (const struct FrameData*)sAddr_6792a8;
+        pOam->pOam = (const struct FrameData*)0x86792a8;
     }
 }
 
@@ -242,7 +226,7 @@ void CutsceneSecretConversationProcessIncomingDispatch(struct CutsceneOam* pOam)
             pOam->timer = 0;
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)sAddr_679350;
+            pOam->pOam = (const struct FrameData*)0x8679350;
         }
     }
     else if (pOam->stage == 1)
@@ -270,19 +254,19 @@ void CutsceneSecretConversationVblank(void)
     switch (CUTSCENE_OAM_DATA.unk_11)
     {
         case 7:
-            DMA3_COPY_32((const u16*)sAddr_677c30, PALRAM_BASE + 0x1E0, PAL_ROW_SIZE / 4);
+            DMA3_COPY_32((const u16*)0x8677c30, PALRAM_BASE + 0x1E0, PAL_ROW_SIZE / 4);
             break;
 
         case 14:
-            DMA3_COPY_32((const u16*)sAddr_677c50, PALRAM_BASE + 0x1E0, PAL_ROW_SIZE / 4);
+            DMA3_COPY_32((const u16*)0x8677c50, PALRAM_BASE + 0x1E0, PAL_ROW_SIZE / 4);
             break;
 
         case 21:
-            DMA3_COPY_32((const u16*)sAddr_677c70, PALRAM_BASE + 0x1E0, PAL_ROW_SIZE / 4);
+            DMA3_COPY_32((const u16*)0x8677c70, PALRAM_BASE + 0x1E0, PAL_ROW_SIZE / 4);
             break;
 
         case 28:
-            DMA3_COPY_32((const u16*)sAddr_677c10, PALRAM_BASE + 0x1E0, PAL_ROW_SIZE / 4);
+            DMA3_COPY_32((const u16*)0x8677c10, PALRAM_BASE + 0x1E0, PAL_ROW_SIZE / 4);
             CUTSCENE_OAM_DATA.unk_11 = 0;
             break;
     }

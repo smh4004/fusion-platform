@@ -27273,6 +27273,14 @@
     "size": 2
   },
   {
+    "path": "Blob_6131c8_63a19c.bin",
+    "count": "0x26FD4",
+    "addr": {
+      "us": "0x6131C8"
+    },
+    "size": 1
+  },
+  {
     "path": "new_file_intro/sr388_surface_bg_0.gfx.lz",
     "count": "0x2AE",
     "addr": {
@@ -27753,6 +27761,14 @@
     "size": 2
   },
   {
+    "path": "Blob_659ba4_65c268.bin",
+    "count": "0x26C4",
+    "addr": {
+      "us": "0x659BA4"
+    },
+    "size": 1
+  },
+  {
     "path": "title_intro/collision_warning_obj.pal",
     "count": "0x100",
     "addr": {
@@ -27791,6 +27807,62 @@
       "us": "0x663820"
     },
     "size": 2
+  },
+  {
+    "path": "Blob_6638a0_68101c.bin",
+    "count": "0x1D77C",
+    "addr": {
+      "us": "0x6638A0"
+    },
+    "size": 1
+  },
+  {
+    "path": "cutscenes/bsl_fire.pal",
+    "count": "0x100",
+    "addr": {
+      "us": "0x68101C"
+    },
+    "size": 2
+  },
+  {
+    "path": "Blob_68121c_68141c.bin",
+    "count": "0x200",
+    "addr": {
+      "us": "0x68121C"
+    },
+    "size": 1
+  },
+  {
+    "path": "cutscenes/lab_debris_1.pal",
+    "count": "0x100",
+    "addr": {
+      "us": "0x68141C"
+    },
+    "size": 2
+  },
+  {
+    "path": "cutscenes/lab_debris_2.pal",
+    "count": "0x100",
+    "addr": {
+      "us": "0x68161C"
+    },
+    "size": 2
+  },
+  {
+    "path": "cutscenes/lab_debris_3.pal",
+    "count": "0x100",
+    "addr": {
+      "us": "0x68181C"
+    },
+    "size": 2
+  },
+  {
+    "path": "Blob_681a1c_682fac.bin",
+    "count": "0x1590",
+    "addr": {
+      "us": "0x681A1C"
+    },
+    "size": 1
   },
   {
     "path": "text_characters.gfx",

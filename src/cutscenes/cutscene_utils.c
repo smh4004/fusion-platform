@@ -77,26 +77,16 @@ void unk_9d0a0(void)
         *dst++ = 0;
 }
 
-// 0x0809D1C4
-NAKED_FUNCTION
+/**
+ * @brief 9d1c4 | 20 | H-blank code for the cutscene window
+ *
+ */
 void unk_9d1c4(void)
 {
-    asm(" .syntax unified\n\
-	ldr r0, _0809D1D8 @ =0x04000006\n\
-	ldrh r0, [r0]\n\
-	ldr r1, _0809D1DC @ =0x04000040\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0xf\n\
-	ldr r2, _0809D1E0 @ =0x02002000\n\
-	adds r0, r0, r2\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	bx lr\n\
-	.align 2, 0\n\
-_0809D1D8: .4byte 0x04000006\n\
-_0809D1DC: .4byte 0x04000040\n\
-_0809D1E0: .4byte 0x02002000\n\
-    .syntax divided\n");
+    s16 vcount;
+
+    vcount = READ_16(REG_VCOUNT);
+    WRITE_16(REG_WIN0H, ((u16*)(EWRAM_BASE + 0x2000))[vcount]);
 }
 
 /**

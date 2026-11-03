@@ -2411,44 +2411,15 @@ void NewFileIntroInit(void)
     CallbackSetVBlank(NewFileIntroVblank);
 }
 
-// 0x080998AC
-NAKED_FUNCTION
+/**
+ * @brief 998ac | 48 | Gets a random number
+ *
+ */
 u8 SpecialCutsceneGetRandomNumber(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, lr}\n\
-	ldr r3, _080998E0 @ =0x03005404\n\
-	ldrh r1, [r3]\n\
-	lsls r0, r1, #2\n\
-	adds r1, r1, r0\n\
-	ldr r2, _080998E4 @ =gFrameCounter8Bit\n\
-	ldr r4, _080998E8 @ =0x00003573\n\
-	adds r0, r4, #0\n\
-	ldrb r2, [r2]\n\
-	adds r0, r0, r2\n\
-	adds r1, r1, r0\n\
-	strh r1, [r3]\n\
-	ldr r2, _080998EC @ =sRandomNumberTable\n\
-	ldr r0, _080998F0 @ =gFrameCounter16Bit\n\
-	ldrh r1, [r0]\n\
-	movs r0, #0x1f\n\
-	ands r0, r1\n\
-	adds r0, r0, r2\n\
-	ldrb r0, [r0]\n\
-	ldrb r1, [r3, #1]\n\
-	adds r0, r0, r1\n\
-	strb r0, [r3, #1]\n\
-	ldrb r0, [r3, #1]\n\
-	pop {r4}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_080998E0: .4byte 0x03005404\n\
-_080998E4: .4byte gFrameCounter8Bit\n\
-_080998E8: .4byte 0x00003573\n\
-_080998EC: .4byte sRandomNumberTable\n\
-_080998F0: .4byte gFrameCounter16Bit\n\
-    .syntax divided\n");
+    gUnk_3005404 = gUnk_3005404 + gUnk_3005404 * 4 + (u16)(0x3573 + gFrameCounter8Bit);
+    ((u8*)&gUnk_3005404)[1] += sRandomNumberTable[MOD_AND(gFrameCounter16Bit, 32)];
+    return ((u8*)&gUnk_3005404)[1];
 }
 
 /**
