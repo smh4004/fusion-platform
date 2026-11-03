@@ -26498,7 +26498,7 @@
   },
   {
     "path": "new_file_intro/samus_helmet_closeup.tm.lz",
-    "count": "0xAC",
+    "count": "0x1A2",
     "addr": {
       "us": "0x598190"
     },
@@ -27178,7 +27178,7 @@
   },
   {
     "path": "new_file_intro/samus_sitting.tm.lz",
-    "count": "0xAB",
+    "count": "0x1A1",
     "addr": {
       "us": "0x605684"
     },
@@ -27186,7 +27186,7 @@
   },
   {
     "path": "menus/title_screen/space_background.gfx.lz",
-    "count": "0x33E",
+    "count": "0xCC6",
     "addr": {
       "us": "0x605D08"
     },
@@ -27210,7 +27210,7 @@
   },
   {
     "path": "menus/title_screen/space_background.tm.lz",
-    "count": "0xAC",
+    "count": "0x1A2",
     "addr": {
       "us": "0x609220"
     },
