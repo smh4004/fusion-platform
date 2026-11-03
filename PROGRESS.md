@@ -2,25 +2,23 @@
 
 Resume from here. Newest status first.
 
-## PAUSED 2026-11-03: resume here
+## Status 2026-11-03 (afternoon): decompilation merged into platform
 
-### Decompilation: 3561 of 3607 functions done (46 left), all on branches
-| Branch | Matched since base | Still naked asm | Notes |
-|---|---|---|---|
-| `decomp-nav` | 18 | ~9 | head c4dcc9f |
-| `decomp-sram` | 33 | 21 | erase-SRAM menu (10), 6 save-file, 5 status-screen |
-| `decomp-fileselect` | 50 | 3 | FileSelectInput, FileSelectSetupOam, FileSelectDrawFileInfo |
-| `decomp-cutscene` | 175 | ~14 | head f23de97 |
+`platform` now contains the decompilation work: **3557/3607 functions (98.61%)**, data 89.63% out of blobs. Verified on the merged build:
+- `make check`: ROM matches.
+- Shiftable: 0x100 before agbmain, generic_data, rooms_data, new_file_intro data; 64 KB before agbmain: new-game smoke test passes.
+- Differential play test: 103/103 identical screenshots vs. the matching ROM, two seeds, two shift points (reaches the first navigation room conversation).
+- `fusiontool check`: 2034 assets round-trip; pytest 6/6.
 
-Every `decomp-*` branch is committed only in matching states (agents commit only when `make check` is OK). `wip-decomp-*` hold unfinished, non-matching edits at the pause (one commit each on top of the branch); worktrees in /home/claude/wt-* still have those edits on disk. Remaining function list and agent notes: NONMATCHING_*.md in each branch, and the list in the 2026-10-31 notes below.
-
-### Integration
-- `decomp-integration` = decomp-gunship-end + the four branches as of 2026-11-03 morning (3557 functions), **builds matching**. Reconciliations: SaveFileInfo moved to include/structs/save_file_info.h; RAM 0x300004c/d named gNavConversationTargetLocation / gFlashingSectorNumber; NonGameplayRam union keeps all members. Merge newer decomp-* commits into it before merging to platform.
-- `platform-merge` = platform + decomp-integration, **does not build yet**. Done: asm deletions taken; data conflict hunks took the integration side; database.json rebuilt as the union of both sides limited to files the sources reference; relocations of sPointerTable_a5224/79c5c0/79ce10 and the inline-asm incbin blocks reverted to INCBIN (tools/merge_unrelocate.py).
-- Next steps on `platform-merge`:
-  1. (Probably already done in the WIP commit: an interrupted run restored these; only their definitions remain. Check with a build.) Platform's literal rewrites refer to blobs the decomp side split: `sBlob_6b2fac_72eee0`, `sBlob_5f6990_5f7190`, `sBlob_5dfd6c_5e116c`. Turn `(u32)&sBlob_X_Y + 0xOFF` / `((const u8*)&sBlob_X_Y + 0xOFF)` / `(&sBlob_X_Y)` back into raw addresses (blob start 0x08X + OFF), get `make check` OK.
-  2. Re-run relocation against the new symbols: `relocate_pointers.py tables Blob_79ce10_79e6a0 Blob_79c5c0_79cdd8 Blob_a5224_a5258`; `relocate_pointers.py incbin Blob_6131c8_63a19c Blob_6638a0_682fac Blob_659ba4_65c268` plus any remaining sa_x_close_up/ending blobs that hold frame tables; `relocate_pointers.py literals` over every C file with raw addresses (new decomp files included) and `fix_undeclared.py`; `unsize_incbins.py --keep <sizeof users>`. `make check` OK after each.
-  3. `make smoke`, `make shift-test`, `python3 tools/smoketest/diff_test.py`, `python3 -m fusiontool check`. Then fast-forward platform to platform-merge and push.
+### Still to do
+1. **Newer decomp commits not yet integrated**: decomp-nav (GetFlashingSectorNumber) and decomp-cutscene (3 commits incl. unk_9d1c4, SpecialCutsceneGetRandomNumber). Merge them into decomp-integration, then into platform; rerun `relocate_pointers.py literals` on the changed files, `make check`, `diff_test.py`.
+2. **~46 functions still naked asm** (NONMATCHING_*.md on the decomp branches, list in the 2026-10-31 notes below). wip-decomp-* branches hold unfinished attempts. Worktrees /home/claude/wt-* still exist with those edits on disk.
+3. Merge lessons:
+   - database.json: when both sides list the same file, keep platform's size for the four LZ77 entries fixed on fix-truncated-lz-entries.
+   - Literal relocation in C uses one label per address inside a blob (`sAddr_<addr>`, automatic now); `blob + offset` makes agbcc share a base and changes code.
+   - Naked asm inside C files has `.4byte 0x08...` literals too; the literal pass handles them now.
+   - Never alias with `.set name, 0x08...` (absolute, can't move); define aliases in linker.ld (`a = b;`).
+   - fix_undeclared declares unknown names as `const u8[]`; for sPointerTable_* change the extern to `u32`.
 
 ## Earlier pause notes (2026-10-31)
 

@@ -12,7 +12,7 @@ The `platform` branch is the one to use. `main` mirrors upstream untouched. Othe
 - **Symbols instead of addresses.** Every enemy's AI function and most sprite graphics/palettes are referenced by name, so tables can be extended like normal code.
 - **Shiftable ROM.** Hard-coded addresses have been replaced with symbols across code, data, music and graphics tables.
 - **Automated play test.** `make smoke` boots the game in headless mGBA, starts a new file, plays the intro and checks Samus is in the first room.
-- **More decompiled code**, starting with the gunship ending.
+- **More decompiled code**: 3557 of 3607 functions are C (98.6%), including menus, saving, file select, the intro and cutscenes.
 
 ## Quick start
 
@@ -35,7 +35,7 @@ Edit files in `assets/`, run `PYTHONPATH=tools/fusiontool python3 -m fusiontool 
 
 ## Moving things around
 
-Everything after the ROM header can change size or move: code, data and assets. Inserting padding anywhere from the startup code onward, or growing an edited graphic, still plays from boot through the intro into the first room (`make shift-test`). The test doesn't yet cover saves, other sectors or late-game events, so report anything that breaks after a size change. See PROGRESS.md for details.
+Everything after the ROM header can change size or move: code, data and assets. Inserting padding anywhere from the startup code onward, or growing an edited graphic, still plays from boot through the intro, the first room and the first navigation conversation, pixel-identical to the original (`make shift-test`, `tools/smoketest/diff_test.py`). The test doesn't yet cover saves, other sectors or late-game events, so report anything that breaks after a size change. See PROGRESS.md for details.
 
 ## Credits
 
