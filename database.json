@@ -27673,10 +27673,58 @@
     "size": 2
   },
   {
-    "path": "Blob_6638a0_682fac.bin",
-    "count": "0x1F70C",
+    "path": "Blob_6638a0_68101c.bin",
+    "count": "0x1D77C",
     "addr": {
       "us": "0x6638A0"
+    },
+    "size": 1
+  },
+  {
+    "path": "cutscenes/bsl_fire.pal",
+    "count": "0x100",
+    "addr": {
+      "us": "0x68101C"
+    },
+    "size": 2
+  },
+  {
+    "path": "Blob_68121c_68141c.bin",
+    "count": "0x200",
+    "addr": {
+      "us": "0x68121C"
+    },
+    "size": 1
+  },
+  {
+    "path": "cutscenes/lab_debris_1.pal",
+    "count": "0x100",
+    "addr": {
+      "us": "0x68141C"
+    },
+    "size": 2
+  },
+  {
+    "path": "cutscenes/lab_debris_2.pal",
+    "count": "0x100",
+    "addr": {
+      "us": "0x68161C"
+    },
+    "size": 2
+  },
+  {
+    "path": "cutscenes/lab_debris_3.pal",
+    "count": "0x100",
+    "addr": {
+      "us": "0x68181C"
+    },
+    "size": 2
+  },
+  {
+    "path": "Blob_681a1c_682fac.bin",
+    "count": "0x1590",
+    "addr": {
+      "us": "0x681A1C"
     },
     "size": 1
   },
