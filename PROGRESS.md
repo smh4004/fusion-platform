@@ -12,7 +12,7 @@ Resume from here. Newest status first.
 
 ### Still to do
 1. All decomp-* commits so far are integrated (decomp-integration and platform).
-2. **~46 functions still naked asm** (NONMATCHING_*.md on the decomp branches, list in the 2026-10-31 notes below). wip-decomp-* branches hold unfinished attempts. Worktrees /home/claude/wt-* still exist with those edits on disk.
+2. **~46 functions still naked asm** (NONMATCHING_*.md on the decomp branches, list in the 2026-10-31 notes below). wip-decomp-* branches hold unfinished, non-matching attempts (one commit on top of each decomp-* branch). Worktrees /home/claude/wt-* are checked out on those wip-decomp-* branches, so they are clean; to continue, either keep working there and commit only once matching, or `git checkout decomp-<name>` and cherry-pick ideas.
 3. Merge lessons:
    - database.json: when both sides list the same file, keep platform's size for the four LZ77 entries fixed on fix-truncated-lz-entries.
    - Literal relocation in C uses one label per address inside a blob (`sAddr_<addr>`, automatic now); `blob + offset` makes agbcc share a base and changes code.
