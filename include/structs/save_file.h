@@ -10,6 +10,7 @@
 #include "globals.h"
 #include "structs/samus.h"
 #include "structs/scroll.h"
+#include "structs/save_file_info.h"
 
 #define EWRAM_SRAM (EWRAM_BASE + 0x38000)
 #define SRAM_HEADER_SIZE 0x80
@@ -21,24 +22,7 @@
 
 #define SRAM_GET_CHECKSUM_SIZE(type, iteration, checksumType) ((s32)(sizeof(type) / iteration / sizeof(checksumType)))
 
-struct SaveFileInfo {
-    u8 exists;
-    u8 corruptionFlag;
-    u8 currentArea;
-    u8 eventCounter;
-    u16 currentEnergy;
-    u16 maxEnergy;
-    u16 currentMissiles;
-    u16 maxMissiles;
-    u8 weaponsStatus;
-    u8 igtHours;
-    u8 igtMinutes;
-    u8 hasSaved;
-    s8 completedGame;
-    s8 introPlayed;
-    u8 unk_12;
-    u8 unk_13;
-};
+// struct SaveFileInfo is in structs/save_file_info.h
 
 struct SaveMusicInfo {
     u16 musicTrack;

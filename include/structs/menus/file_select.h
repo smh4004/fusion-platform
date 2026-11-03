@@ -3,27 +3,10 @@
 
 #include "types.h"
 #include "oam.h"
+#include "structs/save_file_info.h"
 
 #define FILE_SELECT_DATA gNonGameplayRam.fileSelect
 
-struct SaveFileInfo {
-    u8 exists;
-    u8 corruptionFlag;
-    u8 currentArea;
-    u8 unk_3;
-    u16 currentEnergy;
-    u16 maxEnergy;
-    u16 currentMissiles;
-    u16 maxMissiles;
-    u8 unk_C;
-    u8 igtHours;
-    u8 igtMinutes;
-    u8 hasSaved;
-    s8 completedGame;
-    s8 introPlayed;
-};
-
-extern struct SaveFileInfo gSaveFilesInfo[3];
 
 struct FileSelectOam;
 typedef void (*FileSelectOamFunc_T)(struct FileSelectOam*);
