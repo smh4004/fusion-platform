@@ -922,122 +922,49 @@ void unk_9bac0(struct CutsceneOam* pOam)
     }
 }
 
-// 0x0809BB30
-NAKED_FUNCTION
+/**
+ * @brief 9bb30 | d4 | Processes a debris
+ *
+ */
 void unk_9bb30(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r3, r0, #0\n\
-	ldrb r0, [r3, #0x14]\n\
-	cmp r0, #0\n\
-	bne _0809BB48\n\
-	ldrh r0, [r3]\n\
-	strh r0, [r3, #6]\n\
-	ldrh r0, [r3, #2]\n\
-	strh r0, [r3, #8]\n\
-	movs r0, #1\n\
-	strb r0, [r3, #0x14]\n\
-	b _0809BB6A\n\
-_0809BB48:\n\
-	cmp r0, #1\n\
-	bne _0809BB6A\n\
-	ldrh r0, [r3, #0xe]\n\
-	adds r0, #1\n\
-	strh r0, [r3, #0xe]\n\
-	ldrh r0, [r3, #0xe]\n\
-	lsls r1, r0, #1\n\
-	adds r1, r1, r0\n\
-	lsrs r1, r1, #4\n\
-	ldrh r0, [r3, #6]\n\
-	subs r0, r0, r1\n\
-	strh r0, [r3]\n\
-	ldrh r0, [r3, #0xe]\n\
-	lsrs r0, r0, #3\n\
-	ldrh r1, [r3, #8]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r3, #2]\n\
-_0809BB6A:\n\
-	ldrb r0, [r3, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r3, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #0xc\n\
-	bne _0809BB8C\n\
-	movs r0, #0\n\
-	strb r0, [r3, #0x13]\n\
-	ldrh r0, [r3, #4]\n\
-	subs r0, #2\n\
-	strh r0, [r3, #4]\n\
-	lsls r0, r0, #0x10\n\
-	cmp r0, #0\n\
-	bgt _0809BB8C\n\
-	movs r0, #2\n\
-	strh r0, [r3, #4]\n\
-_0809BB8C:\n\
-	ldrh r0, [r3, #0xa]\n\
-	adds r0, #1\n\
-	movs r1, #0\n\
-	strh r0, [r3, #0xa]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #0x10\n\
-	bne _0809BBC6\n\
-	strh r1, [r3, #0xa]\n\
-	ldrh r0, [r3, #0xc]\n\
-	adds r0, #1\n\
-	strh r0, [r3, #0xc]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #3\n\
-	ble _0809BBAE\n\
-	strh r1, [r3, #0xc]\n\
-_0809BBAE:\n\
-	ldr r2, _0809BBF4 @ =0x040000D4\n\
-	movs r1, #0xc\n\
-	ldrsh r0, [r3, r1]\n\
-	lsls r0, r0, #5\n\
-	ldr r1, _0809BBF8 @ =0x0868161C\n\
-	adds r0, r0, r1\n\
-	str r0, [r2]\n\
-	ldr r0, _0809BBFC @ =0x05000220\n\
-	str r0, [r2, #4]\n\
-	ldr r0, _0809BC00 @ =0x84000008\n\
-	str r0, [r2, #8]\n\
-	ldr r0, [r2, #8]\n\
-_0809BBC6:\n\
-	ldrh r0, [r3]\n\
-	adds r0, #0x10\n\
-	lsls r0, r0, #0x10\n\
-	movs r1, #0x88\n\
-	lsls r1, r1, #0x11\n\
-	cmp r0, r1\n\
-	bhi _0809BBE4\n\
-	movs r0, #2\n\
-	ldrsh r1, [r3, r0]\n\
-	movs r0, #0x10\n\
-	rsbs r0, r0, #0\n\
-	cmp r1, r0\n\
-	blt _0809BBE4\n\
-	cmp r1, #0xb0\n\
-	ble _0809BBF0\n\
-_0809BBE4:\n\
-	movs r0, #0\n\
-	strb r0, [r3, #0x10]\n\
-	ldrb r1, [r3, #0x16]\n\
-	subs r0, #2\n\
-	ands r0, r1\n\
-	strb r0, [r3, #0x16]\n\
-_0809BBF0:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809BBF4: .4byte 0x040000D4\n\
-_0809BBF8: .4byte 0x0868161C\n\
-_0809BBFC: .4byte 0x05000220\n\
-_0809BC00: .4byte 0x84000008\n\
-    .syntax divided\n");
+    if (pOam->stage == 0)
+    {
+        pOam->spawnX = pOam->xPosition;
+        pOam->spawnY = pOam->yPosition;
+        pOam->stage = 1;
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->unk_E++;
+        pOam->xPosition = pOam->spawnX - (pOam->unk_E * 3U >> 4);
+        pOam->yPosition = (u16)pOam->unk_E / 8 + pOam->spawnY;
+    }
+
+    pOam->timer++;
+    if (pOam->timer == 12)
+    {
+        pOam->timer = 0;
+        pOam->scaling -= 2;
+        if (pOam->scaling <= 0)
+            pOam->scaling = 2;
+    }
+
+    pOam->unk_A++;
+    if (pOam->unk_A == 16)
+    {
+        pOam->unk_A = 0;
+        pOam->unk_C++;
+        if (pOam->unk_C > 3)
+            pOam->unk_C = 0;
+        DMA3_COPY_32(&sCutsceneLabDebrisPal2[pOam->unk_C * 16], PALRAM_OBJ + PAL_ROW_SIZE, PAL_ROW_SIZE / 4);
+    }
+
+    if ((u16)(pOam->xPosition + 16) > 272 || pOam->yPosition < -16 || pOam->yPosition > 176)
+    {
+        pOam->type = 0;
+        pOam->enabled = FALSE;
+    }
 }
 
 /**
@@ -1105,121 +1032,49 @@ void unk_9bcdc(struct CutsceneOam* pOam)
     }
 }
 
-// 0x0809BD24
-NAKED_FUNCTION
+/**
+ * @brief 9bd24 | d4 | Processes a debris
+ *
+ */
 void unk_9bd24(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r3, r0, #0\n\
-	ldrb r0, [r3, #0x14]\n\
-	cmp r0, #0\n\
-	bne _0809BD3C\n\
-	ldrh r0, [r3]\n\
-	strh r0, [r3, #6]\n\
-	ldrh r0, [r3, #2]\n\
-	strh r0, [r3, #8]\n\
-	movs r0, #1\n\
-	strb r0, [r3, #0x14]\n\
-	b _0809BD5A\n\
-_0809BD3C:\n\
-	cmp r0, #1\n\
-	bne _0809BD5A\n\
-	ldrh r0, [r3, #0xe]\n\
-	adds r0, #1\n\
-	strh r0, [r3, #0xe]\n\
-	ldrh r1, [r3, #0xe]\n\
-	lsrs r1, r1, #3\n\
-	ldrh r0, [r3, #6]\n\
-	subs r0, r0, r1\n\
-	strh r0, [r3]\n\
-	ldrh r0, [r3, #0xe]\n\
-	lsrs r0, r0, #4\n\
-	ldrh r1, [r3, #8]\n\
-	adds r0, r0, r1\n\
-	strh r0, [r3, #2]\n\
-_0809BD5A:\n\
-	ldrb r0, [r3, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r3, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #3\n\
-	bne _0809BD7E\n\
-	movs r0, #0\n\
-	strb r0, [r3, #0x13]\n\
-	ldrh r0, [r3, #4]\n\
-	subs r0, #4\n\
-	strh r0, [r3, #4]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #2\n\
-	bgt _0809BD7E\n\
-	movs r0, #2\n\
-	strh r0, [r3, #4]\n\
-_0809BD7E:\n\
-	ldrh r0, [r3, #0xa]\n\
-	adds r0, #1\n\
-	movs r1, #0\n\
-	strh r0, [r3, #0xa]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #0xf\n\
-	bne _0809BDB8\n\
-	strh r1, [r3, #0xa]\n\
-	ldrh r0, [r3, #0xc]\n\
-	adds r0, #1\n\
-	strh r0, [r3, #0xc]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #3\n\
-	ble _0809BDA0\n\
-	strh r1, [r3, #0xc]\n\
-_0809BDA0:\n\
-	ldr r2, _0809BDE8 @ =0x040000D4\n\
-	movs r1, #0xc\n\
-	ldrsh r0, [r3, r1]\n\
-	lsls r0, r0, #5\n\
-	ldr r1, _0809BDEC @ =0x0868181C\n\
-	adds r0, r0, r1\n\
-	str r0, [r2]\n\
-	ldr r0, _0809BDF0 @ =0x05000260\n\
-	str r0, [r2, #4]\n\
-	ldr r0, _0809BDF4 @ =0x84000008\n\
-	str r0, [r2, #8]\n\
-	ldr r0, [r2, #8]\n\
-_0809BDB8:\n\
-	ldrh r0, [r3]\n\
-	adds r0, #0x10\n\
-	lsls r0, r0, #0x10\n\
-	movs r1, #0x88\n\
-	lsls r1, r1, #0x11\n\
-	cmp r0, r1\n\
-	bhi _0809BDD6\n\
-	movs r0, #2\n\
-	ldrsh r1, [r3, r0]\n\
-	movs r0, #0x10\n\
-	rsbs r0, r0, #0\n\
-	cmp r1, r0\n\
-	blt _0809BDD6\n\
-	cmp r1, #0xb0\n\
-	ble _0809BDE2\n\
-_0809BDD6:\n\
-	movs r0, #0\n\
-	strb r0, [r3, #0x10]\n\
-	ldrb r1, [r3, #0x16]\n\
-	subs r0, #2\n\
-	ands r0, r1\n\
-	strb r0, [r3, #0x16]\n\
-_0809BDE2:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809BDE8: .4byte 0x040000D4\n\
-_0809BDEC: .4byte 0x0868181C\n\
-_0809BDF0: .4byte 0x05000260\n\
-_0809BDF4: .4byte 0x84000008\n\
-    .syntax divided\n");
+    if (pOam->stage == 0)
+    {
+        pOam->spawnX = pOam->xPosition;
+        pOam->spawnY = pOam->yPosition;
+        pOam->stage = 1;
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->unk_E++;
+        pOam->xPosition = pOam->spawnX - (u16)pOam->unk_E / 8;
+        pOam->yPosition = (u16)pOam->unk_E / 16 + pOam->spawnY;
+    }
+
+    pOam->timer++;
+    if (pOam->timer == 3)
+    {
+        pOam->timer = 0;
+        pOam->scaling -= 4;
+        if (pOam->scaling <= 2)
+            pOam->scaling = 2;
+    }
+
+    pOam->unk_A++;
+    if (pOam->unk_A == 15)
+    {
+        pOam->unk_A = 0;
+        pOam->unk_C++;
+        if (pOam->unk_C > 3)
+            pOam->unk_C = 0;
+        DMA3_COPY_32(&sCutsceneLabDebrisPal3[pOam->unk_C * 16], PALRAM_OBJ + PAL_ROW_SIZE * 3, PAL_ROW_SIZE / 4);
+    }
+
+    if ((u16)(pOam->xPosition + 16) > 272 || pOam->yPosition < -16 || pOam->yPosition > 176)
+    {
+        pOam->type = 0;
+        pOam->enabled = FALSE;
+    }
 }
 
 /**
@@ -1257,107 +1112,46 @@ void unk_9bdf8(struct CutsceneOam* pOam)
     }
 }
 
-// 0x0809BE8C
-NAKED_FUNCTION
+/**
+ * @brief 9be8c | c8 | Fades in the BSL fire
+ *
+ */
 void unk_9be8c(struct CutsceneOam* pOam)
 {
-    asm(" .syntax unified\n\
-	push {lr}\n\
-	adds r3, r0, #0\n\
-	ldrb r0, [r3, #0x14]\n\
-	cmp r0, #0\n\
-	bne _0809BEBC\n\
-	ldr r1, _0809BEAC @ =0x040000D4\n\
-	ldr r0, _0809BEB0 @ =0x0868101C\n\
-	str r0, [r1]\n\
-	ldr r0, _0809BEB4 @ =0x05000120\n\
-	str r0, [r1, #4]\n\
-	ldr r0, _0809BEB8 @ =0x84000008\n\
-	str r0, [r1, #8]\n\
-	ldr r0, [r1, #8]\n\
-	movs r0, #1\n\
-	strb r0, [r3, #0x14]\n\
-	b _0809BF46\n\
-	.align 2, 0\n\
-_0809BEAC: .4byte 0x040000D4\n\
-_0809BEB0: .4byte 0x0868101C\n\
-_0809BEB4: .4byte 0x05000120\n\
-_0809BEB8: .4byte 0x84000008\n\
-_0809BEBC:\n\
-	cmp r0, #1\n\
-	bne _0809BF14\n\
-	ldrb r0, [r3, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r3, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #8\n\
-	bne _0809BF46\n\
-	movs r0, #0\n\
-	strb r0, [r3, #0x13]\n\
-	ldrh r0, [r3, #0xc]\n\
-	adds r0, #1\n\
-	strh r0, [r3, #0xc]\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	cmp r0, #0xe\n\
-	ble _0809BEE8\n\
-	movs r0, #0xf\n\
-	strh r0, [r3, #0xc]\n\
-	movs r0, #2\n\
-	strb r0, [r3, #0x14]\n\
-_0809BEE8:\n\
-	ldr r2, _0809BF04 @ =0x040000D4\n\
-	movs r1, #0xc\n\
-	ldrsh r0, [r3, r1]\n\
-	lsls r0, r0, #5\n\
-	ldr r1, _0809BF08 @ =0x0868101C\n\
-	adds r0, r0, r1\n\
-	str r0, [r2]\n\
-	ldr r0, _0809BF0C @ =0x05000120\n\
-	str r0, [r2, #4]\n\
-	ldr r0, _0809BF10 @ =0x84000008\n\
-	str r0, [r2, #8]\n\
-	ldr r0, [r2, #8]\n\
-	b _0809BF46\n\
-	.align 2, 0\n\
-_0809BF04: .4byte 0x040000D4\n\
-_0809BF08: .4byte 0x0868101C\n\
-_0809BF0C: .4byte 0x05000120\n\
-_0809BF10: .4byte 0x84000008\n\
-_0809BF14:\n\
-	cmp r0, #2\n\
-	bne _0809BF46\n\
-	ldrb r0, [r3, #0x13]\n\
-	adds r0, #1\n\
-	strb r0, [r3, #0x13]\n\
-	lsls r0, r0, #0x18\n\
-	lsrs r0, r0, #0x18\n\
-	cmp r0, #6\n\
-	bne _0809BF46\n\
-	movs r0, #0\n\
-	strb r0, [r3, #0x13]\n\
-	ldr r1, _0809BF4C @ =gWrittenToBldalpha_Eva\n\
-	ldrh r0, [r1]\n\
-	cmp r0, #0xf\n\
-	bhi _0809BF46\n\
-	adds r0, #1\n\
-	strh r0, [r1]\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	cmp r0, #0xf\n\
-	bhi _0809BF46\n\
-	ldr r1, _0809BF50 @ =gWrittenToBldalpha_Evb\n\
-	ldrh r0, [r1]\n\
-	adds r0, #1\n\
-	strh r0, [r1]\n\
-_0809BF46:\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_0809BF4C: .4byte gWrittenToBldalpha_Eva\n\
-_0809BF50: .4byte gWrittenToBldalpha_Evb\n\
-    .syntax divided\n");
+    if (pOam->stage == 0)
+    {
+        DMA3_COPY_32(sCutsceneBslFirePal, PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
+        pOam->stage = 1;
+    }
+    else if (pOam->stage == 1)
+    {
+        pOam->timer++;
+        if (pOam->timer == 8)
+        {
+            pOam->timer = 0;
+            pOam->unk_C++;
+            if (pOam->unk_C > 14)
+            {
+                pOam->unk_C = 15;
+                pOam->stage = 2;
+            }
+            DMA3_COPY_32(&sCutsceneBslFirePal[pOam->unk_C * 16], PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
+        }
+    }
+    else if (pOam->stage == 2)
+    {
+        pOam->timer++;
+        if (pOam->timer == 6)
+        {
+            pOam->timer = 0;
+            if (gWrittenToBldalpha_Eva < BLDALPHA_MAX_VALUE)
+            {
+                gWrittenToBldalpha_Eva++;
+                if (gWrittenToBldalpha_Eva < BLDALPHA_MAX_VALUE)
+                    gWrittenToBldalpha_Evb++;
+            }
+        }
+    }
 }
 
 /**
