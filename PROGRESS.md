@@ -4,20 +4,21 @@ Resume from here. Newest status first.
 
 ## Status 2026-11-03 (afternoon): decompilation merged into platform
 
-`platform` now contains the decompilation work: **3557/3607 functions (98.61%)**, data 89.63% out of blobs. Verified on the merged build:
+`platform` now contains the decompilation work: **3561/3607 functions (98.72%)**, data 89.63% out of blobs. Verified on the merged build:
 - `make check`: ROM matches.
 - Shiftable: 0x100 before agbmain, generic_data, rooms_data, new_file_intro data; 64 KB before agbmain: new-game smoke test passes.
 - Differential play test: 103/103 identical screenshots vs. the matching ROM, two seeds, two shift points (reaches the first navigation room conversation).
 - `fusiontool check`: 2034 assets round-trip; pytest 6/6.
 
 ### Still to do
-1. **Newer decomp commits not yet integrated**: decomp-nav (GetFlashingSectorNumber) and decomp-cutscene (3 commits incl. unk_9d1c4, SpecialCutsceneGetRandomNumber). Merge them into decomp-integration, then into platform; rerun `relocate_pointers.py literals` on the changed files, `make check`, `diff_test.py`.
+1. All decomp-* commits so far are integrated (decomp-integration and platform).
 2. **~46 functions still naked asm** (NONMATCHING_*.md on the decomp branches, list in the 2026-10-31 notes below). wip-decomp-* branches hold unfinished attempts. Worktrees /home/claude/wt-* still exist with those edits on disk.
 3. Merge lessons:
    - database.json: when both sides list the same file, keep platform's size for the four LZ77 entries fixed on fix-truncated-lz-entries.
    - Literal relocation in C uses one label per address inside a blob (`sAddr_<addr>`, automatic now); `blob + offset` makes agbcc share a base and changes code.
    - Naked asm inside C files has `.4byte 0x08...` literals too; the literal pass handles them now.
    - Never alias with `.set name, 0x08...` (absolute, can't move); define aliases in linker.ld (`a = b;`).
+   - Assembly that `.include`s other files (sound/track_data.s) is now dependency-tracked (.sd files); before that a stale track_data.o hid raw voice-group addresses. Screenshots can't catch music bugs, so always also run `find_raw_pointers.py`.
    - fix_undeclared declares unknown names as `const u8[]`; for sPointerTable_* change the extern to `u32`.
 
 ## Earlier pause notes (2026-10-31)
