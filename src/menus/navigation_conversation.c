@@ -3788,96 +3788,44 @@ _0807BBE0:\n\
     .syntax divided\n");
 }
 
-// 0x0807BBF0
-NAKED_FUNCTION
+/**
+ * @brief 7bbf0 | a8 | Gets the number of the sector to flash on the map for the current navigation conversation
+ * 
+ */
 u8 GetFlashingSectorNumber(void)
 {
-    asm(" .syntax unified\n\
-	push {r4, r5, r6, r7, lr}\n\
-	ldr r0, _0807BC80 @ =0x0300004D\n\
-	movs r1, #0\n\
-	strb r1, [r0]\n\
-	ldr r1, _0807BC84 @ =gEventCounter\n\
-	ldrb r2, [r1]\n\
-	adds r6, r0, #0\n\
-	ldr r1, _0807BC88 @ =0x08575A60\n\
-	ldr r7, _0807BC8C @ =gPreviousNavigationConversation\n\
-	cmp r2, #0\n\
-	ble _0807BC2A\n\
-	lsls r0, r2, #1\n\
-	adds r0, r0, r2\n\
-	lsls r3, r0, #2\n\
-	adds r0, r3, r1\n\
-	ldrb r0, [r0, #6]\n\
-	lsls r0, r0, #0x18\n\
-	asrs r0, r0, #0x18\n\
-	cmp r0, #0\n\
-	bne _0807BC2A\n\
-	adds r3, r3, r1\n\
-_0807BC1A:\n\
-	subs r3, #0xc\n\
-	subs r2, #1\n\
-	cmp r2, #0\n\
-	ble _0807BC2A\n\
-	movs r0, #6\n\
-	ldrsb r0, [r3, r0]\n\
-	cmp r0, #0\n\
-	beq _0807BC1A\n\
-_0807BC2A:\n\
-	lsls r0, r2, #1\n\
-	adds r0, r0, r2\n\
-	lsls r0, r0, #2\n\
-	adds r0, r0, r1\n\
-	movs r3, #6\n\
-	ldrsb r3, [r0, r3]\n\
-	ldrb r4, [r7]\n\
-	cmp r4, r3\n\
-	bne _0807BC76\n\
-	movs r3, #0\n\
-	movs r2, #0\n\
-	ldr r0, _0807BC90 @ =0x085766E4\n\
-	movs r1, #0\n\
-	ldrsb r1, [r0, r1]\n\
-	adds r5, r0, #0\n\
-	cmp r4, r1\n\
-	beq _0807BC68\n\
-_0807BC4C:\n\
-	adds r2, #1\n\
-	cmp r2, #0x20\n\
-	bhi _0807BC64\n\
-	ldrb r0, [r7]\n\
-	lsls r1, r2, #3\n\
-	adds r1, r1, r5\n\
-	ldrb r1, [r1]\n\
-	lsls r1, r1, #0x18\n\
-	asrs r1, r1, #0x18\n\
-	cmp r0, r1\n\
-	bne _0807BC4C\n\
-	movs r3, #1\n\
-_0807BC64:\n\
-	cmp r3, #0\n\
-	beq _0807BC76\n\
-_0807BC68:\n\
-	lsls r0, r2, #3\n\
-	adds r0, r0, r5\n\
-	ldrb r2, [r0, #1]\n\
-	ldr r0, _0807BC94 @ =0x08576066\n\
-	adds r0, r2, r0\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r6]\n\
-_0807BC76:\n\
-	ldrb r0, [r6]\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_0807BC80: .4byte 0x0300004D\n\
-_0807BC84: .4byte gEventCounter\n\
-_0807BC88: .4byte 0x08575A60\n\
-_0807BC8C: .4byte gPreviousNavigationConversation\n\
-_0807BC90: .4byte 0x085766E4\n\
-_0807BC94: .4byte 0x08576066\n\
-    .syntax divided\n");
+    s32 i;
+    s32 found;
+
+    gFlashingSectorNumber = 0;
+
+    for (i = gEventCounter; i > 0; i--)
+    {
+        if (sEventLocationAndNavigationInfo[i].navConversation != NAV_CONVO_NONE)
+            break;
+    }
+
+    found = sEventLocationAndNavigationInfo[i].navConversation;
+    if (gPreviousNavigationConversation != found)
+        return gFlashingSectorNumber;
+
+    found = FALSE;
+    for (i = 0; (u32)i < ARRAY_SIZE(sNavConversationTargets); i++)
+    {
+        if (gPreviousNavigationConversation == sNavConversationTargets[i].conversation)
+        {
+            found = TRUE;
+            break;
+        }
+    }
+
+    if (found)
+    {
+        i = sNavConversationTargets[i].location;
+        gFlashingSectorNumber = sNavigationTargetLocationAreas[i];
+    }
+
+    return gFlashingSectorNumber;
 }
 
 /**
