@@ -19,6 +19,10 @@
 #include "data/intro_data.h"
 #include "data/sprite_data.h"
 #include "data/haze_data.h"
+extern const u8 sAddr_680ecc[];
+extern const u8 sAddr_680ffc[];
+extern const u8 sAddr_68100c[];
+extern const u8 sAddr_68101c[];
 
 /**
  * @brief 9c1c8 | 8c | Main handler for the BSL exploding cutscene
@@ -391,7 +395,7 @@ void CutsceneBslExplodingProcessBslFar(struct CutsceneOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x8680ecc;
+            pOam->pOam = (const struct FrameData*)sAddr_680ecc;
             pOam->stage = 1;
         }
     }
@@ -468,19 +472,19 @@ u8 CutsceneBslExplodingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 de
     else if (type == 20)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 2;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680ffc;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680ffc;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = unk_9db70;
     }
     else if (type == 21)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 2;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x868100c;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_68100c;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneBslExplodingProcessBslFar;
     }
     else if (type == 22)
     {
         CUTSCENE_OAM_DATA.oam[slot].priority = 2;
-        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)0x8680ecc;
+        CUTSCENE_OAM_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_680ecc;
         CUTSCENE_OAM_DATA.oam[slot].pFunction = CutsceneBslExplodingProcessExplosions;
     }
 
@@ -525,7 +529,7 @@ void CutsceneBslExplodingVblank(void)
     if (CUTSCENE_OAM_DATA.unk_A == 1)
     {
         CUTSCENE_OAM_DATA.unk_A = 0;
-        DMA3_COPY_32(&((const u16*)0x868101c)[CUTSCENE_OAM_DATA.unk_C * 16], PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
+        DMA3_COPY_32(&((const u16*)sAddr_68101c)[CUTSCENE_OAM_DATA.unk_C * 16], PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
     }
 }
 

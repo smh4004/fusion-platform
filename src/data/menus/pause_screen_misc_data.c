@@ -3,6 +3,16 @@
 #include "macros.h"
 #include "constants/menus/pause_screen.h"
 #include "constants/status_screen.h"
+extern const u8 sAddr_576824[];
+extern const u8 sAddr_576844[];
+extern const u8 sAddr_576864[];
+extern const u8 sAddr_576884[];
+extern const u8 sAddr_5768a4[];
+extern const u8 sAddr_5768c4[];
+extern const u8 sAddr_5768e4[];
+extern const u8 sAddr_576904[];
+extern const u8 sAddr_577024[];
+extern const u8 sAddr_578750[];
 
 // Index is the main deck room + 1
 const u8 sMainDeckRoomBslDiagramColors[90] = {
@@ -341,7 +351,45 @@ const u8 sNavConversationPortraitOamIds[6][3] = {
 const u8 sNavConversationMosaicTarget = 0xEE;
 static const u8 sPadding_576803 = 0;
 
-const u8 sBlob_576804_57bbc4[] = INCBIN_U8("data/Blob_576804_57bbc4.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_576804_57bbc4[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_576804_57bbc4\n\
+sBlob_576804_57bbc4:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0x0, 0x20\n\
+    .global sAddr_576824\n\
+sAddr_576824:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0x20, 0x20\n\
+    .global sAddr_576844\n\
+sAddr_576844:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0x40, 0x20\n\
+    .global sAddr_576864\n\
+sAddr_576864:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0x60, 0x20\n\
+    .global sAddr_576884\n\
+sAddr_576884:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0x80, 0x20\n\
+    .global sAddr_5768a4\n\
+sAddr_5768a4:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0xa0, 0x20\n\
+    .global sAddr_5768c4\n\
+sAddr_5768c4:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0xc0, 0x20\n\
+    .global sAddr_5768e4\n\
+sAddr_5768e4:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0xe0, 0x20\n\
+    .global sAddr_576904\n\
+sAddr_576904:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0x100, 0x720\n\
+    .global sAddr_577024\n\
+sAddr_577024:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0x820, 0x172c\n\
+    .global sAddr_578750\n\
+sAddr_578750:\n\
+    .incbin \"data/Blob_576804_57bbc4.bin\", 0x1f4c, 0x3474\n\
+    .popsection\n\
+");
 
 const u8 sNavConversationPopUpAnim_57bbc4[6 * 2] = {
     0, 20,
@@ -426,62 +474,62 @@ const struct NavConversationPopUp sNavConversationPopUps[5] = {
     [0] = {
         .pAnimation = sNavConversationPopUpAnim_57bbc4,
         .animationLength = 6,
-        .pPalette = (const u16*)0x8576804,
-        .pFlashingPalette = (const u16*)0x8576824,
+        .pPalette = (const u16*)(&sBlob_576804_57bbc4),
+        .pFlashingPalette = (const u16*)sAddr_576824,
         .flashingPaletteDelay = 0,
         .rows = 6,
         .vramRow = 0,
         .size = 8,
         .unk_12_4 = 0,
-        .pGraphics = (const u32*)0x8576904
+        .pGraphics = (const u32*)sAddr_576904
     },
     [1] = {
         .pAnimation = sNavConversationPopUpAnim_57bbc4,
         .animationLength = 6,
-        .pPalette = (const u16*)0x8576804,
-        .pFlashingPalette = (const u16*)0x8576824,
+        .pPalette = (const u16*)(&sBlob_576804_57bbc4),
+        .pFlashingPalette = (const u16*)sAddr_576824,
         .flashingPaletteDelay = 0,
         .rows = 6,
         .vramRow = 0,
         .size = 8,
         .unk_12_4 = 0,
-        .pGraphics = (const u32*)0x8576904
+        .pGraphics = (const u32*)sAddr_576904
     },
     [2] = {
         .pAnimation = sNavConversationPopUpAnim_57bbd0,
         .animationLength = 16,
-        .pPalette = (const u16*)0x8576844,
-        .pFlashingPalette = (const u16*)0x8576864,
+        .pPalette = (const u16*)sAddr_576844,
+        .pFlashingPalette = (const u16*)sAddr_576864,
         .flashingPaletteDelay = 0,
         .rows = 4,
         .vramRow = 1,
         .size = 4,
         .unk_12_4 = 2,
-        .pGraphics = (const u32*)0x8577024
+        .pGraphics = (const u32*)sAddr_577024
     },
     [3] = {
         .pAnimation = sNavConversationPopUpAnim_57bbf0,
         .animationLength = 48,
-        .pPalette = (const u16*)0x8576884,
-        .pFlashingPalette = (const u16*)0x85768A4,
+        .pPalette = (const u16*)sAddr_576884,
+        .pFlashingPalette = (const u16*)sAddr_5768a4,
         .flashingPaletteDelay = 0,
         .rows = 6,
         .vramRow = 0,
         .size = 8,
         .unk_12_4 = 0,
-        .pGraphics = (const u32*)0x8578750
+        .pGraphics = (const u32*)sAddr_578750
     },
     [4] = {
         .pAnimation = sNavConversationPopUpAnim_57bbd0,
         .animationLength = 16,
-        .pPalette = (const u16*)0x85768C4,
-        .pFlashingPalette = (const u16*)0x85768E4,
+        .pPalette = (const u16*)sAddr_5768c4,
+        .pFlashingPalette = (const u16*)sAddr_5768e4,
         .flashingPaletteDelay = 0,
         .rows = 4,
         .vramRow = 1,
         .size = 4,
         .unk_12_4 = 2,
-        .pGraphics = (const u32*)0x8577024
+        .pGraphics = (const u32*)sAddr_577024
     }
 };
 
@@ -569,7 +617,27 @@ const u8 sNavConversationPalTimers_57bebc[8] = { 8, 8, 8, 8, 8, 8, 8, 8 };
 
 const u16 sNavConversationSpecialPal[16 * 16] = INCBIN_U16("data/menus/pause_screen/nav_conversation_ship_room.pal");
 
-const u8 sBlob_57c0c4_581300[] = INCBIN_U8("data/Blob_57c0c4_581300.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_57c0c4_581300[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_57c0c4_581300\n\
+sBlob_57c0c4_581300:\n\
+    .incbin \"data/Blob_57c0c4_581300.bin\", 0x0, 0x3bdc\n\
+    .global sAddr_57fca0\n\
+sAddr_57fca0:\n\
+    .incbin \"data/Blob_57c0c4_581300.bin\", 0x3bdc, 0x598\n\
+    .global sAddr_580238\n\
+sAddr_580238:\n\
+    .incbin \"data/Blob_57c0c4_581300.bin\", 0x4174, 0x598\n\
+    .global sAddr_5807d0\n\
+sAddr_5807d0:\n\
+    .incbin \"data/Blob_57c0c4_581300.bin\", 0x470c, 0x598\n\
+    .global sAddr_580d68\n\
+sAddr_580d68:\n\
+    .incbin \"data/Blob_57c0c4_581300.bin\", 0x4ca4, 0x598\n\
+    .popsection\n\
+");
 const u16 sNavConversationFlashingPal_581300[16][16] = {
     [0] = {
         0x0000, 0x7A73, 0x76F8, 0x4E38, 0x3704, 0x2A25, 0x02B5, 0x1FFF,

@@ -10,6 +10,17 @@
 
 #include "data/generic_data.h"
 #include "data/intro_data.h"
+extern const u8 sAddr_6238f4[];
+extern const u8 sAddr_62b5f4[];
+extern const u8 sAddr_636020[];
+extern const u8 sAddr_636038[];
+extern const u8 sAddr_636050[];
+extern const u8 sAddr_6362b8[];
+extern const u8 sAddr_636a38[];
+extern const u8 sAddr_636c38[];
+extern const u8 sAddr_637038[];
+extern const u8 sAddr_638c14[];
+extern const u8 sAddr_639bc4[];
 
 /**
  * @brief 9741c | a8 | Main handler for the died on SR388 collision cutscene
@@ -71,13 +82,13 @@ void DiedOnSr388CollisionInit(void)
 
     DMA3_FILL_32(0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
-    LZ77UncompVram((const u32*)0x86238f4, VRAM_OBJ);
-    DMA3_COPY_32((const u16*)0x8636c38, PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_6238f4, VRAM_OBJ);
+    DMA3_COPY_32((const u16*)sAddr_636c38, PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
 
-    LZ77UncompVram((const u32*)0x862b5f4, VRAM_BASE);
-    LZ77UncompVram((const u32*)0x8638c14, VRAM_BASE + 0xF000);
-    LZ77UncompVram((const u32*)0x8639bc4, VRAM_BASE + 0xF800);
-    DMA3_COPY_32((const u16*)0x8637038, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_62b5f4, VRAM_BASE);
+    LZ77UncompVram((const u32*)sAddr_638c14, VRAM_BASE + 0xF000);
+    LZ77UncompVram((const u32*)sAddr_639bc4, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const u16*)sAddr_637038, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
 
     gBg1XPosition = 0;
     gBg1YPosition = 8;
@@ -317,7 +328,7 @@ void DiedOnSr388CollisionProcessFallingBsl(struct SpecialCutsceneOam* pOam)
         pOam->stage = 3;
         if (pOam->type == 1)
         {
-            pOam->pOam = (const struct FrameData*)0x86362b8;
+            pOam->pOam = (const struct FrameData*)sAddr_6362b8;
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
             INTRO_DATA.subStage = 2;
@@ -401,7 +412,7 @@ u8 DiedOnSr388CollisionSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 de
         INTRO_DATA.oam[slot].scaling = Q_8_8(1);
         INTRO_DATA.oam[slot].priority = 2;
         INTRO_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8636020;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_636020;
         INTRO_DATA.oam[slot].pFunction = DiedOnSr388CollisionProcessFallingBsl;
     }
     else if (type == 2)
@@ -410,13 +421,13 @@ u8 DiedOnSr388CollisionSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 de
         INTRO_DATA.oam[slot].unk_18_3 = 1;
         INTRO_DATA.oam[slot].priority = 2;
         INTRO_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8636038;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_636038;
         INTRO_DATA.oam[slot].pFunction = DiedOnSr388CollisionProcessFallingBsl;
     }
     else if (type == 3)
     {
         INTRO_DATA.oam[slot].priority = 2;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8636050;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_636050;
         INTRO_DATA.oam[slot].pFunction = unk_979d0;
     }
 
@@ -444,7 +455,7 @@ void DiedOnSr388CollisionVblank(void)
     if (INTRO_DATA.unk_110 == 1)
     {
         INTRO_DATA.unk_110 = 0;
-        DMA3_COPY_32(((const u16*)0x8636a38 + INTRO_DATA.unk_111 * 16), PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
+        DMA3_COPY_32(((const u16*)sAddr_636a38 + INTRO_DATA.unk_111 * 16), PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
     }
 }
 

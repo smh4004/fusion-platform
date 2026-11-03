@@ -19,6 +19,382 @@
 #include "data/audio.h"
 #include "data/menus/game_over_data.h"
 #include "data/menus/file_select_data.h"
+extern const u8 sBlob_5dfd6c_5e116c[];
+extern const u8 sBlob_5f6990_5f7190[];
+extern const u8 sBlob_65c468_662804[];
+extern const u8 sBlob_662cfc_663820[];
+extern const u8 sBlob_73dbcc_7478a0[];
+extern u32 sPointerTable_79ce10[];
+extern const u8 sAddr_5dfeac[];
+extern const u8 sAddr_5dffec[];
+extern const u8 sAddr_5e012c[];
+extern const u8 sAddr_5e026c[];
+extern const u8 sAddr_5e03ac[];
+extern const u8 sAddr_5e04ec[];
+extern const u8 sAddr_5e062c[];
+extern const u8 sAddr_5e076c[];
+extern const u8 sAddr_5e08ac[];
+extern const u8 sAddr_5e09ec[];
+extern const u8 sAddr_5e0b2c[];
+extern const u8 sAddr_5e0c6c[];
+extern const u8 sAddr_5e0dac[];
+extern const u8 sAddr_5e0eec[];
+extern const u8 sAddr_5e102c[];
+extern const u8 sAddr_5f6a10[];
+extern const u8 sAddr_5f6a90[];
+extern const u8 sAddr_5f6b10[];
+extern const u8 sAddr_5f6b90[];
+extern const u8 sAddr_5f6c10[];
+extern const u8 sAddr_5f6c90[];
+extern const u8 sAddr_5f6d10[];
+extern const u8 sAddr_5f6d90[];
+extern const u8 sAddr_5f6e10[];
+extern const u8 sAddr_5f6e90[];
+extern const u8 sAddr_5f6f10[];
+extern const u8 sAddr_5f6f90[];
+extern const u8 sAddr_5f7010[];
+extern const u8 sAddr_5f7090[];
+extern const u8 sAddr_5f7110[];
+extern const u8 sAddr_65fc24[];
+extern const u8 sAddr_6638c0[];
+extern const u8 sAddr_663a20[];
+extern const u8 sAddr_663dd0[];
+extern const u8 sAddr_663df8[];
+extern const u8 sAddr_663eac[];
+extern const u8 sAddr_667c18[];
+extern const u8 sAddr_66aa30[];
+extern const u8 sAddr_66aa58[];
+extern const u8 sAddr_66aa68[];
+extern const u8 sAddr_66abc8[];
+extern const u8 sAddr_66ac88[];
+extern const u8 sAddr_66b524[];
+extern const u8 sAddr_66ec18[];
+extern const u8 sAddr_6719cc[];
+extern const u8 sAddr_6719f4[];
+extern const u8 sAddr_671a04[];
+extern const u8 sAddr_671b64[];
+extern const u8 sAddr_671c24[];
+extern const u8 sAddr_71e20c[];
+extern const u8 sAddr_71e4e4[];
+extern const u8 sAddr_71e67e[];
+extern const u8 sAddr_71e814[];
+extern const u8 sAddr_71e9b6[];
+extern const u8 sAddr_71eb34[];
+extern const u8 sAddr_71ecac[];
+extern const u8 sAddr_71efc2[];
+extern const u8 sAddr_71f498[];
+extern const u8 sAddr_71f52c[];
+extern const u8 sAddr_71f56c[];
+extern const u8 sAddr_71f5fc[];
+extern const u8 sAddr_71f656[];
+extern const u8 sAddr_71f71a[];
+extern const u8 sAddr_71f7cc[];
+extern const u8 sAddr_71f896[];
+extern const u8 sAddr_71f98a[];
+extern const u8 sAddr_71fa32[];
+extern const u8 sAddr_71fa92[];
+extern const u8 sAddr_71fad4[];
+extern const u8 sAddr_7200ee[];
+extern const u8 sAddr_720310[];
+extern const u8 sAddr_720528[];
+extern const u8 sAddr_720748[];
+extern const u8 sAddr_72094a[];
+extern const u8 sAddr_720b4a[];
+extern const u8 sAddr_721116[];
+extern const u8 sAddr_72192e[];
+extern const u8 sAddr_721a12[];
+extern const u8 sAddr_721ab6[];
+extern const u8 sAddr_721c28[];
+extern const u8 sAddr_721d12[];
+extern const u8 sAddr_721f20[];
+extern const u8 sAddr_722068[];
+extern const u8 sAddr_722238[];
+extern const u8 sAddr_722438[];
+extern const u8 sAddr_722550[];
+extern const u8 sAddr_7225f8[];
+extern const u8 sAddr_7226a0[];
+extern const u8 sAddr_723016[];
+extern const u8 sAddr_723324[];
+extern const u8 sAddr_723624[];
+extern const u8 sAddr_723958[];
+extern const u8 sAddr_723be2[];
+extern const u8 sAddr_723e44[];
+extern const u8 sAddr_72475e[];
+extern const u8 sAddr_7252c6[];
+extern const u8 sAddr_725412[];
+extern const u8 sAddr_7254ea[];
+extern const u8 sAddr_7256d8[];
+extern const u8 sAddr_72581e[];
+extern const u8 sAddr_725a60[];
+extern const u8 sAddr_725b94[];
+extern const u8 sAddr_725dac[];
+extern const u8 sAddr_72603c[];
+extern const u8 sAddr_7261c6[];
+extern const u8 sAddr_7262aa[];
+extern const u8 sAddr_72638c[];
+extern const u8 sAddr_726aa6[];
+extern const u8 sAddr_726cfe[];
+extern const u8 sAddr_726f04[];
+extern const u8 sAddr_727106[];
+extern const u8 sAddr_727314[];
+extern const u8 sAddr_727522[];
+extern const u8 sAddr_727b08[];
+extern const u8 sAddr_7282bc[];
+extern const u8 sAddr_7283a6[];
+extern const u8 sAddr_728466[];
+extern const u8 sAddr_728608[];
+extern const u8 sAddr_7286e8[];
+extern const u8 sAddr_7288ba[];
+extern const u8 sAddr_728a12[];
+extern const u8 sAddr_728bfc[];
+extern const u8 sAddr_728e4a[];
+extern const u8 sAddr_728f96[];
+extern const u8 sAddr_72904e[];
+extern const u8 sAddr_7290fc[];
+extern const u8 sAddr_729792[];
+extern const u8 sAddr_729a6e[];
+extern const u8 sAddr_729c84[];
+extern const u8 sAddr_729f24[];
+extern const u8 sAddr_72a124[];
+extern const u8 sAddr_72a330[];
+extern const u8 sAddr_72a8f6[];
+extern const u8 sAddr_72b142[];
+extern const u8 sAddr_72b254[];
+extern const u8 sAddr_72b2c8[];
+extern const u8 sAddr_72b446[];
+extern const u8 sAddr_72b56e[];
+extern const u8 sAddr_72b7a6[];
+extern const u8 sAddr_72b8e6[];
+extern const u8 sAddr_72bab4[];
+extern const u8 sAddr_72bcc2[];
+extern const u8 sAddr_72bdb8[];
+extern const u8 sAddr_72be4a[];
+extern const u8 sAddr_72bef8[];
+extern const u8 sAddr_72c69c[];
+extern const u8 sAddr_72c8f2[];
+extern const u8 sAddr_72cb02[];
+extern const u8 sAddr_72cd92[];
+extern const u8 sAddr_72d002[];
+extern const u8 sAddr_72d212[];
+extern const u8 sAddr_72d81e[];
+extern const u8 sAddr_72e0b8[];
+extern const u8 sAddr_72e1b6[];
+extern const u8 sAddr_72e220[];
+extern const u8 sAddr_72e3d2[];
+extern const u8 sAddr_72e4ea[];
+extern const u8 sAddr_72e70a[];
+extern const u8 sAddr_72e848[];
+extern const u8 sAddr_72ea20[];
+extern const u8 sAddr_72ebf6[];
+extern const u8 sAddr_72ed50[];
+extern const u8 sAddr_72ee1c[];
+extern const u8 sAddr_739d58[];
+extern const u8 sAddr_73a430[];
+extern const u8 sAddr_73ab28[];
+extern const u8 sAddr_73b308[];
+extern const u8 sAddr_73baac[];
+extern const u8 sAddr_73c274[];
+extern const u8 sAddr_73c29c[];
+extern const u8 sAddr_73dbd8[];
+extern const u8 sAddr_73dbde[];
+extern const u8 sAddr_73dbe4[];
+extern const u8 sAddr_73dbea[];
+extern const u8 sAddr_73dbf6[];
+extern const u8 sAddr_73dbfc[];
+extern const u8 sAddr_73dc02[];
+extern const u8 sAddr_73dc08[];
+extern const u8 sAddr_73dc14[];
+extern const u8 sAddr_740800[];
+extern const u8 sAddr_740820[];
+extern const u8 sAddr_740840[];
+extern const u8 sAddr_7408c0[];
+extern const u8 sAddr_7409d8[];
+extern const u8 sAddr_7409e8[];
+extern const u8 sAddr_7409f8[];
+extern const u8 sAddr_740a08[];
+extern const u8 sAddr_740a18[];
+extern const u8 sAddr_740a28[];
+extern const u8 sAddr_740a38[];
+extern const u8 sAddr_740ab8[];
+extern const u8 sAddr_740ac8[];
+extern const u8 sAddr_740ad8[];
+extern const u8 sAddr_740ae8[];
+extern const u8 sAddr_740b08[];
+extern const u8 sAddr_740b28[];
+extern const u8 sAddr_740ba8[];
+extern const u8 sAddr_740bb8[];
+extern const u8 sAddr_740bc8[];
+extern const u8 sAddr_740bd8[];
+extern const u8 sAddr_740be8[];
+extern const u8 sAddr_740bf8[];
+extern const u8 sAddr_740c08[];
+extern const u8 sAddr_740c18[];
+extern const u8 sAddr_740c28[];
+extern const u8 sAddr_740c38[];
+extern const u8 sAddr_740c48[];
+extern const u8 sAddr_740c58[];
+extern const u8 sAddr_740c68[];
+extern const u8 sAddr_740c78[];
+extern const u8 sAddr_740c88[];
+extern const u8 sAddr_740c98[];
+extern const u8 sAddr_740ca8[];
+extern const u8 sAddr_740cb8[];
+extern const u8 sAddr_740cc8[];
+extern const u8 sAddr_740cd8[];
+extern const u8 sAddr_740ce8[];
+extern const u8 sAddr_740cf8[];
+extern const u8 sAddr_740f08[];
+extern const u8 sAddr_740f3a[];
+extern const u8 sAddr_740f64[];
+extern const u8 sAddr_740f82[];
+extern const u8 sAddr_740fc4[];
+extern const u8 sAddr_740ff4[];
+extern const u8 sAddr_741036[];
+extern const u8 sAddr_741078[];
+extern const u8 sAddr_7410ba[];
+extern const u8 sAddr_7410fc[];
+extern const u8 sAddr_74113e[];
+extern const u8 sAddr_741180[];
+extern const u8 sAddr_741196[];
+extern const u8 sAddr_74119e[];
+extern const u8 sAddr_7411b2[];
+extern const u8 sAddr_7411da[];
+extern const u8 sAddr_7411fa[];
+extern const u8 sAddr_74120e[];
+extern const u8 sAddr_741258[];
+extern const u8 sAddr_741280[];
+extern const u8 sAddr_7412ce[];
+extern const u8 sAddr_7412ec[];
+extern const u8 sAddr_74130e[];
+extern const u8 sAddr_741334[];
+extern const u8 sAddr_74134c[];
+extern const u8 sAddr_741364[];
+extern const u8 sAddr_741398[];
+extern const u8 sAddr_7413ce[];
+extern const u8 sAddr_741410[];
+extern const u8 sAddr_741466[];
+extern const u8 sAddr_74149c[];
+extern const u8 sAddr_7414f6[];
+extern const u8 sAddr_741550[];
+extern const u8 sAddr_7415aa[];
+extern const u8 sAddr_74160e[];
+extern const u8 sAddr_741672[];
+extern const u8 sAddr_7416d6[];
+extern const u8 sAddr_7416ec[];
+extern const u8 sAddr_74170a[];
+extern const u8 sAddr_74171e[];
+extern const u8 sAddr_741746[];
+extern const u8 sAddr_741766[];
+extern const u8 sAddr_74177a[];
+extern const u8 sAddr_7417c4[];
+extern const u8 sAddr_7417ee[];
+extern const u8 sAddr_741814[];
+extern const u8 sAddr_741830[];
+extern const u8 sAddr_74185a[];
+extern const u8 sAddr_741884[];
+extern const u8 sAddr_7418b4[];
+extern const u8 sAddr_7418dc[];
+extern const u8 sAddr_741918[];
+extern const u8 sAddr_741946[];
+extern const u8 sAddr_74197e[];
+extern const u8 sAddr_7419d4[];
+extern const u8 sAddr_741a14[];
+extern const u8 sAddr_741a76[];
+extern const u8 sAddr_741ad8[];
+extern const u8 sAddr_741b3a[];
+extern const u8 sAddr_741b98[];
+extern const u8 sAddr_741bf6[];
+extern const u8 sAddr_741c54[];
+extern const u8 sAddr_741c6e[];
+extern const u8 sAddr_741c90[];
+extern const u8 sAddr_741cb2[];
+extern const u8 sAddr_741cdc[];
+extern const u8 sAddr_741d0a[];
+extern const u8 sAddr_741d28[];
+extern const u8 sAddr_741d50[];
+extern const u8 sAddr_741d82[];
+extern const u8 sAddr_741db2[];
+extern const u8 sAddr_741dd6[];
+extern const u8 sAddr_741df2[];
+extern const u8 sAddr_741e24[];
+extern const u8 sAddr_741e48[];
+extern const u8 sAddr_741e82[];
+extern const u8 sAddr_741ec4[];
+extern const u8 sAddr_741eee[];
+extern const u8 sAddr_741f32[];
+extern const u8 sAddr_741f80[];
+extern const u8 sAddr_741fbe[];
+extern const u8 sAddr_74202a[];
+extern const u8 sAddr_742096[];
+extern const u8 sAddr_742102[];
+extern const u8 sAddr_742162[];
+extern const u8 sAddr_7421c2[];
+extern const u8 sAddr_742222[];
+extern const u8 sAddr_742244[];
+extern const u8 sAddr_742270[];
+extern const u8 sAddr_74229c[];
+extern const u8 sAddr_7422c0[];
+extern const u8 sAddr_7422f2[];
+extern const u8 sAddr_742318[];
+extern const u8 sAddr_74234e[];
+extern const u8 sAddr_742362[];
+extern const u8 sAddr_742386[];
+extern const u8 sAddr_7423aa[];
+extern const u8 sAddr_7423d4[];
+extern const u8 sAddr_7423f6[];
+extern const u8 sAddr_742420[];
+extern const u8 sAddr_74244c[];
+extern const u8 sAddr_742486[];
+extern const u8 sAddr_7424c0[];
+extern const u8 sAddr_7424fe[];
+extern const u8 sAddr_74254e[];
+extern const u8 sAddr_742586[];
+extern const u8 sAddr_7425f2[];
+extern const u8 sAddr_74265e[];
+extern const u8 sAddr_7426ca[];
+extern const u8 sAddr_74272e[];
+extern const u8 sAddr_742792[];
+extern const u8 sAddr_7427f6[];
+extern const u8 sAddr_74280c[];
+extern const u8 sAddr_74282c[];
+extern const u8 sAddr_742840[];
+extern const u8 sAddr_74286a[];
+extern const u8 sAddr_74289e[];
+extern const u8 sAddr_7428c4[];
+extern const u8 sAddr_74290a[];
+extern const u8 sAddr_742938[];
+extern const u8 sAddr_742964[];
+extern const u8 sAddr_742982[];
+extern const u8 sAddr_7429ac[];
+extern const u8 sAddr_7429dc[];
+extern const u8 sAddr_742a00[];
+extern const u8 sAddr_742a28[];
+extern const u8 sAddr_742a66[];
+extern const u8 sAddr_742a8e[];
+extern const u8 sAddr_742ac0[];
+extern const u8 sAddr_742b18[];
+extern const u8 sAddr_742b50[];
+extern const u8 sAddr_742baa[];
+extern const u8 sAddr_742c04[];
+extern const u8 sAddr_742c5e[];
+extern const u8 sAddr_742cba[];
+extern const u8 sAddr_742d16[];
+extern const u8 sAddr_742d74[];
+extern const u8 sAddr_742d8a[];
+extern const u8 sAddr_742da2[];
+extern const u8 sAddr_742dc8[];
+extern const u8 sAddr_742de4[];
+extern const u8 sAddr_742df8[];
+extern const u8 sAddr_742e18[];
+extern const u8 sAddr_742e4c[];
+extern const u8 sAddr_742e7c[];
+extern const u8 sAddr_742e9c[];
+extern const u8 sAddr_742ec6[];
+extern const u8 sAddr_742eee[];
+extern const u8 sAddr_742f14[];
+extern const u8 sAddr_742f42[];
+extern const u8 sAddr_742f66[];
+extern const u8 sAddr_742f7a[];
 
 extern const u8 sBlob_6b2fac_72eee0[];
 
@@ -61,41 +437,41 @@ static const u16* sArray_79c2e4[12] = {
 };
 
 static const u16* sPalPointers_79c314[16] = {
-	(const u16*)0x85dfd6c,
-	(const u16*)0x85dfeac,
-	(const u16*)0x85e102c,
-	(const u16*)0x85dffec,
-	(const u16*)0x85e012c,
-	(const u16*)0x85e026c,
-	(const u16*)0x85e03ac,
-	(const u16*)0x85e04ec,
-	(const u16*)0x85e062c,
-	(const u16*)0x85e076c,
-	(const u16*)0x85e08ac,
-	(const u16*)0x85e09ec,
-	(const u16*)0x85e0b2c,
-	(const u16*)0x85e0c6c,
-	(const u16*)0x85e0dac,
-	(const u16*)0x85e0eec
+	(const u16*)(&sBlob_5dfd6c_5e116c),
+	(const u16*)sAddr_5dfeac,
+	(const u16*)sAddr_5e102c,
+	(const u16*)sAddr_5dffec,
+	(const u16*)sAddr_5e012c,
+	(const u16*)sAddr_5e026c,
+	(const u16*)sAddr_5e03ac,
+	(const u16*)sAddr_5e04ec,
+	(const u16*)sAddr_5e062c,
+	(const u16*)sAddr_5e076c,
+	(const u16*)sAddr_5e08ac,
+	(const u16*)sAddr_5e09ec,
+	(const u16*)sAddr_5e0b2c,
+	(const u16*)sAddr_5e0c6c,
+	(const u16*)sAddr_5e0dac,
+	(const u16*)sAddr_5e0eec
 };
 
 static const u16* sPalPointers_79c354[16] = {
-	(const u16*)0x85f6990,
-	(const u16*)0x85f6a10,
-	(const u16*)0x85f6a90,
-	(const u16*)0x85f6b10,
-	(const u16*)0x85f6b90,
-	(const u16*)0x85f6c10,
-	(const u16*)0x85f6c90,
-	(const u16*)0x85f6d10,
-	(const u16*)0x85f6d90,
-	(const u16*)0x85f6e10,
-	(const u16*)0x85f6e90,
-	(const u16*)0x85f6f10,
-	(const u16*)0x85f6f90,
-	(const u16*)0x85f7010,
-	(const u16*)0x85f7090,
-	(const u16*)0x85f7110
+	(const u16*)(&sBlob_5f6990_5f7190),
+	(const u16*)sAddr_5f6a10,
+	(const u16*)sAddr_5f6a90,
+	(const u16*)sAddr_5f6b10,
+	(const u16*)sAddr_5f6b90,
+	(const u16*)sAddr_5f6c10,
+	(const u16*)sAddr_5f6c90,
+	(const u16*)sAddr_5f6d10,
+	(const u16*)sAddr_5f6d90,
+	(const u16*)sAddr_5f6e10,
+	(const u16*)sAddr_5f6e90,
+	(const u16*)sAddr_5f6f10,
+	(const u16*)sAddr_5f6f90,
+	(const u16*)sAddr_5f7010,
+	(const u16*)sAddr_5f7090,
+	(const u16*)sAddr_5f7110
 };
 
 const struct FrameData* sIntroSpaceViewParticleOam[6] = {
@@ -108,13 +484,13 @@ const struct FrameData* sIntroSpaceViewParticleOam[6] = {
 };
 
 const u16** sEndingTextPointers[LANGUAGE_COUNT] = {
-    (const u16**)0x879ce10,
-    (const u16**)0x879d194,
-    (const u16**)0x879d50c,
-    (const u16**)0x879d890,
-    (const u16**)0x879dc14,
-    (const u16**)0x879df98,
-    (const u16**)0x879e31c
+    (const u16**)(&sPointerTable_79ce10),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0x384),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0x6fc),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0xa80),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0xe04),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0x1188),
+    (const u16**)((const u8*)&sPointerTable_79ce10 + 0x150c)
 };
 
 static const u32* sIntroSr388SurfaceBgGfxPointers[8] = {
@@ -184,75 +560,75 @@ const u32* sTitleIntroCollisionWarningObjGfxPointers[6] = {
 u8 sBlob_79c474_79c4a8[] = INCBIN_U8("data/Blob_79c474_79c4a8.bin");
 
 const u16* sCutsceneMonologueBgPalPointers[9] = {
-    (const u16*)0x86638c0,
-    (const u16*)0x866aa68,
-    (const u16*)0x86638c0,
-    (const u16*)0x86638c0,
-    (const u16*)0x866aa68,
-    (const u16*)0x8671a04,
-    (const u16*)0x86638c0,
-    (const u16*)0x86638c0,
-    (const u16*)0x86638c0
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_66aa68,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_66aa68,
+    (const u16*)sAddr_671a04,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_6638c0,
+    (const u16*)sAddr_6638c0
 };
 
 const u16* sCutsceneMonologueObjPalPointers[9] = {
-    (const u16*)0x8663a20,
-    (const u16*)0x8663a20,
-    (const u16*)0x8663a20,
-    (const u16*)0x8663a20,
-    (const u16*)0x866abc8,
-    (const u16*)0x8671b64,
-    (const u16*)0x8663a20,
-    (const u16*)0x8663a20,
-    (const u16*)0x8663a20
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_66abc8,
+    (const u16*)sAddr_671b64,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20,
+    (const u16*)sAddr_663a20
 };
 
 const u32* sCutsceneMonologueBgGfxPointers[9] = {
-    (const u32*)0x865c468,
-    (const u32*)0x8663eac,
-    (const u32*)0x865c468,
-    (const u32*)0x865c468,
-    (const u32*)0x8663eac,
-    (const u32*)0x866b524,
-    (const u32*)0x865c468,
-    (const u32*)0x865c468,
-    (const u32*)0x865c468
+    (const u32*)(&sBlob_65c468_662804),
+    (const u32*)sAddr_663eac,
+    (const u32*)(&sBlob_65c468_662804),
+    (const u32*)(&sBlob_65c468_662804),
+    (const u32*)sAddr_663eac,
+    (const u32*)sAddr_66b524,
+    (const u32*)(&sBlob_65c468_662804),
+    (const u32*)(&sBlob_65c468_662804),
+    (const u32*)(&sBlob_65c468_662804)
 };
 
 const u32* sCutsceneMonologueObjGfxPointers[9] = {
-    (const u32*)0x865fc24,
-    (const u32*)0x865fc24,
-    (const u32*)0x865fc24,
-    (const u32*)0x865fc24,
-    (const u32*)0x8667c18,
-    (const u32*)0x866ec18,
-    (const u32*)0x865fc24,
-    (const u32*)0x865fc24,
-    (const u32*)0x865fc24
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_667c18,
+    (const u32*)sAddr_66ec18,
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_65fc24,
+    (const u32*)sAddr_65fc24
 };
 
 const u32* sCutsceneMonologueBgTilemapPointers[9] = {
-    (const u32*)0x8662cfc,
-    (const u32*)0x866ac88,
-    (const u32*)0x8662cfc,
-    (const u32*)0x8662cfc,
-    (const u32*)0x866ac88,
-    (const u32*)0x8671c24,
-    (const u32*)0x8662cfc,
-    (const u32*)0x8662cfc,
-    (const u32*)0x8662cfc
+    (const u32*)(&sBlob_662cfc_663820),
+    (const u32*)sAddr_66ac88,
+    (const u32*)(&sBlob_662cfc_663820),
+    (const u32*)(&sBlob_662cfc_663820),
+    (const u32*)sAddr_66ac88,
+    (const u32*)sAddr_671c24,
+    (const u32*)(&sBlob_662cfc_663820),
+    (const u32*)(&sBlob_662cfc_663820),
+    (const u32*)(&sBlob_662cfc_663820)
 };
 
 const struct FrameData* sCutsceneMonologueOamPointers[9][2] = {
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x866aa30, (const struct FrameData*)0x866aa58 },
-    { (const struct FrameData*)0x86719cc, (const struct FrameData*)0x86719f4 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 },
-    { (const struct FrameData*)0x8663dd0, (const struct FrameData*)0x8663df8 }
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_66aa30, (const struct FrameData*)sAddr_66aa58 },
+    { (const struct FrameData*)sAddr_6719cc, (const struct FrameData*)sAddr_6719f4 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 },
+    { (const struct FrameData*)sAddr_663dd0, (const struct FrameData*)sAddr_663df8 }
 };
 
 u16** sMonologueTextPointers[LANGUAGE_COUNT] = {
@@ -2382,213 +2758,213 @@ u32 sPointerTable_79ce10[1572] = {
 };
 
 static u16* sMonologueTextPointersJapanese[19] = {
-	(u16*)0x871e20c,
-	(u16*)0x871e4e4,
-	(u16*)0x871e67e,
-	(u16*)0x871e814,
-	(u16*)0x871e9b6,
-	(u16*)0x871eb34,
-	(u16*)0x871ecac,
-	(u16*)0x871efc2,
-	(u16*)0x871f498,
-	(u16*)0x871f52c,
-	(u16*)0x871f56c,
-	(u16*)0x871f5fc,
-	(u16*)0x871f656,
-	(u16*)0x871f71a,
-	(u16*)0x871f7cc,
-	(u16*)0x871f896,
-	(u16*)0x871f98a,
-	(u16*)0x871fa32,
-	(u16*)0x871fa92
+	(u16*)sAddr_71e20c,
+	(u16*)sAddr_71e4e4,
+	(u16*)sAddr_71e67e,
+	(u16*)sAddr_71e814,
+	(u16*)sAddr_71e9b6,
+	(u16*)sAddr_71eb34,
+	(u16*)sAddr_71ecac,
+	(u16*)sAddr_71efc2,
+	(u16*)sAddr_71f498,
+	(u16*)sAddr_71f52c,
+	(u16*)sAddr_71f56c,
+	(u16*)sAddr_71f5fc,
+	(u16*)sAddr_71f656,
+	(u16*)sAddr_71f71a,
+	(u16*)sAddr_71f7cc,
+	(u16*)sAddr_71f896,
+	(u16*)sAddr_71f98a,
+	(u16*)sAddr_71fa32,
+	(u16*)sAddr_71fa92
 };
 
 static u16* sMonologueTextPointersEnglish[19] = {
-	(u16*)0x871fad4,
-	(u16*)0x87200ee,
-	(u16*)0x8720310,
-	(u16*)0x8720528,
-	(u16*)0x8720748,
-	(u16*)0x872094a,
-	(u16*)0x8720b4a,
-	(u16*)0x8721116,
-	(u16*)0x872192e,
-	(u16*)0x8721a12,
-	(u16*)0x8721ab6,
-	(u16*)0x8721c28,
-	(u16*)0x8721d12,
-	(u16*)0x8721f20,
-	(u16*)0x8722068,
-	(u16*)0x8722238,
-	(u16*)0x8722438,
-	(u16*)0x8722550,
-	(u16*)0x87225f8
+	(u16*)sAddr_71fad4,
+	(u16*)sAddr_7200ee,
+	(u16*)sAddr_720310,
+	(u16*)sAddr_720528,
+	(u16*)sAddr_720748,
+	(u16*)sAddr_72094a,
+	(u16*)sAddr_720b4a,
+	(u16*)sAddr_721116,
+	(u16*)sAddr_72192e,
+	(u16*)sAddr_721a12,
+	(u16*)sAddr_721ab6,
+	(u16*)sAddr_721c28,
+	(u16*)sAddr_721d12,
+	(u16*)sAddr_721f20,
+	(u16*)sAddr_722068,
+	(u16*)sAddr_722238,
+	(u16*)sAddr_722438,
+	(u16*)sAddr_722550,
+	(u16*)sAddr_7225f8
 };
 
 static u16* sMonologueTextPointersGerman[19] = {
-	(u16*)0x87226a0,
-	(u16*)0x8723016,
-	(u16*)0x8723324,
-	(u16*)0x8723624,
-	(u16*)0x8723958,
-	(u16*)0x8723be2,
-	(u16*)0x8723e44,
-	(u16*)0x872475e,
-	(u16*)0x87252c6,
-	(u16*)0x8725412,
-	(u16*)0x87254ea,
-	(u16*)0x87256d8,
-	(u16*)0x872581e,
-	(u16*)0x8725a60,
-	(u16*)0x8725b94,
-	(u16*)0x8725dac,
-	(u16*)0x872603c,
-	(u16*)0x87261c6,
-	(u16*)0x87262aa
+	(u16*)sAddr_7226a0,
+	(u16*)sAddr_723016,
+	(u16*)sAddr_723324,
+	(u16*)sAddr_723624,
+	(u16*)sAddr_723958,
+	(u16*)sAddr_723be2,
+	(u16*)sAddr_723e44,
+	(u16*)sAddr_72475e,
+	(u16*)sAddr_7252c6,
+	(u16*)sAddr_725412,
+	(u16*)sAddr_7254ea,
+	(u16*)sAddr_7256d8,
+	(u16*)sAddr_72581e,
+	(u16*)sAddr_725a60,
+	(u16*)sAddr_725b94,
+	(u16*)sAddr_725dac,
+	(u16*)sAddr_72603c,
+	(u16*)sAddr_7261c6,
+	(u16*)sAddr_7262aa
 };
 
 static u16* sMonologueTextPointersFrench[19] = {
-	(u16*)0x872638c,
-	(u16*)0x8726aa6,
-	(u16*)0x8726cfe,
-	(u16*)0x8726f04,
-	(u16*)0x8727106,
-	(u16*)0x8727314,
-	(u16*)0x8727522,
-	(u16*)0x8727b08,
-	(u16*)0x87282bc,
-	(u16*)0x87283a6,
-	(u16*)0x8728466,
-	(u16*)0x8728608,
-	(u16*)0x87286e8,
-	(u16*)0x87288ba,
-	(u16*)0x8728a12,
-	(u16*)0x8728bfc,
-	(u16*)0x8728e4a,
-	(u16*)0x8728f96,
-	(u16*)0x872904e
+	(u16*)sAddr_72638c,
+	(u16*)sAddr_726aa6,
+	(u16*)sAddr_726cfe,
+	(u16*)sAddr_726f04,
+	(u16*)sAddr_727106,
+	(u16*)sAddr_727314,
+	(u16*)sAddr_727522,
+	(u16*)sAddr_727b08,
+	(u16*)sAddr_7282bc,
+	(u16*)sAddr_7283a6,
+	(u16*)sAddr_728466,
+	(u16*)sAddr_728608,
+	(u16*)sAddr_7286e8,
+	(u16*)sAddr_7288ba,
+	(u16*)sAddr_728a12,
+	(u16*)sAddr_728bfc,
+	(u16*)sAddr_728e4a,
+	(u16*)sAddr_728f96,
+	(u16*)sAddr_72904e
 };
 
 static u16* sMonologueTextPointersItalian[19] = {
-	(u16*)0x87290fc,
-	(u16*)0x8729792,
-	(u16*)0x8729a6e,
-	(u16*)0x8729c84,
-	(u16*)0x8729f24,
-	(u16*)0x872a124,
-	(u16*)0x872a330,
-	(u16*)0x872a8f6,
-	(u16*)0x872b142,
-	(u16*)0x872b254,
-	(u16*)0x872b2c8,
-	(u16*)0x872b446,
-	(u16*)0x872b56e,
-	(u16*)0x872b7a6,
-	(u16*)0x872b8e6,
-	(u16*)0x872bab4,
-	(u16*)0x872bcc2,
-	(u16*)0x872bdb8,
-	(u16*)0x872be4a
+	(u16*)sAddr_7290fc,
+	(u16*)sAddr_729792,
+	(u16*)sAddr_729a6e,
+	(u16*)sAddr_729c84,
+	(u16*)sAddr_729f24,
+	(u16*)sAddr_72a124,
+	(u16*)sAddr_72a330,
+	(u16*)sAddr_72a8f6,
+	(u16*)sAddr_72b142,
+	(u16*)sAddr_72b254,
+	(u16*)sAddr_72b2c8,
+	(u16*)sAddr_72b446,
+	(u16*)sAddr_72b56e,
+	(u16*)sAddr_72b7a6,
+	(u16*)sAddr_72b8e6,
+	(u16*)sAddr_72bab4,
+	(u16*)sAddr_72bcc2,
+	(u16*)sAddr_72bdb8,
+	(u16*)sAddr_72be4a
 };
 
 static u16* sMonologueTextPointersSpanish[19] = {
-	(u16*)0x872bef8,
-	(u16*)0x872c69c,
-	(u16*)0x872c8f2,
-	(u16*)0x872cb02,
-	(u16*)0x872cd92,
-	(u16*)0x872d002,
-	(u16*)0x872d212,
-	(u16*)0x872d81e,
-	(u16*)0x872e0b8,
-	(u16*)0x872e1b6,
-	(u16*)0x872e220,
-	(u16*)0x872e3d2,
-	(u16*)0x872e4ea,
-	(u16*)0x872e70a,
-	(u16*)0x872e848,
-	(u16*)0x872ea20,
-	(u16*)0x872ebf6,
-	(u16*)0x872ed50,
-	(u16*)0x872ee1c
+	(u16*)sAddr_72bef8,
+	(u16*)sAddr_72c69c,
+	(u16*)sAddr_72c8f2,
+	(u16*)sAddr_72cb02,
+	(u16*)sAddr_72cd92,
+	(u16*)sAddr_72d002,
+	(u16*)sAddr_72d212,
+	(u16*)sAddr_72d81e,
+	(u16*)sAddr_72e0b8,
+	(u16*)sAddr_72e1b6,
+	(u16*)sAddr_72e220,
+	(u16*)sAddr_72e3d2,
+	(u16*)sAddr_72e4ea,
+	(u16*)sAddr_72e70a,
+	(u16*)sAddr_72e848,
+	(u16*)sAddr_72ea20,
+	(u16*)sAddr_72ebf6,
+	(u16*)sAddr_72ed50,
+	(u16*)sAddr_72ee1c
 };
 
 const struct FrameData* sGameOverCursorOamPointers[3] = {
-    (const struct FrameData*)0x873c274,
-    (const struct FrameData*)0x873c29c,
-    (const struct FrameData*)0x873c29c
+    (const struct FrameData*)sAddr_73c274,
+    (const struct FrameData*)sAddr_73c29c,
+    (const struct FrameData*)sAddr_73c29c
 };
 
 const u32* sGameOverTextGfxPointers[LANGUAGE_COUNT] = {
-    (const u32*)0x8739d58,
-    (const u32*)0x8739d58,
-    (const u32*)0x8739d58,
-    (const u32*)0x873a430,
-    (const u32*)0x873ab28,
-    (const u32*)0x873b308,
-    (const u32*)0x873baac
+    (const u32*)sAddr_739d58,
+    (const u32*)sAddr_739d58,
+    (const u32*)sAddr_739d58,
+    (const u32*)sAddr_73a430,
+    (const u32*)sAddr_73ab28,
+    (const u32*)sAddr_73b308,
+    (const u32*)sAddr_73baac
 };
 
 const struct FrameData* sFileSelectFileOverlayOamPointers[5] = {
-    (const struct FrameData*)0x8740ab8,
-    (const struct FrameData*)0x8740ac8,
-    (const struct FrameData*)0x8740ad8,
-    (const struct FrameData*)0x87408c0,
-    (const struct FrameData*)0x87408c0
+    (const struct FrameData*)sAddr_740ab8,
+    (const struct FrameData*)sAddr_740ac8,
+    (const struct FrameData*)sAddr_740ad8,
+    (const struct FrameData*)sAddr_7408c0,
+    (const struct FrameData*)sAddr_7408c0
 };
 
 const struct FrameData* sFileSelectCursorOamPointers[3][3] = {
     [0] = {
-        (const struct FrameData*)0x8740800,
-        (const struct FrameData*)0x8740800,
-        (const struct FrameData*)0x8740820
+        (const struct FrameData*)sAddr_740800,
+        (const struct FrameData*)sAddr_740800,
+        (const struct FrameData*)sAddr_740820
     },
     [1] = {
-        (const struct FrameData*)0x8740840,
-        (const struct FrameData*)0x8740840,
-        (const struct FrameData*)0x8740ae8
+        (const struct FrameData*)sAddr_740840,
+        (const struct FrameData*)sAddr_740840,
+        (const struct FrameData*)sAddr_740ae8
     },
     [2] = {
-        (const struct FrameData*)0x8740b08,
-        (const struct FrameData*)0x8740b28,
-        (const struct FrameData*)0x8740b28
+        (const struct FrameData*)sAddr_740b08,
+        (const struct FrameData*)sAddr_740b28,
+        (const struct FrameData*)sAddr_740b28
     }
 };
 
 const u16* sFileSelectTextPositions_Default[6] = {
-    (const u16*)0x873dbcc,
-    (const u16*)0x873dbd8,
-    (const u16*)0x873dbde,
-    (const u16*)0x873dbde,
-    (const u16*)0x873dbde,
-    (const u16*)0x873dbe4
+    (const u16*)(&sBlob_73dbcc_7478a0),
+    (const u16*)sAddr_73dbd8,
+    (const u16*)sAddr_73dbde,
+    (const u16*)sAddr_73dbde,
+    (const u16*)sAddr_73dbde,
+    (const u16*)sAddr_73dbe4
 };
 
 const u16* sFileSelectTextPositions_German[6] = {
-    (const u16*)0x873dbea,
-    (const u16*)0x873dbf6,
-    (const u16*)0x873dbfc,
-    (const u16*)0x873dbfc,
-    (const u16*)0x873dbfc,
-    (const u16*)0x873dc02
+    (const u16*)sAddr_73dbea,
+    (const u16*)sAddr_73dbf6,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dc02
 };
 
 const u16* sFileSelectTextPositions_French[6] = {
-    (const u16*)0x873dc08,
-    (const u16*)0x873dbf6,
-    (const u16*)0x873dbfc,
-    (const u16*)0x873dbfc,
-    (const u16*)0x873dbfc,
-    (const u16*)0x873dc02
+    (const u16*)sAddr_73dc08,
+    (const u16*)sAddr_73dbf6,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dc02
 };
 
 const u16* sFileSelectTextPositions_Spanish[6] = {
-    (const u16*)0x873dc14,
-    (const u16*)0x873dbf6,
-    (const u16*)0x873dbfc,
-    (const u16*)0x873dbfc,
-    (const u16*)0x873dbfc,
-    (const u16*)0x873dc02
+    (const u16*)sAddr_73dc14,
+    (const u16*)sAddr_73dbf6,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dbfc,
+    (const u16*)sAddr_73dc02
 };
 
 const u16* const* sFileSelectTextPositionsPointers[LANGUAGE_COUNT] = {
@@ -2603,241 +2979,241 @@ const u16* const* sFileSelectTextPositionsPointers[LANGUAGE_COUNT] = {
 
 const struct FrameData* sFileSelectAreaNameOamPointers[LANGUAGE_COUNT][7] = {
     [0] = {
-        (const struct FrameData*)0x8740a38,
-        (const struct FrameData*)0x87409d8,
-        (const struct FrameData*)0x87409e8,
-        (const struct FrameData*)0x87409f8,
-        (const struct FrameData*)0x8740a08,
-        (const struct FrameData*)0x8740a18,
-        (const struct FrameData*)0x8740a28
+        (const struct FrameData*)sAddr_740a38,
+        (const struct FrameData*)sAddr_7409d8,
+        (const struct FrameData*)sAddr_7409e8,
+        (const struct FrameData*)sAddr_7409f8,
+        (const struct FrameData*)sAddr_740a08,
+        (const struct FrameData*)sAddr_740a18,
+        (const struct FrameData*)sAddr_740a28
     },
     [1] = {
-        (const struct FrameData*)0x8740a38,
-        (const struct FrameData*)0x87409d8,
-        (const struct FrameData*)0x87409e8,
-        (const struct FrameData*)0x87409f8,
-        (const struct FrameData*)0x8740a08,
-        (const struct FrameData*)0x8740a18,
-        (const struct FrameData*)0x8740a28
+        (const struct FrameData*)sAddr_740a38,
+        (const struct FrameData*)sAddr_7409d8,
+        (const struct FrameData*)sAddr_7409e8,
+        (const struct FrameData*)sAddr_7409f8,
+        (const struct FrameData*)sAddr_740a08,
+        (const struct FrameData*)sAddr_740a18,
+        (const struct FrameData*)sAddr_740a28
     },
     [2] = {
-        (const struct FrameData*)0x8740a38,
-        (const struct FrameData*)0x87409d8,
-        (const struct FrameData*)0x87409e8,
-        (const struct FrameData*)0x87409f8,
-        (const struct FrameData*)0x8740a08,
-        (const struct FrameData*)0x8740a18,
-        (const struct FrameData*)0x8740a28
+        (const struct FrameData*)sAddr_740a38,
+        (const struct FrameData*)sAddr_7409d8,
+        (const struct FrameData*)sAddr_7409e8,
+        (const struct FrameData*)sAddr_7409f8,
+        (const struct FrameData*)sAddr_740a08,
+        (const struct FrameData*)sAddr_740a18,
+        (const struct FrameData*)sAddr_740a28
     },
     [3] = {
-        (const struct FrameData*)0x8740c08,
-        (const struct FrameData*)0x8740ba8,
-        (const struct FrameData*)0x8740bb8,
-        (const struct FrameData*)0x8740bc8,
-        (const struct FrameData*)0x8740bd8,
-        (const struct FrameData*)0x8740be8,
-        (const struct FrameData*)0x8740bf8
+        (const struct FrameData*)sAddr_740c08,
+        (const struct FrameData*)sAddr_740ba8,
+        (const struct FrameData*)sAddr_740bb8,
+        (const struct FrameData*)sAddr_740bc8,
+        (const struct FrameData*)sAddr_740bd8,
+        (const struct FrameData*)sAddr_740be8,
+        (const struct FrameData*)sAddr_740bf8
     },
     [4] = {
-        (const struct FrameData*)0x8740c78,
-        (const struct FrameData*)0x8740c18,
-        (const struct FrameData*)0x8740c28,
-        (const struct FrameData*)0x8740c38,
-        (const struct FrameData*)0x8740c48,
-        (const struct FrameData*)0x8740c58,
-        (const struct FrameData*)0x8740c68
+        (const struct FrameData*)sAddr_740c78,
+        (const struct FrameData*)sAddr_740c18,
+        (const struct FrameData*)sAddr_740c28,
+        (const struct FrameData*)sAddr_740c38,
+        (const struct FrameData*)sAddr_740c48,
+        (const struct FrameData*)sAddr_740c58,
+        (const struct FrameData*)sAddr_740c68
     },
     [5] = {
-        (const struct FrameData*)0x8740ce8,
-        (const struct FrameData*)0x8740c88,
-        (const struct FrameData*)0x8740c98,
-        (const struct FrameData*)0x8740ca8,
-        (const struct FrameData*)0x8740cb8,
-        (const struct FrameData*)0x8740cc8,
-        (const struct FrameData*)0x8740cd8
+        (const struct FrameData*)sAddr_740ce8,
+        (const struct FrameData*)sAddr_740c88,
+        (const struct FrameData*)sAddr_740c98,
+        (const struct FrameData*)sAddr_740ca8,
+        (const struct FrameData*)sAddr_740cb8,
+        (const struct FrameData*)sAddr_740cc8,
+        (const struct FrameData*)sAddr_740cd8
     },
     [6] = {
-        (const struct FrameData*)0x8740cf8,
-        (const struct FrameData*)0x87409d8,
-        (const struct FrameData*)0x87409e8,
-        (const struct FrameData*)0x87409f8,
-        (const struct FrameData*)0x8740a08,
-        (const struct FrameData*)0x8740a18,
-        (const struct FrameData*)0x8740a28
+        (const struct FrameData*)sAddr_740cf8,
+        (const struct FrameData*)sAddr_7409d8,
+        (const struct FrameData*)sAddr_7409e8,
+        (const struct FrameData*)sAddr_7409f8,
+        (const struct FrameData*)sAddr_740a08,
+        (const struct FrameData*)sAddr_740a18,
+        (const struct FrameData*)sAddr_740a28
     }
 };
 
 const u16* sFileSelectTextPointers_Japanese[25] = {
-    (const u16*)0x8740f08,
-    (const u16*)0x8740f3a,
-    (const u16*)0x8740f64,
-    (const u16*)0x8740f82,
-    (const u16*)0x8740fc4,
-    (const u16*)0x8740ff4,
-    (const u16*)0x8741036,
-    (const u16*)0x8741078,
-    (const u16*)0x87410ba,
-    (const u16*)0x87410fc,
-    (const u16*)0x874113e,
-    (const u16*)0x8741180,
-    (const u16*)0x8741196,
-    (const u16*)0x874119e,
-    (const u16*)0x87411b2,
-    (const u16*)0x87411da,
-    (const u16*)0x87411fa,
-    (const u16*)0x874120e,
-    (const u16*)0x8741258,
-    (const u16*)0x8741280,
-    (const u16*)0x87412ce,
-    (const u16*)0x87412ec,
-    (const u16*)0x874130e,
-    (const u16*)0x8741334,
-    (const u16*)0x874134c
+    (const u16*)sAddr_740f08,
+    (const u16*)sAddr_740f3a,
+    (const u16*)sAddr_740f64,
+    (const u16*)sAddr_740f82,
+    (const u16*)sAddr_740fc4,
+    (const u16*)sAddr_740ff4,
+    (const u16*)sAddr_741036,
+    (const u16*)sAddr_741078,
+    (const u16*)sAddr_7410ba,
+    (const u16*)sAddr_7410fc,
+    (const u16*)sAddr_74113e,
+    (const u16*)sAddr_741180,
+    (const u16*)sAddr_741196,
+    (const u16*)sAddr_74119e,
+    (const u16*)sAddr_7411b2,
+    (const u16*)sAddr_7411da,
+    (const u16*)sAddr_7411fa,
+    (const u16*)sAddr_74120e,
+    (const u16*)sAddr_741258,
+    (const u16*)sAddr_741280,
+    (const u16*)sAddr_7412ce,
+    (const u16*)sAddr_7412ec,
+    (const u16*)sAddr_74130e,
+    (const u16*)sAddr_741334,
+    (const u16*)sAddr_74134c
 };
 
 const u16* sFileSelectTextPointers_English[25] = {
-    (const u16*)0x8741364,
-    (const u16*)0x8741398,
-    (const u16*)0x87413ce,
-    (const u16*)0x8741410,
-    (const u16*)0x8741466,
-    (const u16*)0x874149c,
-    (const u16*)0x87414f6,
-    (const u16*)0x8741550,
-    (const u16*)0x87415aa,
-    (const u16*)0x874160e,
-    (const u16*)0x8741672,
-    (const u16*)0x87416d6,
-    (const u16*)0x87416ec,
-    (const u16*)0x874170a,
-    (const u16*)0x874171e,
-    (const u16*)0x8741746,
-    (const u16*)0x8741766,
-    (const u16*)0x874177a,
-    (const u16*)0x87417c4,
-    (const u16*)0x87417ee,
-    (const u16*)0x8741814,
-    (const u16*)0x8741830,
-    (const u16*)0x874185a,
-    (const u16*)0x8741884,
-    (const u16*)0x87418b4
+    (const u16*)sAddr_741364,
+    (const u16*)sAddr_741398,
+    (const u16*)sAddr_7413ce,
+    (const u16*)sAddr_741410,
+    (const u16*)sAddr_741466,
+    (const u16*)sAddr_74149c,
+    (const u16*)sAddr_7414f6,
+    (const u16*)sAddr_741550,
+    (const u16*)sAddr_7415aa,
+    (const u16*)sAddr_74160e,
+    (const u16*)sAddr_741672,
+    (const u16*)sAddr_7416d6,
+    (const u16*)sAddr_7416ec,
+    (const u16*)sAddr_74170a,
+    (const u16*)sAddr_74171e,
+    (const u16*)sAddr_741746,
+    (const u16*)sAddr_741766,
+    (const u16*)sAddr_74177a,
+    (const u16*)sAddr_7417c4,
+    (const u16*)sAddr_7417ee,
+    (const u16*)sAddr_741814,
+    (const u16*)sAddr_741830,
+    (const u16*)sAddr_74185a,
+    (const u16*)sAddr_741884,
+    (const u16*)sAddr_7418b4
 };
 
 const u16* sFileSelectTextPointers_German[25] = {
-    (const u16*)0x87418dc,
-    (const u16*)0x8741918,
-    (const u16*)0x8741946,
-    (const u16*)0x874197e,
-    (const u16*)0x87419d4,
-    (const u16*)0x8741a14,
-    (const u16*)0x8741a76,
-    (const u16*)0x8741ad8,
-    (const u16*)0x8741b3a,
-    (const u16*)0x8741b98,
-    (const u16*)0x8741bf6,
-    (const u16*)0x8741c54,
-    (const u16*)0x8741c6e,
-    (const u16*)0x8741c90,
-    (const u16*)0x8741cb2,
-    (const u16*)0x8741cdc,
-    (const u16*)0x8741d0a,
-    (const u16*)0x8741d28,
-    (const u16*)0x8741d50,
-    (const u16*)0x8741d82,
-    (const u16*)0x8741db2,
-    (const u16*)0x8741dd6,
-    (const u16*)0x8741df2,
-    (const u16*)0x8741e24,
-    (const u16*)0x8741e48
+    (const u16*)sAddr_7418dc,
+    (const u16*)sAddr_741918,
+    (const u16*)sAddr_741946,
+    (const u16*)sAddr_74197e,
+    (const u16*)sAddr_7419d4,
+    (const u16*)sAddr_741a14,
+    (const u16*)sAddr_741a76,
+    (const u16*)sAddr_741ad8,
+    (const u16*)sAddr_741b3a,
+    (const u16*)sAddr_741b98,
+    (const u16*)sAddr_741bf6,
+    (const u16*)sAddr_741c54,
+    (const u16*)sAddr_741c6e,
+    (const u16*)sAddr_741c90,
+    (const u16*)sAddr_741cb2,
+    (const u16*)sAddr_741cdc,
+    (const u16*)sAddr_741d0a,
+    (const u16*)sAddr_741d28,
+    (const u16*)sAddr_741d50,
+    (const u16*)sAddr_741d82,
+    (const u16*)sAddr_741db2,
+    (const u16*)sAddr_741dd6,
+    (const u16*)sAddr_741df2,
+    (const u16*)sAddr_741e24,
+    (const u16*)sAddr_741e48
 };
 
 const u16* sFileSelectTextPointers_French[25] = {
-    (const u16*)0x8741e82,
-    (const u16*)0x8741ec4,
-    (const u16*)0x8741eee,
-    (const u16*)0x8741f32,
-    (const u16*)0x8741f80,
-    (const u16*)0x8741fbe,
-    (const u16*)0x874202a,
-    (const u16*)0x8742096,
-    (const u16*)0x8742102,
-    (const u16*)0x8742162,
-    (const u16*)0x87421c2,
-    (const u16*)0x8742222,
-    (const u16*)0x8742244,
-    (const u16*)0x8742270,
-    (const u16*)0x874229c,
-    (const u16*)0x87422c0,
-    (const u16*)0x87422f2,
-    (const u16*)0x8742318,
-    (const u16*)0x874234e,
-    (const u16*)0x8742362,
-    (const u16*)0x8742386,
-    (const u16*)0x87423aa,
-    (const u16*)0x87423d4,
-    (const u16*)0x87423f6,
-    (const u16*)0x8742420
+    (const u16*)sAddr_741e82,
+    (const u16*)sAddr_741ec4,
+    (const u16*)sAddr_741eee,
+    (const u16*)sAddr_741f32,
+    (const u16*)sAddr_741f80,
+    (const u16*)sAddr_741fbe,
+    (const u16*)sAddr_74202a,
+    (const u16*)sAddr_742096,
+    (const u16*)sAddr_742102,
+    (const u16*)sAddr_742162,
+    (const u16*)sAddr_7421c2,
+    (const u16*)sAddr_742222,
+    (const u16*)sAddr_742244,
+    (const u16*)sAddr_742270,
+    (const u16*)sAddr_74229c,
+    (const u16*)sAddr_7422c0,
+    (const u16*)sAddr_7422f2,
+    (const u16*)sAddr_742318,
+    (const u16*)sAddr_74234e,
+    (const u16*)sAddr_742362,
+    (const u16*)sAddr_742386,
+    (const u16*)sAddr_7423aa,
+    (const u16*)sAddr_7423d4,
+    (const u16*)sAddr_7423f6,
+    (const u16*)sAddr_742420
 };
 
 const u16* sFileSelectTextPointers_Italian[25] = {
-    (const u16*)0x874244c,
-    (const u16*)0x8742486,
-    (const u16*)0x87424c0,
-    (const u16*)0x87424fe,
-    (const u16*)0x874254e,
-    (const u16*)0x8742586,
-    (const u16*)0x87425f2,
-    (const u16*)0x874265e,
-    (const u16*)0x87426ca,
-    (const u16*)0x874272e,
-    (const u16*)0x8742792,
-    (const u16*)0x87427f6,
-    (const u16*)0x874280c,
-    (const u16*)0x874282c,
-    (const u16*)0x8742840,
-    (const u16*)0x874286a,
-    (const u16*)0x874289e,
-    (const u16*)0x87428c4,
-    (const u16*)0x874290a,
-    (const u16*)0x8742938,
-    (const u16*)0x8742964,
-    (const u16*)0x8742982,
-    (const u16*)0x87429ac,
-    (const u16*)0x87429dc,
-    (const u16*)0x8742a00
+    (const u16*)sAddr_74244c,
+    (const u16*)sAddr_742486,
+    (const u16*)sAddr_7424c0,
+    (const u16*)sAddr_7424fe,
+    (const u16*)sAddr_74254e,
+    (const u16*)sAddr_742586,
+    (const u16*)sAddr_7425f2,
+    (const u16*)sAddr_74265e,
+    (const u16*)sAddr_7426ca,
+    (const u16*)sAddr_74272e,
+    (const u16*)sAddr_742792,
+    (const u16*)sAddr_7427f6,
+    (const u16*)sAddr_74280c,
+    (const u16*)sAddr_74282c,
+    (const u16*)sAddr_742840,
+    (const u16*)sAddr_74286a,
+    (const u16*)sAddr_74289e,
+    (const u16*)sAddr_7428c4,
+    (const u16*)sAddr_74290a,
+    (const u16*)sAddr_742938,
+    (const u16*)sAddr_742964,
+    (const u16*)sAddr_742982,
+    (const u16*)sAddr_7429ac,
+    (const u16*)sAddr_7429dc,
+    (const u16*)sAddr_742a00
 };
 
 const u16* sFileSelectTextPointers_Spanish[25] = {
-    (const u16*)0x8742a28,
-    (const u16*)0x8742a66,
-    (const u16*)0x8742a8e,
-    (const u16*)0x8742ac0,
-    (const u16*)0x8742b18,
-    (const u16*)0x8742b50,
-    (const u16*)0x8742baa,
-    (const u16*)0x8742c04,
-    (const u16*)0x8742c5e,
-    (const u16*)0x8742cba,
-    (const u16*)0x8742d16,
-    (const u16*)0x8742d74,
-    (const u16*)0x8742d8a,
-    (const u16*)0x8742da2,
-    (const u16*)0x8742dc8,
-    (const u16*)0x8742de4,
-    (const u16*)0x8742df8,
-    (const u16*)0x8742e18,
-    (const u16*)0x8742e4c,
-    (const u16*)0x8742e7c,
-    (const u16*)0x8742e9c,
-    (const u16*)0x8742ec6,
-    (const u16*)0x8742eee,
-    (const u16*)0x8742f14,
-    (const u16*)0x8742f42
+    (const u16*)sAddr_742a28,
+    (const u16*)sAddr_742a66,
+    (const u16*)sAddr_742a8e,
+    (const u16*)sAddr_742ac0,
+    (const u16*)sAddr_742b18,
+    (const u16*)sAddr_742b50,
+    (const u16*)sAddr_742baa,
+    (const u16*)sAddr_742c04,
+    (const u16*)sAddr_742c5e,
+    (const u16*)sAddr_742cba,
+    (const u16*)sAddr_742d16,
+    (const u16*)sAddr_742d74,
+    (const u16*)sAddr_742d8a,
+    (const u16*)sAddr_742da2,
+    (const u16*)sAddr_742dc8,
+    (const u16*)sAddr_742de4,
+    (const u16*)sAddr_742df8,
+    (const u16*)sAddr_742e18,
+    (const u16*)sAddr_742e4c,
+    (const u16*)sAddr_742e7c,
+    (const u16*)sAddr_742e9c,
+    (const u16*)sAddr_742ec6,
+    (const u16*)sAddr_742eee,
+    (const u16*)sAddr_742f14,
+    (const u16*)sAddr_742f42
 };
 
 const u16* sFileSelectCorruptedTextPointers[2] = {
-    (const u16*)0x8742f66,
-    (const u16*)0x8742f7a
+    (const u16*)sAddr_742f66,
+    (const u16*)sAddr_742f7a
 };
 
 const u16** sFileSelectTextPointers[LANGUAGE_COUNT] = {

@@ -19,6 +19,11 @@
 #include "data/intro_data.h"
 #include "data/sprite_data.h"
 #include "data/haze_data.h"
+extern const u8 sBlob_6638a0_682fac[];
+extern const u8 sAddr_65fb5c[];
+extern const u8 sAddr_663598[];
+extern const u8 sAddr_6636a0[];
+extern const u8 sAddr_663e5c[];
 
 /**
  * @brief 99b04 | a8 | Processes the current in-game cutscene
@@ -149,16 +154,16 @@ void CutsceneElevatorMonologueInit(u8 param_1)
     WRITE_16(REG_DISPCNT, 0);
 
     LZ77UncompVram(sCutsceneMonologueObjGfxPointers[gCurrentCutscene - 1], VRAM_OBJ + 0x2000);
-    LZ77UncompVram((const u32*)0x865fb5c, VRAM_OBJ + 0x7C00);
-    DMA3_COPY_32((const u16*)0x86638a0, PALRAM_OBJ + 0x1E0, PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_65fb5c, VRAM_OBJ + 0x7C00);
+    DMA3_COPY_32((const u16*)(&sBlob_6638a0_682fac), PALRAM_OBJ + 0x1E0, PAL_ROW_SIZE / 4);
     DMA3_COPY_32(sCutsceneMonologueObjPalPointers[gCurrentCutscene - 1], PALRAM_OBJ, 6 * PAL_ROW_SIZE / 4);
 
     LZ77UncompVram(sCutsceneMonologueBgGfxPointers[gCurrentCutscene - 1], VRAM_BASE);
     LZ77UncompVram(sCutsceneMonologueBgTilemapPointers[gCurrentCutscene - 1], VRAM_BASE + 0xD000);
     LZ77UncompWram(sIntroTilemap_662804, EWRAM_BASE);
-    LZ77UncompVram((const u32*)0x8663598, VRAM_BASE + 0xD800);
+    LZ77UncompVram((const u32*)sAddr_663598, VRAM_BASE + 0xD800);
     DMA3_COPY_32(EWRAM_BASE, VRAM_BASE + 0xC800, 0x800 / 4);
-    DMA3_COPY_32((const u16*)0x86636a0, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    DMA3_COPY_32((const u16*)sAddr_6636a0, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
     DMA3_COPY_32(sCutsceneMonologueBgPalPointers[gCurrentCutscene - 1], PALRAM_BASE, 11 * PAL_ROW_SIZE / 4);
 
     WRITE_16(REG_BG0VOFS, 4);
@@ -241,7 +246,7 @@ u8 CutsceneElevatorMonologueSetupOam(u8 type, s16 xPosition, s16 yPosition)
     {
         CUTSCENE_DATA.u.monologue.oam[slot].paletteOffset = 15;
         CUTSCENE_DATA.u.monologue.oam[slot].tileOffset = 0x3E0;
-        CUTSCENE_DATA.u.monologue.oam[slot].pOam = (const struct FrameData*)0x8663e5c;
+        CUTSCENE_DATA.u.monologue.oam[slot].pOam = (const struct FrameData*)sAddr_663e5c;
         CUTSCENE_DATA.u.monologue.oam[slot].pFunction = CutsceneMonologueProcessCursor;
     }
     else if (type == 2)

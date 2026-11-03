@@ -14,6 +14,13 @@
 
 #include "constants/audio.h"
 #include "constants/game_state.h"
+extern const u8 sBlob_73422c_73dac4[];
+extern const u8 sAddr_739a78[];
+extern const u8 sAddr_73c274[];
+extern const u8 sAddr_73c2e4[];
+extern const u8 sAddr_73c4e4[];
+extern const u8 sAddr_73c6e4[];
+extern const u8 sAddr_73cca8[];
 
 /**
  * @brief 9deb4 | a4 | Main handler for the game over screen
@@ -117,16 +124,16 @@ void GameOverInit(void)
     WRITE_16(REG_BG3HOFS, 0);
     WRITE_16(REG_BG3VOFS, 0);
 
-    LZ77UncompVram((const void*)0x8739a78, VRAM_OBJ);
-    DMA3_COPY_32((const void*)0x873c4e4, PALRAM_OBJ, PAL_SIZE / sizeof(u32));
+    LZ77UncompVram((const void*)sAddr_739a78, VRAM_OBJ);
+    DMA3_COPY_32((const void*)sAddr_73c4e4, PALRAM_OBJ, PAL_SIZE / sizeof(u32));
 
-    LZ77UncompVram((const void*)0x873422c, VRAM_BASE);
+    LZ77UncompVram((const void*)(&sBlob_73422c_73dac4), VRAM_BASE);
     if (gLanguage > LANGUAGE_HIRAGANA)
         LZ77UncompVram(sGameOverTextGfxPointers[gLanguage], VRAM_BASE);
 
-    LZ77UncompVram((const void*)0x873c6e4, VRAM_BASE + 0xF800);
-    LZ77UncompVram((const void*)0x873cca8, VRAM_BASE + 0xF000);
-    DMA3_COPY_32((const void*)0x873c2e4, PALRAM_BASE, PAL_SIZE / sizeof(u32));
+    LZ77UncompVram((const void*)sAddr_73c6e4, VRAM_BASE + 0xF800);
+    LZ77UncompVram((const void*)sAddr_73cca8, VRAM_BASE + 0xF000);
+    DMA3_COPY_32((const void*)sAddr_73c2e4, PALRAM_BASE, PAL_SIZE / sizeof(u32));
 
     WRITE_16(REG_BG1CNT, CREATE_BGCNT(0, 30, BGCNT_LOW_MID_PRIORITY, BGCNT_SIZE_256x256));
     WRITE_16(REG_BG3CNT, CREATE_BGCNT(0, 31, BGCNT_LOW_PRIORITY, BGCNT_SIZE_256x256));
@@ -199,7 +206,7 @@ u8 GameOverSetupOam(u8 type, u16 xPosition, u16 yPosition)
     else if (type == 2)
     {
         GAME_OVER_DATA.oam[i].priority = 3;
-        GAME_OVER_DATA.oam[i].pOam = (const struct FrameData*)0x873c274;
+        GAME_OVER_DATA.oam[i].pOam = (const struct FrameData*)sAddr_73c274;
         GAME_OVER_DATA.oam[i].pHandler = unk_9e2cc;
     }
 

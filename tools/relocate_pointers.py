@@ -292,6 +292,99 @@ BARE_LIT = re.compile(r"(?<=[(,]\s)0x0?(?P<addr>8[0-9a-fA-F]{6})\b|(?<=[(,])0x0?
 ASM_LIT = re.compile(r"(\.4byte\s+)0x0?(8[0-9A-Fa-f]{6})\b")
 
 
+labels_needed = {}   # blob symbol -> {offset: label}
+externs_needed = {}  # file -> {label}
+
+
+def blob_label(blob, addr):
+    lbl = f"sAddr_{addr:x}"
+    base = int(blob.split("_")[1], 16)
+    labels_needed.setdefault(blob, {})[addr - base] = lbl
+    return lbl
+
+
+def add_blob_labels():
+    """Give each needed address inside a blob its own global label, so C code
+    loads one constant per address exactly as the raw literal did (a single
+    base symbol + offsets makes agbcc share the base and changes the code)."""
+    for blob, offs in labels_needed.items():
+        f, _ = definition_file(blob)
+        if f is None:
+            for g in SRC_FILES:
+                if f'"data/{blob[1:]}.bin"' in g.read_text() or f"{blob}:" in g.read_text():
+                    f = g
+                    break
+        text = f.read_text(newline="")
+        nl = "\r\n" if "\r\n" in text else "\n"
+        size = int(blob.split("_")[2], 16) - int(blob.split("_")[1], 16)
+        # existing pieces: either a plain INCBIN or an asm block from `incbin`
+        plain = re.search(rf"^((?:static\s+)?(const\s+)?)u8 {blob}\[\] = INCBIN_U8\(\"data/{blob[1:]}\.bin\"\);", text, re.M)
+        if plain:
+            is_const = bool(plain.group(2))
+            items = [("bin", 0, size)]
+            start, end = plain.start(), plain.end()
+        else:
+            m = re.search(rf"// Bytes come from the extracted file; pointers are relocated by the linker\.\r?\nextern (const )?u8 {blob}\[\];\r?\nasm\(\"(.*?)\"\);", text, re.S)
+            assert m, blob
+            is_const = bool(m.group(1))
+            items = []
+            for line in m.group(2).split("\\n"):
+                line = line.strip().strip("\\").strip()
+                mm = re.match(r'\.incbin \\?"[^"\\]+\\?", 0x([0-9a-f]+), 0x([0-9a-f]+)', line)
+                if mm:
+                    items.append(("bin", int(mm.group(1), 16), int(mm.group(2), 16)))
+                elif line.startswith(".4byte"):
+                    items.append(("word", line[len(".4byte"):].strip()))
+                elif line.startswith(".global sAddr_") or re.match(r"sAddr_[0-9a-f]+:", line):
+                    pass
+            # recover word offsets
+            pos, fixed = 0, []
+            for it in items:
+                if it[0] == "bin":
+                    fixed.append(it); pos = it[1] + it[2]
+                else:
+                    fixed.append(("word", pos, it[1])); pos += 4
+            items = fixed
+            start, end = m.start(), m.end()
+        # split binary slices at label offsets
+        out = []
+        for it in items:
+            if it[0] == "bin":
+                a, ln = it[1], it[2]
+                cuts = sorted(o for o in offs if a < o < a + ln)
+                prev = a
+                for c in cuts + [a + ln]:
+                    out.append(("bin", prev, c - prev))
+                    prev = c
+            else:
+                out.append(it)
+        lines = [f"    .pushsection {'.rodata' if is_const else '.data'}", f"    .global {blob}", f"{blob}:"]
+        for it in out:
+            o = it[1]
+            if o in offs:
+                lines += [f"    .global {offs[o]}", f"{offs[o]}:"]
+            if it[0] == "bin":
+                if it[2]:
+                    lines.append(f'    .incbin "data/{blob[1:]}.bin", 0x{o:x}, 0x{it[2]:x}')
+            else:
+                lines.append(f"    .4byte {it[2]}")
+        lines.append("    .popsection")
+        block = "// Bytes come from the extracted file; pointers are relocated by the linker." + nl
+        block += f"extern {'const ' if is_const else ''}u8 {blob}[];" + nl
+        block += 'asm("\\n\\' + nl + "".join(l.replace('"', '\\"') + "\\n\\" + nl for l in lines) + '");'
+        f.write_text(text[:start] + block + text[end:], newline="")
+        print(f"  {blob}: {len(offs)} label(s) in {f}")
+    for fn, lbls in externs_needed.items():
+        p = Path(fn)
+        t = p.read_text(newline="")
+        nl = "\r\n" if "\r\n" in t else "\n"
+        decl = "".join(f"extern const u8 {l}[];{nl}" for l in sorted(lbls) if f" {l}[];" not in t)
+        if decl:
+            ends = [mm.end() for mm in re.finditer(r'^#include "[^"]+"\r?\n', t, re.M)]
+            at = ends[-1] if ends else 0
+            p.write_text(t[:at] + decl + t[at:], newline="")
+
+
 def cmd_literals(files):
     total = 0
     for fn in files:
@@ -309,6 +402,10 @@ def cmd_literals(files):
                 if not ensure_global(name, kind):
                     return m.group(0)
                 n += 1
+                if off and name.startswith("sBlob_"):
+                    lbl = blob_label(name, addr)
+                    externs_needed.setdefault(str(p), set()).add(lbl)
+                    return f"({m.group('cast')}){lbl}"
                 inner = f"&{name}" if off == 0 else f"(const u8*)&{name} + 0x{off:x}"
                 return f"({m.group('cast')})({inner})"
             text = p.read_text()
@@ -324,6 +421,10 @@ def cmd_literals(files):
                 if not ensure_global(name, kind):
                     return m.group(0)
                 n += 1
+                if off and name.startswith("sBlob_"):
+                    lbl = blob_label(name, addr)
+                    externs_needed.setdefault(str(p), set()).add(lbl)
+                    return f"(u32){lbl}"
                 return f"(u32)&{name}" + (f" + 0x{off:x}" if off else "")
             text = BARE_LIT.sub(bare, text)
         else:
@@ -346,6 +447,7 @@ def cmd_literals(files):
             p.write_text(text)
         total += n
         print(f"{fn}: {n} literal(s)")
+    add_blob_labels()
     print(f"total {total}; made global: {sorted(made_global)}")
 
 

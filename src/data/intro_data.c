@@ -15918,7 +15918,60 @@ const u16 sIntroSamusRebornBgPal[] = INCBIN_U16("data/new_file_intro/samus_rebor
 const u32 sIntroSamusRebornBgTopTilemap[] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_top.tm.lz");
 const u32 sIntroSamusRebornBgBottomTilemap[] = INCBIN_U32("data/new_file_intro/samus_reborn_bg_bottom.tm.lz");
 
-const u8 sBlob_5dfd6c_5e116c[] = INCBIN_U8("data/Blob_5dfd6c_5e116c.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_5dfd6c_5e116c[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_5dfd6c_5e116c\n\
+sBlob_5dfd6c_5e116c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x0, 0x140\n\
+    .global sAddr_5dfeac\n\
+sAddr_5dfeac:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x140, 0x140\n\
+    .global sAddr_5dffec\n\
+sAddr_5dffec:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x280, 0x140\n\
+    .global sAddr_5e012c\n\
+sAddr_5e012c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x3c0, 0x140\n\
+    .global sAddr_5e026c\n\
+sAddr_5e026c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x500, 0x140\n\
+    .global sAddr_5e03ac\n\
+sAddr_5e03ac:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x640, 0x140\n\
+    .global sAddr_5e04ec\n\
+sAddr_5e04ec:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x780, 0x140\n\
+    .global sAddr_5e062c\n\
+sAddr_5e062c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x8c0, 0x140\n\
+    .global sAddr_5e076c\n\
+sAddr_5e076c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0xa00, 0x140\n\
+    .global sAddr_5e08ac\n\
+sAddr_5e08ac:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0xb40, 0x140\n\
+    .global sAddr_5e09ec\n\
+sAddr_5e09ec:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0xc80, 0x140\n\
+    .global sAddr_5e0b2c\n\
+sAddr_5e0b2c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0xdc0, 0x140\n\
+    .global sAddr_5e0c6c\n\
+sAddr_5e0c6c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0xf00, 0x140\n\
+    .global sAddr_5e0dac\n\
+sAddr_5e0dac:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x1040, 0x140\n\
+    .global sAddr_5e0eec\n\
+sAddr_5e0eec:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x1180, 0x140\n\
+    .global sAddr_5e102c\n\
+sAddr_5e102c:\n\
+    .incbin \"data/Blob_5dfd6c_5e116c.bin\", 0x12c0, 0x140\n\
+    .popsection\n\
+");
 
 const u32 sIntroApproachingBslObjGfx[] = INCBIN_U32("data/new_file_intro/approaching_bsl_obj.gfx.lz");
 
@@ -21110,7 +21163,60 @@ const u32 sIntroArrivingAtBslSpaceMapTilemap[] = INCBIN_U32("data/new_file_intro
 const u32 sIntroSamusMonologueBgTilemap[] = INCBIN_U32("data/new_file_intro/samus_monologue_bg.tm.lz");
 const u32 sIntroTilemap_5f65d8[] = INCBIN_U32("data/new_file_intro/5f65d8.tm.lz");
 
-const u8 sBlob_5f6990_5f7190[] = INCBIN_U8("data/Blob_5f6990_5f7190.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_5f6990_5f7190[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_5f6990_5f7190\n\
+sBlob_5f6990_5f7190:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x0, 0x80\n\
+    .global sAddr_5f6a10\n\
+sAddr_5f6a10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x80, 0x80\n\
+    .global sAddr_5f6a90\n\
+sAddr_5f6a90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x100, 0x80\n\
+    .global sAddr_5f6b10\n\
+sAddr_5f6b10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x180, 0x80\n\
+    .global sAddr_5f6b90\n\
+sAddr_5f6b90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x200, 0x80\n\
+    .global sAddr_5f6c10\n\
+sAddr_5f6c10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x280, 0x80\n\
+    .global sAddr_5f6c90\n\
+sAddr_5f6c90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x300, 0x80\n\
+    .global sAddr_5f6d10\n\
+sAddr_5f6d10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x380, 0x80\n\
+    .global sAddr_5f6d90\n\
+sAddr_5f6d90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x400, 0x80\n\
+    .global sAddr_5f6e10\n\
+sAddr_5f6e10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x480, 0x80\n\
+    .global sAddr_5f6e90\n\
+sAddr_5f6e90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x500, 0x80\n\
+    .global sAddr_5f6f10\n\
+sAddr_5f6f10:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x580, 0x80\n\
+    .global sAddr_5f6f90\n\
+sAddr_5f6f90:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x600, 0x80\n\
+    .global sAddr_5f7010\n\
+sAddr_5f7010:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x680, 0x80\n\
+    .global sAddr_5f7090\n\
+sAddr_5f7090:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x700, 0x80\n\
+    .global sAddr_5f7110\n\
+sAddr_5f7110:\n\
+    .incbin \"data/Blob_5f6990_5f7190.bin\", 0x780, 0x80\n\
+    .popsection\n\
+");
 
 const u32 sIntroLandingOnBslBgGfx[] = INCBIN_U32("data/new_file_intro/landing_on_bsl_bg.gfx.lz");
 const u32 sIntroLandingOnBslObjGfx[] = INCBIN_U32("data/new_file_intro/landing_on_bsl_obj.gfx.lz");
@@ -24567,7 +24673,156 @@ const struct FrameData sIntroNextPageArrowOam[5] = {
 
 const u16 sNextPageArrowPal[] = INCBIN_U16("data/new_file_intro/next_page_arrow.pal");
 
-const u8 sBlob_6131c8_63a19c[] = INCBIN_U8("data/Blob_6131c8_63a19c.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_6131c8_63a19c[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_6131c8_63a19c\n\
+sBlob_6131c8_63a19c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x0, 0x1f20\n\
+    .global sAddr_6150e8\n\
+sAddr_6150e8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x1f20, 0x35bc\n\
+    .global sAddr_6186a4\n\
+sAddr_6186a4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x54dc, 0x31f8\n\
+    .global sAddr_61b89c\n\
+sAddr_61b89c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x86d4, 0x5f0c\n\
+    .global sAddr_6217a8\n\
+sAddr_6217a8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0xe5e0, 0x214c\n\
+    .global sAddr_6238f4\n\
+sAddr_6238f4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x1072c, 0x2e44\n\
+    .global sAddr_626738\n\
+sAddr_626738:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x13570, 0x4ebc\n\
+    .global sAddr_62b5f4\n\
+sAddr_62b5f4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x1842c, 0x7bf8\n\
+    .global sAddr_6331ec\n\
+sAddr_6331ec:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20024, 0x58\n\
+    .global sAddr_633244\n\
+sAddr_633244:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2007c, 0x50\n\
+    .global sAddr_633294\n\
+sAddr_633294:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x200cc, 0x68\n\
+    .global sAddr_6332fc\n\
+sAddr_6332fc:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20134, 0x68\n\
+    .global sAddr_633364\n\
+sAddr_633364:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2019c, 0x68\n\
+    .global sAddr_6333cc\n\
+sAddr_6333cc:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20204, 0x68\n\
+    .global sAddr_633434\n\
+sAddr_633434:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2026c, 0x28\n\
+    .global sAddr_63345c\n\
+sAddr_63345c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20294, 0x448\n\
+    .global sAddr_6338a4\n\
+sAddr_6338a4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x206dc, 0x30\n\
+    .global sAddr_6338d4\n\
+sAddr_6338d4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2070c, 0x100\n\
+    .global sAddr_6339d4\n\
+sAddr_6339d4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2080c, 0x278\n\
+    .global sAddr_633c4c\n\
+sAddr_633c4c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20a84, 0x218\n\
+    .global sAddr_633e64\n\
+sAddr_633e64:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20c9c, 0x28\n\
+    .global sAddr_633e8c\n\
+sAddr_633e8c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20cc4, 0x38\n\
+    .global sAddr_633ec4\n\
+sAddr_633ec4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20cfc, 0x48\n\
+    .global sAddr_633f0c\n\
+sAddr_633f0c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d44, 0x18\n\
+    .global sAddr_633f24\n\
+sAddr_633f24:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x20d5c, 0x20fc\n\
+    .global sAddr_636020\n\
+sAddr_636020:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e58, 0x18\n\
+    .global sAddr_636038\n\
+sAddr_636038:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e70, 0x18\n\
+    .global sAddr_636050\n\
+sAddr_636050:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x22e88, 0x238\n\
+    .global sAddr_636288\n\
+sAddr_636288:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230c0, 0x18\n\
+    .global sAddr_6362a0\n\
+sAddr_6362a0:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230d8, 0x18\n\
+    .global sAddr_6362b8\n\
+sAddr_6362b8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x230f0, 0xe8\n\
+    .global sAddr_6363a0\n\
+sAddr_6363a0:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231d8, 0x18\n\
+    .global sAddr_6363b8\n\
+sAddr_6363b8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x231f0, 0x80\n\
+    .global sAddr_636438\n\
+sAddr_636438:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23270, 0x200\n\
+    .global sAddr_636638\n\
+sAddr_636638:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23470, 0x200\n\
+    .global sAddr_636838\n\
+sAddr_636838:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23670, 0x200\n\
+    .global sAddr_636a38\n\
+sAddr_636a38:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23870, 0x200\n\
+    .global sAddr_636c38\n\
+sAddr_636c38:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23a70, 0x200\n\
+    .global sAddr_636e38\n\
+sAddr_636e38:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23c70, 0x200\n\
+    .global sAddr_637038\n\
+sAddr_637038:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x23e70, 0x200\n\
+    .global sAddr_637238\n\
+sAddr_637238:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x24070, 0x5c0\n\
+    .global sAddr_6377f8\n\
+sAddr_6377f8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x24630, 0x5c0\n\
+    .global sAddr_637db8\n\
+sAddr_637db8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x24bf0, 0x89c\n\
+    .global sAddr_638654\n\
+sAddr_638654:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x2548c, 0x5c0\n\
+    .global sAddr_638c14\n\
+sAddr_638c14:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x25a4c, 0x688\n\
+    .global sAddr_63929c\n\
+sAddr_63929c:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x260d4, 0x31c\n\
+    .global sAddr_6395b8\n\
+sAddr_6395b8:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x263f0, 0x60c\n\
+    .global sAddr_639bc4\n\
+sAddr_639bc4:\n\
+    .incbin \"data/Blob_6131c8_63a19c.bin\", 0x269fc, 0x5d8\n\
+    .popsection\n\
+");
 
 const u16 sCutsceneTextNone[2] = {
     CHAR_TERMINATOR, CHAR_TERMINATOR
@@ -24640,16 +24895,264 @@ const u16 sTitleIntroSamusSittingBgPal[] = INCBIN_U16("data/title_intro/samus_si
 const u32 sTitleIntroCollisionWarningBgTilemap[] = INCBIN_U32("data/title_intro/collision_warning_bg.tm.lz");
 const u16 sTitleIntroCollisionWarningBgPal[] = INCBIN_U16("data/title_intro/collision_warning_bg.pal");
 
-const u8 sBlob_659ba4_65c268[] = INCBIN_U8("data/Blob_659ba4_65c268.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_659ba4_65c268[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_659ba4_65c268\n\
+sBlob_659ba4_65c268:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x0, 0x1f94\n\
+    .global sAddr_65bb38\n\
+sAddr_65bb38:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x1f94, 0x1c8\n\
+    .global sAddr_65bd00\n\
+sAddr_65bd00:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x215c, 0x48\n\
+    .global sAddr_65bd48\n\
+sAddr_65bd48:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21a4, 0x18\n\
+    .global sAddr_65bd60\n\
+sAddr_65bd60:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x21bc, 0xa0\n\
+    .global sAddr_65be00\n\
+sAddr_65be00:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x225c, 0x110\n\
+    .global sAddr_65bf10\n\
+sAddr_65bf10:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x236c, 0x1c0\n\
+    .global sAddr_65c0d0\n\
+sAddr_65c0d0:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x252c, 0x58\n\
+    .global sAddr_65c128\n\
+sAddr_65c128:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2584, 0x58\n\
+    .global sAddr_65c180\n\
+sAddr_65c180:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x25dc, 0x58\n\
+    .global sAddr_65c1d8\n\
+sAddr_65c1d8:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x2634, 0x58\n\
+    .global sAddr_65c230\n\
+sAddr_65c230:\n\
+    .incbin \"data/Blob_659ba4_65c268.bin\", 0x268c, 0x38\n\
+    .popsection\n\
+");
 
 const u16 sTitleIntroCollisionWarningObjPal[] = INCBIN_U16("data/title_intro/collision_warning_obj.pal");
 
-const u8 sBlob_65c468_662804[] = INCBIN_U8("data/Blob_65c468_662804.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_65c468_662804[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_65c468_662804\n\
+sBlob_65c468_662804:\n\
+    .incbin \"data/Blob_65c468_662804.bin\", 0x0, 0x36f4\n\
+    .global sAddr_65fb5c\n\
+sAddr_65fb5c:\n\
+    .incbin \"data/Blob_65c468_662804.bin\", 0x36f4, 0xc8\n\
+    .global sAddr_65fc24\n\
+sAddr_65fc24:\n\
+    .incbin \"data/Blob_65c468_662804.bin\", 0x37bc, 0x2be0\n\
+    .popsection\n\
+");
 
 const u32 sIntroTilemap_662804[] = INCBIN_U32("data/new_file_intro/662804.tm.lz");
 
-const u8 sBlob_662cfc_663820[] = INCBIN_U8("data/Blob_662cfc_663820.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_662cfc_663820[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_662cfc_663820\n\
+sBlob_662cfc_663820:\n\
+    .incbin \"data/Blob_662cfc_663820.bin\", 0x0, 0x89c\n\
+    .global sAddr_663598\n\
+sAddr_663598:\n\
+    .incbin \"data/Blob_662cfc_663820.bin\", 0x89c, 0x108\n\
+    .global sAddr_6636a0\n\
+sAddr_6636a0:\n\
+    .incbin \"data/Blob_662cfc_663820.bin\", 0x9a4, 0x180\n\
+    .popsection\n\
+");
 
 const u16 sIntroPal_663820[] = INCBIN_U16("data/new_file_intro/663820.pal");
 
-const u8 sBlob_6638a0_682fac[] = INCBIN_U8("data/Blob_6638a0_682fac.bin");
+// Bytes come from the extracted file; pointers are relocated by the linker.
+extern const u8 sBlob_6638a0_682fac[];
+asm("\n\
+    .pushsection .rodata\n\
+    .global sBlob_6638a0_682fac\n\
+sBlob_6638a0_682fac:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x0, 0x20\n\
+    .global sAddr_6638c0\n\
+sAddr_6638c0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x20, 0x160\n\
+    .global sAddr_663a20\n\
+sAddr_663a20:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x180, 0x3b0\n\
+    .global sAddr_663dd0\n\
+sAddr_663dd0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x530, 0x28\n\
+    .global sAddr_663df8\n\
+sAddr_663df8:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x558, 0x64\n\
+    .global sAddr_663e5c\n\
+sAddr_663e5c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5bc, 0x18\n\
+    .global sAddr_663e74\n\
+sAddr_663e74:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x5d4, 0x38\n\
+    .global sAddr_663eac\n\
+sAddr_663eac:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x60c, 0x3d6c\n\
+    .global sAddr_667c18\n\
+sAddr_667c18:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x4378, 0x2e18\n\
+    .global sAddr_66aa30\n\
+sAddr_66aa30:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x7190, 0x28\n\
+    .global sAddr_66aa58\n\
+sAddr_66aa58:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x71b8, 0x10\n\
+    .global sAddr_66aa68\n\
+sAddr_66aa68:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x71c8, 0x160\n\
+    .global sAddr_66abc8\n\
+sAddr_66abc8:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x7328, 0xc0\n\
+    .global sAddr_66ac88\n\
+sAddr_66ac88:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x73e8, 0x89c\n\
+    .global sAddr_66b524\n\
+sAddr_66b524:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x7c84, 0x36f4\n\
+    .global sAddr_66ec18\n\
+sAddr_66ec18:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xb378, 0x2db4\n\
+    .global sAddr_6719cc\n\
+sAddr_6719cc:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe12c, 0x28\n\
+    .global sAddr_6719f4\n\
+sAddr_6719f4:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe154, 0x10\n\
+    .global sAddr_671a04\n\
+sAddr_671a04:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe164, 0x160\n\
+    .global sAddr_671b64\n\
+sAddr_671b64:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe2c4, 0xc0\n\
+    .global sAddr_671c24\n\
+sAddr_671c24:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xe384, 0x89c\n\
+    .global sAddr_6724c0\n\
+sAddr_6724c0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0xec20, 0x2498\n\
+    .global sAddr_674958\n\
+sAddr_674958:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x110b8, 0x180\n\
+    .global sAddr_674ad8\n\
+sAddr_674ad8:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x11238, 0x5c0\n\
+    .global sAddr_675098\n\
+sAddr_675098:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x117f8, 0x27dc\n\
+    .global sAddr_677874\n\
+sAddr_677874:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x13fd4, 0xa0\n\
+    .global sAddr_677914\n\
+sAddr_677914:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x14074, 0x2fc\n\
+    .global sAddr_677c10\n\
+sAddr_677c10:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x14370, 0x20\n\
+    .global sAddr_677c30\n\
+sAddr_677c30:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x14390, 0x20\n\
+    .global sAddr_677c50\n\
+sAddr_677c50:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x143b0, 0x20\n\
+    .global sAddr_677c70\n\
+sAddr_677c70:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x143d0, 0x20\n\
+    .global sAddr_677c90\n\
+sAddr_677c90:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x143f0, 0x4cc\n\
+    .global sAddr_67815c\n\
+sAddr_67815c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x148bc, 0x74c\n\
+    .global sAddr_6788a8\n\
+sAddr_6788a8:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15008, 0x9d8\n\
+    .global sAddr_679280\n\
+sAddr_679280:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x159e0, 0x28\n\
+    .global sAddr_6792a8\n\
+sAddr_6792a8:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a08, 0x28\n\
+    .global sAddr_6792d0\n\
+sAddr_6792d0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15a30, 0x80\n\
+    .global sAddr_679350\n\
+sAddr_679350:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15ab0, 0x50\n\
+    .global sAddr_6793a0\n\
+sAddr_6793a0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b00, 0x10\n\
+    .global sAddr_6793b0\n\
+sAddr_6793b0:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x15b10, 0x79a4\n\
+    .global sAddr_680d54\n\
+sAddr_680d54:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4b4, 0x10\n\
+    .global sAddr_680d64\n\
+sAddr_680d64:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4c4, 0x10\n\
+    .global sAddr_680d74\n\
+sAddr_680d74:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4d4, 0x10\n\
+    .global sAddr_680d84\n\
+sAddr_680d84:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4e4, 0x10\n\
+    .global sAddr_680d94\n\
+sAddr_680d94:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d4f4, 0x10\n\
+    .global sAddr_680da4\n\
+sAddr_680da4:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d504, 0x28\n\
+    .global sAddr_680dcc\n\
+sAddr_680dcc:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d52c, 0x60\n\
+    .global sAddr_680e2c\n\
+sAddr_680e2c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d58c, 0x10\n\
+    .global sAddr_680e3c\n\
+sAddr_680e3c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d59c, 0x90\n\
+    .global sAddr_680ecc\n\
+sAddr_680ecc:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d62c, 0x60\n\
+    .global sAddr_680f2c\n\
+sAddr_680f2c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d68c, 0x48\n\
+    .global sAddr_680f74\n\
+sAddr_680f74:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6d4, 0x28\n\
+    .global sAddr_680f9c\n\
+sAddr_680f9c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d6fc, 0x28\n\
+    .global sAddr_680fc4\n\
+sAddr_680fc4:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d724, 0x28\n\
+    .global sAddr_680fec\n\
+sAddr_680fec:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d74c, 0x10\n\
+    .global sAddr_680ffc\n\
+sAddr_680ffc:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d75c, 0x10\n\
+    .global sAddr_68100c\n\
+sAddr_68100c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d76c, 0x10\n\
+    .global sAddr_68101c\n\
+sAddr_68101c:\n\
+    .incbin \"data/Blob_6638a0_682fac.bin\", 0x1d77c, 0x1f90\n\
+    .popsection\n\
+");

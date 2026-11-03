@@ -14,6 +14,35 @@
 #include "data/audio.h"
 #include "data/generic_data.h"
 #include "data/intro_data.h"
+extern const u8 sBlob_6131c8_63a19c[];
+extern const u8 sAddr_6150e8[];
+extern const u8 sAddr_6186a4[];
+extern const u8 sAddr_61b89c[];
+extern const u8 sAddr_6217a8[];
+extern const u8 sAddr_6331ec[];
+extern const u8 sAddr_633244[];
+extern const u8 sAddr_633294[];
+extern const u8 sAddr_6332fc[];
+extern const u8 sAddr_633364[];
+extern const u8 sAddr_6333cc[];
+extern const u8 sAddr_633434[];
+extern const u8 sAddr_63345c[];
+extern const u8 sAddr_6338a4[];
+extern const u8 sAddr_6338d4[];
+extern const u8 sAddr_6339d4[];
+extern const u8 sAddr_633c4c[];
+extern const u8 sAddr_633e64[];
+extern const u8 sAddr_633e8c[];
+extern const u8 sAddr_633ec4[];
+extern const u8 sAddr_633f0c[];
+extern const u8 sAddr_633f24[];
+extern const u8 sAddr_636438[];
+extern const u8 sAddr_636638[];
+extern const u8 sAddr_636838[];
+extern const u8 sAddr_637238[];
+extern const u8 sAddr_6377f8[];
+extern const u8 sAddr_637db8[];
+extern const u8 sAddr_638654[];
 
 /**
  * @brief 95e24 | 200 | Setup for the ending monologue
@@ -30,12 +59,12 @@ void EndingMonologueInit(void)
 
     DMA3_FILL_32(0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
-    LZ77UncompVram((const u32*)0x86150e8, VRAM_OBJ);
-    DMA3_COPY_32((const u16*)0x8636638, PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_6150e8, VRAM_OBJ);
+    DMA3_COPY_32((const u16*)sAddr_636638, PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
 
-    LZ77UncompVram((const u32*)0x86186a4, VRAM_BASE + 0x8000);
-    LZ77UncompVram((const u32*)0x86377f8, VRAM_BASE + 0xF800);
-    DMA3_COPY_32((const u16*)0x8636438, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_6186a4, VRAM_BASE + 0x8000);
+    LZ77UncompVram((const u32*)sAddr_6377f8, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const u16*)sAddr_636438, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
 
     LZ77UncompWram(sIntroTilemap_662804, EWRAM_BASE);
     DMA3_COPY_32(EWRAM_BASE, VRAM_BASE + 0x4800, 0x800 / 4);
@@ -97,10 +126,10 @@ void EndingAdamConversationInit(void)
     DMA3_FILL_16(0, INTRO_DATA.unk_14, sizeof(INTRO_DATA.unk_14));
     DMA3_FILL_16(0, &INTRO_DATA.unk_110, sizeof(INTRO_DATA.unk_14));
 
-    LZ77UncompVram((const u32*)0x86131c8, VRAM_BASE + 0x8000);
-    LZ77UncompVram((const u32*)0x8637238, VRAM_BASE + 0xF800);
+    LZ77UncompVram((const u32*)(&sBlob_6131c8_63a19c), VRAM_BASE + 0x8000);
+    LZ77UncompVram((const u32*)sAddr_637238, VRAM_BASE + 0xF800);
     LZ77UncompVram(sIntroSamusShipFlyingTextTilemap, VRAM_BASE + 0xE000);
-    DMA3_COPY_32((const u16*)0x8636438, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    DMA3_COPY_32((const u16*)sAddr_636438, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
 
     gBg0XPosition = -8;
     gBg0YPosition = 8;
@@ -163,11 +192,11 @@ void EndingAnimalsInit(void)
     DMA3_FILL_16(0, INTRO_DATA.unk_14, sizeof(INTRO_DATA.unk_14));
     DMA3_FILL_16(0, &INTRO_DATA.unk_110, sizeof(INTRO_DATA.unk_14));
 
-    LZ77UncompVram((const u32*)0x861b89c, VRAM_BASE);
-    LZ77UncompVram((const u32*)0x86217a8, VRAM_BASE + 0x8000);
-    LZ77UncompVram((const u32*)0x8638654, VRAM_BASE + 0xF000);
-    LZ77UncompVram((const u32*)0x8637db8, VRAM_BASE + 0xF800);
-    DMA3_COPY_32((const u16*)0x8636838, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_61b89c, VRAM_BASE);
+    LZ77UncompVram((const u32*)sAddr_6217a8, VRAM_BASE + 0x8000);
+    LZ77UncompVram((const u32*)sAddr_638654, VRAM_BASE + 0xF000);
+    LZ77UncompVram((const u32*)sAddr_637db8, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const u16*)sAddr_636838, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
     DMA3_FILL_16(0x2FF, VRAM_BASE + 0xF500, 0x300);
 
     gBg0XPosition = 0;
@@ -580,7 +609,7 @@ void EndingProcessSr388RadarView(struct SpecialCutsceneOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x8633ec4;
+            pOam->pOam = (const struct FrameData*)sAddr_633ec4;
             pOam->stage = 1;
         }
     }
@@ -601,7 +630,7 @@ void EndingProcessSamusViewRadarView(struct SpecialCutsceneOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x8633f0c;
+            pOam->pOam = (const struct FrameData*)sAddr_633f0c;
             pOam->stage = 1;
         }
     }
@@ -634,7 +663,7 @@ void unk_96a70(struct SpecialCutsceneOam* pOam)
         if (INTRO_DATA.subStage == 11)
         {
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x8633244;
+            pOam->pOam = (const struct FrameData*)sAddr_633244;
             SoundPlay(SOUND_11D);
             pOam->stage = 2;
         }
@@ -671,7 +700,7 @@ void EndingProcessAdamTextCursor(struct SpecialCutsceneOam* pOam)
             pOam->xPosition = 290;
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x8633e8c;
+            pOam->pOam = (const struct FrameData*)sAddr_633e8c;
             return;
         }
 
@@ -679,7 +708,7 @@ void EndingProcessAdamTextCursor(struct SpecialCutsceneOam* pOam)
         {
             pOam->xPosition = 120;
             pOam->yPosition = 154;
-            pOam->pOam = (const struct FrameData*)0x8633e64;
+            pOam->pOam = (const struct FrameData*)sAddr_633e64;
             return;
         }
     }
@@ -764,12 +793,12 @@ void EndingProcessAdamPanel(struct SpecialCutsceneOam* pOam)
             pOam->currentAnimationFrame = 0;
             if (pOam->type == 7)
             {
-                pOam->pOam = (const struct FrameData*)0x86332fc;
+                pOam->pOam = (const struct FrameData*)sAddr_6332fc;
                 SoundPlay(SOUND_20B);
             }
             else if (pOam->type == 9)
             {
-                pOam->pOam = (const struct FrameData*)0x86333cc;
+                pOam->pOam = (const struct FrameData*)sAddr_6333cc;
             }
             pOam->stage = 4;
         }
@@ -817,7 +846,7 @@ void EndingProcessAdamIcon(struct SpecialCutsceneOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x86338a4;
+            pOam->pOam = (const struct FrameData*)sAddr_6338a4;
             pOam->stage = 1;
         }
 
@@ -825,7 +854,7 @@ void EndingProcessAdamIcon(struct SpecialCutsceneOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x863345c;
+            pOam->pOam = (const struct FrameData*)sAddr_63345c;
             pOam->stage = 2;
         }
     }
@@ -835,7 +864,7 @@ void EndingProcessAdamIcon(struct SpecialCutsceneOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x863345c;
+            pOam->pOam = (const struct FrameData*)sAddr_63345c;
             pOam->stage = 2;
         }
     }
@@ -965,54 +994,54 @@ u8 EndingDialogueSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 descendi
 
     if (type == 1)
     {
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633e64;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_633e64;
         INTRO_DATA.oam[slot].pFunction = EndingProcessMonologueCursor;
     }
     else if (type == 2)
     {
         INTRO_DATA.oam[slot].priority = 2;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86338d4;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6338d4;
         INTRO_DATA.oam[slot].pFunction = unk_969e0;
     }
     else if (type == 3)
     {
         INTRO_DATA.oam[slot].priority = 2;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86339d4;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6339d4;
         INTRO_DATA.oam[slot].pFunction = EndingProcessSr388RadarView;
     }
     else if (type == 4)
     {
         INTRO_DATA.oam[slot].priority = 2;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633c4c;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_633c4c;
         INTRO_DATA.oam[slot].pFunction = EndingProcessSamusViewRadarView;
     }
     else if (type == 5)
     {
         INTRO_DATA.oam[slot].priority = 2;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86331ec;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6331ec;
         INTRO_DATA.oam[slot].pFunction = unk_96a70;
     }
     else if (type == 6)
     {
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633e8c;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_633e8c;
         INTRO_DATA.oam[slot].pFunction = EndingProcessAdamTextCursor;
     }
     else if (type == 7)
     {
         INTRO_DATA.oam[slot].priority = 1;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633294;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_633294;
         INTRO_DATA.oam[slot].pFunction = EndingProcessAdamPanel;
     }
     else if (type == 8)
     {
         INTRO_DATA.oam[slot].priority = 1;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633434;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_633434;
         INTRO_DATA.oam[slot].pFunction = EndingProcessAdamIcon;
     }
     else if (type == 9)
     {
         INTRO_DATA.oam[slot].priority = 1;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633364;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_633364;
         INTRO_DATA.oam[slot].pFunction = EndingProcessAdamPanel;
     }
     else if (type == 20)
@@ -1024,13 +1053,13 @@ u8 EndingDialogueSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 descendi
     {
         SoundPlay(SOUND_12D);
         INTRO_DATA.oam[slot].priority = 1;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8633f24;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_633f24;
         INTRO_DATA.oam[slot].pFunction = unk_97418;
     }
     else if (type == 255)
     {
         INTRO_DATA.oam[slot].unk_18_0 = 0;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86331ec;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6331ec;
         INTRO_DATA.oam[slot].pFunction = unk_96f00;
     }
 

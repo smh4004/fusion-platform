@@ -37,6 +37,11 @@
 #include "constants/text.h"
 
 #include "gba/keys.h"
+extern const u8 sBlob_57c0c4_581300[];
+extern const u8 sAddr_57fca0[];
+extern const u8 sAddr_580238[];
+extern const u8 sAddr_5807d0[];
+extern const u8 sAddr_580d68[];
 
 
 // sNavConversationTextPointers and sPauseScreenTextPointers are static in pause_screen.c,
@@ -4653,11 +4658,11 @@ void NavigationConversationLoadSpecialGraphics(void)
 {
     if (PAUSE_SCREEN_DATA.conversationNumber == NAV_CONVO_GO_TO_OPERATIONS_ROOM)
     {
-        LZ77UncompVram((const void*)0x857C0C4, EWRAM_BASE);
-        LZ77UncompVram((const void*)0x857FCA0, EWRAM_BASE + 0x6000);
-        LZ77UncompVram((const void*)0x8580238, EWRAM_BASE + 0x6800);
-        LZ77UncompVram((const void*)0x85807D0, EWRAM_BASE + 0x7000);
-        LZ77UncompVram((const void*)0x8580D68, EWRAM_BASE + 0x7800);
+        LZ77UncompVram((const void*)(&sBlob_57c0c4_581300), EWRAM_BASE);
+        LZ77UncompVram((const void*)sAddr_57fca0, EWRAM_BASE + 0x6000);
+        LZ77UncompVram((const void*)sAddr_580238, EWRAM_BASE + 0x6800);
+        LZ77UncompVram((const void*)sAddr_5807d0, EWRAM_BASE + 0x7000);
+        LZ77UncompVram((const void*)sAddr_580d68, EWRAM_BASE + 0x7800);
     }
     else if (PAUSE_SCREEN_DATA.conversationNumber == NAV_CONVO_FIND_SECURITY_ROOM_AND_DOWNLOAD_BOMBS)
     {

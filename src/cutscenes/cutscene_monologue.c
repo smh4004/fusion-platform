@@ -19,6 +19,8 @@
 #include "data/intro_data.h"
 #include "data/sprite_data.h"
 #include "data/haze_data.h"
+extern const u8 sAddr_663e5c[];
+extern const u8 sAddr_663e74[];
 
 /**
  * @brief 9c938 | c0 | Processes the monologue text cursor
@@ -54,7 +56,7 @@ void CutsceneMonologueProcessCursor(struct CutsceneMonologueOam* pOam)
             }
             else
             {
-                pOam->pOam = (const struct FrameData*)0x8663e74;
+                pOam->pOam = (const struct FrameData*)sAddr_663e74;
                 pOam->xPosition = 118;
                 pOam->yPosition = pData->textLine * 8 + 24;
                 pOam->animationDurationCounter = 0;
@@ -65,7 +67,7 @@ void CutsceneMonologueProcessCursor(struct CutsceneMonologueOam* pOam)
         else if (pOam->stage == 1 && gChangedInput & KEY_A)
         {
         new_page:
-            pOam->pOam = (const struct FrameData*)0x8663e5c;
+            pOam->pOam = (const struct FrameData*)sAddr_663e5c;
             pOam->xPosition = 290;
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;

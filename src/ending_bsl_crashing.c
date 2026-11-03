@@ -11,6 +11,25 @@
 
 #include "data/generic_data.h"
 #include "data/intro_data.h"
+extern const u8 sAddr_6238f4[];
+extern const u8 sAddr_626738[];
+extern const u8 sAddr_62b5f4[];
+extern const u8 sAddr_636020[];
+extern const u8 sAddr_636038[];
+extern const u8 sAddr_636050[];
+extern const u8 sAddr_636288[];
+extern const u8 sAddr_6362a0[];
+extern const u8 sAddr_6362b8[];
+extern const u8 sAddr_6363a0[];
+extern const u8 sAddr_6363b8[];
+extern const u8 sAddr_636a38[];
+extern const u8 sAddr_636c38[];
+extern const u8 sAddr_636e38[];
+extern const u8 sAddr_637038[];
+extern const u8 sAddr_638c14[];
+extern const u8 sAddr_63929c[];
+extern const u8 sAddr_6395b8[];
+extern const u8 sAddr_639bc4[];
 
 void Sram_ProcessEndingSave(u8 stage);
 
@@ -97,13 +116,13 @@ void EndingBslCrashingInit(void)
 
     DMA3_FILL_32(0, &gNonGameplayRam, sizeof(gNonGameplayRam));
 
-    LZ77UncompVram((const u32*)0x86238f4, VRAM_OBJ);
-    DMA3_COPY_32((const u16*)0x8636c38, PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_6238f4, VRAM_OBJ);
+    DMA3_COPY_32((const u16*)sAddr_636c38, PALRAM_OBJ, 16 * PAL_ROW_SIZE / 4);
 
-    LZ77UncompVram((const u32*)0x862b5f4, VRAM_BASE);
-    LZ77UncompVram((const u32*)0x8638c14, VRAM_BASE + 0xF000);
-    LZ77UncompVram((const u32*)0x8639bc4, VRAM_BASE + 0xF800);
-    DMA3_COPY_32((const u16*)0x8637038, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_62b5f4, VRAM_BASE);
+    LZ77UncompVram((const u32*)sAddr_638c14, VRAM_BASE + 0xF000);
+    LZ77UncompVram((const u32*)sAddr_639bc4, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const u16*)sAddr_637038, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
 
     gBg1XPosition = 0;
     gBg1YPosition = 8;
@@ -166,10 +185,10 @@ void EndingShipFrontViewInit(void)
     DMA3_FILL_16(0, INTRO_DATA.unk_14, sizeof(INTRO_DATA.unk_14));
     DMA3_FILL_16(0, &INTRO_DATA.unk_110, sizeof(INTRO_DATA.unk_14));
 
-    LZ77UncompVram((const u32*)0x8626738, VRAM_BASE);
-    LZ77UncompVram((const u32*)0x863929c, VRAM_BASE + 0xF000);
-    LZ77UncompVram((const u32*)0x86395b8, VRAM_BASE + 0xF800);
-    DMA3_COPY_32((const u16*)0x8636e38, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
+    LZ77UncompVram((const u32*)sAddr_626738, VRAM_BASE);
+    LZ77UncompVram((const u32*)sAddr_63929c, VRAM_BASE + 0xF000);
+    LZ77UncompVram((const u32*)sAddr_6395b8, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const u16*)sAddr_636e38, PALRAM_BASE, 16 * PAL_ROW_SIZE / 4);
 
     gBg1XPosition = 0;
     gBg1YPosition = 0;
@@ -473,7 +492,7 @@ void EndingProcessFallingBsl(struct SpecialCutsceneOam* pOam)
         pOam->stage = 3;
         if (pOam->type == 1)
         {
-            pOam->pOam = (const struct FrameData*)0x86362b8;
+            pOam->pOam = (const struct FrameData*)sAddr_6362b8;
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
             INTRO_DATA.subStage = 2;
@@ -682,7 +701,7 @@ u8 EndingBslCrashingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 desce
         INTRO_DATA.oam[slot].scaling = Q_8_8(1);
         INTRO_DATA.oam[slot].priority = 2;
         INTRO_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8636020;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_636020;
         INTRO_DATA.oam[slot].pFunction = EndingProcessFallingBsl;
     }
     else if (type == 2)
@@ -691,45 +710,45 @@ u8 EndingBslCrashingSetupOam(u8 type, s16 xPosition, s16 yPosition, boolu8 desce
         INTRO_DATA.oam[slot].unk_18_3 = 1;
         INTRO_DATA.oam[slot].priority = 2;
         INTRO_DATA.oam[slot].affineMode = OAM_AFFINE_MODE_AFFINE;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8636038;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_636038;
         INTRO_DATA.oam[slot].pFunction = EndingProcessFallingBsl;
     }
     else if (type == 3)
     {
         INTRO_DATA.oam[slot].priority = 2;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8636050;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_636050;
         INTRO_DATA.oam[slot].pFunction = unk_9579c;
     }
     else if (type == 4)
     {
         INTRO_DATA.oam[slot].unk_18_0 = 0;
         INTRO_DATA.oam[slot].priority = 2;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x8636288;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_636288;
         INTRO_DATA.oam[slot].pFunction = EndingProcessLeavingSmallShip;
     }
     else if (type == 5)
     {
         INTRO_DATA.oam[slot].unk_18_0 = 0;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86362a0;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6362a0;
         INTRO_DATA.oam[slot].pFunction = EndingProcessLeavingBigShip;
     }
     else if (type == 10)
     {
         INTRO_DATA.oam[slot].unk_18_3 = 1;
         INTRO_DATA.oam[slot].priority = 3;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86363a0;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6363a0;
         INTRO_DATA.oam[slot].pFunction = unk_95e20;
     }
     else if (type == 11)
     {
         INTRO_DATA.oam[slot].priority = 3;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86363b8;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6363b8;
         INTRO_DATA.oam[slot].pFunction = EndingProcessFrontFacingShipThrusters;
     }
     else if (type == 12)
     {
         INTRO_DATA.oam[slot].unk_18_0 = 0;
-        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)0x86363a0;
+        INTRO_DATA.oam[slot].pOam = (const struct FrameData*)sAddr_6363a0;
         INTRO_DATA.oam[slot].pFunction = EndingProcessFrontFacingShip;
     }
 
@@ -757,7 +776,7 @@ void EndingBslCrashingVblank(void)
     if (INTRO_DATA.unk_110 == 1)
     {
         INTRO_DATA.unk_110 = 0;
-        DMA3_COPY_32(((const u16*)0x8636a38 + INTRO_DATA.unk_111 * 16), PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
+        DMA3_COPY_32(((const u16*)sAddr_636a38 + INTRO_DATA.unk_111 * 16), PALRAM_BASE + 0x120, PAL_ROW_SIZE / 4);
     }
 }
 

@@ -17,6 +17,29 @@
 #include "constants/game_state.h"
 
 #include "structs/save_file.h"
+extern const u8 sAddr_73cfac[];
+extern const u8 sAddr_73d380[];
+extern const u8 sAddr_73d5ec[];
+extern const u8 sAddr_73db84[];
+extern const u8 sAddr_73dc20[];
+extern const u8 sAddr_7407c0[];
+extern const u8 sAddr_7407d0[];
+extern const u8 sAddr_7407e0[];
+extern const u8 sAddr_7407f0[];
+extern const u8 sAddr_7408d0[];
+extern const u8 sAddr_7408e0[];
+extern const u8 sAddr_740940[];
+extern const u8 sAddr_740950[];
+extern const u8 sAddr_7409a0[];
+extern const u8 sAddr_7409b0[];
+extern const u8 sAddr_740a48[];
+extern const u8 sAddr_740a70[];
+extern const u8 sAddr_740b48[];
+extern const u8 sAddr_740b70[];
+extern const u8 sAddr_740d08[];
+extern const u8 sAddr_742fb4[];
+extern const u8 sAddr_7470e0[];
+extern const u8 sAddr_7476a0[];
 
 // TODO move to the save file header once that code is decompiled
 void Sram_WriteFileInfo(void);
@@ -159,16 +182,16 @@ void FileSelectInit(void)
     WRITE_16(REG_BG3HOFS, 0);
     WRITE_16(REG_BG3VOFS, 0);
 
-    LZ77UncompVram((const void*)0x8742fb4, VRAM_BASE);
-    LZ77UncompVram((const void*)0x87470e0, VRAM_BASE + 0xF800);
-    DMA3_COPY_32((const void*)0x87476a0, PALRAM_BASE, PAL_SIZE / sizeof(u32));
+    LZ77UncompVram((const void*)sAddr_742fb4, VRAM_BASE);
+    LZ77UncompVram((const void*)sAddr_7470e0, VRAM_BASE + 0xF800);
+    DMA3_COPY_32((const void*)sAddr_7476a0, PALRAM_BASE, PAL_SIZE / sizeof(u32));
 
-    LZ77UncompVram((const void*)0x873cfac, VRAM_BASE + 0xE000);
-    LZ77UncompVram((const void*)0x873d380, EWRAM_BASE);
+    LZ77UncompVram((const void*)sAddr_73cfac, VRAM_BASE + 0xE000);
+    LZ77UncompVram((const void*)sAddr_73d380, EWRAM_BASE);
     DMA3_COPY_32(EWRAM_BASE, VRAM_BASE + 0xE800, 0x800 / sizeof(u32));
-    LZ77UncompVram((const void*)0x873d5ec, VRAM_BASE + 0xF000);
+    LZ77UncompVram((const void*)sAddr_73d5ec, VRAM_BASE + 0xF000);
 
-    DMA3_COPY_32((const void*)0x873db84, PALRAM_BASE, 0x20 / sizeof(u32));
+    DMA3_COPY_32((const void*)sAddr_73db84, PALRAM_BASE, 0x20 / sizeof(u32));
     DMA3_COPY_32(sFileSelectBackdropColors, PALRAM_BASE, 8 / sizeof(u32));
     DMA3_COPY_32(&sFileSelectBackdropColors[4], PALRAM_BASE + 0x1C, 4 / sizeof(u32));
     SET_BACKDROP_COLOR(0);
@@ -176,8 +199,8 @@ void FileSelectInit(void)
     for (i = 0; i < 0x100; i += 2)
         *(u16*)(EWRAM_BASE + 0x800 + i) = (*(u16*)(EWRAM_BASE + 0x340 + i) & 0xFFF) | 0x1000;
 
-    LZ77UncompVram((const void*)0x873dc20, VRAM_OBJ);
-    DMA3_COPY_32((const void*)0x8740d08, PALRAM_OBJ, PAL_SIZE / sizeof(u32));
+    LZ77UncompVram((const void*)sAddr_73dc20, VRAM_OBJ);
+    DMA3_COPY_32((const void*)sAddr_740d08, PALRAM_OBJ, PAL_SIZE / sizeof(u32));
 
     FILE_SELECT_DATA.textId = 0;
     FILE_SELECT_DATA.pText = sFileSelectTextPointers[gLanguage][0];
@@ -2215,14 +2238,14 @@ void FileSelectProcessSamusHead(struct FileSelectOam* pOam)
         {
             pOam->animationDurationCounter = menuState;
             pOam->currentAnimationFrame = menuState;
-            pOam->pOam = (const struct FrameData*)0x8740a48;
+            pOam->pOam = (const struct FrameData*)sAddr_740a48;
             pOam->action = menuState;
         }
         else if (menuState == 5 || menuState == 7 || menuState == 12 || menuState == 13)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x8740a70;
+            pOam->pOam = (const struct FrameData*)sAddr_740a70;
             pOam->action = 200;
         }
     }
@@ -2266,7 +2289,7 @@ void FileSelectProcessCursor(struct FileSelectOam* pOam)
             FILE_SELECT_DATA.unk_E = 0;
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x8740b70;
+            pOam->pOam = (const struct FrameData*)sAddr_740b70;
             pOam->action = 100;
         }
         else if (menuState == 3)
@@ -2300,7 +2323,7 @@ void FileSelectProcessCursor(struct FileSelectOam* pOam)
             {
                 pOam->animationDurationCounter = cancel;
                 pOam->currentAnimationFrame = cancel;
-                pOam->pOam = (const struct FrameData*)0x8740b70;
+                pOam->pOam = (const struct FrameData*)sAddr_740b70;
                 if (FILE_SELECT_DATA.unk_E == 0)
                 {
                     pOam->action = 100;
@@ -2339,7 +2362,7 @@ void FileSelectProcessCursor(struct FileSelectOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x8740b48;
+            pOam->pOam = (const struct FrameData*)sAddr_740b48;
             pOam->action = 0;
         }
     }
@@ -2490,13 +2513,13 @@ void unk_9fddc(struct FileSelectOam* pOam)
             if (FILE_SELECT_DATA.unk_10 == 0)
             {
                 SoundPlay(0x207);
-                pOam->pOam = (const struct FrameData*)0x8740b70;
+                pOam->pOam = (const struct FrameData*)sAddr_740b70;
                 pOam->action = 1;
             }
             else
             {
                 SoundPlay(0x1FB);
-                pOam->pOam = (const struct FrameData*)0x8740b70;
+                pOam->pOam = (const struct FrameData*)sAddr_740b70;
                 pOam->action = 1;
             }
         }
@@ -2565,13 +2588,13 @@ void unk_9ff00(struct FileSelectOam* pOam)
             if (FILE_SELECT_DATA.unk_10 == 0)
             {
                 SoundPlay(0x208);
-                pOam->pOam = (const struct FrameData*)0x8740b70;
+                pOam->pOam = (const struct FrameData*)sAddr_740b70;
                 pOam->action = 1;
             }
             else
             {
                 SoundPlay(0x1FB);
-                pOam->pOam = (const struct FrameData*)0x8740b70;
+                pOam->pOam = (const struct FrameData*)sAddr_740b70;
                 pOam->action = 1;
             }
         }
@@ -2607,11 +2630,11 @@ void FileSelectProcessAudioLogos(struct FileSelectOam* pOam)
     {
         if (pOam->action == 0)
         {
-            pOam->pOam = (const struct FrameData*)0x87407c0;
+            pOam->pOam = (const struct FrameData*)sAddr_7407c0;
             if (gChangedInput & KEY_RIGHT)
             {
                 pOam->action = 1;
-                pOam->pOam = (const struct FrameData*)0x87407d0;
+                pOam->pOam = (const struct FrameData*)sAddr_7407d0;
                 pOam->animationDurationCounter = 0;
                 pOam->currentAnimationFrame = 0;
                 DoSoundAction(0x2000000);
@@ -2620,11 +2643,11 @@ void FileSelectProcessAudioLogos(struct FileSelectOam* pOam)
         }
         else if (pOam->action == 1)
         {
-            pOam->pOam = (const struct FrameData*)0x87407d0;
+            pOam->pOam = (const struct FrameData*)sAddr_7407d0;
             if (gChangedInput & KEY_LEFT)
             {
                 pOam->action = 0;
-                pOam->pOam = (const struct FrameData*)0x87407c0;
+                pOam->pOam = (const struct FrameData*)sAddr_7407c0;
                 pOam->animationDurationCounter = 0;
                 pOam->currentAnimationFrame = 0;
                 DoSoundAction(0x1000000);
@@ -2636,13 +2659,13 @@ void FileSelectProcessAudioLogos(struct FileSelectOam* pOam)
     {
         if (pOam->action == 0)
         {
-            pOam->pOam = (const struct FrameData*)0x87407e0;
+            pOam->pOam = (const struct FrameData*)sAddr_7407e0;
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
         }
         else if (pOam->action == 1)
         {
-            pOam->pOam = (const struct FrameData*)0x87407f0;
+            pOam->pOam = (const struct FrameData*)sAddr_7407f0;
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
         }
@@ -2706,7 +2729,7 @@ void unk_a016c(struct FileSelectOam* pOam)
     if (menuState != 0)
         return;
 
-    pOam->pOam = (const struct FrameData*)0x87408e0;
+    pOam->pOam = (const struct FrameData*)sAddr_7408e0;
     file = FILE_SELECT_DATA.currentFile;
     if (file <= 2)
     {
@@ -2719,7 +2742,7 @@ void unk_a016c(struct FileSelectOam* pOam)
             pOam->yPosition = 81;
 
         if (gChangedInput & (KEY_A | KEY_START))
-            pOam->pOam = (const struct FrameData*)0x87408d0;
+            pOam->pOam = (const struct FrameData*)sAddr_7408d0;
     }
     else
     {
@@ -2751,7 +2774,7 @@ void FileSelectProcessFileActionPanel(struct FileSelectOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x8740940;
+            pOam->pOam = (const struct FrameData*)sAddr_740940;
             pOam->action = 1;
         }
     }
@@ -2766,7 +2789,7 @@ void FileSelectProcessFileActionPanel(struct FileSelectOam* pOam)
                 SoundPlay(0x1FD);
                 pOam->animationDurationCounter = 0;
                 pOam->currentAnimationFrame = 0;
-                pOam->pOam = (const struct FrameData*)0x8740950;
+                pOam->pOam = (const struct FrameData*)sAddr_740950;
                 pOam->action = 2;
                 break;
         }
@@ -2797,7 +2820,7 @@ void FileSelectProcessCopyFilePanel(struct FileSelectOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x87409a0;
+            pOam->pOam = (const struct FrameData*)sAddr_7409a0;
             pOam->action = 1;
         }
     }
@@ -2811,7 +2834,7 @@ void FileSelectProcessCopyFilePanel(struct FileSelectOam* pOam)
                 SoundPlay(0x1FD);
                 pOam->animationDurationCounter = 0;
                 pOam->currentAnimationFrame = 0;
-                pOam->pOam = (const struct FrameData*)0x87409b0;
+                pOam->pOam = (const struct FrameData*)sAddr_7409b0;
                 pOam->action = 2;
                 break;
         }
@@ -2842,7 +2865,7 @@ void FileSelectProcessEraseFilePanel(struct FileSelectOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x87409a0;
+            pOam->pOam = (const struct FrameData*)sAddr_7409a0;
             pOam->action = 1;
         }
     }
@@ -2856,7 +2879,7 @@ void FileSelectProcessEraseFilePanel(struct FileSelectOam* pOam)
                 SoundPlay(0x1FD);
                 pOam->animationDurationCounter = 0;
                 pOam->currentAnimationFrame = 0;
-                pOam->pOam = (const struct FrameData*)0x87409b0;
+                pOam->pOam = (const struct FrameData*)sAddr_7409b0;
                 pOam->action = 2;
                 break;
         }
@@ -2887,7 +2910,7 @@ void unk_a039c(struct FileSelectOam* pOam)
         {
             pOam->animationDurationCounter = 0;
             pOam->currentAnimationFrame = 0;
-            pOam->pOam = (const struct FrameData*)0x87409a0;
+            pOam->pOam = (const struct FrameData*)sAddr_7409a0;
             pOam->action = 1;
         }
     }
@@ -2899,7 +2922,7 @@ void unk_a039c(struct FileSelectOam* pOam)
                 SoundPlay(0x1FD);
                 pOam->animationDurationCounter = 0;
                 pOam->currentAnimationFrame = 0;
-                pOam->pOam = (const struct FrameData*)0x87409b0;
+                pOam->pOam = (const struct FrameData*)sAddr_7409b0;
                 pOam->action = 2;
                 break;
         }
@@ -2958,12 +2981,12 @@ void unk_a0424(struct FileSelectOam* pOam)
             SoundPlay(0x1FE);
             if (FILE_SELECT_DATA.unk_10 == 0)
             {
-                pOam->pOam = (const struct FrameData*)0x8740b70;
+                pOam->pOam = (const struct FrameData*)sAddr_740b70;
                 pOam->action = 100;
             }
             else
             {
-                pOam->pOam = (const struct FrameData*)0x8740b70;
+                pOam->pOam = (const struct FrameData*)sAddr_740b70;
                 pOam->action = 100;
             }
         }
