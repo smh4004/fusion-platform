@@ -24637,4 +24637,16 @@ static const u8 sBlob_662cfc_663820[] = INCBIN_U8("data/Blob_662cfc_663820.bin")
 
 const u16 sIntroPal_663820[4 * PAL_ROW] = INCBIN_U16("data/new_file_intro/663820.pal");
 
-static const u8 sBlob_6638a0_682fac[] = INCBIN_U8("data/Blob_6638a0_682fac.bin");
+static const u8 sBlob_6638a0_68101c[] = INCBIN_U8("data/Blob_6638a0_68101c.bin");
+
+const u16 sCutsceneBslFirePal[16 * PAL_ROW] = INCBIN_U16("data/cutscenes/bsl_fire.pal");
+
+static const u8 sBlob_68121c_68141c[] = INCBIN_U8("data/Blob_68121c_68141c.bin");
+
+const u16 sCutsceneLabDebrisPal1[16 * PAL_ROW] = INCBIN_U16("data/cutscenes/lab_debris_1.pal");
+
+const u16 sCutsceneLabDebrisPal2[16 * PAL_ROW] = INCBIN_U16("data/cutscenes/lab_debris_2.pal");
+
+const u16 sCutsceneLabDebrisPal3[16 * PAL_ROW] = INCBIN_U16("data/cutscenes/lab_debris_3.pal");
+
+static const u8 sBlob_681a1c_682fac[] = INCBIN_U8("data/Blob_681a1c_682fac.bin");

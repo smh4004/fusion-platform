@@ -429,5 +429,9 @@ extern const u16 sTitleIntroCollisionWarningObjPal[16 * PAL_ROW];
 extern const u32 sIntroTilemap_662804[318];
 
 extern const u16 sIntroPal_663820[4 * PAL_ROW];
+extern const u16 sCutsceneBslFirePal[16 * PAL_ROW];
+extern const u16 sCutsceneLabDebrisPal1[16 * PAL_ROW];
+extern const u16 sCutsceneLabDebrisPal2[16 * PAL_ROW];
+extern const u16 sCutsceneLabDebrisPal3[16 * PAL_ROW];
 
 #endif /* INTRO_DATA_H */
