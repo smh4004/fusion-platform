@@ -81,4 +81,4 @@ _080001C4:
 	bx lr
 	.align 2, 0
 _08000228: .4byte 0x00002400
-_0800022C: .4byte sBlob_a5224_a5258
+_0800022C: .4byte sPointerTable_a5224

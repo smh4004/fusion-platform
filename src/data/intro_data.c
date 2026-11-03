@@ -21099,7 +21099,7 @@ const struct FrameData sIntroArrivingAtBslThrustersOam[4] = {
 	[3] = FRAME_DATA_TERMINATOR
 };
 
-static const u8 sBlob_5f4e54_5f4ed4[] = INCBIN_U8("data/Blob_5f4e54_5f4ed4.bin");
+const u8 sBlob_5f4e54_5f4ed4[] = INCBIN_U8("data/Blob_5f4e54_5f4ed4.bin");
 
 const u16 sPal_5f4ed4[] = INCBIN_U16("data/new_file_intro/5f4ed4.pal");
 const u16 sIntroArrivingAtBslSpaceMapPal[] = INCBIN_U16("data/new_file_intro/space_map.pal");

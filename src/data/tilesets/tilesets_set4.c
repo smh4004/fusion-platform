@@ -29,11 +29,11 @@ const u16 sAnimatedPal_16[8 * 16] = INCBIN_U16("data/tilesets/animated_palettes/
 
 const u8 sTileset_39_Tilemap[] = INCBIN_U8("data/tilesets/39.tm");
 const u8 sTileset_25_Tilemap[] = INCBIN_U8("data/tilesets/25.tm");
-static const u8 sBlob_4f3f70_4f4d20[] = INCBIN_U8("data/Blob_4f3f70_4f4d20.bin");
+const u8 sBlob_4f3f70_4f4d20[] = INCBIN_U8("data/Blob_4f3f70_4f4d20.bin");
 const u8 sTileset_26_Tilemap[] = INCBIN_U8("data/tilesets/26.tm");
-static const u8 sBlob_4f4f74_4f5d24[] = INCBIN_U8("data/Blob_4f4f74_4f5d24.bin");
+const u8 sBlob_4f4f74_4f5d24[] = INCBIN_U8("data/Blob_4f4f74_4f5d24.bin");
 const u8 sTileset_37_Tilemap[] = INCBIN_U8("data/tilesets/37.tm");
 const u8 sTileset_27_Tilemap[] = INCBIN_U8("data/tilesets/27.tm");
-static const u8 sBlob_4f6d7c_4f7b2c[] = INCBIN_U8("data/Blob_4f6d7c_4f7b2c.bin");
+const u8 sBlob_4f6d7c_4f7b2c[] = INCBIN_U8("data/Blob_4f6d7c_4f7b2c.bin");
 const u8 sTileset_29_Tilemap[] = INCBIN_U8("data/tilesets/29.tm");
-static const u8 sBlob_4f7d80_4f8d30[] = INCBIN_U8("data/Blob_4f7d80_4f8d30.bin");
+const u8 sBlob_4f7d80_4f8d30[] = INCBIN_U8("data/Blob_4f7d80_4f8d30.bin");

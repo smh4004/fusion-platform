@@ -3250,7 +3250,7 @@ const struct FrameData sOmegaMetroidPartOam_LeftLeg_Swiping[6] = {
     [5] = FRAME_DATA_TERMINATOR
 };
 
-static const u8 sBlob_39aa34_39aae0[] = INCBIN_U8("data/Blob_39aa34_39aae0.bin");
+const u8 sBlob_39aa34_39aae0[] = INCBIN_U8("data/Blob_39aa34_39aae0.bin");
 
 const s16 sGunshipEndEnteringYMovement[65] = {
     0, 0, 0, 0, 1, 0, 1, 0,

@@ -78,7 +78,7 @@ const u16 sEnding_3_Pal[] = INCBIN_U16("data/ending/ending_3.pal");
 const u16 sEnding_4_Pal[] = INCBIN_U16("data/ending/ending_4.pal");
 const u16 sResultsTextPal[] = INCBIN_U16("data/ending/results_text.pal");
 
-static const u8 sBlob_74a7d8_74b0b0[] = INCBIN_U8("data/Blob_74a7d8_74b0b0.bin");
+const u8 sBlob_74a7d8_74b0b0[] = INCBIN_U8("data/Blob_74a7d8_74b0b0.bin");
 
 const struct CreditsEntry sCredits[310] = {
 	[0] = {
@@ -1667,4 +1667,4 @@ const u32 sResultsScreenItalianTextGfx[] = INCBIN_U32("data/ending/results_itali
 const u32 sResultsScreenSpanishTextGfx[] = INCBIN_U32("data/ending/results_spanish_text.gfx.lz");
 const u32 sResultsScreenGermanTextGfx[] = INCBIN_U32("data/ending/results_german_text.gfx.lz");
 
-static const u8 sBlob_79a19c_79a29c[] = INCBIN_U8("data/Blob_79a19c_79a29c.bin");
+const u8 sBlob_79a19c_79a29c[] = INCBIN_U8("data/Blob_79a19c_79a29c.bin");

@@ -341,7 +341,7 @@ const u8 sNavConversationPortraitOamIds[6][3] = {
 const u8 sNavConversationMosaicTarget = 0xEE;
 static const u8 sPadding_576803 = 0;
 
-static const u8 sBlob_576804_57bbc4[] = INCBIN_U8("data/Blob_576804_57bbc4.bin");
+const u8 sBlob_576804_57bbc4[] = INCBIN_U8("data/Blob_576804_57bbc4.bin");
 
 const u8 sNavConversationPopUpAnim_57bbc4[6 * 2] = {
     0, 20,
@@ -569,7 +569,7 @@ const u8 sNavConversationPalTimers_57bebc[8] = { 8, 8, 8, 8, 8, 8, 8, 8 };
 
 const u16 sNavConversationSpecialPal[16 * 16] = INCBIN_U16("data/menus/pause_screen/nav_conversation_ship_room.pal");
 
-static const u8 sBlob_57c0c4_581300[] = INCBIN_U8("data/Blob_57c0c4_581300.bin");
+const u8 sBlob_57c0c4_581300[] = INCBIN_U8("data/Blob_57c0c4_581300.bin");
 const u16 sNavConversationFlashingPal_581300[16][16] = {
     [0] = {
         0x0000, 0x7A73, 0x76F8, 0x4E38, 0x3704, 0x2A25, 0x02B5, 0x1FFF,

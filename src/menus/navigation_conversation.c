@@ -115,7 +115,7 @@ static s8 sMainDeckDiagramTargetOffsets[8][3] = {
     [6] = { 0, 30, 0 }
 };
 
-static u8 sBlob_79c228_79c27c[] = INCBIN_U8("data/Blob_79c228_79c27c.bin");
+u8 sBlob_79c228_79c27c[] = INCBIN_U8("data/Blob_79c228_79c27c.bin");
 
 // 0x08079AFC
 NAKED_FUNCTION
